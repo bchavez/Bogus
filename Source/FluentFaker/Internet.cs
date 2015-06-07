@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Xml.Schema;
 
 namespace FluentFaker
 {
@@ -13,18 +12,33 @@ namespace FluentFaker
             this.Name = new Name(locale);
         }
 
+        /// <summary>
+        /// Generates a legit Internet URL avatar from twitter accounts.
+        /// </summary>
+        /// <returns></returns>
         public string Avatar()
         {
-            return GetArrayItem("avatar_uri");
+            return GetRandomArrayItem("avatar_uri");
         }
 
+        /// <summary>
+        /// Generates an email address.
+        /// </summary>
+        /// <param name="firstName">Always use this first name.</param>
+        /// <param name="lastName">Sometimes used depending on randomness. See 'UserName'.</param>
+        /// <param name="provider">Always use the provider.</param>
         public string Email(string firstName = null, string lastName = null, string provider = null)
         {
-            provider = provider ?? GetArrayItem("free_email");
+            provider = provider ?? GetRandomArrayItem("free_email");
 
             return Helpers.Slugify(UserName(firstName, lastName)) + "@" + provider;
         }
 
+        /// <summary>
+        /// Generates user names.
+        /// </summary>
+        /// <param name="firstName">Always used.</param>
+        /// <param name="lastName">Sometimes used depending on randomness.</param>
         public string UserName(string firstName = null, string lastName = null)
         {
             firstName = firstName ?? Name.FirstName();
@@ -53,11 +67,20 @@ namespace FluentFaker
             return result;
         }
 
+        /// <summary>
+        /// Generates a random domain name.
+        /// </summary>
+        /// <returns></returns>
         public string DomainName()
         {
             return DomainWord() + "." + DomainSuffix();
         }
 
+
+        /// <summary>
+        /// Generates a domain word used for domain names.
+        /// </summary>
+        /// <returns></returns>
         public string DomainWord()
         {
             var domain = Name.FirstName().ToLower();
@@ -65,11 +88,19 @@ namespace FluentFaker
             return Regex.Replace(domain, @"([^a-z0-9._%+-])", "");
         }
 
+        /// <summary>
+        /// Generates a domain name suffix like .com, .net, .org
+        /// </summary>
+        /// <returns></returns>
         public string DomainSuffix()
         {
-            return GetArrayItem("domain_suffix");
+            return GetRandomArrayItem("domain_suffix");
         }
 
+        /// <summary>
+        /// Gets a random IP address.
+        /// </summary>
+        /// <returns></returns>
         public string Ip()
         {
             return string.Format("{0}.{1}.{2}.{3}",
@@ -79,6 +110,13 @@ namespace FluentFaker
                 Random.Number(255));
         }
 
+        /// <summary>
+        /// Gets a random aesthetically pleasing color near the base R,G.B. See: http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
+        /// </summary>
+        /// <param name="baseRed">Red base color</param>
+        /// <param name="baseGreen">Green base color</param>
+        /// <param name="baseBlue">Blue base color</param>
+        /// <returns></returns>
         public string Color(byte baseRed = 0, byte baseGreen = 0, byte baseBlue = 0)
         {
             var red = Math.Floor(( Random.Number(256) + (double)baseRed ) / 2);

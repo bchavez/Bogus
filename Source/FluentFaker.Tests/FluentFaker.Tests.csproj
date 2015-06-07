@@ -57,7 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ConsistentTest.cs" />
+    <Compile Include="ExtensionsForTesting.cs" />
+    <Compile Include="FluentTests.cs" />
+    <Compile Include="InternetTests.cs" />
+    <Compile Include="LoremTests.cs" />
+    <Compile Include="NameTests.cs" />
+    <Compile Include="PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

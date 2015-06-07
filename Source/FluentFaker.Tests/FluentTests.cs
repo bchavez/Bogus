@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
@@ -12,16 +9,8 @@ namespace FluentFaker.Tests
         public string Name { get; set; }
     }
 
-    public static class ExtensionsForJToken
-    {
-        public static void Dump(this JToken token)
-        {
-            Console.WriteLine(JsonConvert.SerializeObject(token));
-        }
-    }
-
     [TestFixture]
-    public class SimpleTests
+    public class FluentTests
     {
         [TestFixtureSetUp]
         public void BeforeRunningTestSession()
@@ -53,17 +42,11 @@ namespace FluentFaker.Tests
         [Test]
         public  void Test()
         {
-            var d = Faker.Get("name", "first_name");
+            var x = Helpers.ReplaceSymbolsWithNumbers("(###) ###-####");
 
-            //d.Dump();
-
-            var name = new Internet();
-
-            var gen = name.Color();
-            Console.WriteLine(gen);
+            x.Dump();
         }
 
         
     }
-
 }

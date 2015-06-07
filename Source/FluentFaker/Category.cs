@@ -6,14 +6,17 @@ namespace FluentFaker
     {
         public Category(string locale = "en")
         {
-            Locale = locale;
+            this.Locale = locale;
+            this.CategoryName = this.GetType().Name.ToLower();
         }
+
+        protected string CategoryName { get; set; }
 
         public string Locale { get; set; }
 
         public JToken Get(string subKind)
         {
-            return Faker.Get(this.GetType().Name.ToLower(), subKind, Locale);
+            return Faker.Get(this.CategoryName, subKind, Locale);
         }
 
         public JArray GetArray(string subKind)
@@ -21,7 +24,12 @@ namespace FluentFaker
             return (JArray)Get(subKind);
         }
 
-        public string GetArrayItem(string subKind)
+        public JObject GetObject(string subKind)
+        {
+            return (JObject)Get(subKind);
+        }
+
+        public string GetRandomArrayItem(string subKind)
         {
             return Random.ArrayElement(GetArray(subKind));
         }

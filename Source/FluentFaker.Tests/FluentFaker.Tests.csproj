@@ -60,6 +60,7 @@
     <Compile Include="ConsistentTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FluentTests.cs" />
+    <Compile Include="ImageTest.cs" />
     <Compile Include="InternetTests.cs" />
     <Compile Include="LoremTests.cs" />
     <Compile Include="NameTests.cs" />

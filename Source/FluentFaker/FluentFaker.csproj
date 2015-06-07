@@ -47,6 +47,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="Helpers.cs" />
+    <Compile Include="Image.cs" />
     <Compile Include="Internet.cs" />
     <Compile Include="Lorem.cs" />
     <Compile Include="Name.cs" />

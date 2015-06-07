@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConsistentTest.cs" />
+    <Compile Include="DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FluentTests.cs" />
     <Compile Include="ImageTest.cs" />

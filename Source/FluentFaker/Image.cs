@@ -2,7 +2,7 @@ using System;
 
 namespace FluentFaker
 {
-    public class Images :Category
+    public class Images : Category
     {
         public Images(string locale = "en") : base(locale)
         {
@@ -88,9 +88,5 @@ namespace FluentFaker
             return ImageUrl("transport", width, height);
 
         }
-
-
-
-
     }
 }

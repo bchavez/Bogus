@@ -50,6 +50,8 @@ namespace FluentFaker
 
             return Data.Value.SelectToken(fallbackPath, errorWhenNoMatch: true);
         }
+
+        
     }
     
     public class Faker<T> where T : class

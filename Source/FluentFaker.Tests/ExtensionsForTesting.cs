@@ -5,11 +5,6 @@ namespace FluentFaker.Tests
 {
     public static class ExtensionsForTesting
     {
-        //public static void Dump(this JToken token)
-        //{
-        //    Console.WriteLine(JsonConvert.SerializeObject(token));
-        //}
-
         public static void Dump(this object obj)
         {
             Console.WriteLine(obj.DumpString());

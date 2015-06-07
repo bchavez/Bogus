@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>fakerjs</RootNamespace>
+    <AssemblyName>fakerjs</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="address.js" />
+    <Content Include="company.js" />
+    <Content Include="date.js" />
+    <Content Include="finance.js" />
+    <Content Include="hacker.js" />
+    <Content Include="helpers.js" />
+    <Content Include="image.js" />
+    <Content Include="index.js" />
+    <Content Include="internet.js" />
+    <Content Include="locales.js" />
+    <Content Include="locales\de.js" />
+    <Content Include="locales\de_AT.js" />
+    <Content Include="locales\de_CH.js" />
+    <Content Include="locales\en.js" />
+    <Content Include="locales\en_AU.js" />
+    <Content Include="locales\en_au_ocker.js" />
+    <Content Include="locales\en_BORK.js" />
+    <Content Include="locales\en_CA.js" />
+    <Content Include="locales\en_GB.js" />
+    <Content Include="locales\en_IND.js" />
+    <Content Include="locales\en_US.js" />
+    <Content Include="locales\es.js" />
+    <Content Include="locales\fa.js" />
+    <Content Include="locales\fr.js" />
+    <Content Include="locales\it.js" />
+    <Content Include="locales\ja.js" />
+    <Content Include="locales\ko.js" />
+    <Content Include="locales\nb_NO.js" />
+    <Content Include="locales\nep.js" />
+    <Content Include="locales\nl.js" />
+    <Content Include="locales\pl.js" />
+    <Content Include="locales\pt_BR.js" />
+    <Content Include="locales\ru.js" />
+    <Content Include="locales\sk.js" />
+    <Content Include="locales\sv.js" />
+    <Content Include="locales\vi.js" />
+    <Content Include="locales\zh_CN.js" />
+    <Content Include="lorem.js" />
+    <Content Include="name.js" />
+    <Content Include="phone_number.js" />
+    <Content Include="random.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

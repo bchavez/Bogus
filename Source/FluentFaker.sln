@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2216B0E0-7ABC-4804-854D-3F24E59C0329}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\FluentFaker.nuspec = .nuget\FluentFaker.nuspec
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentFaker", "FluentFaker\FluentFaker.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentFaker.Tests", "FluentFaker.Tests\FluentFaker.Tests.csproj", "{C738E347-08EF-47DA-B531-EE99739BD759}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fakerjs", "fakerjs\fakerjs.csproj", "{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C738E347-08EF-47DA-B531-EE99739BD759}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C738E347-08EF-47DA-B531-EE99739BD759}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C738E347-08EF-47DA-B531-EE99739BD759}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C738E347-08EF-47DA-B531-EE99739BD759}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417C70A4-CA21-4E0C-83C4-D0CDAFD37245}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

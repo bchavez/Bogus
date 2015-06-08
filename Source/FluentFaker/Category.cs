@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 
 namespace FluentFaker
 {
-    public class Category
+    public class Category : ILocale
     {
         public Category(string locale = "en")
         {
@@ -33,5 +33,10 @@ namespace FluentFaker
         {
             return Random.ArrayElement(GetArray(subKind));
         }
+    }
+
+    public interface ILocale
+    {
+        string Locale { get; set; }
     }
 }

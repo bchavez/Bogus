@@ -6,7 +6,7 @@ namespace FluentFaker.Tests
     {
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Name { get; set; }
+        public string FirstName { get; set; }
     }
 
     [TestFixture]
@@ -42,9 +42,12 @@ namespace FluentFaker.Tests
         [Test]
         public  void Test()
         {
-            var x = Utils.ReplaceSymbolsWithNumbers("(###) ###-####");
+            new Faker<User>()
+                .RuleFor(u => u.FirstName)
+                .Use<Name>(n => n.FirstName())
+                .RuleFor(u => u.UserName)
+                .Use<Name>(n => n.LastName());
 
-            x.Dump();
         }
 
         

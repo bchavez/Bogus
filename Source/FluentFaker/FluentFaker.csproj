@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Address.cs" />
+    <Compile Include="Card.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="Date.cs" />
@@ -61,10 +62,65 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="data\de.locale.json" />
+    <EmbeddedResource Include="data\de_AT.locale.json" />
+    <EmbeddedResource Include="data\de_CH.locale.json" />
+    <EmbeddedResource Include="data\en.locale.json" />
+    <EmbeddedResource Include="data\en_AU.locale.json" />
+    <EmbeddedResource Include="data\en_au_ocker.locale.json" />
+    <EmbeddedResource Include="data\en_BORK.locale.json" />
+    <EmbeddedResource Include="data\en_CA.locale.json" />
+    <EmbeddedResource Include="data\en_GB.locale.json" />
+    <EmbeddedResource Include="data\en_IND.locale.json" />
+    <EmbeddedResource Include="data\en_US.locale.json" />
+    <EmbeddedResource Include="data\es.locale.json" />
+    <EmbeddedResource Include="data\fa.locale.json" />
+    <EmbeddedResource Include="data\fr.locale.json" />
+    <EmbeddedResource Include="data\it.locale.json" />
+    <EmbeddedResource Include="data\ja.locale.json" />
+    <EmbeddedResource Include="data\ko.locale.json" />
+    <EmbeddedResource Include="data\nb_NO.locale.json" />
+    <EmbeddedResource Include="data\nep.locale.json" />
+    <EmbeddedResource Include="data\nl.locale.json" />
+    <EmbeddedResource Include="data\pl.locale.json" />
+    <EmbeddedResource Include="data\pt_BR.locale.json" />
+    <None Include="data\README.md" />
+    <EmbeddedResource Include="data\ru.locale.json" />
+    <EmbeddedResource Include="data\sk.locale.json" />
+    <EmbeddedResource Include="data\sv.locale.json" />
+    <EmbeddedResource Include="data\vi.locale.json" />
+    <EmbeddedResource Include="data\zh_CN.locale.json" />
+    <None Include="locales\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="data\locales.json" />
+    <Content Include="locales\de.js" />
+    <Content Include="locales\de_AT.js" />
+    <Content Include="locales\de_CH.js" />
+    <Content Include="locales\en.js" />
+    <Content Include="locales\en_AU.js" />
+    <Content Include="locales\en_au_ocker.js" />
+    <Content Include="locales\en_BORK.js" />
+    <Content Include="locales\en_CA.js" />
+    <Content Include="locales\en_GB.js" />
+    <Content Include="locales\en_IND.js" />
+    <Content Include="locales\en_US.js" />
+    <Content Include="locales\es.js" />
+    <Content Include="locales\fa.js" />
+    <Content Include="locales\fr.js" />
+    <Content Include="locales\it.js" />
+    <Content Include="locales\ja.js" />
+    <Content Include="locales\ko.js" />
+    <Content Include="locales\nb_NO.js" />
+    <Content Include="locales\nep.js" />
+    <Content Include="locales\nl.js" />
+    <Content Include="locales\pl.js" />
+    <Content Include="locales\pt_BR.js" />
+    <Content Include="locales\ru.js" />
+    <Content Include="locales\sk.js" />
+    <Content Include="locales\sv.js" />
+    <Content Include="locales\vi.js" />
+    <Content Include="locales\zh_CN.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

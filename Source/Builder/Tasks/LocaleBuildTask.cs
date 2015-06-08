@@ -7,13 +7,15 @@ using Builder.Extensions;
 using FluentBuild;
 using JavaScriptEngineSwitcher.Jint;
 using JavaScriptEngineSwitcher.Jint.Configuration;
+using MoreLinq;
 using Newtonsoft.Json;
 
 namespace Builder.Tasks
 {
     public class LocaleBuildTask : BuildFile
     {
-        private FluentFs.Core.Directory ProjectLocale = Projects.FluentFakerProject.Folder.SubFolder("data");
+        private FluentFs.Core.Directory DataDir = Projects.FluentFakerProject.Folder.SubFolder("data");
+        private FluentFs.Core.Directory SourceDir = Projects.FluentFakerProject.Folder.SubFolder("locales");
 
         public LocaleBuildTask()
         {
@@ -23,9 +25,8 @@ namespace Builder.Tasks
 
         private void BuildLocales()
         {
-            var locales = Folders.Source.SubFolder("fakerjs").SubFolder("locales").Files("*.js").Files;
-
-            var dictionary = new Dictionary<string, object>();
+            //wipe all json files.
+            var locales = SourceDir.Files("*.js").Files;
 
             foreach( var locale in locales )
             {
@@ -44,20 +45,26 @@ namespace Builder.Tasks
 
                     var language = engine.GetVariableValue(localeName);
 
-                    dictionary.Add(localeName, language);
+                    var localeJson = JsonConvert.SerializeObject(new Dictionary<string, object>
+                        {
+                            {localeName, language}
+                        }, Formatting.Indented);
+
+                    var pathJson = DataDir.File(localeName + ".locale.json").Path;
+                    System.IO.File.WriteAllText(pathJson, localeJson);
                 }
             }
-
-            var allLocales = JsonConvert.SerializeObject(dictionary, Formatting.Indented);
-
-            var path = ProjectLocale.File("locales.json").Path;
-
-            System.IO.File.WriteAllText(path, allLocales);
         }
 
         private void Clean()
         {
-            ProjectLocale.Wipe();
+            DataDir.Files("*.json")
+                .Files
+                .Select(j => new Fluent.IO.Path(j))
+                .ForEach(p =>
+                    {
+                        p.Delete();
+                    });
         }
     }
 }

@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category.cs" />
+    <Compile Include="Company.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="Helpers.cs" />

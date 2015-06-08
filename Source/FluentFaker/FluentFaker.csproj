@@ -49,6 +49,7 @@
     <Compile Include="Company.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="Faker.cs" />
+    <Compile Include="Finance.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Image.cs" />
     <Compile Include="Internet.cs" />

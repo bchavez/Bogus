@@ -62,6 +62,7 @@
     <Compile Include="ConsistentTest.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
+    <Compile Include="FinanceTest.cs" />
     <Compile Include="FluentTests.cs" />
     <Compile Include="ImageTest.cs" />
     <Compile Include="InternetTests.cs" />

@@ -21,6 +21,12 @@ namespace FluentFaker
             return Number() == 0;
         }
 
+        public static JToken ArrayElement(JProperty[] props)
+        {
+            var r = Number(max: props.Length - 1);
+            return props[r];
+        }
+
         public static string ArrayElement(Array array)
         {
             array = array ?? new[] {"a", "b", "c"};

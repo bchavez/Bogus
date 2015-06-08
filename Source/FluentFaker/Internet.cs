@@ -31,7 +31,7 @@ namespace FluentFaker
         {
             provider = provider ?? GetRandomArrayItem("free_email");
 
-            return Helpers.Slugify(UserName(firstName, lastName)) + "@" + provider;
+            return Utils.Slugify(UserName(firstName, lastName)) + "@" + provider;
         }
 
         /// <summary>

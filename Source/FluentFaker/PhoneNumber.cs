@@ -18,7 +18,7 @@ namespace FluentFaker
         public string PhoneNumber(string format = null)
         {
             format = !string.IsNullOrWhiteSpace(format) ? format : PhoneFormat();
-            return Helpers.ReplaceSymbolsWithNumbers(format);
+            return Utils.ReplaceSymbolsWithNumbers(format);
         }
 
         /// <summary>

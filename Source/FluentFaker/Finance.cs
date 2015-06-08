@@ -21,7 +21,7 @@ namespace FluentFaker
         public string Account(int length = 8)
         {
             var template = new string('#', length);
-            return Helpers.ReplaceSymbolsWithNumbers(template);
+            return Utils.ReplaceSymbolsWithNumbers(template);
         }
 
         /// <summary>

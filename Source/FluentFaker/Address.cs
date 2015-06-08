@@ -19,7 +19,7 @@ namespace FluentFaker
 
             var format = Random.ArrayElement(formats);
 
-            return Helpers.ReplaceSymbolsWithNumbers(format);
+            return Utils.ReplaceSymbolsWithNumbers(format);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FluentFaker
         {
             var homeNumbers = new string('#', Random.Number(3, 5));
 
-            var houseNumber = Helpers.ReplaceSymbolsWithNumbers(homeNumbers);
+            var houseNumber = Utils.ReplaceSymbolsWithNumbers(homeNumbers);
 
             if( useFullAddress )
             {
@@ -106,7 +106,7 @@ namespace FluentFaker
 
             var format = Random.ArrayElement(formats);
 
-            return Helpers.ReplaceSymbolsWithNumbers(format);
+            return Utils.ReplaceSymbolsWithNumbers(format);
         }
 
         /// <summary>

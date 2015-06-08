@@ -15,7 +15,7 @@ namespace FluentFaker
         /// <returns></returns>
         public string[] Words(int num = 3)
         {
-            return Helpers.Shuffle(GetArray("words")).Take(num)
+            return Utils.Shuffle(GetArray("words")).Take(num)
                 .Select(s => (string)s)
                 .ToArray();
         }

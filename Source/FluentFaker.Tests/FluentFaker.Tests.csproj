@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressTest.cs" />
+    <Compile Include="CardTests.cs" />
     <Compile Include="CompanyTest.cs" />
     <Compile Include="ConsistentTest.cs" />
     <Compile Include="DateTest.cs" />

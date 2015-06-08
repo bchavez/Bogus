@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace FluentFaker
 {
-    public static class Helpers
+    public static class Utils
     {
         public static string Slugify(string txt)
         {
@@ -46,5 +46,4 @@ namespace FluentFaker
             return new string(chars);
         }
     }
-    
 }

@@ -42,7 +42,7 @@ namespace FluentFaker.Tests
         [Test]
         public  void Test()
         {
-            var x = Helpers.ReplaceSymbolsWithNumbers("(###) ###-####");
+            var x = Utils.ReplaceSymbolsWithNumbers("(###) ###-####");
 
             x.Dump();
         }

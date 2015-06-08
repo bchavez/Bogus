@@ -64,6 +64,7 @@
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FinanceTest.cs" />
     <Compile Include="FluentTests.cs" />
+    <Compile Include="HackerFixture.cs" />
     <Compile Include="ImageTest.cs" />
     <Compile Include="InternetTests.cs" />
     <Compile Include="LoremTests.cs" />

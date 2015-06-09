@@ -9,7 +9,7 @@ A simple and sane fake data generator for C# and .NET. Inspired by [faker.js](ht
 
 
 ### Download & Install
-Nuget Package [Bogus](https://www.nuget.org/packages/Bogus/)
+**Nuget Package [Bogus](https://www.nuget.org/packages/Bogus/)**
 
 ```
 

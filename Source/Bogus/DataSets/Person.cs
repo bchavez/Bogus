@@ -1,10 +1,12 @@
+#pragma warning disable 1591
+
 using System;
 using Newtonsoft.Json;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
-    /// Contextual generation of a person.
+    /// Uses Faker to generate a person with contextually relevant fields.
     /// </summary>
     public class Person
     {
@@ -58,26 +60,26 @@ namespace Bogus.Generators
             var gaddress = new Address(locale);
 
             this.Address = new CardAddress
-            {
-                Street = gaddress.StreetAddress(),
-                Suite = gaddress.SecondaryAddress(),
-                City = gaddress.City(),
-                ZipCode = gaddress.ZipCode(),
-                Geo = new CardAddress.CardGeo
                 {
-                    Lat = gaddress.Latitude(),
-                    Lng = gaddress.Longitude()
-                }
-            };
+                    Street = gaddress.StreetAddress(),
+                    Suite = gaddress.SecondaryAddress(),
+                    City = gaddress.City(),
+                    ZipCode = gaddress.ZipCode(),
+                    Geo = new CardAddress.CardGeo
+                        {
+                            Lat = gaddress.Latitude(),
+                            Lng = gaddress.Longitude()
+                        }
+                };
 
             var gcompany = new Company(locale);
 
             this.Company = new CardCompany
-            {
-                Name = gcompany.CompanyName(),
-                CatchPhrase = gcompany.CatchPhrase(),
-                Bs = gcompany.Bs()
-            };
+                {
+                    Name = gcompany.CompanyName(),
+                    CatchPhrase = gcompany.CatchPhrase(),
+                    Bs = gcompany.Bs()
+                };
         }
 
         public string Name;

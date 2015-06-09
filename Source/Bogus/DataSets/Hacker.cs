@@ -1,4 +1,4 @@
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Hackerish words

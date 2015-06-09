@@ -1,10 +1,13 @@
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
-    /// Generates a random company name and logos
+    /// Generates a random company name and phrases
     /// </summary>
     public class Company : DataSet
     {
+        /// <summary>
+        /// The source to pull names from.
+        /// </summary>
         protected Name Name = null;
 
         /// <summary>
@@ -15,12 +18,7 @@ namespace Bogus.Generators
         {
             this.Name = new Name(locale);
         }
-
-        protected virtual string[] Suffexes()
-        {
-            return new[] {"Inc", "and Sons", "LLC", "Group", "and Daughters"};
-        }
-
+        
         /// <summary>
         /// Get a company suffix. "Inc" and "LLC" etc.
         /// </summary>
@@ -72,10 +70,17 @@ namespace Bogus.Generators
                 BsNoun());
         }
 
+#pragma warning disable 1591
+        protected virtual string[] Suffexes()
+        {
+            return new[] { "Inc", "and Sons", "LLC", "Group", "and Daughters" };
+        }
+
         protected virtual string CatchPhraseAdjective()
         {
             return GetRandomArrayItem("adjective");
         }
+
 
         protected virtual string CatchPhraseDescriptor()
         {
@@ -101,5 +106,7 @@ namespace Bogus.Generators
         {
             return GetRandomArrayItem("bs_noun");
         }
+#pragma warning restore 1591
+
     }
 }

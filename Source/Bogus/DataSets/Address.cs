@@ -1,10 +1,13 @@
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Methods for generating an address
     /// </summary>
     public class Address : DataSet
     {
+        /// <summary>
+        /// The source to pull names from.
+        /// </summary>
         protected Name Name = null;
 
         /// <summary>

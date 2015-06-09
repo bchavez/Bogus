@@ -16,7 +16,7 @@
         * Initial port from faker.js 2.1.4.
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>fake bogus poco data generator database seed values</tags>
+    <tags>fake bogus poco data generator database seed values test-data test data</tags>
     <dependencies>
       <group targetFramework="net40">
       </group>

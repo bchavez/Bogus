@@ -12,9 +12,7 @@ A simple and sane fake data generator for C# and .NET. Inspired by [faker.js](ht
 **Nuget Package [Bogus](https://www.nuget.org/packages/Bogus/)**
 
 ```
-
 Install-Package Bogus
-
 ```
 
 
@@ -103,6 +101,34 @@ Console.WriteLine(user.DumpAsJson());
   ]
 }
 ```
+
+### Without Fluent Syntax
+
+You can use Bogus without a complex setup. Just use a dataset directly.
+
+```
+[Test]
+public void Without_Fluent_Syntax()
+{
+    var random = new Bogus.Randomizer();
+    var lorem = new Bogus.DataSets.Lorem();
+    var o = new Order()
+        {
+            OrderId = random.Number(1, 100),
+            Item = lorem.Sentance(),
+            Quantity = random.Number(1, 10)
+        };
+    o.Dump();
+}
+//{
+//  "OrderId": 61,
+//  "Item": "vel est ipsa",
+//  "Quantity": 7
+//}
+````
+
+### Locales
+
 
 Building
 --------

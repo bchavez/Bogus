@@ -1,19 +1,25 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Security.AccessControl;
-using Bogus.Generators;
+using Bogus.DataSets;
 
 namespace Bogus
 {
+    /// <summary>
+    /// A hub of all the categories merged into a single class to ease fluent syntax API.
+    /// </summary>
     public class Faker
     {
+        /// <summary>
+        /// The default mode to use when generating objects. Strict mode ensures that all properties have rules.
+        /// </summary>
         public static bool DefaultStrictMode = false;
 
+        /// <summary>
+        /// Create a Faker with a specific locale.
+        /// </summary>
         public Faker(string locale = "en")
         {
             this.Internet = new Internet(locale);
@@ -28,23 +34,59 @@ namespace Bogus
             this.Random = new Randomizer();
         }
         
-        public Person Person { get; set; }
+        /// <summary>
+        /// A contextually relevant fields of a person.
+        /// </summary>
+        public Person Person { get; set; }     
+        /// <summary>
+        /// Generate Phone Numbers
+        /// </summary>
         public PhoneNumbers Phone { get; set; }
+        /// <summary>
+        /// Generate Names
+        /// </summary>
         public Name Name { get; set; }
+        /// <summary>
+        /// Generate Words
+        /// </summary>
         public Lorem Lorem { get; set; }
+        /// <summary>
+        /// Generate Image URL Links
+        /// </summary>
         public Images Image { get; set; }
+        /// <summary>
+        /// Generate Finance Items
+        /// </summary>
         public Finance Finance { get; set; }
+        /// <summary>
+        /// Generate Addresses
+        /// </summary>
         public Address Address { get; set; }
+        /// <summary>
+        /// Generate Dates
+        /// </summary>
         public Date Date { get; set; }
+        /// <summary>
+        /// Generate Internet stuff like Emails and UserNames.
+        /// </summary>
         public Internet Internet { get; set; }
-        
+        /// <summary>
+        /// Generate numbers, booleans, and decimals.
+        /// </summary>
         public Randomizer Random { get; set; }
 
+        /// <summary>
+        /// Helper method to pick a random element.
+        /// </summary>
         public T PickRandom<T>(IEnumerable<T> items)
         {
             return this.Random.ArrayElement(items.ToArray());
         }
 
+        /// <summary>
+        /// Picks a random Enum of T. Works only with Enums.
+        /// </summary>
+        /// <typeparam name="T">Must be an Enum</typeparam>
         public T PickRandom<T>() where T : struct
         {
             var e = typeof(T);
@@ -59,115 +101,155 @@ namespace Bogus
         }
     }
     
+    /// <summary>
+    /// Generates fake objects of T.
+    /// </summary>
     public class Faker<T> where T : class
     {
-        protected internal Faker faker;
+#pragma warning disable 1591
+        protected internal Faker FakerHub;
+        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public;
+        protected internal Func<Faker, T> CustomActivator;
+        protected internal readonly Dictionary<string, Func<Faker, T, object>> Actions = new Dictionary<string, Func<Faker, T, object>>();
+        protected internal readonly Lazy<Dictionary<string, PropertyInfo>> TypeProperties;
+        protected internal bool? UseStrictMode;
+        protected internal bool? IsValid;
+#pragma warning restore 1591
 
+        /// <summary>
+        /// Creates a Faker with a locale.
+        /// </summary>
+        /// <param name="locale"></param>
         public Faker(string locale = "en")
         {
-            faker = new Faker(locale);
-            typeProperties = new Lazy<Dictionary<string, PropertyInfo>>(() =>
+            FakerHub = new Faker(locale);
+            TypeProperties = new Lazy<Dictionary<string, PropertyInfo>>(() =>
                 {
-                    return typeof(T).GetProperties(bindingFlags)
+                    return typeof(T).GetProperties(BindingFlags)
                         .ToDictionary(pi => pi.Name);
                 });
         }
 
-        protected BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public;
+        
 
+        //TODO: Maybe we can have a way to opt-in or ignore like Json.net. But will need smarter validation
+        /// <summary>
+        /// Set the binding flags visibility when getting properties. IE: Only public or public+private properties.
+        /// </summary>
         public Faker<T> UseBindingFlags(BindingFlags flags)
         {
-            this.bindingFlags = flags;
+            this.BindingFlags = flags;
             return this;
         }
 
-        protected internal Func<Faker, T> customInstantiator;
 
+        /// <summary>
+        /// Uses the factory method to generate new instances.
+        /// </summary>
         public Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
         {
-            this.customInstantiator = factoryMethod;
+            this.CustomActivator = factoryMethod;
             return this;
         }
 
+        /// <summary>
+        /// Creates a rule for a compound property and providing access to the instance being generated.
+        /// </summary>
         public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter)
         {
             var propName = PropertyName.For(property);
 
             Func<Faker, T, object> invoker = (f, t) => setter(f, t);
 
-            this.actions.Add(propName, invoker);
+            this.Actions.Add(propName, invoker);
 
             return this;
         }
+
+        /// <summary>
+        /// Creates a rule for a property.
+        /// </summary>
         public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter )
         {
             var propName = PropertyName.For(property);
 
             Func<Faker, T, object> invoker = (f, t) => setter(f);
 
-            this.actions.Add(propName, invoker);
+            this.Actions.Add(propName, invoker);
 
             return this;
         }
 
+        /// <summary>
+        /// Ensures all properties of T have rules.
+        /// </summary>
+        /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
+        /// <returns></returns>
         public Faker<T> StrictMode(bool ensureRulesForAllProperties)
         {
-            strictMode = ensureRulesForAllProperties;
+            UseStrictMode = ensureRulesForAllProperties;
             return this;
         }
 
-        protected Dictionary<string, Func<Faker, T, object>> actions = new Dictionary<string, Func<Faker, T, object>>();
-        protected Lazy<Dictionary<string, PropertyInfo>> typeProperties;
 
 
-
-        protected bool? strictMode;
-
-        protected bool? isValid;
-
+        /// <summary>
+        /// Generates a fake object of T.
+        /// </summary>
+        /// <returns></returns>
         public virtual T Generate()
         {
-            var instance = customInstantiator == null ? Activator.CreateInstance<T>() : customInstantiator(this.faker);
+            var instance = CustomActivator == null ? Activator.CreateInstance<T>() : CustomActivator(this.FakerHub);
 
             Populate(instance);
 
             return instance;
         }
 
+        /// <summary>
+        /// Generates multiple fake objects of T.
+        /// </summary>
         public virtual IEnumerable<T> Generate(int count)
         {
             return Enumerable.Range(1, count)
                 .Select(i => Generate());
         }
 
+        /// <summary>
+        /// Only populates an instance of T.
+        /// </summary>
         public virtual void Populate(T instance)
         {
-            var useStrictMode = strictMode ?? Faker.DefaultStrictMode;
-            if( useStrictMode && !isValid.HasValue ) 
+            var useStrictMode = UseStrictMode ?? Faker.DefaultStrictMode;
+            if( useStrictMode && !IsValid.HasValue ) 
             {
                 //run validation
-                this.isValid = Validate();
+                this.IsValid = Validate();
             }
-            if( useStrictMode && !isValid.GetValueOrDefault())
+            if( useStrictMode && !IsValid.GetValueOrDefault())
             {
                 throw new InvalidOperationException(string.Format("Cannot generate {0} because strict mode is enabled on this type and some properties have no rules.",
                     typeof(T)));
             }
 
-            var typeProps = typeProperties.Value;
+            var typeProps = TypeProperties.Value;
 
-            foreach( var kvp in actions )
+            foreach( var kvp in Actions )
             {
                 PropertyInfo prop;
                 typeProps.TryGetValue(kvp.Key, out prop);
                 var valueFactory = kvp.Value;
-                prop.SetValue(instance, valueFactory(faker, instance), null);
+                prop.SetValue(instance, valueFactory(FakerHub, instance), null);
             }
         }
 
+        /// <summary>
+        /// Checks if all properties have rules.
+        /// </summary>
+        /// <returns>True if validation pases, false otherwise.</returns>
         public virtual bool Validate()
         {
-            return typeProperties.Value.Count == actions.Count;
+            return TypeProperties.Value.Count == Actions.Count;
         }
     }
 }

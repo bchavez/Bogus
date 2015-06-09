@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Generates plain old boring text.

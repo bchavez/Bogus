@@ -1,4 +1,4 @@
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Generates images URLs from lorempixel.com
@@ -11,7 +11,7 @@ namespace Bogus.Generators
         /// <param name="locale"></param>
         public Images(string locale = "en") : base(locale)
         {
-            this.CategoryName = "image";
+            this.Category = "image";
         }
 
         /// <summary>
@@ -27,8 +27,11 @@ namespace Bogus.Generators
             return ImageUrl(picked);
         }
 
-        // we can do some extra work here
-        // lorempixel supports greyscale and image index
+        
+        //TODO: Add support for greyscale
+        /// <summary>
+        /// Creates an image URL with lorempixel.com.
+        /// </summary>
         protected virtual string ImageUrl( string category, int width = 640, int height = 480)
         {
             var path = string.Format("http://lorempixel.com/{0}/{1}/{2}", width, height, category);

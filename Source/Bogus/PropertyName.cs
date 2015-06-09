@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Bogus
 {
-    public static class PropertyName
+    internal static class PropertyName
     {
         public static string For<T,TProp>(Expression<Func<T, TProp>> expression)
         {

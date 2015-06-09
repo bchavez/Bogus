@@ -1,5 +1,5 @@
 using System.Net;
-using Bogus.Generators;
+using Bogus.DataSets;
 using NUnit.Framework;
 
 namespace Bogus.Tests

@@ -1,5 +1,5 @@
-﻿using FluentAssertions;
-using Bogus.Generators;
+﻿using Bogus.DataSets;
+using FluentAssertions;
 using Newtonsoft.Json;
 using NUnit.Framework;
 

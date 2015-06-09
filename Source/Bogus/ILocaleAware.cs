@@ -5,6 +5,9 @@ namespace Bogus
     /// </summary>
     public interface ILocaleAware
     {
+        /// <summary>
+        /// The current locale for the dataset.
+        /// </summary>
         string Locale { get; set; }
     }
 }

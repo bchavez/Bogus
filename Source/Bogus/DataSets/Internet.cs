@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Random Internet things like email addresses
     /// </summary>
     public class Internet : DataSet
     {
+        /// <summary>
+        /// The source to pull names from.
+        /// </summary>
         protected Name Name = null;
 
         /// <summary>
@@ -98,7 +101,6 @@ namespace Bogus.Generators
         /// <summary>
         /// Generates a domain name suffix like .com, .net, .org
         /// </summary>
-        /// <returns></returns>
         public string DomainSuffix()
         {
             return GetRandomArrayItem("domain_suffix");
@@ -107,7 +109,6 @@ namespace Bogus.Generators
         /// <summary>
         /// Gets a random IP address.
         /// </summary>
-        /// <returns></returns>
         public string Ip()
         {
             return string.Format("{0}.{1}.{2}.{3}",
@@ -123,7 +124,6 @@ namespace Bogus.Generators
         /// <param name="baseRed">Red base color</param>
         /// <param name="baseGreen">Green base color</param>
         /// <param name="baseBlue">Blue base color</param>
-        /// <returns></returns>
         public string Color(byte baseRed = 0, byte baseGreen = 0, byte baseBlue = 0)
         {
             var red = Math.Floor(( Random.Number(256) + (double)baseRed ) / 2);

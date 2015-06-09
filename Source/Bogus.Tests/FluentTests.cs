@@ -9,7 +9,7 @@ namespace Bogus.Tests
     public class Examples : SeededTest
     {
         [Test]
-        public  void TestAPIDesign()
+        public void TestAPIDesign()
         {
             //Set the randomzier seed if you wish to generate repeatable data sets.
             Randomizer.Seed = new Random(3897234);
@@ -52,7 +52,26 @@ namespace Bogus.Tests
             var user = testUsers.Generate();
 
             user.Dump();
+        }
 
+        [Test]
+        public void Without_Fluent_Syntax()
+        {
+            var random = new Bogus.Randomizer();
+            var lorem = new Bogus.DataSets.Lorem();
+            var o = new Order()
+                {
+                    OrderId = random.Number(1, 100),
+                    Item = lorem.Sentance(),
+                    Quantity = random.Number(1, 10)
+                };
+            o.Dump();
+        }
+
+        [Test]
+        public void With_German_Locale()
+        {
+            var lorem
         }
 
         public class Order

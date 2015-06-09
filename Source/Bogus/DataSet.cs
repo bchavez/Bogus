@@ -14,34 +14,64 @@ namespace Bogus
         public DataSet(string locale = "en")
         {
             this.Locale = locale;
-            this.CategoryName = this.GetType().Name.ToLower();
+            this.Category = this.GetType().Name.ToLower();
             this.Random = new Randomizer();
         }
 
+        /// <summary>
+        /// The Randomizer
+        /// </summary>
         public Randomizer Random { get; set; }
 
-        protected string CategoryName { get; set; }
+        /// <summary>
+        /// The category name of inside the locale
+        /// </summary>
+        protected string Category { get; set; }
 
+        /// <summary>
+        /// Current locale of the data set.
+        /// </summary>
         public string Locale { get; set; }
 
-        public JToken Get(string subKind)
+        /// <summary>
+        /// This method accesses the JSON path of a locale dataset LOCALE.CATEGORY.KEY and returns the JToken.
+        /// </summary>
+        /// <param name="key">key in the category</param>
+        /// <returns></returns>
+        public JToken Get(string key)
         {
-            return Database.Get(this.CategoryName, subKind, Locale);
+            return Database.Get(this.Category, key, Locale);
         }
 
-        public JArray GetArray(string subKind)
+        /// <summary>
+        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
+        /// </summary>
+        /// <param name="key">key int the category</param>
+        /// <returns></returns>
+        public JArray GetArray(string key)
         {
-            return (JArray)Get(subKind);
+            return (JArray)Get(key);
         }
 
-        public JObject GetObject(string subKind)
+        /// <summary>
+        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JObject.
+        /// </summary>
+        /// <param name="key">key int the category</param>
+        /// <returns></returns>
+        public JObject GetObject(string key)
         {
-            return (JObject)Get(subKind);
+            return (JObject)Get(key);
         }
 
-        public string GetRandomArrayItem(string subKind)
+        /// <summary>
+        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns a random element.
+        /// It assumes LOCALE.CATEGORY.KEY is a JArray.
+        /// </summary>
+        /// <param name="key">key int the category</param>
+        /// <returns></returns>
+        public string GetRandomArrayItem(string key)
         {
-            return Random.ArrayElement(GetArray(subKind));
+            return Random.ArrayElement(GetArray(key));
         }
     }
 }

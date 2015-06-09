@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Methods for generating names

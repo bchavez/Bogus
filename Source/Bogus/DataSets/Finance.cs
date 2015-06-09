@@ -2,15 +2,31 @@ using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
+    /// <summary>
+    /// Represents a currency
+    /// </summary>
     public class Currency
     {
+        /// <summary>
+        /// The long for description of the currency. IE: "US Dollar"
+        /// </summary>
         public string Description { get; set; }
+        /// <summary>
+        /// The currency code. iE: USD.
+        /// </summary>
         public string Code { get; set; }
+        /// <summary>
+        /// The currency symbol. IE: $
+        /// </summary>
         public string Symbol { get; set; }
     }
 
+
+    /// <summary>
+    /// Provides financial randomness.
+    /// </summary>
     public class Finance : DataSet
     {
         /// <summary>

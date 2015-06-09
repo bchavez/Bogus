@@ -1,5 +1,5 @@
+using Bogus.DataSets;
 using FluentAssertions;
-using Bogus.Generators;
 using NUnit.Framework;
 
 namespace Bogus.Tests

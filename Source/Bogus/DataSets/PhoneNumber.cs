@@ -1,4 +1,4 @@
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Generates phone numbers
@@ -11,7 +11,7 @@ namespace Bogus.Generators
         /// <param name="locale"></param>
         public PhoneNumbers(string locale = "en") : base(locale)
         {
-            this.CategoryName = "phone_number";
+            this.Category = "phone_number";
         }
 
         /// <summary>
@@ -38,6 +38,9 @@ namespace Bogus.Generators
             return PhoneNumber(format);
         }
 
+        /// <summary>
+        /// Gets the format of a phone number.
+        /// </summary>
         protected virtual string PhoneFormat()
         {
             return GetRandomArrayItem("formats");

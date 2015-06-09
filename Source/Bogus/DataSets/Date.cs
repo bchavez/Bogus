@@ -1,6 +1,6 @@
 using System;
 
-namespace Bogus.Generators
+namespace Bogus.DataSets
 {
     /// <summary>
     /// Methods for generating dates

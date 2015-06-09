@@ -24,6 +24,12 @@ Usage
 
 ```csharp
 
+public enum Gender
+{
+    Male,
+    Female
+}
+
 //Set the randomzier seed if you wish to generate repeatable data sets.
 Randomizer.Seed = new Random(3897234);
 

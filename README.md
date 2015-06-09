@@ -1,6 +1,6 @@
 Bogus for .NET/C#
 ======================
-![Faker.js](http://imgur.com/KiinQ.png)
+![Bogus](https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logofull.png)
 
 Project Description
 -------------------

@@ -73,5 +73,31 @@ namespace FluentFaker.Generators
 
             return cur;
         }
+
+        //Mostly taken from here, we could do better I suppose.
+        //https://developers.braintreepayments.com/ios+ruby/reference/general/testing
+        public string CreditCardNumber()
+        {
+            var cards = new[]
+                {
+                    "378282246310005",
+                    "371449635398431",
+                    "6011111111111117",
+                    "3530111333300000",
+                    "6304000000000000",
+                    "5555555555554444",
+                    "4111111111111111",
+                    "4005519200000004",
+                    "4009348888881881",
+                    "4012000033330026",
+                    "4012000077777777",
+                    "4012888888881881",
+                    "4217651111111119",
+                    "4500600000000061"
+                };
+
+            return Random.ArrayElement(cards);
+        }
     }
+
 }

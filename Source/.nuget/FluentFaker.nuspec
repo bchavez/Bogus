@@ -9,14 +9,14 @@
     <projectUrl>https://github.com/bchavez/FluentFaker</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/bchavez/FluentFaker/master/Docs/FluentFaker.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>A simple and sane data generator for populating objects that supports different locales.</description>
+    <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
         History: v0.1.0:
         * Initial implementation.
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
-    <tags>fake poco data generator</tags>
+    <tags>fake bogus poco data generator database seed values</tags>
     <dependencies>
       <group targetFramework="net40">
       </group>

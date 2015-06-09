@@ -44,20 +44,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Address.cs" />
-    <Compile Include="Card.cs" />
-    <Compile Include="Category.cs" />
-    <Compile Include="Company.cs" />
-    <Compile Include="Date.cs" />
+    <Compile Include="DataSet.cs" />
+    <Compile Include="Generators\Address.cs" />
+    <Compile Include="Generators\Card.cs" />
+    <Compile Include="Generators\Company.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="Generators\Date.cs" />
     <Compile Include="Faker.cs" />
-    <Compile Include="Finance.cs" />
-    <Compile Include="Hacker.cs" />
-    <Compile Include="Image.cs" />
-    <Compile Include="Internet.cs" />
-    <Compile Include="Lorem.cs" />
-    <Compile Include="Name.cs" />
-    <Compile Include="PhoneNumber.cs" />
+    <Compile Include="Generators\Finance.cs" />
+    <Compile Include="Generators\Hacker.cs" />
+    <Compile Include="ILocaleAware.cs" />
+    <Compile Include="Generators\Image.cs" />
+    <Compile Include="Generators\Internet.cs" />
+    <Compile Include="Generators\Lorem.cs" />
+    <Compile Include="Generators\Name.cs" />
+    <Compile Include="Generators\PhoneNumber.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyName.cs" />
     <Compile Include="Random.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>

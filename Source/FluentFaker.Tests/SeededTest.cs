@@ -2,13 +2,13 @@
 
 namespace FluentFaker.Tests
 {
-    public class ConsistentTest
-    {
+    public class SeededTest
+    { 
         [SetUp]
         public void BeforeEachTest()
         {
             //set the random gen manually to a seeded value
-            Random.Generator = new System.Random(3116);
+            Randomizer.Seed = new System.Random(3116);
         }
     }
 }

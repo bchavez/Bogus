@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
     public class Currency
     {
@@ -11,7 +11,7 @@ namespace FluentFaker
         public string Symbol { get; set; }
     }
 
-    public class Finance : Category
+    public class Finance : DataSet
     {
         /// <summary>
         /// Get an account number. Default length is 8 digits.
@@ -21,7 +21,7 @@ namespace FluentFaker
         public string Account(int length = 8)
         {
             var template = new string('#', length);
-            return Utils.ReplaceSymbolsWithNumbers(template);
+            return Random.Replace(template);
         }
 
         /// <summary>
@@ -44,9 +44,10 @@ namespace FluentFaker
         public decimal Amount(decimal min = 0, decimal max = 1000, int decimals = 2)
         {
             var amount = (max - min);
-            var part = (decimal)Random.Generator.NextDouble() * amount;
+            var part = (decimal)Random.Double() * amount;
             return Math.Round( min + part, decimals);
         }
+
 
         /// <summary>
         /// Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".

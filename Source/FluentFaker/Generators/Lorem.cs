@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Lorem : Category
+    public class Lorem : DataSet
     {
         public Lorem(string locale = "en") : base(locale)
         {
@@ -15,7 +15,7 @@ namespace FluentFaker
         /// <returns></returns>
         public string[] Words(int num = 3)
         {
-            return Utils.Shuffle(GetArray("words")).Take(num)
+            return Random.Shuffle(GetArray("words")).Take(num)
                 .Select(s => (string)s)
                 .ToArray();
         }

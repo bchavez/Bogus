@@ -1,16 +1,17 @@
 ﻿using FluentAssertions;
+using FluentFaker.Generators;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class CardTests : ConsistentTest
+    public class CardTests : SeededTest
     {
         [Test]
         public void should_be_able_to_get_a_contextually_bogus_person()
         {
-            var card = new Card();
+            var card = new Person();
 
             var json = @"{
   'Name': 'Lee',
@@ -37,7 +38,7 @@ namespace FluentFaker.Tests
   }
 }
 ";
-            var truth = JsonConvert.DeserializeObject<Card>(json);
+            var truth = JsonConvert.DeserializeObject<Person>(json);
 
             card.ShouldBeEquivalentTo(truth);
         }

@@ -1,8 +1,8 @@
 using System;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Date : Category
+    public class Date : DataSet
     {
         /// <summary>
         /// Get a date in the past between refDate and years past that date.
@@ -19,7 +19,7 @@ namespace FluentFaker
             var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 
             //find % of the timespan
-            var partTimeSpanTicks = Random.Generator.NextDouble() * totalTimeSpanTicks;
+            var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
 
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 
@@ -40,7 +40,7 @@ namespace FluentFaker
             var totalTimeSpanTicks = ( maxDate - minDate ).Ticks;
 
             //find % of the timespan
-            var partTimeSpanTicks = Random.Generator.NextDouble() * totalTimeSpanTicks;
+            var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
 
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 
@@ -60,7 +60,7 @@ namespace FluentFaker
 
             var totalTimeSpanTicks = maxTicks - minTicks;
 
-            var partTimeSpanTicks = Random.Generator.NextDouble() * totalTimeSpanTicks;
+            var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
 
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 
@@ -81,7 +81,7 @@ namespace FluentFaker
             var totalTimeSpanTicks = ( maxDate - minDate ).Ticks;
 
             //find % of the timespan
-            var partTimeSpanTicks = Random.Generator.NextDouble() * totalTimeSpanTicks;
+            var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
 
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 

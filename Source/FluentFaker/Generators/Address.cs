@@ -1,6 +1,6 @@
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Address : Category
+    public class Address : DataSet
     {
         protected Name Name = null;
 
@@ -19,7 +19,7 @@ namespace FluentFaker
 
             var format = Random.ArrayElement(formats);
 
-            return Utils.ReplaceSymbolsWithNumbers(format);
+            return Random.Replace(format);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace FluentFaker
         {
             var homeNumbers = new string('#', Random.Number(3, 5));
 
-            var houseNumber = Utils.ReplaceSymbolsWithNumbers(homeNumbers);
+            var houseNumber = Random.Replace(homeNumbers);
 
             if( useFullAddress )
             {
@@ -106,7 +106,7 @@ namespace FluentFaker
 
             var format = Random.ArrayElement(formats);
 
-            return Utils.ReplaceSymbolsWithNumbers(format);
+            return Random.Replace(format);
         }
 
         /// <summary>

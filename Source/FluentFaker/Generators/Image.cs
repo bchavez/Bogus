@@ -1,8 +1,6 @@
-using System;
-
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Images : Category
+    public class Images : DataSet
     {
         public Images(string locale = "en") : base(locale)
         {

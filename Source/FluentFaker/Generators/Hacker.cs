@@ -1,6 +1,6 @@
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Hacker : Category
+    public class Hacker : DataSet
     {
         /// <summary>
         /// Returns an abbreviation.

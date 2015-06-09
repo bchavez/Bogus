@@ -60,7 +60,6 @@
     <Compile Include="AddressTest.cs" />
     <Compile Include="CardTests.cs" />
     <Compile Include="CompanyTest.cs" />
-    <Compile Include="ConsistentTest.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FinanceTest.cs" />
@@ -72,6 +71,7 @@
     <Compile Include="NameTests.cs" />
     <Compile Include="PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeededTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentFaker\FluentFaker.csproj">

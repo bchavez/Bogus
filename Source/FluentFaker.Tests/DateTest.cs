@@ -1,12 +1,13 @@
 using System;
 using System.Net;
 using FluentAssertions;
+using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class DateTest : ConsistentTest
+    public class DateTest : SeededTest
     {
         private Date date;
 

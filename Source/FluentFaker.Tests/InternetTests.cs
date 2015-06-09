@@ -1,11 +1,12 @@
 using System;
 using FluentAssertions;
+using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class InternetTests : ConsistentTest
+    public class InternetTests : SeededTest
     {
         private Internet internet;
 

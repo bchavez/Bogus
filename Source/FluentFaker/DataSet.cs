@@ -2,13 +2,17 @@ using Newtonsoft.Json.Linq;
 
 namespace FluentFaker
 {
-    public class Category : ILocale
+    public class DataSet : ILocaleAware
     {
-        public Category(string locale = "en")
+
+        public DataSet(string locale = "en")
         {
             this.Locale = locale;
             this.CategoryName = this.GetType().Name.ToLower();
+            this.Random = new Randomizer();
         }
+
+        public Randomizer Random { get; set; }
 
         protected string CategoryName { get; set; }
 
@@ -16,7 +20,7 @@ namespace FluentFaker
 
         public JToken Get(string subKind)
         {
-            return Faker.Get(this.CategoryName, subKind, Locale);
+            return Database.Get(this.CategoryName, subKind, Locale);
         }
 
         public JArray GetArray(string subKind)
@@ -33,10 +37,5 @@ namespace FluentFaker
         {
             return Random.ArrayElement(GetArray(subKind));
         }
-    }
-
-    public interface ILocale
-    {
-        string Locale { get; set; }
     }
 }

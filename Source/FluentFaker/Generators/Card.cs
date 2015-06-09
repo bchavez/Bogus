@@ -1,9 +1,9 @@
 using System;
 using Newtonsoft.Json;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Card
+    public class Person
     {
         public class CardAddress
         {
@@ -27,7 +27,12 @@ namespace FluentFaker
             public string Bs;
         }
 
-        public Card(string locale = "en")
+        public Person(string locale = "en")
+        {
+            Initialize(locale);
+        }
+
+        protected virtual void Initialize(string locale)
         {
             var gname = new Name(locale);
 
@@ -39,8 +44,8 @@ namespace FluentFaker
             this.Email = ginternet.Email(this.UserName);
             this.Website = ginternet.DomainName();
             this.Avatar = ginternet.Avatar();
-            
-            var gdate = new Date(){Locale = locale};
+
+            var gdate = new Date() { Locale = locale };
 
             this.DateOfBirth = gdate.Past(50, DateTime.Parse("9/20/1992"));
 
@@ -50,26 +55,26 @@ namespace FluentFaker
             var gaddress = new Address(locale);
 
             this.Address = new CardAddress
+            {
+                Street = gaddress.StreetAddress(),
+                Suite = gaddress.SecondaryAddress(),
+                City = gaddress.City(),
+                ZipCode = gaddress.ZipCode(),
+                Geo = new CardAddress.CardGeo
                 {
-                    Street = gaddress.StreetAddress(),
-                    Suite = gaddress.SecondaryAddress(),
-                    City = gaddress.City(),
-                    ZipCode = gaddress.ZipCode(),
-                    Geo = new CardAddress.CardGeo
-                        {
-                            Lat = gaddress.Latitude(),
-                            Lng = gaddress.Longitude()
-                        }
-                };
+                    Lat = gaddress.Latitude(),
+                    Lng = gaddress.Longitude()
+                }
+            };
 
             var gcompany = new Company(locale);
 
             this.Company = new CardCompany
-                {
-                    Name = gcompany.CompanyName(),
-                    CatchPhrase = gcompany.CatchPhrase(),
-                    Bs = gcompany.Bs()
-                };
+            {
+                Name = gcompany.CompanyName(),
+                CatchPhrase = gcompany.CatchPhrase(),
+                Bs = gcompany.Bs()
+            };
         }
 
         public string Name;

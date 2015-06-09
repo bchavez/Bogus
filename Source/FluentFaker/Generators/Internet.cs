@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Internet : Category
+    public class Internet : DataSet
     {
-        public Name Name = null;
+        protected Name Name = null;
 
         public Internet(string locale = "en") : base(locale)
         {

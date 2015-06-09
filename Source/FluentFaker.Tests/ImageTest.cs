@@ -1,10 +1,11 @@
 using System.Net;
+using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class ImageTest : ConsistentTest
+    public class ImageTest : SeededTest
     {
         private Images image;
 

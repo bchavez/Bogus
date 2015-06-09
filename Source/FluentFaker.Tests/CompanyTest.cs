@@ -1,11 +1,12 @@
 using System.Net;
 using FluentAssertions;
+using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class CompanyTest : ConsistentTest
+    public class CompanyTest : SeededTest
     {
         private Company company;
 

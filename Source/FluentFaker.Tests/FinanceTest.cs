@@ -1,13 +1,14 @@
 using System;
 using System.Net;
 using FluentAssertions;
+using FluentFaker.Generators;
 using Newtonsoft.Json;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class FinanceTest : ConsistentTest
+    public class FinanceTest : SeededTest
     {
         private Finance finance;
 

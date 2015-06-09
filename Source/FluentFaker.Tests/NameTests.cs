@@ -1,10 +1,11 @@
 using FluentAssertions;
+using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
 {
     [TestFixture]
-    public class NameTests : ConsistentTest
+    public class NameTests : SeededTest
     {
         private Name name;
 

@@ -1,152 +1,173 @@
 ﻿using System;
+using System.CodeDom;
+using System.Collections;
 using System.Collections.Generic;
-using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Security.AccessControl;
+using FluentFaker.Generators;
 
 namespace FluentFaker
 {
-    public static class Faker
+    public class Faker
     {
-        public static Lazy<JObject> Data = new Lazy<JObject>(Initialize);
-
-        private static JObject Initialize()
-        {
-            var asm = typeof(Faker).Assembly;
-            var root = new JObject();
-
-            foreach( var resourceName in asm.GetManifestResourceNames() )
-            {
-                if( resourceName.EndsWith(".locale.json") )
-                {
-                    using( var s = typeof(Faker).Assembly.GetManifestResourceStream(resourceName) )
-                    using( var sr = new StreamReader(s) )
-                    {
-                        var serializer = new JsonSerializer();
-                        var locale = serializer.Deserialize<JObject>(new JsonTextReader(sr));
-                        var props = locale.Properties();
-                        foreach( var prop in props )
-                            root.Add(prop.Name, prop.First);
-                    }
-                }
-            }
-            return root;
-        }
-
-        public static JToken Get(string category, string subKind, string locale = "en", string localeFallback = "en" )
-        {
-            var path = string.Format("{0}.{1}.{2}", locale, category, subKind);
-            var jtoken = Data.Value.SelectToken(path);
-
-            if( jtoken != null )
-            {
-                return jtoken;
-            }
-
-            //fallback path
-            var fallbackPath = string.Format("{0}.{1}.{2}", localeFallback, category, subKind);
-
-            return Data.Value.SelectToken(fallbackPath, errorWhenNoMatch: true);
-        }
-    }
-    
-    public class Faker<T> where T : class, new()
-    {
-        internal readonly string locale;
+        public static bool DefaultStrictMode = false;
 
         public Faker(string locale = "en")
         {
-            this.locale = locale;
+            this.Internet = new Internet(locale);
+            this.Date = new Date {Locale = locale};
+            this.Address = new Address(locale);
+            this.Finance = new Finance() {Locale = locale};
+            this.Image = new Images(locale);
+            this.Lorem = new Lorem(locale);
+            this.Name = new Name(locale);
+            this.Phone = new PhoneNumbers(locale);
+            this.Person = new Person(locale);
+            this.Random = new Randomizer();
+        }
+        
+        public Person Person { get; set; }
+        public PhoneNumbers Phone { get; set; }
+        public Name Name { get; set; }
+        public Lorem Lorem { get; set; }
+        public Images Image { get; set; }
+        public Finance Finance { get; set; }
+        public Address Address { get; set; }
+        public Date Date { get; set; }
+        public Internet Internet { get; set; }
+        
+        public Randomizer Random { get; set; }
+
+        public T PickRandom<T>(IEnumerable<T> items)
+        {
+            return this.Random.ArrayElement(items.ToArray());
         }
 
-        public Rule<T,TProperty> RuleFor<TProperty>(Expression<Func<T, TProperty>> prop )
+        public T PickRandom<T>() where T : struct
         {
-            return new Rule<T, TProperty>(this, prop);
-        }
+            var e = typeof(T);
+            if( !e.IsEnum )
+                throw new ArgumentException("When calling PickRandom<T>() with no parameters T must be an enum.");
 
-        internal Dictionary<string, Action<T>> setup;
-
-        public T Generate()
-        {
-            return new T();
+            var val = this.Random.ArrayElement(Enum.GetNames(e));
+            
+            T picked;
+            Enum.TryParse(val, out picked );
+            return picked;
         }
     }
-
-    public class Rule<T, TProperty> where T : class, new()
+    
+    public class Faker<T> where T : class
     {
-        private readonly Faker<T> faker;
-        private readonly Expression<Func<T, TProperty>> prop;
+        protected internal Faker faker;
 
-        public Rule(Faker<T> faker, Expression<Func<T, TProperty>> prop)
+        public Faker(string locale = "en")
         {
-            this.faker = faker;
-            this.prop = prop;
-        }
-
-        public Faker<T> Use<TGenerator>(Func<TGenerator, TProperty> generateAction) where TGenerator : class, new()
-        {
-            var propName = PropertyName.For(this.prop);
-
-            var gen = new TGenerator();
-
-            var hasLocale = gen as ILocale;
-
-            if( hasLocale != null )
-                hasLocale.Locale = this.faker.locale;
-
-            Action action = () =>
+            faker = new Faker(locale);
+            typeProperties = new Lazy<Dictionary<string, PropertyInfo>>(() =>
                 {
-                    generateAction(gen);
-                };
-
-            faker.setup.Add(propName, action);
-
-            return faker;
+                    return typeof(T).GetProperties(bindingFlags)
+                        .ToDictionary(pi => pi.Name);
+                });
         }
 
-    }
+        protected BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public;
 
-    public static class PropertyName
-    {
-        public static string For<T,TProp>(Expression<Func<T, TProp>> expression)
+        public Faker<T> UseBindingFlags(BindingFlags flags)
         {
-            Expression body = expression.Body;
-            return GetMemberName(body);
+            this.bindingFlags = flags;
+            return this;
         }
-        public static string For<T>(Expression<Func<T, object>> expression)
+
+        protected internal Func<Faker, T> customInstantiator;
+
+        public Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
         {
-            Expression body = expression.Body;
-            return GetMemberName(body);
+            this.customInstantiator = factoryMethod;
+            return this;
         }
-        public static string For(Expression<Func<object>> expression)
+
+        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter)
         {
-            Expression body = expression.Body;
-            return GetMemberName(body);
+            var propName = PropertyName.For(property);
+
+            Func<Faker, T, object> invoker = (f, t) => setter(f, t);
+
+            this.actions.Add(propName, invoker);
+
+            return this;
         }
-        public static string GetMemberName(Expression expression)
+        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter )
         {
-            MemberExpression memberExpression;
+            var propName = PropertyName.For(property);
 
-            var unary = expression as UnaryExpression;
-            if( unary != null )
-                //In this case the return type of the property was not object,
-                //so .Net wrapped the expression inside of a unary Convert()
-                //expression that casts it to type object. In this case, the
-                //Operand of the Convert expression has the original expression.
-                memberExpression = unary.Operand as MemberExpression;
-            else
-                //when the property is of type object the body itself is the
-                //correct expression
-                memberExpression = expression as MemberExpression;
+            Func<Faker, T, object> invoker = (f, t) => setter(f);
 
-            if( memberExpression == null
-                || !( memberExpression.Member is PropertyInfo ) )
-                throw new ArgumentException(
-                    "Expression was not of the form 'x =&gt; x.property'.");
+            this.actions.Add(propName, invoker);
 
-            return memberExpression.Member.Name;
+            return this;
+        }
+
+        public Faker<T> StrictMode(bool ensureRulesForAllProperties)
+        {
+            strictMode = ensureRulesForAllProperties;
+            return this;
+        }
+
+        protected Dictionary<string, Func<Faker, T, object>> actions = new Dictionary<string, Func<Faker, T, object>>();
+        protected Lazy<Dictionary<string, PropertyInfo>> typeProperties;
+
+
+
+        protected bool? strictMode;
+
+        protected bool? isValid;
+
+        public virtual T Generate()
+        {
+            var instance = customInstantiator == null ? Activator.CreateInstance<T>() : customInstantiator(this.faker);
+
+            Populate(instance);
+
+            return instance;
+        }
+
+        public virtual IEnumerable<T> Generate(int count)
+        {
+            return Enumerable.Range(1, count)
+                .Select(i => Generate());
+        }
+
+        public virtual void Populate(T instance)
+        {
+            var useStrictMode = strictMode ?? Faker.DefaultStrictMode;
+            if( useStrictMode && !isValid.HasValue ) 
+            {
+                //run validation
+                this.isValid = Validate();
+            }
+            if( useStrictMode && !isValid.GetValueOrDefault())
+            {
+                throw new InvalidOperationException(string.Format("Cannot generate {0} because strict mode is enabled on this type and properties have no rules.",
+                    typeof(T)));
+            }
+
+            var typeProps = typeProperties.Value;
+
+            foreach( var kvp in actions )
+            {
+                PropertyInfo prop;
+                typeProps.TryGetValue(kvp.Key, out prop);
+                var valueFactory = kvp.Value;
+                prop.SetValue(instance, valueFactory(faker, instance), null);
+            }
+        }
+
+        public virtual bool Validate()
+        {
+            return typeProperties.Value.Count == actions.Count;
         }
     }
 }

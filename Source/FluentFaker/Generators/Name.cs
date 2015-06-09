@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Name : Category
+    public class Name : DataSet
     {
         public Name(string locale = "en") : base(locale)
         {

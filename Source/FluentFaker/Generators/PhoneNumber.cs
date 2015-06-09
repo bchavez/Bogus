@@ -1,9 +1,6 @@
-using System;
-using Newtonsoft.Json.Linq;
-
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class PhoneNumbers : Category
+    public class PhoneNumbers : DataSet
     {
         public PhoneNumbers(string locale = "en") : base(locale)
         {
@@ -18,7 +15,7 @@ namespace FluentFaker
         public string PhoneNumber(string format = null)
         {
             format = !string.IsNullOrWhiteSpace(format) ? format : PhoneFormat();
-            return Utils.ReplaceSymbolsWithNumbers(format);
+            return Random.Replace(format);
         }
 
         /// <summary>

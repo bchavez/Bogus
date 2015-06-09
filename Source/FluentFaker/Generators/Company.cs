@@ -1,6 +1,6 @@
-namespace FluentFaker
+namespace FluentFaker.Generators
 {
-    public class Company : Category
+    public class Company : DataSet
     {
         protected Name Name = null;
 

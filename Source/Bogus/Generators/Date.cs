@@ -2,6 +2,9 @@ using System;
 
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Methods for generating dates
+    /// </summary>
     public class Date : DataSet
     {
         /// <summary>

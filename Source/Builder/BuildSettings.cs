@@ -46,8 +46,8 @@ namespace Builder
             public static readonly Action<IAssemblyInfoDetails> AssemblyInfo =
                 i =>
                     {
-                        i.Title("Bogus API for .NET")
-                            .Product("Bogus API");
+                        i.Title("Bogus Fake Data Generator for .NET")
+                            .Product("Bogus");
 
                         GlobalAssemblyInfo(i);
                     };

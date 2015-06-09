@@ -1,9 +1,16 @@
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Methods for generating an address
+    /// </summary>
     public class Address : DataSet
     {
         protected Name Name = null;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Address(string locale = "en") : base(locale)
         {
             this.Name = new Name(locale);

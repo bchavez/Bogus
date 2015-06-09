@@ -1,7 +1,14 @@
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Generates images URLs from lorempixel.com
+    /// </summary>
     public class Images : DataSet
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Images(string locale = "en") : base(locale)
         {
             this.CategoryName = "image";

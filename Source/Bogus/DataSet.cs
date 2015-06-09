@@ -2,9 +2,15 @@ using Newtonsoft.Json.Linq;
 
 namespace Bogus
 {
+    /// <summary>
+    /// Data set methods that access the JSON database of locales.
+    /// </summary>
     public class DataSet : ILocaleAware
     {
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public DataSet(string locale = "en")
         {
             this.Locale = locale;

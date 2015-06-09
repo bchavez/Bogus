@@ -1,5 +1,8 @@
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Hackerish words
+    /// </summary>
     public class Hacker : DataSet
     {
         /// <summary>

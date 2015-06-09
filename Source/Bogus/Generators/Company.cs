@@ -1,9 +1,16 @@
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Generates a random company name and logos
+    /// </summary>
     public class Company : DataSet
     {
         protected Name Name = null;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Company(string locale = "en") : base(locale)
         {
             this.Name = new Name(locale);

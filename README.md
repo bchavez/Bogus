@@ -68,7 +68,7 @@ var testUsers = new Faker<User>()
     .RuleFor(u => u.Orders, f => testOrders.Generate(3).ToList());
 
 var user = testUsers.Generate();
-Console.WriteLine(user.Dump());
+Console.WriteLine(user.DumpAsJson());
 ```
 
 #### Output

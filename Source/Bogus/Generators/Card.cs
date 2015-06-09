@@ -3,6 +3,9 @@ using Newtonsoft.Json;
 
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Contextual generation of a person.
+    /// </summary>
     public class Person
     {
         public class CardAddress

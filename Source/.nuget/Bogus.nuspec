@@ -12,8 +12,8 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: v0.1.0:
-        * Initial implementation.
+        History: v2.1.4.0:
+        * Initial port from faker.js 2.1.4.
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>fake bogus poco data generator database seed values</tags>

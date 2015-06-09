@@ -2,8 +2,15 @@
 
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Generates plain old boring text.
+    /// </summary>
     public class Lorem : DataSet
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Lorem(string locale = "en") : base(locale)
         {
         }

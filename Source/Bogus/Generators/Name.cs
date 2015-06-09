@@ -2,8 +2,15 @@
 
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Methods for generating names
+    /// </summary>
     public class Name : DataSet
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Name(string locale = "en") : base(locale)
         {
         }

@@ -3,10 +3,17 @@ using System.Text.RegularExpressions;
 
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Random Internet things like email addresses
+    /// </summary>
     public class Internet : DataSet
     {
         protected Name Name = null;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public Internet(string locale = "en") : base(locale)
         {
             this.Name = new Name(locale);

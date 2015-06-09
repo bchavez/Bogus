@@ -1,7 +1,14 @@
 namespace Bogus.Generators
 {
+    /// <summary>
+    /// Generates phone numbers
+    /// </summary>
     public class PhoneNumbers : DataSet
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="locale"></param>
         public PhoneNumbers(string locale = "en") : base(locale)
         {
             this.CategoryName = "phone_number";

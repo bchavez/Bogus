@@ -30,7 +30,7 @@ namespace Builder.Tasks
 
             foreach( var locale in locales )
             {
-                Defaults.Logger.Write("LOCALE", "Reading: " + locale);
+                Defaults.Logger.Write("LOCALE", "Compile: " + locale);
                 var data = System.IO.File.ReadAllLines(locale, Encoding.UTF8)
                     .ToList();
                 data.RemoveAt(1); //remove modules line

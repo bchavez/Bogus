@@ -23,7 +23,6 @@ Usage
 ### The Great Example
 
 ```csharp
-
 public enum Gender
 {
     Male,
@@ -69,12 +68,11 @@ var testUsers = new Faker<User>()
     .RuleFor(u => u.Orders, f => testOrders.Generate(3).ToList());
 
 var user = testUsers.Generate();
-
+Console.WriteLine(user.Dump());
 ```
 
 #### Output
 ```
-
 {
   "Id": 0,
   "FirstName": "Audrey",
@@ -104,9 +102,6 @@ var user = testUsers.Generate();
     }
   ]
 }
-
-
-
 ```
 
 Building

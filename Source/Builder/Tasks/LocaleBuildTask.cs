@@ -14,8 +14,8 @@ namespace Builder.Tasks
 {
     public class LocaleBuildTask : BuildFile
     {
-        private FluentFs.Core.Directory DataDir = Projects.FluentFakerProject.Folder.SubFolder("data");
-        private FluentFs.Core.Directory SourceDir = Projects.FluentFakerProject.Folder.SubFolder("locales");
+        private FluentFs.Core.Directory DataDir = Projects.BogusProject.Folder.SubFolder("data");
+        private FluentFs.Core.Directory SourceDir = Projects.BogusProject.Folder.SubFolder("locales");
 
         public LocaleBuildTask()
         {

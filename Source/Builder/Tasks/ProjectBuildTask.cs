@@ -25,24 +25,24 @@ namespace Builder.Tasks
 
             Task.CreateAssemblyInfo.Language.CSharp(aid =>
                 {
-                    Projects.FluentFakerProject.AssemblyInfo(aid);
-                    aid.OutputPath(Projects.FluentFakerProject.Folder.SubFolder("Properties").File("AssemblyInfo.cs"));
+                    Projects.BogusProject.AssemblyInfo(aid);
+                    aid.OutputPath(Projects.BogusProject.Folder.SubFolder("Properties").File("AssemblyInfo.cs"));
                 });
 
 
             Task.Build.MsBuild(msb =>
                 {
                     msb.Configuration("Release")
-                        .ProjectOrSolutionFilePath(Projects.FluentFakerProject.ProjectFile)
+                        .ProjectOrSolutionFilePath(Projects.BogusProject.ProjectFile)
                         .AddTarget("Rebuild")
-                        .OutputDirectory(Projects.FluentFakerProject.OutputDirectory);
+                        .OutputDirectory(Projects.BogusProject.OutputDirectory);
                 });
 
             Defaults.Logger.WriteHeader("BUILD COMPLETE. Packaging ...");
 
             //copy compile directory to package directory
-            Path.Get(Projects.FluentFakerProject.OutputDirectory.ToString())
-                .Copy(Projects.FluentFakerProject.PackageDir.ToString(), Overwrite.Always, true);
+            Path.Get(Projects.BogusProject.OutputDirectory.ToString())
+                .Copy(Projects.BogusProject.PackageDir.ToString(), Overwrite.Always, true);
 
             string version = Properties.CommandLineProperties.Version();
 
@@ -52,7 +52,7 @@ namespace Builder.Tasks
                 .Files("NuGet.exe", true).First();
 
             Task.Run.Executable(e => e.ExecutablePath(nuget.FullPath)
-                .WithArguments("pack", Projects.FluentFakerProject.NugetSpec.Path, "-Version", version, "-OutputDirectory",
+                .WithArguments("pack", Projects.BogusProject.NugetSpec.Path, "-Version", version, "-OutputDirectory",
                     Folders.Package.ToString()));
 
             Defaults.Logger.Write("RESULTS", "Setting NuGet PUSH script");
@@ -61,7 +61,7 @@ namespace Builder.Tasks
             //Defaults.Logger.Write( "RESULTS", pushcmd );
             System.IO.File.WriteAllText("nuget.push.bat",
                 "{0} push {1}".With(nuget.MakeRelative().ToString(),
-                    Path.Get(Projects.FluentFakerProject.NugetNupkg.ToString()).MakeRelative().ToString()) +
+                    Path.Get(Projects.BogusProject.NugetNupkg.ToString()).MakeRelative().ToString()) +
                 Environment.NewLine);
         }
     }

@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bogus</RootNamespace>
+    <AssemblyName>Bogus</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataSet.cs" />
+    <Compile Include="Generators\Address.cs" />
+    <Compile Include="Generators\Card.cs" />
+    <Compile Include="Generators\Company.cs" />
+    <Compile Include="Database.cs" />
+    <Compile Include="Generators\Date.cs" />
+    <Compile Include="Faker.cs" />
+    <Compile Include="Generators\Finance.cs" />
+    <Compile Include="Generators\Hacker.cs" />
+    <Compile Include="ILocaleAware.cs" />
+    <Compile Include="Generators\Image.cs" />
+    <Compile Include="Generators\Internet.cs" />
+    <Compile Include="Generators\Lorem.cs" />
+    <Compile Include="Generators\Name.cs" />
+    <Compile Include="Generators\PhoneNumber.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyName.cs" />
+    <Compile Include="Random.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="data\de.locale.json" />
+    <EmbeddedResource Include="data\de_AT.locale.json" />
+    <EmbeddedResource Include="data\de_CH.locale.json" />
+    <EmbeddedResource Include="data\en.locale.json" />
+    <EmbeddedResource Include="data\en_AU.locale.json" />
+    <EmbeddedResource Include="data\en_au_ocker.locale.json" />
+    <EmbeddedResource Include="data\en_BORK.locale.json" />
+    <EmbeddedResource Include="data\en_CA.locale.json" />
+    <EmbeddedResource Include="data\en_GB.locale.json" />
+    <EmbeddedResource Include="data\en_IND.locale.json" />
+    <EmbeddedResource Include="data\en_US.locale.json" />
+    <EmbeddedResource Include="data\es.locale.json" />
+    <EmbeddedResource Include="data\fa.locale.json" />
+    <EmbeddedResource Include="data\fr.locale.json" />
+    <EmbeddedResource Include="data\it.locale.json" />
+    <EmbeddedResource Include="data\ja.locale.json" />
+    <EmbeddedResource Include="data\ko.locale.json" />
+    <EmbeddedResource Include="data\nb_NO.locale.json" />
+    <EmbeddedResource Include="data\nep.locale.json" />
+    <EmbeddedResource Include="data\nl.locale.json" />
+    <EmbeddedResource Include="data\pl.locale.json" />
+    <EmbeddedResource Include="data\pt_BR.locale.json" />
+    <None Include="data\README.md" />
+    <EmbeddedResource Include="data\ru.locale.json" />
+    <EmbeddedResource Include="data\sk.locale.json" />
+    <EmbeddedResource Include="data\sv.locale.json" />
+    <EmbeddedResource Include="data\vi.locale.json" />
+    <EmbeddedResource Include="data\zh_CN.locale.json" />
+    <None Include="locales\README.md" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="locales\de.js" />
+    <Content Include="locales\de_AT.js" />
+    <Content Include="locales\de_CH.js" />
+    <Content Include="locales\en.js" />
+    <Content Include="locales\en_AU.js" />
+    <Content Include="locales\en_au_ocker.js" />
+    <Content Include="locales\en_BORK.js" />
+    <Content Include="locales\en_CA.js" />
+    <Content Include="locales\en_GB.js" />
+    <Content Include="locales\en_IND.js" />
+    <Content Include="locales\en_US.js" />
+    <Content Include="locales\es.js" />
+    <Content Include="locales\fa.js" />
+    <Content Include="locales\fr.js" />
+    <Content Include="locales\it.js" />
+    <Content Include="locales\ja.js" />
+    <Content Include="locales\ko.js" />
+    <Content Include="locales\nb_NO.js" />
+    <Content Include="locales\nep.js" />
+    <Content Include="locales\nl.js" />
+    <Content Include="locales\pl.js" />
+    <Content Include="locales\pt_BR.js" />
+    <Content Include="locales\ru.js" />
+    <Content Include="locales\sk.js" />
+    <Content Include="locales\sv.js" />
+    <Content Include="locales\vi.js" />
+    <Content Include="locales\zh_CN.js" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

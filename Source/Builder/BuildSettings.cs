@@ -26,28 +26,28 @@ namespace Builder
                .FileVersion( Properties.CommandLineProperties.Version() )
                .InformationalVersion( "{0} built on {1} UTC".With( Properties.CommandLineProperties.Version(), DateTime.UtcNow ) )
                .Trademark( "MIT License" )
-               .Description( "http://www.github.com/bchavez/FluentFaker" )
+               .Description( "http://www.github.com/bchavez/Bogus" )
                .ComVisible(false);
         }
 
-        public static readonly File SolutionFile = Folders.Source.File( "FluentFaker.sln" );
+        public static readonly File SolutionFile = Folders.Source.File( "Bogus.sln" );
 
-        public class FluentFakerProject
+        public class BogusProject
         {
-            public static readonly Directory Folder = Folders.Source.SubFolder( "FluentFaker" );
-            public static readonly File ProjectFile = Folder.File( "FluentFaker.csproj" );
-            public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "FluentFaker" );
-            public static readonly File OutputDll = OutputDirectory.File( "FluentFaker.dll" );
-            public static readonly Directory PackageDir = Folders.Package.SubFolder( "FluentFaker" );
+            public static readonly Directory Folder = Folders.Source.SubFolder( "Bogus" );
+            public static readonly File ProjectFile = Folder.File( "Bogus.csproj" );
+            public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( "Bogus" );
+            public static readonly File OutputDll = OutputDirectory.File( "Bogus.dll" );
+            public static readonly Directory PackageDir = Folders.Package.SubFolder( "Bogus" );
             
-            public static readonly File NugetSpec = Folders.Source.SubFolder(".nuget").File( "FluentFaker.nuspec" );
-            public static readonly File NugetNupkg = Folders.Package.File( "FluentFaker.{0}.nupkg".With( Properties.CommandLineProperties.Version() ) );
+            public static readonly File NugetSpec = Folders.Source.SubFolder(".nuget").File( "Bogus.nuspec" );
+            public static readonly File NugetNupkg = Folders.Package.File( "Bogus.{0}.nupkg".With( Properties.CommandLineProperties.Version() ) );
 
             public static readonly Action<IAssemblyInfoDetails> AssemblyInfo =
                 i =>
                     {
-                        i.Title("FluentFaker API for .NET")
-                            .Product("FluentFaker API");
+                        i.Title("Bogus API for .NET")
+                            .Product("Bogus API");
 
                         GlobalAssemblyInfo(i);
                     };
@@ -55,7 +55,7 @@ namespace Builder
 
         public class Tests
         {
-            public static readonly Directory Folder = Folders.Source.SubFolder( "FluentFaker.Tests" );
+            public static readonly Directory Folder = Folders.Source.SubFolder( "Bogus.Tests" );
         }
     }
 

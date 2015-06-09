@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>Bogus</id>
+    <version>$version$</version>
+    <authors>Brian Chavez</authors>
+    <owners>Brian Chavez</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/bchavez/Bogus</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation.</description>
+    <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
+    <releaseNotes>
+        History: v0.1.0:
+        * Initial implementation.
+    </releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>fake bogus poco data generator database seed values</tags>
+    <dependencies>
+      <group targetFramework="net40">
+      </group>
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="..\..\__package\Bogus\Bogus.dll" target="lib\net40\Bogus.dll" />
+    <file src="..\..\__package\Bogus\Bogus.XML" target="lib\net40\Bogus.XML" />
+  </files>
+
+</package>

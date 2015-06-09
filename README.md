@@ -1,10 +1,11 @@
 Bogus for .NET/C#
 ======================
-![Bogus](https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logofull.png)
 
 Project Description
 -------------------
 A simple and sane fake data generator for C# and .NET. Inspired by [faker.js](https://github.com/marak/Faker.js/) and FluentValidation.
+
+![Bogus](https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logofull.png)
 
 ### License
 * [MIT License](https://github.com/bchavez/Bogus/blob/master/LICENSE)

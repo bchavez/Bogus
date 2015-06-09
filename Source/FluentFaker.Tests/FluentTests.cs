@@ -1,17 +1,6 @@
-﻿//API DESIGN
-//new Faker<User>()
-//    .RuleFor(u => u.FirstName, (Name n) => n.FirstName())
-//    .RuleFor(u => u.UserName, (Internet i) => i.UserName())
-//    .RuleFor(u => u.Email, (Internet i) => i.Email());
-
-//new Faker<User>().RuleFor(u => u.FirstName).Use<Name>(n => n.FirstName())
-//    .RuleFor(u => u.UserName).Use<Internet>(i => i.UserName())
-//    .RuleFor( u => u.Email).Use<Internet>( i => i.UserName());
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentFaker.Generators;
 using NUnit.Framework;
 
 namespace FluentFaker.Tests
@@ -29,8 +18,8 @@ namespace FluentFaker.Tests
 
             var orderIds = 0;
             var testOrders = new Faker<Order>()
-                //Ensure that all 
-                .StrictMode(false)
+                //Ensure all properties have rules.
+                .StrictMode(true)
                 //OrderId is deterministic
                 .RuleFor(o => o.OrderId, f => orderIds++)
                 //Pick some fruit from a basket

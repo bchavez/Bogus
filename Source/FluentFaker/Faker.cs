@@ -150,7 +150,7 @@ namespace FluentFaker
             }
             if( useStrictMode && !isValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException(string.Format("Cannot generate {0} because strict mode is enabled on this type and properties have no rules.",
+                throw new InvalidOperationException(string.Format("Cannot generate {0} because strict mode is enabled on this type and some properties have no rules.",
                     typeof(T)));
             }
 

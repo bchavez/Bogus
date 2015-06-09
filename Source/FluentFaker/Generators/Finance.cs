@@ -74,8 +74,11 @@ namespace FluentFaker.Generators
             return cur;
         }
 
-        //Mostly taken from here, we could do better I suppose.
-        //https://developers.braintreepayments.com/ios+ruby/reference/general/testing
+        //We could do better at generating these I suppose.
+        /// <summary>
+        /// Returns a credit card number that should pass validation. See: https://developers.braintreepayments.com/ios+ruby/reference/general/testing
+        /// </summary>
+        /// <returns></returns>
         public string CreditCardNumber()
         {
             var cards = new[]

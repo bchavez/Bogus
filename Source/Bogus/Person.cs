@@ -1,9 +1,10 @@
 #pragma warning disable 1591
 
 using System;
+using Bogus.DataSets;
 using Newtonsoft.Json;
 
-namespace Bogus.DataSets
+namespace Bogus
 {
     /// <summary>
     /// Uses Faker to generate a person with contextually relevant fields.
@@ -41,12 +42,13 @@ namespace Bogus.DataSets
         {
             var gname = new Name(locale);
 
-            this.Name = gname.FirstName();
+            this.FirstName = gname.FirstName();
+            this.LastName = gname.LastName();
 
             var ginternet = new Internet(locale);
 
-            this.UserName = ginternet.UserName(this.Name);
-            this.Email = ginternet.Email(this.UserName);
+            this.UserName = ginternet.UserName(this.FirstName, this.LastName);
+            this.Email = ginternet.Email(this.UserName, this.LastName);
             this.Website = ginternet.DomainName();
             this.Avatar = ginternet.Avatar();
 
@@ -82,7 +84,8 @@ namespace Bogus.DataSets
                 };
         }
 
-        public string Name;
+        public string FirstName;
+        public string LastName;
         public string UserName;
         public string Avatar;
         public string Email;

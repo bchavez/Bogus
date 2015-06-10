@@ -120,11 +120,12 @@ public void Without_Fluent_Syntax()
         };
     o.Dump();
 }
-//{
-//  "OrderId": 61,
-//  "Item": "vel est ipsa",
-//  "Quantity": 7
-//}
+/* OUTPUT
+{
+  "OrderId": 61,
+  "Item": "vel est ipsa",
+  "Quantity": 7
+} */
 ```
 
 
@@ -141,7 +142,7 @@ public void With_Korean_Locale()
     Console.WriteLine(lorem.Sentance(5));
 }
 
-//국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와
+/* 국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와 */
 ```
 
 Bogus has support following locales:
@@ -194,32 +195,32 @@ public void Create_Context_Related_Person()
     person.Dump();
 }
 
-//{
-//  "FirstName": "Lee",
-//  "LastName": "Brown",
-//  "UserName": "Lee_Brown3",
-//  "Avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/ccinojasso1/128.jpg",
-//  "Email": "Lee_Brown369@yahoo.com",
-//  "DateOfBirth": "1984-01-16T21:31:27.87666",
-//  "Address": {
-//    "Street": "2552 Bernard Rapid",
-//    "Suite": "Suite 199",
-//    "City": "New Haskell side",
-//    "ZipCode": "78425-0411",
-//    "Geo": {
-//      "Lat": -35.8154,
-//      "Lng": -140.2044
-//    }
-//  },
-//  "Phone": "1-500-790-8836 x5069",
-//  "Website": "javier.biz",
-//  "Company": {
-//    "Name": "Kuphal and Sons",
-//    "CatchPhrase": "Organic even-keeled monitoring",
-//    "Bs": "open-source brand e-business"
-//  }
-//}
-
+/* OUTPUT
+{
+  "FirstName": "Lee",
+  "LastName": "Brown",
+  "UserName": "Lee_Brown3",
+  "Avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/ccinojasso1/128.jpg",
+  "Email": "Lee_Brown369@yahoo.com",
+  "DateOfBirth": "1984-01-16T21:31:27.87666",
+  "Address": {
+    "Street": "2552 Bernard Rapid",
+    "Suite": "Suite 199",
+    "City": "New Haskell side",
+    "ZipCode": "78425-0411",
+    "Geo": {
+      "Lat": -35.8154,
+      "Lng": -140.2044
+    }
+  },
+  "Phone": "1-500-790-8836 x5069",
+  "Website": "javier.biz",
+  "Company": {
+    "Name": "Kuphal and Sons",
+    "CatchPhrase": "Organic even-keeled monitoring",
+    "Bs": "open-source brand e-business"
+  }
+} */
 ```
 
 

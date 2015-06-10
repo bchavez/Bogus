@@ -106,7 +106,7 @@ Console.WriteLine(user.DumpAsJson());
 
 You can use Bogus without a complex setup. Just use a dataset directly.
 
-````csharp
+```csharp
 [Test]
 public void Without_Fluent_Syntax()
 {
@@ -125,7 +125,7 @@ public void Without_Fluent_Syntax()
 //  "Item": "vel est ipsa",
 //  "Quantity": 7
 //}
-````
+```
 
 
 ### Locales
@@ -133,7 +133,7 @@ public void Without_Fluent_Syntax()
     Since we're a port of faker.js, we support a whole bunch of different
     locales. Here's an example in Korean:
 
-````csharp
+```csharp
 [Test]
 public void With_Korean_Locale()
 {
@@ -142,7 +142,7 @@ public void With_Korean_Locale()
 }
 
 //국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와
-````
+```
 
     Bogus has support following locales:
 

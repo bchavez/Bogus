@@ -104,7 +104,7 @@ Console.WriteLine(user.DumpAsJson());
 
 ### Locales
     
-Since we're a port of faker.js, we support a whole bunch of different
+Since we're a port of **faker.js**, we support a whole bunch of different
 locales. Here's an example in Korean:
 
 ```csharp
@@ -150,8 +150,9 @@ Bogus has support following locales:
 |`vi`          |Vietnamese
 |`zh_CN`       |Chinese
 
-If you'd like to help contribute new locales, see our [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) 
-wiki page for more info.
+If you'd like to help contribute new locales or update existing ones please see our 
+[Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) wiki page
+for more info.
 
 ### Without Fluent Syntax
 

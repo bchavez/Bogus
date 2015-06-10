@@ -130,8 +130,8 @@ public void Without_Fluent_Syntax()
 
 ### Locales
     
-    Since we're a port of faker.js, we support a whole bunch of different
-    locales. Here's an example in Korean:
+Since we're a port of faker.js, we support a whole bunch of different
+locales. Here's an example in Korean:
 
 ```csharp
 [Test]
@@ -144,44 +144,44 @@ public void With_Korean_Locale()
 //국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와
 ```
 
-    Bogus has support following locales:
+Bogus has support following locales:
 
-    | Locale Code  | Language      |
-    |:------------:|:-------------:|
-    |`de`          |German
-    |`de_AT`       |German (Austria)
-    |`de_CH`       |German (Switzerland)
-    |`en`          |English
-    |`en_AU`       |Australia (English)
-    |`en_au_ocker` |Australia Ocker (English)
-    |`en_BORK`     |Bork (English)
-    |`en_CA`       |Canada (English)
-    |`en_GB`       |Great Britain (English)
-    |`en_IND`      |India (English)
-    |`en_US`       |United States (English)
-    |`es`          |Spanish
-    |`fa`          |Farsi
-    |`fr`          |French
-    |`it`          |Italian
-    |`ja`          |Japanese
-    |`ko`          |Korean
-    |`nb_NO`       |Norwegian
-    |`nep`         |Nepalese
-    |`nl`          |Dutch
-    |`pl`          |Polish
-    |`pt_BR`       |Portuguese (Brazil)
-    |`ru`          |Russian
-    |`sk`          |Slovakian
-    |`sv`          |Swedish
-    |`vi`          |Vietnamese
-    |`zh_CN`       |Chinese
+| Locale Code  | Language      |
+|:------------:|:-------------:|
+|`de`          |German
+|`de_AT`       |German (Austria)
+|`de_CH`       |German (Switzerland)
+|`en`          |English
+|`en_AU`       |Australia (English)
+|`en_au_ocker` |Australia Ocker (English)
+|`en_BORK`     |Bork (English)
+|`en_CA`       |Canada (English)
+|`en_GB`       |Great Britain (English)
+|`en_IND`      |India (English)
+|`en_US`       |United States (English)
+|`es`          |Spanish
+|`fa`          |Farsi
+|`fr`          |French
+|`it`          |Italian
+|`ja`          |Japanese
+|`ko`          |Korean
+|`nb_NO`       |Norwegian
+|`nep`         |Nepalese
+|`nl`          |Dutch
+|`pl`          |Polish
+|`pt_BR`       |Portuguese (Brazil)
+|`ru`          |Russian
+|`sk`          |Slovakian
+|`sv`          |Swedish
+|`vi`          |Vietnamese
+|`zh_CN`       |Chinese
 
 
 
 ### Helpers
     
-    If you want to generate a `Person` with context relevant 
-    p
+If you want to generate a `Person` with context relevant 
+p
 
 
 

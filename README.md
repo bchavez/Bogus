@@ -102,33 +102,6 @@ Console.WriteLine(user.DumpAsJson());
 }
 ```
 
-### Without Fluent Syntax
-
-You can use Bogus without a complex setup. Just use a dataset directly.
-
-```csharp
-[Test]
-public void Without_Fluent_Syntax()
-{
-    var random = new Bogus.Randomizer();
-    var lorem = new Bogus.DataSets.Lorem();
-    var o = new Order()
-        {
-            OrderId = random.Number(1, 100),
-            Item = lorem.Sentance(),
-            Quantity = random.Number(1, 10)
-        };
-    o.Dump();
-}
-/* OUTPUT
-{
-  "OrderId": 61,
-  "Item": "vel est ipsa",
-  "Quantity": 7
-} */
-```
-
-
 ### Locales
     
 Since we're a port of faker.js, we support a whole bunch of different
@@ -179,6 +152,32 @@ Bogus has support following locales:
 
 If you'd like to help contribute new locales, see our [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) 
 wiki page for more info.
+
+### Without Fluent Syntax
+
+You can use Bogus without a complex setup. Just use a dataset directly.
+
+```csharp
+[Test]
+public void Without_Fluent_Syntax()
+{
+    var random = new Bogus.Randomizer();
+    var lorem = new Bogus.DataSets.Lorem();
+    var o = new Order()
+        {
+            OrderId = random.Number(1, 100),
+            Item = lorem.Sentance(),
+            Quantity = random.Number(1, 10)
+        };
+    o.Dump();
+}
+/* OUTPUT
+{
+  "OrderId": 61,
+  "Item": "vel est ipsa",
+  "Quantity": 7
+} */
+```
 
 ### Helpers
     

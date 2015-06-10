@@ -86,6 +86,13 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void Create_an_SSN()
+        {
+            var ssn = new Bogus.Randomizer().Replace("###-##-####");
+            ssn.Dump();
+        }
+
+        [Test]
         public void get_all_locales()
         {
             var data = Database.Data.Value;

@@ -67,10 +67,8 @@ var testUsers = new Faker<User>()
 
 var user = testUsers.Generate();
 Console.WriteLine(user.DumpAsJson());
-```
 
-#### Output
-```
+/* OUTPUT:
 {
   "Id": 0,
   "FirstName": "Audrey",
@@ -99,7 +97,7 @@ Console.WriteLine(user.DumpAsJson());
       "Quantity": 9
     }
   ]
-}
+} */
 ```
 
 ### Locales
@@ -172,7 +170,7 @@ public void Without_Fluent_Syntax()
         };
     o.Dump();
 }
-/* OUTPUT
+/* OUTPUT:
 {
   "OrderId": 61,
   "Item": "vel est ipsa",
@@ -182,9 +180,10 @@ public void Without_Fluent_Syntax()
 
 ### Helpers
     
+##### Person
 If you want to generate a `Person` with context relevant properties like
-an email that looks like it belongs to someone with the same first/last name
-you can create a person.
+an email that looks like it belongs to someone with the same first/last name,
+create a person! 
 
 ```csharp
 [Test]
@@ -195,7 +194,7 @@ public void Create_Context_Related_Person()
     person.Dump();
 }
 
-/* OUTPUT
+/* OUTPUT:
 {
   "FirstName": "Lee",
   "LastName": "Brown",
@@ -221,6 +220,20 @@ public void Create_Context_Related_Person()
     "Bs": "open-source brand e-business"
   }
 } */
+```
+
+##### Replace
+
+Replace a formatted string with some numbers:
+```csharp
+[Test]
+public void Create_an_SSN()
+{
+    var ssn = new Bogus.Randomizer().Replace("###-##-####");
+    ssn.Dump();
+}
+/* OUTPUT:
+"618-19-3064"
 ```
 
 

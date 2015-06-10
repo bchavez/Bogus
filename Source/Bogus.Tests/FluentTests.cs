@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Text;
 using NUnit.Framework;
 
 namespace Bogus.Tests
@@ -69,9 +71,27 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void With_German_Locale()
+        public void With_Korean_Locale()
         {
-            var lorem
+            var lorem = new Bogus.DataSets.Lorem(locale: "ko");
+            Console.WriteLine(lorem.Sentance(5));
+        }
+
+        [Test]
+        public void get_all_locales()
+        {
+            var data = Database.Data.Value;
+
+            var sb = new StringBuilder();
+            foreach( var prop in data.Properties() )
+            {
+                var code = prop.Name;
+                var title = prop.First["title"];
+
+                sb.AppendFormat("|{0,-14}|{1}", "`"+code+"`", title);
+                sb.AppendLine();
+            }
+            Console.WriteLine(sb);
         }
 
         public class Order

@@ -106,7 +106,7 @@ Console.WriteLine(user.DumpAsJson());
 
 You can use Bogus without a complex setup. Just use a dataset directly.
 
-```csharp
+````csharp
 [Test]
 public void Without_Fluent_Syntax()
 {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Text;
+using Bogus.DataSets;
 using NUnit.Framework;
 
 namespace Bogus.Tests
@@ -59,8 +59,8 @@ namespace Bogus.Tests
         [Test]
         public void Without_Fluent_Syntax()
         {
-            var random = new Bogus.Randomizer();
-            var lorem = new Bogus.DataSets.Lorem();
+            var random = new Randomizer();
+            var lorem = new Lorem();
             var o = new Order()
                 {
                     OrderId = random.Number(1, 100),
@@ -73,14 +73,14 @@ namespace Bogus.Tests
         [Test]
         public void With_Korean_Locale()
         {
-            var lorem = new Bogus.DataSets.Lorem(locale: "ko");
+            var lorem = new Lorem(locale: "ko");
             Console.WriteLine(lorem.Sentance(5));
         }
 
         [Test]
         public void Create_Context_Related_Person()
         {
-            var person = new Bogus.Person();
+            var person = new Person();
 
             person.Dump();
         }
@@ -88,7 +88,7 @@ namespace Bogus.Tests
         [Test]
         public void Create_an_SSN()
         {
-            var ssn = new Bogus.Randomizer().Replace("###-##-####");
+            var ssn = new Randomizer().Replace("###-##-####");
             ssn.Dump();
         }
 

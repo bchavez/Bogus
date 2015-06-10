@@ -6,6 +6,7 @@
 Project Description
 -------------------
 A simple and sane fake data generator for C# and .NET. Inspired by [faker.js](https://github.com/marak/Faker.js/) and FluentValidation.
+**Bogus** will help you load databases, UIs, and apps with fake data for your testing needs.
 
 
 ### Download & Install
@@ -116,7 +117,7 @@ public void With_Korean_Locale()
 /* 국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와 */
 ```
 
-Bogus has support following locales:
+**Bogus** has support following locales:
 
 | Locale Code  | Language      |
 |:------------:|:-------------:|
@@ -154,7 +155,7 @@ for more info.
 
 ### Without Fluent Syntax
 
-You can use Bogus without a complex setup. Just use a dataset directly.
+You can use **Bogus** without a complex setup. Just use a dataset directly.
 
 ```csharp
 [Test]
@@ -235,7 +236,6 @@ public void Create_an_SSN()
 /* OUTPUT:
 "618-19-3064"
 ```
-
 
 Building
 --------

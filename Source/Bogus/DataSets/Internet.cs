@@ -131,6 +131,24 @@ namespace Bogus.DataSets
             var blue = Math.Floor(( Random.Number(256) + (double)baseBlue ) / 2);
 
             return string.Format("#{0:x02}{1:x02}{2:x02}", (byte)red, (byte)green, (byte)blue);
-        }       
+        }
+
+        /// <summary>
+        /// Returns a random protocol. HTTP or HTTPS.
+        /// </summary>
+        public string Protocol()
+        {
+            var protocols = new[] {"http", "https"};
+
+            return Random.ArrayElement(protocols);
+        }
+
+        /// <summary>
+        /// Generates a random URL.
+        /// </summary>
+        public string Url()
+        {
+            return string.Format("{0}://{1}", Protocol(), DomainName());
+        }
     }
 }

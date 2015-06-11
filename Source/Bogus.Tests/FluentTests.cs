@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
+using System.Security;
 using System.Text;
+using System.Text.RegularExpressions;
 using Bogus.DataSets;
 using NUnit.Framework;
 
@@ -113,16 +117,18 @@ namespace Bogus.Tests
         {
             var data = Database.Data.Value;
 
-            var sb = new StringBuilder();
-            foreach( var prop in data.Properties() )
+            var locales = new List<string>();
+            
+            foreach( var prop in data.Properties().OrderBy( p => p.Name) )
             {
                 var code = prop.Name;
                 var title = prop.First["title"];
 
-                sb.AppendFormat("|{0,-14}|{1}", "`"+code+"`", title);
-                sb.AppendLine();
+                var str = string.Format("|{0,-14}|{1}", "`"+code+"`", title);
+                locales.Add(str);
             }
-            Console.WriteLine(sb);
+
+            Console.WriteLine(string.Join("\n", locales));
         }
 
         public class Order
@@ -159,5 +165,13 @@ namespace Bogus.Tests
 
             public List<Order> Orders { get; set; }
         }
+
+
+
     }
+
+
+
+
+
 }

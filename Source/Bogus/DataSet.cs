@@ -36,42 +36,42 @@ namespace Bogus
         /// <summary>
         /// This method accesses the JSON path of a locale dataset LOCALE.CATEGORY.KEY and returns the JToken.
         /// </summary>
-        /// <param name="key">key in the category</param>
+        /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
-        public JToken Get(string key)
+        public JToken Get(string keyOrSubPath)
         {
-            return Database.Get(this.Category, key, Locale);
+            return Database.Get(this.Category, keyOrSubPath, Locale);
         }
 
         /// <summary>
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
         /// </summary>
-        /// <param name="key">key int the category</param>
+        /// <param name="keyOrSubPath">key int the category</param>
         /// <returns></returns>
-        public JArray GetArray(string key)
+        public JArray GetArray(string keyOrSubPath)
         {
-            return (JArray)Get(key);
+            return (JArray)Get(keyOrSubPath);
         }
 
         /// <summary>
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JObject.
         /// </summary>
-        /// <param name="key">key int the category</param>
+        /// <param name="keyOrSubPath">key int the category</param>
         /// <returns></returns>
-        public JObject GetObject(string key)
+        public JObject GetObject(string keyOrSubPath)
         {
-            return (JObject)Get(key);
+            return (JObject)Get(keyOrSubPath);
         }
 
         /// <summary>
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns a random element.
         /// It assumes LOCALE.CATEGORY.KEY is a JArray.
         /// </summary>
-        /// <param name="key">key int the category</param>
+        /// <param name="keyOrSubPath">key int the category</param>
         /// <returns></returns>
-        public string GetRandomArrayItem(string key)
+        public string GetRandomArrayItem(string keyOrSubPath)
         {
-            return Random.ArrayElement(GetArray(key));
+            return Random.ArrayElement(GetArray(keyOrSubPath));
         }
     }
 }

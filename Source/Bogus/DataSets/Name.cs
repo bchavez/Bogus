@@ -79,5 +79,17 @@ namespace Bogus.DataSets
                 .Trim();
 
         }
+
+        /// <summary>
+        /// Gets a random job title.
+        /// </summary>
+        public string JobTitle()
+        {
+            var descriptor = GetRandomArrayItem("title.descriptor");
+            var level = GetRandomArrayItem("title.level");
+            var job = GetRandomArrayItem("title.job");
+
+            return string.Format("{0} {1} {2}", descriptor, level, job);
+        }
     }
 }

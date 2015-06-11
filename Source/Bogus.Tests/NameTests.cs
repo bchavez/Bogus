@@ -63,5 +63,11 @@ namespace Bogus.Tests
             name.FindName(lastName: "cowboy", withPrefix: false, withSuffix: false)
                 .Should().Be("Eliza cowboy");
         }
+
+        [Test]
+        public void should_be_able_to_get_job_title()
+        {
+            name.JobTitle().Should().Be("Investor Research Assistant");
+        }
     }
 }

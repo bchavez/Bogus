@@ -1,0 +1,3 @@
+[submodule "Source/fakerjs"]
+	path = Source/fakerjs
+	url = git@github.com:Marak/faker.js.git

@@ -12,7 +12,13 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: v2.1.4.2:
+        History: v2.1.5.1
+        * Added Georgian, Turkish, and Chinese (Taiwan) locales.
+        * Added Name.JobTitle()
+        * Added Internet.Url() and Internet.Protocol().
+        * Sync'd up with faker.js v2.1.5.
+        
+        v2.1.4.2:
         * Fixed bug in Faker.Person and Faker[T] that generates new person context after every new object.
         * Added support for .FinishWith() for post-processing that runs after all rules but before returning new instance.
         * Added Newtonsoft.Json as NuGet dependency.

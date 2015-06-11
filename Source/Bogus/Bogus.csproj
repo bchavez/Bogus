@@ -94,6 +94,9 @@
     <EmbeddedResource Include="data\sv.locale.json" />
     <EmbeddedResource Include="data\vi.locale.json" />
     <EmbeddedResource Include="data\zh_CN.locale.json" />
+    <EmbeddedResource Include="data\ge.locale.json" />
+    <EmbeddedResource Include="data\tr.locale.json" />
+    <EmbeddedResource Include="data\zh_TW.locale.json" />
     <None Include="locales\README.md" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -112,6 +115,7 @@
     <Content Include="locales\es.js" />
     <Content Include="locales\fa.js" />
     <Content Include="locales\fr.js" />
+    <Content Include="locales\ge.js" />
     <Content Include="locales\it.js" />
     <Content Include="locales\ja.js" />
     <Content Include="locales\ko.js" />
@@ -123,8 +127,10 @@
     <Content Include="locales\ru.js" />
     <Content Include="locales\sk.js" />
     <Content Include="locales\sv.js" />
+    <Content Include="locales\tr.js" />
     <Content Include="locales\vi.js" />
     <Content Include="locales\zh_CN.js" />
+    <Content Include="locales\zh_TW.js" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

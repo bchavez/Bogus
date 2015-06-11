@@ -5,8 +5,10 @@
 
 Project Description
 -------------------
-A simple and sane fake data generator for C# and .NET. Inspired by [faker.js](https://github.com/marak/Faker.js/) and FluentValidation.
-**Bogus** will help you load databases, UIs, and apps with fake data for your testing needs.
+A simple and sane fake data generator for C# and .NET. Is a C# port of [faker.js](https://github.com/marak/Faker.js/)
+and inspired by FluentValidation's syntax sugar.
+
+**Bogus** will help you load databases, UI and apps with fake data for your testing needs.
 
 
 ### Download & Install
@@ -142,6 +144,7 @@ public void With_Korean_Locale()
 |`es`          |Spanish
 |`fa`          |Farsi
 |`fr`          |French
+|`ge`          |Georgian
 |`it`          |Italian
 |`ja`          |Japanese
 |`ko`          |Korean
@@ -153,8 +156,11 @@ public void With_Korean_Locale()
 |`ru`          |Russian
 |`sk`          |Slovakian
 |`sv`          |Swedish
+|`tr`          |Turkish
 |`vi`          |Vietnamese
 |`zh_CN`       |Chinese
+|`zh_TW`       |Chinese (Taiwan)
+
 
 If you'd like to help contribute new locales or update existing ones please see our 
 [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) wiki page

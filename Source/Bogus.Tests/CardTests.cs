@@ -12,6 +12,7 @@ namespace Bogus.Tests
         public void should_be_able_to_get_a_contextually_bogus_person()
         {
             var card = new Person();
+            card.Dump();
 
             var json = @"{
   'Name': 'Lee',

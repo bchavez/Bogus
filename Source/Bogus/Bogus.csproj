@@ -41,7 +41,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -90,7 +89,6 @@
     <EmbeddedResource Include="data\nl.locale.json" />
     <EmbeddedResource Include="data\pl.locale.json" />
     <EmbeddedResource Include="data\pt_BR.locale.json" />
-    <None Include="data\README.md" />
     <EmbeddedResource Include="data\ru.locale.json" />
     <EmbeddedResource Include="data\sk.locale.json" />
     <EmbeddedResource Include="data\sv.locale.json" />

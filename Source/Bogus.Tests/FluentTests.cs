@@ -67,7 +67,7 @@ namespace Bogus.Tests
             //FinallyInvoke
             //FinishWith
             
-            var user = testUsers.Generate();
+            var user = testUsers.Generate(3);
 
             user.Dump();
         }

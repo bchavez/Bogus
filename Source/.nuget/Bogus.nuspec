@@ -12,7 +12,11 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: v2.1.4.1:
+        History: v2.1.4.2:
+        * Fixed bug in Faker.Person and Faker[T] that generates new person context after every new object.
+        * Added support for .FinishWith() for post-processing that runs after all rules but before returning new instance.
+        * Added Newtonsoft.Json as NuGet dependency.
+        v2.1.4.1:
         * Minor changes, mostly XML doc update and Person moved from DataSet to Bogus namespace.
         v2.1.4.0:
         * Initial port from faker.js 2.1.4.
@@ -21,6 +25,7 @@
     <tags>fake bogus poco data generator database seed values test-data test data</tags>
     <dependencies>
       <group targetFramework="net40">
+          <dependency id="Newtonsoft.Json" />
       </group>
     </dependencies>
   </metadata>

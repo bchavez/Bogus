@@ -5,7 +5,7 @@
 
 Project Description
 -------------------
-A simple and sane fake data generator for C# and .NET. Is a C# port of [faker.js](https://github.com/marak/Faker.js/)
+A simple and sane fake data generator for C# and .NET. Bogus is a C# port of [faker.js](https://github.com/marak/Faker.js/)
 and inspired by FluentValidation's syntax sugar.
 
 **Bogus** will help you load databases, UI and apps with fake data for your testing needs.

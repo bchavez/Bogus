@@ -269,5 +269,5 @@ Created by [Brian Chavez](http://bchavez.bitarmory.com).
 
 A big thanks to GitHub and all contributors:
 
-* 
+* [Anton Georgiev](https://github.com/antongeorgiev)
 

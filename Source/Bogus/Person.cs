@@ -54,7 +54,7 @@ namespace Bogus
 
             var gdate = new Date() { Locale = locale };
 
-            this.DateOfBirth = gdate.Past(50, DateTime.Parse("9/20/1992"));
+            this.DateOfBirth = gdate.Past(50, DateTime.Now.AddYears(-20));
 
             var gphone = new PhoneNumbers(locale);
             this.Phone = gphone.PhoneNumber();

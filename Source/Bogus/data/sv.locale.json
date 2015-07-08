@@ -537,9 +537,9 @@
     },
     "cell_phone": {
       "common_cell_prefix": [
-        56.0,
-        62.0,
-        59.0
+        56,
+        62,
+        59
       ],
       "formats": [
         "#{common_cell_prefix}-###-####"

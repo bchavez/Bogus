@@ -2,7 +2,6 @@
   "en_GB": {
     "title": "Great Britain (English)",
     "address": {
-      "postcode": "/[A-PR-UWYZ][A-HK-Y]?[0-9][ABEHMNPRVWXY0-9]? [0-9][ABD-HJLN-UW-Z]{2}/",
       "county": [
         "Avon",
         "Bedfordshire",

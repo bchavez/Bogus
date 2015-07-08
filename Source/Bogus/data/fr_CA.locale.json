@@ -1,19 +1,22 @@
 {
-  "en_CA": {
-    "title": "Canada (English)",
+  "fr_CA": {
+    "title": "Canada (French)",
     "address": {
+      "postcode": [
+        "?#? #?#"
+      ],
       "state": [
         "Alberta",
-        "British Columbia",
+        "Colombie-Britannique",
         "Manitoba",
-        "New Brunswick",
-        "Newfoundland and Labrador",
-        "Nova Scotia",
-        "Northwest Territories",
+        "Nouveau-Brunswick",
+        "Terre-Neuve-et-Labrador",
+        "Nouvelle-Écosse",
+        "Territoires du Nord-Ouest",
         "Nunavut",
         "Ontario",
-        "Prince Edward Island",
-        "Quebec",
+        "Île-du-Prince-Édouard",
+        "Québec",
         "Saskatchewan",
         "Yukon"
       ],
@@ -30,7 +33,7 @@
         "PE",
         "QC",
         "SK",
-        "YT"
+        "YK"
       ],
       "default_country": [
         "Canada"
@@ -43,6 +46,7 @@
         "hotmail.com"
       ],
       "domain_suffix": [
+        "qc.ca",
         "ca",
         "com",
         "biz",
@@ -54,22 +58,9 @@
     },
     "phone_number": {
       "formats": [
-        "###-###-####",
-        "(###)###-####",
-        "###.###.####",
-        "1-###-###-####",
-        "###-###-#### x###",
-        "(###)###-#### x###",
-        "1-###-###-#### x###",
-        "###.###.#### x###",
-        "###-###-#### x####",
-        "(###)###-#### x####",
-        "1-###-###-#### x####",
-        "###.###.#### x####",
-        "###-###-#### x#####",
-        "(###)###-#### x#####",
-        "1-###-###-#### x#####",
-        "###.###.#### x#####"
+        "### ###-####",
+        "1 ### ###-####",
+        "### ###-####, poste ###"
       ]
     }
   }

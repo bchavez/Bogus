@@ -71,38 +71,38 @@ namespace Bogus.DataSets
         }
 
 #pragma warning disable 1591
-        protected virtual string[] Suffexes()
+        internal protected virtual string[] Suffexes()
         {
-            return new[] { "Inc", "and Sons", "LLC", "Group", "and Daughters" };
+            return GetArray("suffix").ToObject<string[]>();
         }
 
-        protected virtual string CatchPhraseAdjective()
+        internal protected virtual string CatchPhraseAdjective()
         {
             return GetRandomArrayItem("adjective");
         }
 
 
-        protected virtual string CatchPhraseDescriptor()
+        internal protected virtual string CatchPhraseDescriptor()
         {
             return GetRandomArrayItem("descriptor");
         }
 
-        protected virtual string CatchPhraseNoun()
+        internal protected virtual string CatchPhraseNoun()
         {
             return GetRandomArrayItem("noun");
         }
 
-        protected virtual string BsAdjective()
+        internal protected virtual string BsAdjective()
         {
             return GetRandomArrayItem("bs_adjective");
         }
 
-        protected virtual string BsBuzz()
+        internal protected virtual string BsBuzz()
         {
             return GetRandomArrayItem("bs_verb");
         }
 
-        protected virtual string BsNoun()
+        internal protected virtual string BsNoun()
         {
             return GetRandomArrayItem("bs_noun");
         }

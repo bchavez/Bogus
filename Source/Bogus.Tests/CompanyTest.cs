@@ -16,6 +16,13 @@ namespace Bogus.Tests
             company = new Company();
         }
 
+        [Test]
+        public void can_get_company_suffix_array()
+        {
+            var arr = company.Suffexes();
+
+            arr.Length.Should().NotBe(0);
+        }
 
         [Test]
         public void can_get_company_name()

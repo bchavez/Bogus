@@ -4,8 +4,6 @@ var _ = require("underscore");
 
 var es = require("event-stream");
 
-//var File = require("vinyl");
-
 var locales = require("../fakerjs/lib/locales.js");
 
 var dataFolder = "../Bogus/data";

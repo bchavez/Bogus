@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 [assembly: AssemblyTitleAttribute("Bogus Fake Data Generator for .NET")]
 [assembly: AssemblyProductAttribute("Bogus")]
@@ -10,3 +11,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("MIT License")]
 [assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 [assembly: ComVisible(false)]
+[assembly: InternalsVisibleTo("Bogus.Tests")]

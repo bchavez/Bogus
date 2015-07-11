@@ -17,9 +17,12 @@
         * Faker.Parse() can now tokenize and replace handlebar formats.
         * Added Faker.Hacker and Faker.Company properties.
         * Added Custom separator on Lorem.Paragraph.
-        * Added "Canada (French)" locale.
+        * Added Canada (French) locale.
+        * Added Ukrainian locale.
         * Added Internet.Mac for mac addresses.
         * Exposed Name.JobTitle, Name.JobDescriptor, Name.JobArea, Name.JobType
+        * Exposed Address.CountryCode
+        
 
         v2.1.5.2:
         * Fixed instantiating a Person in a non-US locale. -antongeorgiev

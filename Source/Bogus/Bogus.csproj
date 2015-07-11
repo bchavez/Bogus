@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="DataSet.cs" />
     <Compile Include="DataSets\Address.cs" />
+    <Compile Include="DataSets\Commerce.cs" />
     <Compile Include="DataSets\Company.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DataSets\Date.cs" />

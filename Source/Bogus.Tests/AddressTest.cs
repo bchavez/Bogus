@@ -75,5 +75,18 @@ namespace Bogus.Tests
             address.Latitude().Should().Be(18.634);
             
         }
+
+        [Test]
+        public void can_get_a_street_suffix()
+        {
+            address.StreetSuffix().Should().Be("Pines");
+        }
+
+        [Test]
+        public void can_get_a_random_country_code()
+        {
+            address.CountryCode().Should().Be( "MQ" );
+        }
+
     }
 }

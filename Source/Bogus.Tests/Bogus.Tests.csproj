@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AddressTest.cs" />
     <Compile Include="CardTests.cs" />
+    <Compile Include="CommerceTest.cs" />
     <Compile Include="CompanyTest.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />

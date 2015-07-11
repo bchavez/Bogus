@@ -85,11 +85,36 @@ namespace Bogus.DataSets
         /// </summary>
         public string JobTitle()
         {
-            var descriptor = GetRandomArrayItem("title.descriptor");
-            var level = GetRandomArrayItem("title.level");
-            var job = GetRandomArrayItem("title.job");
+            var descriptor = JobDescriptor();
+            var level = JobArea();
+            var job = JobType();
 
             return string.Format("{0} {1} {2}", descriptor, level, job);
+        }
+
+        /// <summary>
+        /// Get a job description.
+        /// </summary>
+        public string JobDescriptor()
+        {
+            return  GetRandomArrayItem("title.descriptor");
+        }
+
+        /// <summary>
+        /// Get a job area expertise.
+        /// </summary>
+        /// <returns></returns>
+        public string JobArea()
+        {
+            return GetRandomArrayItem("title.level");
+        }
+
+        /// <summary>
+        /// Get a type of job.
+        /// </summary>
+        public string JobType()
+        {
+            return GetRandomArrayItem("title.job");
         }
     }
 }

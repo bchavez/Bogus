@@ -67,12 +67,12 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public string Paragraphs(int count = 3)
+        public string Paragraphs(int count = 3, string separator = "\r\n")
         {
             var paras = Enumerable.Range(1, count)
                 .Select(i => Paragraph());
 
-            return string.Join("\n \r\t", paras);
+            return string.Join(separator, paras);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json.Linq;
 
 namespace Bogus
@@ -8,13 +9,24 @@ namespace Bogus
     public class DataSet : ILocaleAware
     {
         /// <summary>
+        /// Resolves the 'category' type of a dataset type; respects the 'DataCategory' attribute.
+        /// </summary>
+        public static string ResolveCategory(Type type)
+        {
+            var categoryAttribute = Attribute.GetCustomAttribute(type, typeof(DataCategoryAttribute)) as DataCategoryAttribute;
+            return categoryAttribute != null ? categoryAttribute.Name : type.Name.ToLower();
+        }
+
+        /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="locale"></param>
         public DataSet(string locale = "en")
         {
             this.Locale = locale;
-            this.Category = this.GetType().Name.ToLower();
+
+            this.Category = ResolveCategory(this.GetType());
+
             this.Random = new Randomizer();
         }
 
@@ -24,7 +36,7 @@ namespace Bogus
         public Randomizer Random { get; set; }
 
         /// <summary>
-        /// The category name of inside the locale
+        /// The category name inside the locale
         /// </summary>
         protected string Category { get; set; }
 

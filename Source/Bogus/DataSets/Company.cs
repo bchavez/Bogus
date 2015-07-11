@@ -1,3 +1,5 @@
+using System;
+
 namespace Bogus.DataSets
 {
     /// <summary>
@@ -32,17 +34,26 @@ namespace Bogus.DataSets
         /// Get a company name
         /// </summary>
         /// <param name="formatIndex">0: name + suffix, 1: name-name, 2: name, name and name."</param>
-        /// <returns></returns>
         public string CompanyName(int? formatIndex = null)
         {
-            formatIndex = formatIndex ?? Random.Number(2);
+            var formats = new[]
+                {
+                    "{{name.lastName}} {{company.companySuffix}}",
+                    "{{name.lastName}} - {{name.lastName}}",
+                    "{{name.lastName}}, {{name.lastName}} and {{name.lastName}}"
+                };
 
-            if( formatIndex == 0 )
-                return string.Format("{0} {1}", Name.LastName(), CompanySuffix());
-            if( formatIndex == 1 )
-                return string.Format("{0}-{1}", Name.LastName(), Name.LastName());
+            var index = formatIndex ?? Random.Number(formats.Length - 1);
+            return CompanyName(formats[index]);
+        }
 
-            return string.Format("{0}, {1} and {2}", Name.LastName(), Name.LastName(), Name.LastName());
+        /// <summary>
+        /// Get a company name. The only tokenized format data sets are company.* and name.*
+        /// </summary>
+        /// <param name="format">Example: "{{name.lastName}} {{company.companySuffix}}"</param>
+        public string CompanyName(string format)
+        {
+            return Tokenizer.Parse(format, this, this.Name);
         }
 
 

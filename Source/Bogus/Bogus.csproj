@@ -50,20 +50,22 @@
     <Compile Include="DataSets\Company.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DataSets\Date.cs" />
+    <Compile Include="DataSets\Images.cs" />
+    <Compile Include="DataSets\PhoneNumbers.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="DataSets\Finance.cs" />
     <Compile Include="DataSets\Hacker.cs" />
     <Compile Include="Faker[T].cs" />
     <Compile Include="ILocaleAware.cs" />
-    <Compile Include="DataSets\Image.cs" />
     <Compile Include="DataSets\Internet.cs" />
     <Compile Include="DataSets\Lorem.cs" />
     <Compile Include="DataSets\Name.cs" />
-    <Compile Include="DataSets\PhoneNumber.cs" />
+    <Compile Include="MustasheAttribute.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyName.cs" />
     <Compile Include="Random.cs" />
+    <Compile Include="Tokenizer.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>

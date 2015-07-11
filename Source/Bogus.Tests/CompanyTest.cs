@@ -27,7 +27,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_company_name()
         {
-            company.CompanyName().Should().Be("Brown-Schultz");
+            company.CompanyName().Should().Be("Brown - Schultz");
         }
 
         [Test]

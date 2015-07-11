@@ -14,25 +14,30 @@
     <releaseNotes>
         History: v2.2.1.1
         * Migrated to new FakerJS datafile format. Build system uses gulp file to directly import FakerJS locales.
-        * 
-        
+        * Faker.Parse() can now tokenize and replace handlebar formats.
+        * Added Faker.Hacker and Faker.Company properties.
+        * Added Custom separator on Lorem.Paragraph.
+        * Added "Canada (French)" locale.
+        * Added Internet.Mac for mac addresses.
+        * Exposed Name.JobTitle, Name.JobDescriptor, Name.JobArea, Name.JobType
+
         v2.1.5.2:
         * Fixed instantiating a Person in a non-US locale. -antongeorgiev
-        
+
         v2.1.5.1:
         * Added Georgian, Turkish, and Chinese (Taiwan) locales.
         * Added Name.JobTitle()
         * Added Internet.Url() and Internet.Protocol().
         * Sync'd up with faker.js v2.1.5.
-        
+
         v2.1.4.2:
         * Fixed bug in Faker.Person and Faker[T] that generates new person context after every new object.
         * Added support for .FinishWith() for post-processing that runs after all rules but before returning new instance.
         * Added Newtonsoft.Json as NuGet dependency.
-        
+
         v2.1.4.1:
         * Minor changes, mostly XML doc update and Person moved from DataSet to Bogus namespace.
-        
+
         v2.1.4.0:
         * Initial port from faker.js 2.1.4.
     </releaseNotes>

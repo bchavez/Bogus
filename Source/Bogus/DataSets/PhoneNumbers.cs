@@ -3,6 +3,7 @@ namespace Bogus.DataSets
     /// <summary>
     /// Generates phone numbers
     /// </summary>
+    [DataCategory("phone_number")]
     public class PhoneNumbers : DataSet
     {
         /// <summary>
@@ -11,7 +12,6 @@ namespace Bogus.DataSets
         /// <param name="locale"></param>
         public PhoneNumbers(string locale = "en") : base(locale)
         {
-            this.Category = "phone_number";
         }
 
         /// <summary>

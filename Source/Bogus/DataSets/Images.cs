@@ -3,6 +3,7 @@ namespace Bogus.DataSets
     /// <summary>
     /// Generates images URLs from lorempixel.com
     /// </summary>
+    [DataCategory("image")]
     public class Images : DataSet
     {
         /// <summary>
@@ -11,7 +12,6 @@ namespace Bogus.DataSets
         /// <param name="locale"></param>
         public Images(string locale = "en") : base(locale)
         {
-            this.Category = "image";
         }
 
         /// <summary>

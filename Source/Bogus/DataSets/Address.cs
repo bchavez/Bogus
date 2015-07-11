@@ -106,6 +106,9 @@ namespace Bogus.DataSets
             return GetRandomArrayItem("street_suffix");
         }
 
+        //commit 10/9/14 67ddefc327d00697fd1d723349b188185cd88955
+        public string StreetPrefix
+
         /// <summary>
         /// Get a secondary address like 'Apt. 2' or 'Suite 321'.
         /// </summary>

@@ -69,5 +69,23 @@ namespace Bogus.Tests
         {
             name.JobTitle().Should().Be("Investor Research Assistant");
         }
+
+        [Test]
+        public void should_be_able_to_get_job_description()
+        {
+            name.JobDescriptor().Should().Be("Investor");
+        }
+
+        [Test]
+        public void should_be_able_to_get_job_area()
+        {
+            name.JobArea().Should().Be("Communications");
+        }
+
+        [Test]
+        public void should_be_able_to_get_job_type()
+        {
+            name.JobType().Should().Be("Orchestrator");
+        }
     }
 }

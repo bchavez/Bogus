@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Bogus.DataSets;
 
 namespace Bogus
@@ -20,54 +21,94 @@ namespace Bogus
         /// </summary>
         public Faker(string locale = "en")
         {
-            this.Internet = new Internet(locale);
-            this.Date = new Date {Locale = locale};
             this.Address = new Address(locale);
-            this.Finance = new Finance() {Locale = locale};
+            this.Company = new Company(locale);
+            this.Date = new Date {Locale = locale};
+            this.Finance = new Finance {Locale = locale};
+            this.Hacker = new Hacker();
             this.Image = new Images(locale);
+            this.Internet = new Internet(locale);
             this.Lorem = new Lorem(locale);
             this.Name = new Name(locale);
             this.Phone = new PhoneNumbers(locale);
+
             this.Person = new Person(locale);
             this.Random = new Randomizer();
         }
-        
+
+        /// <summary>
+        /// Can parse a handle bar expression like "{{name.lastName}}, {{name.firstName}} {{name.suffix}}".
+        /// </summary>
+        public string Parse(string str)
+        {
+            return Tokenizer.Parse(str,
+                this.Address,
+                this.Company,
+                this.Date,
+                this.Finance,
+                this.Hacker,
+                this.Image,
+                this.Internet,
+                this.Lorem,
+                this.Name,
+                this.Phone);
+        }
+
         /// <summary>
         /// A contextually relevant fields of a person.
         /// </summary>
-        public Person Person { get; set; }     
+        public Person Person { get; set; }
+
+        /// <summary>
+        /// Creates hacker gibberish.
+        /// </summary>
+        public Hacker Hacker { get; set; }
+
         /// <summary>
         /// Generate Phone Numbers
         /// </summary>
         public PhoneNumbers Phone { get; set; }
+
         /// <summary>
         /// Generate Names
         /// </summary>
         public Name Name { get; set; }
+
         /// <summary>
         /// Generate Words
         /// </summary>
         public Lorem Lorem { get; set; }
+
         /// <summary>
         /// Generate Image URL Links
         /// </summary>
         public Images Image { get; set; }
+
         /// <summary>
         /// Generate Finance Items
         /// </summary>
         public Finance Finance { get; set; }
+
         /// <summary>
         /// Generate Addresses
         /// </summary>
         public Address Address { get; set; }
+
         /// <summary>
         /// Generate Dates
         /// </summary>
         public Date Date { get; set; }
+
+        /// <summary>
+        /// Generates company names, titles and BS.
+        /// </summary>
+        public Company Company { get; set; }
+
         /// <summary>
         /// Generate Internet stuff like Emails and UserNames.
         /// </summary>
         public Internet Internet { get; set; }
+
         /// <summary>
         /// Generate numbers, booleans, and decimals.
         /// </summary>
@@ -98,4 +139,6 @@ namespace Bogus
             return picked;
         }
     }
+
+
 }

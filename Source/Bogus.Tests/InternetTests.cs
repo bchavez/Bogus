@@ -81,5 +81,11 @@ namespace Bogus.Tests
         {
             internet.Color().Should().Be("#4d0e68");
         }
+
+        [Test]
+        public void can_generate_mac_address()
+        {
+            internet.Mac().Should().Be("9a:1c:d0:a5:09:9f");
+        }
     }
 }

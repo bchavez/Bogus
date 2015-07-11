@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Bogus.DataSets
@@ -117,6 +119,20 @@ namespace Bogus.DataSets
                 Random.Number(255),
                 Random.Number(255));
         }
+
+        /// <summary>
+        /// Gets a random mac address
+        /// </summary>
+        public string Mac()
+        {
+            var sb = new StringBuilder();
+
+            var arr = Enumerable.Range(0, 6)
+                .Select(s => this.Random.Number(0, 255).ToString("x2"));
+
+            return string.Join(":", arr);
+        }
+
 
         /// <summary>
         /// Gets a random aesthetically pleasing color near the base R,G.B. See: http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette

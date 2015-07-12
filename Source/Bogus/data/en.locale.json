@@ -3,10 +3,6 @@
     "title": "English",
     "separator": " & ",
     "address": {
-      "zipFormat": [
-        "#####",
-        "#####-####"
-      ],
       "city_prefix": [
         "North",
         "East",

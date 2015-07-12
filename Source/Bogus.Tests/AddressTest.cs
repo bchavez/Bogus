@@ -24,7 +24,8 @@ namespace Bogus.Tests
         [Test]
         public void can_get_canadian_zip_code()
         {
-            Assert.Fail("missing");
+            var a = new Address("en_CA");
+            a.ZipCode().Should().Be("C8Q 0Q0");
         }
 
         [Test]

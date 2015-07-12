@@ -27,7 +27,7 @@ namespace Bogus.DataSets
         {
             if( format == null )
             {
-                format = GetRandomArrayItem("zipFormat");
+                format = GetRandomArrayItem("postcode");
             }
 
             return Random.Replace(format);

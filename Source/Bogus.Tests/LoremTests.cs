@@ -73,7 +73,7 @@ namespace Bogus.Tests
         public void can_get_paragraphs()
         {
             lorem.Paragraphs()
-                .Should().Be("vel est ipsa\nab eligendi atque enim rerum consectetur id\nexplicabo ipsa nihil repudiandae consequatur pariatur nulla\nlaborum mollitia explicabo est sapiente\ntempora qui unde labore voluptas consequuntur\n \r	dolorem non delectus et et molestiae consequatur saepe dolor\ntotam ad error architecto iusto sed numquam voluptatem eos\net modi error ea libero\nlaudantium eveniet omnis porro eos et et enim\nassumenda hic quibusdam non iusto in est dolorem et\n \r	dolorem ipsum neque qui ab aperiam repellat esse\nrerum quis et sunt voluptatibus\ndoloremque eos et voluptatem pariatur eum quis numquam nam sit");
+                .Should().Be("vel est ipsa\nab eligendi atque enim rerum consectetur id\nexplicabo ipsa nihil repudiandae consequatur pariatur nulla\nlaborum mollitia explicabo est sapiente\ntempora qui unde labore voluptas consequuntur\r\ndolorem non delectus et et molestiae consequatur saepe dolor\ntotam ad error architecto iusto sed numquam voluptatem eos\net modi error ea libero\nlaudantium eveniet omnis porro eos et et enim\nassumenda hic quibusdam non iusto in est dolorem et\r\ndolorem ipsum neque qui ab aperiam repellat esse\nrerum quis et sunt voluptatibus\ndoloremque eos et voluptatem pariatur eum quis numquam nam sit");
         }
     }
 }

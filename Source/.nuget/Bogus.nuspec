@@ -12,7 +12,10 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: v3.0.0.1
+        History: v3.0.0.2
+        * Includes Ireland (English) locale.
+
+        v3.0.0.1
         * Migrated to new FakerJS datafile format. Build system uses gulp file to directly import FakerJS locales.
         * Faker.Parse() can now tokenize and replace handlebar formats.
         * Added Faker.Hacker and Faker.Company properties.

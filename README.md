@@ -139,6 +139,7 @@ public void With_Korean_Locale()
 |`en_BORK`     |Bork (English)
 |`en_CA`       |Canada (English)
 |`en_GB`       |Great Britain (English)
+|`en_IE`       |Ireland (English)
 |`en_IND`      |India (English)
 |`en_US`       |United States (English)
 |`es`          |Spanish

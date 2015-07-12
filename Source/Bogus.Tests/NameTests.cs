@@ -1,4 +1,4 @@
-using Bogus.DataSets;
+﻿using Bogus.DataSets;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -86,6 +86,21 @@ namespace Bogus.Tests
         public void should_be_able_to_get_job_type()
         {
             name.JobType().Should().Be("Orchestrator");
+        }
+
+        [Test]
+        public void can_get_first_name_when_locale_dataset_is_split_in_male_female()
+        {
+            var n = new Name("ru");
+
+            n.FirstName().Should().Be("Анастасия");
+        }
+        [Test]
+        public void can_get_last_name_when_locale_dataset_is_split_in_male_female()
+        {
+            var n = new Name("ru");
+
+            n.LastName().Should().Be("Анастасия");
         }
     }
 }

@@ -22,6 +22,12 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void can_get_canadian_zip_code()
+        {
+            Assert.Fail("missing");
+        }
+
+        [Test]
         public void can_get_a_city_name()
         {
             address.City().Should().Be("Bernhard fort");

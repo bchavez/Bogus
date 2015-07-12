@@ -58,6 +58,12 @@ namespace Bogus.Tests
         {
             commerce.Price(symbol:"$").Dump();
         }
+
+        [Test]
+        public void can_get_list_of_departments()
+        {
+            commerce.Department(5).Should().Be("Music, Jewelery & Baby");
+        }
     }
 
 }

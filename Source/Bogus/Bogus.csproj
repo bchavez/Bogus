@@ -100,6 +100,8 @@
     <EmbeddedResource Include="data\ge.locale.json" />
     <EmbeddedResource Include="data\tr.locale.json" />
     <EmbeddedResource Include="data\zh_TW.locale.json" />
+    <EmbeddedResource Include="data\fr_CA.locale.json" />
+    <EmbeddedResource Include="data\uk.locale.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

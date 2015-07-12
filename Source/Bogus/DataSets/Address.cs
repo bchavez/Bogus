@@ -23,11 +23,12 @@ namespace Bogus.DataSets
         /// Get a zipcode.
         /// </summary>
         /// <returns></returns>
-        public string ZipCode()
+        public string ZipCode(string format = null)
         {
-            var formats = new[] {"#####", "#####-####"};
-
-            var format = Random.ArrayElement(formats);
+            if( format == null )
+            {
+                format = GetRandomArrayItem("zipFormat");
+            }
 
             return Random.Replace(format);
         }

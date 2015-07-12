@@ -11,6 +11,7 @@ namespace Bogus
     {
         public string Name { get; set; }
         public MethodInfo Method { get; set; }
+        public object[] OptionalArgs { get; set; }
     }
 
     public class Tokenizer
@@ -27,12 +28,23 @@ namespace Bogus
             MustashMethods = typeof(Faker).GetProperties().SelectMany(p =>
                 {
                     return p.PropertyType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                        .Where(mi => mi.GetParameters().Length == 0 && mi.GetGenericArguments().Length == 0)
+                        .Where(mi =>
+                            {
+                                if( mi.GetParameters().Length == 0 || mi.GetParameters().All(pi => pi.IsOptional) )
+                                {
+                                    if( mi.GetGenericArguments().Length == 0 )
+                                    {
+                                        return true;
+                                    }
+                                }
+                                return false;
+                            })
                         //.Where(mi => Attribute.IsDefined(mi, typeof(MustasheAttribute)))
                         .Select(mi => new MustashMethod
                             {
                                 Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
                                 Method = mi,
+                                OptionalArgs = Enumerable.Repeat(Type.Missing, mi.GetParameters().Length).ToArray()
                             });
                 }).ToDictionary(mm => mm.Name);
         }
@@ -43,7 +55,6 @@ namespace Bogus
         {
             var start = str.IndexOf("{{", StringComparison.Ordinal);
             var end = str.IndexOf("}}", StringComparison.Ordinal);
-
             if( start == -1 && end == -1 )
             {
                 return str;
@@ -67,7 +78,7 @@ namespace Bogus
                 throw new ArgumentException(string.Format("Can't parse {0} because the dataset was not provided in the dataSets parameter.", methodName));
             }
 
-            var fakeVal = mm.Method.Invoke(module, null) as string;
+            var fakeVal = mm.Method.Invoke(module, mm.OptionalArgs) as string;
 
             var sb = new StringBuilder();
             sb.Append(str.Substring(0, start));

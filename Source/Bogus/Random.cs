@@ -98,13 +98,51 @@ namespace Bogus
         /// </summary>
         /// <param name="format"></param>
         /// <param name="symbol"></param>
-        /// <returns></returns>
-        public string Replace(string format, char symbol = '#')
+        public string ReplaceNumbers(string format, char symbol = '#')
         {
             var chars = format.Select(c => c == symbol ? Convert.ToChar('0' + Number(9)) : c)
                 .ToArray();
 
             return new string(chars);
+        }
+        /// <summary>
+        /// Replaces symbols with numbers and letters. IE: ###???# -> 283QED4
+        /// </summary>
+        /// <param name="format"></param>
+        public string Replace(string format)
+        {
+            var chars = format.Select(c =>
+                {
+                    if( c == '#' )
+                    {
+                        return Convert.ToChar('0' + Number(9));
+                    }
+                    if( c == '?' )
+                    {
+                        return Convert.ToChar('A' + Number(25));
+                    }
+                    return c;
+                })
+               .ToArray();
+
+            return new string(chars);
+        }
+
+        /// <summary>
+        /// Picks a random Enum of T. Works only with Enums.
+        /// </summary>
+        /// <typeparam name="T">Must be an Enum</typeparam>
+        public T Enum<T>() where T : struct
+        {
+            var e = typeof(T);
+            if( !e.IsEnum )
+                throw new ArgumentException("When calling PickRandom<T>() with no parameters T must be an enum.");
+
+            var val = this.ArrayElement(System.Enum.GetNames(e));
+
+            T picked;
+            System.Enum.TryParse(val, out picked);
+            return picked;
         }
 
         /// <summary>

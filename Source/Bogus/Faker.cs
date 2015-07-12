@@ -128,15 +128,7 @@ namespace Bogus
         /// <typeparam name="T">Must be an Enum</typeparam>
         public T PickRandom<T>() where T : struct
         {
-            var e = typeof(T);
-            if( !e.IsEnum )
-                throw new ArgumentException("When calling PickRandom<T>() with no parameters T must be an enum.");
-
-            var val = this.Random.ArrayElement(Enum.GetNames(e));
-            
-            T picked;
-            Enum.TryParse(val, out picked );
-            return picked;
+            return this.Random.Enum<T>();
         }
     }
 

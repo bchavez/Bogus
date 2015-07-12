@@ -59,7 +59,7 @@ namespace Bogus
             //fallback path
             var fallbackPath = string.Format("{0}.{1}.{2}", localeFallback, category, key);
 
-            return Data.Value.SelectToken(fallbackPath, errorWhenNoMatch: true);
+            return Data.Value.SelectToken(fallbackPath);
         }
     }
 }

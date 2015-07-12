@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Bogus.DataSets
 {
@@ -8,24 +9,31 @@ namespace Bogus.DataSets
         {
         }
 
-
-        public string Department(int max = 3)
+        public string Department(int max = 3, bool returnMax = false)
         {
+            var num = max;
+            if( !returnMax )
+            {
+                 num = this.Random.Number(max);
+            }
 
-            return null;
+            var cats = Categories(num);
+            if( num > 1 )
+            {
+                return string.Format("{0} & {1}", string.Join(", ", cats.Take(cats.Length - 1)),
+                    cats.Last());
+            }
+
+            return cats[0];
         }
 
         /// there is an easier way to do this.
         /// check finance.amount
-        public string Price( double min = 0, double max = 1000, int dec = 2, string symbol = "" )
+        public string Price( decimal min = 0, decimal max = 1000, int decimals = 2, string symbol = "" )
         {
-            if ( min < 0 | max < 0 )
-                return symbol + 0.00;
-            a
-            return symbol + Math.Round(
-                this.Random.Double() * (max - min) + min
-                * Math.Pow( 10, dec )
-                / Math.Pow( 10, dec ), dec );
+            var amount = ( max - min );
+            var part = (decimal)Random.Double() * amount;
+            return symbol + Math.Round(min + part, decimals);
         }
 
         public string[] Categories(int num)

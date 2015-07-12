@@ -22,7 +22,10 @@
         * Added Internet.Mac for mac addresses.
         * Exposed Name.JobTitle, Name.JobDescriptor, Name.JobArea, Name.JobType
         * Exposed Address.CountryCode
-        
+        * Replace symbols in domain words so it generates output for all locales
+        * Support for gender names, but only for locales that support it. Russian('ru') but not English('en').
+        * Corrected abbreviation for Yukon to reflect its official abbreviation of "YT".
+
 
         v2.1.5.2:
         * Fixed instantiating a Person in a non-US locale. -antongeorgiev

@@ -22,8 +22,8 @@ namespace Builder.Tasks
         {
             Properties.CommandLineProperties.Add( "Version", "0.0.0.0" );
 
-            CompilerService.ExecuteBuildTask( Assembly.GetExecutingAssembly().Location,
-                                              typeof(LocaleBuildTask).Name, new List<string>() );
+            //CompilerService.ExecuteBuildTask( Assembly.GetExecutingAssembly().Location,
+            //                                  typeof(LocaleBuildTask).Name, new List<string>() );
         }
     }
 

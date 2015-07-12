@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyAttributes.cs" />
     <Compile Include="DataSet.cs" />
     <Compile Include="DataSets\Address.cs" />
     <Compile Include="DataSets\Commerce.cs" />

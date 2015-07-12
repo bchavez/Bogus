@@ -144,6 +144,7 @@ public void With_Korean_Locale()
 |`es`          |Spanish
 |`fa`          |Farsi
 |`fr`          |French
+|`fr_CA`       |Canada (French)
 |`ge`          |Georgian
 |`it`          |Italian
 |`ja`          |Japanese
@@ -157,6 +158,7 @@ public void With_Korean_Locale()
 |`sk`          |Slovakian
 |`sv`          |Swedish
 |`tr`          |Turkish
+|`uk`          |Ukrainian
 |`vi`          |Vietnamese
 |`zh_CN`       |Chinese
 |`zh_TW`       |Chinese (Taiwan)

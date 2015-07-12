@@ -46,18 +46,6 @@
       <HintPath>..\packages\FluentBuild.1.2.0.0\lib\net40\FluentBuild.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.Core, Version=1.2.4.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Core.1.2.4\lib\net40\JavaScriptEngineSwitcher.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="JavaScriptEngineSwitcher.Jint, Version=1.2.8.0, Culture=neutral, PublicKeyToken=c608b2a8cc9e4472, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Jint.1.2.8\lib\net40\JavaScriptEngineSwitcher.Jint.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Jint, Version=2.5.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
-      <HintPath>..\packages\JavaScriptEngineSwitcher.Jint.1.2.8\lib\net40\Jint.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
       <Private>True</Private>
@@ -90,7 +78,6 @@
   <ItemGroup>
     <Compile Include="BuildSettings.cs" />
     <Compile Include="Tasks\BuildDebugger.cs" />
-    <Compile Include="Tasks\LocaleBuildTask.cs" />
     <Compile Include="Tasks\ProjectBuildTask.cs" />
     <Compile Include="Utils\BuildUtil.cs" />
     <Compile Include="Extensions\Extensions.cs" />

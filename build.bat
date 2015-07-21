@@ -9,6 +9,6 @@ IF NOT DEFINED DevEnvDir (
 	)
 )
 
-set version="3.0.0.2"
+set version="3.0.0.3"
 msbuild source\Builder\Builder.csproj
 Source\Builder\bin\Debug\fb.exe Source\Builder\bin\Debug\Builder.dll -c:ProjectBuildTask -p:Version="%version%"

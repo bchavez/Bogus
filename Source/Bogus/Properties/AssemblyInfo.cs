@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyrightAttribute("Brian Chavez © 2015")]
 [assembly: AssemblyVersionAttribute("3.0.0.2")]
 [assembly: AssemblyFileVersion("3.0.0.2")]
-[assembly: AssemblyInformationalVersion("3.0.0.2 built on 7/12/2015 6:55:22 AM UTC")]
+[assembly: AssemblyInformationalVersion("3.0.0.2 built on 7/21/2015 2:42:49 PM UTC")]
 [assembly: AssemblyTrademark("MIT License")]
 [assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 [assembly: ComVisible(false)]

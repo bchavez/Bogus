@@ -56,7 +56,7 @@
     <tags>fake bogus poco data generator database seed values test-data test data</tags>
     <dependencies>
       <group targetFramework="net40">
-          <dependency id="Newtonsoft.Json" />
+          <dependency id="Newtonsoft.Json" version="[7,8)" />
       </group>
     </dependencies>
   </metadata>

@@ -1,7 +1,12 @@
 @ECHO OFF
 
 IF NOT DEFINED DevEnvDir (
-	CALL "%vs120comntools%\vsvars32.bat"
+	IF DEFINED vs120comntools ( 
+		CALL "%vs120comntools%\vsvars32.bat"
+	)
+	IF DEFINED vs140comntools ( 
+		CALL "%vs140comntools%\vsvars32.bat"
+	)
 )
 
 set version="3.0.0.2"

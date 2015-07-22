@@ -290,23 +290,7 @@ public void Without_Fluent_Syntax()
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
 	* `PhoneFormat` - Gets the format of a phone number.
 
-### Helpers
-
-#### Handlebars
-You can also parse strings in the following format:
-```csharp
-[Test]
-public void Handlebar()
-{
-    var faker = new Faker();
-    var randomName = faker.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}");
-    randomName.Dump();
-}
-
-/* OUTPUT:
-"Roob, Michale PhD"
-*/
-```
+### Helpers Methods
 
 ##### Person
 If you want to generate a `Person` with context relevant properties like
@@ -369,6 +353,22 @@ public void Create_an_SSN()
 */
 ```
 
+#### Parse Handlebars
+You can also parse strings in the following format:
+```csharp
+[Test]
+public void Handlebar()
+{
+    var faker = new Faker();
+    var randomName = faker.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}");
+    randomName.Dump();
+}
+
+/* OUTPUT:
+"Roob, Michale PhD"
+*/
+```
+
 Building
 --------
 * Download the source code.
@@ -377,6 +377,7 @@ Building
 Upon successful build, the results will be in the `\__package` directory.
 The `build.bat` compiles the C# code and embeds the locales in `Source\Bogus\data`.
 
+#### Rebundling Locales
 If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 
 1. `git submodule init`

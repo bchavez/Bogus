@@ -15,6 +15,7 @@
         History: v3.0.0.4
         * Adding generators: Date.Month(), Date.Weekday()
         * Sentences using lexically correct "A foo bar."
+        * Added Spanish Mexico (es_MX) locale.
 
         v3.0.0.3
         * Use latest Newtonsoft.Json 7.0.0.0, Issue #2 -Mpdreamz

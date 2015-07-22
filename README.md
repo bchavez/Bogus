@@ -38,7 +38,7 @@ var fruit = new[] { "apple", "banana", "orange", "strawberry", "kiwi" };
 var orderIds = 0;
 var testOrders = new Faker<Order>()
     //Ensure all properties have rules. By default, StrictMode is false
-    //Set a global policy by using Faker.DefaultStrictMode if you prefer.
+    //Set a global policy by using Faker.DefaultStrictMode
     .StrictMode(true)
     //OrderId is deterministic
     .RuleFor(o => o.OrderId, f => orderIds++)
@@ -144,6 +144,7 @@ public void With_Korean_Locale()
 |`en_IND`      |India (English)
 |`en_US`       |United States (English)
 |`es`          |Spanish
+|`es_MX`       |Spanish Mexico
 |`fa`          |Farsi
 |`fr`          |French
 |`fr_CA`       |Canada (French)
@@ -398,8 +399,10 @@ If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 
 Contributors
 ---------
-faker.js made possible by Matthew Bergman & Marak Squires.
-C# port created by [Brian Chavez](http://bchavez.bitarmory.com).
+Created by [Brian Chavez](http://bchavez.bitarmory.com).
+
+[faker.js](https://github.com/marak/Faker.js/) made possible by Matthew Bergman & Marak Squires.
+
 
 A big thanks to GitHub and all contributors:
 

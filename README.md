@@ -290,7 +290,7 @@ public void Without_Fluent_Syntax()
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
 	* `PhoneFormat` - Gets the format of a phone number.
 
-### Helpers Methods
+### Helper Methods
 
 ##### Person
 If you want to generate a `Person` with context relevant properties like
@@ -398,7 +398,8 @@ If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 
 Contributors
 ---------
-Created by [Brian Chavez](http://bchavez.bitarmory.com).
+faker.js made possible by Matthew Bergman & Marak Squires.
+C# port created by [Brian Chavez](http://bchavez.bitarmory.com).
 
 A big thanks to GitHub and all contributors:
 

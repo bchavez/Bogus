@@ -48,7 +48,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get a company name. The only tokenized format data sets are company.* and name.*
+        /// Get a company name. The format can use any name.* and company.* methods.
         /// </summary>
         /// <param name="format">Example: "{{name.lastName}} {{company.companySuffix}}"</param>
         public string CompanyName(string format)

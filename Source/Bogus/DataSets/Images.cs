@@ -30,7 +30,7 @@ namespace Bogus.DataSets
         
         //TODO: Add support for greyscale
         /// <summary>
-        /// Creates an image URL with lorempixel.com.
+        /// Creates an image URL with http://lorempixel.com.
         /// </summary>
         protected virtual string ImageUrl( string category, int width = 640, int height = 480)
         {
@@ -39,7 +39,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an abstract looking image.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -50,7 +50,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image of an animal.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -61,7 +61,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets a business looking image.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -72,7 +72,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets a picture of a cat.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -83,7 +83,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets a city looking image.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -94,7 +94,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image of food.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -106,7 +106,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image with city looking nightlife.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -118,7 +118,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image in the fashion category.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -130,7 +130,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image of humans.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -142,7 +142,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image of nature.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -154,7 +154,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Gets an image related to sports.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -166,7 +166,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Get a technology related image.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
@@ -178,7 +178,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get an random image based on your category selection.
+        /// Get a transportation related image.
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>

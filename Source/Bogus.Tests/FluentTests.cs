@@ -6,7 +6,11 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
+using System.Xml.XPath;
 using Bogus.DataSets;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 
 namespace Bogus.Tests
@@ -24,7 +28,8 @@ namespace Bogus.Tests
 
             var orderIds = 0;
             var testOrders = new Faker<Order>()
-                //Ensure all properties have rules.
+                //Ensure all properties have rules. By default, StrictMode is false
+                //Set a global policy by using Faker.DefaultStrictMode if you prefer.
                 .StrictMode(true)
                 //OrderId is deterministic
                 .RuleFor(o => o.OrderId, f => orderIds++)
@@ -110,6 +115,9 @@ namespace Bogus.Tests
         {
             var ssn = new Randomizer().Replace("###-##-####");
             ssn.Dump();
+
+            var code = new Randomizer().Replace("##? ??? ####");
+            code.Dump();
         }
 
         [Test]
@@ -129,6 +137,61 @@ namespace Bogus.Tests
             }
 
             Console.WriteLine(string.Join("\n", locales));
+        }
+
+        [Test]
+        public void get_available_methods()
+        {
+            var x = XElement.Load(@"Bogus.XML");
+            var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
+
+            var all = json.SelectTokens("doc.members.member").SelectMany(jt => jt)
+                .Select(m =>
+                    {
+                        var member = m["@name"];
+                        var summary = m["summary"];
+                        if( member == null || summary == null ) return null;
+
+                        var declare = member.ToString();
+                        var argPos = declare.IndexOf('(');
+                        if( argPos > 0 )
+                        {
+                            declare = declare.Substring(0, argPos);
+                        }
+                        if( !declare.StartsWith("M:Bogus.DataSets.") ) return null;
+
+                        var method = declare.TrimStart('M', ':');
+                        method = method.Replace("Bogus.DataSets.", "");
+
+                        var methodSplit = method.Split('.');
+
+                        var dataset = methodSplit[0];
+                        var call = methodSplit[1];
+
+                        if( call == "#ctor" ) return null;
+
+                        return new {dataset = dataset, method = call, summary = summary.ToString().Trim()};
+                    })
+                .Where(a => a != null)
+                .GroupBy(k => k.dataset)
+                .OrderBy(k => k.Key);
+
+            foreach( var g in all )
+            {
+                Console.WriteLine("* **`" + g.Key+"`**");
+                foreach( var m in g )
+                {
+                    Console.WriteLine("\t* `" + m.method+"` - " + m.summary);
+                }
+            }
+        }
+
+        [Test]
+        public void Handlebar()
+        {
+            var faker = new Faker();
+            var randomName = faker.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}");
+            randomName.Dump();
         }
 
         public class Order

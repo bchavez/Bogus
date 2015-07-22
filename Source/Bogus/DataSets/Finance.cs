@@ -92,7 +92,7 @@ namespace Bogus.DataSets
 
         //We could do better at generating these I suppose.
         /// <summary>
-        /// Returns a credit card number that should pass validation. See: https://developers.braintreepayments.com/ios+ruby/reference/general/testing
+        /// Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
         /// </summary>
         /// <returns></returns>
         public string CreditCardNumber()

@@ -135,7 +135,7 @@ namespace Bogus.DataSets
 
 
         /// <summary>
-        /// Gets a random aesthetically pleasing color near the base R,G.B. See: http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette
+        /// Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
         /// </summary>
         /// <param name="baseRed">Red base color</param>
         /// <param name="baseGreen">Green base color</param>

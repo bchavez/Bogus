@@ -1,4 +1,4 @@
-﻿Bogus for .NET/C#
+Bogus for .NET/C#
 ======================
 ![Bogus](https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png)
 
@@ -37,7 +37,8 @@ var fruit = new[] { "apple", "banana", "orange", "strawberry", "kiwi" };
 
 var orderIds = 0;
 var testOrders = new Faker<Order>()
-    //Ensure all properties have rules.
+    //Ensure all properties have rules. By default, StrictMode is false
+    //Set a global policy by using Faker.DefaultStrictMode if you prefer.
     .StrictMode(true)
     //OrderId is deterministic
     .RuleFor(o => o.OrderId, f => orderIds++)
@@ -171,7 +172,7 @@ for more info.
 
 ### Without Fluent Syntax
 
-You can use **Bogus** without a complex setup. Just use a dataset directly.
+You can use **Bogus** without a fluent setup. Just use a dataset directly.
 
 ```csharp
 [Test]
@@ -195,8 +196,118 @@ public void Without_Fluent_Syntax()
 } */
 ```
 
+### Bogus API Support
+* **`Address`**
+	* `ZipCode` - Get a zipcode.
+	* `City` - Get a city name.
+	* `StreetAddress` - Get a street address.
+	* `CityPrefix` - Get a city prefix.
+	* `CitySuffix` - Get a city suffix.
+	* `StreetName` - Get a street name.
+	* `StreetSuffix` - Get a street suffix.
+	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
+	* `County` - Get a county.
+	* `Country` - Get a country.
+	* `CountryCode` - Get a random country code.
+	* `State` - Get a state.
+	* `StateAbbr` - Get a state abbreviation.
+	* `Latitude` - Get a Latitude
+	* `Longitude` - Get a Longitude
+* **`Company`**
+	* `CompanySuffix` - Get a company suffix. "Inc" and "LLC" etc.
+	* `CompanyName` - Get a company name
+	* `CompanyName` - Get a company name. The format can use any name.* and company.* methods.
+	* `CatchPhrase` - Get a company catch phrase.
+	* `Bs` - Get a company BS phrase.
+* **`Date`**
+	* `Past` - Get a date in the past between refDate and years past that date.
+	* `Future` - Get a date in the future between refDate and years forward of that date.
+	* `Between` - Get a random date between start and end.
+	* `Recent` - Get a random date/time within the last few days since now.
+* **`Finance`**
+	* `Account` - Get an account number. Default length is 8 digits.
+	* `AccountName` - Get an account name. Like "savings", "checking", "Home Loan" etc..
+	* `Amount` - Get a random amount. Default 0 - 1000.
+	* `TransactionType` - Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
+	* `Currency` - Get a random currency.
+	* `CreditCardNumber` - Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
+* **`Hacker`**
+	* `Abbreviation` - Returns an abbreviation.
+	* `Adjective` - Returns a adjective.
+	* `Noun` - Returns a noun.
+	* `Verb` - Returns a verb.
+	* `IngVerb` - Returns an -ing verb.
+	* `Phrase` - Returns a phrase.
+* **`Images`**
+	* `Image` - Gets a random image.
+	* `ImageUrl` - Creates an image URL with http://lorempixel.com.
+	* `Abstract` - Gets an abstract looking image.
+	* `Animals` - Gets an image of an animal.
+	* `Business` - Gets a business looking image.
+	* `Cats` - Gets a picture of a cat.
+	* `City` - Gets a city looking image.
+	* `Food` - Gets an image of food.
+	* `Nightlife` - Gets an image with city looking nightlife.
+	* `Fashion` - Gets an image in the fashion category.
+	* `People` - Gets an image of humans.
+	* `Nature` - Gets an image of nature.
+	* `Sports` - Gets an image related to sports.
+	* `Technics` - Get a technology related image.
+	* `Transport` - Get a transportation related image.
+* **`Internet`**
+	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
+	* `Email` - Generates an email address.
+	* `UserName` - Generates user names.
+	* `DomainName` - Generates a random domain name.
+	* `DomainWord` - Generates a domain word used for domain names.
+	* `DomainSuffix` - Generates a domain name suffix like .com, .net, .org
+	* `Ip` - Gets a random IP address.
+	* `Mac` - Gets a random mac address
+	* `Color` - Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
+	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
+	* `Url` - Generates a random URL.
+* **`Lorem`**
+	* `Words` - Get some lorem words
+	* `Sentance` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
+            If you want a sustenance with 5 words always call Sentence(5, range: 0);
+	* `Sentances` - Get some sentences.
+	* `Paragraph` - Get a paragraph.
+	* `Paragraphs` - Get some paragraphs with tabs n all.
+* **`Name`**
+	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
+            male/female names, but not 'en' english.
+	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
+            male/female names, but Enblish ('en') does not.
+	* `Prefix` - Gets a random prefix for a name
+	* `Suffix` - Gets a random suffix for a name
+	* `FindName` - Gets a full name
+	* `JobTitle` - Gets a random job title.
+	* `JobDescriptor` - Get a job description.
+	* `JobArea` - Get a job area expertise.
+	* `JobType` - Get a type of job.
+* **`PhoneNumbers`**
+	* `PhoneNumber` - Get a phone number.
+	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+	* `PhoneFormat` - Gets the format of a phone number.
+
 ### Helpers
-    
+
+#### Handlebars
+You can also parse strings in the following format:
+```csharp
+[Test]
+public void Handlebar()
+{
+    var faker = new Faker();
+    var randomName = faker.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}");
+    randomName.Dump();
+}
+
+/* OUTPUT:
+"Roob, Michale PhD"
+*/
+```
+
 ##### Person
 If you want to generate a `Person` with context relevant properties like
 an email that looks like it belongs to someone with the same first/last name,
@@ -241,16 +352,21 @@ public void Create_Context_Related_Person()
 
 ##### Replace
 
-Replace a formatted string with some numbers:
+Replace a formatted string with random numbers and letters:
 ```csharp
 [Test]
 public void Create_an_SSN()
 {
     var ssn = new Bogus.Randomizer().Replace("###-##-####");
     ssn.Dump();
+
+    var code = new Randomizer().Replace("##? ??? ####");
+    code.Dump();
 }
 /* OUTPUT:
 "618-19-3064"
+"39E SPC 0790"
+*/
 ```
 
 Building
@@ -273,4 +389,4 @@ Created by [Brian Chavez](http://bchavez.bitarmory.com).
 A big thanks to GitHub and all contributors:
 
 * [Anton Georgiev](https://github.com/antongeorgiev)
-
+* [Martijn Laarman](https://github.com/Mpdreamz)

@@ -383,7 +383,7 @@ If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 
 1. `git submodule init`
 2. `git submodule update`
-3. Ensure, [NodeJS](https://nodejs.org/) is installed.
+3. Ensure, [NodeJS](https://nodejs.org/) and `gulp` are properly installed.
 4. `cd Source\Builder`
 5. `npm install` to install required dev dependencies.
 6. `gulp build.locales` to regenerate locales in `Source\Bogus\data`.

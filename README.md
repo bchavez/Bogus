@@ -375,6 +375,19 @@ Building
 * Run `build.bat`.
 
 Upon successful build, the results will be in the `\__package` directory.
+The `build.bat` compiles the C# code and embeds the locales in `Source\Bogus\data`.
+
+If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
+
+1. `git submodule init`
+2. `git submodule update`
+3. Ensure, [NodeJS](https://nodejs.org/) is installed.
+4. `cd Source\Builder`
+5. `npm install` to install required dev dependencies.
+6. `gulp build.locales` to regenerate locales in `Source\Bogus\data`.
+7. In solution explorer add any new locales not already included as an
+`EmbeddedResource`.
+8. Finally, run `build.bat`.
 
 ### License
 * [MIT License](https://github.com/bchavez/Bogus/blob/master/LICENSE)

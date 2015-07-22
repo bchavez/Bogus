@@ -12,7 +12,11 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: v3.0.0.3
+        History: v3.0.0.4
+        * Adding generators: Date.Month(), Date.Weekday()
+        * Sentences using lexically correct "A foo bar."
+
+        v3.0.0.3
         * Use latest Newtonsoft.Json 7.0.0.0, Issue #2 -Mpdreamz
 
         v3.0.0.2

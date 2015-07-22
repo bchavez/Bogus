@@ -36,7 +36,8 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Sentance(int minWordCount = 3, int range = 7)
         {
-            return string.Join(" ", Words(minWordCount + Random.Number(range)));
+            var sentance = string.Join(" ", Words(minWordCount + Random.Number(range)));
+            return sentance.Substring(0, 1).ToUpper() + sentance.Substring(1) + ".";
         }
 
         /// <summary>

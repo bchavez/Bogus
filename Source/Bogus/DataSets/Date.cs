@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json.Linq;
 
 namespace Bogus.DataSets
 {
@@ -7,6 +8,24 @@ namespace Bogus.DataSets
     /// </summary>
     public class Date : DataSet
     {
+        private bool hasMonthWideContext;
+        private bool hasMonthAbbrContext;
+        private bool hasWeekdayWideContext;
+        private bool hasWeekdayAbbrContext;
+
+
+        /// <summary>
+        /// Create a Date dataset
+        /// </summary>
+        /// <param name="locale"></param>
+        public Date(string locale = "en") : base(locale)
+        {
+            this.hasMonthWideContext = Get("month.wide_context") != null;
+            this.hasMonthAbbrContext = Get("month.abbr_context") != null;
+            this.hasWeekdayWideContext = Get("weekday.wide_context") != null;
+            this.hasWeekdayAbbrContext = Get("weekday.abbr_context") != null;
+        }
+
         /// <summary>
         /// Get a date in the past between refDate and years past that date.
         /// </summary>
@@ -89,6 +108,44 @@ namespace Bogus.DataSets
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 
             return maxDate - partTimeSpan;
+        }
+
+        /// <summary>
+        /// Get a random month
+        /// </summary>
+        public string Month( bool abbrivation = false, bool useContext = false )
+        {
+            var type = "wide";
+            if( abbrivation )
+                type = "abbr";
+
+            if( useContext && 
+                (type == "wide" && hasMonthWideContext) ||
+                (type == "abbr" && hasMonthAbbrContext) )
+            {
+                type += "_context";
+            }
+
+            return GetRandomArrayItem("month."+type);
+        }
+
+        /// <summary>
+        /// Get a random weekday
+        /// </summary>
+        public string Weekday(bool abbrivation = false, bool useContext = false)
+        {
+            var type = "wide";
+            if( abbrivation )
+                type = "abbr";
+
+            if( useContext &&
+                ( type == "wide" && hasWeekdayWideContext ) ||
+                ( type == "abbr" && hasWeekdayAbbrContext ) )
+            {
+                type += "_context";
+            }
+
+            return GetRandomArrayItem("month." + type);
         }
     }
 }

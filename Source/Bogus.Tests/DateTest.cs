@@ -90,5 +90,19 @@ namespace Bogus.Tests
                 .And
                 .BeOnOrAfter(start.AddDays(-1));
         }
+
+        [Test]
+        public void can_get_a_random_month()
+        {
+            date.Month().Should().NotBeNullOrEmpty();
+            date.Month(abbrivation: true).Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public void can_get_a_random_weekday()
+        {
+            date.Weekday().Should().NotBeNullOrEmpty();
+            date.Weekday(abbrivation: true).Should().NotBeNullOrEmpty();
+        }
     }
 }

@@ -95,7 +95,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string StreetName()
         {
-            return string.Format("{0} {1}", Random.Bool() ? Name.FirstName() : Name.LastName(), StreetSuffix());
+	        return $"{(Random.Bool() ? Name.FirstName() : Name.LastName())} {StreetSuffix()}".Trim();
         }
 
         /// <summary>

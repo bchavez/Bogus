@@ -1,4 +1,4 @@
-https://bchavez.visualstudio.com/DefaultCollection/_apis/public/build/definitions/8ce74ee7-9d28-469e-8c5b-6d98f89c6398/1/badge
+![Build Status](https://bchavez.visualstudio.com/DefaultCollection/_apis/public/build/definitions/8ce74ee7-9d28-469e-8c5b-6d98f89c6398/1/badge)
 
 Bogus for .NET/C#
 ======================

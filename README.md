@@ -1,9 +1,8 @@
 ![Build Status](https://bchavez.visualstudio.com/DefaultCollection/_apis/public/build/definitions/8ce74ee7-9d28-469e-8c5b-6d98f89c6398/1/badge)
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 Bogus for .NET/C#
 ======================
-<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
-
 
 Project Description
 -------------------

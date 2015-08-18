@@ -34,10 +34,6 @@
       <HintPath>..\packages\fasterflect.2.1.3\lib\net40\Fasterflect.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="fb, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentBuild.1.2.0.0\lib\net40\fb.exe</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Fluent.IO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentPath.1.1.0\lib\Net4\Fluent.IO.dll</HintPath>
       <Private>True</Private>
@@ -77,8 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BuildSettings.cs" />
-    <Compile Include="Tasks\BuildDebugger.cs" />
-    <Compile Include="Tasks\ProjectBuildTask.cs" />
+    <Compile Include="Tasks\BuildTasks.cs" />
     <Compile Include="Utils\BuildUtil.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

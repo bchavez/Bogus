@@ -2,7 +2,7 @@
 
 Bogus for .NET/C#
 ======================
-<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" aligh='right' />
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 
 Project Description

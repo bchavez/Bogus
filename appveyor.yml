@@ -1,0 +1,13 @@
+version: 0.0.{build}
+
+build_script: build.cmd pack
+
+test:
+  assemblies:
+    - __compile\Bogus.Tests.dll
+
+artifacts:
+  - path: __package\*.nupkg
+
+nuget:
+  disable_publish_on_pr: true

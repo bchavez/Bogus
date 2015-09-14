@@ -3,20 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2216B0E0-7ABC-4804-854D-3F24E59C0329}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\Bogus.nuspec = .nuget\Bogus.nuspec
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bogus", "Bogus\Bogus.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bogus.Tests", "Bogus.Tests\Bogus.Tests.csproj", "{C738E347-08EF-47DA-B531-EE99739BD759}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{5DA7A8D8-9A2C-4B8E-9F6D-B8334F3C585F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2EF3-4B31-8123-19BB2A14206D}"
 	ProjectSection(SolutionItems) = preProject
+		..\appveyor.yml = ..\appveyor.yml
+		..\build.cmd = ..\build.cmd
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

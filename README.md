@@ -1,4 +1,4 @@
-![Build Status](https://bchavez.visualstudio.com/DefaultCollection/_apis/public/build/definitions/8ce74ee7-9d28-469e-8c5b-6d98f89c6398/1/badge)
+[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6?svg=true)](https://ci.appveyor.com/project/bchavez/bogus) ![Nuget](https://img.shields.io/nuget/v/Bogus.svg) ![Users](https://img.shields.io/nuget/dt/Bogus.svg)
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 Bogus for .NET/C#
@@ -374,10 +374,12 @@ public void Handlebar()
 Building
 --------
 * Download the source code.
-* Run `build.bat`.
+* Run `build.cmd`.
 
-Upon successful build, the results will be in the `\__package` directory.
-The `build.bat` compiles the C# code and embeds the locales in `Source\Bogus\data`.
+Upon successful build, the results will be in the `\__compile` directory.
+The `build.cmd` compiles the C# code and embeds the locales in `Source\Bogus\data`.
+If you want to rebuild the NuGet packages run `build.cmd pack` and the NuGet
+packages will be in `__package`.
 
 #### Rebundling Locales
 If you wish to re-bundle the latest **faker.js** locales, you'll need to first:

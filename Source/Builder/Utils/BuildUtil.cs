@@ -1,6 +1,5 @@
 using System.Linq;
 using System.Xml.XPath;
-using Builder.Extensions;
 using FluentFs.Core;
 
 namespace Builder.Utils

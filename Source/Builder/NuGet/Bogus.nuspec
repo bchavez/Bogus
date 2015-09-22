@@ -5,7 +5,7 @@
     <version>0.0.0.0</version>
     <authors>Brian Chavez</authors>
     <owners>Brian Chavez</owners>
-    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <licenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/bchavez/Bogus</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

@@ -50,7 +50,7 @@ namespace Builder.Utils
                 return ver;
             ver = Environment.GetEnvironmentVariable("APPVEYOR_BUILD_VERSION")?.Trim();
             if( ver.IsNotNullOrWhiteSpace() )
-                return $"{ver}-ci";
+                return $"0.0.{ver}-ci";
             return "0.0.0-localbuild";
         }
     }

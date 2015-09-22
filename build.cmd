@@ -1,7 +1,9 @@
 @ECHO OFF
 SETLOCAL
 
-set BUILD_VERSION=3.0.1.4
+REM Uncomment to forcibly set the build version.
+REM set FORCE_VERSION=3.1.0.4
+
 
 IF NOT DEFINED DevEnvDir (
 	IF DEFINED vs140comntools ( 

@@ -19,9 +19,9 @@ namespace Builder
 
 	public class BuildContext
 	{
-		public static readonly string FullVersion = Environment.GetEnvironmentVariable("BUILD_VERSION").Trim() ?? "0.0.0.0";
-		public static readonly string Version = FullVersion.WithoutPreReleaseName();
-		public static readonly DateTime BuildDate = DateTime.UtcNow;
+        public static readonly string FullVersion = VersionGetter.GetVersion();
+        public static readonly string Version = FullVersion.WithoutPreReleaseName();
+        public static readonly DateTime BuildDate = DateTime.UtcNow;
 	}
 
 	public class Projects

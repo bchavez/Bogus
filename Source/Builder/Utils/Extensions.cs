@@ -1,5 +1,7 @@
+using System;
 using FluentBuild.ApplicationProperties;
 using FluentFs.Core;
+using Z.ExtensionMethods;
 
 namespace Builder.Utils
 {
@@ -32,6 +34,24 @@ namespace Builder.Utils
         {
             var dash = version.IndexOf("-");
             return dash > 0 ? version.Substring(dash + 1) : null;
+        }
+    }
+
+
+    public static class VersionGetter
+    {
+        public static string GetVersion()
+        {
+            var ver = Environment.GetEnvironmentVariable("FORCE_VERSION")?.Trim();
+            if (ver.IsNotNullOrWhiteSpace())
+                return ver;
+            ver = Environment.GetEnvironmentVariable("APPVEYOR_REPO_TAG_NAME")?.Trim(' ', 'v');
+            if (ver.IsNotNullOrWhiteSpace())
+                return ver;
+            ver = Environment.GetEnvironmentVariable("APPVEYOR_BUILD_VERSION")?.Trim();
+            if( ver.IsNotNullOrWhiteSpace() )
+                return ver;
+            return "0.0.0-localbuild";
         }
     }
 }

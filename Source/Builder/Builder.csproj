@@ -103,6 +103,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.ExtensionMethods.WithTwoNamespace, Version=2.0.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.ExtensionMethods.WithTwoNamespace.2.0.9\lib\net45\Z.ExtensionMethods.WithTwoNamespace.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BauBuild.cs" />

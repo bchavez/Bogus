@@ -12,10 +12,12 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        History: 
-        v3.0.1.4
+        History:
+        v3.0.1
         * Added debug symbols to symbolsource.org.
-        
+        * PR#6: Fixed lastname and empty list exception -salixzs
+        * Switch to semantic versioning at par with FakerJS.
+
         v3.0.0.4
         * Adding generators: Date.Month(), Date.Weekday()
         * Sentences using lexically correct "A foo bar."

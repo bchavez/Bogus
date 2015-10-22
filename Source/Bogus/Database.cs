@@ -51,7 +51,7 @@ namespace Bogus
             var path = string.Format("{0}.{1}.{2}", locale, category, key);
             var jtoken = Data.Value.SelectToken(path);
 
-            if( jtoken != null )
+            if( jtoken != null && jtoken.HasValues )
             {
                 return jtoken;
             }

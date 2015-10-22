@@ -1,7 +1,4 @@
-﻿using System;
-using Newtonsoft.Json.Linq;
-
-namespace Bogus.DataSets
+﻿namespace Bogus.DataSets
 {
     /// <summary>
     /// Methods for generating names
@@ -61,9 +58,9 @@ namespace Bogus.DataSets
 
                 if( gender == Gender.Male )
                 {
-                    return GetRandomArrayItem("male_first_name");
+                    return GetRandomArrayItem("male_last_name");
                 }
-                return GetRandomArrayItem("female_first_name");
+                return GetRandomArrayItem("female_last_name");
             }
 
             return GetRandomArrayItem("last_name");

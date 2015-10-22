@@ -48,6 +48,13 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void should_be_able_to_get_locale_full_name()
+        {
+            var n = new Name("ru");
+            n.FindName().Should().Contain(" ");
+        }
+
+        [Test]
         public void should_be_able_to_get_any_name_with_options()
         {
             name.FindName(firstName: "cowboy")
@@ -102,7 +109,7 @@ namespace Bogus.Tests
         {
             var n = new Name("ru");
 
-            n.LastName().Should().Be("Анастасия");
+            n.LastName().Should().Be("Киселева");
         }
     }
 }

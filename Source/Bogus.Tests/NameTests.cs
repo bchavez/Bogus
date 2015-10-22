@@ -109,7 +109,7 @@ namespace Bogus.Tests
         {
             var n = new Name("ru");
 
-            n.LastName().Should().Be("Анастасия");
+            n.LastName().Should().Be("Киселева");
         }
     }
 }

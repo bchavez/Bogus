@@ -24,7 +24,7 @@
         * Added Spanish Mexico (es_MX) locale.
 
         v3.0.0.3
-        * Use latest Newtonsoft.Json 7.0.0.0, Issue #2 -Mpdreamz
+        * Issue #2: Use latest Newtonsoft.Json 7.0.0.0 -Mpdreamz
 
         v3.0.0.2
         * Includes Ireland (English) locale.

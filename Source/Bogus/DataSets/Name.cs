@@ -25,6 +25,13 @@
         }
 
         /// <summary>
+        /// Switches locale
+        /// </summary>
+        /// <param name="switchLocale"></param>
+        /// <returns></returns>
+        public Name this[string switchLocale] => new Name(switchLocale);
+
+        /// <summary>
         /// Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
         /// male/female names, but not 'en' english.
         /// </summary>

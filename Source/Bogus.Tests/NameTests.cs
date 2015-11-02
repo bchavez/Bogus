@@ -111,5 +111,15 @@ namespace Bogus.Tests
 
             n.LastName().Should().Be("Киселева");
         }
+
+        [Test]
+        public void switch_locale_syntax()
+        {
+            var n = new Name("ru");
+            n.LastName().Should().Be("Киселева");
+            
+            //switch to EN
+            n["en"].LastName().Should().Be("Schultz");
+        }
     }
 }

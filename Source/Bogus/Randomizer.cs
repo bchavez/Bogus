@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -123,7 +123,7 @@ namespace Bogus
                     }
                     return c;
                 })
-               .ToArray();
+                .ToArray();
 
             return new string(chars);
         }
@@ -132,13 +132,27 @@ namespace Bogus
         /// Picks a random Enum of T. Works only with Enums.
         /// </summary>
         /// <typeparam name="T">Must be an Enum</typeparam>
-        public T Enum<T>() where T : struct
+        /// <param name="exclude">Exclude enum values from being returned</param>
+        public T Enum<T>(params T[] exclude) where T : struct 
         {
             var e = typeof(T);
-            if( !e.IsEnum )
-                throw new ArgumentException("When calling PickRandom<T>() with no parameters T must be an enum.");
+            if (!e.IsEnum)
+                throw new ArgumentException("When calling Enum<T>() with no parameters T must be an enum.");
 
-            var val = this.ArrayElement(System.Enum.GetNames(e));
+            var selection = System.Enum.GetNames(e);
+            
+            if( exclude.Any() )
+            {
+                var excluded = exclude.Select(ex => System.Enum.GetName(e, ex));
+                selection = selection.Except(excluded).ToArray();
+            }
+
+            if ( !selection.Any() )
+            {
+                throw new ArgumentException("There are no values after exclusion choose from.");
+            }
+
+            var val = this.ArrayElement(selection);
 
             T picked;
             System.Enum.TryParse(val, out picked);

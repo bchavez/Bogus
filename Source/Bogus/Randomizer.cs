@@ -106,14 +106,18 @@ namespace Bogus
             return new string(chars);
         }
         /// <summary>
-        /// Replaces symbols with numbers and letters. IE: ###???# -> 283QED4
+        /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4
         /// </summary>
         /// <param name="format"></param>
         public string Replace(string format)
         {
             var chars = format.Select(c =>
                 {
-                    if( c == '#' )
+                    if (c == '*')
+                    {
+                        c = Bool() ? '#' : '?';
+                    }
+                    if ( c == '#' )
                     {
                         return Convert.ToChar('0' + Number(9));
                     }
@@ -121,6 +125,7 @@ namespace Bogus
                     {
                         return Convert.ToChar('A' + Number(25));
                     }
+                    
                     return c;
                 })
                 .ToArray();

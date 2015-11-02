@@ -46,6 +46,13 @@ namespace Bogus.Tests
 
             act.ShouldThrow<ArgumentException>();
         }
+
+        [Test]
+        public void can_replace_numbers_or_letters_using_asterisk()
+        {
+            r.Replace("***")
+                .Should().Be("CQ6");
+        }
     }
 
 

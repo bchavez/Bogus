@@ -75,5 +75,17 @@ namespace Bogus.Tests
             lorem.Paragraphs()
                 .Should().Be("Vel est ipsa.\nAb eligendi atque enim rerum consectetur id.\nExplicabo ipsa nihil repudiandae consequatur pariatur nulla.\nLaborum mollitia explicabo est sapiente.\nTempora qui unde labore voluptas consequuntur.\r\nDolorem non delectus et et molestiae consequatur saepe dolor.\nTotam ad error architecto iusto sed numquam voluptatem eos.\nEt modi error ea libero.\nLaudantium eveniet omnis porro eos et et enim.\nAssumenda hic quibusdam non iusto in est dolorem et.\r\nDolorem ipsum neque qui ab aperiam repellat esse.\nRerum quis et sunt voluptatibus.\nDoloremque eos et voluptatem pariatur eum quis numquam nam sit.");
         }
+
+        [Test]
+        public void can_get_some_letters()
+        {
+            var c = lorem.Letter();
+            c.Should().Be("i");
+
+
+            var chars = lorem.Letter(100);
+            chars.Length.Should().Be(100);
+            chars.Should().Be("eiblrueeulrtiorismecntonniaeaaumrumclrquoqaeoiehdtueuteisquagsieuiuturutunuuaiuamisseqvnqeratepilptt");
+        }
     }
 }

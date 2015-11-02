@@ -28,6 +28,21 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
+        /// Get a character letter.
+        /// </summary>
+        /// <param name="num">Number of characters to return.</param>
+        /// <returns></returns>
+        public string Letter(int num = 1)
+        {
+            if( num == 0 )
+                return string.Empty;
+
+            var w = Words(1)[0];
+            var c = Random.ArrayElement(w.ToArray());
+            return c + Letter(num - 1);
+        }
+
+        /// <summary>
         /// Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
         /// If you want a sustenance with 5 words always call Sentence(5, range: 0);
         /// </summary>

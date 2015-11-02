@@ -71,6 +71,7 @@
     <Compile Include="InternetTests.cs" />
     <Compile Include="LoremTests.cs" />
     <Compile Include="NameTests.cs" />
+    <Compile Include="PersonTest.cs" />
     <Compile Include="PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomizerTest.cs" />

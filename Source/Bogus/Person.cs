@@ -82,6 +82,9 @@ namespace Bogus
                     CatchPhrase = gcompany.CatchPhrase(),
                     Bs = gcompany.Bs()
                 };
+
+            var randomizer = new Randomizer();
+            this.SSN = randomizer.ReplaceNumbers("###-##-####");
         }
 
         public string FirstName;
@@ -94,6 +97,7 @@ namespace Bogus
         public string Phone;
         public string Website;
         public CardCompany Company;
+        public string SSN;
         
         public override string ToString()
         {

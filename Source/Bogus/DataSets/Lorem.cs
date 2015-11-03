@@ -34,7 +34,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Letter(int num = 1)
         {
-            if( num == 0 )
+            if( num <= 0 )
                 return string.Empty;
 
             var w = Words(1)[0];

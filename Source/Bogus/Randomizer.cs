@@ -154,7 +154,7 @@ namespace Bogus
 
             if ( !selection.Any() )
             {
-                throw new ArgumentException("There are no values after exclusion choose from.");
+                throw new ArgumentException("There are no values after exclusion to choose from.");
             }
 
             var val = this.ArrayElement(selection);

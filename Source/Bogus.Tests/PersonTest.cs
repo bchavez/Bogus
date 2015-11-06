@@ -1,4 +1,7 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using Bogus.Extensions.Canada;
+using Bogus.Extensions.UnitedStates;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Bogus.Tests
@@ -9,8 +12,22 @@ namespace Bogus.Tests
         public void check_ssn_on_person()
         {
             var p = new Person();
-            p.SSN.Should().Be("778-69-2879");
+            p.Ssn().Should().Be("778-69-2879");
         }
+
+        [Test]
+        public void can_generate_valid_sin()
+        {
+            Enumerable.Range(1, 10000)
+                .Select(s =>
+                    {
+                        var p = new Person();
+
+                        return p.Sin();
+                    })
+                .Dump();
+        }
+
     }
 
 }

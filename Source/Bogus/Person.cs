@@ -1,6 +1,7 @@
 #pragma warning disable 1591
 
 using System;
+using System.Collections.Generic;
 using Bogus.DataSets;
 using Newtonsoft.Json;
 
@@ -11,6 +12,10 @@ namespace Bogus
     /// </summary>
     public class Person
     {
+        //context variable to store state from Bogus.Extensions so, they
+        //keep returning the result on each person.
+        internal Dictionary<string, object> context = new Dictionary<string, object>();
+
         public class CardAddress
         {
             public class CardGeo
@@ -83,8 +88,6 @@ namespace Bogus
                     Bs = gcompany.Bs()
                 };
 
-            var randomizer = new Randomizer();
-            this.SSN = randomizer.ReplaceNumbers("###-##-####");
         }
 
         public string FirstName;
@@ -97,7 +100,6 @@ namespace Bogus
         public string Phone;
         public string Website;
         public CardCompany Company;
-        public string SSN;
         
         public override string ToString()
         {

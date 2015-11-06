@@ -54,6 +54,8 @@
     <Compile Include="DataSets\Date.cs" />
     <Compile Include="DataSets\Images.cs" />
     <Compile Include="DataSets\PhoneNumbers.cs" />
+    <Compile Include="Extensions\ExtensionsForCanada.cs" />
+    <Compile Include="Extensions\ExtensionsForUnitedStates.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="DataSets\Finance.cs" />
     <Compile Include="DataSets\Hacker.cs" />

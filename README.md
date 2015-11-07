@@ -11,7 +11,7 @@ and inspired by FluentValidation's syntax sugar.
 
 **Bogus** will help you load databases, UI and apps with fake data for your testing needs.
 
-:warning: <span style="color: red;">***Warning:***</span> *Do not use this library for any other purpose other than generating test data*.
+:warning: *Do not use this library for any other purpose other than generating test data.*
 
 
 ### Download & Install

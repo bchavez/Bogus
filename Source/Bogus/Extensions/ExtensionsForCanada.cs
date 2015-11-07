@@ -13,7 +13,7 @@ namespace Bogus.Extensions.Canada
         public static string Sin(this Person p)
         {
             const string Key = nameof(ExtensionsForCanada) + "SIN";
-            if( p.context.ContainsKey(Key) )
+            if (p.context.ContainsKey(Key))
             {
                 return p.context[Key] as string;
             }
@@ -21,18 +21,31 @@ namespace Bogus.Extensions.Canada
             //bit verbose, but works. :)
             //could be mathematically simplified.
             //brute forced this one. yeah.
+            //
+            //should pass basic validation, but only some 
+            //numbers dont start with 8 etc.
+
+            /*
+            1 — Atlantic Provinces: Nova Scotia, New Brunswick, Prince Edward Island, and Newfoundland and Labrador (this may also cover overseas residents).
+            2–3 — Quebec
+            4–5 — Ontario (#4 includes overseas forces)
+            6 — Prairie Provinces (Manitoba, Saskatchewan, and Alberta), Northwest Territories, and Nunavut
+            7 — Pacific Region (British Columbia and Yukon)
+            8 — Not used
+            9 — Temporary resident
+            0 — Not used (Canada Revenue may assign fictitious SIN numbers beginning with zero to taxpayers who do not have SINs)
+            */
 
             var r = new Randomizer();
             //get 8 numbers
-            var numbers = Enumerable.Range(0, 8)
-                .Select(s => r.Number(9)).ToList();
+            var numbers = r.Digits(8);
 
             // the last number that makes it pass the checksum.
             var last = 10 - (numbers.Sum() % 10);
             if (last == 10)
                 last = 0;
 
-            var digits = numbers.Concat(new[] {last}).ToArray();
+            var digits = numbers.Concat(new[] { last }).ToArray();
 
             var comp = digits
                 .Zip(Mask, (n, c) =>
@@ -51,16 +64,15 @@ namespace Bogus.Extensions.Canada
                         return n;
                     }).ToArray();
 
-            var chars = comp
-                .Select(n => (byte)(n + '0')); //boost all digits to ASCII number range
 
-            var sinstr = Encoding.ASCII.GetString(chars.ToArray());
+            var sinstr = $"{comp[0]}{comp[1]}{comp[2]} {comp[3]}{comp[4]}{comp[5]} {comp[6]}{comp[7]}{comp[8]}";
 
             p.context[Key] = sinstr;
 
             return sinstr;
         }
 
-     
+
     }
 }
+ 

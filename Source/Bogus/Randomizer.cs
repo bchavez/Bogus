@@ -24,6 +24,26 @@ namespace Bogus
         {
             return Number(0, max);
         }
+        
+        /// <summary>
+        /// Get a random sequence of digits
+        /// </summary>
+        /// <param name="count">How many</param>
+        /// <param name="minDigit">minimum digit, inclusive</param>
+        /// <param name="maxDigit">maximum digit, inclusive</param>
+        /// <returns></returns>
+        public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
+        {
+            if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
+            if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
+
+            var digits = new int[count];
+            for( var i = 0; i < count; i++)
+            {
+                digits[i] = Number(min: minDigit, max: maxDigit);
+            }
+            return digits;
+        }
 
         /// <summary>
         /// Get an int from min to max.

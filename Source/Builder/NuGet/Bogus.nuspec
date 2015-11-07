@@ -13,6 +13,15 @@
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
         History:
+        v3.0.2
+        * Generate US: SSN - Social Security Numbers.
+        * Generate Canada: SIN - Social Insurance Numbers.
+        * Generate Brazil: Cadastro de Pessoas Físicas - CPF Numbers.
+        * Allow exclude values on Randomizer.Enum.
+        * Randomizer.Replace accepts '*' replace with letter or digit.
+        * Added Lorem.Letter(num).
+        * Can switch locale on Name: f.Name["en"].LastName()
+
         v3.0.1
         * Added debug symbols to symbolsource.org.
         * PR#6: Fixed lastname and empty list exception -salixzs

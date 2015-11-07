@@ -20,7 +20,6 @@ namespace Bogus.Extensions.Brazil
                 .Sum();
 
             var sum1mod = sum1 % 11;
-            var sum1quot = sum1 / 11;
 
             int check1 = 0;
             if( sum1mod >= 2 )
@@ -35,7 +34,6 @@ namespace Bogus.Extensions.Brazil
                 .Sum();
 
             var sum2mod = sum2 % 11;
-            var sum2quot = sum2 / 11;
 
             var check2 = 0;
             if( sum2mod >= 2 )

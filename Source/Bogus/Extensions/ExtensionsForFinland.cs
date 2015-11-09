@@ -4,6 +4,12 @@
     {
         public static string Henkilötunnus(this Person p)
         {
+            const string Key = nameof(ExtensionsForFinland) + "Henkilötunnus";
+            if (p.context.ContainsKey(Key))
+            {
+                return p.context[Key] as string;
+            }
+
             // DDMMYYCZZZQ
             //
             // DD
@@ -41,6 +47,7 @@
 
             var final = $"{ddMMyy}{c}{zzz}{q}";
 
+            p.context[Key] = final;
             return final;
         }
     }

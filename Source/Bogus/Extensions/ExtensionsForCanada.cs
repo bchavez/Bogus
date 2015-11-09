@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Text;
 
 namespace Bogus.Extensions.Canada
 {

@@ -57,6 +57,37 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Returns a random even number
+        /// </summary>
+        /// <param name="min">Lower bound, inclusive</param>
+        /// <param name="max">Upper bound, inclusive</param>
+        public int Even(int min = 0, int max = 1)
+        {
+            var result = 0;
+            do
+            {
+                result = Number(min, max);
+            } while( result % 2 == 1 );
+            return result;
+        }
+
+        /// <summary>
+        /// Returns a random even number
+        /// </summary>
+        /// <param name="min">Lower bound, inclusive</param>
+        /// <param name="max">Upper bound, inclusive</param>
+        public int Odd(int min = 0, int max = 1)
+        {
+            int result = 0;
+            do
+            {
+                result = Number(min, max);
+            } while (result % 2 == 0);
+            return result;
+        }
+
+
+        /// <summary>
         /// Get a random double.
         /// </summary>
         /// <returns></returns>
@@ -69,7 +100,7 @@ namespace Bogus
         /// Get a random boolean
         /// </summary>
         /// <returns></returns>
-        public  bool Bool()
+        public bool Bool()
         {
             return Number() == 0;
         }

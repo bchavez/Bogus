@@ -70,47 +70,21 @@ namespace Bogus.Tests
         [Test]
         public void can_generate_cpr_nummer_for_denmark()
         {
-            var obtained = Get(10, p => p.Cpr());
+            var p = new Person();
+            var obtained = p.Cpr();
 
             obtained.Dump();
 
-            var expect = new[]
-                {
-                    "070387-7786",
-                    "030185-3322",
-                    "130481-2724",
-                    "160493-7870",
-                    "260551-6224",
-                    "090354-0535",
-                    "031169-4478",
-                    "110995-4194",
-                    "200470-2575",
-                    "280979-6319"
-                };
-
-            obtained.Should().BeEquivalentTo(expect);
+            obtained.Should().Be("070387-7786");
         }
 
         [Test]
         public void can_generate_henkilötunnus_for_finland()
         {
-            var obtained = Get(10, p => p.Henkilötunnus());
+            var p = new Person();
+            var obtained = p.Henkilötunnus();
 
-            var expect = new[]
-                {
-                    "070387-778H",
-                    "091154-865E",
-                    "180785-860O",
-                    "201072-2546",
-                    "021158-471G",
-                    "060560-846H",
-                    "270364-915D",
-                    "070294-475H",
-                    "190494-342U",
-                    "111092-664J"
-                };
-
-            obtained.Should().Equal(expect);
+            obtained.Should().Be("070387-778H");
         }
 
         IEnumerable<string> Get(int times, Func<Person, string> a)

@@ -35,7 +35,8 @@ deploy:
       auth_token:
           secure: cyivrWQwrZNAb6UCNXlIQlGfVSnKIC6TatUOIP95CQgMeKGnmBSqBgAFv2TsRZhR
       on:
-          branch: /v\d+\.\d+\.\d+/
+          branch: master
+          appveyor_repo_tag_name: /v\d+\.\d+\.\d+/ 
           appveyor_repo_tag: true
 
     - provider: NuGet
@@ -43,7 +44,8 @@ deploy:
           secure: 1nPS2ttf+N4+FUhd+GZycrL7YzSWQpZjnGOMCb5+pGJXSdx0IFvVF8xhTGna7B9t
       artifact: NuGet
       on:
-          branch: /v\d+\.\d+\.\d+/
+          branch: master
+          appveyor_repo_tag_name: /v\d+\.\d+\.\d+/
           appveyor_repo_tag: true
 
 

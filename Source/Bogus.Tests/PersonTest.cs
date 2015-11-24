@@ -75,7 +75,11 @@ namespace Bogus.Tests
 
             obtained.Dump();
 
-            obtained.Should().Be("220387-7786");
+            var a = obtained.Split('-')[0];
+            var b = obtained.Split('-')[1];
+
+            a.Length.Should().Be(6);
+            b.Length.Should().Be(4);
         }
 
         [Test]
@@ -84,7 +88,11 @@ namespace Bogus.Tests
             var p = new Person();
             var obtained = p.Henkilötunnus();
 
-            obtained.Should().Be("220387-7788");
+            var a = obtained.Split('-')[0];
+            var b = obtained.Split('-')[1];
+
+            a.Length.Should().Be(6);
+            b.Length.Should().Be(4);
         }
 
         IEnumerable<string> Get(int times, Func<Person, string> a)

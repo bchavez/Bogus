@@ -75,7 +75,7 @@ namespace Bogus.Tests
 
             obtained.Dump();
 
-            obtained.Should().Be("070387-7786");
+            obtained.Should().Be("220387-7786");
         }
 
         [Test]
@@ -84,7 +84,7 @@ namespace Bogus.Tests
             var p = new Person();
             var obtained = p.Henkilötunnus();
 
-            obtained.Should().Be("070387-778H");
+            obtained.Should().Be("220387-7788");
         }
 
         IEnumerable<string> Get(int times, Func<Person, string> a)

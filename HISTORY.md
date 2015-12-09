@@ -4,8 +4,8 @@
 ## v3.0.2
 * Generate US: SSN - Social Security Numbers.
 * Generate Canada: SIN - Social Insurance Numbers.
-* Generate Brazil: Cadastro de Pessoas Físicas - CPF Numbers.
-* Generate Finland: Henkilötunnus - Person ID numbers
+* Generate Brazil: Cadastro de Pessoas Fisicas - CPF Numbers.
+* Generate Finland: Henkilotunnus - Person ID numbers
 * Generate Denmark: Det Centrale Personregister - Person ID numbers.
 * Allow exclude values on Randomizer.Enum.
 * Randomizer.Replace accepts '*' replace with letter or digit.

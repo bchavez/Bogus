@@ -89,7 +89,7 @@ namespace Bogus.Tests
             var o = new Order()
                 {
                     OrderId = random.Number(1, 100),
-                    Item = lorem.Sentance(),
+                    Item = lorem.Sentence(),
                     Quantity = random.Number(1, 10)
                 };
             o.Dump();
@@ -99,7 +99,7 @@ namespace Bogus.Tests
         public void With_Korean_Locale()
         {
             var lorem = new Lorem(locale: "ko");
-            Console.WriteLine(lorem.Sentance(5));
+            Console.WriteLine(lorem.Sentence(5));
         }
 
         [Test]

@@ -49,10 +49,10 @@ namespace Bogus.DataSets
         /// <param name="minWordCount">Minimum word count</param>
         /// <param name="range">Plus, add extra number of words ranging from 0 to range</param>
         /// <returns></returns>
-        public string Sentance(int minWordCount = 3, int range = 7)
+        public string Sentence(int minWordCount = 3, int range = 7)
         {
-            var sentance = string.Join(" ", Words(minWordCount + Random.Number(range)));
-            return sentance.Substring(0, 1).ToUpper() + sentance.Substring(1) + ".";
+            var sentence = string.Join(" ", Words(minWordCount + Random.Number(range)));
+            return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";
         }
 
         /// <summary>
@@ -60,12 +60,12 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="count">The number of sentences</param>
         /// <returns></returns>
-        public string Sentances(int count = 3)
+        public string Sentences(int count = 3)
         {
-            var sentances = Enumerable.Range(1, count)
-                .Select(s => Sentance());
+            var sentences = Enumerable.Range(1, count)
+                .Select(s => Sentence());
 
-            return string.Join("\n", sentances);
+            return string.Join("\n", sentences);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Paragraph(int count = 3)
         {
-            return Sentances(count + Random.Number(3));
+            return Sentences(count + Random.Number(3));
         }
 
         /// <summary>

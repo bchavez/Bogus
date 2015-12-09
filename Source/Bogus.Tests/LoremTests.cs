@@ -43,22 +43,22 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void can_get_a_sentance()
+        public void can_get_a_sentence()
         {
-            lorem.Sentance().Should().Be("Aut illum est quae et quasi optio.");
+            lorem.Sentence().Should().Be("Aut illum est quae et quasi optio.");
         }
 
         [Test]
-        public void can_get_a_sentance_with_options()
+        public void can_get_a_sentence_with_options()
         {
-            lorem.Sentance(5, 0)
+            lorem.Sentence(5, 0)
                 .Should().Be("Aut illum est quae et.");
         }
 
         [Test]
-        public void should_get_some_sentances()
+        public void should_get_some_sentences()
         {
-            lorem.Sentances(5)
+            lorem.Sentences(5)
                 .Should().Be("Aut illum est quae et quasi optio.\nCorporis rerum dolor minus deserunt fugit.\nCumque repudiandae eaque.\nVoluptas voluptatem et animi aut eligendi sapiente ea magnam.\nPerspiciatis incidunt voluptatem sed est consequatur amet.");
         }
 

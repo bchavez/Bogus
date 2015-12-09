@@ -82,7 +82,7 @@ Console.WriteLine(user.DumpAsJson());
 
 /* OUTPUT:
 User Created! Id=0
- * 
+ *
 {
   "Id": 0,
   "FirstName": "Audrey",
@@ -115,7 +115,7 @@ User Created! Id=0
 ```
 
 ### Locales
-    
+
 Since we're a port of **faker.js**, we support a whole bunch of different
 locales. Here's an example in Korean:
 
@@ -124,7 +124,7 @@ locales. Here's an example in Korean:
 public void With_Korean_Locale()
 {
     var lorem = new Bogus.DataSets.Lorem(locale: "ko");
-    Console.WriteLine(lorem.Sentance(5));
+    Console.WriteLine(lorem.Sentence(5));
 }
 
 /* 국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와 */
@@ -170,7 +170,7 @@ public void With_Korean_Locale()
 |`zh_TW`       |Chinese (Taiwan)
 
 
-If you'd like to help contribute new locales or update existing ones please see our 
+If you'd like to help contribute new locales or update existing ones please see our
 [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) wiki page
 for more info.
 
@@ -187,7 +187,7 @@ public void Without_Fluent_Syntax()
     var o = new Order()
         {
             OrderId = random.Number(1, 100),
-            Item = lorem.Sentance(),
+            Item = lorem.Sentence(),
             Quantity = random.Number(1, 10)
         };
     o.Dump();
@@ -272,9 +272,9 @@ public void Without_Fluent_Syntax()
 	* `Url` - Generates a random URL.
 * **`Lorem`**
 	* `Words` - Get some lorem words
-	* `Sentance` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
+	* `Sentence` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
             If you want a sustenance with 5 words always call Sentence(5, range: 0);
-	* `Sentances` - Get some sentences.
+	* `Sentences` - Get some sentences.
 	* `Paragraph` - Get a paragraph.
 	* `Paragraphs` - Get some paragraphs with tabs n all.
 * **`Name`**
@@ -299,7 +299,7 @@ public void Without_Fluent_Syntax()
 ##### Person
 If you want to generate a `Person` with context relevant properties like
 an email that looks like it belongs to someone with the same first/last name,
-create a person! 
+create a person!
 
 ```csharp
 [Test]
@@ -414,3 +414,4 @@ A big thanks to GitHub and all contributors:
 * [Anton Georgiev](https://github.com/antongeorgiev)
 * [Martijn Laarman](https://github.com/Mpdreamz)
 * [Anrijs Vitolins](https://github.com/salixzs)
+* [Pi Lanningham](https://github.com/quantumplation)

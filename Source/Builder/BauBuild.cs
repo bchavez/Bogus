@@ -6,6 +6,8 @@ using BauNuGet;
 using Builder.Utils;
 using FluentAssertions;
 using FluentBuild;
+using FluentFs.Core;
+using Directory = System.IO.Directory;
 
 namespace Builder
 {
@@ -71,7 +73,16 @@ namespace Builder
 				.NuGet(Pack).Desc("Packs NuGet packages")
 				.DependsOn(Build).Do(ng =>
 				{
-					ng.Pack(Projects.BogusProject.NugetSpec.ToString(),
+                    var nuspec = Projects.BogusProject.NugetSpec.WithExt("history.nuspec");
+                    nuspec.Delete(OnError.Continue);
+
+                    Projects.BogusProject.NugetSpec
+                        .Copy
+                        .ReplaceToken("history")
+                        .With(History.NugetText())
+                        .To(nuspec.ToString());
+
+                    ng.Pack(nuspec.ToString(),
 						p =>
 						{
 							p.BasePath = Folders.CompileOutput.ToString();

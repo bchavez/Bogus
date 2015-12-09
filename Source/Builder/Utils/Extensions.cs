@@ -21,6 +21,14 @@ namespace Builder.Utils
         }
     }
 
+    public static class ExtensionsForFile
+    {
+        public static File WithExt(this File f, string ext)
+        {
+            return new File(System.IO.Path.ChangeExtension(f.ToString(), ext));
+        }
+    }
+
     public static class ExtensionsForBuildContext
     {
         public static string WithoutPreReleaseName(this string version)
@@ -54,4 +62,24 @@ namespace Builder.Utils
             return "0.0.0-localbuild";
         }
     }
+
+    public static class History
+    {
+        public static string All()
+        {
+            return System.IO.File.ReadAllText(Files.History.ToString());
+        }
+
+        public static string NugetText()
+        {
+            return System.Security.SecurityElement.Escape(All());
+        }
+
+        public static string ChangesFor(string fullVersion)
+        {
+            var all = All();
+            return all.GetAfter(fullVersion).GetBefore("## ").Trim();
+        }
+    }
+
 }

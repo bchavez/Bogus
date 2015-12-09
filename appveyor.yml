@@ -29,7 +29,7 @@ deploy:
     - provider: GitHub
       release: 'Release $(APPVEYOR_REPO_TAG_NAME) build $(APPVEYOR_BUILD_VERSION)'
       tag: $(APPVEYOR_REPO_TAG_NAME)
-      description: $(APPVEYOR_REPO_COMMIT_MESSAGE)
+      description: '[**CHANGE LOG**](https://github.com/bchavez/Bogus/blob/master/HISTORY.md)'
       prerelease: $(IsPreRelease)
       artifact: NuGet
       auth_token:

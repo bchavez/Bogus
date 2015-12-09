@@ -17,7 +17,12 @@ namespace Builder
 		public static readonly Directory Lib = Source.SubFolder( "packages" );
     }
 
-	public class BuildContext
+    public class Files
+    {
+        public static readonly File History = Folders.WorkingFolder.File("HISTORY.md");
+    }
+
+    public class BuildContext
 	{
         public static readonly string FullVersion = VersionGetter.GetVersion();
         public static readonly string Version = FullVersion.WithoutPreReleaseName();

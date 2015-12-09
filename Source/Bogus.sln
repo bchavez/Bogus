@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Builder", "Builder\Builder.csproj", "{86C6AA07-4C34-4A97-A72F-992F7DF6E2C4}"
 EndProject
@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\appveyor.yml = ..\appveyor.yml
 		..\build.cmd = ..\build.cmd
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
+		..\HISTORY.md = ..\HISTORY.md
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

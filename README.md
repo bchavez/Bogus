@@ -340,7 +340,7 @@ public void Create_Context_Related_Person()
 
 ##### Replace
 
-Replace a formatted string with random numbers and letters:
+Replace a formatted string with random numbers `#`, letters `?`, or `*` random number or letter:
 ```csharp
 [Test]
 public void Create_an_SSN()
@@ -350,10 +350,14 @@ public void Create_an_SSN()
 
     var code = new Randomizer().Replace("##? ??? ####");
     code.Dump();
+
+    var serial = new Randomizer().Replace("**-****");
+    code.Dump();
 }
 /* OUTPUT:
 "618-19-3064"
 "39E SPC 0790"
+"L3-J9N5"
 */
 ```
 

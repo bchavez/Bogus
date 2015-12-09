@@ -13,6 +13,9 @@
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
         History:
+        v3.0.3
+        * PR 9: quantumplation - Fixed typo in Lorem.Sentance() -> Lorem.Sentence()
+
         v3.0.2
         * Generate US: SSN - Social Security Numbers.
         * Generate Canada: SIN - Social Insurance Numbers.

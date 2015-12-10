@@ -1,5 +1,5 @@
 ## v3.0.4
-* Issue 10: Make Bogus work with Fields also, not just properties. Fixes LINQPad issues.
+* Issue 10: Make Bogus work with fields also, not just properties. Fixes LINQPad issues.
 
 ## v3.0.3
 * PR 9: quantumplation - Fixed typo in Lorem.Sentance() -> Lorem.Sentence()

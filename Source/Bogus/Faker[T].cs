@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Bogus
 {
@@ -13,10 +14,10 @@ namespace Bogus
     {
 #pragma warning disable 1591
         protected internal Faker FakerHub;
-        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public;
+        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.SetField;
         protected internal Func<Faker, T> CustomActivator;
         protected internal readonly Dictionary<string, Func<Faker, T, object>> Actions = new Dictionary<string, Func<Faker, T, object>>();
-        protected internal readonly Lazy<Dictionary<string, PropertyInfo>> TypeProperties;
+        protected internal readonly Lazy<Dictionary<string, MemberInfo>> TypeProperties;
         protected internal bool? UseStrictMode;
         protected internal bool? IsValid;
         protected internal Action<Faker, T> FinalizeAction;
@@ -30,9 +31,18 @@ namespace Bogus
         {
             this.Locale = locale;
             FakerHub = new Faker(locale);
-            TypeProperties = new Lazy<Dictionary<string, PropertyInfo>>(() =>
+            TypeProperties = new Lazy<Dictionary<string, MemberInfo>>(() =>
                 {
-                    return typeof(T).GetProperties(BindingFlags)
+                    return typeof(T).GetMembers(BindingFlags)
+                        .Where(m =>
+                            {
+                                if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
+                                {
+                                    //no compiler generated stuff
+                                    return false;
+                                }
+                                return m is PropertyInfo || m is FieldInfo;
+                            })
                         .ToDictionary(pi => pi.Name);
                 });
         }
@@ -148,18 +158,22 @@ namespace Bogus
             }
             if( useStrictMode && !IsValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException(string.Format("Cannot generate {0} because strict mode is enabled on this type and some properties have no rules.",
-                    typeof(T)));
+                throw new InvalidOperationException($"Cannot generate {typeof(T)} because strict mode is enabled on this type and some properties/fields have no rules.");
             }
 
             var typeProps = TypeProperties.Value;
 
             foreach( var kvp in Actions )
             {
-                PropertyInfo prop;
-                typeProps.TryGetValue(kvp.Key, out prop);
+                MemberInfo member;
+                typeProps.TryGetValue(kvp.Key, out member);
                 var valueFactory = kvp.Value;
-                prop.SetValue(instance, valueFactory(FakerHub, instance), null);
+
+                var prop = member as PropertyInfo;
+                prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
+
+                var field = member as FieldInfo;
+                field?.SetValue(instance, valueFactory(FakerHub, instance));
             }
 
             if( FinalizeAction != null )

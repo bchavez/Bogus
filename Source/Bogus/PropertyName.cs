@@ -37,10 +37,9 @@ namespace Bogus
             //correct expression
                 memberExpression = expression as MemberExpression;
 
-            if( memberExpression == null
-                || !( memberExpression.Member is PropertyInfo ) )
+            if( memberExpression == null )
                 throw new ArgumentException(
-                    "Expression was not of the form 'x =&gt; x.property'.");
+                    "Expression was not of the form 'x => x.Property or x => x.Field'.");
 
             return memberExpression.Member.Name;
         }

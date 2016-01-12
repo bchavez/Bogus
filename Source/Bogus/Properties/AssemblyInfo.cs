@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCopyrightAttribute("Brian Chavez © 2016")]
 [assembly: AssemblyVersionAttribute("0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0")]
-[assembly: AssemblyInformationalVersion("0.0.0-localbuild built on 1/12/2016 6:13:51 AM UTC")]
+[assembly: AssemblyInformationalVersion("0.0.0-localbuild built on 1/12/2016 7:01:23 AM UTC")]
 [assembly: AssemblyTrademark("MIT License")]
 [assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 [assembly: InternalsVisibleTo("Bogus.Tests")]

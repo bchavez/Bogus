@@ -54,6 +54,7 @@ namespace Builder
             public const string Name = "Bogus";
             public static readonly Directory Folder = Folders.Source.SubFolder( Name );
             public static readonly File ProjectFile = Folder.File( $"{Name}.csproj" );
+            public static readonly File DnxProjectFile = Folder.File("project.json");
             public static readonly Directory OutputDirectory = Folders.CompileOutput.SubFolder( Name );
             public static readonly File OutputDll = OutputDirectory.File( $"{Name}.dll" );
             public static readonly Directory PackageDir = Folders.Package.SubFolder( Name );

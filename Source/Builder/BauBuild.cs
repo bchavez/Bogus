@@ -74,8 +74,8 @@ namespace Builder
                     {
                         e.ExecutablePath("powershell")
                             .WithArguments(
-                                "dnvm update-self;",
-                                $"dnvm install {Projects.DnmvVersion} -r clr;",
+                                //"dnvm update-self;",
+                                //$"dnvm install {Projects.DnmvVersion} -r clr;",
                                 $"dnvm use {Projects.DnmvVersion} -r clr -p;",
                                 "dnu restore"
                             ).InWorkingDirectory(Projects.BogusProject.Folder);
@@ -94,7 +94,19 @@ namespace Builder
 						Console.WriteLine($"Creating AssemblyInfo file: {outputPath}");
 						aid.OutputPath(outputPath);
 					});
-				})
+
+                    //version
+                    WriteJson.Value(Projects.BogusProject.DnxProjectFile.ToString(), "version", BuildContext.FullVersion);
+                    //description
+                    WriteJson.Value(Projects.BogusProject.DnxProjectFile.ToString(), "description",
+                        ReadXml.From(Projects.BogusProject.NugetSpec.ToString(), "package.metadata.summary"));
+                    //projectUrl
+                    WriteJson.Value(Projects.BogusProject.DnxProjectFile.ToString(), "projectUrl",
+                        ReadXml.From(Projects.BogusProject.NugetSpec.ToString(), "package.metadata.projectUrl"));
+                    //license
+                    WriteJson.Value(Projects.BogusProject.DnxProjectFile.ToString(), "licenseUrl",
+                        ReadXml.From(Projects.BogusProject.NugetSpec.ToString(), "package.metadata.licenseUrl"));
+                })
 				.Task(Clean).Desc("Cleans project files")
 				.Do(() =>
 				{
@@ -106,7 +118,7 @@ namespace Builder
 					Directory.CreateDirectory(Folders.Package.ToString());
 				})
 				.NuGet(Pack).Desc("Packs NuGet packages")
-				.DependsOn(MsBuild).Do(ng =>
+				.DependsOn(DnxBuild).Do(ng =>
 				{
                     var nuspec = Projects.BogusProject.NugetSpec.WithExt("history.nuspec");
                     nuspec.Delete(OnError.Continue);
@@ -120,7 +132,7 @@ namespace Builder
                     ng.Pack(nuspec.ToString(),
 						p =>
 						{
-							p.BasePath = Folders.CompileOutput.ToString();
+							p.BasePath = Projects.BogusProject.OutputDirectory.ToString();
 							p.Version = BuildContext.FullVersion;
 							p.Symbols = true;
 							p.OutputDirectory = Folders.Package.ToString();

@@ -16,20 +16,59 @@
     </releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>fake bogus poco data generator database seed values test-data test data</tags>
-    <dependencies>
-      <group targetFramework="net40">
-          <dependency id="Newtonsoft.Json" version="[7,8)" />
-      </group>
-    </dependencies>
+
+      <dependencies>
+
+          <group targetFramework="net40">
+              <dependency id="Newtonsoft.Json" version="8.0.2" />
+          </group>
+
+          <group targetFramework="DNX4.5.1">
+              <dependency id="Newtonsoft.Json" version="8.0.2" />
+          </group>
+          <group targetFramework="DNXCore5.0">
+              <dependency id="Newtonsoft.Json" version="8.0.2" />
+              <dependency id="System.Text.Encoding" version="4.0.11-beta-23516" />
+              <dependency id="System.Dynamic.Runtime" version="4.0.11-beta-23516" />
+              <dependency id="System.IO" version="4.0.11-beta-23516" />
+              <dependency id="System.ComponentModel" version="4.0.1-beta-23516" />
+              <dependency id="System.Reflection.Extensions" version="4.0.1-beta-23516" />
+              <dependency id="System.Reflection.TypeExtensions" version="4.0.1-beta-23409" />
+              <dependency id="System.Text.RegularExpressions" version="4.0.11-beta-23516" />
+
+          </group>
+
+      </dependencies>
+
+
+      <frameworkAssemblies>
+          <frameworkAssembly assemblyName="mscorlib" targetFramework=".NETFramework4.0" />
+          <frameworkAssembly assemblyName="System" targetFramework=".NETFramework4.0" />
+          <frameworkAssembly assemblyName="System.Core" targetFramework=".NETFramework4.0" />
+          <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework=".NETFramework4.0" />
+          <frameworkAssembly assemblyName="mscorlib" targetFramework="DNX4.5.1" />
+          <frameworkAssembly assemblyName="System" targetFramework="DNX4.5.1" />
+          <frameworkAssembly assemblyName="System.Core" targetFramework="DNX4.5.1" />
+          <frameworkAssembly assemblyName="Microsoft.CSharp" targetFramework="DNX4.5.1" />
+      </frameworkAssemblies>
+      
   </metadata>
 
-  <files> 
-    <file src="Bogus.dll" target="lib\net40" />
-    <file src="Bogus.pdb" target="lib\net40" />
-    <file src="Bogus.XML" target="lib\net40" />
+    <files>
+        <file src="Release\net40\Bogus.dll" target="lib\net40" />
+        <file src="Release\net40\Bogus.pdb" target="lib\net40" />
+        <file src="Release\net40\Bogus.XML" target="lib\net40" />
 
-    <file src="..\Source\Bogus\**\*.cs"
-            exclude="..\Source\Bogus\obj\**" target="src" />
+        <file src="Release\dnx451\Bogus.dll" target="lib\dnx451" />
+        <file src="Release\dnx451\Bogus.pdb" target="lib\dnx451" />
+        <file src="Release\dnx451\Bogus.XML" target="lib\dnx451" />
+
+        <file src="Release\dnxcore50\Bogus.dll" target="lib\dnxcore50" />
+        <file src="Release\dnxcore50\Bogus.pdb" target="lib\dnxcore50" />
+        <file src="Release\dnxcore50\Bogus.XML" target="lib\dnxcore50" />
+
+    <file src="..\..\Source\Bogus\**\*.cs"
+            exclude="..\..\Source\Bogus\obj\**" target="src" />
   </files>
 
 </package>

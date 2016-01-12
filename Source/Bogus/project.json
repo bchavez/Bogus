@@ -1,52 +1,51 @@
 {
-    "version": "0.0.0-localbuild",
-    "description": "A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.",
-    "authors": [
-        "Brian Chavez"
-    ],
-    "tags": [
-        ""
-    ],
-    "projectUrl": "https://github.com/bchavez/Bogus",
-    "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",
-    "configurations": {
-        "Debug": {
-            "compilationOptions": { }
-        },
-        "Release": {
-            "compilationOptions": {
-                "optimize": true
-            }
-        }
+  "version": "0.0.0-localbuild",
+  "description": "A simple and sane data generator for populating objects that supports different locales.",
+  "authors": [
+    "Brian Chavez"
+  ],
+  "tags": [
+    ""
+  ],
+  "projectUrl": "https://github.com/bchavez/Bogus",
+  "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",
+  "configurations": {
+    "Debug": {
+      "compilationOptions": {}
     },
-    "dependencies": {
-        "Newtonsoft.Json": "7.0.1"
-    },
-    "frameworks": {
-        "net40": {
-        },
-        "dnx451": {
-            "compilationOptions": {
-                "define": [
-                    "DNX"
-                ]
-            }
-        },
-        "dnxcore50": {
-            "dependencies": {
-                "System.Text.Encoding": "4.0.11-beta-23516",
-                "System.Dynamic.Runtime": "4.0.11-beta-23516",
-                "System.IO": "4.0.11-beta-23516",
-                "System.ComponentModel": "4.0.1-beta-23516",
-                "System.Reflection.Extensions": "4.0.1-beta-23516",
-                "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
-                "System.Text.RegularExpressions": "4.0.11-beta-23516"
-            },
-            "compilationOptions": {
-                "define": [
-                    "DNX"
-                ]
-            }
-        }
+    "Release": {
+      "compilationOptions": {
+        "optimize": true
+      }
     }
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "8.0.2"
+  },
+  "frameworks": {
+    "net40": {},
+    "dnx451": {
+      "compilationOptions": {
+        "define": [
+          "DNX"
+        ]
+      }
+    },
+    "dnxcore50": {
+      "dependencies": {
+        "System.Text.Encoding": "4.0.11-beta-23516",
+        "System.Dynamic.Runtime": "4.0.11-beta-23516",
+        "System.IO": "4.0.11-beta-23516",
+        "System.ComponentModel": "4.0.1-beta-23516",
+        "System.Reflection.Extensions": "4.0.1-beta-23516",
+        "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
+        "System.Text.RegularExpressions": "4.0.11-beta-23516"
+      },
+      "compilationOptions": {
+        "define": [
+          "DNX"
+        ]
+      }
+    }
+  }
 }

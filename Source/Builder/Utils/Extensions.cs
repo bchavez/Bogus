@@ -1,4 +1,5 @@
 using System;
+using System.Xml.Linq;
 using FluentBuild.ApplicationProperties;
 using FluentFs.Core;
 using Newtonsoft.Json;
@@ -78,6 +79,25 @@ namespace Builder.Utils
         }
     }
 
+    public static class ReadXml
+    {
+        public static string From(string filename, string jsonPath)
+        {
+            var xdoc = XDocument.Load(filename);
+            var obj = JObject.FromObject(xdoc);
+            return obj.SelectToken(jsonPath).ToString();
+        }
+    }
+
+    public static class WriteJson
+    {
+        public static void Value(string file, string jsonPath, object value)
+        {
+            var val = ReadJson.Token(file, jsonPath) as JValue;
+            val.Value = value;
+            System.IO.File.WriteAllText(file, JsonConvert.SerializeObject(val.Root, Formatting.Indented));
+        }
+    }
 
     public static class History
     {

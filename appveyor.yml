@@ -44,7 +44,6 @@ deploy:
           secure: 1nPS2ttf+N4+FUhd+GZycrL7YzSWQpZjnGOMCb5+pGJXSdx0IFvVF8xhTGna7B9t
       artifact: NuGet
       on:
-          branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/
           appveyor_repo_tag: true
 

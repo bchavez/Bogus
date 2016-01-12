@@ -1,5 +1,5 @@
 ## v3.0.5-beta-1
-* CoreCLR support
+* CoreCLR support (CoreCLR users, please continue using beta releases until CoreCLR is RTM).
 
 ## v3.0.4
 * Issue 10: Make Bogus work with fields also, not just properties. Fixes LINQPad issues.

@@ -112,7 +112,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\es_MX.locale.json" />
-    <None Include="packages.config" />
+    <None Include="project.json" />
+    <None Include="Bogus.project.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

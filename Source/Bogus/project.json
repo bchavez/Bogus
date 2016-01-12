@@ -1,0 +1,55 @@
+{
+    "version": "0.0.0-localbuild",
+    "description": "A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.",
+    "authors": [
+        "Brian Chavez"
+    ],
+    "tags": [
+        ""
+    ],
+    "projectUrl": "https://github.com/bchavez/Bogus",
+    "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",
+    "configurations": {
+        "Debug": {
+            "compilationOptions": { }
+        },
+        "Release": {
+            "compilationOptions": {
+                "optimize": true
+            }
+        }
+    },
+    "dependencies": {
+        "Newtonsoft.Json": "7.0.1"
+    },
+    "frameworks": {
+        "net45": {
+        },
+        "dnx451": {
+            "compilationOptions": {
+                "define": [
+                    "DNX"
+                ]
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+                "System.Text.Encoding": "4.0.11-beta-23516",
+                "System.Dynamic.Runtime": "4.0.11-beta-23516",
+                "System.IO": "4.0.11-beta-23516",
+                "System.ComponentModel": "4.0.1-beta-23516",
+                "System.Reflection.Extensions": "4.0.1-beta-23516",
+                "Microsoft.Extensions.Logging.Abstractions": "1.0.0-rc1-final",
+                "System.Net.Sockets": "4.0.10-beta-23123",
+                "System.Net.Primitives": "4.0.11-beta-23516",
+                "System.Threading.Timer": "4.0.1-beta-23516",
+                "System.Threading.Thread": "4.0.0-beta-23516"
+            },
+            "compilationOptions": {
+                "define": [
+                    "DNX"
+                ]
+            }
+        }
+    }
+}

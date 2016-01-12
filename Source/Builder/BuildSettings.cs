@@ -45,6 +45,9 @@ namespace Builder
         }
 
         public static readonly File SolutionFile = Folders.Source.File( "Bogus.sln" );
+        public static readonly File GlobalJson = Folders.Source.File("global.json");
+        public static string DnmvVersion = ReadJson.From(GlobalJson.ToString(), "sdk.version");
+
 
         public class BogusProject
         {

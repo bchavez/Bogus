@@ -38,6 +38,10 @@
       <HintPath>..\packages\Bau.0.1.0-beta09\lib\net45\Bau.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Bau.Exec, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bau.Exec.0.1.0-beta09\lib\net45\Bau.Exec.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Bau.MSBuild, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Bau.MSBuild.0.1.0-beta01\lib\net45\Bau.MSBuild.dll</HintPath>
       <Private>True</Private>
@@ -118,7 +122,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="NuGet\Bogus.nuspec" />
+    <None Include="NuGet\Bogus.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

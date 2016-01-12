@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using BauCore;
+using BauExec;
 using BauMSBuild;
 using BauNuGet;
 using Builder.Utils;
@@ -14,10 +15,12 @@ namespace Builder
 	public static class BauBuild
 	{
 		//Build Tasks
-		public const string Build = "build";
-		public const string Clean = "clean";
+		public const string MsBuild = "msb";
+        public const string DnxBuild = "dnx";
+        public const string Clean = "clean";
 		public const string Restore = "restore";
-		public const string BuildInfo = "buildinfo";
+        public const string DnxRestore = "dnxrestore";
+        public const string BuildInfo = "buildinfo";
 		public const string Pack = "pack";
 		public const string Push = "push";
 
@@ -35,8 +38,8 @@ namespace Builder
 			var nugetExe = FindNugetExe();
 
 			new Bau(Arguments.Parse(args))
-				.DependsOn(Clean, Restore, Build)
-				.MSBuild(Build).Desc("Invokes MSBuild to build solution")
+				.DependsOn(Clean, Restore, MsBuild)
+				.MSBuild(MsBuild).Desc("Invokes MSBuild to build solution")
 				.DependsOn(Clean, BuildInfo)
 				.Do(msb =>
 				{
@@ -49,7 +52,39 @@ namespace Builder
 					};
 					msb.Targets = new[] { "Rebuild" };
 				})
-				.Task(BuildInfo).Desc("Creates dynamic AssemblyInfos for projects")
+
+
+                //Define
+                .Exec(DnxBuild).Desc("Build .NET Core Assemblies")
+                .DependsOn(Clean, DnxRestore, BuildInfo)
+                .Do(exec =>
+                {
+                    exec.Run("powershell")
+                        .With(
+                            $"dnvm use {Projects.DnmvVersion} -r clr -p;",
+                            $"dnu build --configuration Release --out {Projects.BogusProject.OutputDirectory};"
+                        ).In(Projects.BogusProject.Folder.ToString());
+                })
+
+                //Define
+                .Task(DnxRestore).Desc("Restores .NET Core dependencies")
+                .Do(() =>
+                {
+                    Task.Run.Executable(e =>
+                    {
+                        e.ExecutablePath("powershell")
+                            .WithArguments(
+                                "dnvm update-self;",
+                                $"dnvm install {Projects.DnmvVersion} -r clr;",
+                                $"dnvm use {Projects.DnmvVersion} -r clr -p;",
+                                "dnu restore"
+                            ).InWorkingDirectory(Projects.BogusProject.Folder);
+                    });
+                })
+
+
+
+                .Task(BuildInfo).Desc("Creates dynamic AssemblyInfos for projects")
 				.Do(() =>
 				{
 					Task.CreateAssemblyInfo.Language.CSharp(aid =>
@@ -71,7 +106,7 @@ namespace Builder
 					Directory.CreateDirectory(Folders.Package.ToString());
 				})
 				.NuGet(Pack).Desc("Packs NuGet packages")
-				.DependsOn(Build).Do(ng =>
+				.DependsOn(MsBuild).Do(ng =>
 				{
                     var nuspec = Projects.BogusProject.NugetSpec.WithExt("history.nuspec");
                     nuspec.Delete(OnError.Continue);

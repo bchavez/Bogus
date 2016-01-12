@@ -1,6 +1,8 @@
 using System;
 using FluentBuild.ApplicationProperties;
 using FluentFs.Core;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Z.ExtensionMethods;
 
 namespace Builder.Utils
@@ -62,6 +64,20 @@ namespace Builder.Utils
             return "0.0.0-localbuild";
         }
     }
+
+    public static class ReadJson
+    {
+        public static string From(string filename, string jsonPath)
+        {
+            return Token(filename, jsonPath).ToString();
+        }
+
+        public static JToken Token(string filename, string jsonPath)
+        {
+            return JsonConvert.DeserializeObject<JObject>(System.IO.File.ReadAllText(filename)).SelectToken(jsonPath);
+        }
+    }
+
 
     public static class History
     {

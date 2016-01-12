@@ -1,4 +1,4 @@
-## v3.0.5-beta-1
+## v3.0.5-beta-2
 * CoreCLR support (CoreCLR users, please continue using beta releases until CoreCLR is RTM).
 
 ## v3.0.4

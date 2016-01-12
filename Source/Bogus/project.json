@@ -47,5 +47,8 @@
         ]
       }
     }
-  }
+  },
+  "resource": [
+    "data/*.locale.json"
+  ]
 }

@@ -28,8 +28,11 @@ namespace Bogus
             var asm = typeof(Database).GetAssembly();
             var root = new JObject();
 
+            var resourcesFound = false;
+
             foreach( var resourceName in asm.GetManifestResourceNames() )
             {
+                resourcesFound = true;
                 if( resourceName.EndsWith(".locale.json") )
                 {
                     using( var s = typeof(Database).GetAssembly().GetManifestResourceStream(resourceName) )
@@ -43,6 +46,12 @@ namespace Bogus
                     }
                 }
             }
+
+            if( !resourcesFound )
+            {
+                throw new NotImplementedException("No Locale Resources Could Be Found.");
+            }
+
             return root;
         }
 

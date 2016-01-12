@@ -34,7 +34,7 @@ namespace Bogus.Extensions
 #endif
         }
 
-        public static T GetCustomAttributeX<T>(this Type type) where T : class 
+        public static T GetCustomAttributeX<T>(this Type type) where T : Attribute 
         {
 #if DNX
             return type.GetTypeInfo().GetCustomAttribute<T>();

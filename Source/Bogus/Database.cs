@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Reflection;
+using Bogus.Extensions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -22,14 +24,15 @@ namespace Bogus
         /// </summary>
         private static JObject Initialize()
         {
-            var asm = typeof(Database).Assembly;
+            //var asm = typeof(Database).Assembly;
+            var asm = typeof(Database).GetAssembly();
             var root = new JObject();
 
             foreach( var resourceName in asm.GetManifestResourceNames() )
             {
                 if( resourceName.EndsWith(".locale.json") )
                 {
-                    using( var s = typeof(Database).Assembly.GetManifestResourceStream(resourceName) )
+                    using( var s = typeof(Database).GetAssembly().GetManifestResourceStream(resourceName) )
                     using( var sr = new StreamReader(s) )
                     {
                         var serializer = new JsonSerializer();

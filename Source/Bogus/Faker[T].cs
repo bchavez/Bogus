@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
+
 namespace Bogus
 {
     /// <summary>
@@ -14,7 +15,7 @@ namespace Bogus
     {
 #pragma warning disable 1591
         protected internal Faker FakerHub;
-        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.SetProperty | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.SetField;
+        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
         protected internal Func<Faker, T> CustomActivator;
         protected internal readonly Dictionary<string, Func<Faker, T, object>> Actions = new Dictionary<string, Func<Faker, T, object>>();
         protected internal readonly Lazy<Dictionary<string, MemberInfo>> TypeProperties;

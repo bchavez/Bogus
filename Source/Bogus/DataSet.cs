@@ -1,4 +1,5 @@
 using System;
+using Bogus.Extensions;
 using Newtonsoft.Json.Linq;
 
 namespace Bogus
@@ -13,7 +14,7 @@ namespace Bogus
         /// </summary>
         public static string ResolveCategory(Type type)
         {
-            var categoryAttribute = Attribute.GetCustomAttribute(type, typeof(DataCategoryAttribute)) as DataCategoryAttribute;
+            var categoryAttribute = type.GetCustomAttributeX<DataCategoryAttribute>();
             return categoryAttribute != null ? categoryAttribute.Name : type.Name.ToLower();
         }
 

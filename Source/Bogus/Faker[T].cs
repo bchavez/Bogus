@@ -120,7 +120,7 @@ namespace Bogus
         /// </summary>
         public Faker<T> FinishWith(Action<Faker, T> action)
         {
-            this.FinalizeAction = action;
+             this.FinalizeAction = action;
             return this;
         }
         
@@ -164,26 +164,28 @@ namespace Bogus
 
             var typeProps = TypeProperties.Value;
 
-            foreach( var kvp in Actions )
+            lock( Randomizer.Locker.Value )
             {
-                MemberInfo member;
-                typeProps.TryGetValue(kvp.Key, out member);
-                var valueFactory = kvp.Value;
+                foreach( var kvp in Actions )
+                {
+                    MemberInfo member;
+                    typeProps.TryGetValue(kvp.Key, out member);
+                    var valueFactory = kvp.Value;
 
-                var prop = member as PropertyInfo;
-                prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
+                    var prop = member as PropertyInfo;
+                    prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
 
-                var field = member as FieldInfo;
-                field?.SetValue(instance, valueFactory(FakerHub, instance));
+                    var field = member as FieldInfo;
+                    field?.SetValue(instance, valueFactory(FakerHub, instance));
+                }
+
+                if( FinalizeAction != null )
+                {
+                    FinalizeAction(this.FakerHub, instance);
+                }
+
+                MakeNewContext();
             }
-
-            if( FinalizeAction != null )
-            {
-                FinalizeAction(this.FakerHub, instance);
-            }
-
-            MakeNewContext();
-            
         }
 
         /// <summary>

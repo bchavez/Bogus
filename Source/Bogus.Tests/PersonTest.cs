@@ -14,6 +14,29 @@ namespace Bogus.Tests
 {
     public class PersonTest: SeededTest
     {
+        public class User
+        {
+            public string FirstName { get; set; }
+            public string Email { get; set; }
+            public string LastName { get; set; }
+        }
+
+        [Test]
+        public void new_person_on_every_generate()
+        {
+            var faker = new Faker<User>()
+                .RuleFor(b => b.Email, f => f.Person.Email)
+                .RuleFor(b => b.FirstName, f => f.Person.FirstName)
+                .RuleFor(b => b.LastName, f => f.Person.LastName);
+
+            var fakes = faker.Generate(3).ToList();
+
+            fakes.Select(f => f.Email).Distinct().Count().Should().Be(3);
+            fakes.Select(f => f.FirstName).Distinct().Count().Should().Be(3);
+            fakes.Select(f => f.LastName).Distinct().Count().Should().Be(3);
+        }
+
+
         [Test]
         public void check_ssn_on_person()
         {

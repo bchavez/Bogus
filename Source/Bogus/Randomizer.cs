@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
+using System.Threading;
 using Bogus.Extensions;
 using Newtonsoft.Json.Linq;
 
@@ -16,6 +16,8 @@ namespace Bogus
         /// Set the random number generator manually with a seed to get reproducible results.
         /// </summary>
         public static Random Seed = new Random();
+
+        internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>
         /// Get an int from 0 to max.
@@ -55,7 +57,11 @@ namespace Bogus
         /// <returns></returns>
         public int Number(int min = 0, int max = 1)
         {
-            return Seed.Next(min, max + 1);
+            //lock any seed access, for thread safety.
+            lock( Locker.Value )
+            {
+                return Seed.Next(min, max + 1);
+            }
         }
 
         /// <summary>
@@ -95,7 +101,11 @@ namespace Bogus
         /// <returns></returns>
         public double Double()
         {
-            return Seed.NextDouble();
+            //lock any seed access, for thread safety.
+            lock ( Locker.Value )
+            {
+                return Seed.NextDouble();
+            }
         }
 
         /// <summary>
@@ -223,9 +233,14 @@ namespace Bogus
         public IEnumerable<T> Shuffle<T>(IEnumerable<T> source)
         {
             List<T> buffer = source.ToList();
-            for( int i = 0; i < buffer.Count; i++ )
+            for( var i = 0; i < buffer.Count; i++ )
             {
-                int j = Seed.Next(i, buffer.Count);
+                int j;
+                //lock any seed access, for thread safety.
+                lock ( Locker.Value )
+                {
+                    j = Seed.Next(i, buffer.Count);
+                }
                 yield return buffer[j];
 
                 buffer[j] = buffer[i];

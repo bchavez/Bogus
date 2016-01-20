@@ -1,3 +1,7 @@
+## v3.0.5-beta-4
+* Issue #13: StrictMode() now ignores read-only properties.
+* CoreCLR users please continue using beta releases until CoreCLR is RTM.
+
 ## v3.0.5-beta-3
 * Issue #12: Make Bogus thread-safe on Generate() and DataSets. Avoids threading issues in test runners.
 * CoreCLR users please continue using beta releases until CoreCLR is RTM.

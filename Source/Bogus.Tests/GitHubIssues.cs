@@ -76,5 +76,23 @@ namespace Bogus.Tests
             Console.WriteLine(barId);
             barId.Should().Be(120);
         }
+
+        public class ReadOnly
+        {
+            public string Name;
+
+            public string NameReadOnly => Name;
+        }
+
+        [Test]
+        public void issue_13_readonly_property()
+        {
+            var faker = new Faker<ReadOnly>()
+                .StrictMode(true)
+                .RuleFor(ro => ro.Name, f => f.Name.FirstName());
+
+            faker.Validate().Should().BeTrue();
+            faker.TypeProperties.Count.Should().Be(1);
+        }
     }
 }

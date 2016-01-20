@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 
 
 namespace Bogus
@@ -15,10 +14,10 @@ namespace Bogus
     {
 #pragma warning disable 1591
         protected internal Faker FakerHub;
-        protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
         protected internal Func<Faker, T> CustomActivator;
+        protected internal IBinder binder;
         protected internal readonly Dictionary<string, Func<Faker, T, object>> Actions = new Dictionary<string, Func<Faker, T, object>>();
-        protected internal readonly Lazy<Dictionary<string, MemberInfo>> TypeProperties;
+        protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
         protected internal bool? UseStrictMode;
         protected internal bool? IsValid;
         protected internal Action<Faker, T> FinalizeAction;
@@ -27,25 +26,14 @@ namespace Bogus
         /// <summary>
         /// Creates a Faker with a locale.
         /// </summary>
-        /// <param name="locale"></param>
-        public Faker(string locale = "en")
+        /// <param name="locale">language</param>
+        /// <param name="binder">A binder that discovers properties or fields on T that are candidates for faking. Null uses the default Binder.</param>
+        public Faker(string locale = "en", IBinder binder = null)
         {
+            this.binder = binder ?? new Binder();
             this.Locale = locale;
             FakerHub = new Faker(locale);
-            TypeProperties = new Lazy<Dictionary<string, MemberInfo>>(() =>
-                {
-                    return typeof(T).GetMembers(BindingFlags)
-                        .Where(m =>
-                            {
-                                if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
-                                {
-                                    //no compiler generated stuff
-                                    return false;
-                                }
-                                return m is PropertyInfo || m is FieldInfo;
-                            })
-                        .ToDictionary(pi => pi.Name);
-                });
+            TypeProperties = this.binder.GetMembers(typeof(T));
         }
 
         /// <summary>
@@ -56,14 +44,13 @@ namespace Bogus
             this.FakerHub.Person = new Person(this.Locale);
         }
 
-        //TODO: Maybe we can have a way to opt-in or ignore like Json.net. But will need smarter validation
         /// <summary>
         /// Set the binding flags visibility when getting properties. IE: Only public or public+private properties.
         /// </summary>
+        [Obsolete("Use new Binder(BindingFlags) if you are using custom BindingFlags. Construct Faker<T> with a custom IBinder.", true)]
         public Faker<T> UseBindingFlags(BindingFlags flags)
         {
-            this.BindingFlags = flags;
-            return this;
+            throw new NotImplementedException("Use new Binder(BindingFlags) when constructing a Faker<T> class.");
         }
 
 
@@ -162,7 +149,7 @@ namespace Bogus
                 throw new InvalidOperationException($"Cannot generate {typeof(T)} because strict mode is enabled on this type and some properties/fields have no rules.");
             }
 
-            var typeProps = TypeProperties.Value;
+            var typeProps = TypeProperties;
 
             lock( Randomizer.Locker.Value )
             {
@@ -194,7 +181,7 @@ namespace Bogus
         /// <returns>True if validation pases, false otherwise.</returns>
         public virtual bool Validate()
         {
-            return TypeProperties.Value.Count == Actions.Count;
+            return TypeProperties.Count == Actions.Count;
         }
 
         /// <summary>

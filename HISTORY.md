@@ -1,13 +1,18 @@
+## v3.0.5
+* Roll-up Release for .NET Framework since v3.0.4.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
 ## v3.0.5-beta-4
 * Issue #13: StrictMode() now ignores read-only properties.
-* CoreCLR users please continue using beta releases until CoreCLR is RTM.
+* Newtonsoft.Json v8 compatibility.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5-beta-3
 * Issue #12: Make Bogus thread-safe on Generate() and DataSets. Avoids threading issues in test runners.
-* CoreCLR users please continue using beta releases until CoreCLR is RTM.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5-beta-2
-* CoreCLR support (CoreCLR users, please continue using beta releases until CoreCLR is RTM).
+* CoreCLR support (CoreCLR users please continue using latest beta release until CoreCLR is RTM.).
 
 ## v3.0.4
 * Issue 10: Make Bogus work with fields also, not just properties. Fixes LINQPad issues.

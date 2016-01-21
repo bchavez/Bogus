@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Bogus.DataSets;
+using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
@@ -192,6 +193,23 @@ namespace Bogus.Tests
             var faker = new Faker();
             var randomName = faker.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}");
             randomName.Dump();
+        }
+
+
+        [Test]
+        public void TestIgnore()
+        {
+            var faker = new Faker<Order>()
+                .StrictMode(true)
+                .Ignore(o => o.Item)
+                .RuleFor(o => o.OrderId, f => 3343)
+                .RuleFor(o => o.Quantity, f => f.Random.Number(3));
+
+            var fake = faker.Generate();
+
+            fake.Dump();
+
+            fake.Item.Should().BeNull();
         }
 
         public class Order

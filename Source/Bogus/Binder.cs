@@ -69,7 +69,14 @@ namespace Bogus
                         {
                             return pi.CanWrite;
                         }
-                        return m is PropertyInfo || m is FieldInfo;
+                        var fi = m as FieldInfo;
+                        if( fi != null )
+                        {
+                            //No private fields.
+                            //Github Issue #13
+                            return !fi.IsPrivate;
+                        }
+                        return false;
                     })
                 .ToDictionary(pi => pi.Name);
         }

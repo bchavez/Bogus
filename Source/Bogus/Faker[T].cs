@@ -92,6 +92,24 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Ignore a property or field when using StrictMode.
+        /// </summary>
+        /// <typeparam name="TPropertyOrField"></typeparam>
+        /// <param name="propertyOrField"></param>
+        /// <returns></returns>
+        public Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
+        {
+            var propNameOrField = PropertyName.For(propertyOrField);
+
+            if( !this.TypeProperties.Remove(propNameOrField) )
+            {
+                throw new ArgumentException($"The property or field {propNameOrField} was not found on {typeof(T)} during the binding discovery of T. Can't ignore something that doesn't exist.");
+            }
+
+            return this;
+        }
+
+        /// <summary>
         /// Ensures all properties of T have rules.
         /// </summary>
         /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
@@ -146,7 +164,7 @@ namespace Bogus
             }
             if( useStrictMode && !IsValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException($"Cannot generate {typeof(T)} because strict mode is enabled on this type and some properties/fields have no rules.");
+                throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have {Actions.Count} actions rules.");
             }
 
             var typeProps = TypeProperties;

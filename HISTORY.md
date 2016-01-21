@@ -1,3 +1,12 @@
+## v3.0.6
+* Roll-up Release for .NET Framework since v3.0.5.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
+## v3.0.6-beta-1
+* Issue #13: Fixed StrictMode to exclude private fields.
+* New Feature: Ignore property or field in StrictMode: Faker[Order].Ignore(o => o.OrderId).
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
 ## v3.0.5
 * Roll-up Release for .NET Framework since v3.0.4.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

@@ -85,6 +85,10 @@
         "Scotland",
         "Wales",
         "Northern Ireland"
+      ],
+      "postcode": [
+        "??# #??",
+        "??## #??"
       ]
     },
     "internet": {

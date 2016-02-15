@@ -55,6 +55,10 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Z.ExtensionMethods.WithTwoNamespace, Version=2.0.10.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Z.ExtensionMethods.WithTwoNamespace.2.0.10\lib\net45\Z.ExtensionMethods.WithTwoNamespace.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressTest.cs" />
@@ -78,6 +82,7 @@
     <Compile Include="RandomizerTest.cs" />
     <Compile Include="SeededTest.cs" />
     <Compile Include="StrictModeTests.cs" />
+    <Compile Include="SystemTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bogus\Bogus.csproj">

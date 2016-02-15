@@ -53,6 +53,22 @@ namespace Bogus.Tests
             r.Replace("***")
                 .Should().Be("CQ6");
         }
+
+        [Test]
+        public void can_get_a_random_word()
+        {
+            r.Word().Should().Be("Court");
+            r.Word().Should().Be("bluetooth");
+            r.Word().Should().Be("Movies & Clothing");
+        }
+
+        [Test]
+        public void can_get_some_random_words()
+        {
+            r.Words().Should().Be("Soft deposit");
+            r.Words().Should().Be("Handcrafted Granite Gloves Directives");
+            r.Words().Should().Be("Corner Handcrafted Frozen Chair transmitting");
+        }
     }
 
 

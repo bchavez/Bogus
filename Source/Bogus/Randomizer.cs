@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Bogus.DataSets;
 using Bogus.Extensions;
 using Newtonsoft.Json.Linq;
 
@@ -28,7 +29,7 @@ namespace Bogus
         {
             return Number(0, max);
         }
-        
+
         /// <summary>
         /// Get a random sequence of digits
         /// </summary>
@@ -38,11 +39,11 @@ namespace Bogus
         /// <returns></returns>
         public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
         {
-            if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
-            if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
+            if(maxDigit > 9 || maxDigit < 0) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
+            if(minDigit > 9 || minDigit < 0) throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
 
             var digits = new int[count];
-            for( var i = 0; i < count; i++)
+            for(var i = 0; i < count; i++)
             {
                 digits[i] = Number(min: minDigit, max: maxDigit);
             }
@@ -58,7 +59,7 @@ namespace Bogus
         public int Number(int min = 0, int max = 1)
         {
             //lock any seed access, for thread safety.
-            lock( Locker.Value )
+            lock(Locker.Value)
             {
                 return Seed.Next(min, max + 1);
             }
@@ -75,7 +76,7 @@ namespace Bogus
             do
             {
                 result = Number(min, max);
-            } while( result % 2 == 1 );
+            } while(result % 2 == 1);
             return result;
         }
 
@@ -90,7 +91,7 @@ namespace Bogus
             do
             {
                 result = Number(min, max);
-            } while (result % 2 == 0);
+            } while(result % 2 == 0);
             return result;
         }
 
@@ -102,7 +103,7 @@ namespace Bogus
         public double Double()
         {
             //lock any seed access, for thread safety.
-            lock ( Locker.Value )
+            lock(Locker.Value)
             {
                 return Seed.NextDouble();
             }
@@ -127,6 +128,15 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Get a random list item.
+        /// </summary>
+        public T ListItem<T>(List<T> list)
+        {
+            var r = Number(max: list.Count - 1);
+            return list[r];
+        }
+
+        /// <summary>
         /// Helper method to get a random JProperty.
         /// </summary>
         public JToken ArrayElement(JProperty[] props)
@@ -134,6 +144,7 @@ namespace Bogus
             var r = Number(max: props.Length - 1);
             return props[r];
         }
+
         /// <summary>
         /// Get a random array element.
         /// </summary>
@@ -168,6 +179,7 @@ namespace Bogus
 
             return new string(chars);
         }
+
         /// <summary>
         /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4
         /// </summary>
@@ -176,19 +188,19 @@ namespace Bogus
         {
             var chars = format.Select(c =>
                 {
-                    if (c == '*')
+                    if(c == '*')
                     {
                         c = Bool() ? '#' : '?';
                     }
-                    if ( c == '#' )
+                    if(c == '#')
                     {
                         return Convert.ToChar('0' + Number(9));
                     }
-                    if( c == '?' )
+                    if(c == '?')
                     {
                         return Convert.ToChar('A' + Number(25));
                     }
-                    
+
                     return c;
                 })
                 .ToArray();
@@ -201,21 +213,21 @@ namespace Bogus
         /// </summary>
         /// <typeparam name="T">Must be an Enum</typeparam>
         /// <param name="exclude">Exclude enum values from being returned</param>
-        public T Enum<T>(params T[] exclude) where T : struct 
+        public T Enum<T>(params T[] exclude) where T : struct
         {
             var e = typeof(T);
-            if (!e.IsEnum())
+            if(!e.IsEnum())
                 throw new ArgumentException("When calling Enum<T>() with no parameters T must be an enum.");
 
             var selection = System.Enum.GetNames(e);
-            
-            if( exclude.Any() )
+
+            if(exclude.Any())
             {
                 var excluded = exclude.Select(ex => System.Enum.GetName(e, ex));
                 selection = selection.Except(excluded).ToArray();
             }
 
-            if ( !selection.Any() )
+            if(!selection.Any())
             {
                 throw new ArgumentException("There are no values after exclusion to choose from.");
             }
@@ -233,11 +245,11 @@ namespace Bogus
         public IEnumerable<T> Shuffle<T>(IEnumerable<T> source)
         {
             List<T> buffer = source.ToList();
-            for( var i = 0; i < buffer.Count; i++ )
+            for(var i = 0; i < buffer.Count; i++)
             {
                 int j;
                 //lock any seed access, for thread safety.
-                lock ( Locker.Value )
+                lock(Locker.Value)
                 {
                     j = Seed.Next(i, buffer.Count);
                 }
@@ -246,5 +258,88 @@ namespace Bogus
                 buffer[j] = buffer[i];
             }
         }
+
+        /// <summary>
+        /// Returns a single word or phrase in English.
+        /// </summary>
+        public string Word()
+        {
+            var randomWordMethod = ListItem(WordFunctions.Functions);
+            return randomWordMethod();
+        }
+
+        /// <summary>
+        /// Gets some random words and phrases in English.
+        /// </summary>
+        /// <param name="count">Number of times to call Word()</param>
+        public string Words(int? count = null)
+        {
+            if(count == null)
+                count = Number(1, 3);
+
+            var words = Enumerable.Range(1, count.Value)
+                .Select(f => Word()).ToArray(); // lol.
+
+            return string.Join(" ", words);
+        }
+
+        /// <summary>
+        /// Get a random unique GUID.
+        /// </summary>
+        public Guid Uuid()
+        {
+            return Guid.NewGuid();
+        }
     }
+
+    public static class WordFunctions
+    {
+        public static List<Func<string>> Functions = new List<Func<string>>();
+
+        static WordFunctions()
+        {
+            var commerce = new Commerce();
+            var company = new Company();
+            var address = new Address();
+            var finance = new Finance();
+            var hacker = new Hacker();
+            var name = new Name();
+
+            Functions.Add(() => commerce.Department());
+            Functions.Add(() => commerce.ProductName());
+            Functions.Add(() => commerce.ProductAdjective());
+            Functions.Add(() => commerce.ProductMaterial());
+            Functions.Add(() => commerce.ProductName());
+            Functions.Add(() => commerce.Color());
+
+            Functions.Add(() => company.CatchPhraseAdjective());
+            Functions.Add(() => company.CatchPhraseDescriptor());
+            Functions.Add(() => company.CatchPhraseNoun());
+            Functions.Add(() => company.BsAdjective());
+            Functions.Add(() => company.BsBuzz());
+            Functions.Add(() => company.BsNoun());
+
+            Functions.Add(() => address.StreetSuffix());
+            Functions.Add(() => address.County());
+            Functions.Add(() => address.Country());
+            Functions.Add(() => address.State());
+            
+            Functions.Add(() => address.StreetSuffix());
+
+            Functions.Add(() => finance.AccountName());
+            Functions.Add(() => finance.TransactionType());
+            Functions.Add(() => finance.Currency().Description);
+
+            Functions.Add(() => hacker.Noun());
+            Functions.Add(() => hacker.Verb());
+            Functions.Add(() => hacker.Adjective());
+            Functions.Add(() => hacker.IngVerb());
+            Functions.Add(() => hacker.Abbreviation());
+
+            Functions.Add(() => name.JobDescriptor());
+            Functions.Add(() => name.JobArea());
+            Functions.Add(() => name.JobType());
+        }
+    }
+
 }

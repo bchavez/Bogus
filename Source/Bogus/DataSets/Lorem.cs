@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Bogus.DataSets
 {
@@ -15,6 +16,11 @@ namespace Bogus.DataSets
         {
         }
 
+        public string Word()
+        {
+            return this.GetRandomArrayItem("words");
+        }
+
         /// <summary>
         /// Get some lorem words
         /// </summary>
@@ -22,9 +28,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string[] Words(int num = 3)
         {
-            return Random.Shuffle(GetArray("words")).Take(num)
-                .Select(s => (string)s)
-                .ToArray();
+            return Enumerable.Range(1, num).Select(f => Word()).ToArray(); // lol
         }
 
         /// <summary>
@@ -46,26 +50,29 @@ namespace Bogus.DataSets
         /// Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
         /// If you want a sustenance with 5 words always call Sentence(5, range: 0);
         /// </summary>
-        /// <param name="minWordCount">Minimum word count</param>
+        /// <param name="wordCountunt">Minimum word count</param>
         /// <param name="range">Plus, add extra number of words ranging from 0 to range</param>
         /// <returns></returns>
-        public string Sentence(int minWordCount = 3, int range = 7)
+        public string Sentence(int? wordCount = null)
         {
-            var sentence = string.Join(" ", Words(minWordCount + Random.Number(range)));
+            var wc = wordCount ?? this.Random.Number(3, 10);
+
+            var sentence = string.Join(" ", Words(wc));
             return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";
         }
 
         /// <summary>
         /// Get some sentences.
         /// </summary>
-        /// <param name="count">The number of sentences</param>
+        /// <param name="sentanceCount">The number of sentences</param>
         /// <returns></returns>
-        public string Sentences(int count = 3)
+        public string Sentences(int? sentanceCount = null, string separator = "\n")
         {
-            var sentences = Enumerable.Range(1, count)
+            var sc = sentanceCount ?? this.Random.Number(2, 6);
+            var sentences = Enumerable.Range(1, sc)
                 .Select(s => Sentence());
 
-            return string.Join("\n", sentences);
+            return string.Join(separator, sentences);
         }
 
         /// <summary>
@@ -75,7 +82,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Paragraph(int count = 3)
         {
-            return Sentences(count + Random.Number(3));
+            return Sentences(count + Random.Number(3), " ");
         }
 
         /// <summary>
@@ -83,12 +90,35 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="count"></param>
         /// <returns></returns>
-        public string Paragraphs(int count = 3, string separator = "\r\n")
+        public string Paragraphs(int count = 3, string separator = "\n\n")
         {
             var paras = Enumerable.Range(1, count)
                 .Select(i => Paragraph());
 
             return string.Join(separator, paras);
         }
+
+        /// <summary>
+        /// Get random text on a random lorem methods.
+        /// </summary>
+        public string Text()
+        {
+            var methods = new Func<string>[] {() => Word(), () => Sentence(), () => Sentences(), () => Paragraph()};
+
+            var randomLoremMethod = this.Random.ArrayElement(methods);
+            return randomLoremMethod();
+        }
+
+        /// <summary>
+        /// Get lines of lorem
+        /// </summary>
+        /// <returns></returns>
+        public string Lines(int? lineCount = null, string seperator = "\n")
+        {
+            var lc = lineCount ?? this.Random.Number(1, 5);
+
+            return Sentences(lc, seperator);
+        }
+
     }
 }

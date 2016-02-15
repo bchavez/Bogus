@@ -97,7 +97,7 @@ namespace Bogus.DataSets
         {
             var domain = Name.FirstName().ToLower();
 
-            return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""])", "");
+            return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""'])", "");
         }
 
         /// <summary>

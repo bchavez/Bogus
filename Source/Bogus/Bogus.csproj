@@ -51,6 +51,7 @@
     <Compile Include="Database.cs" />
     <Compile Include="DataSets\Date.cs" />
     <Compile Include="DataSets\Images.cs" />
+    <Compile Include="DataSets\System.cs" />
     <Compile Include="DataSets\PhoneNumbers.cs" />
     <Compile Include="Extensions\CrossPlatform.cs" />
     <Compile Include="Extensions\ExtensionsForBrazil.cs" />
@@ -110,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\es_MX.locale.json" />
+    <None Include="data\id_ID.locale.json" />
     <None Include="project.json" />
     <None Include="Bogus.project.json" />
   </ItemGroup>

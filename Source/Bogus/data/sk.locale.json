@@ -3439,7 +3439,7 @@
       ]
     },
     "name": {
-      "man_first_name": [
+      "male_first_name": [
         "Drahoslav",
         "Severín",
         "Alexej",
@@ -3633,7 +3633,7 @@
         "Dávid",
         "Silvester"
       ],
-      "woman_first_name": [
+      "female_first_name": [
         "Alexandra",
         "Karina",
         "Daniela",
@@ -3835,7 +3835,7 @@
         "Ivana",
         "Milada"
       ],
-      "man_last_name": [
+      "male_last_name": [
         "Antal",
         "Babka",
         "Bahna",
@@ -4094,7 +4094,7 @@
         "Švehla",
         "Šťastný"
       ],
-      "woman_last_name": [
+      "female_last_name": [
         "Antalová",
         "Babková",
         "Bahnová",

@@ -1,3 +1,18 @@
+## v4.0.1
+* Roll-up Release for .NET Framework since v3.0.6.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
+## v4.0.1-beta-1
+* Bogus - Faker.JS parity.
+* System module added. Generate random file names and extensions.
+* Randomizer - Added Uuid().
+* en_GB, sv, sk, de_CH, en. locales updated.
+* id_ID locale added.
+* Prevent apostrophes in return value of Internet.DomainWords
+* BREAKING API METHODS:
+* Lorem - Better API methods. Seeded tests based on "content" will fail due to upgrade.
+
+
 ## v3.0.6
 * Roll-up Release for .NET Framework since v3.0.5.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

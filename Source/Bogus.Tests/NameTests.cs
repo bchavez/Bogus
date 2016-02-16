@@ -30,7 +30,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_prefix()
         {
-            name.Prefix().Should().Be("Miss");
+            name.Prefix().Should().Be("Mr.");
         }
 
         [Test]

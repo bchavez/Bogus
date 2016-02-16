@@ -1,35 +1,36 @@
 ﻿var gulp = require("gulp");
-var $ = require("gulp-load-plugins")({ lazy: true });
+var $ = require("gulp-load-plugins")({ lazy: true, rename: { 'gulp-cr-lf-replace': 'crlf' } });
 var _ = require("underscore");
 
 var es = require("event-stream");
 
-var locales = require("../fakerjs/lib/locales.js");
+var localeFolders = gulp.src(["../fakerjs/lib/locales/*"]);
 
 var dataFolder = "../Bogus/data";
 
-gulp.task("build.locales", function() {
+gulp.task("build.locales", function () {
 
-  var localeCodes = _.keys(locales);
+    return localeFolders
+        .pipe($.plumber())
+        .pipe($.map(function(file) {
+            var localeCode = file.relative;
+            var localeIndex = file.path + "/index.js";
+            var locale = require(localeIndex);
 
-  var files = _.map(localeCodes, function(code) {
+            var bogusLocale = {};
+            bogusLocale[localeCode] = locale;
 
-    var destName = code + ".locale.json";
+            var destName = localeCode + ".locale.json";
 
-    var thisLocale = {};
-    thisLocale[code] = locales[code];
-
-    var localeFile = new $.util.File({
-      path: './' + destName,
-      contents: new Buffer(JSON.stringify(thisLocale, null, 2))
-    });
-
-    return localeFile;
-  });
-
-  return es.readArray(files)
-    .pipe($.print())
-    .pipe(gulp.dest(dataFolder));
+            var vinyl = new $.util.File({
+                path: './' + destName,
+                contents: new Buffer(JSON.stringify(bogusLocale, null, 2))
+            });
+            return vinyl;
+        }))
+        .pipe($.print())
+        .pipe($.crlf({changeCode: "CR+LF"}))
+        .pipe(gulp.dest(dataFolder));
 });
 
 

@@ -18,13 +18,13 @@ namespace Bogus.DataSets
         /// Gets a random image.
         /// </summary>
         /// <returns></returns>
-        public string Image()
+        public string Image(int width = 640, int height = 480, bool randomize = false)
         {
             var categories = new[]
                 {"abstract", "animals", "business", "cats", "city", "food", "nightlife", "fashion", "people", "nature", "sports", "technics", "transport"};
 
             var picked = Random.ArrayElement(categories);
-            return ImageUrl(picked);
+            return ImageUrl(picked, width, height, randomize);
         }
 
         
@@ -32,10 +32,15 @@ namespace Bogus.DataSets
         /// <summary>
         /// Creates an image URL with http://lorempixel.com.
         /// </summary>
-        protected virtual string ImageUrl( string category, int width = 640, int height = 480)
+        protected virtual string ImageUrl( string category, int width = 640, int height = 480, bool randomize = false)
         {
-            var path = string.Format("http://lorempixel.com/{0}/{1}/{2}", width, height, category);
-            return string.IsNullOrWhiteSpace(category) ? path.Trim('/') : path;
+            var url = $"http://lorempixel.com/{width}/{height}";
+            if(string.IsNullOrWhiteSpace(category))
+                url += $"/{category}";
+            if(randomize)
+                url += $"?{this.Random.Number()}";
+
+            return url;
         }
 
         /// <summary>
@@ -43,10 +48,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Abstract(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Abstract(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("abstract", width, height);
+            return ImageUrl("abstract", width, height, randomize);
         }
 
         /// <summary>
@@ -54,10 +59,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Animals(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Animals(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("animals", width, height);
+            return ImageUrl("animals", width, height, randomize);
         }
 
         /// <summary>
@@ -65,10 +70,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Business(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Business(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("business", width, height);
+            return ImageUrl("business", width, height, randomize);
         }
 
         /// <summary>
@@ -76,10 +81,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Cats(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Cats(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("cats", width, height);
+            return ImageUrl("cats", width, height, randomize);
         }
 
         /// <summary>
@@ -87,10 +92,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string City(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string City(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("city", width, height);
+            return ImageUrl("city", width, height, randomize);
         }
 
         /// <summary>
@@ -98,10 +103,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Food(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Food(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("food", width, height);
+            return ImageUrl("food", width, height, randomize);
 
         }
 
@@ -110,10 +115,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Nightlife(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Nightlife(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("nightlife", width, height);
+            return ImageUrl("nightlife", width, height, randomize);
 
         }
 
@@ -122,10 +127,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Fashion(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Fashion(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("fashion", width, height);
+            return ImageUrl("fashion", width, height, randomize);
 
         }
 
@@ -134,10 +139,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string People(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string People(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("people", width, height);
+            return ImageUrl("people", width, height, randomize);
 
         }
 
@@ -146,10 +151,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Nature(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Nature(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("nature", width, height);
+            return ImageUrl("nature", width, height, randomize);
 
         }
 
@@ -158,10 +163,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Sports(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Sports(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("sports", width, height);
+            return ImageUrl("sports", width, height, randomize);
 
         }
 
@@ -170,10 +175,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Technics(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Technics(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("technics", width, height);
+            return ImageUrl("technics", width, height, randomize);
 
         }
 
@@ -182,10 +187,10 @@ namespace Bogus.DataSets
         /// </summary>
         /// <param name="width">Width</param>
         /// <param name="height">Height</param>
-        /// <returns></returns>
-        public string Transport(int width = 640, int height = 480)
+        /// <param name="randomize">Adds a random cache busting number to the URL</param>
+        public string Transport(int width = 640, int height = 480, bool randomize = false)
         {
-            return ImageUrl("transport", width, height);
+            return ImageUrl("transport", width, height, randomize);
 
         }
     }

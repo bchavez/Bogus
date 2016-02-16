@@ -111,7 +111,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\es_MX.locale.json" />
-    <None Include="data\id_ID.locale.json" />
+    <EmbeddedResource Include="data\el.locale.json" />
+    <EmbeddedResource Include="data\id_ID.locale.json" />
+    <EmbeddedResource Include="data\lv.locale.json" />
     <None Include="project.json" />
     <None Include="Bogus.project.json" />
   </ItemGroup>

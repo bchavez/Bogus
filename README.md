@@ -137,6 +137,7 @@ public void With_Korean_Locale()
 |`de`          |German
 |`de_AT`       |German (Austria)
 |`de_CH`       |German (Switzerland)
+|`el`          |Greek
 |`en`          |English
 |`en_AU`       |Australia (English)
 |`en_au_ocker` |Australia Ocker (English)
@@ -152,9 +153,11 @@ public void With_Korean_Locale()
 |`fr`          |French
 |`fr_CA`       |Canada (French)
 |`ge`          |Georgian
+|`id_ID`       |Indonesia
 |`it`          |Italian
 |`ja`          |Japanese
 |`ko`          |Korean
+|`lv`          |Latvian
 |`nb_NO`       |Norwegian
 |`nep`         |Nepalese
 |`nl`          |Dutch
@@ -228,6 +231,8 @@ public void Without_Fluent_Syntax()
 	* `Future` - Get a date in the future between refDate and years forward of that date.
 	* `Between` - Get a random date between start and end.
 	* `Recent` - Get a random date/time within the last few days since now.
+	* `Month` - Get a random month
+	* `Weekday` - Get a random weekday
 * **`Finance`**
 	* `Account` - Get an account number. Default length is 8 digits.
 	* `AccountName` - Get an account name. Like "savings", "checking", "Home Loan" etc..
@@ -272,11 +277,14 @@ public void Without_Fluent_Syntax()
 	* `Url` - Generates a random URL.
 * **`Lorem`**
 	* `Words` - Get some lorem words
+	* `Letter` - Get a character letter.
 	* `Sentence` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
             If you want a sustenance with 5 words always call Sentence(5, range: 0);
 	* `Sentences` - Get some sentences.
 	* `Paragraph` - Get a paragraph.
 	* `Paragraphs` - Get some paragraphs with tabs n all.
+	* `Text` - Get random text on a random lorem methods.
+	* `Lines` - Get lines of lorem
 * **`Name`**
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
             male/female names, but not 'en' english.
@@ -293,6 +301,14 @@ public void Without_Fluent_Syntax()
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
 	* `PhoneFormat` - Gets the format of a phone number.
+* **`System`**
+	* `FileName` - Get a random file name
+	* `MimeType` - Get a random mime type
+	* `CommonFileType` - Returns a commonly used file type
+	* `CommonFileExt` - Returns a commonly used file extension
+	* `FileType` - Returns any file type available as mime-type
+	* `FileExt` - Gets a random extension for the given mime type.
+
 
 ### Helper Methods
 

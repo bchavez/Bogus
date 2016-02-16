@@ -28,7 +28,9 @@ namespace Bogus.Tests
             test.Should()
                 .HaveCount(3);
 
-            test.ForEach(w => w.Should().NotBeNullOrWhiteSpace());
+            test.Should().Equal("id", "aut", "vel");
+
+            //test.ForEach(w => w.Should().NotBeNullOrWhiteSpace());
         }
 
         [Test]
@@ -41,7 +43,13 @@ namespace Bogus.Tests
             test.Should()
                 .HaveCount(5);
 
-            test.ForEach(w => w.Should().NotBeNullOrWhiteSpace());
+            test.Should().Equal("id",
+                "aut",
+                "vel",
+                "facilis",
+                "aperiam");
+
+            //test.ForEach(w => w.Should().NotBeNullOrWhiteSpace());
         }
 
         [Test]

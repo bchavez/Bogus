@@ -80,6 +80,7 @@
     <Compile Include="PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomizerTest.cs" />
+    <Compile Include="README_Generator.cs" />
     <Compile Include="SeededTest.cs" />
     <Compile Include="StrictModeTests.cs" />
     <Compile Include="SystemTest.cs" />

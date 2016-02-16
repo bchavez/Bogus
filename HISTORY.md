@@ -3,14 +3,15 @@
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v4.0.1-beta-1
-* Bogus - Faker.JS parity.
+* Bogus - Feature parity with faker.js.
 * System module added. Generate random file names and extensions.
 * Randomizer - Added Uuid().
-* en_GB, sv, sk, de_CH, en. locales updated.
-* id_ID locale added.
+* Locales Updated: en_GB, sv, sk, de_CH, en.
+* Locales Added: id_ID, el, lv.
 * Prevent apostrophes in return value of Internet.DomainWords
+* Added more parameters for Image data set.
 * BREAKING API METHODS:
-* Lorem - Better API methods. Seeded tests based on "content" will fail due to upgrade.
+* Lorem - Better API methods: Seeded tests based on "content" will fail due to upgrade.
 
 
 ## v3.0.6

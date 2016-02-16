@@ -13,6 +13,7 @@
 
         public readonly bool SupportsGenderFirstNames = false;
         public readonly bool SupportsGenderLastNames = false;
+        public readonly bool SupportsGenderPrefixes = false;
 
         /// <summary>
         /// Default constructor
@@ -22,6 +23,7 @@
         {
             SupportsGenderFirstNames = Get("male_first_name") != null && Get("female_first_name") != null;
             SupportsGenderLastNames = Get("male_last_name") != null && Get("female_last_name") != null;
+            SupportsGenderPrefixes = Get("male_prefix") != null && Get("female_prefix") != null;
         }
 
         /// <summary>
@@ -77,8 +79,17 @@
         /// Gets a random prefix for a name
         /// </summary>
         /// <returns></returns>
-        public string Prefix()
+        public string Prefix(Gender? gender = null)
         {
+            gender = gender ?? this.Random.Enum<Gender>();
+            if (SupportsGenderPrefixes)
+            {
+                if(gender == Gender.Male)
+                {
+                    return GetRandomArrayItem("male_prefix");
+                }
+                return GetRandomArrayItem("female_prefix");
+            }
             return GetRandomArrayItem("prefix");
         }
 
@@ -114,7 +125,7 @@
             }
         
             return string.Format("{0} {1} {2} {3}",
-                withPrefix.GetValueOrDefault() ? Prefix() : "", firstName, lastName, withSuffix.GetValueOrDefault() ? Suffix() : "")
+                withPrefix.GetValueOrDefault() ? Prefix(gender) : "", firstName, lastName, withSuffix.GetValueOrDefault() ? Suffix() : "")
                 .Trim();
 
         }

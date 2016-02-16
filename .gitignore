@@ -3,8 +3,13 @@
 
 # custom
 **.lock.json
-**.history.nuspec
+*.history.nuspec
 **/.vs/**
+/Source/packages**
+paket.lock
+.fake
+.paket/paket.exe
+__test
 
 Source/Builder/node_modules/**
 

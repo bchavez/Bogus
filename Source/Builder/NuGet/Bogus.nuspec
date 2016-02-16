@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package>
   <metadata>
-    <id>Bogus</id>
-    <version>0.0.0.0</version>
+    <id>@project@</id>
+    <version>@build.number@</version>
     <authors>Brian Chavez</authors>
     <owners>Brian Chavez</owners>
     <licenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</licenseUrl>
@@ -12,9 +12,9 @@
     <description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mockup data. Get started by using Faker class or a DataSet directly.</description>
     <summary>A simple and sane data generator for populating objects that supports different locales.</summary>
     <releaseNotes>
-        @history@
+        @releaseNotes@
     </releaseNotes>
-    <copyright>Copyright 2015</copyright>
+    <copyright>Copyright 2016</copyright>
     <tags>fake bogus poco data generator database seed values test-data test data</tags>
 
       <dependencies>
@@ -54,21 +54,6 @@
       
   </metadata>
 
-    <files>
-        <file src="Release\net40\Bogus.dll" target="lib\net40" />
-        <file src="Release\net40\Bogus.pdb" target="lib\net40" />
-        <file src="Release\net40\Bogus.XML" target="lib\net40" />
-
-        <file src="Release\dnx451\Bogus.dll" target="lib\dnx451" />
-        <file src="Release\dnx451\Bogus.pdb" target="lib\dnx451" />
-        <file src="Release\dnx451\Bogus.XML" target="lib\dnx451" />
-
-        <file src="Release\dnxcore50\Bogus.dll" target="lib\dnxcore50" />
-        <file src="Release\dnxcore50\Bogus.pdb" target="lib\dnxcore50" />
-        <file src="Release\dnxcore50\Bogus.XML" target="lib\dnxcore50" />
-
-    <file src="..\..\Source\Bogus\**\*.cs"
-            exclude="..\..\Source\Bogus\obj\**" target="src" />
-  </files>
+    @files@
 
 </package>

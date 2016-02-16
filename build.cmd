@@ -1,23 +1,20 @@
-@ECHO OFF
-SETLOCAL
+@echo off
+cls
+REM "NuGet.exe" "Install" "FAKE" "-OutputDirectory" "Source\packages" "-ExcludeVersion"
 
-REM Uncomment to forcibly set the build version.
-REM set FORCE_VERSION=3.1.0.4
-
-
-IF NOT DEFINED DevEnvDir (
-	IF DEFINED vs140comntools ( 
-		CALL "%vs140comntools%\vsvars32.bat"
-	)
+.paket\paket.bootstrapper.exe
+if errorlevel 1 (
+  exit /b %errorlevel%
 )
 
-nuget restore Source\Bogus.sln
+pushd Source
+..\.paket\paket.exe install
+if errorlevel 1 (
+  popd
+  exit /b %errorlevel%
+)
+popd
 
-msbuild Source\Builder\Builder.csproj
-if %errorlevel% neq 0 exit /b %errorlevel%
+"Source\packages\build\FAKE\tools\Fake.exe" .\Source\Builder\build.fsx %1
 
-ECHO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ECHO        RUNNING BAU BUILDER
-ECHO ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Source\Builder\bin\Debug\Builder.exe %1
-if %errorlevel% neq 0 exit /b %errorlevel%
+popd

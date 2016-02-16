@@ -1,0 +1,13 @@
+source https://www.nuget.org/api/v2
+
+nuget Newtonsoft.Json == 8.0.2
+
+group build
+    
+    source https://www.nuget.org/api/v2
+
+    nuget FAKE
+    nuget FSharp.Data
+    nuget Z.ExtensionMethods.WithNamespace
+    nuget DotNetZip
+    nuget NuGet.CommandLine == 2.8.6

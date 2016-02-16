@@ -1,7 +1,7 @@
 version: '{build}'
 
 skip_commits:
-  message: /read\W{0,1}me*/
+  message: /(//skip\W*ci)|(read\W*me)/
 
 init:
     - ps: |
@@ -12,15 +12,18 @@ init:
               Set-AppveyorBuildVariable -Name "IsPreRelease" -Value False
             }
 
-build_script: build.cmd pack
+build_script: build.cmd ci
 
-test:
-  assemblies:
-    - __compile\Bogus.Tests.dll
+test_script:
+  - build.cmd citest
+
 
 artifacts:
   - path: __package\*.nupkg
     name: NuGet
+  - path: __package\*.zip
+    name: Zip
+
 
 nuget:
     disable_publish_on_pr: true
@@ -31,10 +34,11 @@ deploy:
       tag: $(APPVEYOR_REPO_TAG_NAME)
       description: '[**CHANGE LOG**](https://github.com/bchavez/Bogus/blob/master/HISTORY.md)'
       prerelease: $(IsPreRelease)
-      artifact: NuGet
+      artifact: Zip, NuGet
       auth_token:
           secure: cyivrWQwrZNAb6UCNXlIQlGfVSnKIC6TatUOIP95CQgMeKGnmBSqBgAFv2TsRZhR
       on:
+          branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/ 
           appveyor_repo_tag: true
 
@@ -43,6 +47,7 @@ deploy:
           secure: 1nPS2ttf+N4+FUhd+GZycrL7YzSWQpZjnGOMCb5+pGJXSdx0IFvVF8xhTGna7B9t
       artifact: NuGet
       on:
+          branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/
           appveyor_repo_tag: true
 

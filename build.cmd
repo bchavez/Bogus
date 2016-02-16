@@ -16,5 +16,3 @@ if errorlevel 1 (
 popd
 
 "Source\packages\build\FAKE\tools\Fake.exe" .\Source\Builder\build.fsx %1
-
-popd

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
-
 namespace Bogus
 {
     /// <summary>
@@ -34,14 +33,6 @@ namespace Bogus
             this.Locale = locale;
             FakerHub = new Faker(locale);
             TypeProperties = this.binder.GetMembers(typeof(T));
-        }
-
-        /// <summary>
-        /// Forcibly makes a new person context.
-        /// </summary>
-        public virtual void MakeNewContext()
-        {
-            this.FakerHub.Person = new Person(this.Locale);
         }
 
         /// <summary>
@@ -184,12 +175,9 @@ namespace Bogus
                     field?.SetValue(instance, valueFactory(FakerHub, instance));
                 }
 
-                if( FinalizeAction != null )
-                {
-                    FinalizeAction(this.FakerHub, instance);
-                }
+                FinalizeAction?.Invoke(this.FakerHub, instance);
 
-                MakeNewContext();
+                FakerHub.ResetData();
             }
         }
 

@@ -31,7 +31,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_a_city_name()
         {
-            address.City().Should().Be("Bernhard fort");
+            address.City().Should().Be("Bernhardfort");
         }
 
         [Test]

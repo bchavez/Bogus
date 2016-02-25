@@ -1,3 +1,7 @@
+using System;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json.Linq;
+
 namespace Bogus.DataSets
 {
     /// <summary>
@@ -8,15 +12,15 @@ namespace Bogus.DataSets
         /// <summary>
         /// The source to pull names from.
         /// </summary>
-        protected Name Name = null;
+        protected Name Name;
 
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="locale"></param>
-        public Address(string locale = "en") : base(locale)
+        public Address( string locale = "en" ) : base( locale )
         {
-            this.Name = new Name(locale);
+            this.Name = new Name( locale );
         }
 
         /// <summary>
@@ -25,12 +29,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string ZipCode(string format = null)
         {
-            if( format == null )
-            {
-                format = GetRandomArrayItem("postcode");
-            }
-
-            return Random.Replace(format);
+            return format == null ? GetRandomValue( "postcode" ) : Random.Replace(format);
         }
 
         /// <summary>
@@ -39,18 +38,10 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string City()
         {
-            var format = Random.Number(3);
-            if( format == 0 )
-                return string.Format("{0} {1} {2}", CityPrefix(), Name.FirstName(), CitySuffix());
-            
-            if( format == 1 )
-                return string.Format("{0} {1}", CityPrefix(), Name.FirstName());
-            
-            if( format == 2 )
-                return string.Format("{0} {1}", Name.FirstName(), CitySuffix());
-
-            return string.Format("{0} {1}", Name.LastName(), CitySuffix());
+            return GetRandomValue( "city" );
         }
+
+        
 
         /// <summary>
         /// Get a street address.
@@ -59,16 +50,8 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string StreetAddress(bool useFullAddress = false)
         {
-            var homeNumbers = new string('#', Random.Number(3, 5));
-
-            var houseNumber = Random.Replace(homeNumbers);
-
-            if( useFullAddress )
-            {
-                return string.Format("{0} {1} {2}", houseNumber, StreetName(), SecondaryAddress());
-            }
-
-            return string.Format("{0} {1}", houseNumber, StreetName());
+            var streetAddress = GetRandomValue( "street_address" );
+            return useFullAddress ? $"{streetAddress} {SecondaryAddress()}" : streetAddress;
         }
 
         /// <summary>
@@ -95,7 +78,16 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string StreetName()
         {
-	        return $"{(Random.Bool() ? Name.FirstName() : Name.LastName())} {StreetSuffix()}".Trim();
+            return GetRandomValue( "street_name" );
+        }
+
+        /// <summary>
+        /// Get the buildingnumber
+        /// </summary>
+        /// <returns></returns>
+        public string BuildingNumber()
+        {
+            return GetRandomValue( "building_number" );
         }
 
         /// <summary>
@@ -113,11 +105,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string SecondaryAddress()
         {
-            var formats = new[] {"Apt. ###", "Suite ###"};
-
-            var format = Random.ArrayElement(formats);
-
-            return Random.Replace(format);
+            return GetRandomValue( "secondary_address" );
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Bogus.Extensions;
 using Newtonsoft.Json.Linq;
 
@@ -85,6 +86,53 @@ namespace Bogus
         public string GetRandomArrayItem(string keyOrSubPath)
         {
             return Random.ArrayElement(GetArray(keyOrSubPath));
+        }
+
+
+        /// <summary>
+        /// Retreives a random value from the locale info.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>System.String.</returns>
+        protected string GetRandomValue( string name )
+        {
+            var value = GetRandomArrayItem( name );
+
+            var tokenResult = ParseTokens( value );
+
+            return Random.Replace( tokenResult );
+        }
+
+        /// <summary>
+        /// Recursive parse the tokens in the string .
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        private string ParseTokens( string value )
+        {
+            var regex = new Regex( "\\#{(.*?)\\}" );
+            var cityResult = regex.Replace( value,
+                x =>
+                {
+                    JArray result;
+                    var groupValue = x.Groups[1].Value.ToLower().Split( '.' );
+                    if ( groupValue.Length == 1 )
+                    {
+                        result = (JArray) Database.Get( Category, groupValue[0], Locale );
+                    }
+                    else
+                    {
+                        result = (JArray) Database.Get( groupValue[0], groupValue[1], Locale );
+                    }
+
+                    var randomElement = Random.ArrayElement( result );
+                    
+                    //replace values
+                    return ParseTokens( randomElement );
+
+                }
+                );
+            return cityResult;
         }
     }
 }

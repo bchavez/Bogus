@@ -9,7 +9,7 @@ namespace Bogus
     /// <summary>
     /// A hub of all the categories merged into a single class to ease fluent syntax API.
     /// </summary>
-    public class Faker
+    public class Faker : ILocaleAware
     {
         /// <summary>
         /// The default mode to use when generating objects. Strict mode ensures that all properties have rules.
@@ -21,6 +21,8 @@ namespace Bogus
         /// </summary>
         public Faker(string locale = "en")
         {
+            Locale = locale;
+
             this.Address = new Address(locale);
             this.Company = new Company(locale);
             this.Date = new Date {Locale = locale};
@@ -32,7 +34,6 @@ namespace Bogus
             this.Name = new Name(locale);
             this.Phone = new PhoneNumbers(locale);
 
-            this.Person = new Person(locale);
             this.Random = new Randomizer();
         }
 
@@ -54,10 +55,12 @@ namespace Bogus
                 this.Phone);
         }
 
+
+        private Person _person;
         /// <summary>
         /// A contextually relevant fields of a person.
         /// </summary>
-        public Person Person { get; set; }
+        public Person Person => _person ?? (_person = new Person( Locale ));
 
         /// <summary>
         /// Creates hacker gibberish.
@@ -129,6 +132,20 @@ namespace Bogus
         public T PickRandom<T>() where T : struct
         {
             return this.Random.Enum<T>();
+        }
+
+        /// <summary>
+        /// The current locale for the dataset.
+        /// </summary>
+        /// <value>The locale.</value>
+        public string Locale { get; set; }
+
+        /// <summary>
+        /// Resets the data.
+        /// </summary>
+        public void ResetData()
+        {
+            _person = null;
         }
     }
 

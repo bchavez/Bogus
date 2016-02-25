@@ -22,32 +22,49 @@
   "dependencies": {
     "Newtonsoft.Json": "8.0.2"
   },
-  "frameworks": {
-    "net40": {},
-    "dnx451": {
-      "compilationOptions": {
-        "define": [
-          "DNX"
-        ]
-      }
+    "frameworks": {
+        "net40": { },
+        "dnx451": {
+            "compilationOptions": {
+                "define": [
+                    "DNX"
+                ]
+            }
+        },
+        "dnxcore50": {
+            "dependencies": {
+                "System.Text.Encoding": "4.0.11-beta-23516",
+                "System.Dynamic.Runtime": "4.0.11-beta-23516",
+                "System.IO": "4.0.11-beta-23516",
+                "System.ComponentModel": "4.0.1-beta-23516",
+                "System.Reflection.Extensions": "4.0.1-beta-23516",
+                "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
+                "System.Text.RegularExpressions": "4.0.11-beta-23516"
+            },
+            "compilationOptions": {
+                "define": [
+                    "DNX"
+                ]
+            }
+        },
+        "dotnet5.4": {
+            "dependencies": {
+                "System.Text.Encoding": "4.0.11-beta-23516",
+                "System.Dynamic.Runtime": "4.0.11-beta-23516",
+                "System.IO": "4.0.11-beta-23516",
+                "System.ComponentModel": "4.0.1-beta-23516",
+                "System.Reflection.Extensions": "4.0.1-beta-23516",
+                "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
+                "System.Text.RegularExpressions": "4.0.11-beta-23516",
+                "System.Linq": "4.0.0"
+            },
+            "compilationOptions": {
+                "define": [
+                    "DNX"
+                ]
+            }
+        }
     },
-    "dnxcore50": {
-      "dependencies": {
-        "System.Text.Encoding": "4.0.11-beta-23516",
-        "System.Dynamic.Runtime": "4.0.11-beta-23516",
-        "System.IO": "4.0.11-beta-23516",
-        "System.ComponentModel": "4.0.1-beta-23516",
-        "System.Reflection.Extensions": "4.0.1-beta-23516",
-        "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
-        "System.Text.RegularExpressions": "4.0.11-beta-23516"
-      },
-      "compilationOptions": {
-        "define": [
-          "DNX"
-        ]
-      }
-    }
-  },
   "resource": [
     "data/*.locale.json"
   ]

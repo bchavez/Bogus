@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Reflection;
 
-#if DNX
-using System.Reflection;
-#endif
-
 namespace Bogus.Extensions
 {
     internal static class ExtensionsForType

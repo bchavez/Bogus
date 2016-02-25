@@ -37,13 +37,13 @@ namespace Bogus.Tests
         [Test]
         public void can_get_a_street_address()
         {
-            address.StreetAddress().Should().Be("1860 Bechtelar Rest");
+            address.StreetAddress().Should().Be("60643 Oberbrunner Bypass");
         }
 
         [Test]
         public void can_get_a_full_street_address()
         {
-            address.StreetAddress(useFullAddress: true).Should().Be("1860 Bechtelar Rest Apt. 391");
+            address.StreetAddress(useFullAddress: true).Should().Be("60643 Oberbrunner Bypass Suite 175");
         }
 
         [Test]

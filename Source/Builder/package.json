@@ -1,0 +1,22 @@
+{
+  "name": "Bogus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Brian Chavez",
+  "license": "MIT",
+  "devDependencies": {
+    "event-stream": "^3.3.1",
+    "gulp": "^3.9.0",
+    "gulp-cr-lf-replace": "0.0.4",
+    "gulp-load-plugins": "^1.0.0-rc.1",
+    "gulp-map": "0.0.2",
+    "gulp-plumber": "^1.1.0",
+    "gulp-print": "^1.1.0",
+    "gulp-util": "^3.0.6",
+    "underscore": "^1.8.3"
+  }
+}

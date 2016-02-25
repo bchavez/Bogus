@@ -56,11 +56,12 @@ namespace Bogus
         }
 
 
-        private Person _person;
+        private Person person;
+
         /// <summary>
         /// A contextually relevant fields of a person.
         /// </summary>
-        public Person Person => _person ?? (_person = new Person( Locale ));
+        public Person Person => person ?? (person = new Person(this.Locale));
 
         /// <summary>
         /// Creates hacker gibberish.
@@ -141,11 +142,11 @@ namespace Bogus
         public string Locale { get; set; }
 
         /// <summary>
-        /// Resets the data.
+        /// Resets the person context.
         /// </summary>
-        public void ResetData()
+        internal void ResetPersonContext()
         {
-            _person = null;
+            person = null;
         }
     }
 

@@ -435,3 +435,4 @@ A big thanks to GitHub and all contributors:
 * [Martijn Laarman](https://github.com/Mpdreamz)
 * [Anrijs Vitolins](https://github.com/salixzs)
 * [Pi Lanningham](https://github.com/quantumplation)
+* [JvanderStad](https://github.com/JvanderStad)

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Net;
 using Bogus.DataSets;
 using FluentAssertions;
@@ -31,7 +32,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_date_in_past_with_custom_options()
         {
-            var starting = DateTime.Parse("6/15/2000 4:17:41 PM");
+            var starting = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
             date.Past(refDate: starting, yearsToGoBack: 5).Should()
                 .BeOnOrBefore(starting)
                 .And
@@ -52,7 +53,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_date_in_future_with_options()
         {
-            var starting = DateTime.Parse("6/15/2000 4:17:41 PM");
+            var starting = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
             date.Future(refDate: starting, yearsToGoForward: 5).Should()
                 .BeOnOrBefore(starting.AddYears(5))
                 .And
@@ -63,8 +64,8 @@ namespace Bogus.Tests
         [Test]
         public void can_get_random_time_between_two_dates()
         {
-            var start = DateTime.Parse("6/15/2000 4:17:41 PM");
-            var end = DateTime.Parse("8/15/2000 4:17:41 PM");
+            var start = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
+            var end = DateTime.Parse("8/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
 
             date.Between(start, end)
                 .Should()

@@ -60,7 +60,7 @@ namespace Bogus
         /// <summary>
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
         /// </summary>
-        /// <param name="keyOrSubPath">key int the category</param>
+        /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
         public JArray GetArray(string keyOrSubPath)
         {
@@ -70,7 +70,7 @@ namespace Bogus
         /// <summary>
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JObject.
         /// </summary>
-        /// <param name="keyOrSubPath">key int the category</param>
+        /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
         public JObject GetObject(string keyOrSubPath)
         {
@@ -81,7 +81,7 @@ namespace Bogus
         /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns a random element.
         /// It assumes LOCALE.CATEGORY.KEY is a JArray.
         /// </summary>
-        /// <param name="keyOrSubPath">key int the category</param>
+        /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
         public string GetRandomArrayItem(string keyOrSubPath)
         {
@@ -90,13 +90,13 @@ namespace Bogus
 
 
         /// <summary>
-        /// Retreives a random value from the locale info.
+        /// Retrieves a random value from the locale info.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="keyOrSubPath">key in the category</param>
         /// <returns>System.String.</returns>
-        protected string GetRandomValue( string name )
+        protected string GetFormattedValue( string keyOrSubPath )
         {
-            var value = GetRandomArrayItem( name );
+            var value = GetRandomArrayItem( keyOrSubPath );
 
             var tokenResult = ParseTokens( value );
 
@@ -111,26 +111,26 @@ namespace Bogus
         private string ParseTokens( string value )
         {
             var regex = new Regex( "\\#{(.*?)\\}" );
-            var cityResult = regex.Replace( value,
+            var cityResult = regex.Replace(value,
                 x =>
-                {
-                    JArray result;
-                    var groupValue = x.Groups[1].Value.ToLower().Split( '.' );
-                    if ( groupValue.Length == 1 )
                     {
-                        result = (JArray) Database.Get( Category, groupValue[0], Locale );
-                    }
-                    else
-                    {
-                        result = (JArray) Database.Get( groupValue[0], groupValue[1], Locale );
-                    }
+                        JArray result;
+                        var groupValue = x.Groups[1].Value.ToLower().Split('.');
+                        if( groupValue.Length == 1 )
+                        {
+                            result = (JArray)Database.Get(Category, groupValue[0], Locale);
+                        }
+                        else
+                        {
+                            result = (JArray)Database.Get(groupValue[0], groupValue[1], Locale);
+                        }
 
-                    var randomElement = Random.ArrayElement( result );
-                    
-                    //replace values
-                    return ParseTokens( randomElement );
+                        var randomElement = Random.ArrayElement(result);
 
-                }
+                        //replace values
+                        return ParseTokens(randomElement);
+
+                    }
                 );
             return cityResult;
         }

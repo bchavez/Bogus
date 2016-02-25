@@ -29,7 +29,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string ZipCode(string format = null)
         {
-            return format == null ? GetRandomValue( "postcode" ) : Random.Replace(format);
+            return format == null ? GetFormattedValue( "postcode" ) : Random.Replace(format);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string City()
         {
-            return GetRandomValue( "city" );
+            return GetFormattedValue( "city" );
         }
 
         
@@ -50,7 +50,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string StreetAddress(bool useFullAddress = false)
         {
-            var streetAddress = GetRandomValue( "street_address" );
+            var streetAddress = GetFormattedValue( "street_address" );
             return useFullAddress ? $"{streetAddress} {SecondaryAddress()}" : streetAddress;
         }
 
@@ -78,7 +78,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string StreetName()
         {
-            return GetRandomValue( "street_name" );
+            return GetFormattedValue( "street_name" );
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string BuildingNumber()
         {
-            return GetRandomValue( "building_number" );
+            return GetFormattedValue( "building_number" );
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string SecondaryAddress()
         {
-            return GetRandomValue( "secondary_address" );
+            return GetFormattedValue( "secondary_address" );
         }
 
         /// <summary>

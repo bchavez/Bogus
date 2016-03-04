@@ -19,7 +19,7 @@ and inspired by FluentValidation's syntax sugar.
 Install-Package Bogus
 ```
 
-#### Projects That Use Bogus
+##### Projects That Use Bogus
 
 * [**Elasticsearch (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
 

@@ -11,8 +11,6 @@ and inspired by FluentValidation's syntax sugar.
 
 **Bogus** will help you load databases, UI and apps with fake data for your testing needs.
 
-:warning: *Do not use this library for any other purpose other than generating test data.*
-
 
 ### Download & Install
 **Nuget Package [Bogus](https://www.nuget.org/packages/Bogus/)**
@@ -20,6 +18,11 @@ and inspired by FluentValidation's syntax sugar.
 ```
 Install-Package Bogus
 ```
+
+#### Projects That Use Bogus
+
+* [**Elasticsearch (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
+
 
 
 Usage

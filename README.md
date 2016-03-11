@@ -4,6 +4,8 @@
 Bogus for .NET/C#
 ======================
 
+[![Join the chat at https://gitter.im/bchavez/Bogus](https://badges.gitter.im/bchavez/Bogus.svg)](https://gitter.im/bchavez/Bogus?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Project Description
 -------------------
 A simple and sane fake data generator for C# and .NET. Bogus is a C# port of [faker.js](https://github.com/marak/Faker.js/)

@@ -1,5 +1,5 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6?svg=true)](https://ci.appveyor.com/project/bchavez/bogus) [![Nuget](https://img.shields.io/nuget/v/Bogus.svg)](https://www.nuget.org/packages/Bogus/) [![Users](https://img.shields.io/nuget/dt/Bogus.svg)](https://www.nuget.org/packages/Bogus/) [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple and Sane Fake Data Generator for .NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus)
-<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
+[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple and Sane Fake Data Generator for .NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus)
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' /> 
 
 Bogus for .NET/C#
 ======================

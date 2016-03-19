@@ -83,6 +83,16 @@ namespace Bogus
         }
 
         /// <summary>
+        /// RuleFor helper for constant string values.
+        /// </summary>
+        /// <param name="constantValue">Constant string value used to set the property.</param>
+        /// <returns></returns>
+        public Faker<T> RuleFor(Expression<Func<T, string>> property, string constantValue)
+        {
+            return RuleFor(property, (f) => constantValue);
+        }
+
+        /// <summary>
         /// Ignore a property or field when using StrictMode.
         /// </summary>
         /// <typeparam name="TPropertyOrField"></typeparam>

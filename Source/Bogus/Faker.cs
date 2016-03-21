@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Bogus.DataSets;
 
 namespace Bogus
@@ -33,6 +34,8 @@ namespace Bogus
             this.Phone = new PhoneNumbers(locale);
 
             this.Random = new Randomizer();
+
+            this.Hashids = new Hashids();
         }
 
         /// <summary>
@@ -140,12 +143,32 @@ namespace Bogus
         public string Locale { get; set; }
 
         /// <summary>
-        /// Resets the person context.
+        /// Triggers a new generation context
         /// </summary>
-        internal void ResetPersonContext()
+        internal void NewContext()
         {
             person = null;
+            Interlocked.Increment(ref GlobalUniqueIndex);
         }
+
+        /// <summary>
+        /// A global variable that is automatically incremented on every
+        /// new object created by Bogus. Useful for composing property values that require
+        /// uniqueness.
+        /// </summary>
+        public static long GlobalUniqueIndex = 0;
+
+        /// <summary>
+        /// A global variable that is automatically incremented on every
+        /// new object created by Bogus. Useful for composing property values that require
+        /// uniqueness.
+        /// </summary>
+        public long UniqueIndex => GlobalUniqueIndex;
+
+        /// <summary>
+        /// HashID generator with default (string.Empty) salt. See: https://github.com/ullmark/hashids.net
+        /// </summary>
+        public Hashids Hashids { get; set; }
     }
 
 

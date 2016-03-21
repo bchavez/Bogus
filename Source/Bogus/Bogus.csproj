@@ -67,6 +67,8 @@
     <Compile Include="DataSets\Finance.cs" />
     <Compile Include="DataSets\Hacker.cs" />
     <Compile Include="Faker[T].cs" />
+    <Compile Include="Hashids.cs" />
+    <Compile Include="IHashids.cs" />
     <Compile Include="ILocaleAware.cs" />
     <Compile Include="DataSets\Internet.cs" />
     <Compile Include="DataSets\Lorem.cs" />

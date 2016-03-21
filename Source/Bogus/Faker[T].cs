@@ -187,7 +187,7 @@ namespace Bogus
 
                 FinalizeAction?.Invoke(this.FakerHub, instance);
 
-                FakerHub.ResetPersonContext();
+                FakerHub.NewContext();
             }
         }
 

@@ -1,6 +1,7 @@
 ## v5.1.1-beta-1
-* New RuleFor(x => x.Prop, 'constant')
+* New RuleFor(x => x.Prop, constantValue)
 * Support for Hashids.net: RuleFor(x => x.Id, f => f.Hashids.Encode())
+* New f.UniqueIndex, useful for composing property values that require uniqueness.
 
 
 ## v5.0.1

@@ -16,10 +16,15 @@ namespace Bogus.Tests
             public string Username { get; set; }
         }
 
+        [SetUp]
+        public void BeforeEachTest()
+        {
+            Faker.GlobalUniqueIndex = 0;
+        }
+
         [Test]
         public void every_new_generation_should_have_a_new_unqiue_index()
         {
-            Faker.GlobalUniqueIndex = 0;
             var faker = new Faker<User>()
                 .RuleFor(u => u.FirstName, f => f.Person.FirstName)
                 .RuleFor(u => u.LastName, f => f.Person.LastName)
@@ -53,7 +58,7 @@ namespace Bogus.Tests
 
         [Test]
         public void should_be_able_to_create_some_hash_ids()
-        {
+        { 
             var faker = new Faker<Video>()
                 .RuleFor(v => v.VideoId, f => f.Hashids.EncodeLong(f.UniqueIndex))
                 .RuleFor(v => v.Summary, f => f.Lorem.Sentence());

@@ -360,7 +360,7 @@ namespace Bogus
             if (string.IsNullOrWhiteSpace(hash))
                 return new long[0];
 
-            var alphabet = string.Copy(this.alphabet);
+            var alphabet = new string(this.alphabet.ToCharArray());
             var ret = new List<long>();
             int i = 0;
 

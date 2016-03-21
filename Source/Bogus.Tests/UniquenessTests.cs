@@ -19,6 +19,7 @@ namespace Bogus.Tests
         [Test]
         public void every_new_generation_should_have_a_new_unqiue_index()
         {
+            Faker.GlobalUniqueIndex = 0;
             var faker = new Faker<User>()
                 .RuleFor(u => u.FirstName, f => f.Person.FirstName)
                 .RuleFor(u => u.LastName, f => f.Person.LastName)

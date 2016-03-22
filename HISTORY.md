@@ -3,7 +3,6 @@
 * Support for Hashids.net: RuleFor(x => x.Id, f => f.Hashids.Encode())
 * New f.UniqueIndex, useful for composing property values that require uniqueness.
 
-
 ## v5.0.1
 * Roll-up Release for .NET Framework since v4.0.1.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

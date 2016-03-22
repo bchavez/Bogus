@@ -156,14 +156,14 @@ namespace Bogus
         /// new object created by Bogus. Useful for composing property values that require
         /// uniqueness.
         /// </summary>
-        public static long GlobalUniqueIndex = 0;
+        public static int GlobalUniqueIndex = 0;
 
         /// <summary>
         /// A global variable that is automatically incremented on every
         /// new object created by Bogus. Useful for composing property values that require
         /// uniqueness.
         /// </summary>
-        public long UniqueIndex => GlobalUniqueIndex;
+        public int UniqueIndex => GlobalUniqueIndex;
 
         /// <summary>
         /// HashID generator with default (string.Empty) salt. See: https://github.com/ullmark/hashids.net

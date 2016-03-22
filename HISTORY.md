@@ -1,6 +1,10 @@
+## v5.1.1-beta-2
+* Make f.UniqueIndex as int for convenience.
+* Use generic RuleFor(x = x.Prop, constantValue).
+
 ## v5.1.1-beta-1
-* New RuleFor(x => x.Prop, constantValue)
-* Support for Hashids.net: RuleFor(x => x.Id, f => f.Hashids.Encode())
+* New RuleFor(x = x.Prop, constantValue)
+* Support for Hashids.net: RuleFor(x = x.Id, f = f.Hashids.Encode())
 * New f.UniqueIndex, useful for composing property values that require uniqueness.
 
 ## v5.0.1

@@ -87,7 +87,7 @@ namespace Bogus
         /// </summary>
         /// <param name="constantValue">Constant string value used to set the property.</param>
         /// <returns></returns>
-        public Faker<T> RuleFor(Expression<Func<T, string>> property, string constantValue)
+        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty constantValue)
         {
             return RuleFor(property, (f) => constantValue);
         }

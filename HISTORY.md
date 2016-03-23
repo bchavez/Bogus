@@ -1,3 +1,7 @@
+## v5.1.1-beta-3
+* Removed RuleFor(x = x.Prop, constantValue), was confusing the API.
+* Added 0-arity RuleFor(x = x.Prop, () => someValue)
+
 ## v5.1.1-beta-2
 * Make f.UniqueIndex as int for convenience.
 * Use generic RuleFor(x = x.Prop, constantValue).

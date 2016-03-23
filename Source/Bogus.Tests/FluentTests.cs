@@ -53,7 +53,7 @@ namespace Bogus.Tests
                 .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
                 .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
                 .RuleFor(u => u.SomethingUnique, f => $"Value {f.UniqueIndex}")
-                .RuleFor(u => u.SomethingConstant, "SomeConstantStringValue")
+                .RuleFor(u => u.SomeGuid, Guid.NewGuid)
 
                 //Use an enum outside scope.
                 .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())
@@ -177,8 +177,9 @@ namespace Bogus.Tests
             public string FullName { get; set; }
             public string UserName { get; set; }
             public string Email { get; set; }
-            public string SomethingConstant { get; set; }
             public string SomethingUnique { get; set; }
+            public Guid SomeGuid { get; set; }
+
             public string Avatar { get; set; }
             public Guid CartId { get; set; }
             public string SSN { get; set; }

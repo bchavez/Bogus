@@ -72,5 +72,19 @@ namespace Bogus.Tests
             ids.Should().BeEquivalentTo("gY", "jR", "k5", "l5", "mO");
         }
 
+        [Test]
+        public void should_be_able_to_drive_manual_index()
+        {
+            int indexer = 0;
+            var faker = new Faker<User>()
+                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
+                .RuleFor(u => u.LastName, f => new[] {"A", "B", "C", "D"}[indexer % 4])
+                .FinishWith((f, u) => indexer++);
+
+            var fakes = faker.Generate(10).ToList();
+
+            fakes.Dump();
+        }
+
     }
 }

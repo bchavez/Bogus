@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -68,6 +70,13 @@ namespace Bogus.Tests
             r.Words().Should().Be("Soft deposit");
             r.Words().Should().Be("Handcrafted Granite Gloves Directives");
             r.Words().Should().Be("Corner Handcrafted Frozen Chair transmitting");
+        }
+
+        [Test]
+        public void can_shuffle_some_enumerable()
+        {
+            new string(r.Shuffle("123456789").ToArray())
+                .Should().Be("628753491");
         }
     }
 

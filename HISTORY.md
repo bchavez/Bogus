@@ -1,3 +1,10 @@
+## v5.1.1
+* Roll-up Release for .NET Framework since v4.0.1.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
+## v5.1.1-beta-4
+* Fixed index out of bounds bug in faker.Random.Word().
+
 ## v5.1.1-beta-3
 * Removed RuleFor(x = x.Prop, constantValue), was confusing the API.
 * Added 0-arity RuleFor(x = x.Prop, () => someValue)

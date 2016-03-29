@@ -128,6 +128,22 @@ namespace Bogus.Tests
             fake.Dump();
         }
 
+        [Test]
+        public void issue_23_should_be_able_to_generate_random_word_without_exception()
+        {
+            var faker = new Faker<TestClass>();
+            faker.RuleFor(x => x.Value, faker1 => faker1.Random.Word());
+            foreach (var item in faker.Generate(1000))
+            {
+                item.Value.Should().NotBeNullOrWhiteSpace();
+            }
+        }
+
+        public class TestClass
+        {
+            public string Value { get; set; }
+        }
+
         public class TestObject
         {
             private DateTime? _lastTimeToUnbook;

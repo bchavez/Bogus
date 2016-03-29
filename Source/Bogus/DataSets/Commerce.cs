@@ -14,7 +14,7 @@ namespace Bogus.DataSets
             var num = max;
             if( !returnMax )
             {
-                 num = this.Random.Number(max);
+                 num = this.Random.Number(1, max);
             }
 
             var cats = Categories(num);

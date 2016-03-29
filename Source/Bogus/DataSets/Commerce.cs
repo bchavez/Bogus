@@ -14,11 +14,14 @@ namespace Bogus.DataSets
             var num = max;
             if( !returnMax )
             {
-                 num = this.Random.Number(max);
+                do
+                {
+                    num = this.Random.Number(max);
+                } while (num == 0);
             }
 
             var cats = Categories(num);
-            if( num > 1 )
+            if (num > 1)
             {
                 return string.Format("{0} & {1}", string.Join(", ", cats.Take(cats.Length - 1)),
                     cats.Last());

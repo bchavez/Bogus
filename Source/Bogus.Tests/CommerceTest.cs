@@ -62,7 +62,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_list_of_departments()
         {
-            commerce.Department(5).Should().Be("Music, Jewelery & Baby");
+            commerce.Department(5).Should().Be("Music, Jewelery, Baby & Books");
         }
     }
 

@@ -1,5 +1,5 @@
 ## v6.1.1
-* Roll-up Release for .NET Framework since v4.0.1.
+* Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v6.1.1-beta-1

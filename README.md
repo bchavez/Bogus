@@ -294,7 +294,7 @@ public void Without_Fluent_Syntax()
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
             male/female names, but not 'en' english.
 	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
-            male/female names, but Enblish ('en') does not.
+            male/female names, but English ('en') does not.
 	* `Prefix` - Gets a random prefix for a name
 	* `Suffix` - Gets a random suffix for a name
 	* `FindName` - Gets a full name

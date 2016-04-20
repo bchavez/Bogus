@@ -35,7 +35,7 @@
 
         /// <summary>
         /// Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
-        /// male/female names, but not 'en' english.
+        /// male/female names, but not 'en' English.
         /// </summary>
         /// <param name="gender">For locale's that support Gender naming.</param>
         public string FirstName(Gender? gender = null)
@@ -56,7 +56,7 @@
 
         /// <summary>
         /// Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
-        /// male/female names, but Enblish ('en') does not.
+        /// male/female names, but English ('en') does not.
         /// </summary>
         /// <param name="gender">For locale's that support Gender naming.</param>
         public string LastName(Gender? gender = null)

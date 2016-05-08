@@ -216,6 +216,7 @@ public void Without_Fluent_Syntax()
 	* `CityPrefix` - Get a city prefix.
 	* `CitySuffix` - Get a city suffix.
 	* `StreetName` - Get a street name.
+	* `BuildingNumber` - Get the buildingnumber
 	* `StreetSuffix` - Get a street suffix.
 	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
 	* `County` - Get a county.
@@ -254,7 +255,6 @@ public void Without_Fluent_Syntax()
 	* `Phrase` - Returns a phrase.
 * **`Images`**
 	* `Image` - Gets a random image.
-	* `ImageUrl` - Creates an image URL with http://lorempixel.com.
 	* `Abstract` - Gets an abstract looking image.
 	* `Animals` - Gets an image of an animal.
 	* `Business` - Gets a business looking image.
@@ -292,7 +292,7 @@ public void Without_Fluent_Syntax()
 	* `Lines` - Get lines of lorem
 * **`Name`**
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
-            male/female names, but not 'en' english.
+            male/female names, but not 'en' English.
 	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
             male/female names, but English ('en') does not.
 	* `Prefix` - Gets a random prefix for a name
@@ -305,7 +305,6 @@ public void Without_Fluent_Syntax()
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
-	* `PhoneFormat` - Gets the format of a phone number.
 * **`System`**
 	* `FileName` - Get a random file name
 	* `MimeType` - Get a random mime type

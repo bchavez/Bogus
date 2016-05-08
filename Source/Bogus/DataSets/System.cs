@@ -8,7 +8,7 @@ namespace Bogus.DataSets
     /// <summary>
     /// Generates fake data for many computer systems properties
     /// </summary>
-    internal class System : DataSet
+    public class System : DataSet
     {
         /// <summary>
         /// Default constructor

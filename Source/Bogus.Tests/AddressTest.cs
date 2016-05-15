@@ -55,7 +55,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_a_country()
         {
-            address.Country().Should().Be("Morocco");
+            address.Country().Should().Be("Mozambique");
         }
 
         [Test]

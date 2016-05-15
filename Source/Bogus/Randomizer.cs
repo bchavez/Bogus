@@ -181,7 +181,7 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4
+        /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4. Letters are uppercase.
         /// </summary>
         /// <param name="format"></param>
         public string Replace(string format)
@@ -289,6 +289,15 @@ namespace Bogus
         public Guid Uuid()
         {
             return Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// Returns a random locale.
+        /// </summary>
+        public string RandomLocale()
+        {
+            var ele = ArrayElement(Database.Data.Value.Properties().ToArray()) as JProperty;
+            return ele.Name;
         }
     }
 

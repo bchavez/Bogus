@@ -78,6 +78,12 @@ namespace Bogus.Tests
             new string(r.Shuffle("123456789").ToArray())
                 .Should().Be("628753491");
         }
+
+        [Test]
+        public void can_get_random_locale()
+        {
+            r.RandomLocale().Should().Be("ru");
+        }
     }
 
 

@@ -139,7 +139,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get a random System.Version
+        /// Get a random `System.Version`
         /// </summary>
         public Version Version()
         {
@@ -148,7 +148,7 @@ namespace Bogus.DataSets
 
 
         /// <summary>
-        /// Can generate a random exception with a fake stack trace.
+        /// Can generate a random `Exception` with a fake stack trace.
         /// </summary>
         public Exception Exception()
         {

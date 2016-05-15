@@ -226,6 +226,15 @@ public void Without_Fluent_Syntax()
 	* `StateAbbr` - Get a state abbreviation.
 	* `Latitude` - Get a Latitude
 	* `Longitude` - Get a Longitude
+* **`Commerce`**
+	* `Department` - Get a random commerce department.
+	* `Price` - Get a random product price.
+	* `Categories` - Get random product categories
+	* `ProductName` - Get a random product name.
+	* `Color` - Get a random color.
+	* `Product` - Get a random product.
+	* `ProductAdjective` - Random product adjective.
+	* `ProductMaterial` - Random product material.
 * **`Company`**
 	* `CompanySuffix` - Get a company suffix. "Inc" and "LLC" etc.
 	* `CompanyName` - Get a company name
@@ -237,6 +246,7 @@ public void Without_Fluent_Syntax()
 	* `Future` - Get a date in the future between refDate and years forward of that date.
 	* `Between` - Get a random date between start and end.
 	* `Recent` - Get a random date/time within the last few days since now.
+	* `Timespan` - Get a random span of time.
 	* `Month` - Get a random month
 	* `Weekday` - Get a random weekday
 * **`Finance`**
@@ -246,6 +256,7 @@ public void Without_Fluent_Syntax()
 	* `TransactionType` - Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
 	* `Currency` - Get a random currency.
 	* `CreditCardNumber` - Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
+	* `BitcoinAddress` - Generates a random bitcoin address
 * **`Hacker`**
 	* `Abbreviation` - Returns an abbreviation.
 	* `Adjective` - Returns a adjective.
@@ -271,6 +282,7 @@ public void Without_Fluent_Syntax()
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
+	* `ExampleEmail` - Generates an example email with @example.com
 	* `UserName` - Generates user names.
 	* `DomainName` - Generates a random domain name.
 	* `DomainWord` - Generates a domain word used for domain names.
@@ -312,6 +324,9 @@ public void Without_Fluent_Syntax()
 	* `CommonFileExt` - Returns a commonly used file extension
 	* `FileType` - Returns any file type available as mime-type
 	* `FileExt` - Gets a random extension for the given mime type.
+	* `Semver` - Get a random semver version string.
+	* `Version` - Get a random `System.Version`
+	* `Exception` - Can generate a random `Exception` with a fake stack trace.
 
 
 ### Helper Methods

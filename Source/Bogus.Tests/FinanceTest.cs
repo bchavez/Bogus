@@ -53,5 +53,11 @@ namespace Bogus.Tests
         {
             finance.TransactionType().Should().Be("payment");
         }
+
+        [Test]
+        public void can_generate_a_random_bitcoin_address()
+        {
+            finance.BitcoinAddress().Dump();
+        }
     }
 }

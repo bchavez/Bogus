@@ -117,6 +117,20 @@ namespace Bogus.DataSets
 
             return Random.ArrayElement(cards);
         }
+
+        /// <summary>
+        /// Generates a random bitcoin address
+        /// </summary>
+        public string BitcoinAddress()
+        {
+            var addressLength = Math.Floor(this.Random.Double()*(36 - 27 + 1)) + 27;
+            var address = this.Random.ArrayElement(new[] {"1", "3"});
+            for( var i = 0; i < addressLength - 1; i++ )
+            {
+                address += "*";
+            }
+            return Random.Replace(address);
+        }
     }
 
 }

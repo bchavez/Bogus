@@ -1,4 +1,8 @@
 ## v7.1.1
+* Roll-up Release for .NET Framework since last non-beta release.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
+## v7.1.1-beta-1
 * Locale update
 * Date.Recent(0) generates random times for current date between midnight and now.
 * New `System` data set for generating fake file names and mime-types.

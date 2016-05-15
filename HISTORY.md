@@ -1,3 +1,6 @@
+## v6.1.2
+* Date.Recent(0) generates random times for current date between midnight and now.
+
 ## v6.1.1
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

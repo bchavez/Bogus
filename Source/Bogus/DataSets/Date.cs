@@ -98,7 +98,7 @@ namespace Bogus.DataSets
         {
             var maxDate = DateTime.Now;
 
-            var minDate = maxDate.AddDays(-days);
+            var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
 
             var totalTimeSpanTicks = ( maxDate - minDate ).Ticks;
 

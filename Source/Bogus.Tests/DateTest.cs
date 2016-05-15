@@ -30,6 +30,15 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void can_get_date_in_past_0_days_results_in_random_time()
+        {
+            date.Recent(0).Should()
+                .BeOnOrBefore(DateTime.Now)
+                .And
+                .BeOnOrAfter(DateTime.Now.Date);
+        }
+
+        [Test]
         public void can_get_date_in_past_with_custom_options()
         {
             var starting = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);

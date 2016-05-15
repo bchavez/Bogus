@@ -198,7 +198,7 @@ namespace Bogus.DataSets
                 case 4:
                     try
                     {
-                        throw new StackOverflowException(Random.Words());
+                        throw new ArithmeticException(Random.Words());
                     }
                     catch( Exception e )
                     {
@@ -218,7 +218,7 @@ namespace Bogus.DataSets
                 case 6:
                     try
                     {
-                        throw new ApplicationException(Random.Words());
+                        throw new FormatException(Random.Words());
                     }
                     catch( Exception e )
                     {

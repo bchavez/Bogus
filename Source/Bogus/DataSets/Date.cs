@@ -111,6 +111,23 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
+        /// Get a random span of time.
+        /// </summary>
+        /// <param name="maxSpan">Maximum of time to span. Default 1 week/7 days.</param>
+        public TimeSpan Timespan(TimeSpan? maxSpan = null)
+        {
+            var span = maxSpan ?? TimeSpan.FromDays(7);
+
+            var totalTimeSpanTicks = span.Ticks;
+
+            var partTimeSpanTicks = Random.Double()*totalTimeSpanTicks;
+
+            var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+
+            return partTimeSpan;
+        }
+
+        /// <summary>
         /// Get a random month
         /// </summary>
         public string Month( bool abbrivation = false, bool useContext = false )

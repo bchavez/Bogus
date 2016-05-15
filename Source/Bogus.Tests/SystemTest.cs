@@ -2,6 +2,8 @@
 using FluentAssertions;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Z.ExtensionMethods;
+using Z.ExtensionMethods.ObjectExtensions;
 
 namespace Bogus.Tests
 {
@@ -89,6 +91,26 @@ namespace Bogus.Tests
                 .Distinct()
                 .ToArray().Dump();
 
+        }
+
+        [Test]
+        public void can_generate_random_semver()
+        {
+            var numbers = system.Semver().Split('.');
+
+            numbers.TrueForAll(x => x.ToInt32() >= 0 && x.ToInt32() <= 9)
+                .Should().BeTrue();
+        }
+
+        [Test]
+        public void can_get_a_random_system_version()
+        {
+            var ver = system.Version();
+
+            var numbers = ver.ToString().Split('.');
+
+            numbers.TrueForAll(x => x.ToInt32() >= 0 && x.ToInt32() <= 9)
+                .Should().BeTrue();
         }
     }
 }

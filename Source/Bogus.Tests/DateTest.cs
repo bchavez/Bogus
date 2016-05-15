@@ -114,5 +114,15 @@ namespace Bogus.Tests
             date.Weekday().Should().NotBeNullOrEmpty();
             date.Weekday(abbrivation: true).Should().NotBeNullOrEmpty();
         }
+
+        [Test]
+        public void can_get_a_timespan()
+        {
+            date.Timespan().Should().BePositive()
+                .And
+                .BeGreaterThan(TimeSpan.Zero)
+                .And
+                .BeLessThan(TimeSpan.FromDays(7));
+        }
     }
 }

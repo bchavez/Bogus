@@ -129,5 +129,21 @@ namespace Bogus.DataSets
 
             return this.Random.ArrayElement(exts);
         }
+
+        /// <summary>
+        /// Get a random semver version string.
+        /// </summary>
+        public string Semver()
+        {
+            return $"{this.Random.Number(9)}.{this.Random.Number(9)}.{this.Random.Number(9)}";
+        }
+
+        /// <summary>
+        /// Get a random System.Version
+        /// </summary>
+        public Version Version()
+        {
+            return new Version(this.Random.Number(9), this.Random.Number(9), this.Random.Number(9), this.Random.Number(9));
+        }
     }
 }

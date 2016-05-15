@@ -1,5 +1,9 @@
 ## v6.1.2
 * Date.Recent(0) generates random times for current date between midnight and now.
+* New `System` data set for generating fake file names and mime-types.
+* Added `Date.Timespan` for random timespan values.
+* Added `System.Semver` for random semantic versions.
+* Added `System.Version` for random System.Version objects.
 
 ## v6.1.1
 * Roll-up Release for .NET Framework since last non-beta release.

@@ -112,5 +112,18 @@ namespace Bogus.Tests
             numbers.TrueForAll(x => x.ToInt32() >= 0 && x.ToInt32() <= 9)
                 .Should().BeTrue();
         }
+
+        [Test]
+        public void can_get_a_random_exception()
+        {
+            var exe = system.Exception();
+
+            exe.Dump();
+
+            var exe2 = system.Exception();
+
+            exe2.Dump();
+
+        }
     }
 }

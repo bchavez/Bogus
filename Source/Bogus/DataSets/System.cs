@@ -145,5 +145,141 @@ namespace Bogus.DataSets
         {
             return new Version(this.Random.Number(9), this.Random.Number(9), this.Random.Number(9), this.Random.Number(9));
         }
+
+
+        /// <summary>
+        /// Can generate a random exception with a fake stack trace.
+        /// </summary>
+        public Exception Exception()
+        {
+            Exception exe = null;
+            switch( this.Random.Number(11) )
+            {
+                case 0:
+                    try
+                    {
+                        throw new ArgumentException(Random.Words(), Random.Word());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 1:
+                    try
+                    {
+                        throw new ArgumentNullException(Random.Word(), Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 2:
+                    try
+                    {
+                        throw new BadImageFormatException(Random.Words(), Random.Word());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 3:
+                    try
+                    {
+                        throw new IndexOutOfRangeException(Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 4:
+                    try
+                    {
+                        throw new StackOverflowException(Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 5:
+                    try
+                    {
+                        throw new OutOfMemoryException(Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 6:
+                    try
+                    {
+                        throw new ApplicationException(Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 7:
+                    try
+                    {
+                        throw new DivideByZeroException();
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 8:
+                    try
+                    {
+                        throw new EndOfStreamException(Random.Words());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+                case 9:
+                    try
+                    {
+                        throw new FileNotFoundException("File not found...", Path.GetRandomFileName());
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+
+                case 10:
+                    try
+                    {
+                        throw new NotImplementedException();
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+
+                case 11:
+                    try
+                    {
+                        throw new UnauthorizedAccessException();
+                    }
+                    catch( Exception e )
+                    {
+                        exe = e;
+                    }
+                    break;
+            }
+
+            return exe;
+        }
     }
 }

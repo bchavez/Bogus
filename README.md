@@ -326,7 +326,7 @@ public void Without_Fluent_Syntax()
 	* `FileExt` - Gets a random extension for the given mime type.
 	* `Semver` - Get a random semver version string.
 	* `Version` - Get a random `System.Version`
-	* `Exception` - Can generate a random `Exception` with a fake stack trace.
+	* `Exception` - Get a random `Exception` with a fake stack trace.
 
 
 ### Helper Methods

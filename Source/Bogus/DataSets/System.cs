@@ -148,7 +148,7 @@ namespace Bogus.DataSets
 
 
         /// <summary>
-        /// Can generate a random `Exception` with a fake stack trace.
+        /// Get a random `Exception` with a fake stack trace.
         /// </summary>
         public Exception Exception()
         {

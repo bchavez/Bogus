@@ -91,7 +91,6 @@
         "Colombia",
         "Comoros",
         "Congo",
-        "Congo",
         "Cook Islands",
         "Costa Rica",
         "Cote d'Ivoire",
@@ -1610,6 +1609,11 @@
         "gmail.com",
         "yahoo.com",
         "hotmail.com"
+      ],
+      "example_email": [
+        "example.org",
+        "example.com",
+        "example.net"
       ],
       "domain_suffix": [
         "com",

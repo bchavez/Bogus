@@ -4,6 +4,7 @@
 * Added `Date.Timespan` for random timespan values.
 * Added `System.Semver` for random semantic versions.
 * Added `System.Version` for random System.Version objects.
+* Added `Internet.ExampleEmail` for simple @example.com email generation.
 
 ## v6.1.1
 * Roll-up Release for .NET Framework since last non-beta release.

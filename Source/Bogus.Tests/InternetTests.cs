@@ -2,6 +2,7 @@ using System;
 using Bogus.DataSets;
 using FluentAssertions;
 using NUnit.Framework;
+using Z.ExtensionMethods;
 
 namespace Bogus.Tests
 {
@@ -86,6 +87,15 @@ namespace Bogus.Tests
         public void can_generate_mac_address()
         {
             internet.Mac().Should().Be("9a:1c:d0:a5:09:9f");
+        }
+
+        [Test]
+        public void can_generate_an_example_email()
+        {
+            var email = internet.ExampleEmail();
+            
+            email.Should().EndWith("@example.com");
+            email.GetBefore("@").Should().Contain(".");
         }
     }
 }

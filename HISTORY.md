@@ -1,3 +1,10 @@
+## v7.1.2
+* Roll-up Release for .NET Framework since last non-beta release.
+* CoreCLR users please continue using latest beta release until CoreCLR is RTM.
+
+## v7.1.2-beta-1
+* Clamp Randomizer maximum value to int.MaxValue.
+
 ## v7.1.1
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

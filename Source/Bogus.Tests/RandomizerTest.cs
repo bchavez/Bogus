@@ -84,6 +84,13 @@ namespace Bogus.Tests
         {
             r.RandomLocale().Should().Be("ru");
         }
+
+        [Test]
+        public void exclusive_int_maxvalue_number()
+        {
+            var max = r.Number(int.MaxValue - 1, int.MaxValue);
+            max.Should().Be(int.MaxValue - 1);
+        }
     }
 
 

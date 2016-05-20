@@ -23,7 +23,7 @@ namespace Bogus
         /// <summary>
         /// Get an int from 0 to max.
         /// </summary>
-        /// <param name="max">Upper bound, inclusive</param>
+        /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
         /// <returns></returns>
         public int Number(int max)
         {
@@ -54,14 +54,16 @@ namespace Bogus
         /// Get an int from min to max.
         /// </summary>
         /// <param name="min">Lower bound, inclusive</param>
-        /// <param name="max">Upper bound, inclusive</param>
+        /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
         /// <returns></returns>
         public int Number(int min = 0, int max = 1)
         {
             //lock any seed access, for thread safety.
             lock(Locker.Value)
             {
-                return Seed.Next(min, max + 1);
+                //Clamp max value, Issue #30.
+                max = max == int.MaxValue ? max : max + 1;
+                return Seed.Next(min, max);
             }
         }
 
@@ -181,7 +183,7 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4
+        /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4. Letters are uppercase.
         /// </summary>
         /// <param name="format"></param>
         public string Replace(string format)
@@ -289,6 +291,15 @@ namespace Bogus
         public Guid Uuid()
         {
             return Guid.NewGuid();
+        }
+
+        /// <summary>
+        /// Returns a random locale.
+        /// </summary>
+        public string RandomLocale()
+        {
+            var ele = ArrayElement(Database.Data.Value.Properties().ToArray()) as JProperty;
+            return ele.Name;
         }
     }
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using Bogus.DataSets;
+using System = Bogus.DataSets.System;
 
 namespace Bogus
 {
@@ -32,6 +33,7 @@ namespace Bogus
             this.Lorem = new Lorem(locale);
             this.Name = new Name(locale);
             this.Phone = new PhoneNumbers(locale);
+            this.System = new DataSets.System(locale);
 
             this.Random = new Randomizer();
 
@@ -53,7 +55,8 @@ namespace Bogus
                 this.Internet,
                 this.Lorem,
                 this.Name,
-                this.Phone);
+                this.Phone,
+                this.System);
         }
 
 
@@ -113,6 +116,11 @@ namespace Bogus
         /// Generate Internet stuff like Emails and UserNames.
         /// </summary>
         public Internet Internet { get; set; }
+
+        /// <summary>
+        /// Generates fake data for many computer systems properties
+        /// </summary>
+        public DataSets.System System { get; set; }
 
         /// <summary>
         /// Generate numbers, booleans, and decimals.

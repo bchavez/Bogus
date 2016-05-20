@@ -46,6 +46,19 @@ namespace Bogus.DataSets
             return Utils.Slugify(UserName(firstName, lastName)) + "@" + provider;
         }
 
+
+        /// <summary>
+        /// Generates an example email with @example.com
+        /// </summary>
+        /// <param name="firstName">Optional: first name of the user</param>
+        /// <param name="lastName">Optional: last name of the user</param>
+        /// <returns></returns>
+        public string ExampleEmail(string firstName = null, string lastName = null)
+        {
+            var provider = GetRandomArrayItem("example_email");
+            return Email(firstName, lastName, provider);
+        }
+
         /// <summary>
         /// Generates user names.
         /// </summary>

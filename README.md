@@ -216,6 +216,7 @@ public void Without_Fluent_Syntax()
 	* `CityPrefix` - Get a city prefix.
 	* `CitySuffix` - Get a city suffix.
 	* `StreetName` - Get a street name.
+	* `BuildingNumber` - Get the buildingnumber
 	* `StreetSuffix` - Get a street suffix.
 	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
 	* `County` - Get a county.
@@ -225,6 +226,15 @@ public void Without_Fluent_Syntax()
 	* `StateAbbr` - Get a state abbreviation.
 	* `Latitude` - Get a Latitude
 	* `Longitude` - Get a Longitude
+* **`Commerce`**
+	* `Department` - Get a random commerce department.
+	* `Price` - Get a random product price.
+	* `Categories` - Get random product categories
+	* `ProductName` - Get a random product name.
+	* `Color` - Get a random color.
+	* `Product` - Get a random product.
+	* `ProductAdjective` - Random product adjective.
+	* `ProductMaterial` - Random product material.
 * **`Company`**
 	* `CompanySuffix` - Get a company suffix. "Inc" and "LLC" etc.
 	* `CompanyName` - Get a company name
@@ -236,6 +246,7 @@ public void Without_Fluent_Syntax()
 	* `Future` - Get a date in the future between refDate and years forward of that date.
 	* `Between` - Get a random date between start and end.
 	* `Recent` - Get a random date/time within the last few days since now.
+	* `Timespan` - Get a random span of time.
 	* `Month` - Get a random month
 	* `Weekday` - Get a random weekday
 * **`Finance`**
@@ -245,6 +256,7 @@ public void Without_Fluent_Syntax()
 	* `TransactionType` - Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
 	* `Currency` - Get a random currency.
 	* `CreditCardNumber` - Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
+	* `BitcoinAddress` - Generates a random bitcoin address
 * **`Hacker`**
 	* `Abbreviation` - Returns an abbreviation.
 	* `Adjective` - Returns a adjective.
@@ -254,7 +266,6 @@ public void Without_Fluent_Syntax()
 	* `Phrase` - Returns a phrase.
 * **`Images`**
 	* `Image` - Gets a random image.
-	* `ImageUrl` - Creates an image URL with http://lorempixel.com.
 	* `Abstract` - Gets an abstract looking image.
 	* `Animals` - Gets an image of an animal.
 	* `Business` - Gets a business looking image.
@@ -271,6 +282,7 @@ public void Without_Fluent_Syntax()
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
+	* `ExampleEmail` - Generates an example email with @example.com
 	* `UserName` - Generates user names.
 	* `DomainName` - Generates a random domain name.
 	* `DomainWord` - Generates a domain word used for domain names.
@@ -292,7 +304,7 @@ public void Without_Fluent_Syntax()
 	* `Lines` - Get lines of lorem
 * **`Name`**
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
-            male/female names, but not 'en' english.
+            male/female names, but not 'en' English.
 	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
             male/female names, but English ('en') does not.
 	* `Prefix` - Gets a random prefix for a name
@@ -305,7 +317,6 @@ public void Without_Fluent_Syntax()
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
-	* `PhoneFormat` - Gets the format of a phone number.
 * **`System`**
 	* `FileName` - Get a random file name
 	* `MimeType` - Get a random mime type
@@ -313,6 +324,9 @@ public void Without_Fluent_Syntax()
 	* `CommonFileExt` - Returns a commonly used file extension
 	* `FileType` - Returns any file type available as mime-type
 	* `FileExt` - Gets a random extension for the given mime type.
+	* `Semver` - Get a random semver version string.
+	* `Version` - Get a random `System.Version`
+	* `Exception` - Get a random `Exception` with a fake stack trace.
 
 
 ### Helper Methods
@@ -441,3 +455,5 @@ A big thanks to GitHub and all contributors:
 * [Anrijs Vitolins](https://github.com/salixzs)
 * [Pi Lanningham](https://github.com/quantumplation)
 * [JvanderStad](https://github.com/JvanderStad)
+
+<a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>

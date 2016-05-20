@@ -78,6 +78,19 @@ namespace Bogus.Tests
             new string(r.Shuffle("123456789").ToArray())
                 .Should().Be("628753491");
         }
+
+        [Test]
+        public void can_get_random_locale()
+        {
+            r.RandomLocale().Should().Be("ru");
+        }
+
+        [Test]
+        public void exclusive_int_maxvalue_number()
+        {
+            var max = r.Number(int.MaxValue - 1, int.MaxValue);
+            max.Should().Be(int.MaxValue - 1);
+        }
     }
 
 

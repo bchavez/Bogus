@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Xml.Linq;
 using FluentAssertions;
 using Newtonsoft.Json;
@@ -50,11 +51,24 @@ namespace Bogus.Tests
                 .GroupBy(k => k.dataset)
                 .OrderBy(k => k.Key);
 
+
+            //get all publicly accessible types.
+            var datasets = typeof(DataSet).Assembly.ExportedTypes
+                .Where(t => typeof(DataSet).IsAssignableFrom(t) && t != typeof(DataSet))
+                .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+                .Select(mi => new {dataset = mi.DeclaringType.Name, method = mi.Name})
+                .GroupBy(g => g.dataset, u => u.method)
+                .ToDictionary(g => g.Key);
+
             foreach (var g in all)
             {
+                if (!datasets.ContainsKey(g.Key)) return; //check if it's accessible
+                var methods = datasets[g.Key];
+
                 Console.WriteLine("* **`" + g.Key + "`**");
                 foreach (var m in g)
                 {
+                    if (!methods.Any(s => s.Contains(m.method))) continue; //check if it's accessible
                     Console.WriteLine("\t* `" + m.method + "` - " + m.summary);
                 }
             }

@@ -98,7 +98,7 @@ namespace Bogus.DataSets
         {
             var maxDate = DateTime.Now;
 
-            var minDate = maxDate.AddDays(-days);
+            var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
 
             var totalTimeSpanTicks = ( maxDate - minDate ).Ticks;
 
@@ -108,6 +108,23 @@ namespace Bogus.DataSets
             var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
 
             return maxDate - partTimeSpan;
+        }
+
+        /// <summary>
+        /// Get a random span of time.
+        /// </summary>
+        /// <param name="maxSpan">Maximum of time to span. Default 1 week/7 days.</param>
+        public TimeSpan Timespan(TimeSpan? maxSpan = null)
+        {
+            var span = maxSpan ?? TimeSpan.FromDays(7);
+
+            var totalTimeSpanTicks = span.Ticks;
+
+            var partTimeSpanTicks = Random.Double()*totalTimeSpanTicks;
+
+            var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+
+            return partTimeSpan;
         }
 
         /// <summary>

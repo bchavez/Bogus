@@ -9,6 +9,9 @@ namespace Bogus.DataSets
         {
         }
 
+        /// <summary>
+        /// Get a random commerce department.
+        /// </summary>
         public string Department(int max = 3, bool returnMax = false)
         {
             var num = max;
@@ -27,8 +30,11 @@ namespace Bogus.DataSets
             return cats[0];
         }
 
-        /// there is an easier way to do this.
-        /// check finance.amount
+        // there is an easier way to do this.
+        // check finance.amount
+        /// <summary>
+        /// Get a random product price.
+        /// </summary>
         public string Price( decimal min = 0, decimal max = 1000, int decimals = 2, string symbol = "" )
         {
             var amount = ( max - min );
@@ -36,6 +42,9 @@ namespace Bogus.DataSets
             return symbol + Math.Round(min + part, decimals);
         }
 
+        /// <summary>
+        /// Get random product categories
+        /// </summary>
         public string[] Categories(int num)
         {
             var result = new string[num];
@@ -47,6 +56,9 @@ namespace Bogus.DataSets
             return result;
         }
 
+        /// <summary>
+        /// Get a random product name.
+        /// </summary>
         public string ProductName()
         {
             return string.Format( "{0} {1} {2}",
@@ -56,21 +68,33 @@ namespace Bogus.DataSets
                 );
         }
 
+        /// <summary>
+        /// Get a random color.
+        /// </summary>
         public string Color()
         {
             return GetRandomArrayItem( "color" );
         }
 
+        /// <summary>
+        /// Get a random product.
+        /// </summary>
         public string Product()
         {
             return GetRandomArrayItem( "product_name.product" );
         }
 
+        /// <summary>
+        /// Random product adjective.
+        /// </summary>
         public string ProductAdjective()
         {
             return GetRandomArrayItem( "product_name.adjective" );
         }
 
+        /// <summary>
+        /// Random product material.
+        /// </summary>
         public string ProductMaterial()
         {
             return GetRandomArrayItem( "product_name.material" );

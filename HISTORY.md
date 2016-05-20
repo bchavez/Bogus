@@ -1,3 +1,6 @@
+## v7.1.3-beta-1
+* Compatibility with .NET Standard 1.3 and .NET Core RC2.
+
 ## v7.1.2
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.

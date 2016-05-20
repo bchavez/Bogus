@@ -10,7 +10,6 @@
 #r @"FakeLib.dll"
 #r @"Ionic.Zip.dll"
 
-
 #load @"Utils.fsx"
 
 open Fake
@@ -18,11 +17,12 @@ open Utils
 open System.Reflection
 open Helpers
 
-let workingDir = GetWorkingFolder();
+let workingDir = ChangeWorkingFolder();
 
 trace (sprintf "WORKING DIR: %s" workingDir)
 
 let ProjectName = "Bogus";
+let GitHubUrl = "https://github.com/bchavez/Bogus"
 
 let Folders = Setup.Folders(workingDir)
 let Files = Setup.Files(Folders)
@@ -58,14 +58,8 @@ Target "dnx" (fun _ ->
 
     let tag = "dnx_build"
     
-    DnvmUpdate()
-    DnvmInstall Projects.DnvmVersion
-    DnvmUse Projects.DnvmVersion
-    
-    // PROJECTS
-    Dnu DnuCommands.Restore BogusProject.Folder
-    DnuBuild BogusProject.Folder (BogusProject.OutputDirectory @@ tag)
-
+    Dotnet DotnetCommands.Restore BogusProject.Folder
+    DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
 )
 
 Target "mono" (fun _ ->
@@ -88,16 +82,13 @@ Target "restore" (fun _ ->
 Target "nuget" (fun _ ->
     trace "NuGet Task"
     
-    let driverConfig = NuGetConfig BogusProject Folders Files     
-    NuGet ( fun p -> driverConfig) BogusProject.NugetSpec
-
+    DotnetPack BogusProject Folders.Package
 )
 
 Target "push" (fun _ ->
     trace "NuGet Push Task"
     
-    let driverConfig = NuGetConfig BogusProject Folders Files     
-    NuGetPublish ( fun p -> driverConfig)
+    failwith "Only CI server should publish on NuGet"
 
 )
 
@@ -115,13 +106,19 @@ Target "BuildInfo" (fun _ ->
     trace "Writing Assembly Build Info"
 
     MakeBuildInfo BogusProject Folders
+    JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
 
+    let releaseNotes = History.NugetText Files.History GitHubUrl
+    JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
 )
 
 
 Target "Clean" (fun _ ->
     DeleteFile Files.TestResultFile
     CleanDirs [Folders.CompileOutput; Folders.Package]
+
+    JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
+    JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
 )
 
 let RunTests() =

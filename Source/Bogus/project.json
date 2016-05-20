@@ -1,70 +1,74 @@
 {
   "version": "0.0.0-localbuild",
-  "description": "A simple and sane data generator for populating objects that supports different locales.",
+  "description": "A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mock up data. Get started by using Faker class or a DataSet directly.",
   "authors": [
     "Brian Chavez"
   ],
-  "tags": [
-    ""
-  ],
-  "projectUrl": "https://github.com/bchavez/Bogus",
-  "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",
-  "configurations": {
-    "Debug": {
-      "compilationOptions": {}
-    },
-    "Release": {
-      "compilationOptions": {
-        "optimize": true
+  "packOptions": {
+    "summary": "A simple and sane data generator for populating objects that supports different locales.",
+    "tags": [
+      "fake",
+      "bogus",
+      "poco",
+      "data",
+      "generator",
+      "database",
+      "seed",
+      "values",
+      "test-data",
+      "test",
+      "data"
+    ],
+    "owners": [
+      "Brian Chavez"
+    ],
+    "releaseNotes": "",
+    "iconUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png",
+    "projectUrl": "https://github.com/bchavez/Bogus",
+    "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",
+    "requireLicenseAcceptance": false,
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/bchavez/Bogus"
+    }
+  },
+  "buildOptions": {
+    "xmlDoc": true,
+    "configurations": {
+      "Debug": {
+        "buildOptions": {}
+      },
+      "Release": {
+        "buildOptions": {
+          "optimize": true
+        }
       }
     }
   },
   "dependencies": {
-    "Newtonsoft.Json": "8.0.2"
+    "Newtonsoft.Json": "8.0.3"
   },
-    "frameworks": {
-        "net40": { },
-        "dnx451": {
-            "compilationOptions": {
-                "define": [
-                    "DNX"
-                ]
-            }
-        },
-        "dnxcore50": {
-            "dependencies": {
-                "System.Text.Encoding": "4.0.11-beta-23516",
-                "System.Dynamic.Runtime": "4.0.11-beta-23516",
-                "System.IO": "4.0.11-beta-23516",
-                "System.ComponentModel": "4.0.1-beta-23516",
-                "System.Reflection.Extensions": "4.0.1-beta-23516",
-                "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
-                "System.Text.RegularExpressions": "4.0.11-beta-23516"
-            },
-            "compilationOptions": {
-                "define": [
-                    "DNX"
-                ]
-            }
-        },
-        "dotnet5.4": {
-            "dependencies": {
-                "System.Text.Encoding": "4.0.11-beta-23516",
-                "System.Dynamic.Runtime": "4.0.11-beta-23516",
-                "System.IO": "4.0.11-beta-23516",
-                "System.ComponentModel": "4.0.1-beta-23516",
-                "System.Reflection.Extensions": "4.0.1-beta-23516",
-                "System.Reflection.TypeExtensions": "4.0.1-beta-23409",
-                "System.Text.RegularExpressions": "4.0.11-beta-23516",
-                "System.Linq": "4.0.0"
-            },
-            "compilationOptions": {
-                "define": [
-                    "DNX"
-                ]
-            }
-        }
-    },
+  "frameworks": {
+    "net40": {},
+    "netstandard1.3": {
+      "dependencies": {
+        "NETStandard.Library": "1.5.0-rc2-24027",
+        "System.Linq": "4.1.0-rc2-24027",
+        "System.Linq.Expressions": "4.0.11-rc2-24027",
+        "System.Reflection": "4.1.0-rc2-24027",
+        "System.Reflection.TypeExtensions": "4.1.0-rc2-24027"
+      },
+      "imports": [
+        "portable-net451+win8",
+        "dnxcore50"
+      ],
+      "buildOptions": {
+        "define": [
+          "STANDARD"
+        ]
+      }
+    }
+  },
   "resource": [
     "data/*.locale.json"
   ]

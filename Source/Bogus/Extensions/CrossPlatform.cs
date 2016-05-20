@@ -5,7 +5,7 @@ namespace Bogus.Extensions
 {
     internal static class ExtensionsForType
     {
-#if DNX
+#if STANDARD
         public static bool IsSubclassOf(this Type type, Type other)
         {
             return type.GetTypeInfo().IsSubclassOf(other);
@@ -14,7 +14,7 @@ namespace Bogus.Extensions
 
         public static bool IsGenericType(this Type type)
         {
-#if DNX
+#if STANDARD
             return type.GetTypeInfo().IsGenericType;
 #else
             return type.IsGenericType;
@@ -23,7 +23,7 @@ namespace Bogus.Extensions
 
         public static Type BaseType(this Type type)
         {
-#if DNX
+#if STANDARD
             return type.GetTypeInfo().BaseType;
 #else
             return type.BaseType;
@@ -32,7 +32,7 @@ namespace Bogus.Extensions
 
         public static T GetCustomAttributeX<T>(this Type type) where T : Attribute 
         {
-#if DNX
+#if STANDARD
             return type.GetTypeInfo().GetCustomAttribute<T>();
 #else
             return Attribute.GetCustomAttribute(type, typeof(T)) as T;
@@ -41,7 +41,7 @@ namespace Bogus.Extensions
 
         public static Assembly GetAssembly(this Type type)
         {
-#if DNX
+#if STANDARD
             return type.GetTypeInfo().Assembly;
 #else
             return type.Assembly;
@@ -50,7 +50,7 @@ namespace Bogus.Extensions
 
         public static bool IsEnum(this Type type)
         {
-#if DNX
+#if STANDARD
             return type.GetTypeInfo().IsEnum;
 #else
             return type.IsEnum;

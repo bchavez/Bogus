@@ -12,3 +12,4 @@ group build
     nuget DotNetZip
     nuget NuGet.CommandLine == 2.8.6
     nuget NUnit.Runners == 2.6.4
+    nuget Newtonsoft.Json

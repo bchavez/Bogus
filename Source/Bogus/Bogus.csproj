@@ -73,6 +73,7 @@
     <Compile Include="DataSets\Internet.cs" />
     <Compile Include="DataSets\Lorem.cs" />
     <Compile Include="DataSets\Name.cs" />
+    <Compile Include="IRuleSet.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyName.cs" />

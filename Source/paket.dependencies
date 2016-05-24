@@ -1,6 +1,6 @@
 source https://www.nuget.org/api/v2
 
-nuget Newtonsoft.Json == 8.0.2
+nuget Newtonsoft.Json == 8.0.3
 
 group build
     

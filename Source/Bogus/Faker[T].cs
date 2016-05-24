@@ -6,49 +6,6 @@ using System.Reflection;
 
 namespace Bogus
 {
-    public interface IRuleSet<T> where T : class
-    {
-        /// <summary>
-        /// Uses the factory method to generate new instances.
-        /// </summary>
-        Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod);
-
-        /// <summary>
-        /// Creates a rule for a compound property and providing access to the instance being generated.
-        /// </summary>
-        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter);
-
-        /// <summary>
-        /// Creates a rule for a property.
-        /// </summary>
-        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter );
-
-        /// <summary>
-        /// Creates a rule for a property.
-        /// </summary>
-        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction);
-
-        /// <summary>
-        /// Ignore a property or field when using StrictMode.
-        /// </summary>
-        /// <typeparam name="TPropertyOrField"></typeparam>
-        /// <param name="propertyOrField"></param>
-        /// <returns></returns>
-        Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField);
-
-        /// <summary>
-        /// Ensures all properties of T have rules.
-        /// </summary>
-        /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
-        /// <returns></returns>
-        Faker<T> StrictMode(bool ensureRulesForAllProperties);
-
-        /// <summary>
-        /// Action is invoked after all the rules are applied.
-        /// </summary>
-        Faker<T> FinishWith(Action<Faker, T> action);
-    }
-
     /// <summary>
     /// Generates fake objects of T.
     /// </summary>
@@ -82,16 +39,6 @@ namespace Bogus
             TypeProperties = this.binder.GetMembers(typeof(T));
             this.CreateActions[Default] = faker => Activator.CreateInstance<T>();
         }
-
-        /// <summary>
-        /// Set the binding flags visibility when getting properties. IE: Only public or public+private properties.
-        /// </summary>
-        [Obsolete("Use new Binder(BindingFlags) if you are using custom BindingFlags. Construct Faker<T> with a custom IBinder.", true)]
-        public Faker<T> UseBindingFlags(BindingFlags flags)
-        {
-            throw new NotImplementedException("Use new Binder(BindingFlags) when constructing a Faker<T> class.");
-        }
-
 
         /// <summary>
         /// Uses the factory method to generate new instances.
@@ -254,15 +201,15 @@ namespace Bogus
                 .Select(i => Generate(ruleSets));
         }
 
+        /// <summary>
+        /// Only populates an instance of T.
+        /// </summary>
         public virtual void Populate(T instance, string ruleSets = null)
         {
             var cleanRules = ParseDirtyRulesSets(ruleSets);
             PopulateInternal(instance, cleanRules);
         }
 
-        /// <summary>
-        /// Only populates an instance of T.
-        /// </summary>
         private void PopulateInternal(T instance, string[] ruleSets)
         {
             if( !IsValid.HasValue ) 

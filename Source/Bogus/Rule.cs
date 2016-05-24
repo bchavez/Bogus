@@ -35,6 +35,10 @@ namespace Bogus
 
     public class MultiDictionary<Key, Key2, Value> : Dictionary<Key, Dictionary<Key2, Value>>
     {
+        public MultiDictionary(IEqualityComparer<Key> comparer) : base(comparer)
+        {
+        }
+
         public void Add(Key key, Key2 key2, Value value)
         {
             Dictionary<Key2, Value> values;
@@ -48,6 +52,10 @@ namespace Bogus
     }
     public class MultiSetDictionary<Key, Value> : Dictionary<Key, HashSet<Value>>
     {
+        public MultiSetDictionary(IEqualityComparer<Key> comparer) : base(comparer)
+        {
+        }
+
         public void Add(Key key, Value value)
         {
             HashSet<Value> values;

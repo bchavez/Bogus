@@ -6,20 +6,67 @@ using System.Reflection;
 
 namespace Bogus
 {
+    public interface IRuleSet<T> where T : class
+    {
+        /// <summary>
+        /// Uses the factory method to generate new instances.
+        /// </summary>
+        Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod);
+
+        /// <summary>
+        /// Creates a rule for a compound property and providing access to the instance being generated.
+        /// </summary>
+        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter);
+
+        /// <summary>
+        /// Creates a rule for a property.
+        /// </summary>
+        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter );
+
+        /// <summary>
+        /// Creates a rule for a property.
+        /// </summary>
+        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction);
+
+        /// <summary>
+        /// Ignore a property or field when using StrictMode.
+        /// </summary>
+        /// <typeparam name="TPropertyOrField"></typeparam>
+        /// <param name="propertyOrField"></param>
+        /// <returns></returns>
+        Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField);
+
+        /// <summary>
+        /// Ensures all properties of T have rules.
+        /// </summary>
+        /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
+        /// <returns></returns>
+        Faker<T> StrictMode(bool ensureRulesForAllProperties);
+
+        /// <summary>
+        /// Action is invoked after all the rules are applied.
+        /// </summary>
+        Faker<T> FinishWith(Action<Faker, T> action);
+    }
+
     /// <summary>
     /// Generates fake objects of T.
     /// </summary>
-    public class Faker<T> : ILocaleAware where T : class
+    public class Faker<T> : ILocaleAware, IRuleSet<T> where T : class
     {
+        private const string Default = "default";
+        private static readonly string[] DefaultRuleSet = {Default};
 #pragma warning disable 1591
         protected internal Faker FakerHub;
-        protected internal Func<Faker, T> CustomActivator;
         protected internal IBinder binder;
-        protected internal readonly Dictionary<string, Func<Faker, T, object>> Actions = new Dictionary<string, Func<Faker, T, object>>();
+        protected internal readonly MultiDictionary<string, string, PopulateAction<T>> Actions = new MultiDictionary<string, string, PopulateAction<T>>();
+        protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new Dictionary<string, FinalizeAction<T>>();
+        protected internal Dictionary<string, Func<Faker, T>> CreateActions = new Dictionary<string, Func<Faker, T>>();
+        protected internal readonly MultiSetDictionary<string, string> Ignores = new MultiSetDictionary<string, string>();
         protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
-        protected internal bool? UseStrictMode;
+        protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
         protected internal bool? IsValid;
-        protected internal Action<Faker, T> FinalizeAction;
+        protected internal string currentRuleSet = Default;
 #pragma warning restore 1591
 
         /// <summary>
@@ -33,6 +80,7 @@ namespace Bogus
             this.Locale = locale;
             FakerHub = new Faker(locale);
             TypeProperties = this.binder.GetMembers(typeof(T));
+            this.CreateActions[Default] = faker => Activator.CreateInstance<T>();
         }
 
         /// <summary>
@@ -50,7 +98,7 @@ namespace Bogus
         /// </summary>
         public Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
         {
-            this.CustomActivator = factoryMethod;
+            this.CreateActions[currentRuleSet] = factoryMethod;
             return this;
         }
 
@@ -63,7 +111,14 @@ namespace Bogus
 
             Func<Faker, T, object> invoker = (f, t) => setter(f, t);
 
-            this.Actions.Add(propName, invoker);
+            var rule = new PopulateAction<T>
+                {
+                    Action = invoker,
+                    RuleSet = currentRuleSet,
+                    PropertyName = propName
+                };
+
+            this.Actions.Add(currentRuleSet, propName, rule);
 
             return this;
         }
@@ -77,7 +132,14 @@ namespace Bogus
 
             Func<Faker, T, object> invoker = (f, t) => setter(f);
 
-            this.Actions.Add(propName, invoker);
+            var rule = new PopulateAction<T>
+                {
+                    Action = invoker,
+                    RuleSet = currentRuleSet,
+                    PropertyName = propName,
+                };
+
+            this.Actions.Add(currentRuleSet, propName, rule);
 
             return this;
         }
@@ -91,6 +153,20 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Create a rule set that can be executed in specialized cases.
+        /// </summary>
+        /// <param name="ruleSetName">The rule set name</param>
+        /// <param name="action">The set of rules to apply when this rules set is specified.</param>
+        public Faker<T> RuleSet(string ruleSetName, Action<IRuleSet<T>> action)
+        {
+            if( currentRuleSet != Default ) throw new ArgumentException("Cannot create a rule set within a rule set.");
+            currentRuleSet = ruleSetName;
+            action(this);
+            currentRuleSet = Default;
+            return this;
+        }
+
+        /// <summary>
         /// Ignore a property or field when using StrictMode.
         /// </summary>
         /// <typeparam name="TPropertyOrField"></typeparam>
@@ -100,10 +176,12 @@ namespace Bogus
         {
             var propNameOrField = PropertyName.For(propertyOrField);
 
-            if( !this.TypeProperties.Remove(propNameOrField) )
+            MemberInfo mi;
+            if( !this.TypeProperties.TryGetValue(propNameOrField, out mi) )
             {
                 throw new ArgumentException($"The property or field {propNameOrField} was not found on {typeof(T)} during the binding discovery of T. Can't ignore something that doesn't exist.");
             }
+            this.Ignores.Add(currentRuleSet, propNameOrField);
 
             return this;
         }
@@ -115,7 +193,7 @@ namespace Bogus
         /// <returns></returns>
         public Faker<T> StrictMode(bool ensureRulesForAllProperties)
         {
-            UseStrictMode = ensureRulesForAllProperties;
+            this.StrictModes[currentRuleSet] = ensureRulesForAllProperties;
             return this;
         }
 
@@ -124,19 +202,45 @@ namespace Bogus
         /// </summary>
         public Faker<T> FinishWith(Action<Faker, T> action)
         {
-             this.FinalizeAction = action;
+            var rule = new FinalizeAction<T>
+                {
+                    Action = action,
+                    RuleSet = currentRuleSet
+                };
+            this.FinalizeActions.Add(currentRuleSet, rule);
             return this;
         }
-        
+
+        private string[] ParseDirtyRulesSets(string dirtyRules)
+        {
+            dirtyRules = dirtyRules?.Trim(',').Trim();
+            if( string.IsNullOrWhiteSpace(dirtyRules) ) return DefaultRuleSet;
+            return dirtyRules.Split(',')
+                .Where(s => !string.IsNullOrWhiteSpace(s))
+                .Select(s => s.Trim()).ToArray();
+        }
+
         /// <summary>
         /// Generates a fake object of T.
         /// </summary>
         /// <returns></returns>
-        public virtual T Generate()
+        public virtual T Generate(string ruleSets = null)
         {
-            var instance = CustomActivator == null ? Activator.CreateInstance<T>() : CustomActivator(this.FakerHub);
+            Func<Faker, T> createRule = null;
+            var cleanRules = ParseDirtyRulesSets(ruleSets);
+            
+            if ( string.IsNullOrWhiteSpace(ruleSets) )
+            {
+                createRule = CreateActions[Default];
+            }
+            else
+            {
+                var firstRule = cleanRules[0];
+                createRule = CreateActions.TryGetValue(firstRule, out createRule) ? createRule : CreateActions[Default];
+            }
+            var instance = createRule(this.FakerHub);
 
-            Populate(instance);
+            PopulateInternal(instance, cleanRules);
 
             return instance;
         }
@@ -144,46 +248,65 @@ namespace Bogus
         /// <summary>
         /// Generates multiple fake objects of T.
         /// </summary>
-        public virtual IEnumerable<T> Generate(int count)
+        public virtual IEnumerable<T> Generate(int count, string ruleSets = null)
         {
             return Enumerable.Range(1, count)
-                .Select(i => Generate());
+                .Select(i => Generate(ruleSets));
+        }
+
+        public virtual void Populate(T instance, string ruleSets = null)
+        {
+            var cleanRules = ParseDirtyRulesSets(ruleSets);
+            PopulateInternal(instance, cleanRules);
         }
 
         /// <summary>
         /// Only populates an instance of T.
         /// </summary>
-        public virtual void Populate(T instance)
+        private void PopulateInternal(T instance, string[] ruleSets)
         {
-            var useStrictMode = UseStrictMode ?? Faker.DefaultStrictMode;
-            if( useStrictMode && !IsValid.HasValue ) 
+            if( !IsValid.HasValue ) 
             {
                 //run validation
-                this.IsValid = Validate();
+                this.IsValid = ValidateInternal(ruleSets);
             }
-            if( useStrictMode && !IsValid.GetValueOrDefault())
+            if( !IsValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have {Actions.Count} actions rules.");
+                throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have different number of actions rules. Also, check RuleSets.");
             }
 
             var typeProps = TypeProperties;
 
             lock( Randomizer.Locker.Value )
             {
-                foreach( var kvp in Actions )
+                foreach( var ruleSet in ruleSets )
                 {
-                    MemberInfo member;
-                    typeProps.TryGetValue(kvp.Key, out member);
-                    var valueFactory = kvp.Value;
+                    Dictionary<string, PopulateAction<T>> populateActions;
+                    if( this.Actions.TryGetValue(ruleSet, out populateActions) )
+                    {
+                        foreach( var action in populateActions.Values )
+                        {
+                            MemberInfo member;
+                            typeProps.TryGetValue(action.PropertyName, out member);
+                            var valueFactory = action.Action;
 
-                    var prop = member as PropertyInfo;
-                    prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
+                            var prop = member as PropertyInfo;
+                            prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
 
-                    var field = member as FieldInfo;
-                    field?.SetValue(instance, valueFactory(FakerHub, instance));
+                            var field = member as FieldInfo;
+                            field?.SetValue(instance, valueFactory(FakerHub, instance));
+                        }
+                    }
                 }
 
-                FinalizeAction?.Invoke(this.FakerHub, instance);
+                foreach( var ruleSet in ruleSets )
+                {
+                    FinalizeAction<T> finalizer;
+                    if( this.FinalizeActions.TryGetValue(ruleSet, out finalizer) )
+                    {
+                        finalizer.Action(this.FakerHub, instance);
+                    }
+                }
 
                 FakerHub.NewContext();
             }
@@ -193,9 +316,43 @@ namespace Bogus
         /// Checks if all properties have rules.
         /// </summary>
         /// <returns>True if validation pases, false otherwise.</returns>
-        public virtual bool Validate()
+        public virtual bool Validate(string ruleSets = null)
         {
-            return TypeProperties.Count == Actions.Count;
+            var rules = ruleSets == null
+                ? this.Actions.Keys.ToArray()
+                : ParseDirtyRulesSets(ruleSets);
+
+            return ValidateInternal(rules);
+        }
+
+        private bool ValidateInternal(string[] ruleSets)
+        {
+            var propsOrFieldsOfT = this.TypeProperties.Keys;
+            foreach (var rule in ruleSets)
+            {
+                var strictMode = Faker.DefaultStrictMode;
+                this.StrictModes.TryGetValue(rule, out strictMode);
+                if( !strictMode) continue;
+                
+                HashSet<string> ignores;
+                this.Ignores.TryGetValue(rule, out ignores);
+
+                Dictionary<string, PopulateAction<T>> populateActions;
+                this.Actions.TryGetValue(rule, out populateActions);
+
+                if( strictMode )
+                {
+                    var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                    if( ignores != null )
+                        finalSet.UnionWith(ignores);
+                    if( populateActions != null )
+                        finalSet.UnionWith(populateActions.Keys);
+
+                    if( !finalSet.SetEquals(propsOrFieldsOfT) ) return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>

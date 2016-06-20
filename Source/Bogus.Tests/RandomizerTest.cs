@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using FluentAssertions;
@@ -90,6 +91,12 @@ namespace Bogus.Tests
         {
             var max = r.Number(int.MaxValue - 1, int.MaxValue);
             max.Should().Be(int.MaxValue - 1);
+        }
+
+        [Test]
+        public void random_bool()
+        {
+            r.Bool().Should().BeFalse();
         }
     }
 

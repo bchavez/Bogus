@@ -178,7 +178,7 @@ public void With_Korean_Locale()
 |`zh_TW`       |Chinese (Taiwan)
 
 
-***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/Marak/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/Marak/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the example above, the missing `zh_CN:lorem` data set will default to `en:lorem` data set.
+***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/Marak/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/Marak/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to `en:lorem` data set.
 
 If you'd like to help contribute new locales or update existing ones please see our
 [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) wiki page

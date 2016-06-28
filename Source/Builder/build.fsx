@@ -8,7 +8,7 @@
 #I @"../packages/build/FAKE/tools"
 #I @"../packages/build/DotNetZip/lib/net20"
 #r @"FakeLib.dll"
-#r @"Ionic.Zip.dll"
+#r @"DotNetZip.dll"
 
 #load @"Utils.fsx"
 

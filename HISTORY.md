@@ -1,3 +1,6 @@
+## v7.1.3
+* :boom: .NET Core 1.0 RTM Support.
+
 ## v7.1.3-beta-1
 * Compatibility with .NET Standard 1.3 and .NET Core RC2.
 

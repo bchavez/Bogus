@@ -1,3 +1,6 @@
+## v7.1.4
+* Newtonsoft Json 9.0.1 dependency support.
+
 ## v7.1.3
 * :boom: .NET Core 1.0 RTM Support.
 

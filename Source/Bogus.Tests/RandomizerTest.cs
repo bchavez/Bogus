@@ -98,6 +98,12 @@ namespace Bogus.Tests
         {
             r.Bool().Should().BeFalse();
         }
+
+        [Test]
+        public void can_get_some_alpha_chars()
+        {
+            r.AlphaNumeric(20).Should().Be("l3tn1m1ohax6ql31pw1u");
+        }
     }
 
 

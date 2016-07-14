@@ -1,3 +1,9 @@
+## v7.1.5
+* Added `cz`/Czech locale
+* Updated `en`, `nl`, `pl`, `sk`, `sv` locales.
+* Realistic Dutch city naming
+* `Randomizer.AlphaNumeric` added.
+
 ## v7.1.4
 * Newtonsoft Json 9.0.1 dependency support.
 

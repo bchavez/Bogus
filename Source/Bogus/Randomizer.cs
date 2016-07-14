@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using Bogus.DataSets;
 using Bogus.Extensions;
@@ -300,6 +301,23 @@ namespace Bogus
         {
             var ele = ArrayElement(Database.Data.Value.Properties().ToArray()) as JProperty;
             return ele.Name;
+        }
+
+
+        private static char[] AlphaChars =
+            {
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y', 'z'
+            };
+        /// <summary>
+        /// Returns a random set of alpha numeric characters 0-9, a-z
+        /// </summary>
+        public string AlphaNumeric(int count)
+        {
+            var sb = new StringBuilder();
+            return Enumerable.Range(1, count).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
         }
     }
 

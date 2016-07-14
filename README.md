@@ -139,6 +139,7 @@ public void With_Korean_Locale()
 
 | Locale Code  | Language      |
 |:------------:|:-------------:|
+|`cz`          |Czech
 |`de`          |German
 |`de_AT`       |German (Austria)
 |`de_CH`       |German (Switzerland)

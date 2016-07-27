@@ -76,7 +76,7 @@ namespace Bogus
         public int Even(int min = 0, int max = 1)
         {
             var result = 0;
-            do
+            do //could do this better by just +1 or -1 if it's not an even/odd number
             {
                 result = Number(min, max);
             } while(result % 2 == 1);
@@ -91,7 +91,7 @@ namespace Bogus
         public int Odd(int min = 0, int max = 1)
         {
             int result = 0;
-            do
+            do //could do this better by just +1 or -1 if it's not an even/odd number
             {
                 result = Number(min, max);
             } while(result % 2 == 0);
@@ -100,17 +100,164 @@ namespace Bogus
 
 
         /// <summary>
-        /// Get a random double.
+        /// Get a random double, between 0.0 and 1.0.
         /// </summary>
-        /// <returns></returns>
-        public double Double()
+        /// <param name="min">Minimum, default 0.0</param>
+        /// <param name="max">Maximum, default 1.0</param>
+        public double Double(double min = 0.0d, double max = 1.0d)
         {
             //lock any seed access, for thread safety.
             lock(Locker.Value)
             {
-                return Seed.NextDouble();
+                if( min == 0.0d && max == 1.0d )
+                {
+                    //use default implementation
+                    return Seed.NextDouble();
+                }
+
+                return Seed.NextDouble() * (max - min) + min;
             }
         }
+
+        /// <summary>
+        /// Get a random decimal, between 0.0 and 1.0
+        /// </summary>
+        /// <param name="min">Minimum, default 0.0</param>
+        /// <param name="max">Maximum, default 1.0</param>
+        public decimal Decimal(decimal min = 0.0m, decimal max = 1.0m)
+        {
+            return Convert.ToDecimal(Double()) * (max - min) + min;
+        }
+
+        /// <summary>
+        /// Get a random float, between 0.0 and 1.0
+        /// </summary>
+        /// <param name="min">Minimum, default 0.0</param>
+        /// <param name="max">Maximum, default 1.0</param>
+        public float Float(float min = 0.0f, float max = 1.0f)
+        {
+            return Convert.ToSingle(Double()) * (max - min) + min;
+        }
+
+        /// <summary>
+        /// Generate a random byte between 0 and 255.
+        /// </summary>
+        /// <param name="min">Min value, default 0</param>
+        /// <param name="max">Max value, default 255</param>
+        public byte Byte(byte min = byte.MinValue, byte max = byte.MaxValue)
+        {
+            return Convert.ToByte(Number(min, max));
+        }
+
+        /// <summary>
+        /// Get a random sequence of bytes.
+        /// </summary>
+        /// <param name="count">The size of the byte array</param>
+        public byte[] Bytes(int count)
+        {
+            var arr = new byte[count];
+            lock( Locker.Value )
+            {
+                Seed.NextBytes(arr);
+            }
+            return arr;
+        }
+
+        /// <summary>
+        /// Generate a random sbyte between -128 and 127.
+        /// </summary>
+        /// <param name="min">Min value, default -128</param>
+        /// <param name="max">Max value, default 127</param>
+        public sbyte SByte(sbyte min = sbyte.MinValue, sbyte max = sbyte.MaxValue)
+        {
+            return Convert.ToSByte(Number(min, max));
+        }
+        
+        /// <summary>
+        /// Generate a random int between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public int Int(int min = int.MinValue, int max = int.MaxValue)
+        {
+            return Convert.ToInt32(Math.Abs(Double() * (max - min)) + min);
+        }
+
+        /// <summary>
+        /// Generate a random uint between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public uint UInt(uint min = uint.MinValue, uint max = uint.MaxValue)
+        {
+            return Convert.ToUInt32(Double() * (max - min) + min);
+        }
+
+        /// <summary>
+        /// Generate a random ulong between -128 and 127.
+        /// </summary>
+        /// <param name="min">Min value, default -128</param>
+        /// <param name="max">Max value, default 127</param>
+        public ulong ULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
+        {
+            return Convert.ToUInt64(Double() * (max - min) + min);
+        }
+        
+        /// <summary>
+        /// Generate a random long between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public long Long(long min = long.MinValue, long max = long.MaxValue)
+        {
+            return Convert.ToInt64(Math.Abs(Double() * (max - min)) + min);
+        }
+
+        /// <summary>
+        /// Generate a random short between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public short Short(short min = short.MinValue, short max = short.MaxValue)
+        {
+            return Convert.ToInt16(Math.Abs(Double() * (max - min)) + min);
+        }
+
+        /// <summary>
+        /// Generate a random ushort between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public ushort UShort(ushort min = ushort.MinValue, ushort max = ushort.MaxValue)
+        {
+            return Convert.ToUInt16(Double() * (max - min) + min);
+        }
+
+        /// <summary>
+        /// Generate a random char between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        public char Char(char min = char.MinValue, char max = char.MaxValue)
+        {
+            return Convert.ToChar(Number(min, max));
+        }
+
+        /// <summary>
+        /// Generate a random chars between MinValue and MaxValue.
+        /// </summary>
+        /// <param name="min">Min value, default MinValue</param>
+        /// <param name="max">Max value, default MaxValue</param>
+        /// <param name="count">The length of chars to return</param>
+        public char[] Chars(char min = char.MinValue, char max = char.MaxValue, int count = 5)
+        {
+            var arr = new char[count];
+            for(var i = 0; i < count; i++)
+                arr[i] = Char(min, max);
+            return arr;
+        }
+
+
 
         /// <summary>
         /// Get a random boolean

@@ -3,6 +3,8 @@
 * Updated `en`, `nl`, `pl`, `sk`, `sv` locales.
 * Realistic Dutch city naming
 * `Randomizer.AlphaNumeric` added.
+* `Randomizer.Double` now accepts `(min,max)` arguments
+* Added convenience `Randomizer` for random `Decimal`, `Float`, `Byte`, `Bytes`, `SByte`, `Int`, `UInt`, `ULong`, `Long`, `Short`, `UShort`, `Char` and `Chars`.
 
 ## v7.1.4
 * Newtonsoft Json 9.0.1 dependency support.

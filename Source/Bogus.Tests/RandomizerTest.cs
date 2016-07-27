@@ -4,7 +4,6 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using FluentAssertions;
 using NUnit.Framework;
-using Z.ExtensionMethods;
 
 namespace Bogus.Tests
 {

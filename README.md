@@ -21,8 +21,11 @@ Install-Package Bogus
 
 ##### Projects That Use Bogus
 
-* [**Elasticsearch (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
+* [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
+* [**RethinkDb.Driver**](https://github.com/bchavez/RethinkDb.Driver) C# database driver.
 
+##### Featured In
+* .NET Engineering Blog: NuGet Package of the week #1. - ["This week in .NET - 12/08/2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)
 
 
 Usage

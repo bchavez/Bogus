@@ -3,8 +3,14 @@ using System.Linq;
 
 namespace Bogus.DataSets
 {
+    /// <summary>
+    /// Methods relating to commerce.
+    /// </summary>
     public class Commerce : DataSet
     {
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public Commerce( string locale = "en" ) : base( locale )
         {
         }

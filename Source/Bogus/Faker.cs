@@ -34,6 +34,7 @@ namespace Bogus
             this.Name = new Name(locale);
             this.Phone = new PhoneNumbers(locale);
             this.System = new DataSets.System(locale);
+            this.Commerce = new Commerce(locale);
 
             this.Random = new Randomizer();
 
@@ -116,6 +117,11 @@ namespace Bogus
         /// Generate Internet stuff like Emails and UserNames.
         /// </summary>
         public Internet Internet { get; set; }
+
+        /// <summary>
+        /// Generates data related to commerce
+        /// </summary>
+        public Commerce Commerce { get; set; }
 
         /// <summary>
         /// Generates fake data for many computer systems properties

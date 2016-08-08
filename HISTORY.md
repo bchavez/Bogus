@@ -1,3 +1,6 @@
+## v7.1.6
+* Added `f => f.Commerce` on `Faker`.
+
 ## v7.1.5
 * Added `cz`/Czech locale
 * Updated `en`, `nl`, `pl`, `sk`, `sv` locales.

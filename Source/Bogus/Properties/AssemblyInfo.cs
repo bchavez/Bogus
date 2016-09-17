@@ -9,7 +9,7 @@ using System.Reflection;
 [assembly: AssemblyFileVersionAttribute("0.0.0")]
 [assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 7/14/2016 8:29:43 PM")]
 [assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
-[assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/RethinkDb.Driver")]
+[assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = "0.0.0";

@@ -155,7 +155,7 @@ let MakeBuildInfo (project: NugetProject) (folders : Folders) =
               Attribute.FileVersion BuildContext.Version
               Attribute.InformationalVersion infoVersion
               Attribute.Trademark "Apache License v2.0"
-              Attribute.Description "http://www.github.com/bchavez/RethinkDb.Driver"
+              Attribute.Description "http://www.github.com/bchavez/Bogus"
           ]
     CreateCSharpAssemblyInfo path attrs
 

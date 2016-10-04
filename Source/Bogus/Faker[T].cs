@@ -299,7 +299,6 @@ namespace Bogus
             {
                 var strictMode = Faker.DefaultStrictMode;
                 this.StrictModes.TryGetValue(rule, out strictMode);
-                if (!strictMode) continue;
 
                 HashSet<string> ignores;
                 this.Ignores.TryGetValue(rule, out ignores);
@@ -307,23 +306,20 @@ namespace Bogus
                 Dictionary<string, PopulateAction<T>> populateActions;
                 this.Actions.TryGetValue(rule, out populateActions);
 
-                if (strictMode)
-                {
-                    var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                    if (ignores != null)
-                        finalSet.UnionWith(ignores);
-                    if (populateActions != null)
-                        finalSet.UnionWith(populateActions.Keys);
+                var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                if (ignores != null)
+                    finalSet.UnionWith(ignores);
+                if (populateActions != null)
+                    finalSet.UnionWith(populateActions.Keys);
 
-                    if (!finalSet.SetEquals(propsOrFieldsOfT))
-                    {
-                        var delta = new List<string>();
-                        foreach (var propOrField in propsOrFieldsOfT)
-                            if (!finalSet.Contains(propOrField))
-                                delta.Add(propOrField);
-                        missingPropsOrFields = delta.ToArray();
-                        return false;
-                    }
+                if (!finalSet.SetEquals(propsOrFieldsOfT))
+                {
+                    var delta = new List<string>();
+                    foreach (var propOrField in propsOrFieldsOfT)
+                        if (!finalSet.Contains(propOrField))
+                            delta.Add(propOrField);
+                    missingPropsOrFields = delta.ToArray();
+                    return !strictMode || false;
                 }
             }
             return true;

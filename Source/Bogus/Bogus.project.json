@@ -4,5 +4,8 @@
   },
   "runtimes": {
     "win": {}
+  },
+  "dependencies": {
+    "Newtonsoft.Json": "6.0.8"
   }
 }

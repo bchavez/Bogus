@@ -15,7 +15,7 @@ namespace Bogus.Tests
     public class README_Generator
     {
         [Test]
-        [Ignore("paths not coherent on different machines")]
+        //[Ignore("paths not coherent on different machines")]
         public void get_available_methods()
         {
             var x = XElement.Load(@"Bogus.XML");
@@ -76,7 +76,7 @@ namespace Bogus.Tests
         }
 
         [Test]
-        [Ignore("paths not coherent on different machines")]
+        //[Ignore("paths not coherent on different machines")]
         public void get_all_locales()
         {
             var data = Database.Data.Value;
@@ -98,7 +98,6 @@ namespace Bogus.Tests
 
             //make sure # of embedded locales matches the number of imported on disk.
             count.Should().Be(Directory.GetFiles(@"..\..\..\Bogus\data", "*.locale.json").Length);
-            //count.Should().Be(Directory.GetFiles(@"Bogus\data", "*.locale.json").Length); // =
 
             Console.WriteLine(string.Join("\n", locales));
         }

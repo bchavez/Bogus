@@ -7,12 +7,12 @@ using System.Reflection;
 [assembly: AssemblyCopyrightAttribute("Brian Chavez © 2016")]
 [assembly: AssemblyVersionAttribute("0.0.0")]
 [assembly: AssemblyFileVersionAttribute("0.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 7/14/2016 8:29:43 PM")]
+[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 10/3/2016 3:53:14 PM")]
 [assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
 [assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const string Version = "0.0.0";
-        internal const string InformationalVersion = "0.0.0-localbuild built on 7/14/2016 8:29:43 PM";
+        internal const string InformationalVersion = "0.0.0-localbuild built on 10/3/2016 3:53:14 PM";
     }
 }

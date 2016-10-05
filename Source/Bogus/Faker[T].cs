@@ -215,8 +215,9 @@ namespace Bogus
             if (!IsValid.HasValue)
             {
                 //run validation
-                this.IsValid = ValidateInternal(ruleSets);
+                this.IsValid = ValidateInternal(ruleSets).IsValid;
             }
+
             if (!IsValid.GetValueOrDefault())
             {
                 throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have different number of actions rules. Also, check RuleSets.");
@@ -266,34 +267,36 @@ namespace Bogus
         /// <returns>True if validation passes, false otherwise.</returns>
         public virtual bool Validate(string ruleSets = null)
         {
-            var missingPropsOrFields = default(string[]);
-            return Validate(out missingPropsOrFields, ruleSets);
+            var rules = ruleSets == null
+                ? this.Actions.Keys.ToArray()
+                : ParseDirtyRulesSets(ruleSets);
+            var result = ValidateInternal(rules);
+            return result.IsValid;
         }
 
         /// <summary>
-        /// Checks if all properties have rules.
+        /// Checks if all properties have rules. In case of lack of rules an exception will be raised
+        /// with complete list of missing rules. Very useful in tests for fast forward fixing of 
+        /// missing rules
         /// </summary>
+        /// <exception cref="MissingFieldException"/>
         /// <param name="ruleSets"></param>
-        /// <param name="missingPropsOrFields">missing properties or fields output array</param>
-        /// <returns>True if validation pases, false otherwise.</returns>
-        public virtual bool Validate(out string[] missingPropsOrFields, string ruleSets = null)
+        public virtual void AssertConfigurationIsValid(string ruleSets = null)
         {
             var rules = ruleSets == null
                 ? this.Actions.Keys.ToArray()
                 : ParseDirtyRulesSets(ruleSets);
-
-            return ValidateInternal(out missingPropsOrFields, rules);
+            var result = ValidateInternal(rules);
+            if (!result.IsValid)
+            {
+                throw new MissingFieldException($"missing rules for: \n==================\n\n{string.Join("\n", result.MissingRules)}\n");
+            }
         }
 
-        private bool ValidateInternal(string[] ruleSets)
+        private ValidationResult ValidateInternal(string[] ruleSets)
         {
-            var missingPropsOrFields = default(string[]);
-            return ValidateInternal(out missingPropsOrFields, ruleSets);
-        }
+            var result = new ValidationResult { IsValid = true };
 
-        private bool ValidateInternal(out string[] missingPropsOrFields, string[] ruleSets)
-        {
-            missingPropsOrFields = new String[0];
             var propsOrFieldsOfT = this.TypeProperties.Keys;
             foreach (var rule in ruleSets)
             {
@@ -318,11 +321,11 @@ namespace Bogus
                     foreach (var propOrField in propsOrFieldsOfT)
                         if (!finalSet.Contains(propOrField))
                             delta.Add(propOrField);
-                    missingPropsOrFields = delta.ToArray();
-                    return !strictMode || false;
+                    result.MissingRules.AddRange(delta);
+                    result.IsValid = !strictMode;
                 }
             }
-            return true;
+            return result;
         }
 
         /// <summary>

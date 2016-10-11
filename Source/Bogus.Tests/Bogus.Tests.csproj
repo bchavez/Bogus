@@ -86,6 +86,7 @@
     <Compile Include="StrictModeTests.cs" />
     <Compile Include="SystemTest.cs" />
     <Compile Include="UniquenessTests.cs" />
+    <Compile Include="ValidationDeltaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bogus\Bogus.csproj">

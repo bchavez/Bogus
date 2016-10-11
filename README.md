@@ -461,5 +461,6 @@ A big thanks to GitHub and all contributors:
 * [Anrijs Vitolins](https://github.com/salixzs)
 * [Pi Lanningham](https://github.com/quantumplation)
 * [JvanderStad](https://github.com/JvanderStad)
+* [Giuseppe Dimauro](https://github.com/gdimauro)
 
 <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>

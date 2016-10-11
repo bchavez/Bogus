@@ -78,6 +78,12 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void can_get_a_random_ipv6_address()
+        {
+            internet.Ipv6().Should().Be("da23:9c4c:e0c4:2dd7:e3c4:a896:17f2:55b2");
+        }
+
+        [Test]
         public void can_get_html_color()
         {
             internet.Color().Should().Be("#4d0e68");

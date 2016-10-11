@@ -134,6 +134,16 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
+        /// Generates a random IPv6 address.
+        /// </summary>
+        /// <returns></returns>
+        public string Ipv6()
+        {
+            var bytes = Random.Bytes(16);
+            return $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
+        }
+
+        /// <summary>
         /// Gets a random mac address
         /// </summary>
         public string Mac()

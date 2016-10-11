@@ -15,7 +15,6 @@ namespace Bogus.Tests
     public class README_Generator
     {
         [Test]
-        //[Ignore("paths not coherent on different machines")]
         public void get_available_methods()
         {
             var x = XElement.Load(@"Bogus.XML");
@@ -57,7 +56,7 @@ namespace Bogus.Tests
             var datasets = typeof(DataSet).Assembly.ExportedTypes
                 .Where(t => typeof(DataSet).IsAssignableFrom(t) && t != typeof(DataSet))
                 .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
-                .Select(mi => new { dataset = mi.DeclaringType.Name, method = mi.Name })
+                .Select(mi => new {dataset = mi.DeclaringType.Name, method = mi.Name})
                 .GroupBy(g => g.dataset, u => u.method)
                 .ToDictionary(g => g.Key);
 
@@ -76,11 +75,12 @@ namespace Bogus.Tests
         }
 
         [Test]
-        //[Ignore("paths not coherent on different machines")]
         public void get_all_locales()
         {
             var data = Database.Data.Value;
+
             var locales = new List<string>();
+
             int count = 0;
 
             foreach (var prop in data.Properties().OrderBy(p => p.Name))
@@ -101,5 +101,7 @@ namespace Bogus.Tests
 
             Console.WriteLine(string.Join("\n", locales));
         }
+        
     }
+
 }

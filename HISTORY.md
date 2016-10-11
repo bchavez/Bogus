@@ -1,3 +1,7 @@
+## v7.1.7
+* `Faker<T>.AssertConfigurationIsValid` to help in unit testing scenarios.
+* 
+
 ## v7.1.6
 * Added `f => f.Commerce` on `Faker`.
 

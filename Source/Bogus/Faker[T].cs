@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Text;
 
 namespace Bogus
 {
@@ -215,7 +216,7 @@ namespace Bogus
             if( !IsValid.HasValue ) 
             {
                 //run validation
-                this.IsValid = ValidateInternal(ruleSets);
+                this.IsValid = ValidateInternal(ruleSets).IsValid;
             }
             if( !IsValid.GetValueOrDefault())
             {
@@ -262,44 +263,83 @@ namespace Bogus
         /// <summary>
         /// Checks if all properties have rules.
         /// </summary>
-        /// <returns>True if validation pases, false otherwise.</returns>
+        /// <param name="ruleSets"></param>
+        /// <returns>True if validation passes, false otherwise.</returns>
         public virtual bool Validate(string ruleSets = null)
         {
             var rules = ruleSets == null
                 ? this.Actions.Keys.ToArray()
                 : ParseDirtyRulesSets(ruleSets);
-
-            return ValidateInternal(rules);
+            var result = ValidateInternal(rules);
+            return result.IsValid;
         }
 
-        private bool ValidateInternal(string[] ruleSets)
+        /// <summary>
+        /// Asserts that all properties have rules. When StrictMode is enabled, an exception will be raised
+        /// with complete list of missing rules. Useful in unit tests for fast forward fixing of missing rules.
+        /// </summary>
+        /// <exception cref="ValidationException"/>
+        /// <param name="ruleSets"></param>
+        public virtual void AssertConfigurationIsValid(string ruleSets = null)
         {
+            var rules = ruleSets == null
+                ? this.Actions.Keys.ToArray()
+                : ParseDirtyRulesSets(ruleSets);
+            var result = ValidateInternal(rules);
+            if (!result.IsValid)
+            {
+                throw MakeValidationException(result);
+            }
+        }
+
+        private ValidationException MakeValidationException(ValidationResult result)
+        {
+            var message = new StringBuilder()
+                .AppendLine("Faker validation error. Validation was called to ensure all properties / fields have rules.")
+                .AppendLine($"There are missing rules for Faker<T> '{typeof(T).Name}'.")
+                .AppendLine("=========== Missing Rules ===========");
+
+            foreach( var fieldOrProp in result.MissingRules )
+            {
+                message.AppendLine(fieldOrProp);
+            }
+
+            return new ValidationException(message.ToString());
+        }
+
+        private ValidationResult ValidateInternal(string[] ruleSets)
+        {
+            var result = new ValidationResult { IsValid = true };
+
             var propsOrFieldsOfT = this.TypeProperties.Keys;
             foreach (var rule in ruleSets)
             {
                 var strictMode = Faker.DefaultStrictMode;
                 this.StrictModes.TryGetValue(rule, out strictMode);
-                if( !strictMode) continue;
-                
+
                 HashSet<string> ignores;
                 this.Ignores.TryGetValue(rule, out ignores);
 
                 Dictionary<string, PopulateAction<T>> populateActions;
                 this.Actions.TryGetValue(rule, out populateActions);
 
-                if( strictMode )
-                {
-                    var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                    if( ignores != null )
-                        finalSet.UnionWith(ignores);
-                    if( populateActions != null )
-                        finalSet.UnionWith(populateActions.Keys);
+                var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                if (ignores != null)
+                    finalSet.UnionWith(ignores);
+                if (populateActions != null)
+                    finalSet.UnionWith(populateActions.Keys);
 
-                    if( !finalSet.SetEquals(propsOrFieldsOfT) ) return false;
+                if (!finalSet.SetEquals(propsOrFieldsOfT))
+                {
+                    var delta = new List<string>();
+                    foreach (var propOrField in propsOrFieldsOfT)
+                        if (!finalSet.Contains(propOrField))
+                            delta.Add(propOrField);
+                    result.MissingRules.AddRange(delta);
+                    result.IsValid = !strictMode;
                 }
             }
-
-            return true;
+            return result;
         }
 
         /// <summary>

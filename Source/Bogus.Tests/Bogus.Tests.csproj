@@ -86,6 +86,7 @@
     <Compile Include="StrictModeTests.cs" />
     <Compile Include="SystemTest.cs" />
     <Compile Include="UniquenessTests.cs" />
+    <Compile Include="ValidationDeltaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bogus\Bogus.csproj">
@@ -95,7 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

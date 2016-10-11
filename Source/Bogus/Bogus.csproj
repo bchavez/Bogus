@@ -81,6 +81,7 @@
     <Compile Include="Rule.cs" />
     <Compile Include="Tokenizer.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ValidationResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\de.locale.json" />

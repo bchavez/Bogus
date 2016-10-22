@@ -122,6 +122,22 @@ namespace Bogus.Tests
             act.ShouldThrow<InvalidOperationException>();
         }
 
+        [Test]
+        public void should_be_able_to_override_existing_rules()
+        {
+            var testCustomers = new Faker<Customer>()
+                .RuleSet("Good",
+                    (set) =>
+                        {
+                            set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
+                            set.RuleFor(c => c.Description, f => "overridden");
+                        });
+
+            var results = testCustomers.Generate(5, "Good");
+
+            results.Should().OnlyContain(c => c.Description == "overridden");
+        }
+
 
     }
 

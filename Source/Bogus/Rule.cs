@@ -47,7 +47,7 @@ namespace Bogus
                 values = new Dictionary<Key2, Value>();
                 this.Add(key, values);
             }
-            values.Add(key2, value);
+            values[key2] = value;
         }
     }
     public class MultiSetDictionary<Key, Value> : Dictionary<Key, HashSet<Value>>

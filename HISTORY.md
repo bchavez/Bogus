@@ -1,3 +1,6 @@
+## v8.0.1
+* Allow `Faker<T>.RuleFor` rules to be overridden. Last set rule wins.
+
 ## v7.1.7
 * `Faker<T>.AssertConfigurationIsValid` to help in unit testing scenarios.
 * Add `Internet.Ipv6` method to generate IPv6 addresses.

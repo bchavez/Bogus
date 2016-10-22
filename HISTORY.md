@@ -1,4 +1,4 @@
-## v8.0.1
+## v8.0.1-beta-1
 * Allow `Faker<T>.RuleFor` rules to be overridden. Last set rule wins.
 
 ## v7.1.7

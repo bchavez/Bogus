@@ -172,6 +172,7 @@ public void With_Korean_Locale()
 |`nl`          |Dutch
 |`pl`          |Polish
 |`pt_BR`       |Portuguese (Brazil)
+|`pt_PT`       |Portuguese (Portugal)
 |`ru`          |Russian
 |`sk`          |Slovakian
 |`sv`          |Swedish

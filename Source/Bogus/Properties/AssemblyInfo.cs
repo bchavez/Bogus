@@ -7,12 +7,19 @@ using System.Reflection;
 [assembly: AssemblyCopyrightAttribute("Brian Chavez © 2016")]
 [assembly: AssemblyVersionAttribute("0.0.0")]
 [assembly: AssemblyFileVersionAttribute("0.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 7/14/2016 8:29:43 PM")]
+[assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 24/11/2016 22:44:53")]
 [assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
 [assembly: AssemblyDescriptionAttribute("http://www.github.com/bchavez/Bogus")]
 namespace System {
     internal static class AssemblyVersionInformation {
-        internal const string Version = "0.0.0";
-        internal const string InformationalVersion = "0.0.0-localbuild built on 7/14/2016 8:29:43 PM";
+        internal const System.String AssemblyTitle = "Bogus Fake Data Generator for .NET";
+        internal const System.String AssemblyProduct = "Bogus";
+        internal const System.String AssemblyCompany = "Brian Chavez";
+        internal const System.String AssemblyCopyright = "Brian Chavez © 2016";
+        internal const System.String AssemblyVersion = "0.0.0";
+        internal const System.String AssemblyFileVersion = "0.0.0";
+        internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 24/11/2016 22:44:53";
+        internal const System.String AssemblyTrademark = "Apache License v2.0";
+        internal const System.String AssemblyDescription = "http://www.github.com/bchavez/Bogus";
     }
 }

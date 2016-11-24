@@ -22,7 +22,7 @@
     "owners": [
       "Brian Chavez"
     ],
-    "releaseNotes": "",
+    "releaseNotes": "## v8.0.1-beta-1\r\n* Allow `Faker<T>.RuleFor` rules to be overridden. Last set rule wins.\r\n\r\n## v7.1.7\r\n* `Faker<T>.AssertConfigurationIsValid` to help in unit testing scenarios.\r\n* Add `Internet.Ipv6` method to generate IPv6 addresses.\r\n\r\n## v7.1.6\r\n* Added `f => f.Commerce` on `Faker`.\r\n\r\n## v7.1.5\r\n* Added `cz`/Czech locale\r\n* Updated `en`, `nl`, `pl`, `sk`, `sv` locales.\r\n* Realistic Dutch city naming\r\n* `Randomizer.AlphaNumeric` added.\r\n* `Randomizer.Double` now accepts `(min,max)` arguments\r\n* Added convenience `Randomizer` for random `Decimal`, `Float`, `Byte`, `Bytes`, `SByte`, `Int`, `UInt`, `ULong`, `Long`, `Short`, `UShort`, `Char` and `Chars`.\r\n\r\n## v7.1.4\r\n* Newtonsoft Json 9.0.1 dependency support.\r\n\r\n\r\nFull History Here: https://github.com/bchavez/Bogus/blob/master/HISTORY.md",
     "iconUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png",
     "projectUrl": "https://github.com/bchavez/Bogus",
     "licenseUrl": "https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE",

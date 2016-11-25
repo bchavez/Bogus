@@ -1,3 +1,6 @@
+## v8.0.1
+* Added `pt_PT` Portuguese (Portugal) locale. 
+
 ## v8.0.1-beta-1
 * Allow `Faker<T>.RuleFor` rules to be overridden. Last set rule wins.
 

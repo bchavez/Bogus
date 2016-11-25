@@ -83,7 +83,7 @@ namespace Bogus.Tests
         [Test]
         public void can_get_random_locale()
         {
-            r.RandomLocale().Should().Be("ru");
+            r.RandomLocale().Should().Be("sk");
         }
 
         [Test]

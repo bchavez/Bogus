@@ -125,6 +125,7 @@
     <EmbeddedResource Include="data\id_ID.locale.json" />
     <EmbeddedResource Include="data\lv.locale.json" />
     <EmbeddedResource Include="data\cz.locale.json" />
+    <EmbeddedResource Include="data\pt_PT.locale.json" />
     <None Include="project.json" />
     <None Include="Bogus.project.json" />
   </ItemGroup>

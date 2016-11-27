@@ -138,6 +138,23 @@ namespace Bogus.Tests
                 item.Value.Should().NotBeNullOrWhiteSpace();
             }
         }
+        public class Person
+        {
+            public int Id { get; set; }
+            public List<string> Phones { get; set; } // PROBLEM !!!
+        }
+
+        [Test]
+        public void issue_45_better_fluency()
+        {
+            var ids = 0;
+
+            var test = new Faker<Person>()
+                .RuleFor(p => p.Id, f => ids++)
+                .RuleFor(p => p.Phones, f => f.Generate(5, () => f.Phone.PhoneNumber()).ToList());
+
+            test.Generate(1).Dump();
+        }
 
         public class TestClass
         {

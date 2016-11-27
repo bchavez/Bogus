@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using Bogus.DataSets;
 using System = Bogus.DataSets.System;
+using System;
 
 namespace Bogus
 {
@@ -139,6 +140,14 @@ namespace Bogus
         public T PickRandom<T>(IEnumerable<T> items)
         {
             return this.Random.ArrayElement(items.ToArray());
+        }
+
+        /// <summary>
+        /// Helper method to call faker actions multiple times and return the result as IEnumerable
+        /// </summary>
+        public IEnumerable<T> Generate<T>(int count, Func<T> action)
+        {
+            return Enumerable.Range(1, count).Select(n => action());
         }
 
         /// <summary>

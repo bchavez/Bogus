@@ -1,3 +1,6 @@
+## v8.0.2
+* Added `f => f.Generate(count, ()=> f.Phone.PhoneNumber())` helper for better fluency when filling properties with `List` of `T`.
+
 ## v8.0.1
 * Added `pt_PT` Portuguese (Portugal) locale. 
 

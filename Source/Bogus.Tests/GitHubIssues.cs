@@ -138,7 +138,8 @@ namespace Bogus.Tests
                 item.Value.Should().NotBeNullOrWhiteSpace();
             }
         }
-        public class Person
+
+        public class Issue45Object
         {
             public int Id { get; set; }
             public List<string> Phones { get; set; } // PROBLEM !!!
@@ -149,11 +150,11 @@ namespace Bogus.Tests
         {
             var ids = 0;
 
-            var test = new Faker<Person>()
+            var test = new Faker<Issue45Object>()
                 .RuleFor(p => p.Id, f => ids++)
                 .RuleFor(p => p.Phones, f => f.Generate(5, () => f.Phone.PhoneNumber()).ToList());
 
-            test.Generate(1).Dump();
+            test.Generate(1).First().Phones.Count.Should().Be(5);
         }
 
         public class TestClass

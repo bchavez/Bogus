@@ -19,7 +19,7 @@ namespace Bogus
         /// </summary>
         public static Random Seed = new Random();
 
-        internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.PublicationOnly);
+        internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
         /// <summary>
         /// Get an int from 0 to max.

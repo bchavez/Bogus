@@ -1,4 +1,5 @@
 ## v8.0.2
+* Issue 46. Fixed threading deadlock situation with static faker initialization. Thanks Mpdreamz.
 * Added `f => f.Generate(count, ()=> f.Phone.PhoneNumber())` helper for better fluency when filling properties with `List` of `T`.
 
 ## v8.0.1

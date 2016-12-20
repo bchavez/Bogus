@@ -1,3 +1,6 @@
+## v8.0.3
+* New Feature: `RuleForType(typeof(string))` allows bulk/default for a particular type on a class. Useful for very large classes with a specific type.
+
 ## v8.0.2
 * Issue 46. Fixed threading deadlock situation with static faker initialization. Thanks Mpdreamz.
 * Added `f => f.Generate(count, ()=> f.Phone.PhoneNumber())` helper for better fluency when filling properties with `List` of `T`.

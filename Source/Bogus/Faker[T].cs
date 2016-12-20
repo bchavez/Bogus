@@ -78,16 +78,21 @@ namespace Bogus
         {
             var propName = PropertyName.For(property);
 
+            return RuleFor(propName, setter);
+        }
+
+        private Faker<T> RuleFor<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
+        {
             Func<Faker, T, object> invoker = (f, t) => setter(f);
 
             var rule = new PopulateAction<T>
-                {
-                    Action = invoker,
-                    RuleSet = currentRuleSet,
-                    PropertyName = propName,
-                };
+            {
+                Action = invoker,
+                RuleSet = currentRuleSet,
+                PropertyName = propertyOrField,
+            };
 
-            this.Actions.Add(currentRuleSet, propName, rule);
+            this.Actions.Add(currentRuleSet, propertyOrField, rule);
 
             return this;
         }
@@ -98,6 +103,45 @@ namespace Bogus
         public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
         {
             return RuleFor(property, (f) => valueFunction());
+        }
+
+        /// <summary>
+        /// Creates a rule for a type on a class
+        /// </summary>
+        public Faker<T> RuleForType<TType>(Type type, Func<Faker, TType> setterForType)
+        {
+            if( typeof(TType) != type )
+            {
+                throw new ArgumentException($"{nameof(TType)} must be the same type as parameter named '{nameof(type)}'");
+            }
+
+            foreach( var kvp in this.TypeProperties)
+            {
+                var propOrFieldType = GetFieldOrPropertyType(kvp.Value);
+                var propOrFieldName = kvp.Key;
+
+                if ( propOrFieldType == type )
+                {
+                    RuleFor(propOrFieldName, setterForType);
+                }
+            }
+
+            return this;
+        }
+
+        private Type GetFieldOrPropertyType(MemberInfo mi)
+        {
+            var pi = mi as PropertyInfo;
+            if( pi != null )
+            {
+                return pi.PropertyType;
+            }
+            var fi = mi as FieldInfo;
+            if( fi != null )
+            {
+                return fi.FieldType;
+            }
+            return null;
         }
 
         /// <summary>

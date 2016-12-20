@@ -150,6 +150,46 @@ namespace Bogus.Tests
             fake.Item.Should().BeNull();
         }
 
+        [Test]
+        public void Can_Define_Rule_By_Type()
+        {
+            var faker = new Faker<Issue47>()
+                .RuleForType(typeof(string), f => f.Random.Word());
+
+            var fake = faker.Generate();
+
+            fake.Dump();
+
+            fake.Bake.Should().NotBeNullOrEmpty();
+            fake.Make.Should().NotBeNullOrEmpty();
+            fake.Fake.Should().NotBeNullOrEmpty();
+            fake.Bar.Should().NotBeNullOrEmpty();
+            fake.Foo.Should().NotBeNullOrEmpty();
+            fake.Baz.Should().NotBeNullOrEmpty();
+        }
+
+        [Test]
+        public void Should_Throw_Exception_If_RuleForType_Types_Dont_Match()
+        {
+            Action action = () =>
+                {
+                    var faker = new Faker<Issue47>()
+                        .RuleForType(typeof(int), f => f.Random.Word());
+                };
+
+            action.ShouldThrow<ArgumentException>();
+        }
+
+        public class Issue47
+        {
+            public string Foo { get; set; }
+            public string Bar { get; set; }
+            public string Baz { get; set; }
+            public string Bake;
+            public string Make;
+            public string Fake;
+        }
+
         public class Order
         {
             public int OrderId { get; set; }

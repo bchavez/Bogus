@@ -143,6 +143,30 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Helper to pick random subset of elements out of the list.
+        /// </summary>
+        /// <param name="amountToPick">amount of elements to pick of the list.</param>
+        /// <example cref="ArgumentException">if amountToPick is lower than zero.</example>
+        /// <returns></returns>
+        public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int amountToPick)
+        {
+            if(amountToPick < 0)
+                throw new ArgumentException("amountToPick needs to be a positive integer");
+            var size = items.Count();
+            foreach (var item in items)
+            {
+                if(amountToPick <= 0)
+                    yield break;
+                if (Random.Int(1, size) <= amountToPick)
+                {
+                    amountToPick--;
+                    yield return item;
+                }
+                size--;
+            }
+        }
+
+        /// <summary>
         /// Helper method to call faker actions multiple times and return the result as IEnumerable
         /// </summary>
         public IEnumerable<T> Generate<T>(int count, Func<T> action)

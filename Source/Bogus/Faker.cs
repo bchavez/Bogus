@@ -147,7 +147,6 @@ namespace Bogus
         /// </summary>
         /// <param name="amountToPick">amount of elements to pick of the list.</param>
         /// <example cref="ArgumentException">if amountToPick is lower than zero.</example>
-        /// <returns></returns>
         public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int amountToPick)
         {
             if(amountToPick < 0)
@@ -157,7 +156,7 @@ namespace Bogus
             {
                 if(amountToPick <= 0)
                     yield break;
-                if (Random.Int(1, size) <= amountToPick)
+                if (this.Random.Int(1, size) <= amountToPick)
                 {
                     amountToPick--;
                     yield return item;

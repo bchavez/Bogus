@@ -25,7 +25,9 @@ namespace Bogus
 
         private static void RegisterMustashMethods()
         {
-            MustashMethods = typeof(Faker).GetProperties().SelectMany(p =>
+            MustashMethods = typeof(Faker).GetProperties()
+                .Where(p => Attribute.IsDefined(p, typeof(RegisterMustasheMethodsAttribute)))
+                .SelectMany(p =>
                 {
                     return p.PropertyType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
                         .Where(mi =>
@@ -39,12 +41,15 @@ namespace Bogus
                                 }
                                 return false;
                             })
-                        //.Where(mi => Attribute.IsDefined(mi, typeof(MustasheAttribute)))
-                        .Select(mi => new MustashMethod
+                        .Select(mi =>
                             {
-                                Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
-                                Method = mi,
-                                OptionalArgs = Enumerable.Repeat(Type.Missing, mi.GetParameters().Length).ToArray()
+                                var mm = new MustashMethod
+                                    {
+                                        Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
+                                        Method = mi,
+                                        OptionalArgs = Enumerable.Repeat(Type.Missing, mi.GetParameters().Length).ToArray()
+                                    };
+                                return mm;
                             });
                 }).ToDictionary(mm => mm.Name);
         }
@@ -121,5 +126,10 @@ namespace Bogus
 
             return expr;
         }
+    }
+
+    [AttributeUsage((AttributeTargets.Property))]
+    internal class RegisterMustasheMethodsAttribute : Attribute
+    {
     }
 }

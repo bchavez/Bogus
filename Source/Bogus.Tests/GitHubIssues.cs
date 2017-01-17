@@ -183,6 +183,46 @@ namespace Bogus.Tests
             test.Generate(1).First().Phones.Count.Should().Be(5);
         }
 
+        [Test]
+        public void issue_48()
+        {
+            Faker<Issue48Client> clients = new Faker<Issue48Client>()
+                .RuleFor(x => x.Description, y => y.Lorem.Paragraphs(1));
+            var users = new List<Issue48User>();
+
+            users.AddRange(
+                new Faker<Issue48User>()
+                    .RuleFor(x => x.Name, y =>
+                        {
+                            var i = y.IndexFaker;
+                            i.Dump();
+                            return new[] {"John", "Mary", "Mike", "Tom"}[i % 4];
+                        })
+                    .RuleFor(x => x.Email, (y, x) => $"{x.Name}@xyz.com".Replace(" ", "").ToLower())
+                    .RuleFor(x => x.Client, y => y.Random.Bool() ? clients.Generate(1).First() : null)
+                    .RuleFor(x => x.UserName, (y, x) => x.Email)
+                    .Generate(4).ToList()
+                    );
+
+            users.Dump();
+
+
+            users.Select(f => f.Name).ToList().Should().Equal("John", "Mary", "Mike", "Tom");
+        }
+
+        public class Issue48User
+        {
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public Issue48Client Client { get; set; }
+            public string UserName { get; set; }
+        }
+
+        public class Issue48Client
+        {
+            public string Description
+            { get; set; }
+        }
         public class DerivedFaker : Faker<Issue55Object>
         {
             public DerivedFaker()
@@ -208,38 +248,7 @@ namespace Bogus.Tests
             var fakes = derivedFaker.Generate(5);
         }
 
-        [Test]
-        public void issue_57_unique_index_not_really_unique_in_parentchild_generation()
-        {
 
-            var childFaker = new Faker<Issue57Child>()
-                .RuleFor(u => u.Id, f => f.UniqueIndex);
-
-            var parentFaker = new Faker<Issue57Parent>()
-                .RuleFor(u => u.Id, f => f.UniqueIndex)
-                .RuleFor(u => u.Child, f => childFaker.Generate());
-
-            var ids = parentFaker.Generate(3).Select(o => new {o.Id, CId = o.Child.Id})
-                .ToList();
-            
-            var allIds = ids.SelectMany(x => new[] {x.Id, x.CId}).ToList();
-
-            ids.Dump();
-            allIds.Dump();
-
-            allIds.Distinct().Count().Should().Be(6);
-
-        }
-        public class Issue57Parent
-        {
-            public int Id { get; set; }
-            public Issue57Child Child { get; set; }
-        }
-
-        public class Issue57Child
-        {
-            public int Id { get; set; }
-        }
 
 
         public class Issue55Object

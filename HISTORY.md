@@ -1,3 +1,6 @@
+## v8.0.4
+* New Feature: Added `PickRandom(IEnumerable)` overload. Thanks joleharkes.
+
 ## v8.0.3
 * New Feature: `RuleForType(typeof(string))` allows bulk/default for a particular type on a class. Useful for very large classes with a specific type.
 

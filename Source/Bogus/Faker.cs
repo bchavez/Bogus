@@ -149,14 +149,23 @@ namespace Bogus
         /// <example cref="ArgumentException">if amountToPick is lower than zero.</example>
         public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int amountToPick)
         {
-            if(amountToPick < 0)
-                throw new ArgumentException("amountToPick needs to be a positive integer");
-            var size = items.Count();
-            foreach (var item in items)
+            if( amountToPick < 0 )
             {
-                if(amountToPick <= 0)
+                throw new ArgumentOutOfRangeException($"{nameof(amountToPick)} needs to be a positive integer.");
+            }
+            var size = items.Count();
+            if( amountToPick > size )
+            {
+                throw new ArgumentOutOfRangeException($"{nameof(amountToPick)} is greater than the number of items.");
+            }
+
+            foreach( var item in items )
+            {
+                if( amountToPick <= 0 )
+                {
                     yield break;
-                if (this.Random.Int(1, size) <= amountToPick)
+                }
+                if( this.Random.Int(1, size) <= amountToPick )
                 {
                     amountToPick--;
                     yield return item;

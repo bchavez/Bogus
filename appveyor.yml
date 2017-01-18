@@ -1,5 +1,9 @@
 version: '{build}'
 
+environment:
+  SNKFILE_SECRET: #SecretDatabase.kdbx / OpenSource / Bogus.snk.enc
+    secure: Bce2VwNFEBM1oWspgNlpTXSH290GZmc5DCuxjnAX72nBWNbR0S2tq/odIdfv2+t3bA9xzFHEwqvjGVEWgg5ZdfWUYj+PSBr+con0PiUGng0=
+
 skip_commits:
   message: /(//skip\W*ci)|(read\W*me)/
 

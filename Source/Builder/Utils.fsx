@@ -13,6 +13,7 @@
 
 open Fake
 open AssemblyInfoFile
+open Fake.AppVeyor
 
 module BuildContext =     
 
@@ -37,7 +38,8 @@ module BuildContext =
 
     let Version = WithoutPreReleaseName FullVersion
 
-        
+    let IsTaggedBuild =
+        AppVeyorEnvironment.RepoTag
 
 
 open System
@@ -82,6 +84,9 @@ module Setup =
     type Projects(projectName : string, folders : Folders) = 
         let solutionFile = folders.Source @@ sprintf "%s.sln" projectName
         let globalJson = folders.Source @@ "global.json"
+        let snkFile = folders.Source @@ sprintf "%s.snk" projectName
+        let snkFilePublic = folders.Source @@ sprintf "%s.snk.pub" projectName 
+
         let dnvmVersion = 
             let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
             json?sdk?version.AsString()
@@ -89,9 +94,8 @@ module Setup =
         member this.SolutionFile = solutionFile
         member this.GlobalJson = globalJson
         member this.DnvmVersion = dnvmVersion
-
-
-    
+        member this.SnkFile = snkFile
+        member this.SnkFilePublic = snkFilePublic
 
 
 open Setup
@@ -139,12 +143,31 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     member this.Title = assemblyTitle
 
 
+let ReadFileAsHexString file =
+    let bytes = ReadFileAsBytes file
+    let sb = new System.Text.StringBuilder()
+    let toHex (b : byte)=
+        b.ToString("x2")
+        
+    let acc = bytes 
+                |> Array.fold (fun (acc:System.Text.StringBuilder) b -> 
+                    acc.Append(toHex b)
+                ) sb
+    acc.ToString()
 
+type BuildInfoParams = { DateTime:System.DateTime; ExtraAttrs:list<AssemblyInfoFile.Attribute> }
 
-let MakeBuildInfo (project: NugetProject) (folders : Folders) = 
+let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams = 
+    
+    let bip : BuildInfoParams = { 
+                                    DateTime = System.DateTime.UtcNow
+                                    ExtraAttrs = []
+                                } |> setParams
+    
     let path = folders.Source @@ project.Name @@ "/Properties/AssemblyInfo.cs"
-    let infoVersion = sprintf "%s built on %s" BuildContext.FullVersion (System.DateTime.UtcNow.ToString())
-    let copyright = sprintf "Brian Chavez © %i" (System.DateTime.UtcNow.Year)
+    let infoVersion = sprintf "%s built on %s" BuildContext.FullVersion (bip.DateTime.ToString())
+    let copyright = sprintf "Brian Chavez © %i" (bip.DateTime.Year)
+
     let attrs = 
           [
               Attribute.Title project.Title
@@ -155,9 +178,9 @@ let MakeBuildInfo (project: NugetProject) (folders : Folders) =
               Attribute.FileVersion BuildContext.Version
               Attribute.InformationalVersion infoVersion
               Attribute.Trademark "Apache License v2.0"
-              Attribute.Description "http://www.github.com/bchavez/Bogus"
           ]
-    CreateCSharpAssemblyInfo path attrs
+
+    CreateCSharpAssemblyInfo path (attrs @ bip.ExtraAttrs)
 
 
 open System.Reflection
@@ -236,14 +259,23 @@ module Helpers =
     open FSharp.Data
     open FSharp.Data.JsonExtensions
 
-    let shellExec cmdPath args target = 
+    let shellExec cmdPath args workingDir = 
         let result = ExecProcess (
                       fun info ->
                         info.FileName <- cmdPath
-                        info.WorkingDirectory <- target
+                        info.WorkingDirectory <- workingDir
                         info.Arguments <- args
                       ) System.TimeSpan.MaxValue
         if result <> 0 then failwith (sprintf "'%s' failed" cmdPath + " " + args)
+
+    let shellExecSecret cmdPath args workingDir = 
+        let ok = directExec (
+                      fun info ->
+                        info.FileName <- cmdPath
+                        info.WorkingDirectory <- workingDir
+                        info.Arguments <- args
+                      )
+        if not ok then failwith (sprintf "'%s' failed" cmdPath)
 
     let findOnPath name = 
         let executable = tryFindFileOnPath name
@@ -251,6 +283,15 @@ module Helpers =
             | Some exec -> exec
             | None -> failwith (sprintf "'%s' can't find" name)
 
+    let encryptFile file secret =
+        let secureFile = findToolInSubPath "secure-file.exe" "."
+        let args = sprintf "-encrypt %s -secret %s" file secret
+        shellExecSecret secureFile args "."
+
+    let decryptFile file secret =
+        let secureFile = findToolInSubPath "secure-file.exe" "."
+        let args = sprintf "-decrypt %s.enc -secret %s" file secret
+        shellExecSecret secureFile args "."
   
     let dotnet args workingDir = 
         let executable = findOnPath "dotnet.exe"

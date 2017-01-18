@@ -11,6 +11,10 @@ paket.lock
 .paket/paket.exe
 __test
 
+/__package
+/__compile
+/Source/Bogus.snk
+
 Source/Builder/node_modules/**
 
 # User-specific files
@@ -162,7 +166,5 @@ $RECYCLE.BIN/
 
 # Mac crap
 .DS_Store
-/Source/Coinbase.Tests/App.config
 /nuget.push.bat
-/__package
-/__compile
+

@@ -1,3 +1,6 @@
+## v9.0.1
+* New Feature: Bogus is now a signed assembly; PublicToken: fa1bb3f3f218129a
+
 ## v8.0.4
 * New Feature: Added `PickRandom(IEnumerable)` overload. Thanks joleharkes.
 

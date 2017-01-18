@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyAttributes.cs" />
     <Compile Include="Binder.cs" />
     <Compile Include="DataCategoryAttribute.cs" />
     <Compile Include="DataSet.cs" />

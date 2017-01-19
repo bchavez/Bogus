@@ -106,6 +106,15 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Not Implemented: This method only exists as a work around for Visual Studio IntelliSense. See: https://github.com/bchavez/Bogus/issues/54
+        /// </summary>
+        [Obsolete("This exists here only as a Visual Studio IntelliSense work around. See: https://github.com/bchavez/Bogus/issues/54", true)]
+        public void RuleFor<TProperty>(Expression<Func<T, TProperty>> property)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Creates a rule for a type on a class
         /// </summary>
         public Faker<T> RuleForType<TType>(Type type, Func<Faker, TType> setterForType)

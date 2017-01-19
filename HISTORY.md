@@ -1,3 +1,6 @@
+## v9.0.2
+* Bug: Issue 54: Work around for Visual Studio IntelliSense.
+
 ## v9.0.1
 * New Feature: Bogus is now a signed assembly; PublicToken: fa1bb3f3f218129a
 

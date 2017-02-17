@@ -28,6 +28,20 @@ namespace Bogus
 #pragma warning restore 1591
 
         /// <summary>
+        /// Creates a Faker with default 'en' locale.
+        /// </summary>
+        public Faker() : this("en", null)
+        {
+        }
+        
+        /// <summary>
+        /// Creates a Faker with a locale
+        /// </summary>
+        public Faker(string locale) : this(locale, null)
+        {
+        }
+
+        /// <summary>
         /// Creates a Faker with a locale.
         /// </summary>
         /// <param name="locale">language</param>

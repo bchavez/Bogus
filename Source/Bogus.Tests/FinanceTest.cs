@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using Bogus.DataSets;
 using FluentAssertions;
@@ -35,6 +36,12 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void get_random_amount_with_zero_decimals()
+        {
+            finance.Amount(decimals: 0).Should().Be(604);
+        }
+
+        [Test]
         public void get_random_amount_with_options()
         {
             var val = finance.Amount(200, 300, 3);
@@ -58,6 +65,20 @@ namespace Bogus.Tests
         public void can_generate_a_random_bitcoin_address()
         {
             finance.BitcoinAddress().Dump();
+        }
+
+        [Test]
+        public void can_generate_iban()
+        {
+            finance.Iban().Should().Be("MT78CVQA0491707AV6092536EZ69UM5");
+
+            finance.Iban(true).Should().Be("BH95 LCFH 2236 87QH UU47 F6");
+        }
+
+        [Test]
+        public void can_generate_bic()
+        {
+            finance.Bic().Should().Be("CVQAMUB1");
         }
     }
 }

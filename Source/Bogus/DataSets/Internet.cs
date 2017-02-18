@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using Bogus.Vendor;
 
 namespace Bogus.DataSets
 {
@@ -22,6 +24,7 @@ namespace Bogus.DataSets
         public Internet(string locale = "en") : base(locale)
         {
             this.Name = new Name(locale);
+            this.userAgentGenerator = new UserAgentGenerator( () => this.Random);
         }
 
         /// <summary>
@@ -143,6 +146,16 @@ namespace Bogus.DataSets
             return $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
         }
 
+        private UserAgentGenerator userAgentGenerator;
+
+        /// <summary>
+        /// Generates a random user agent.
+        /// </summary>
+        public string UserAgent()
+        {
+            return userAgentGenerator.Generate();
+        }
+
         /// <summary>
         /// Gets a random mac address
         /// </summary>
@@ -156,6 +169,50 @@ namespace Bogus.DataSets
             return string.Join(":", arr);
         }
 
+        /// <summary>
+        /// Generates a random password.
+        /// </summary>
+        /// <param name="length">Length of the password.</param>
+        /// <param name="memorable">A memorable password (ie: all lower case).</param>
+        /// <param name="regexPattern">Regex pattern that the password should follow.</param>
+        /// <param name="prefix">Password prefix.</param>
+        public string Password(int length = 10, bool memorable = false, string regexPattern = "\\w", string prefix = "" )
+        {
+            string consonant, vowel;
+            vowel = "[aeiouAEIOU]$";
+            consonant = "[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]";
+
+            string c;
+            int n;
+
+            if (prefix.Length >= length)
+            {
+                return prefix;
+            }
+            if (memorable)
+            {
+                if (Regex.IsMatch(prefix, consonant))
+                {
+                    regexPattern = vowel;
+                }
+                else
+                {
+                    regexPattern = consonant;
+                }
+            }
+            n = this.Random.Number(32, 126); //ascii
+            c = Convert.ToChar(n).ToString();
+            if (memorable)
+            {
+                c = c.ToLower();
+            }
+            if (!Regex.IsMatch(c, regexPattern))
+            {
+                return Password(length, memorable, regexPattern, prefix);
+            }
+            return Password(length, memorable, regexPattern, "" + prefix + c);
+
+        }
 
         /// <summary>
         /// Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).

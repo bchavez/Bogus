@@ -47,6 +47,7 @@ namespace Bogus.DataSets
             filename = filename.Replace(",", "_");
             filename = filename.Replace("-", "_");
             filename = filename.Replace(@"\", "_");
+            filename = filename.Replace("/", "_");
             filename = filename.ToLower().Trim();
             return filename;
         }
@@ -59,6 +60,7 @@ namespace Bogus.DataSets
             filename = filename.Replace(",", "_");
             filename = filename.Replace("-", "_");
             filename = filename.Replace(@"\", "_");
+            filename = filename.Replace("/", "_");
             filename = filename.ToLower().Trim();
             return filename;
         }

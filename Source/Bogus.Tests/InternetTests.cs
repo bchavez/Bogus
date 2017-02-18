@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using NUnit.Framework;
@@ -102,6 +103,25 @@ namespace Bogus.Tests
             
             email.Should().EndWith("@example.com");
             email.GetBefore("@").Should().Contain(".");
+        }
+
+        [Test]
+        public void can_generate_a_password()
+        {
+            var pw = internet.Password();
+            pw.Should().Be("YmaMy0eWbv");
+
+            var pw2 = internet.Password(regexPattern: @"\W");
+            pw2.Should().Be(@""">({=*`/{]");
+        }
+
+
+        [Test]
+        public void can_pick_random_browser()
+        {
+            Enumerable.Range(1, 200).Select(
+                    i => internet.UserAgent())
+                .Dump();
         }
     }
 }

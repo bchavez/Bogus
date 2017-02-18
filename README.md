@@ -142,6 +142,7 @@ public void With_Korean_Locale()
 
 | Locale Code  | Language      |
 |:------------:|:-------------:|
+|`az`          |Azerbaijani
 |`cz`          |Czech
 |`de`          |German
 |`de_AT`       |German (Austria)
@@ -248,6 +249,11 @@ public void Without_Fluent_Syntax()
 	* `CompanyName` - Get a company name. The format can use any name.* and company.* methods.
 	* `CatchPhrase` - Get a company catch phrase.
 	* `Bs` - Get a company BS phrase.
+* **`Database`**
+	* `Column` - Generates a column name.
+	* `Type` - Generates a column type.
+	* `Collation` - Generates a collation.
+	* `Engine` - Generates a storage engine.
 * **`Date`**
 	* `Past` - Get a date in the past between refDate and years past that date.
 	* `Future` - Get a date in the future between refDate and years forward of that date.
@@ -264,6 +270,8 @@ public void Without_Fluent_Syntax()
 	* `Currency` - Get a random currency.
 	* `CreditCardNumber` - Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
 	* `BitcoinAddress` - Generates a random bitcoin address
+	* `Bic` - Generates Bank Identifier Code (BIC) code.
+	* `Iban` - Generates an International Bank Account Number (IBAN).
 * **`Hacker`**
 	* `Abbreviation` - Returns an abbreviation.
 	* `Adjective` - Returns a adjective.
@@ -286,6 +294,7 @@ public void Without_Fluent_Syntax()
 	* `Sports` - Gets an image related to sports.
 	* `Technics` - Get a technology related image.
 	* `Transport` - Get a transportation related image.
+	* `DataUri` - Get a SVG data URI image with a specific width and height.
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
@@ -295,15 +304,20 @@ public void Without_Fluent_Syntax()
 	* `DomainWord` - Generates a domain word used for domain names.
 	* `DomainSuffix` - Generates a domain name suffix like .com, .net, .org
 	* `Ip` - Gets a random IP address.
+	* `Ipv6` - Generates a random IPv6 address.
+	* `UserAgent` - Generates a random user agent.
 	* `Mac` - Gets a random mac address
+	* `Password` - Generates a random password.
 	* `Color` - Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
 	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
 	* `Url` - Generates a random URL.
 * **`Lorem`**
+	* `Word` - Get a random lorem word.
 	* `Words` - Get some lorem words
 	* `Letter` - Get a character letter.
 	* `Sentence` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
             If you want a sustenance with 5 words always call Sentence(5, range: 0);
+	* `Slug` - Slugify lorem words.
 	* `Sentences` - Get some sentences.
 	* `Paragraph` - Get a paragraph.
 	* `Paragraphs` - Get some paragraphs with tabs n all.

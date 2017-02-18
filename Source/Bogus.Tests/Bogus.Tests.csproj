@@ -65,6 +65,7 @@
     <Compile Include="CardTests.cs" />
     <Compile Include="CommerceTest.cs" />
     <Compile Include="CompanyTest.cs" />
+    <Compile Include="DatabaseTests.cs" />
     <Compile Include="DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FinanceTest.cs" />

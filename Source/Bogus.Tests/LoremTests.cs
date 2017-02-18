@@ -110,5 +110,11 @@ namespace Bogus.Tests
         {
             lorem.Lines().Split(" ").Length.Should().BeGreaterThan(5);
         }
+
+        [Test]
+        public void can_slugify_lorem()
+        {
+            lorem.Slug(5).Should().Be("id-aut-vel-facilis-aperiam");
+        }
     }
 }

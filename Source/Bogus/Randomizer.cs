@@ -317,6 +317,13 @@ namespace Bogus
             return array[r].ToString();
         }
 
+        internal T ArrayElement<T>(JArray array)
+        {
+            var r = Number(max: array.Count - 1);
+
+            return array[r].ToObject<T>();
+        }
+
         /// <summary>
         /// Replaces symbols with numbers. IE: ### -> 283
         /// </summary>
@@ -466,6 +473,37 @@ namespace Bogus
             var sb = new StringBuilder();
             return Enumerable.Range(1, count).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
         }
+
+        //items are weighted by the decimal probability in their value
+        /// <summary>
+        /// Returns a selection of T[] based on a weighted distribution of probability
+        /// </summary>
+        /// <param name="items">Items to draw the selection from.</param>
+        /// <param name="weights">Weights in decimal form: ie:[.25, .50, .25] for total of 3 items. Should add up to 1.</param>
+        public T WeightedRandom<T>(T[] items, float[] weights)
+        {
+            if (weights.Length != items.Length) throw new ArgumentOutOfRangeException($"{nameof(items)}.Length and {nameof(weights)}.Length must be the same.");
+
+            var rand = this.Float();
+            float max;
+            float min = 0f;
+
+            var item = default(T);
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                max = min + weights[i];
+                item = items[i];
+                if (rand >= min && rand <= max)
+                {
+                    break;
+                }
+                min = min + weights[i];
+            }
+
+            return item;
+        }
+
     }
 
     public static class WordFunctions

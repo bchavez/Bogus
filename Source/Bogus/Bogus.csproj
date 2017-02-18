@@ -52,6 +52,7 @@
     <Compile Include="DataSets\Commerce.cs" />
     <Compile Include="DataSets\Company.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="DataSets\Database.cs" />
     <Compile Include="DataSets\Date.cs" />
     <Compile Include="DataSets\Images.cs" />
     <Compile Include="DataSets\System.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ValidationException.cs" />
     <Compile Include="ValidationResult.cs" />
+    <Compile Include="Vendor\UserAgentGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\de.locale.json" />
@@ -125,6 +127,7 @@
     <EmbeddedResource Include="data\lv.locale.json" />
     <EmbeddedResource Include="data\cz.locale.json" />
     <EmbeddedResource Include="data\pt_PT.locale.json" />
+    <EmbeddedResource Include="data\az.locale.json" />
     <None Include="project.json" />
     <None Include="Bogus.project.json" />
   </ItemGroup>

@@ -16,6 +16,9 @@ namespace Bogus.DataSets
         {
         }
 
+        /// <summary>
+        /// Get a random lorem word.
+        /// </summary>
         public string Word()
         {
             return this.GetRandomArrayItem("words");
@@ -59,6 +62,16 @@ namespace Bogus.DataSets
 
             var sentence = string.Join(" ", Words(wc));
             return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";
+        }
+
+        /// <summary>
+        /// Slugify lorem words.
+        /// </summary>
+        /// <param name="wordcount"></param>
+        public string Slug(int wordcount = 3)
+        {
+            var words = Words(wordcount);
+            return Utils.Slugify(string.Join(" ", words));
         }
 
         /// <summary>

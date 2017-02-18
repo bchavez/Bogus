@@ -15,7 +15,7 @@ namespace Bogus
         /// </summary>
         public static string Slugify(string txt)
         {
-            var str = txt.Replace(" ", "");
+            var str = txt.Replace(" ", "-");
             return Regex.Replace(str, @"[^\w\.\-]+", "");
         }
 

@@ -1,3 +1,17 @@
+## v10.0.1
+* `Internet.UserAgent` - Generates browser user agent strings.
+* `Internet.Password` - Generates user passwords using regex.
+* Added `az`/Azerbaijani locale.
+* Disallow `/` character in `System.FileName`.
+* `Helpers.Slugify` properly replaces spaces with `-` dashes.
+* `Lorem.Slug` slugs some lorem text.
+* `Finance.Iban` - Generates International Bank Account Numbers (IBAN).
+* `Finance.Bic` - Generates Bank Identifier Code (BIC) codes.
+* `Random.WeightedRandom` - Returns a weighted random distribution of items.
+* Allow `https://` in random images.
+* `Images.DataUri` - Generates "data:image/svg" URI with width and height.
+* `Database` data set for generating column, collation, type stuff.
+
 ## v9.0.2
 * Bug: Issue 54: Work around for Visual Studio IntelliSense.
 

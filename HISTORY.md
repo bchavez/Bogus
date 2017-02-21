@@ -4,6 +4,8 @@
 * Added `IndexVariable` a developer controlled index convenience variable. 
 * Added `Database` dataset to `f => f.Database` facade.
 * Fixed Issue 57 - Avoid unexpected behavior with Parent-Child generators using `UniqueIndex`.
+* Removed some `Internet.Avatars` that returned 404.
+* Reached feature/data parity with `faker.js` v4.1.0.
 
 ## v10.0.1
 * `Internet.UserAgent` - Generates browser user agent strings.

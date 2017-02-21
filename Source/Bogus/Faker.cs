@@ -154,6 +154,7 @@ namespace Bogus
         /// <summary>
         /// Generates fake database things.
         /// </summary>
+        [RegisterMustasheMethods]
         public DataSets.Database Database { get; set; }
 
         /// <summary>

@@ -208,6 +208,40 @@ namespace Bogus.Tests
             var fakes = derivedFaker.Generate(5);
         }
 
+        [Test]
+        public void issue_57_unique_index_not_really_unique_in_parentchild_generation()
+        {
+
+            var childFaker = new Faker<Issue57Child>()
+                .RuleFor(u => u.Id, f => f.UniqueIndex);
+
+            var parentFaker = new Faker<Issue57Parent>()
+                .RuleFor(u => u.Id, f => f.UniqueIndex)
+                .RuleFor(u => u.Child, f => childFaker.Generate());
+
+            var ids = parentFaker.Generate(3).Select(o => new {o.Id, CId = o.Child.Id})
+                .ToList();
+            
+            var allIds = ids.SelectMany(x => new[] {x.Id, x.CId}).ToList();
+
+            ids.Dump();
+            allIds.Dump();
+
+            allIds.Distinct().Count().Should().Be(6);
+
+        }
+        public class Issue57Parent
+        {
+            public int Id { get; set; }
+            public Issue57Child Child { get; set; }
+        }
+
+        public class Issue57Child
+        {
+            public int Id { get; set; }
+        }
+
+
         public class Issue55Object
         {
             public string Code { get; set; }

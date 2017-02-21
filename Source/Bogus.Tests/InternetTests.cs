@@ -23,7 +23,7 @@ namespace Bogus.Tests
         {
             var avatar = internet.Avatar();
 
-            avatar.Should().Be("https://s3.amazonaws.com/uifaces/faces/twitter/demersdesigns/128.jpg");
+            avatar.Should().Be("https://s3.amazonaws.com/uifaces/faces/twitter/nasirwd/128.jpg");
         }
 
         [Test]

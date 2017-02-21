@@ -1,4 +1,4 @@
-## v10.0.2
+## v11.0.1
 * Added `IndexGlobal` alias for `UniqueIndex`.
 * Added `IndexFaker` for uniqueness in Faker[T] lifetime.
 * Added `IndexVariable` a developer controlled index convenience variable. 

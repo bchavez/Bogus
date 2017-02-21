@@ -26,7 +26,7 @@ namespace Bogus
         private static void RegisterMustashMethods()
         {
             MustashMethods = typeof(Faker).GetProperties()
-                .Where(p => Attribute.IsDefined(p, typeof(RegisterMustasheMethodsAttribute)))
+                .Where(p => p.IsDefined(typeof(RegisterMustasheMethodsAttribute), true))
                 .SelectMany(p =>
                 {
                     return p.PropertyType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)

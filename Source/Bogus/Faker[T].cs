@@ -294,7 +294,11 @@ namespace Bogus
 
             lock( Randomizer.Locker.Value )
             {
-                foreach( var ruleSet in ruleSets )
+                //Issue 57 - Make sure you generate a new context
+                //before executing any rules.
+                FakerHub.NewContext();
+
+                foreach ( var ruleSet in ruleSets )
                 {
                     Dictionary<string, PopulateAction<T>> populateActions;
                     if( this.Actions.TryGetValue(ruleSet, out populateActions) )
@@ -322,8 +326,6 @@ namespace Bogus
                         finalizer.Action(this.FakerHub, instance);
                     }
                 }
-
-                FakerHub.NewContext();
             }
         }
 

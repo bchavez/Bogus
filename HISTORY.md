@@ -1,3 +1,10 @@
+## v10.0.2
+* Added `IndexGlobal` alias for `UniqueIndex`.
+* Added `IndexFaker` for uniqueness in Faker[T] lifetime.
+* Added `IndexVariable` a developer controlled index convenience variable. 
+* Added `Database` dataset to `f => f.Database` facade.
+* Fixed Issue 57 - Avoid unexpected behavior with Parent-Child generators using `UniqueIndex`.
+
 ## v10.0.1
 * `Internet.UserAgent` - Generates browser user agent strings.
 * `Internet.Password` - Generates user passwords using regex.

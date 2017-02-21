@@ -19,7 +19,7 @@ namespace Bogus.Tests
         [SetUp]
         public void BeforeEachTest()
         {
-            Faker.GlobalUniqueIndex = 0;
+            Faker.GlobalUniqueIndex = -1;
         }
 
         [Test]
@@ -29,13 +29,13 @@ namespace Bogus.Tests
                 .RuleFor(u => u.FirstName, f => f.Person.FirstName)
                 .RuleFor(u => u.LastName, f => f.Person.LastName)
                 .RuleFor(u => u.Email, f => f.Person.Email)
-                .RuleFor(u => u.Username, f => f.UniqueIndex + f.Person.UserName);
+                .RuleFor(u => u.Username, f => f.IndexGlobal + f.Person.UserName);
 
             var fakes = faker.Generate(10).ToList();
 
             fakes.Dump();
 
-            faker.FakerHub.UniqueIndex.Should().Be(10);
+            faker.FakerHub.IndexGlobal.Should().Be(9);
 
             var values = fakes
                 .Select(u => u.Username.Left(1).ToInt32())
@@ -47,11 +47,12 @@ namespace Bogus.Tests
 
             morefakes.Dump();
 
-            faker.FakerHub.UniqueIndex.Should().Be(13);
+            faker.FakerHub.IndexGlobal.Should().Be(12);
         }
 
         public class Video
         {
+            public int Index { get; set; }
             public string VideoId { get; set; }
             public string Summary { get; set; }
         }
@@ -60,7 +61,8 @@ namespace Bogus.Tests
         public void should_be_able_to_create_some_hash_ids()
         { 
             var faker = new Faker<Video>()
-                .RuleFor(v => v.VideoId, f => f.Hashids.EncodeLong(f.UniqueIndex))
+                .RuleFor( v => v.Index, f => f.IndexGlobal)
+                .RuleFor(v => v.VideoId, f => f.Hashids.EncodeLong(f.IndexGlobal))
                 .RuleFor(v => v.Summary, f => f.Lorem.Sentence());
 
             var fakes = faker.Generate(5).ToList();
@@ -85,6 +87,96 @@ namespace Bogus.Tests
 
             fakes.Dump();
         }
+
+
+        [Test]
+        public void should_be_able_to_drive_internal_index()
+        {
+            var faker = new Faker<User>()
+                .RuleFor(u => u.FirstName, f => f.Name.FirstName())
+                .RuleFor(u => u.LastName, f => new[] {"A", "B", "C", "D"}[ f.IndexFaker % 4]);
+            var fakes = faker.Generate(5).ToList();
+
+            fakes.Dump();
+
+            fakes.Select(f => f.LastName).ToList().Should().Equal("A", "B", "C", "D", "A");
+        }
+
+        [Test]
+        public void issue_57_unique_index_not_really_unique_in_parentchild_generation()
+        {
+            var childFaker = new Faker<Issue57Child>()
+                .RuleFor(u => u.Id, f => f.IndexGlobal);
+
+            var parentFaker = new Faker<Issue57Parent>()
+                .RuleFor(u => u.Id, f => f.IndexGlobal)
+                .RuleFor(u => u.Child, f => childFaker.Generate());
+            
+            var ids = parentFaker.Generate(3).Select(o => new { o.Id, CId = o.Child.Id })
+                .ToList();
+
+            var allIds = ids.SelectMany(x => new[] { x.Id, x.CId }).ToList();
+
+            ids.Dump();
+            allIds.Dump();
+
+            allIds.Distinct().Count().Should().Be(6);
+           }
+
+        [Test]
+        public void issue_57_reordering_rules_shouldn_matter()
+        {
+            var childFaker = new Faker<Issue57Child>()
+                .RuleFor(u => u.Id, f => f.IndexGlobal);
+
+            var parentFaker = new Faker<Issue57Parent>()
+                .RuleFor(u => u.Child, f => childFaker.Generate())
+                .RuleFor(u => u.Id, f => f.IndexGlobal);
+
+            var ids = parentFaker.Generate(3).Select(o => new { o.Id, CId = o.Child.Id })
+                .ToList();
+
+            var allIds = ids.SelectMany(x => new[] { x.Id, x.CId }).ToList();
+
+            ids.Dump();
+            allIds.Dump();
+
+            allIds.Distinct().Count().Should().Be(6);
+        }
+        
+        public class Issue57Parent
+        {
+            public int Id { get; set; }
+            public Issue57Child Child { get; set; }
+        }
+
+        public class Issue57Child
+        {
+            public int Id { get; set; }
+        }
+
+        [Test]
+        public void should_be_able_to_control_indexvariable()
+        {
+            var childFaker = new Faker<Issue57Child>()
+                .RuleFor(u => u.Id, f => f.IndexVariable++ + 50);
+
+
+            var parentFaker = new Faker<Issue57Parent>()
+                .RuleFor(u => u.Child, f => childFaker.Generate())
+                .RuleFor(u => u.Id, f => f.IndexVariable++);
+
+            var ids = parentFaker.Generate(3).Select(o => new { o.Id, CId = o.Child.Id })
+                .ToList();
+
+            var allIds = ids.SelectMany(x => new[] { x.Id, x.CId }).ToList();
+
+            ids.Dump();
+            allIds.Dump();
+
+            allIds.Distinct().Count().Should().Be(6);
+        }
+
 
     }
 }

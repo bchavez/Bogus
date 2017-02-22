@@ -17,7 +17,9 @@ namespace Bogus.Tests
         [Test]
         public void get_available_methods()
         {
-            var x = XElement.Load(@"Bogus.XML");
+            var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var bogusXml = Path.Combine(workingDir, "Bogus.XML");
+            var x = XElement.Load(bogusXml);
             var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
 
             var all = json.SelectTokens("doc.members.member").SelectMany(jt => jt)
@@ -97,7 +99,9 @@ namespace Bogus.Tests
             }
 
             //make sure # of embedded locales matches the number of imported on disk.
-            count.Should().Be(Directory.GetFiles(@"..\..\..\Bogus\data", "*.locale.json").Length);
+            var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var dataDir = Path.Combine(workingDir, @"..\..\..\Bogus\data");
+            count.Should().Be(Directory.GetFiles(dataDir, "*.locale.json").Length);
 
             Console.WriteLine(string.Join("\n", locales));
         }

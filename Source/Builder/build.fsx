@@ -16,6 +16,7 @@ open Fake
 open Utils
 open System.Reflection
 open Helpers
+open Fake.Testing.NUnit3
 
 let workingDir = ChangeWorkingFolder();
 
@@ -146,13 +147,14 @@ Target "Clean" (fun _ ->
 
 let RunTests() =
     CreateDir Folders.Test
-    let nunit = findToolInSubPath "nunit-console.exe" Folders.Lib
+    let nunit = findToolInSubPath "nunit3-console.exe" Folders.Lib
     let nunitFolder = System.IO.Path.GetDirectoryName(nunit)
 
     !! TestProject.TestAssembly
-    |> NUnit (fun p -> { p with 
-                            ToolPath = nunitFolder
-                            OutputFile = Files.TestResultFile
+    |> NUnit3 (fun p -> { p with 
+                            ProcessModel = NUnit3ProcessModel.SingleProcessModel
+                            ToolPath = nunit
+                            ResultSpecs = [Files.TestResultFile]
                             ErrorLevel = TestRunnerErrorLevel.Error }) 
 
 
@@ -170,7 +172,7 @@ Target "test" (fun _ ->
 Target "citest" (fun _ ->
     trace "CI TEST"
     RunTests()
-    UploadTestResultsXml TestResultsType.NUnit Folders.Test
+    UploadTestResultsXml TestResultsType.NUnit3 Folders.Test
 )
 
 

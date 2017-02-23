@@ -28,6 +28,11 @@ namespace Bogus
 #pragma warning restore 1591
 
         /// <summary>
+        /// The current locale.
+        /// </summary>
+        public string Locale { get; set; }
+
+        /// <summary>
         /// Creates a Faker with default 'en' locale.
         /// </summary>
         public Faker() : this("en", null)
@@ -411,9 +416,13 @@ namespace Bogus
             return result;
         }
 
+
         /// <summary>
-        /// The current locale.
+        /// Provides implicit type conversion from Faker[T] to T. IE: Order testOrder = faker;
         /// </summary>
-        public string Locale { get; set; }
+        public static implicit operator T(Faker<T> faker)
+        {
+            return faker.Generate();
+        }
     }
 }

@@ -1,3 +1,6 @@
+## v11.0.2
+* New Feature: Allow implicit and explicit type casts: `Order o = orderFaker` and `var o = (Order)orderFaker` without having to call `orderFaker.Generate()`.
+
 ## v11.0.1
 * Added `IndexGlobal` alias for `UniqueIndex`.
 * Added `IndexFaker` for uniqueness in Faker[T] lifetime.

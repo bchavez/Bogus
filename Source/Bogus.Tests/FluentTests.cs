@@ -180,6 +180,36 @@ namespace Bogus.Tests
             action.ShouldThrow<ArgumentException>();
         }
 
+        [Test]
+        public void implicit_operator_test()
+        {
+            var orderFaker = new Faker<Order>()
+                .RuleFor(o => o.OrderId, f => f.IndexVariable++)
+                .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
+                .RuleFor(o => o.Item, f => f.Commerce.Product());
+
+            Order testOrder1 = orderFaker;
+            Order testOrder2 = orderFaker;
+            Order testOrder3 = orderFaker;
+
+            testOrder1.Dump();
+            testOrder2.Dump();
+            testOrder3.Dump();
+
+            var threeOrders = new[] {testOrder1, testOrder2, testOrder3};
+            threeOrders.Select(o => o.Item).Should().ContainInOrder("Computer", "Tuna", "Soap");
+            threeOrders.Select(o => o.Quantity).Should().ContainInOrder(2, 3, 1);
+
+            var testOrders = Enumerable.Range(1, 3)
+                .Select(x => (Order)orderFaker)
+                .ToArray();
+
+            testOrders.Dump();
+
+            testOrders.Select(o => o.Item).Should().ContainInOrder("Chicken", "Gloves", "Mouse");
+            testOrders.Select(o => o.Quantity).Should().ContainInOrder(1, 2, 3);
+        }
+
         public class Issue47
         {
             public string Foo { get; set; }
@@ -195,6 +225,7 @@ namespace Bogus.Tests
             public int OrderId { get; set; }
             public string Item { get; set; }
             public int Quantity { get; set; }
+
         }
 
         public enum Gender

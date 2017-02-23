@@ -1,15 +1,15 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple and Sane Fake Data Generator for .NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus)
-<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' /> 
+[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple and Sane Fake Data Generator for .NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus) <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 Bogus for .NET/C#
 ======================
 
 Project Description
 -------------------
-A simple and sane fake data generator for C# and .NET. Bogus is a C# port of [faker.js](https://github.com/marak/Faker.js/)
-and inspired by FluentValidation's syntax sugar.
+Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). Bogus is a simple and sane fake data generator for C# and .NET. Bogus is a C# port of [`faker.js`](https://github.com/marak/Faker.js/)
+and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentValidation)'s syntax sugar.
 
-**Bogus** will help you load databases, UI and apps with fake data for your testing needs.
+**Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile:
 
 
 ### Download & Install
@@ -433,6 +433,30 @@ public void Handlebar()
 */
 ```
 
+#### Implicit and Explicit Type Conversion
+You can also use implicit type conversion to make your code look cleaner.
+
+```csharp
+var orderFaker = new Faker<Order>()
+                     .RuleFor(o => o.OrderId, f => f.IndexVariable++)
+                     .RuleFor(o => o.Item, f => f.Commerce.Product())
+                     .RuleFor(o => o.Quantity, f => f.Random.Number(1,3));
+
+Order testOrder = orderFaker;
+testOrder.Dump();
+
+/* OUTPUT:
+{
+  "OrderId": 0,
+  "Item": "Computer",
+  "Quantity": 2
+}
+*/
+
+//Explicit works too!
+var anotherOrder = (Order)orderFaker;
+```
+
 Building
 --------
 * Download the source code.
@@ -478,4 +502,4 @@ A big thanks to GitHub and all contributors:
 * [JvanderStad](https://github.com/JvanderStad)
 * [Giuseppe Dimauro](https://github.com/gdimauro)
 
-<a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
+

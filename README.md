@@ -434,7 +434,7 @@ public void Handlebar()
 ```
 
 #### Implicit and Explicit Type Conversion
-You can also use implicit type conversion to make your code look cleaner.
+You can also use implicit type conversion to make your code look cleaner without having to explicitly call `Faker<T>.Generate()`.
 
 ```csharp
 var orderFaker = new Faker<Order>()
@@ -442,14 +442,21 @@ var orderFaker = new Faker<Order>()
                      .RuleFor(o => o.Item, f => f.Commerce.Product())
                      .RuleFor(o => o.Quantity, f => f.Random.Number(1,3));
 
-Order testOrder = orderFaker;
-testOrder.Dump();
+Order testOrder1 = orderFaker;
+Order testOrder2 = orderFaker;
+testOrder1.Dump();
+testOrder2.Dump();
 
 /* OUTPUT:
 {
   "OrderId": 0,
   "Item": "Computer",
   "Quantity": 2
+}
+{
+  "OrderId": 1,
+  "Item": "Tuna",
+  "Quantity": 3
 }
 */
 

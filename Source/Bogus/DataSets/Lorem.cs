@@ -50,15 +50,17 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
-        /// If you want a sustenance with 5 words always call Sentence(5, range: 0);
+        /// Get a random sentence of specific number of words. 
         /// </summary>
-        /// <param name="wordCountunt">Minimum word count</param>
-        /// <param name="range">Plus, add extra number of words ranging from 0 to range</param>
-        /// <returns></returns>
-        public string Sentence(int? wordCount = null)
+        /// <param name="wordCount">Get a sentence with wordCount words. Defaults between 3 and 10</param>
+        /// <param name="range">Add anywhere between 0 to 'range' additional words to wordCount. Default is 0.</param>
+        public string Sentence(int? wordCount = null, int? range = 0)
         {
             var wc = wordCount ?? this.Random.Number(3, 10);
+            if( range > 0 )
+            {
+                wc += this.Random.Number(range.Value);
+            }
 
             var sentence = string.Join(" ", Words(wc));
             return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";

@@ -65,6 +65,12 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void can_get_a_setnance_with_range_option()
+        {
+            lorem.Sentence(10, 5).Split(' ').Length.Should().Be(13);
+        }
+
+        [Test]
         public void can_get_a_paragraph()
         {
             lorem.Paragraph()

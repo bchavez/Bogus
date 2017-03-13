@@ -1,3 +1,6 @@
+## v11.0.3
+* Added range option to `Sentence`.
+
 ## v11.0.2
 * New Feature: Allow implicit and explicit type casts: `Order o = orderFaker` and `var o = (Order)orderFaker` without having to call `orderFaker.Generate()`.
 

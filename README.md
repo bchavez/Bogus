@@ -315,8 +315,7 @@ public void Without_Fluent_Syntax()
 	* `Word` - Get a random lorem word.
 	* `Words` - Get some lorem words
 	* `Letter` - Get a character letter.
-	* `Sentence` - Get a random sentence. Default minimum of 3 words but at most 10 words (range = 7).
-            If you want a sustenance with 5 words always call Sentence(5, range: 0);
+	* `Sentence` - Get a random sentence of specific number of words.
 	* `Slug` - Slugify lorem words.
 	* `Sentences` - Get some sentences.
 	* `Paragraph` - Get a paragraph.

@@ -259,12 +259,18 @@ namespace Bogus.Tests
             public List<Order> Orders { get; set; }
         }
 
+        [Test]
+        public void just_want_to_set_a_value()
+        {
+            var faker = new Faker<Order>()
+                .RuleFor(o => o.OrderId, 25)
+                .RuleFor(o => o.Item, "foo");
 
+            faker.Generate().OrderId.Should().Be(25);
+            faker.Generate().Item.Should().Be("foo");
+
+        }
 
     }
-
-
-
-
 
 }

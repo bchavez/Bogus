@@ -1,3 +1,6 @@
+## v11.0.4
+* Added `.RuleFor(x.Item, "foo")`. Eliminates ceremony of `f =>` for simple values.
+
 ## v11.0.3
 * Added range option to `Sentence`.
 

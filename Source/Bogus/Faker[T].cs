@@ -93,6 +93,14 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a property.
         /// </summary>
+        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
+        {
+            return RuleFor(property, f => value);
+        }
+
+        /// <summary>
+        /// Creates a rule for a property.
+        /// </summary>
         public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter )
         {
             var propName = PropertyName.For(property);

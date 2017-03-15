@@ -47,5 +47,10 @@ namespace Bogus
         /// Action is invoked after all the rules are applied.
         /// </summary>
         Faker<T> FinishWith(Action<Faker, T> action);
+
+        /// <summary>
+        /// Creates a rule for a property.
+        /// </summary>
+        Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
     }
 }

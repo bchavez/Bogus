@@ -86,11 +86,11 @@ namespace Bogus.Vendor
         private const string BrowserUsageJson =
             @"
     {
-        chrome:    .45132810566,
-        iexplorer: .27477061836,
-        firefox:   .19384170608,
-        safari:    .06186781118,
-        opera:     .01574236955
+        'chrome':    0.45132810566,
+        'iexplorer': 0.27477061836,
+        'firefox':   0.19384170608,
+        'safari':    0.06186781118,
+        'opera':     0.01574236955
     }";
 
         private static readonly JObject BrowserUsage = JObject.Parse(BrowserUsageJson);
@@ -100,11 +100,11 @@ namespace Bogus.Vendor
         private const string BrowserOsUsageJson =
             @"
 {
-        chrome:  {win: .89,  mac: .09 , lin: .02},
-        firefox: {win: .83,  mac: .16,  lin: .01},
-        opera:   {win: .91,  mac: .03 , lin: .06},
-        safari:  {win: .04 , mac: .96  },
-        iexplorer: {'win': 1}
+        'chrome':  {'win': 0.89, 'mac': 0.09, 'lin': 0.02},
+        'firefox': {'win': 0.83, 'mac': 0.16, 'lin': 0.01},
+        'opera':   {'win': 0.91, 'mac': 0.03, 'lin': 0.06},
+        'safari':  {'win': 0.04, 'mac': 0.96  },
+        'iexplorer':  {'win': 1}
 }
 ";
         private static readonly JObject BrowserOsUsage = JObject.Parse(BrowserOsUsageJson);
@@ -124,9 +124,9 @@ namespace Bogus.Vendor
 
         private const string ProcJson = @"
     {
-        lin: {'i686':   .50, 'x86_64':  .50 },
-        mac: {'Intel':  .48, 'PPC':     .01, 'U; Intel':  .48, 'U; PPC':  .01},
-        win: {'':       .33, 'WOW64':   .33, 'Win64; x64':.33}
+        lin: {'i686':   0.50, 'x86_64':  0.50 },
+        mac: {'Intel':  0.48, 'PPC':     0.01, 'U; Intel':  0.48, 'U; PPC':  0.01},
+        win: {'':       0.33, 'WOW64':   0.33, 'Win64; x64':0.33}
     }
 ";
         private static readonly JObject Proc = JObject.Parse(ProcJson);

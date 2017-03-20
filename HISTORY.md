@@ -1,3 +1,6 @@
+## v11.0.5
+* Compatibility with `Newtonsoft.Json` v10.0.1
+
 ## v11.0.4
 * Added `.RuleFor(x.Item, "foo")`. Eliminates ceremony of `f =>` for simple values.
 

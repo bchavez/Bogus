@@ -1,3 +1,6 @@
+## v12.0.1
+* PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.  
+
 ## v11.0.5
 * Compatibility with `Newtonsoft.Json` v10.0.1
 

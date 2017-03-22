@@ -162,7 +162,7 @@ namespace Bogus.Tests
 
             var picked = f.PickRandom(items, 4).ToArray();
             picked.Dump();
-            picked.Should().Equal(2, 5, 7, 9);
+            picked.Should().Equal(7, 2, 9, 8);
         }
 
         public class Issue45Object

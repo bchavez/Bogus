@@ -181,20 +181,7 @@ namespace Bogus
             {
                 throw new ArgumentOutOfRangeException($"{nameof(amountToPick)} is greater than the number of items.");
             }
-
-            foreach( var item in items )
-            {
-                if( amountToPick <= 0 )
-                {
-                    yield break;
-                }
-                if( this.Random.Int(1, size) <= amountToPick )
-                {
-                    amountToPick--;
-                    yield return item;
-                }
-                size--;
-            }
+            return this.Random.Shuffle(items).Take(amountToPick);
         }
 
         /// <summary>

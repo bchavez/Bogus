@@ -1,5 +1,6 @@
 ## v12.0.1
-* PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.  
+* PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.
+* Added `"string".ClampLength(max,min)` extension method to clamp length of strings between min and max.  
 
 ## v11.0.5
 * Compatibility with `Newtonsoft.Json` v10.0.1

@@ -70,7 +70,13 @@
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="FinanceTest.cs" />
     <Compile Include="FluentTests.cs" />
-    <Compile Include="GitHubIssues.cs" />
+    <Compile Include="GitHubIssues\Issue10.cs" />
+    <Compile Include="GitHubIssues\Issue13.cs" />
+    <Compile Include="GitHubIssues\Issue23.cs" />
+    <Compile Include="GitHubIssues\Issue45.cs" />
+    <Compile Include="GitHubIssues\Issue48.cs" />
+    <Compile Include="GitHubIssues\Issue49.cs" />
+    <Compile Include="GitHubIssues\Issue55.cs" />
     <Compile Include="HackerFixture.cs" />
     <Compile Include="HandleBarTests.cs" />
     <Compile Include="ImageTest.cs" />

@@ -62,6 +62,7 @@
     <Compile Include="Extensions\ExtensionsForCanada.cs" />
     <Compile Include="Extensions\ExtensionsForDenmark.cs" />
     <Compile Include="Extensions\ExtensionsForFinland.cs" />
+    <Compile Include="Extensions\ExtensionsForString.cs" />
     <Compile Include="Extensions\ExtensionsForUnitedStates.cs" />
     <Compile Include="Faker.cs" />
     <Compile Include="DataSets\Finance.cs" />

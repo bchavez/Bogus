@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Bogus.DataSets;
+using Bogus.Extensions;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -208,6 +209,17 @@ namespace Bogus.Tests
 
             testOrders.Select(o => o.Item).Should().ContainInOrder("Chicken", "Gloves", "Mouse");
             testOrders.Select(o => o.Quantity).Should().ContainInOrder(1, 2, 3);
+        }
+
+        [Test]
+        public void can_clamp_string_length()
+        {
+            var c = new Company();
+
+            var cnames = Enumerable.Range(1, 200).Select(i => c.CompanyName(0).ClampLength(12, 15));
+
+            cnames.Any(name => name.EndsWith(" ")).Should().BeFalse();
+            cnames.Dump();
         }
 
         public class Issue47

@@ -180,7 +180,7 @@ namespace Bogus
         /// <param name="max">Max value, default MaxValue</param>
         public int Int(int min = int.MinValue, int max = int.MaxValue)
         {
-            return Convert.ToInt32(Math.Abs(Double() * (max - min)) + min);
+            return this.Number(min, max);
         }
 
         /// <summary>
@@ -210,7 +210,8 @@ namespace Bogus
         /// <param name="max">Max value, default MaxValue</param>
         public long Long(long min = long.MinValue, long max = long.MaxValue)
         {
-            return Convert.ToInt64(Math.Abs(Double() * (max - min)) + min);
+            var range = (decimal)max - min; //use more bits?
+            return Convert.ToInt64((decimal)Double() * range + min);
         }
 
         /// <summary>
@@ -220,7 +221,7 @@ namespace Bogus
         /// <param name="max">Max value, default MaxValue</param>
         public short Short(short min = short.MinValue, short max = short.MaxValue)
         {
-            return Convert.ToInt16(Math.Abs(Double() * (max - min)) + min);
+            return Convert.ToInt16(Double() * (max - min) + min);
         }
 
         /// <summary>

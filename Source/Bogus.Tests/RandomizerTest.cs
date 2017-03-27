@@ -58,7 +58,7 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void can_get_a_random_word()
+        public void can_get_random_word()
         {
             r.Word().Should().Be("Court");
             r.Word().Should().Be("bluetooth");
@@ -106,26 +106,26 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void generate_a_double_with_min_and_max()
+        public void generate_double_with_min_and_max()
         {
             r.Double(2.5, 2.9).Should().BeInRange(2.74140891332244, 2.74140891332246);
         }
 
         [Test]
-        public void generate_a_decimal_with_min_and_max()
+        public void generate_decimal_with_min_and_max()
         {
             r.Decimal(2.2m, 5.2m).Should().Be(4.0105668499183690m);
         }
 
         [Test]
-        public void generate_a_float_with_min_and_max()
+        public void generate_float_with_min_and_max()
         {
             r.Float(2.7f, 3.9f).Should().BeInRange(3.424226f, 3.424228f);
 
         }
 
         [Test]
-        public void generate_a_byte()
+        public void generate_byte()
         {
             r.Byte(1, 128).Should().Be(78);
         }
@@ -138,49 +138,95 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void generate_an_sbyte()
+        public void generate__sbyte()
         {
             r.SByte(max:0).Should().Be(-51);
         }
 
         [Test]
-        public void generate_a_uint32()
+        public void generate_uint32()
         {
             r.UInt(99, 200).Should().Be(160);
         }
 
         [Test]
-        public void generate_a_int32()
+        public void generate_unit32_many()
         {
-            r.Int(max: 0).Should().Be(-851429413);
+            r.UInt().Should().Be(2592108469u);
+            r.UInt().Should().Be(471320134u);
+            r.UInt().Should().Be(3498684729u);
+            r.UInt().Should().Be(2775978649u);
         }
 
         [Test]
-        public void generate_a_uint64()
+        public void generate_int32()
+        {
+            r.Int(max: 0).Should().Be(-425714706);
+        }
+
+        [Test]
+        public void generate_int32_many()
+        {
+            r.Int().Should().Be(1296054233);
+            r.Int().Should().Be(-1749342366);
+            r.Int().Should().Be(-76446690);
+            r.Int().Should().Be(108870444);
+        }
+
+        [Test]
+        public void generate_uint64()
         {
             r.ULong(99, 9999).Should().Be(6074);
         }
 
         [Test]
-        public void generate_an_int64()
+        public void generate_uint64_many()
         {
-            r.Long(max: 0).Should().Be(-3656861485390336000);
+            r.ULong().Should().Be(11133021102928879616UL);
+            r.ULong().Should().Be(2024304562418978048UL);
+            r.ULong().Should().Be(15026736492772024320UL);
+            r.ULong().Should().Be(11922737513106253824UL);
         }
 
         [Test]
-        public void generate_a_int16()
+        public void generate_int64()
+        {
+            r.Long(max: 0).Should().Be(-3656861485390335055L);
+        }
+
+        [Test]
+        public void generate_int64_many()
+        {
+            r.Long().Should().Be(1909649066074105698L);
+            r.Long().Should().Be(-7199067474435792608L);
+            r.Long().Should().Be(5803364455917250112L);
+            r.Long().Should().Be(2699365476251477286L);
+            r.Long().Should().Be(-8566699986853958425L);
+        }
+
+        [Test]
+        public void generate_int16()
         {
             r.Short(max: 0).Should().Be(-12992);
         }
 
         [Test]
-        public void generate_a_uint16()
+        public void generate_int16_many()
+        {
+            r.Short().Should().Be(6784);
+            r.Short().Should().Be(-25576);
+            r.Short().Should().Be(20617);
+            r.Short().Should().Be(9589);
+        }
+
+        [Test]
+        public void generate_uint16()
         {
             r.UShort().Should().Be(39552);
         }
 
         [Test]
-        public void generate_a_char()
+        public void generate_char()
         {
             r.Char().Should().Be('\u9a80');
         }

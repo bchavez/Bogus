@@ -1,6 +1,7 @@
 ## v12.0.1
 * PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.
-* Added `"string".ClampLength(max,min)` extension method to clamp length of strings between min and max.  
+* Added `"string".ClampLength(max,min)` extension method to clamp length of strings between min and max.
+* Issue 67: Fixed `Randomizer.Int(int.MaxValue, int.MinValue)` range overflow not returning random `int32` values.  
 
 ## v11.0.5
 * Compatibility with `Newtonsoft.Json` v10.0.1

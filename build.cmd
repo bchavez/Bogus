@@ -1,6 +1,5 @@
 @echo off
 cls
-REM "NuGet.exe" "Install" "FAKE" "-OutputDirectory" "Source\packages" "-ExcludeVersion"
 
 .paket\paket.bootstrapper.exe
 if errorlevel 1 (

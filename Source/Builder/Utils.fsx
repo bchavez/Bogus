@@ -1,15 +1,10 @@
 ﻿module Utils
 
 // include Fake lib
-#I @"../packages/build/FAKE/tools"
-#I @"../packages/build/FSharp.Data/lib/net40"
-#I @"../packages/build/Z.ExtensionMethods.WithNamespace/lib/net40"
-#I @"../packages/build/Newtonsoft.Json/lib/net45"
+#load @"../.paket/load/build/build.group.fsx"
 
+#I @"../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
-#r @"FSharp.Data.dll"
-#r @"Z.ExtensionMethods.WithNamespace.dll"
-#r @"Newtonsoft.Json"
 
 open Fake
 open AssemblyInfoFile

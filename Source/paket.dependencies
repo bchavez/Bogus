@@ -3,6 +3,7 @@ source https://www.nuget.org/api/v2
 nuget Newtonsoft.Json == 10.0.1
 
 group build
+    generate_load_scripts: true
     
     source https://www.nuget.org/api/v2
 

@@ -24,5 +24,16 @@ namespace Bogus.Tests.GitHubIssues
 
             test.Generate(1).First().Phones.Count.Should().Be(5);
         }
+
+        [Test]
+        public void with_int_argument()
+        {
+            var test = new Faker<Issue45Object>()
+                .RuleFor(p => p.Id, f => f.IndexVariable++)
+                .RuleFor(p => p.Phones, f => f.Generate(5, i => i.ToString()).ToList());
+
+            test.Generate(1).First().Phones.Select(int.Parse)
+                .Distinct().Should().Equal(1, 2, 3, 4, 5);
+        }
     }
 }

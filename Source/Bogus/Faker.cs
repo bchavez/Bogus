@@ -193,6 +193,15 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Helper method to call faker actions multiple times and return the result as IEnumerable.
+        /// This method passes in the current index of the generation.
+        /// </summary>
+        public IEnumerable<T> Generate<T>(int count, Func<int,T> action)
+        {
+            return Enumerable.Range(1, count).Select(action);
+        }
+
+        /// <summary>
         /// Picks a random Enum of T. Works only with Enums.
         /// </summary>
         /// <typeparam name="T">Must be an Enum</typeparam>

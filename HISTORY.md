@@ -1,7 +1,10 @@
+## v12.0.2
+* `f => f.Generate(n, i => ...)` overload allows use of index when using `f.Generate`.
+
 ## v12.0.1
 * PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.
 * Added `"string".ClampLength(max,min)` extension method to clamp length of strings between min and max.
-* Issue 67: Fixed `Randomizer.Int(int.MaxValue, int.MinValue)` range overflow not returning random `int32` values.  
+* Issue 67: Fixed `Randomizer.Int(int.MaxValue, int.MinValue)` range overflow not returning random `int32` values.
 
 ## v11.0.5
 * Compatibility with `Newtonsoft.Json` v10.0.1

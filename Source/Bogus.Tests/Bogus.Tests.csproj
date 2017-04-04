@@ -97,16 +97,16 @@
     <Compile Include="ValidationDeltaTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bogus\Bogus.csproj">
-      <Project>{340a2fe9-5b52-4fd7-9d21-83ccf1621e09}</Project>
-      <Name>Bogus</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bogus\Bogus.csproj">
+      <Project>{340a2fe9-5b52-4fd7-9d21-83ccf1621e09}</Project>
+      <Name>Bogus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

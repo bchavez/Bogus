@@ -2,10 +2,13 @@
 
   <PropertyGroup>
     <Description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mock up data. Get started by using Faker class or a DataSet directly.</Description>
-    <VersionPrefix>0.0.0-localbuild</VersionPrefix>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <Version>0.0.0-localbuild</Version>
     <Authors>Brian Chavez</Authors>
     <TargetFrameworks>net40;netstandard1.3</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
     <AssemblyName>Bogus</AssemblyName>
     <PackageId>Bogus</PackageId>
     <PackageTags>fake;bogus;poco;data;generator;database;seed;values;test-data;test;data</PackageTags>

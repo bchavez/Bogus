@@ -118,7 +118,7 @@ type TestProject(name : string, folders : Folders) =
 type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     inherit Project(name, folders)
     
-    let projectJson = base.Folder @@ "project.json"
+    //let projectJson = base.Folder @@ "project.json"
     let outputDirectory = folders.CompileOutput @@ name
     let outputDll = outputDirectory @@ sprintf "%s.dll" name
     let packageDir = folders.Package @@ name
@@ -128,7 +128,7 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
 
     let zip = folders.Package @@ sprintf "%s.zip" name
 
-    member this.ProjectJson = projectJson
+    //member this.ProjectJson = projectJson
     member this.OutputDirectory = outputDirectory
     member this.OutputDll = outputDll
     

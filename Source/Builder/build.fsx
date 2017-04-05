@@ -123,10 +123,12 @@ Target "BuildInfo" (fun _ ->
         { bip with
             ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
 
-    JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
+    //JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
 
     let releaseNotes = History.NugetText Files.History GitHubUrl
-    JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
+    //JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
 )
 
 
@@ -134,9 +136,13 @@ Target "Clean" (fun _ ->
     DeleteFile Files.TestResultFile
     CleanDirs [Folders.CompileOutput; Folders.Package]
 
-    JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
-    JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
-    JsonPoke "buildOptions.keyFile" "" BogusProject.ProjectJson
+    //JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
+    //JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
+    //JsonPoke "buildOptions.keyFile" "" BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
@@ -181,7 +187,9 @@ Target "setup-snk"(fun _ ->
     let decryptSecret = environVarOrFail "SNKFILE_SECRET"
     decryptFile Projects.SnkFile decryptSecret
 
-    JsonPoke "buildOptions.keyFile" Projects.SnkFile BogusProject.ProjectJson
+    //JsonPoke "buildOptions.keyFile" Projects.SnkFile BogusProject.ProjectJson
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
 

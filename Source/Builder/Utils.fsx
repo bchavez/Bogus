@@ -78,17 +78,17 @@ module Setup =
 
     type Projects(projectName : string, folders : Folders) = 
         let solutionFile = folders.Source @@ sprintf "%s.sln" projectName
-        let globalJson = folders.Source @@ "global.json"
+        //let globalJson = folders.Source @@ "global.json"
         let snkFile = folders.Source @@ sprintf "%s.snk" projectName
         let snkFilePublic = folders.Source @@ sprintf "%s.snk.pub" projectName 
 
-        let dnvmVersion = 
-            let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
-            json?sdk?version.AsString()
+        //let dnvmVersion = 
+        //    let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
+        //    json?sdk?version.AsString()
 
         member this.SolutionFile = solutionFile
-        member this.GlobalJson = globalJson
-        member this.DnvmVersion = dnvmVersion
+        //member this.GlobalJson = globalJson
+        //member this.DnvmVersion = dnvmVersion
         member this.SnkFile = snkFile
         member this.SnkFilePublic = snkFilePublic
 

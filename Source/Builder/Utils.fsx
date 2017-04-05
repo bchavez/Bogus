@@ -309,10 +309,14 @@ module Helpers =
         dotnet packArgs project.Folder
 
     let DotnetBuild (target: NugetProject) (output: string) = 
-        let projectJson = JsonValue.Parse(File.ReadAllText(target.ProjectJson))
-        for framework in projectJson?frameworks.Properties do
+        //let projectJson = JsonValue.Parse(File.ReadAllText(target.ProjectJson))
+        let frameworks = XMLRead true target.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/"
+                         |> Seq.head
+                         |> (fun x -> x.Split(';'))
+                     
+        for framework in frameworks do
             //let moniker, _ = framework;
-            let moniker = fst framework;
+            let moniker = framework;
             let buildArgs = sprintf "build --configuration Release --output %s\\%s --framework %s" output moniker moniker
             dotnet buildArgs target.Folder
 

@@ -60,7 +60,7 @@ Target "dnx" (fun _ ->
 
     let tag = "dnx_build"
     
-    Dotnet DotnetCommands.Restore BogusProject.Folder
+    //Dotnet DotnetCommands.Restore BogusProject.Folder
     DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
 )
 
@@ -75,9 +75,18 @@ Target "mono" (fun _ ->
 
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
+     let lookIn = Folders.Lib @@ "build"
+     let toolPath = findToolInSubPath "NuGet.exe" lookIn
+
+     tracefn "NuGet Tool Path: %s" toolPath
+
      Projects.SolutionFile
      |> RestoreMSSolutionPackages (fun p ->
-            { p with OutputPath = (Folders.Source @@ "packages" )}
+            { 
+              p with 
+                OutputPath = (Folders.Source @@ "packages" )
+                ToolPath = toolPath
+            }
         )
  )
 
@@ -123,12 +132,12 @@ Target "BuildInfo" (fun _ ->
         { bip with
             ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
 
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
     //JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
 
     let releaseNotes = History.NugetText Files.History GitHubUrl
     //JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
 )
 
 
@@ -137,12 +146,12 @@ Target "Clean" (fun _ ->
     CleanDirs [Folders.CompileOutput; Folders.Package]
 
     //JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
     //JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
     //JsonPoke "buildOptions.keyFile" "" BogusProject.ProjectJson
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
@@ -188,8 +197,8 @@ Target "setup-snk"(fun _ ->
     decryptFile Projects.SnkFile decryptSecret
 
     //JsonPoke "buildOptions.keyFile" Projects.SnkFile BogusProject.ProjectJson
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
-    XmlPoke BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
 

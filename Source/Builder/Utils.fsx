@@ -310,7 +310,7 @@ module Helpers =
 
     let DotnetBuild (target: NugetProject) (output: string) = 
         //let projectJson = JsonValue.Parse(File.ReadAllText(target.ProjectJson))
-        let frameworks = XMLRead true target.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/"
+        let frameworks = XMLRead true target.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/text()"
                          |> Seq.head
                          |> (fun x -> x.Split(';'))
                      

@@ -1,9 +1,9 @@
 ﻿module Utils
 
 // include Fake lib
-#load @"../.paket/load/build/build.group.fsx"
+#load @"../paket/.paket/load/build/build.group.fsx"
 
-#I @"../packages/build/FAKE/tools"
+#I @"../paket/packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
 open Fake
@@ -59,6 +59,7 @@ module Setup =
         let test = workingFolder @@ "__test"
         let source = workingFolder @@ "Source"
         let lib = source @@ "packages"
+        let paketLib = source @@ "paket" @@ "packages"
         let builder = workingFolder @@ "Builder"
     
         member this.WorkingFolder = workingFolder
@@ -66,6 +67,7 @@ module Setup =
         member this.Package = package
         member this.Source = source
         member this.Lib = lib
+        member this.PaketLib = paketLib
         member this.Builder = builder
         member this.Test = test
 
@@ -123,8 +125,10 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     let outputDll = outputDirectory @@ sprintf "%s.dll" name
     let packageDir = folders.Package @@ name
 
-    let nugetSpec = folders.Builder @@ "NuGet" @@ sprintf "%s.nuspec" name
+    let nugetSpecFileName = sprintf "%s.nuspec" name
     let nugetPkg = folders.Package @@ sprintf "%s.%s.nupkg" name BuildContext.FullVersion
+    let nugetPkgSymbols = changeExt "symbols.nupkg" nugetPkg
+
 
     let zip = folders.Package @@ sprintf "%s.zip" name
 
@@ -132,8 +136,9 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     member this.OutputDirectory = outputDirectory
     member this.OutputDll = outputDll
     
-    member this.NugetSpec = nugetSpec
+    member this.NugetSpec = nugetSpecFileName
     member this.NugetPkg = nugetPkg
+    member this.NugetPkgSymbols = nugetPkgSymbols
     
     member this.Title = assemblyTitle
 
@@ -244,6 +249,32 @@ let JsonPoke (jsonPath: string) (value: string) (filePath: string) =
     let newJson = JsonConvert.SerializeObject(obj, Formatting.Indented);
     File.WriteAllText(filePath, newJson);
 
+open System.Xml;
+
+let XmlStrip (fileName : string) xpath =
+    let doc = new XmlDocument()
+    doc.Load fileName
+    let node = doc.SelectSingleNode xpath
+    node.ParentNode.RemoveChild node |> ignore
+    doc.Save fileName
+
+let XPathReplaceAllNS xpath value (namespaces : #seq<string * string>) (doc : XmlDocument) =
+    let nsmgr = XmlNamespaceManager(doc.NameTable)
+    namespaces |> Seq.iter nsmgr.AddNamespace
+    let nodes = doc.SelectNodes(xpath, nsmgr)
+    if nodes = null then failwithf "XML nodes '%s' not found" xpath
+    else
+        for node in nodes do
+            node.Value <- value
+        doc
+
+let XmlPokeAllNS (fileName : string) namespaces xpath value =
+    let doc = new XmlDocument()
+    doc.Load fileName
+    XPathReplaceAllNS xpath value namespaces doc |> fun x -> x.Save fileName
+
+
+
 let SetDependency (dependency:string) (dependencyVersion: string) (projectJson: string) =
     let jsonPath = sprintf "dependencies.['%s']" dependency
     JsonPoke jsonPath dependencyVersion projectJson
@@ -305,7 +336,7 @@ module Helpers =
             | Publish -> (failwith "Only CI server should publish on NuGet")
 
     let DotnetPack (project: NugetProject) (output: string) =
-        let packArgs = sprintf "pack --configuration Release --output %s" output
+        let packArgs = sprintf "pack --include-symbols --include-source --configuration Release --output %s" output
         dotnet packArgs project.Folder
 
     let DotnetBuild (target: NugetProject) (output: string) = 

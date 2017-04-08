@@ -5,8 +5,8 @@
 //#endif
 
 // include Fake lib
-#I @"../packages/build/FAKE/tools"
-#I @"../packages/build/DotNetZip/lib/net20"
+#I @"../paket/packages/build/FAKE/tools"
+#I @"../paket/packages/build/DotNetZip/lib/net20"
 #r @"FakeLib.dll"
 #r @"DotNetZip.dll"
 
@@ -75,7 +75,7 @@ Target "mono" (fun _ ->
 
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
-     let lookIn = Folders.Lib @@ "build"
+     let lookIn = Folders.PaketLib @@ "build"
      let toolPath = findToolInSubPath "NuGet.exe" lookIn
 
      tracefn "NuGet Tool Path: %s" toolPath
@@ -90,10 +90,52 @@ Target "restore" (fun _ ->
         )
  )
 
+open Ionic.Zip
+
 Target "nuget" (fun _ ->
     trace "NuGet Task"
     
     DotnetPack BogusProject Folders.Package
+
+    
+    
+    traceHeader "Injecting Version Ranges"
+
+    let files = [
+                    BogusProject.NugetPkg, BogusProject.NugetSpec
+                    BogusProject.NugetPkgSymbols, BogusProject.NugetSpec
+                ]
+
+    let versionString = XMLRead true BogusProject.ProjectFile "" "" "/Project/ItemGroup/PackageReference[@Include='Newtonsoft.Json']/@Version"
+                        |> Seq.head
+
+    for (pkg, spec) in files do 
+        tracefn "FILE: %s" pkg
+
+        use zip = new ZipFile(pkg)
+
+        let extractPath = Folders.Package @@ fileNameWithoutExt pkg
+        zip.ExtractAll( extractPath )
+
+        zip.Dispose()
+
+        DeleteFile pkg
+
+
+        let nuspecFile = extractPath @@ spec
+
+        let xmlns = [("def", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")]
+
+        XmlPokeAllNS nuspecFile xmlns "//def:dependency[@id='Newtonsoft.Json']/@version" versionString
+    
+        use zip2 = new ZipFile()
+        zip2.AddDirectory(extractPath) |> ignore
+        zip2.Save(pkg);
+
+        zip2.Dispose();
+
+        DeleteDir extractPath
+    
 )
 
 Target "push" (fun _ ->

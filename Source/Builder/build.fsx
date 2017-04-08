@@ -106,6 +106,7 @@ Target "nuget" (fun _ ->
                     BogusProject.NugetPkgSymbols, BogusProject.NugetSpec
                 ]
 
+
     let versionString = XMLRead true BogusProject.ProjectFile "" "" "/Project/ItemGroup/PackageReference[@Include='Newtonsoft.Json']/@Version"
                         |> Seq.head
 

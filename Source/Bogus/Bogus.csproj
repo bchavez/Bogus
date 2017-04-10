@@ -1,147 +1,47 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bogus</RootNamespace>
+    <Description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use it to create and load databases and UIs with mock up data. Get started by using Faker class or a DataSet directly.</Description>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <Version>0.0.0-localbuild</Version>
+    <Authors>Brian Chavez</Authors>
+    <TargetFrameworks>net40;netstandard1.3</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
     <AssemblyName>Bogus</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <PackageId>Bogus</PackageId>
+    <PackageTags>fake;bogus;poco;data;generator;database;seed;values;test-data;test;data</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</PackageLicenseUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
+    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.3' ">$(PackageTargetFallback);portable-net451+win8;dnxcore50</PackageTargetFallback>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Bogus.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Bogus.XML</DocumentationFile>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <DefineConstants>$(DefineConstants);STANDARD</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
+    <EmbeddedResource Include="data\*.locale.json" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Binder.cs" />
-    <Compile Include="DataCategoryAttribute.cs" />
-    <Compile Include="DataSet.cs" />
-    <Compile Include="DataSets\Address.cs" />
-    <Compile Include="DataSets\Commerce.cs" />
-    <Compile Include="DataSets\Company.cs" />
-    <Compile Include="Database.cs" />
-    <Compile Include="DataSets\Database.cs" />
-    <Compile Include="DataSets\Date.cs" />
-    <Compile Include="DataSets\Images.cs" />
-    <Compile Include="DataSets\System.cs" />
-    <Compile Include="DataSets\PhoneNumbers.cs" />
-    <Compile Include="Extensions\CrossPlatform.cs" />
-    <Compile Include="Extensions\ExtensionsForBrazil.cs" />
-    <Compile Include="Extensions\ExtensionsForCanada.cs" />
-    <Compile Include="Extensions\ExtensionsForDenmark.cs" />
-    <Compile Include="Extensions\ExtensionsForFinland.cs" />
-    <Compile Include="Extensions\ExtensionsForString.cs" />
-    <Compile Include="Extensions\ExtensionsForUnitedStates.cs" />
-    <Compile Include="Faker.cs" />
-    <Compile Include="DataSets\Finance.cs" />
-    <Compile Include="DataSets\Hacker.cs" />
-    <Compile Include="Faker[T].cs" />
-    <Compile Include="Hashids.cs" />
-    <Compile Include="IHashids.cs" />
-    <Compile Include="ILocaleAware.cs" />
-    <Compile Include="DataSets\Internet.cs" />
-    <Compile Include="DataSets\Lorem.cs" />
-    <Compile Include="DataSets\Name.cs" />
-    <Compile Include="IRuleSet.cs" />
-    <Compile Include="Person.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyName.cs" />
-    <Compile Include="Randomizer.cs" />
-    <Compile Include="Rule.cs" />
-    <Compile Include="Tokenizer.cs" />
-    <Compile Include="Utils.cs" />
-    <Compile Include="ValidationException.cs" />
-    <Compile Include="ValidationResult.cs" />
-    <Compile Include="Vendor\UserAgentGenerator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="data\de.locale.json" />
-    <EmbeddedResource Include="data\de_AT.locale.json" />
-    <EmbeddedResource Include="data\de_CH.locale.json" />
-    <EmbeddedResource Include="data\en.locale.json" />
-    <EmbeddedResource Include="data\en_AU.locale.json" />
-    <EmbeddedResource Include="data\en_au_ocker.locale.json" />
-    <EmbeddedResource Include="data\en_BORK.locale.json" />
-    <EmbeddedResource Include="data\en_CA.locale.json" />
-    <EmbeddedResource Include="data\en_GB.locale.json" />
-    <EmbeddedResource Include="data\en_IND.locale.json" />
-    <EmbeddedResource Include="data\en_US.locale.json" />
-    <EmbeddedResource Include="data\es.locale.json" />
-    <EmbeddedResource Include="data\fa.locale.json" />
-    <EmbeddedResource Include="data\fr.locale.json" />
-    <EmbeddedResource Include="data\it.locale.json" />
-    <EmbeddedResource Include="data\ja.locale.json" />
-    <EmbeddedResource Include="data\ko.locale.json" />
-    <EmbeddedResource Include="data\nb_NO.locale.json" />
-    <EmbeddedResource Include="data\nep.locale.json" />
-    <EmbeddedResource Include="data\nl.locale.json" />
-    <EmbeddedResource Include="data\pl.locale.json" />
-    <EmbeddedResource Include="data\pt_BR.locale.json" />
-    <EmbeddedResource Include="data\ru.locale.json" />
-    <EmbeddedResource Include="data\sk.locale.json" />
-    <EmbeddedResource Include="data\sv.locale.json" />
-    <EmbeddedResource Include="data\vi.locale.json" />
-    <EmbeddedResource Include="data\zh_CN.locale.json" />
-    <EmbeddedResource Include="data\ge.locale.json" />
-    <EmbeddedResource Include="data\tr.locale.json" />
-    <EmbeddedResource Include="data\zh_TW.locale.json" />
-    <EmbeddedResource Include="data\fr_CA.locale.json" />
-    <EmbeddedResource Include="data\uk.locale.json" />
-    <EmbeddedResource Include="data\en_IE.locale.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="data\es_MX.locale.json" />
-    <EmbeddedResource Include="data\el.locale.json" />
-    <EmbeddedResource Include="data\id_ID.locale.json" />
-    <EmbeddedResource Include="data\lv.locale.json" />
-    <EmbeddedResource Include="data\cz.locale.json" />
-    <EmbeddedResource Include="data\pt_PT.locale.json" />
-    <EmbeddedResource Include="data\az.locale.json" />
-    <None Include="project.json" />
-    <None Include="Bogus.project.json" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

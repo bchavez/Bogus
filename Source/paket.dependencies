@@ -1,17 +1,19 @@
+version 4.3.0
+
 source https://www.nuget.org/api/v2
 
-nuget Newtonsoft.Json == 10.0.1
+nuget Newtonsoft.Json == 10.0.2
 
 group build
     generate_load_scripts: true
     
     source https://www.nuget.org/api/v2
 
-    nuget FAKE == 4.50.1
+    nuget FAKE == 4.57.4
     nuget FSharp.Data
     nuget Z.ExtensionMethods.WithNamespace
     nuget DotNetZip == 1.10.1
     nuget NuGet.CommandLine == 3.5.0
-    nuget NUnit.Runners == 2.6.4
+    nuget NUnit.ConsoleRunner == 3.6.1
     nuget Newtonsoft.Json
     nuget secure-file

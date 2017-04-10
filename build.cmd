@@ -1,13 +1,8 @@
 @echo off
 cls
 
-.paket\paket.bootstrapper.exe
-if errorlevel 1 (
-  exit /b %errorlevel%
-)
-
-pushd Source
-..\.paket\paket.exe install
+pushd Source\
+.paket\paket.exe install
 if errorlevel 1 (
   popd
   exit /b %errorlevel%

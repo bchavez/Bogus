@@ -61,30 +61,86 @@ Target "dnx" (fun _ ->
     let tag = "dnx_build"
     
     Dotnet DotnetCommands.Restore BogusProject.Folder
+    //Dotnet DotnetCommands.Restore TestProject.Folder
     DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
-)
-
-Target "mono" (fun _ ->
-     trace "Mono Task"
-
-     let tag = "mono_build/"
-
-     //Setup
-     XBuild BogusProject.ProjectFile (BogusProject.OutputDirectory @@ tag)
 )
 
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
+     let lookIn = Folders.Lib @@ "build"
+     let toolPath = findToolInSubPath "NuGet.exe" lookIn
+
+     tracefn "NuGet Tool Path: %s" toolPath
+
      Projects.SolutionFile
      |> RestoreMSSolutionPackages (fun p ->
-            { p with OutputPath = (Folders.Source @@ "packages" )}
+            { 
+              p with 
+                OutputPath = (Folders.Source @@ "packages" )
+                ToolPath = toolPath
+            }
         )
  )
+
+open Ionic.Zip
+open System.Xml
 
 Target "nuget" (fun _ ->
     trace "NuGet Task"
     
     DotnetPack BogusProject Folders.Package
+
+    
+    
+    traceHeader "Injecting Version Ranges"
+
+    let files = [
+                    BogusProject.NugetPkg, BogusProject.NugetSpec
+                    BogusProject.NugetPkgSymbols, BogusProject.NugetSpec
+                ]
+
+    let forwardNugetVersion = [
+                                "Newtonsoft.Json"
+                                "NETStandard.Library"
+                                "System.Reflection.TypeExtensions"
+                              ]
+
+    let extractNugetPackage (pkg : string) (extractPath : string) = 
+        use zip = new ZipFile(pkg)
+        zip.ExtractAll( extractPath )
+
+    let repackNugetPackage (folderPath : string) (pkg : string) =
+        use zip = new ZipFile()
+        zip.AddDirectory(folderPath) |> ignore
+        zip.Save(pkg)
+
+    for (pkg, spec) in files do 
+        tracefn "FILE: %s" pkg
+
+        let extractPath = Folders.Package @@ fileNameWithoutExt pkg
+
+        extractNugetPackage pkg extractPath
+        DeleteFile pkg
+
+        let nuspecFile = extractPath @@ spec
+
+        let xmlns = [("def", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")]
+
+        let doc = new XmlDocument()
+        doc.Load nuspecFile
+
+        for forward in forwardNugetVersion do
+            let target = sprintf "//def:dependency[@id='%s']" forward
+            let nodes = XPathSelectAllNSDoc doc xmlns target
+            for node in nodes do
+                let version = getAttribute "version" node
+                node.Attributes.["version"].Value <- sprintf "[%s,)" version
+        
+        doc.Save nuspecFile
+    
+        repackNugetPackage extractPath pkg
+        DeleteDir extractPath
+    
 )
 
 Target "push" (fun _ ->
@@ -123,10 +179,12 @@ Target "BuildInfo" (fun _ ->
         { bip with
             ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
 
-    JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
+    //JsonPoke "version" BuildContext.FullVersion BogusProject.ProjectJson
 
     let releaseNotes = History.NugetText Files.History GitHubUrl
-    JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
+    //JsonPoke "packOptions.releaseNotes" releaseNotes BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
 )
 
 
@@ -134,9 +192,13 @@ Target "Clean" (fun _ ->
     DeleteFile Files.TestResultFile
     CleanDirs [Folders.CompileOutput; Folders.Package]
 
-    JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
-    JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
-    JsonPoke "buildOptions.keyFile" "" BogusProject.ProjectJson
+    //JsonPoke "version" "0.0.0-localbuild" BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
+    //JsonPoke "packOptions.releaseNotes" "" BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
+    //JsonPoke "buildOptions.keyFile" "" BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
@@ -181,7 +243,9 @@ Target "setup-snk"(fun _ ->
     let decryptSecret = environVarOrFail "SNKFILE_SECRET"
     decryptFile Projects.SnkFile decryptSecret
 
-    JsonPoke "buildOptions.keyFile" Projects.SnkFile BogusProject.ProjectJson
+    //JsonPoke "buildOptions.keyFile" Projects.SnkFile BogusProject.ProjectJson
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
 
@@ -203,7 +267,6 @@ Target "setup-snk"(fun _ ->
 
 "BuildInfo"
     =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "mono"
     ==> "zip"
 
 "dnx"

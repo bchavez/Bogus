@@ -1,3 +1,6 @@
+## v15.0.0
+* Building with Visual Studio 2017.
+
 ## v12.0.2
 * `f => f.Generate(n, i => ...)` overload allows use of index when using `f.Generate`.
 

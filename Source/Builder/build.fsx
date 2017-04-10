@@ -5,8 +5,8 @@
 //#endif
 
 // include Fake lib
-#I @"../paket/packages/build/FAKE/tools"
-#I @"../paket/packages/build/DotNetZip/lib/net20"
+#I @"../packages/build/FAKE/tools"
+#I @"../packages/build/DotNetZip/lib/net20"
 #r @"FakeLib.dll"
 #r @"DotNetZip.dll"
 
@@ -67,7 +67,7 @@ Target "dnx" (fun _ ->
 
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
-     let lookIn = Folders.PaketLib @@ "build"
+     let lookIn = Folders.Lib @@ "build"
      let toolPath = findToolInSubPath "NuGet.exe" lookIn
 
      tracefn "NuGet Tool Path: %s" toolPath
@@ -209,7 +209,7 @@ Target "Clean" (fun _ ->
 
 let RunTests() =
     CreateDir Folders.Test
-    let nunit = findToolInSubPath "nunit3-console.exe" Folders.PaketLib
+    let nunit = findToolInSubPath "nunit3-console.exe" Folders.Lib
     let nunitFolder = System.IO.Path.GetDirectoryName(nunit)
 
     !! TestProject.TestAssembly

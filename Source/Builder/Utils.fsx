@@ -1,9 +1,9 @@
 ﻿module Utils
 
 // include Fake lib
-#load @"../paket/.paket/load/build/build.group.fsx"
+#load @"../.paket/load/build/build.group.fsx"
 
-#I @"../paket/packages/build/FAKE/tools"
+#I @"../packages/build/FAKE/tools"
 #r @"FakeLib.dll"
 
 open Fake
@@ -59,7 +59,6 @@ module Setup =
         let test = workingFolder @@ "__test"
         let source = workingFolder @@ "Source"
         let lib = source @@ "packages"
-        let paketLib = source @@ "paket" @@ "packages"
         let builder = workingFolder @@ "Builder"
     
         member this.WorkingFolder = workingFolder
@@ -67,7 +66,6 @@ module Setup =
         member this.Package = package
         member this.Source = source
         member this.Lib = lib
-        member this.PaketLib = paketLib
         member this.Builder = builder
         member this.Test = test
 

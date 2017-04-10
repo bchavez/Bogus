@@ -1,6 +1,8 @@
+version 4.3.0
+
 source https://www.nuget.org/api/v2
 
-nuget Newtonsoft.Json == 10.0.1
+nuget Newtonsoft.Json == 10.0.2
 
 group build
     generate_load_scripts: true

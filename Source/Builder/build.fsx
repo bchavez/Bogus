@@ -65,15 +65,6 @@ Target "dnx" (fun _ ->
     DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
 )
 
-Target "mono" (fun _ ->
-     trace "Mono Task"
-
-     let tag = "mono_build/"
-
-     //Setup
-     XBuild BogusProject.ProjectFile (BogusProject.OutputDirectory @@ tag)
-)
-
 Target "restore" (fun _ -> 
      trace "MS NuGet Project Restore"
      let lookIn = Folders.PaketLib @@ "build"
@@ -276,7 +267,6 @@ Target "setup-snk"(fun _ ->
 
 "BuildInfo"
     =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "mono"
     ==> "zip"
 
 "dnx"

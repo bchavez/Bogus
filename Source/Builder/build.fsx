@@ -60,7 +60,7 @@ Target "dnx" (fun _ ->
 
     let tag = "dnx_build"
     
-    //Dotnet DotnetCommands.Restore BogusProject.Folder
+    Dotnet DotnetCommands.Restore BogusProject.Folder
     DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
 )
 

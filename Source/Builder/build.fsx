@@ -91,6 +91,7 @@ Target "restore" (fun _ ->
  )
 
 open Ionic.Zip
+open System.Xml
 
 Target "nuget" (fun _ ->
     trace "NuGet Task"
@@ -106,35 +107,46 @@ Target "nuget" (fun _ ->
                     BogusProject.NugetPkgSymbols, BogusProject.NugetSpec
                 ]
 
+    let forwardNugetVersion = [
+                                "Newtonsoft.Json"
+                                "NETStandard.Library"
+                                "System.Reflection.TypeExtensions"
+                              ]
 
-    let versionString = XMLRead true BogusProject.ProjectFile "" "" "/Project/ItemGroup/PackageReference[@Include='Newtonsoft.Json']/@Version"
-                        |> Seq.head
+    let extractNugetPackage (pkg : string) (extractPath : string) = 
+        use zip = new ZipFile(pkg)
+        zip.ExtractAll( extractPath )
+
+    let repackNugetPackage (folderPath : string) (pkg : string) =
+        use zip = new ZipFile()
+        zip.AddDirectory(folderPath) |> ignore
+        zip.Save(pkg)
 
     for (pkg, spec) in files do 
         tracefn "FILE: %s" pkg
 
-        use zip = new ZipFile(pkg)
-
         let extractPath = Folders.Package @@ fileNameWithoutExt pkg
-        zip.ExtractAll( extractPath )
 
-        zip.Dispose()
-
+        extractNugetPackage pkg extractPath
         DeleteFile pkg
-
 
         let nuspecFile = extractPath @@ spec
 
         let xmlns = [("def", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")]
 
-        XmlPokeAllNS nuspecFile xmlns "//def:dependency[@id='Newtonsoft.Json']/@version" versionString
+        let doc = new XmlDocument()
+        doc.Load nuspecFile
+
+        for forward in forwardNugetVersion do
+            let target = sprintf "//def:dependency[@id='%s']" forward
+            let nodes = XPathSelectAllNSDoc doc xmlns target
+            for node in nodes do
+                let version = getAttribute "version" node
+                node.Attributes.["version"].Value <- sprintf "[%s,)" version
+        
+        doc.Save nuspecFile
     
-        use zip2 = new ZipFile()
-        zip2.AddDirectory(extractPath) |> ignore
-        zip2.Save(pkg);
-
-        zip2.Dispose();
-
+        repackNugetPackage extractPath pkg
         DeleteDir extractPath
     
 )

@@ -257,11 +257,22 @@ let XmlStrip (fileName : string) xpath =
     let node = doc.SelectSingleNode xpath
     node.ParentNode.RemoveChild node |> ignore
     doc.Save fileName
+   
 
-let XPathReplaceAllNS xpath value (namespaces : #seq<string * string>) (doc : XmlDocument) =
+let XPathSelectAllNSDoc (doc : XmlDocument) (namespaces : #seq<string * string>) xpath =
     let nsmgr = XmlNamespaceManager(doc.NameTable)
     namespaces |> Seq.iter nsmgr.AddNamespace
     let nodes = doc.SelectNodes(xpath, nsmgr)
+    if nodes = null then failwithf "XML nodes '%s' not found" xpath
+    nodes
+
+let XPathSelectAllNSFile (filename:string) (namespaces : #seq<string * string>) xpath  =
+    let doc = new XmlDocument();
+    doc.Load filename
+    XPathSelectAllNSDoc doc namespaces xpath
+
+let XPathReplaceAllNS xpath value (namespaces : #seq<string * string>) (doc : XmlDocument) =
+    let nodes = XPathSelectAllNSDoc doc namespaces xpath 
     if nodes = null then failwithf "XML nodes '%s' not found" xpath
     else
         for node in nodes do

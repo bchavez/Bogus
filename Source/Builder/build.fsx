@@ -217,7 +217,7 @@ Target "Clean" (fun _ ->
 
 let RunTests() =
     CreateDir Folders.Test
-    let nunit = findToolInSubPath "nunit3-console.exe" Folders.Lib
+    let nunit = findToolInSubPath "nunit3-console.exe" Folders.PaketLib
     let nunitFolder = System.IO.Path.GetDirectoryName(nunit)
 
     !! TestProject.TestAssembly

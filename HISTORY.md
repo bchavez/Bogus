@@ -1,5 +1,6 @@
-## v15.0.0
+## v15.0.1
 * Building with Visual Studio 2017.
+* Issue 70: Fixed `ArgumentException` that occurs with derived hidden `new` properties.
 
 ## v12.0.2
 * `f => f.Generate(n, i => ...)` overload allows use of index when using `f.Generate`.

@@ -54,18 +54,18 @@ namespace Bogus
         /// set of viable properties/fields that can be faked on T.
         /// </summary>
         /// <returns>The full set of MemberInfos for injection.</returns>
-        public Dictionary<string, MemberInfo> GetMembers(Type t)
+        public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
         {
-            return t.GetMembers(BindingFlags)
+            var group = t.GetMembers(BindingFlags)
                 .Where(m =>
                     {
-                        if (m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any())
+                        if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
                         {
                             //no compiler generated stuff
                             return false;
                         }
                         var pi = m as PropertyInfo;
-                        if (pi != null)
+                        if( pi != null )
                         {
                             return pi.CanWrite;
                         }
@@ -78,7 +78,19 @@ namespace Bogus
                         }
                         return false;
                     })
-                .ToDictionary(pi => pi.Name);
-        }
+                .GroupBy(mi => mi.Name);
+
+            //Issue #70 we could get back mulitple keys
+            //when reflecting over a type. Consider:
+            //
+            //   ClassA { public int Value {get;set} }
+            //   DerivedA : ClassA { public new int Value {get;set;} }
+            //
+            //So, when reflecting over DerivedA, grab the first
+            //reflected MemberInfo that was returned from
+            //reflection; the second one was the inherited
+            //ClassA.Value.
+            return group.ToDictionary(k => k.Key, g => g.First());
+        }        
     }
 }

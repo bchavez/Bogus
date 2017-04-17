@@ -192,11 +192,21 @@ for more info.
 
 ### Without Fluent Syntax
 
-You can use **Bogus** without a fluent setup. Just use a dataset directly.
+You can use **Bogus** without a fluent setup. Just use the `Faker` facade or a **dataset** directly.
 
 ```csharp
-[Test]
-public void Without_Fluent_Syntax()
+public void Using_The_Faker_Facade()
+{
+    var faker = new Faker("en");
+    var o = new Order()
+        {
+            OrderId = faker.Random.Number(1, 100),
+            Item = faker.Lorem.Sentence(),
+            Quantity = faker.Random.Number(1, 10)
+        };
+    o.Dump()
+}
+public void Or_Using_DataSets_Directly()
 {
     var random = new Bogus.Randomizer();
     var lorem = new Bogus.DataSets.Lorem();

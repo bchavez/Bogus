@@ -96,6 +96,23 @@ namespace Bogus.Tests
                     Item = lorem.Sentence(),
                     Quantity = random.Number(1, 10)
                 };
+            o.OrderId.Should().Be(61);
+            o.Quantity.Should().Be(7);
+            o.Dump();
+        }
+
+        [Test]
+        public void With_Faker_Facade()
+        {
+            var faker = new Faker("en");
+            var o = new Order()
+                {
+                    OrderId = faker.Random.Number(1, 100),
+                    Item = faker.Lorem.Sentence(),
+                    Quantity = faker.Random.Number(1, 10)
+                };
+            o.OrderId.Should().Be(61);
+            o.Quantity.Should().Be(7);
             o.Dump();
         }
 

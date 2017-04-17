@@ -88,59 +88,7 @@ open System.Xml
 Target "nuget" (fun _ ->
     trace "NuGet Task"
     
-    DotnetPack BogusProject Folders.Package
-
-    
-    
-    traceHeader "Injecting Version Ranges"
-
-    let files = [
-                    BogusProject.NugetPkg, BogusProject.NugetSpec
-                    BogusProject.NugetPkgSymbols, BogusProject.NugetSpec
-                ]
-
-    let forwardNugetVersion = [
-                                "Newtonsoft.Json"
-                                "NETStandard.Library"
-                                "System.Reflection.TypeExtensions"
-                              ]
-
-    let extractNugetPackage (pkg : string) (extractPath : string) = 
-        use zip = new ZipFile(pkg)
-        zip.ExtractAll( extractPath )
-
-    let repackNugetPackage (folderPath : string) (pkg : string) =
-        use zip = new ZipFile()
-        zip.AddDirectory(folderPath) |> ignore
-        zip.Save(pkg)
-
-    for (pkg, spec) in files do 
-        tracefn "FILE: %s" pkg
-
-        let extractPath = Folders.Package @@ fileNameWithoutExt pkg
-
-        extractNugetPackage pkg extractPath
-        DeleteFile pkg
-
-        let nuspecFile = extractPath @@ spec
-
-        let xmlns = [("def", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")]
-
-        let doc = new XmlDocument()
-        doc.Load nuspecFile
-
-        for forward in forwardNugetVersion do
-            let target = sprintf "//def:dependency[@id='%s']" forward
-            let nodes = XPathSelectAllNSDoc doc xmlns target
-            for node in nodes do
-                let version = getAttribute "version" node
-                node.Attributes.["version"].Value <- sprintf "[%s,)" version
-        
-        doc.Save nuspecFile
-    
-        repackNugetPackage extractPath pkg
-        DeleteDir extractPath
-    
+    DotnetPack BogusProject Folders.Package   
 )
 
 Target "push" (fun _ ->

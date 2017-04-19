@@ -25,7 +25,7 @@ Install-Package Bogus
 * [**RethinkDb.Driver**](https://github.com/bchavez/RethinkDb.Driver) - A RethinkDB database driver.
 
 ##### Featured In
-* .NET Engineering Blog: NuGet Package of the week #1. - ["This week in .NET - 12/08/2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)
+* **.NET Engineering Blog: NuGet Package of the week #1.** - [**"This week in .NET - 12/08/2015"**](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)
 
 
 Usage

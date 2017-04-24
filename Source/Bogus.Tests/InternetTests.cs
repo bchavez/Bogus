@@ -97,6 +97,12 @@ namespace Bogus.Tests
         }
 
         [Test]
+        public void can_generate_mac_address_with_separator()
+        {
+            internet.Mac("_").Should().Be("9a_1c_d0_a5_09_9f");
+        }
+
+        [Test]
         public void can_generate_an_example_email()
         {
             var email = internet.ExampleEmail();

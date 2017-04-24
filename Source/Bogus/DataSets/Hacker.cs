@@ -6,6 +6,13 @@ namespace Bogus.DataSets
     public class Hacker : DataSet
     {
         /// <summary>
+        /// Create a hacker lingo dataset.
+        /// </summary>
+        public Hacker(string locale = "en") : base(locale)
+        {
+        }
+
+        /// <summary>
         /// Returns an abbreviation.
         /// </summary>
         /// <returns></returns>

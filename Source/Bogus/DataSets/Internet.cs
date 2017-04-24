@@ -159,14 +159,12 @@ namespace Bogus.DataSets
         /// <summary>
         /// Gets a random mac address
         /// </summary>
-        public string Mac()
+        public string Mac(string separator = ":")
         {
-            var sb = new StringBuilder();
-
             var arr = Enumerable.Range(0, 6)
                 .Select(s => this.Random.Number(0, 255).ToString("x2"));
 
-            return string.Join(":", arr);
+            return string.Join(separator, arr);
         }
 
         /// <summary>

@@ -2,6 +2,9 @@
 * Added `Address.FullAddress`
 * Added `Name.Occupation` as an alternate source of job titles.
 * Added `Internet.UrlWithPath` allowing to create URLs with random paths.
+* Added `ru` (Russian locale) hacker adjective, ing-verb, noun, and verb.
+* Added `Internet.Mac` address separator parameter.
+* Feature parity with **faker.js** @ 6cdb93ef...
 
 ## v15.0.1
 * Building with Visual Studio 2017.

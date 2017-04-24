@@ -125,7 +125,7 @@ namespace Bogus.Tests
         [Test]
         public void get_a_random_occupation()
         {
-            name.Occupation().Should().Be("Karate Master");
+            name.Occupation().Should().Be("Journeyman");
         }
     }
 }

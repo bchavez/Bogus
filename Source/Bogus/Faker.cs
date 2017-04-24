@@ -27,7 +27,7 @@ namespace Bogus
             this.Company = new Company(locale);
             this.Date = new Date {Locale = locale};
             this.Finance = new Finance {Locale = locale};
-            this.Hacker = new Hacker();
+            this.Hacker = new Hacker(locale);
             this.Image = new Images(locale);
             this.Internet = new Internet(locale);
             this.Lorem = new Lorem(locale);

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26114.2
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bogus", "Bogus\Bogus.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
 EndProject
@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\build.cmd = ..\build.cmd
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		..\HISTORY.md = ..\HISTORY.md
-		paket\paket.dependencies = paket\paket.dependencies
+		paket.dependencies = paket.dependencies
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

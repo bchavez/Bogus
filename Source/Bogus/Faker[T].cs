@@ -125,6 +125,30 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Gives you a way to specify multiple rules inside an action
+        /// without having to call RuleFor multiple times.
+        /// </summary>
+        //need to think more about the naming on this one before exposing
+        //API to public.
+        internal Faker<T> Rules(Action<Faker, T> setter)
+        {
+            Func<Faker, T, object> invoker = (f, t) =>
+                {
+                    setter(f, t);
+                    return null;
+                };
+            var guid = Guid.NewGuid().ToString();
+            var rule = new PopulateAction<T>()
+                {
+                    Action = invoker,
+                    RuleSet = currentRuleSet,
+                    PropertyName = guid
+                };
+            this.Actions.Add(currentRuleSet, guid, rule);
+            return this;
+        }
+
+        /// <summary>
         /// Creates a rule for a property.
         /// </summary>
         public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
@@ -322,11 +346,19 @@ namespace Bogus
                             typeProps.TryGetValue(action.PropertyName, out member);
                             var valueFactory = action.Action;
 
-                            var prop = member as PropertyInfo;
-                            prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
+                            if( member != null )
+                            {
+                                var prop = member as PropertyInfo;
+                                prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
 
-                            var field = member as FieldInfo;
-                            field?.SetValue(instance, valueFactory(FakerHub, instance));
+                                var field = member as FieldInfo;
+                                field?.SetValue(instance, valueFactory(FakerHub, instance));
+                            }
+                            else // member would be null if this was an RuleForObject.
+                            {
+                                //Invoke this if this is a basic rule which does not select a property or a field.
+                                var outputValue = valueFactory(FakerHub, instance);
+                            }
                         }
                     }
                 }

@@ -239,6 +239,7 @@ public void Or_Using_DataSets_Directly()
 	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
 	* `County` - Get a county.
 	* `Country` - Get a country.
+	* `FullAddress` - Get a full address like Street, City, Country.
 	* `CountryCode` - Get a random country code.
 	* `State` - Get a state.
 	* `StateAbbr` - Get a state abbreviation.
@@ -321,6 +322,7 @@ public void Or_Using_DataSets_Directly()
 	* `Color` - Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
 	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
 	* `Url` - Generates a random URL.
+	* `UrlWithPath` - Get a random URL with random path.
 * **`Lorem`**
 	* `Word` - Get a random lorem word.
 	* `Words` - Get some lorem words
@@ -344,6 +346,7 @@ public void Or_Using_DataSets_Directly()
 	* `JobDescriptor` - Get a job description.
 	* `JobArea` - Get a job area expertise.
 	* `JobType` - Get a type of job.
+	* `Occupation` - Get a random occupation.
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.

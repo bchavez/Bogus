@@ -435,10 +435,30 @@ namespace Bogus
             if(count == null)
                 count = Number(1, 3);
 
-            var words = Enumerable.Range(1, count.Value)
-                .Select(f => Word()).ToArray(); // lol.
+            var words = WordsArray(count.Value);
 
             return string.Join(" ", words);
+        }
+
+        /// <summary>
+        /// Get a range of words in an array (English)
+        /// </summary>
+        /// <param name="min">Minimum word count.</param>
+        /// <param name="max">Maximum word count.</param>
+        public string[] WordsArray(int min, int max)
+        {
+            var count = Number(min, max);
+            return WordsArray(count);
+        }
+
+        /// <summary>
+        /// Get a specific number of words in an array (English).
+        /// </summary>
+        public string[] WordsArray(int count)
+        {
+            return Enumerable.Range(1, count)
+                .Select(f => Word())
+                .ToArray(); // lol.
         }
 
         /// <summary>

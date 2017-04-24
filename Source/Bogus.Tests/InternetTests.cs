@@ -123,5 +123,17 @@ namespace Bogus.Tests
                     i => internet.UserAgent())
                 .Dump();
         }
+
+        [Test]
+        public void can_get_url_with_path()
+        {
+            internet.UrlWithPath().Should().Be("https://ambrose.net/soft/deposit");
+        }
+
+        [Test]
+        public void can_get_a_urlpath_with_a_specific_domain()
+        {
+            internet.UrlWithPath( domain: "bitarmory.com").Should().Be("https://bitarmory.com/soft/deposit");
+        }
     }
 }

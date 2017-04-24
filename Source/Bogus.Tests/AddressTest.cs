@@ -95,5 +95,11 @@ namespace Bogus.Tests
             address.CountryCode().Should().Be( "MQ" );
         }
 
+        [Test]
+        public void can_get_a_full_address()
+        {
+            address.FullAddress().Should().Be("60643 Oberbrunner Bypass, Danielchester, Monaco");
+        }
+
     }
 }

@@ -244,7 +244,27 @@ namespace Bogus.DataSets
         /// </summary>
         public string Url()
         {
-            return string.Format("{0}://{1}", Protocol(), DomainName());
+            return Url(null, null);
+        }
+
+        private string Url(string protocol, string domain)
+        {
+            return $"{protocol ?? Protocol()}://{domain ?? DomainName()}";
+        }
+
+        /// <summary>
+        /// Get a random URL with random path.
+        /// </summary>
+        /// <param name="protocol">Protocol part of the URL, random if null</param>
+        /// <param name="domain">Domain part of the URL, random if null</param>
+        public string UrlWithPath( string protocol = null, string domain = null)
+        {
+            var words = Random.WordsArray(1, 3)
+                .Select(Utils.Slugify)
+                .Select(s => s.ToLower())
+                .ToArray();
+
+            return $"{Url(protocol, domain)}/{Utils.Slashify(words, "/")}";
         }
     }
 }

@@ -300,6 +300,45 @@ namespace Bogus.Tests
 
         }
 
+        [Test]
+        public void create_rule_for_an_object()
+        {
+            var faker = new Faker<Order>()
+                .Rules((f, o) =>
+                    {
+                        o.Quantity = f.Random.Number(1, 4);
+                        o.Item = f.Commerce.Product();
+                        o.OrderId = 25;
+                    });
+
+            Order result = faker;
+            result.Item.Should().Be("Computer");
+            result.OrderId.Should().Be(25);
+            result.Quantity.Should().BeInRange(1, 4);
+
+        }
+
+        [Test]
+        public void can_create_rule_for_object_multiple_times()
+        {
+            var faker = new Faker<Order>()
+                .Rules((f, o) =>
+                    {
+                        o.Quantity = f.Random.Number(1, 4);
+                        o.Item = f.Commerce.Product();
+                        o.OrderId = 25;
+                    });
+            
+            var faker2 = faker.Rules((f, o) =>
+                {
+                    o.OrderId = 26;
+                });
+
+            Order result = faker2;
+            result.OrderId.Should().Be(26);
+            result.Item.Should().Be("Computer");
+        }
+
     }
 
 }

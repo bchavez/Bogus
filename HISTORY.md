@@ -1,3 +1,8 @@
+## v15.0.2
+* Added `Address.FullAddress`
+* Added `Name.Occupation` as an alternate source of job titles.
+* Added `Internet.UrlWithPath` allowing to create URLs with random paths.
+
 ## v15.0.1
 * Building with Visual Studio 2017.
 * Issue 70: Fixed `ArgumentException` that occurs with derived hidden `new` properties.

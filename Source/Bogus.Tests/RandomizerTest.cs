@@ -246,6 +246,17 @@ namespace Bogus.Tests
                 '\u7a91',
                 '\u4d58');
         }
+
+        [Test]
+        public void random_word_tests()
+        {
+            //r.Words(3).Should().Be("");
+            //r.Words(5).Split(' ').Length.Should().Be(4);
+            r.WordsArray(5).Length.Should().Be(5);
+            r.WordsArray(1, 80).Length.Should().BeInRange(1,80); //.Should().BeInRange(1, 80);
+            r.WordsArray(10, 20).Length.Should().BeInRange(10, 20);
+
+        }
     }
 
 

@@ -67,11 +67,7 @@ namespace Bogus.DataSets
         /// </summary>
         public string ProductName()
         {
-            return string.Format( "{0} {1} {2}",
-                ProductAdjective(),
-                ProductMaterial(),
-                Product()
-                );
+            return $"{ProductAdjective()} {ProductMaterial()} {Product()}";
         }
 
         /// <summary>

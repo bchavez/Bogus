@@ -129,11 +129,7 @@ namespace Bogus.DataSets
         /// </summary>
         public string Ip()
         {
-            return string.Format("{0}.{1}.{2}.{3}",
-                Random.Number(255),
-                Random.Number(255),
-                Random.Number(255),
-                Random.Number(255));
+            return $"{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
         }
 
         /// <summary>

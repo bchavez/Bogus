@@ -73,14 +73,14 @@ namespace Bogus
             MustashMethod mm;
             if( !MustashMethods.TryGetValue(methodName, out mm) )
             {
-                throw new ArgumentException(string.Format("Unknown method {0} can't be found.", methodName));
+                throw new ArgumentException($"Unknown method {methodName} can't be found.");
             }
 
             var module = dataSets.FirstOrDefault(o => o.GetType() == mm.Method.DeclaringType);
 
             if( module == null )
             {
-                throw new ArgumentException(string.Format("Can't parse {0} because the dataset was not provided in the dataSets parameter.", methodName));
+                throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the dataSets parameter.");
             }
 
             var fakeVal = mm.Method.Invoke(module, mm.OptionalArgs) as string;
@@ -117,7 +117,7 @@ namespace Bogus
                 var module = dataSets.FirstOrDefault(o => o.GetType() == mustashMethod.Method.DeclaringType);
 
                 if( module == null )
-                    throw new ArgumentException(string.Format("Can't parse {0} because the dataset was not provided in the dataSets parameter.", handle));
+                    throw new ArgumentException($"Can't parse {handle} because the dataset was not provided in the dataSets parameter.");
 
                 var val = mustashMethod.Method.Invoke(module, null) as string;
 

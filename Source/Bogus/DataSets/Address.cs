@@ -135,7 +135,7 @@ namespace Bogus.DataSets
             var street = StreetAddress();
             var city = City();
             var country = Country();
-            return string.Format("{0}, {1}, {2}", street, city, country);
+            return $"{street}, {city}, {country}";
         }
 
         /// <summary>

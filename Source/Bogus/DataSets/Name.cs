@@ -139,7 +139,7 @@
             var level = JobArea();
             var job = JobType();
 
-            return string.Format("{0} {1} {2}", descriptor, level, job);
+            return $"{descriptor} {level} {job}";
         }
 
         /// <summary>

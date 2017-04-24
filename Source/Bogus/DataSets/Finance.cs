@@ -48,7 +48,7 @@ namespace Bogus.DataSets
         public string AccountName()
         {
             var type = GetRandomArrayItem("account_type");
-            return string.Format("{0} Account", type);
+            return $"{type} Account";
         }
 
         /// <summary>

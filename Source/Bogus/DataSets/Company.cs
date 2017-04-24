@@ -63,10 +63,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string CatchPhrase()
         {
-            return string.Format("{0} {1} {2}",
-                CatchPhraseAdjective(),
-                CatchPhraseDescriptor(),
-                CatchPhraseNoun());
+            return $"{CatchPhraseAdjective()} {CatchPhraseDescriptor()} {CatchPhraseNoun()}";
         }
 
         /// <summary>
@@ -75,10 +72,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Bs()
         {
-            return string.Format("{0} {1} {2}",
-                BsAdjective(),
-                BsBuzz(),
-                BsNoun());
+            return $"{BsAdjective()} {BsBuzz()} {BsNoun()}";
         }
 
 #pragma warning disable 1591

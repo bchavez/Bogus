@@ -113,11 +113,11 @@ namespace Bogus
             Func<Faker, T, object> invoker = (f, t) => setter(f);
 
             var rule = new PopulateAction<T>
-            {
-                Action = invoker,
-                RuleSet = currentRuleSet,
-                PropertyName = propertyOrField,
-            };
+                {
+                    Action = invoker,
+                    RuleSet = currentRuleSet,
+                    PropertyName = propertyOrField,
+                };
 
             this.Actions.Add(currentRuleSet, propertyOrField, rule);
 
@@ -191,13 +191,11 @@ namespace Bogus
 
         private Type GetFieldOrPropertyType(MemberInfo mi)
         {
-            var pi = mi as PropertyInfo;
-            if( pi != null )
+            if( mi is PropertyInfo pi )
             {
                 return pi.PropertyType;
             }
-            var fi = mi as FieldInfo;
-            if( fi != null )
+            if( mi is FieldInfo fi )
             {
                 return fi.FieldType;
             }
@@ -228,8 +226,7 @@ namespace Bogus
         {
             var propNameOrField = PropertyName.For(propertyOrField);
 
-            MemberInfo mi;
-            if( !this.TypeProperties.TryGetValue(propNameOrField, out mi) )
+            if( !this.TypeProperties.TryGetValue(propNameOrField, out MemberInfo mi) )
             {
                 throw new ArgumentException($"The property or field {propNameOrField} was not found on {typeof(T)} during the binding discovery of T. Can't ignore something that doesn't exist.");
             }
@@ -337,13 +334,11 @@ namespace Bogus
 
                 foreach ( var ruleSet in ruleSets )
                 {
-                    Dictionary<string, PopulateAction<T>> populateActions;
-                    if( this.Actions.TryGetValue(ruleSet, out populateActions) )
+                    if( this.Actions.TryGetValue(ruleSet, out var populateActions) )
                     {
                         foreach( var action in populateActions.Values )
                         {
-                            MemberInfo member;
-                            typeProps.TryGetValue(action.PropertyName, out member);
+                            typeProps.TryGetValue(action.PropertyName, out MemberInfo member);
                             var valueFactory = action.Action;
 
                             if( member != null )
@@ -365,8 +360,7 @@ namespace Bogus
 
                 foreach( var ruleSet in ruleSets )
                 {
-                    FinalizeAction<T> finalizer;
-                    if( this.FinalizeActions.TryGetValue(ruleSet, out finalizer) )
+                    if( this.FinalizeActions.TryGetValue(ruleSet, out FinalizeAction<T> finalizer) )
                     {
                         finalizer.Action(this.FakerHub, instance);
                     }
@@ -431,24 +425,30 @@ namespace Bogus
                 var strictMode = Faker.DefaultStrictMode;
                 this.StrictModes.TryGetValue(rule, out strictMode);
 
-                HashSet<string> ignores;
-                this.Ignores.TryGetValue(rule, out ignores);
+                this.Ignores.TryGetValue(rule, out HashSet<string> ignores);
 
-                Dictionary<string, PopulateAction<T>> populateActions;
-                this.Actions.TryGetValue(rule, out populateActions);
+                this.Actions.TryGetValue(rule, out var populateActions);
 
                 var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                if (ignores != null)
+                if( ignores != null )
+                {
                     finalSet.UnionWith(ignores);
-                if (populateActions != null)
+                }
+                if( populateActions != null )
+                {
                     finalSet.UnionWith(populateActions.Keys);
+                }
 
                 if (!finalSet.SetEquals(propsOrFieldsOfT))
                 {
                     var delta = new List<string>();
-                    foreach (var propOrField in propsOrFieldsOfT)
-                        if (!finalSet.Contains(propOrField))
+                    foreach( var propOrField in propsOrFieldsOfT )
+                    {
+                        if( !finalSet.Contains(propOrField) )
+                        {
                             delta.Add(propOrField);
+                        }
+                    }
                     result.MissingRules.AddRange(delta);
                     result.IsValid = !strictMode;
                 }

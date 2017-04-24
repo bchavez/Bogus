@@ -5,6 +5,7 @@
 * Added `ru` (Russian locale) hacker adjective, ing-verb, noun, and verb.
 * Added `Internet.Mac` address separator parameter.
 * Feature parity with **faker.js** @ 6cdb93ef...
+* Using new C# 7 features. =)
 
 ## v15.0.1
 * Building with Visual Studio 2017.

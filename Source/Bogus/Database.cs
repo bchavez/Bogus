@@ -60,7 +60,7 @@ namespace Bogus
         /// </summary>
         public static JToken Get(string category, string key, string locale = "en", string localeFallback = "en" )
         {
-            var path = string.Format("{0}.{1}.{2}", locale, category, key);
+            var path = $"{locale}.{category}.{key}";
             var jtoken = Data.Value.SelectToken(path);
 
             if( jtoken != null && jtoken.HasValues )
@@ -69,7 +69,7 @@ namespace Bogus
             }
 
             //fallback path
-            var fallbackPath = string.Format("{0}.{1}.{2}", localeFallback, category, key);
+            var fallbackPath = $"{localeFallback}.{category}.{key}";
 
             return Data.Value.SelectToken(fallbackPath);
         }

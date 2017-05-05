@@ -130,11 +130,11 @@ namespace Bogus
         /// </summary>
         //need to think more about the naming on this one before exposing
         //API to public.
-        internal Faker<T> Rules(Action<Faker, T> setter)
+        internal Faker<T> Rules(Action<Faker, T> setActions)
         {
             Func<Faker, T, object> invoker = (f, t) =>
                 {
-                    setter(f, t);
+                    setActions(f, t);
                     return null;
                 };
             var guid = Guid.NewGuid().ToString();
@@ -390,9 +390,16 @@ namespace Bogus
         /// <param name="ruleSets"></param>
         public virtual void AssertConfigurationIsValid(string ruleSets = null)
         {
-            var rules = ruleSets == null
-                ? this.Actions.Keys.ToArray()
-                : ParseDirtyRulesSets(ruleSets);
+            string[] rules;
+            if( ruleSets is null )
+            {
+                rules = this.Actions.Keys.ToArray();
+            }
+            else
+            {
+                rules = ParseDirtyRulesSets(ruleSets);
+            }
+
             var result = ValidateInternal(rules);
             if (!result.IsValid)
             {

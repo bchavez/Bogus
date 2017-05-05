@@ -166,13 +166,5 @@
         {
             return GetRandomArrayItem("title.job");
         }
-
-        /// <summary>
-        /// Get a random occupation.
-        /// </summary>
-        public string Occupation()
-        {
-            return GetRandomArrayItem("occupation");
-        }
     }
 }

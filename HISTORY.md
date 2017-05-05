@@ -1,6 +1,5 @@
 ## v15.0.2
 * Added `Address.FullAddress`
-* Added `Name.Occupation` as an alternate source of job titles.
 * Added `Internet.UrlWithPath` allowing to create URLs with random paths.
 * Added `ru` (Russian locale) hacker adjective, ing-verb, noun, and verb.
 * Added `Internet.Mac` address separator parameter.

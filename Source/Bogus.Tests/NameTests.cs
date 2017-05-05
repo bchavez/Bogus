@@ -121,11 +121,5 @@ namespace Bogus.Tests
             //switch to EN
             n["en"].LastName().Should().Be("Schultz");
         }
-
-        [Test]
-        public void get_a_random_occupation()
-        {
-            name.Occupation().Should().Be("Journeyman");
-        }
     }
 }

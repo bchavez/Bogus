@@ -349,7 +349,6 @@ public void Or_Using_DataSets_Directly()
 	* `JobDescriptor` - Get a job description.
 	* `JobArea` - Get a job area expertise.
 	* `JobType` - Get a type of job.
-	* `Occupation` - Get a random occupation.
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.

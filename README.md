@@ -352,6 +352,9 @@ public void Or_Using_DataSets_Directly()
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+* **`Rant`**
+	* `Review` - Generates a random user review.
+	* `Reviews` - Generate an array of random reviews.
 * **`System`**
 	* `FileName` - Get a random file name
 	* `MimeType` - Get a random mime type

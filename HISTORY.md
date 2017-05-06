@@ -1,3 +1,6 @@
+## v15.0.3
+* Added `f => f.Rant` to generate random user content like product reviews.
+
 ## v15.0.2
 * Added `Address.FullAddress`
 * Added `Internet.UrlWithPath` allowing to create URLs with random paths.

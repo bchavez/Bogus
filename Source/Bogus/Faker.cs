@@ -36,6 +36,7 @@ namespace Bogus
             this.System = new DataSets.System(locale);
             this.Commerce = new Commerce(locale);
             this.Database = new DataSets.Database();
+            this.Rant = new Rant();
 
             this.Random = new Randomizer();
 
@@ -155,6 +156,13 @@ namespace Bogus
         /// </summary>
         [RegisterMustasheMethods]
         public DataSets.Database Database { get; set; }
+
+        /// <summary>
+        /// Generates random user content.
+        /// </summary>
+        [RegisterMustasheMethods]
+        public Rant Rant { get; set; }
+
 
         /// <summary>
         /// Helper method to pick a random element.

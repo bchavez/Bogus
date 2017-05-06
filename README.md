@@ -28,6 +28,8 @@ Install-Package Bogus
 * **[.NET Rocks Podcast - #BetterKnowThatFramework - March 16th 2017](https://twitter.com/bchavez/status/842479138850070528)**
 * **[.NET Engineering Blog: NuGet Package of the week #1. - "This week in .NET - December 8th 2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)**
 
+##### Blog Posts
+* Mark Timmings - [Auto generating test data with Bogus](http://putridparrot.com/blog/auto-generating-test-data-with-bogus/)
 
 Usage
 -----
@@ -347,10 +349,12 @@ public void Or_Using_DataSets_Directly()
 	* `JobDescriptor` - Get a job description.
 	* `JobArea` - Get a job area expertise.
 	* `JobType` - Get a type of job.
-	* `Occupation` - Get a random occupation.
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+* **`Rant`**
+	* `Review` - Generates a random user review.
+	* `Reviews` - Generate an array of random reviews.
 * **`System`**
 	* `FileName` - Get a random file name
 	* `MimeType` - Get a random mime type

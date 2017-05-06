@@ -47,6 +47,9 @@
       <HintPath>..\packages\NUnit.3.6.1\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rant, Version=3.0.508.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rant.3.0.508\lib\net45\Rant.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -90,6 +93,8 @@
     <Compile Include="PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RandomizerTest.cs" />
+    <Compile Include="RantTests.cs" />
+    <Compile Include="Rant_Generator.cs" />
     <Compile Include="README_Generator.cs" />
     <Compile Include="RuleSetTests.cs" />
     <Compile Include="SeededTest.cs" />
@@ -103,12 +108,18 @@
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Rantionary-3.0.17.rantpkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bogus\Bogus.csproj">
       <Project>{340a2fe9-5b52-4fd7-9d21-83ccf1621e09}</Project>
       <Name>Bogus</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Rant License.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

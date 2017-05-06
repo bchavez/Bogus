@@ -339,6 +339,21 @@ namespace Bogus.Tests
             result.Item.Should().Be("Computer");
         }
 
+        [Test]
+        public void cannot_use_rules_with_strictmode()
+        {
+            var faker = new Faker<Order>()
+                .Rules((f, o) =>
+                    {
+                        o.Quantity = f.Random.Number(1, 4);
+                        o.Item = f.Commerce.Product();
+                        o.OrderId = 25;
+                    })
+                .StrictMode(true);
+
+            Action act =()=> faker.AssertConfigurationIsValid();
+            act.ShouldThrow<ValidationException>();
+        }
     }
 
 }

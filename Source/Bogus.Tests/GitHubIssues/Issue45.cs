@@ -20,7 +20,7 @@ namespace Bogus.Tests.GitHubIssues
 
             var test = new Faker<Issue45Object>()
                 .RuleFor(p => p.Id, f => ids++)
-                .RuleFor(p => p.Phones, f => f.Generate(5, () => f.Phone.PhoneNumber()).ToList());
+                .RuleFor(p => p.Phones, f => f.Make(5, () => f.Phone.PhoneNumber()).ToList());
 
             test.Generate(1).First().Phones.Count.Should().Be(5);
         }
@@ -30,7 +30,7 @@ namespace Bogus.Tests.GitHubIssues
         {
             var test = new Faker<Issue45Object>()
                 .RuleFor(p => p.Id, f => f.IndexVariable++)
-                .RuleFor(p => p.Phones, f => f.Generate(5, i => i.ToString()).ToList());
+                .RuleFor(p => p.Phones, f => f.Make(5, i => i.ToString()).ToList());
 
             test.Generate(1).First().Phones.Select(int.Parse)
                 .Distinct().Should().Equal(1, 2, 3, 4, 5);

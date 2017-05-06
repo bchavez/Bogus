@@ -12,7 +12,7 @@ namespace Bogus.Tests
     {
         private Randomizer r;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void BeforeRunningTestSession()
         {
             r = new Randomizer();

@@ -10,13 +10,13 @@ namespace Bogus.Tests
     [TestFixture]
     public class HandleBarTests
     {
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void BeforeRunningTestSession()
         {
 
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDown]
         public void AfterRunningTestSession()
         {
 

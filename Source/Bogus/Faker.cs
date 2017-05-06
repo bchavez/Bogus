@@ -194,7 +194,16 @@ namespace Bogus
         /// <summary>
         /// Helper method to call faker actions multiple times and return the result as IEnumerable
         /// </summary>
+        [Obsolete("Please use f => f.Make(...) instead of f => f.Generate(...).")]
         public IEnumerable<T> Generate<T>(int count, Func<T> action)
+        {
+            return Make(count, action);
+        }
+
+        /// <summary>
+        /// Helper method to call faker actions multiple times and return the result as IEnumerable
+        /// </summary>
+        public IEnumerable<T> Make<T>(int count, Func<T> action)
         {
             return Enumerable.Range(1, count).Select(n => action());
         }
@@ -203,7 +212,16 @@ namespace Bogus
         /// Helper method to call faker actions multiple times and return the result as IEnumerable.
         /// This method passes in the current index of the generation.
         /// </summary>
+        [Obsolete("Please use f => f.Make(...) instead of f => f.Generate(...)")]
         public IEnumerable<T> Generate<T>(int count, Func<int,T> action)
+        {
+            return Make(count, action);
+        }
+        /// <summary>
+        /// Helper method to call faker actions multiple times and return the result as IEnumerable.
+        /// This method passes in the current index of the generation.
+        /// </summary>
+        public IEnumerable<T> Make<T>(int count, Func<int, T> action)
         {
             return Enumerable.Range(1, count).Select(action);
         }

@@ -30,5 +30,34 @@ namespace Bogus.Tests
             testOrders.Invoking(faker => faker.Generate())
                 .ShouldNotThrow<InvalidOperationException>();
         }
+
+        [Test]
+        public void cannot_use_rules_with_strictmode()
+        {
+            var faker = new Faker<Examples.Order>()
+                .Rules((f, o) =>
+                    {
+                        o.Quantity = f.Random.Number(1, 4);
+                        o.Item = f.Commerce.Product();
+                        o.OrderId = 25;
+                    })
+                .StrictMode(true);
+
+            Action act = () => faker.AssertConfigurationIsValid();
+            act.ShouldThrow<ValidationException>();
+
+            var faker2 = new Faker<Examples.Order>()
+                .StrictMode(true)
+                .Rules((f, o) =>
+                    {
+                        o.Quantity = f.Random.Number(1, 4);
+                        o.Item = f.Commerce.Product();
+                        o.OrderId = 25;
+                    });
+
+            Action act2 = () => faker2.AssertConfigurationIsValid();
+            act2.ShouldThrow<ValidationException>();
+        }
+
     }
 }

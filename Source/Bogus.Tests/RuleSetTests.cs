@@ -139,6 +139,17 @@ namespace Bogus.Tests
         }
 
 
+        public class EmptyObject { }
+
+        [Test]
+        public void can_create_a_fake_object_with_no_props_or_rules()
+        {
+            var f = new Faker<EmptyObject>()
+                .StrictMode(true);
+
+            f.Generate().Should().NotBeNull();
+        }
+
     }
 
 }

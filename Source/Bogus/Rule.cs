@@ -11,7 +11,6 @@ namespace Bogus
         /// <summary>
         /// Populate action
         /// </summary>
-        //public Func<Faker, T, object> PopulateAction { get; set; }
         public T Action { get; set; }
         /// <summary>
         /// Property name, maybe null for finalize or create.
@@ -22,6 +21,11 @@ namespace Bogus
         /// The rule set this rule belongs to.
         /// </summary>
         public string RuleSet { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Prohibits the rule from being applied in strict mode.
+        /// </summary>
+        public bool ProhibtInStrictMode { get; set; } = false;
     }
 
     public class PopulateAction<T> : Rule<Func<Faker, T, object>>

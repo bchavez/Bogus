@@ -126,11 +126,10 @@ namespace Bogus
 
         /// <summary>
         /// Gives you a way to specify multiple rules inside an action
-        /// without having to call RuleFor multiple times.
+        /// without having to call RuleFor multiple times. Note: StrictMode
+        /// must be false since property rules cannot be individually checked.
         /// </summary>
-        //need to think more about the naming on this one before exposing
-        //API to public.
-        internal Faker<T> Rules(Action<Faker, T> setActions)
+        public Faker<T> Rules(Action<Faker, T> setActions)
         {
             Func<Faker, T, object> invoker = (f, t) =>
                 {
@@ -142,7 +141,8 @@ namespace Bogus
                 {
                     Action = invoker,
                     RuleSet = currentRuleSet,
-                    PropertyName = guid
+                    PropertyName = guid,
+                    ProhibtInStrictMode = true
                 };
             this.Actions.Add(currentRuleSet, guid, rule);
             return this;
@@ -409,55 +409,84 @@ namespace Bogus
 
         private ValidationException MakeValidationException(ValidationResult result)
         {
-            var message = new StringBuilder()
-                .AppendLine("Faker validation error. Validation was called to ensure all properties / fields have rules.")
+            var builder = new StringBuilder();
+
+            result.ExtraMessages.ForEach(m =>
+                {
+                    builder.AppendLine(m);
+                    builder.AppendLine();
+                }); 
+  
+            builder.AppendLine("Validation was called to ensure all properties / fields have rules.")
                 .AppendLine($"There are missing rules for Faker<T> '{typeof(T).Name}'.")
                 .AppendLine("=========== Missing Rules ===========");
 
             foreach( var fieldOrProp in result.MissingRules )
             {
-                message.AppendLine(fieldOrProp);
+                builder.AppendLine(fieldOrProp);
             }
 
-            return new ValidationException(message.ToString());
+            return new ValidationException(builder.ToString().Trim());
         }
 
         private ValidationResult ValidateInternal(string[] ruleSets)
         {
             var result = new ValidationResult { IsValid = true };
 
-            var propsOrFieldsOfT = this.TypeProperties.Keys;
+            var binderPropsOrFieldsOfT = this.TypeProperties.Keys;
             foreach (var rule in ruleSets)
             {
                 var strictMode = Faker.DefaultStrictMode;
                 this.StrictModes.TryGetValue(rule, out strictMode);
 
+                //If strictMode is not enabled, skip and move on to the next ruleSet.
+                if ( !strictMode ) continue;
+
+                //Otherwise, we need to take a diff of what the user
+                //specified and what the Binder found reflecting over
+                //type T.
                 this.Ignores.TryGetValue(rule, out HashSet<string> ignores);
 
                 this.Actions.TryGetValue(rule, out var populateActions);
 
-                var finalSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                var userSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
                 if( ignores != null )
                 {
-                    finalSet.UnionWith(ignores);
+                    userSet.UnionWith(ignores);
                 }
                 if( populateActions != null )
                 {
-                    finalSet.UnionWith(populateActions.Keys);
+                    userSet.UnionWith(populateActions.Keys);
                 }
 
-                if (!finalSet.SetEquals(propsOrFieldsOfT))
+                //Get the set properties or fields that are only
+                //known to the binder, while removing
+                //items in userSet that are known to both the user and binder.
+
+                userSet.SymmetricExceptWith(binderPropsOrFieldsOfT);
+
+                //What's left in userSet is the set of properties or fields
+                //that the user does not know about + .Rule() methods.
+
+                if( userSet.Count > 0 )
                 {
-                    var delta = new List<string>();
-                    foreach( var propOrField in propsOrFieldsOfT )
+                    foreach( var propOrFieldOfT in userSet )
                     {
-                        if( !finalSet.Contains(propOrField) )
+                        if( populateActions.TryGetValue(propOrFieldOfT, out var populateAction) )
+                        {   // Very much a .Rules() action
+                            if( populateAction.ProhibtInStrictMode )
+                            {
+                                result.ExtraMessages.Add(
+                                    $"When StrictMode is set to True the Faker<{typeof(T).Name}>.Rules(...) method cannot verify that all properties have rules. You need to use Faker<{typeof(T).Name}>.RuleFor( x => x.Prop, ...) for each property to ensure each property has an associated rule when StrictMode is true; otherwise, set StrictMode to False in order to use Faker<{typeof(T).Name}>.Rules() method.");
+                                result.IsValid = false;
+                            }
+                        }
+                        else //The user doesn't know about this property or field. Log it as a validation error.
                         {
-                            delta.Add(propOrField);
+                            result.MissingRules.Add(propOrFieldOfT);
+                            result.IsValid = false;
                         }
                     }
-                    result.MissingRules.AddRange(delta);
-                    result.IsValid = !strictMode;
                 }
             }
             return result;

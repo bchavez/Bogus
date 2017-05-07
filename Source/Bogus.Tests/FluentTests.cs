@@ -301,7 +301,7 @@ namespace Bogus.Tests
         }
 
         [Test]
-        public void create_rule_for_an_object()
+        public void create_rules_for_an_object_the_easy_way()
         {
             var faker = new Faker<Order>()
                 .Rules((f, o) =>
@@ -312,10 +312,10 @@ namespace Bogus.Tests
                     });
 
             Order result = faker;
+            result.Dump();
             result.Item.Should().Be("Computer");
             result.OrderId.Should().Be(25);
             result.Quantity.Should().BeInRange(1, 4);
-
         }
 
         [Test]
@@ -337,22 +337,6 @@ namespace Bogus.Tests
             Order result = faker2;
             result.OrderId.Should().Be(26);
             result.Item.Should().Be("Computer");
-        }
-
-        [Test]
-        public void cannot_use_rules_with_strictmode()
-        {
-            var faker = new Faker<Order>()
-                .Rules((f, o) =>
-                    {
-                        o.Quantity = f.Random.Number(1, 4);
-                        o.Item = f.Commerce.Product();
-                        o.OrderId = 25;
-                    })
-                .StrictMode(true);
-
-            Action act =()=> faker.AssertConfigurationIsValid();
-            act.ShouldThrow<ValidationException>();
         }
     }
 

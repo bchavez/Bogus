@@ -228,6 +228,23 @@ public void Or_Using_DataSets_Directly()
   "Quantity": 7
 } */
 ```
+##### Bulk Rules
+Sometimes writing `.RuleFor(x => x.Prop, ...)` can get repetitive, use the `.Rules((f, t) => {...})` shortcut to specify rules in bulk as shown below:
+```
+public void create_rules_for_an_object_the_easy_way()
+{
+    var faker = new Faker<Order>()
+        .StrictMode(false)
+        .Rules((f, o) =>
+            {
+                o.Quantity = f.Random.Number(1, 4);
+                o.Item = f.Commerce.Product();
+                o.OrderId = 25;
+            });
+    Order o = faker.Generate();
+}
+```
+***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be indpendently checked to ensure each property has a rule.
 
 ### Bogus API Support
 * **`Address`**

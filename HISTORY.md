@@ -1,5 +1,6 @@
 ## v15.0.3
 * Added `f => f.Rant` to generate random user content like product reviews.
+* Added `new Faker[T].Rules( (f, t) => ...)` as a shortcut for building rules quickly.
 
 ## v15.0.2
 * Added `Address.FullAddress`

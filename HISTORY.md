@@ -1,8 +1,6 @@
 ## v15.0.3
 * Added `f => f.Rant` to generate random user content like product reviews.
 * Added `new Faker[T].Rules( (f, t) => ...)` as a shortcut for building rules quickly.
-
-## v15.0.2
 * Added `Address.FullAddress`
 * Added `Internet.UrlWithPath` allowing to create URLs with random paths.
 * Added `ru` (Russian locale) hacker adjective, ing-verb, noun, and verb.

@@ -228,23 +228,6 @@ public void Or_Using_DataSets_Directly()
   "Quantity": 7
 } */
 ```
-##### Bulk Rules
-Sometimes writing `.RuleFor(x => x.Prop, ...)` can get repetitive, use the `.Rules((f, t) => {...})` shortcut to specify rules in bulk as shown below:
-```
-public void create_rules_for_an_object_the_easy_way()
-{
-    var faker = new Faker<Order>()
-        .StrictMode(false)
-        .Rules((f, o) =>
-            {
-                o.Quantity = f.Random.Number(1, 4);
-                o.Item = f.Commerce.Product();
-                o.OrderId = 25;
-            });
-    Order o = faker.Generate();
-}
-```
-***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be indpendently checked to ensure each property has a rule.
 
 ### Bogus API Support
 * **`Address`**
@@ -386,7 +369,7 @@ public void create_rules_for_an_object_the_easy_way()
 
 ### Helper Methods
 
-##### Person
+#### Person
 If you want to generate a `Person` with context relevant properties like
 an email that looks like it belongs to someone with the same first/last name,
 create a person!
@@ -428,7 +411,7 @@ public void Create_Context_Related_Person()
 } */
 ```
 
-##### Replace
+#### Replace
 
 Replace a formatted string with random numbers `#`, letters `?`, or `*` random number or letter:
 ```csharp
@@ -497,6 +480,24 @@ testOrder2.Dump();
 //Explicit works too!
 var anotherOrder = (Order)orderFaker;
 ```
+
+#### Bulk Rules
+Sometimes writing `.RuleFor(x => x.Prop, ...)` can get repetitive, use the `.Rules((f, t) => {...})` shortcut to specify rules in bulk as shown below:
+```
+public void create_rules_for_an_object_the_easy_way()
+{
+    var faker = new Faker<Order>()
+        .StrictMode(false)
+        .Rules((f, o) =>
+            {
+                o.Quantity = f.Random.Number(1, 4);
+                o.Item = f.Commerce.Product();
+                o.OrderId = 25;
+            });
+    Order o = faker.Generate();
+}
+```
+***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be indpendently checked to ensure each property has a rule.
 
 Building
 --------

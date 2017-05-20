@@ -4,13 +4,12 @@ using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
 using Rant;
 using Rant.Resources;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    [Explicit]
     public class Rant_Generator
     {
         public const string Package = "Rantionary-3.0.17.rantpkg";
@@ -31,7 +30,7 @@ namespace Bogus.Tests
             rant.LoadPackage(package);
         }
 
-        [Test]
+        [Fact(Skip = "Explicit")]
         public void generate_product_reviews()
         {
             var reviews = new[]
@@ -70,7 +69,7 @@ namespace Bogus.Tests
                 .Concat(singles)
                 .Distinct()
                 .ToList();
-            Inject("en","rant","review", genReviews);
+            Inject("en", "rant", "review", genReviews);
         }
 
         private void Inject(string locale, string category, string section, List<string> genReviews)

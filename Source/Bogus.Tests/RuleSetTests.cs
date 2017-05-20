@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    [TestFixture]
     public class RuleSetTests : SeededTest
     {
-        [SetUp]
-        public void BeforeEachTest()
+        public RuleSetTests()
         {
             Faker.DefaultStrictMode = false;
         }
-
 
         public class Customer
         {
@@ -22,7 +19,7 @@ namespace Bogus.Tests
             public bool GoodCustomer { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void should_be_able_to_create_a_rule_set()
         {
             var orderIds = 0;
@@ -47,19 +44,19 @@ namespace Bogus.Tests
             results.Dump();
         }
 
-        [Test]
+        [Fact]
         public void should_be_able_to_run_two_rules_with_last_one_taking_presidence()
         {
             var orderIds = 0;
             var testCustomers = new Faker<Customer>()
                 .RuleSet("Good",
                     (set) =>
-                    {
-                        set.StrictMode(true);
-                        set.RuleFor(c => c.Id, f => orderIds++);
-                        set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                        set.RuleFor(c => c.GoodCustomer, f => true);
-                    })
+                        {
+                            set.StrictMode(true);
+                            set.RuleFor(c => c.Id, f => orderIds++);
+                            set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
+                            set.RuleFor(c => c.GoodCustomer, f => true);
+                        })
                 .StrictMode(true)
                 .RuleFor(c => c.Id, f => orderIds++)
                 .RuleFor(c => c.Description, f => f.Lorem.Sentence())
@@ -72,19 +69,19 @@ namespace Bogus.Tests
             results.Dump();
         }
 
-        [Test]
+        [Fact]
         public void should_be_able_to_run_default_ruleset()
         {
             var orderIds = 0;
             var testCustomers = new Faker<Customer>()
                 .RuleSet("Good",
                     (set) =>
-                    {
-                        set.StrictMode(true);
-                        set.RuleFor(c => c.Id, f => orderIds++);
-                        set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                        set.RuleFor(c => c.GoodCustomer, f => true);
-                    })
+                        {
+                            set.StrictMode(true);
+                            set.RuleFor(c => c.Id, f => orderIds++);
+                            set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
+                            set.RuleFor(c => c.GoodCustomer, f => true);
+                        })
                 .StrictMode(true)
                 .RuleFor(c => c.Id, f => orderIds++)
                 .RuleFor(c => c.Description, f => f.Lorem.Sentence())
@@ -97,7 +94,7 @@ namespace Bogus.Tests
             results.Dump();
         }
 
-        [Test]
+        [Fact]
         public void should_throw_error_when_strict_mode_is_set()
         {
             var orderIds = 0;
@@ -122,7 +119,7 @@ namespace Bogus.Tests
             act.ShouldThrow<InvalidOperationException>();
         }
 
-        [Test]
+        [Fact]
         public void should_be_able_to_override_existing_rules()
         {
             var testCustomers = new Faker<Customer>()
@@ -139,9 +136,11 @@ namespace Bogus.Tests
         }
 
 
-        public class EmptyObject { }
+        public class EmptyObject
+        {
+        }
 
-        [Test]
+        [Fact]
         public void can_create_a_fake_object_with_no_props_or_rules()
         {
             var f = new Faker<EmptyObject>()
@@ -149,7 +148,5 @@ namespace Bogus.Tests
 
             f.Generate().Should().NotBeNull();
         }
-
     }
-
 }

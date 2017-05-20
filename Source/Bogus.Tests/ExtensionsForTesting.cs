@@ -9,6 +9,7 @@ namespace Bogus.Tests
         {
             Console.WriteLine(obj.DumpString());
         }
+
         public static string DumpString(this object obj)
         {
             return JsonConvert.SerializeObject(obj, Formatting.Indented);

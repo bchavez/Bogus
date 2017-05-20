@@ -150,16 +150,17 @@ Target "Clean" (fun _ ->
 
 )
 
+open Fake.Testing
+
 let RunTests() =
     CreateDir Folders.Test
-    let nunit = findToolInSubPath "nunit3-console.exe" Folders.Lib
-    let nunitFolder = System.IO.Path.GetDirectoryName(nunit)
+    let xunit = findToolInSubPath "xunit.console.exe" Folders.Lib
 
     !! TestProject.TestAssembly
-    |> NUnit3 (fun p -> { p with 
-                            ProcessModel = NUnit3ProcessModel.SingleProcessModel
-                            ToolPath = nunit
-                            ResultSpecs = [Files.TestResultFile]
+    |> xUnit2 (fun p -> { p with 
+                            ToolPath = xunit
+                            ShadowCopy = false
+                            XmlOutputPath = Some(Files.TestResultFile)
                             ErrorLevel = TestRunnerErrorLevel.Error }) 
 
 
@@ -177,7 +178,7 @@ Target "test" (fun _ ->
 Target "citest" (fun _ ->
     trace "CI TEST"
     RunTests()
-    UploadTestResultsXml TestResultsType.NUnit3 Folders.Test
+    UploadTestResultsXml TestResultsType.Xunit Folders.Test
 )
 
 

@@ -1,13 +1,12 @@
 using System;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    [TestFixture]
     public class StrictModeTests
     {
-        [Test]
+        [Fact]
         public void should_throw_exception_on_incomplete_rules()
         {
             var testOrders = new Faker<Examples.Order>()
@@ -18,7 +17,7 @@ namespace Bogus.Tests
                 .ShouldThrow<InvalidOperationException>();
         }
 
-        [Test]
+        [Fact]
         public void should_not_throw_exception_on_complete_rule_set()
         {
             var testOrders = new Faker<Examples.Order>()
@@ -31,7 +30,7 @@ namespace Bogus.Tests
                 .ShouldNotThrow<InvalidOperationException>();
         }
 
-        [Test]
+        [Fact]
         public void cannot_use_rules_with_strictmode()
         {
             var faker = new Faker<Examples.Order>()
@@ -58,6 +57,5 @@ namespace Bogus.Tests
             Action act2 = () => faker2.AssertConfigurationIsValid();
             act2.ShouldThrow<ValidationException>();
         }
-
     }
 }

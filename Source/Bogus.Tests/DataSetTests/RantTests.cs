@@ -1,26 +1,18 @@
 ﻿using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.DataSetTests
 {
-    [TestFixture]
     public class RantTests : SeededTest
     {
-        private DataSets.Rant rant;
-
-        [SetUp]
-        public void BeforeEachTest()
+        public RantTests()
         {
             rant = new DataSets.Rant();
         }
 
-        [Test]
-        public void can_get_random_product_review()
-        {
-            rant.Review("foobar").Should().Be("one of my hobbies is poetry. and when i'm writing poems this works great.");
-        }
+        private readonly DataSets.Rant rant;
 
-        [Test]
+        [Fact]
         public void can_get_an_array_of_reviews()
         {
             var reviews = rant.Reviews("foobar", 3);
@@ -33,6 +25,12 @@ namespace Bogus.Tests
                 };
             //reviews.Length.Should().Be(3);
             reviews.Should().BeEquivalentTo(truth);
+        }
+
+        [Fact]
+        public void can_get_random_product_review()
+        {
+            rant.Review("foobar").Should().Be("one of my hobbies is poetry. and when i'm writing poems this works great.");
         }
     }
 }

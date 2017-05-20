@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -10,12 +10,12 @@ namespace Bogus.Tests.GitHubIssues
             public string Value { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void issue_23_should_be_able_to_generate_random_word_without_exception()
         {
             var faker = new Faker<TestClass>();
             faker.RuleFor(x => x.Value, faker1 => faker1.Random.Word());
-            foreach (var item in faker.Generate(1000))
+            foreach( var item in faker.Generate(1000) )
             {
                 item.Value.Should().NotBeNullOrWhiteSpace();
             }

@@ -1,45 +1,59 @@
 ﻿using Bogus.DataSets;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.DataSetTests
 {
-    [TestFixture]
     public class NameTests : SeededTest
     {
-        private Name name;
-
-        [SetUp]
-        public void BeforeEachTest()
+        public NameTests()
         {
             name = new Name();
         }
 
-        [Test]
+        private readonly Name name;
+
+        [Fact]
         public void can_get_first_name()
         {
             name.FirstName().Should().Be("Lee");
         }
 
-        [Test]
+        [Fact]
+        public void can_get_first_name_when_locale_dataset_is_split_in_male_female()
+        {
+            var n = new Name("ru");
+
+            n.FirstName().Should().Be("Анастасия");
+        }
+
+        [Fact]
         public void can_get_last_name()
         {
             name.LastName().Should().Be("Mitchell");
         }
 
-        [Test]
+        [Fact]
+        public void can_get_last_name_when_locale_dataset_is_split_in_male_female()
+        {
+            var n = new Name("ru");
+
+            n.LastName().Should().Be("Киселева");
+        }
+
+        [Fact]
         public void can_get_prefix()
         {
             name.Prefix().Should().Be("Mr.");
         }
 
-        [Test]
+        [Fact]
         public void can_get_suffix()
         {
             name.Suffix().Should().Be("V");
         }
 
-        [Test]
+        [Fact]
         public void should_be_able_to_get_any_full_name()
         {
             var n = name.FindName();
@@ -47,17 +61,10 @@ namespace Bogus.Tests
             n.Should().Contain(" ");
         }
 
-        [Test]
-        public void should_be_able_to_get_locale_full_name()
-        {
-            var n = new Name("ru");
-            n.FindName().Should().Contain(" ");
-        }
-
-        [Test]
+        [Fact]
         public void should_be_able_to_get_any_name_with_options()
         {
-            name.FindName(firstName: "cowboy")
+            name.FindName("cowboy")
                 .Should().StartWith("cowboy");
 
             name.FindName(lastName: "cowboy")
@@ -66,58 +73,50 @@ namespace Bogus.Tests
             name.FindName(withPrefix: false, withSuffix: false)
                 .Should().Contain(" ");
 
-            name.FindName(firstName: "cowboy", withPrefix: false, withSuffix: false)
+            name.FindName("cowboy", withPrefix: false, withSuffix: false)
                 .Should().StartWith("cowboy");
 
             name.FindName(lastName: "cowboy", withPrefix: false, withSuffix: false)
                 .Should().EndWith("cowboy");
         }
 
-        [Test]
-        public void should_be_able_to_get_job_title()
-        {
-            name.JobTitle().Should().Be("Investor Research Assistant");
-        }
-
-        [Test]
-        public void should_be_able_to_get_job_description()
-        {
-            name.JobDescriptor().Should().Be("Investor");
-        }
-
-        [Test]
+        [Fact]
         public void should_be_able_to_get_job_area()
         {
             name.JobArea().Should().Be("Communications");
         }
 
-        [Test]
+        [Fact]
+        public void should_be_able_to_get_job_description()
+        {
+            name.JobDescriptor().Should().Be("Investor");
+        }
+
+        [Fact]
+        public void should_be_able_to_get_job_title()
+        {
+            name.JobTitle().Should().Be("Investor Research Assistant");
+        }
+
+        [Fact]
         public void should_be_able_to_get_job_type()
         {
             name.JobType().Should().Be("Orchestrator");
         }
 
-        [Test]
-        public void can_get_first_name_when_locale_dataset_is_split_in_male_female()
+        [Fact]
+        public void should_be_able_to_get_locale_full_name()
         {
             var n = new Name("ru");
-
-            n.FirstName().Should().Be("Анастасия");
-        }
-        [Test]
-        public void can_get_last_name_when_locale_dataset_is_split_in_male_female()
-        {
-            var n = new Name("ru");
-
-            n.LastName().Should().Be("Киселева");
+            n.FindName().Should().Contain(" ");
         }
 
-        [Test]
+        [Fact]
         public void switch_locale_syntax()
         {
             var n = new Name("ru");
             n.LastName().Should().Be("Киселева");
-            
+
             //switch to EN
             n["en"].LastName().Should().Be("Schultz");
         }

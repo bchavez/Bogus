@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -17,7 +17,7 @@ namespace Bogus.Tests.GitHubIssues
             internal string LastName;
         }
 
-        [Test]
+        [Fact]
         public void issue_10_should_be_able_to_fake_fields()
         {
             var faker = new Faker<Bar>()
@@ -35,11 +35,10 @@ namespace Bogus.Tests.GitHubIssues
 
             bar.LastName.Should().NotBeNullOrEmpty();
             bar.LastName.Length.Should().BeGreaterOrEqualTo(2);
-
         }
 
 
-        [Test]
+        [Fact]
         public void issue_12_bogus_should_be_thread_safe()
         {
             int threadCount = 20;
@@ -52,13 +51,13 @@ namespace Bogus.Tests.GitHubIssues
                 .RuleFor(b => b.LastName, f => f.Name.LastName());
 
             var threads = new List<Task>();
-            for (var x = 0; x < threadCount; x++)
+            for( var x = 0; x < threadCount; x++ )
             {
                 var thread = Task.Run(() =>
-                {
-                    var fakes = faker.Generate(3);
-                    fakes.Dump();
-                });
+                    {
+                        var fakes = faker.Generate(3);
+                        fakes.Dump();
+                    });
                 threads.Add(thread);
             }
 
@@ -68,9 +67,9 @@ namespace Bogus.Tests.GitHubIssues
             barId.Should().Be(60);
 
             var result = Parallel.For(0, threadCount, i =>
-            {
-                var fakes = faker.Generate(3).ToList();
-            });
+                {
+                    var fakes = faker.Generate(3).ToList();
+                });
 
             Console.WriteLine(barId);
             barId.Should().Be(120);

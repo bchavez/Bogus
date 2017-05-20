@@ -1,14 +1,11 @@
-﻿using Bogus.DataSets;
-using FluentAssertions;
-using Newtonsoft.Json;
-using NUnit.Framework;
+﻿using FluentAssertions;
+using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.DataSetTests
 {
-    [TestFixture]
     public class CardTests : SeededTest
     {
-        [Test]
+        [Fact]
         public void should_be_able_to_get_a_contextually_bogus_person()
         {
             var card = new Person();

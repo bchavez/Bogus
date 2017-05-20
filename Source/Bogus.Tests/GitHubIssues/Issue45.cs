@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -13,7 +13,7 @@ namespace Bogus.Tests.GitHubIssues
             public List<string> Phones { get; set; } // PROBLEM !!!
         }
 
-        [Test]
+        [Fact]
         public void issue_45_better_fluency()
         {
             var ids = 0;
@@ -25,7 +25,7 @@ namespace Bogus.Tests.GitHubIssues
             test.Generate(1).First().Phones.Count.Should().Be(5);
         }
 
-        [Test]
+        [Fact]
         public void with_int_argument()
         {
             var test = new Faker<Issue45Object>()

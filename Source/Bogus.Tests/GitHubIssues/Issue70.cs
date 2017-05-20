@@ -1,37 +1,39 @@
 ﻿using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
     //https://github.com/bchavez/Bogus/issues/70
     public class Issue70 : SeededTest
     {
-        [Test]
+        [Fact]
         public void should_be_able_to_create_derrived_faker_with_class_hierarchy()
         {
             var baseBFaker = new Faker<BaseB>()
-                .RuleFor(b => b.Value, f => f.Random.Int(1,5));
+                .RuleFor(b => b.Value, f => f.Random.Int(1, 5));
 
             var derivedBFaker = new Faker<DerivedB>()
-                .RuleFor(b => b.Value, f => f.Random.Int(6,10)); ;
+                .RuleFor(b => b.Value, f => f.Random.Int(6, 10));
+            ;
 
             //Works
             var baseAFaker = new Faker<BaseA>()
-                .RuleFor(a => a.SomeProp, () => baseBFaker.Generate()); ;
+                .RuleFor(a => a.SomeProp, () => baseBFaker.Generate());
+            ;
 
             //Threw System.ArgumentException: 'An item with the same key has already been added.'
             var derivedAFaker = new Faker<DerivedA>()
                 .RuleFor(da => da.SomeProp, () => derivedBFaker.Generate());
-            
+
 
             DerivedA derivedA = derivedAFaker.Generate();
 
-            derivedA.SomeProp.Value.Should().BeInRange(6,10);
+            derivedA.SomeProp.Value.Should().BeInRange(6, 10);
             BaseA baseA = derivedA;
             baseA.SomeProp.Should().BeNull();
         }
 
-        [Test]
+        [Fact]
         public void quick_test_for_derivedC()
         {
             var fakerC = new Faker<ClassC>()
@@ -54,7 +56,6 @@ namespace Bogus.Tests.GitHubIssues
     {
         public new DerivedB SomeProp { get; set; }
     }
-
 
 
     class BaseB

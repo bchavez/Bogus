@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
     public class Issue48 : SeededTest
     {
-        [Test]
+        [Fact]
         public void issue_48()
         {
             Faker<Client> clients = new Faker<Client>()
@@ -17,16 +17,16 @@ namespace Bogus.Tests.GitHubIssues
             users.AddRange(
                 new Faker<User>()
                     .RuleFor(x => x.Name, y =>
-                    {
-                        var i = y.IndexFaker;
-                        i.Dump();
-                        return new[] { "John", "Mary", "Mike", "Tom" }[i % 4];
-                    })
+                        {
+                            var i = y.IndexFaker;
+                            i.Dump();
+                            return new[] {"John", "Mary", "Mike", "Tom"}[i % 4];
+                        })
                     .RuleFor(x => x.Email, (y, x) => $"{x.Name}@xyz.com".Replace(" ", "").ToLower())
                     .RuleFor(x => x.Client, y => y.Random.Bool() ? clients.Generate(1).First() : null)
                     .RuleFor(x => x.UserName, (y, x) => x.Email)
                     .Generate(4).ToList()
-                    );
+            );
 
             users.Dump();
 
@@ -44,8 +44,7 @@ namespace Bogus.Tests.GitHubIssues
 
         public class Client
         {
-            public string Description
-            { get; set; }
+            public string Description { get; set; }
         }
     }
 }

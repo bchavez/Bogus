@@ -7,14 +7,13 @@ using System.Xml.Linq;
 using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    [TestFixture]
     public class README_Generator
     {
-        [Test]
+        [Fact]
         public void get_available_methods()
         {
             var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -24,31 +23,31 @@ namespace Bogus.Tests
 
             var all = json.SelectTokens("doc.members.member").SelectMany(jt => jt)
                 .Select(m =>
-                {
-                    var member = m["@name"];
-                    var summary = m["summary"];
-                    if (member == null || summary == null) return null;
-
-                    var declare = member.ToString();
-                    var argPos = declare.IndexOf('(');
-                    if (argPos > 0)
                     {
-                        declare = declare.Substring(0, argPos);
-                    }
-                    if (!declare.StartsWith("M:Bogus.DataSets.")) return null;
+                        var member = m["@name"];
+                        var summary = m["summary"];
+                        if( member == null || summary == null ) return null;
 
-                    var method = declare.TrimStart('M', ':');
-                    method = method.Replace("Bogus.DataSets.", "");
+                        var declare = member.ToString();
+                        var argPos = declare.IndexOf('(');
+                        if( argPos > 0 )
+                        {
+                            declare = declare.Substring(0, argPos);
+                        }
+                        if( !declare.StartsWith("M:Bogus.DataSets.") ) return null;
 
-                    var methodSplit = method.Split('.');
+                        var method = declare.TrimStart('M', ':');
+                        method = method.Replace("Bogus.DataSets.", "");
 
-                    var dataset = methodSplit[0];
-                    var call = methodSplit[1];
+                        var methodSplit = method.Split('.');
 
-                    if (call == "#ctor") return null;
+                        var dataset = methodSplit[0];
+                        var call = methodSplit[1];
 
-                    return new { dataset = dataset, method = call, summary = summary.ToString().Trim() };
-                })
+                        if( call == "#ctor" ) return null;
+
+                        return new {dataset = dataset, method = call, summary = summary.ToString().Trim()};
+                    })
                 .Where(a => a != null)
                 .GroupBy(k => k.dataset)
                 .OrderBy(k => k.Key);
@@ -62,21 +61,21 @@ namespace Bogus.Tests
                 .GroupBy(g => g.dataset, u => u.method)
                 .ToDictionary(g => g.Key);
 
-            foreach (var g in all)
+            foreach( var g in all )
             {
-                if (!datasets.ContainsKey(g.Key)) return; //check if it's accessible
+                if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
                 var methods = datasets[g.Key];
 
                 Console.WriteLine("* **`" + g.Key + "`**");
-                foreach (var m in g)
+                foreach( var m in g )
                 {
-                    if (!methods.Any(s => s.Contains(m.method))) continue; //check if it's accessible
+                    if( !methods.Any(s => s.Contains(m.method)) ) continue; //check if it's accessible
                     Console.WriteLine("\t* `" + m.method + "` - " + m.summary);
                 }
             }
         }
 
-        [Test]
+        [Fact]
         public void get_all_locales()
         {
             var data = Database.Data.Value;
@@ -85,7 +84,7 @@ namespace Bogus.Tests
 
             int count = 0;
 
-            foreach (var prop in data.Properties().OrderBy(p => p.Name))
+            foreach( var prop in data.Properties().OrderBy(p => p.Name) )
             {
                 count++;
 
@@ -105,7 +104,5 @@ namespace Bogus.Tests
 
             Console.WriteLine(string.Join("\n", locales));
         }
-        
     }
-
 }

@@ -7,11 +7,11 @@ using Bogus.Extensions.Denmark;
 using Bogus.Extensions.Finland;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    public class PersonTest: SeededTest
+    public class PersonTest : SeededTest
     {
         public class User
         {
@@ -20,7 +20,7 @@ namespace Bogus.Tests
             public string LastName { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void new_person_on_every_generate()
         {
             var faker = new Faker<User>()
@@ -36,60 +36,59 @@ namespace Bogus.Tests
         }
 
 
-        [Test]
+        [Fact]
         public void check_ssn_on_person()
         {
             var p = new Person();
             p.Ssn().Should().Be("786-92-8797");
         }
 
-        [Test]
+        [Fact]
         public void can_generate_valid_sin()
         {
             var obtained = Get(10, p => p.Sin());
 
             var truth = new[]
-            {
-                "746 924 794",
-                "595 169 327",
-                "947 986 089",
-                "845 442 110",
-                "035 435 247",
-                "386 828 776",
-                "045 289 626",
-                "079 899 753",
-                "620 761 643",
-                "574 964 227"
-            };
+                {
+                    "746 924 794",
+                    "595 169 327",
+                    "947 986 089",
+                    "845 442 110",
+                    "035 435 247",
+                    "386 828 776",
+                    "045 289 626",
+                    "079 899 753",
+                    "620 761 643",
+                    "574 964 227"
+                };
 
             obtained.Should().Equal(truth);
         }
 
-        [Test]
+        [Fact]
         public void can_generate_cpf_for_brazil()
         {
-
             var obtained = Get(10, p => p.Cpf());
 
 
             var expect = new[]
-            {
-                "786.928.797-03",
-                "595.269.345-80",
-                "073.298.888-85",
-                "365.760.664-57",
-                "835.282.914-94",
-                "340.967.549-35",
-                "989.784.800-20",
-                "003.525.756-38",
-                "658.676.631-16",
-                "210.847.792-69"
-            };
+                {
+                    "786.928.797-03",
+                    "595.269.345-80",
+                    "073.298.888-85",
+                    "365.760.664-57",
+                    "835.282.914-94",
+                    "340.967.549-35",
+                    "989.784.800-20",
+                    "003.525.756-38",
+                    "658.676.631-16",
+                    "210.847.792-69"
+                };
 
             obtained.Should().Equal(expect);
         }
 
-        [Test]
+        [Fact]
         public void can_generate_cpr_nummer_for_denmark()
         {
             var p = new Person();
@@ -104,7 +103,7 @@ namespace Bogus.Tests
             b.Length.Should().Be(4);
         }
 
-        [Test]
+        [Fact]
         public void can_generate_henkilötunnus_for_finland()
         {
             var p = new Person();
@@ -127,5 +126,4 @@ namespace Bogus.Tests
                     }).ToArray();
         }
     }
-
 }

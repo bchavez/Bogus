@@ -1,32 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
-using System.Xml.XPath;
 using Bogus.DataSets;
 using Bogus.Extensions;
 using FluentAssertions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests
 {
-    [TestFixture]
     public class Examples : SeededTest
     {
-        [Test]
+        [Fact]
         public void TestAPIDesign()
         {
             //Set the randomzier seed if you wish to generate repeatable data sets.
             Randomizer.Seed = new Random(3897234);
 
-            var fruit = new[] { "apple", "banana", "orange", "strawberry", "kiwi" };
+            var fruit = new[] {"apple", "banana", "orange", "strawberry", "kiwi"};
 
             var orderIds = 0;
             var testOrders = new Faker<Order>()
@@ -39,7 +29,6 @@ namespace Bogus.Tests
                 .RuleFor(o => o.Item, f => f.PickRandom(fruit))
                 //A random quantity from 1 to 10
                 .RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
-
 
 
             var userIds = 0;
@@ -79,13 +68,13 @@ namespace Bogus.Tests
             //BeforeReturn
             //FinallyInvoke
             //FinishWith
-            
+
             var user = testUsers.Generate(3);
 
             user.Dump();
         }
 
-        [Test]
+        [Fact]
         public void Without_Fluent_Syntax()
         {
             var random = new Randomizer();
@@ -101,7 +90,7 @@ namespace Bogus.Tests
             o.Dump();
         }
 
-        [Test]
+        [Fact]
         public void With_Faker_Facade()
         {
             var faker = new Faker("en");
@@ -116,14 +105,14 @@ namespace Bogus.Tests
             o.Dump();
         }
 
-        [Test]
+        [Fact]
         public void With_Korean_Locale()
         {
             var lorem = new Lorem(locale: "ko");
             Console.WriteLine(lorem.Sentence(5));
         }
 
-        [Test]
+        [Fact]
         public void Create_Context_Related_Person()
         {
             var person = new Person();
@@ -131,7 +120,7 @@ namespace Bogus.Tests
             person.Dump();
         }
 
-        [Test]
+        [Fact]
         public void Create_an_SSN()
         {
             var ssn = new Randomizer().Replace("###-##-####");
@@ -142,9 +131,7 @@ namespace Bogus.Tests
         }
 
 
-
-
-        [Test]
+        [Fact]
         public void Handlebar()
         {
             var faker = new Faker();
@@ -152,7 +139,7 @@ namespace Bogus.Tests
             randomName.Dump();
         }
 
-        [Test]
+        [Fact]
         public void TestIgnore()
         {
             var faker = new Faker<Order>()
@@ -168,7 +155,7 @@ namespace Bogus.Tests
             fake.Item.Should().BeNull();
         }
 
-        [Test]
+        [Fact]
         public void Can_Define_Rule_By_Type()
         {
             var faker = new Faker<Issue47>()
@@ -186,7 +173,7 @@ namespace Bogus.Tests
             fake.Baz.Should().NotBeNullOrEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Should_Throw_Exception_If_RuleForType_Types_Dont_Match()
         {
             Action action = () =>
@@ -198,7 +185,7 @@ namespace Bogus.Tests
             action.ShouldThrow<ArgumentException>();
         }
 
-        [Test]
+        [Fact]
         public void implicit_operator_test()
         {
             var orderFaker = new Faker<Order>()
@@ -228,7 +215,7 @@ namespace Bogus.Tests
             testOrders.Select(o => o.Quantity).Should().ContainInOrder(1, 2, 3);
         }
 
-        [Test]
+        [Fact]
         public void can_clamp_string_length()
         {
             var c = new Company();
@@ -254,7 +241,6 @@ namespace Bogus.Tests
             public int OrderId { get; set; }
             public string Item { get; set; }
             public int Quantity { get; set; }
-
         }
 
         public enum Gender
@@ -288,7 +274,7 @@ namespace Bogus.Tests
             public List<Order> Orders { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void just_want_to_set_a_value()
         {
             var faker = new Faker<Order>()
@@ -297,10 +283,9 @@ namespace Bogus.Tests
 
             faker.Generate().OrderId.Should().Be(25);
             faker.Generate().Item.Should().Be("foo");
-
         }
 
-        [Test]
+        [Fact]
         public void create_rules_for_an_object_the_easy_way()
         {
             var faker = new Faker<Order>()
@@ -318,7 +303,7 @@ namespace Bogus.Tests
             result.Quantity.Should().BeInRange(1, 4);
         }
 
-        [Test]
+        [Fact]
         public void can_create_rule_for_object_multiple_times()
         {
             var faker = new Faker<Order>()
@@ -339,5 +324,4 @@ namespace Bogus.Tests
             result.Item.Should().Be("Computer");
         }
     }
-
 }

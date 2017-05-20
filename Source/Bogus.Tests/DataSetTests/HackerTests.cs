@@ -1,28 +1,25 @@
 ﻿using Bogus.DataSets;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.DataSetTests
 {
-    [TestFixture]
     public class HackerTests : SeededTest
     {
-        private Hacker hacker;
-
-
-        [SetUp]
-        public void BeforeEachTest()
+        public HackerTests()
         {
             hacker = new Hacker();
         }
 
-        [Test]
+        private readonly Hacker hacker;
+
+        [Fact]
         public void can_get_a_hacker_phrase()
         {
             hacker.Phrase().Should().Be("Use the neural RAM driver, then you can calculate the neural driver!");
         }
 
-        [Test]
+        [Fact]
         public void make_sure_we_have_updated_ru_hacker_locale()
         {
             var ruhacker = new Hacker("ru");
@@ -31,6 +28,5 @@ namespace Bogus.Tests
             ruhacker.Verb().Should().Be("передавать");
             ruhacker.IngVerb().Should().Be("определение количества");
         }
-
     }
 }

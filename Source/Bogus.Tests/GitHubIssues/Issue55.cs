@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -13,6 +13,7 @@ namespace Bogus.Tests.GitHubIssues
                 this.RuleFor(o => o.Code, f => f.Random.AlphaNumeric(5));
                 this.RuleFor(o => o.Dba, f => f.Company.CompanyName());
             }
+
             public override IEnumerable<Issue55Object> Generate(int count, string ruleSets = null)
             {
                 var list = base.Generate(count, ruleSets)
@@ -23,7 +24,7 @@ namespace Bogus.Tests.GitHubIssues
             }
         }
 
-        [Test]
+        [Fact]
         public void issue_55_collection_finish_with_syntax()
         {
             var derivedFaker = new DerivedFaker();
@@ -37,6 +38,5 @@ namespace Bogus.Tests.GitHubIssues
             public string Dba { get; set; }
             public bool Primary { get; set; }
         }
-
     }
 }

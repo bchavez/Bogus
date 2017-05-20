@@ -1,6 +1,6 @@
 ﻿using System;
 using FluentAssertions;
-using NUnit.Framework;
+using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -13,7 +13,7 @@ namespace Bogus.Tests.GitHubIssues
             public string NameReadOnly => Name;
         }
 
-        [Test]
+        [Fact]
         public void issue_13_readonly_property()
         {
             var faker = new Faker<ReadOnly>()
@@ -24,7 +24,7 @@ namespace Bogus.Tests.GitHubIssues
             faker.TypeProperties.Count.Should().Be(1);
         }
 
-        [Test]
+        [Fact]
         public void issue_13_with_model()
         {
             var counter = 0;
@@ -41,12 +41,10 @@ namespace Bogus.Tests.GitHubIssues
                 .RuleFor(c => c.SomeBool2, f => f.Random.Bool())
                 .RuleFor(c => c.SomeBool1, f => f.Random.Bool())
                 .RuleFor(c => c.SomeOtherInt, f => f.Random.Number(1, 5))
-
                 .RuleFor(c => c.SomeInt, f => 0)
                 .RuleFor(c => c.SomeOtherString, f => null)
                 .RuleFor(c => c.SomeOtherGuid, f => Guid.NewGuid())
                 .RuleFor(c => c.SomeString, f => null)
-
                 .RuleFor(c => c.SomeComment, f => f.Lorem.Sentence())
                 .RuleFor(c => c.SomeGuid, f => null)
                 .RuleFor(c => c.SomeTimestamp, f => null);
@@ -87,10 +85,7 @@ namespace Bogus.Tests.GitHubIssues
 
             public DateTime? ReadOnlyDateTime
             {
-                get
-                {
-                    return _lastTimeToUnbook;
-                }
+                get { return _lastTimeToUnbook; }
             }
 
             public int SomeInt { get; set; }
@@ -112,6 +107,5 @@ namespace Bogus.Tests.GitHubIssues
 
             public string SomeComment { get; set; }
         }
-
     }
 }

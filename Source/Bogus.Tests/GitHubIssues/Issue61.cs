@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+﻿using Xunit;
 using static Bogus.Tests.GitHubIssues.Issue61.HashIdExtension;
 
 namespace Bogus.Tests.GitHubIssues
@@ -10,7 +10,7 @@ namespace Bogus.Tests.GitHubIssues
             public static Hashids Hashid { get; set; }
         }
 
-        [Test]
+        [Fact]
         public void can_have_custom_hashid_extension()
         {
             //Custom

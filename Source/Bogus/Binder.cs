@@ -64,13 +64,11 @@ namespace Bogus
                             //no compiler generated stuff
                             return false;
                         }
-                        var pi = m as PropertyInfo;
-                        if( pi != null )
+                        if( m is PropertyInfo pi )
                         {
                             return pi.CanWrite;
                         }
-                        var fi = m as FieldInfo;
-                        if( fi != null )
+                        if( m is FieldInfo fi )
                         {
                             //No private fields.
                             //Github Issue #13

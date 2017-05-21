@@ -5,7 +5,7 @@ namespace Bogus
     /// <summary>
     /// Contains validation results after validation
     /// </summary>
-    internal class ValidationResult
+    public class ValidationResult
     {
         /// <summary>
         /// True if is valid

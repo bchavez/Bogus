@@ -12,9 +12,9 @@ namespace Bogus
     /// </summary>
     public class Faker<T> : ILocaleAware, IRuleSet<T> where T : class
     {
-        private const string Default = "default";
-        private static readonly string[] DefaultRuleSet = {Default};
 #pragma warning disable 1591
+        protected const string Default = "default";
+        private static readonly string[] DefaultRuleSet = {Default};
         protected internal Faker FakerHub;
         protected internal IBinder binder;
         protected internal readonly MultiDictionary<string, string, PopulateAction<T>> Actions = new MultiDictionary<string, string, PopulateAction<T>>(StringComparer.OrdinalIgnoreCase);
@@ -63,7 +63,7 @@ namespace Bogus
         /// <summary>
         /// Uses the factory method to generate new instances.
         /// </summary>
-        public Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
+        public virtual Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
         {
             this.CreateActions[currentRuleSet] = factoryMethod;
             return this;
@@ -72,7 +72,7 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a compound property and providing access to the instance being generated.
         /// </summary>
-        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter)
+        public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, T, TProperty> setter)
         {
             var propName = PropertyName.For(property);
 
@@ -93,7 +93,7 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a property.
         /// </summary>
-        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
+        public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
         {
             return RuleFor(property, f => value);
         }
@@ -101,14 +101,14 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a property.
         /// </summary>
-        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter )
+        public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter )
         {
             var propName = PropertyName.For(property);
 
             return RuleFor(propName, setter);
         }
 
-        private Faker<T> RuleFor<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
+        protected virtual Faker<T> RuleFor<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
         {
             Func<Faker, T, object> invoker = (f, t) => setter(f);
 
@@ -129,7 +129,7 @@ namespace Bogus
         /// without having to call RuleFor multiple times. Note: StrictMode
         /// must be false since property rules cannot be individually checked.
         /// </summary>
-        public Faker<T> Rules(Action<Faker, T> setActions)
+        public virtual Faker<T> Rules(Action<Faker, T> setActions)
         {
             Func<Faker, T, object> invoker = (f, t) =>
                 {
@@ -151,7 +151,7 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a property.
         /// </summary>
-        public Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
+        public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
         {
             return RuleFor(property, (f) => valueFunction());
         }
@@ -168,7 +168,7 @@ namespace Bogus
         /// <summary>
         /// Creates a rule for a type on a class
         /// </summary>
-        public Faker<T> RuleForType<TType>(Type type, Func<Faker, TType> setterForType)
+        public virtual Faker<T> RuleForType<TType>(Type type, Func<Faker, TType> setterForType)
         {
             if( typeof(TType) != type )
             {
@@ -189,7 +189,10 @@ namespace Bogus
             return this;
         }
 
-        private Type GetFieldOrPropertyType(MemberInfo mi)
+        /// <summary>
+        /// Utility method to get the Type of a Property or Field
+        /// </summary>
+        protected virtual Type GetFieldOrPropertyType(MemberInfo mi)
         {
             if( mi is PropertyInfo pi )
             {
@@ -207,7 +210,7 @@ namespace Bogus
         /// </summary>
         /// <param name="ruleSetName">The rule set name</param>
         /// <param name="action">The set of rules to apply when this rules set is specified.</param>
-        public Faker<T> RuleSet(string ruleSetName, Action<IRuleSet<T>> action)
+        public virtual Faker<T> RuleSet(string ruleSetName, Action<IRuleSet<T>> action)
         {
             if( currentRuleSet != Default ) throw new ArgumentException("Cannot create a rule set within a rule set.");
             currentRuleSet = ruleSetName;
@@ -222,7 +225,7 @@ namespace Bogus
         /// <typeparam name="TPropertyOrField"></typeparam>
         /// <param name="propertyOrField"></param>
         /// <returns></returns>
-        public Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
+        public virtual Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
         {
             var propNameOrField = PropertyName.For(propertyOrField);
 
@@ -240,7 +243,7 @@ namespace Bogus
         /// </summary>
         /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
         /// <returns></returns>
-        public Faker<T> StrictMode(bool ensureRulesForAllProperties)
+        public virtual Faker<T> StrictMode(bool ensureRulesForAllProperties)
         {
             this.StrictModes[currentRuleSet] = ensureRulesForAllProperties;
             return this;
@@ -249,7 +252,7 @@ namespace Bogus
         /// <summary>
         /// Action is invoked after all the rules are applied.
         /// </summary>
-        public Faker<T> FinishWith(Action<Faker, T> action)
+        public virtual Faker<T> FinishWith(Action<Faker, T> action)
         {
             var rule = new FinalizeAction<T>
                 {
@@ -260,7 +263,10 @@ namespace Bogus
             return this;
         }
 
-        private string[] ParseDirtyRulesSets(string dirtyRules)
+        /// <summary>
+        /// Utility method to parse out rule sets form user input.
+        /// </summary>
+        protected virtual string[] ParseDirtyRulesSets(string dirtyRules)
         {
             dirtyRules = dirtyRules?.Trim(',').Trim();
             if( string.IsNullOrWhiteSpace(dirtyRules) ) return DefaultRuleSet;
@@ -312,7 +318,10 @@ namespace Bogus
             PopulateInternal(instance, cleanRules);
         }
 
-        private void PopulateInternal(T instance, string[] ruleSets)
+        /// <summary>
+        /// Given an instance of T, populate it with the desired rule sets.
+        /// </summary>
+        protected virtual void PopulateInternal(T instance, string[] ruleSets)
         {
             if( !IsValid.HasValue ) 
             {
@@ -387,7 +396,6 @@ namespace Bogus
         /// with complete list of missing rules. Useful in unit tests for fast forward fixing of missing rules.
         /// </summary>
         /// <exception cref="ValidationException"/>
-        /// <param name="ruleSets"></param>
         public virtual void AssertConfigurationIsValid(string ruleSets = null)
         {
             string[] rules;
@@ -407,7 +415,11 @@ namespace Bogus
             }
         }
 
-        private ValidationException MakeValidationException(ValidationResult result)
+        /// <summary>
+        /// Composes a <see cref="ValidationException"/> based on the failed validation
+        /// results that can be readily used to raise the exception.
+        /// </summary>
+        protected virtual ValidationException MakeValidationException(ValidationResult result)
         {
             var builder = new StringBuilder();
 
@@ -491,7 +503,6 @@ namespace Bogus
             }
             return result;
         }
-
 
         /// <summary>
         /// Provides implicit type conversion from Faker[T] to T. IE: Order testOrder = faker;

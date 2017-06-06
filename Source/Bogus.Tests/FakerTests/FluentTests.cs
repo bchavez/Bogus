@@ -6,7 +6,7 @@ using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.FakerTests
 {
     public class Examples : SeededTest
     {

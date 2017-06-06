@@ -8,7 +8,7 @@ using Rant;
 using Rant.Resources;
 using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.Other
 {
     public class Rant_Generator
     {

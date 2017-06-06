@@ -4,7 +4,7 @@ using Xunit;
 using Z.ExtensionMethods;
 using Z.ExtensionMethods.ObjectExtensions;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.FakerTests
 {
     public class UniquenessTests : SeededTest
     {

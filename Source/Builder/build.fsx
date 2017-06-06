@@ -30,6 +30,12 @@ let Files = Setup.Files(Folders)
 let Projects = Setup.Projects(ProjectName, Folders)
 
 let BogusProject = NugetProject("Bogus", "Bogus Fake Data Generator for .NET", Folders)
+let BogusPlugIns = [
+                        NugetProject("Bogus.FakeItEasy", "Bogus Fake Data Generator for .NET with FakeItEasy", Folders)
+                        NugetProject("Bogus.Moq", "Bogus Fake Data Generator for .NET with Moq", Folders)
+                        NugetProject("Bogus.NSubstitute", "Bogus Fake Data Generator for .NET with NSubstitute", Folders)
+                   ]
+let NugetProjects = BogusProject :: BogusPlugIns
 let TestProject = TestProject("Bogus.Tests", Folders)
 
 
@@ -42,11 +48,11 @@ Target "msb" (fun _ ->
                         "AssemblyOriginatorKeyFile", Projects.SnkFile
                         "SignAssembly", BuildContext.IsTaggedBuild.ToString()
                      ]
-
-    !! BogusProject.ProjectFile
-    |> MSBuildReleaseExt (BogusProject.OutputDirectory @@ tag) buildProps "Build"
-    |> Log "AppBuild-Output: "
-
+       
+    for project in NugetProjects do
+        !! project.ProjectFile
+        |> MSBuildReleaseExt (project.OutputDirectory @@ tag) buildProps "Build"
+        |> Log "AppBuild-Output: "
 
     !! TestProject.ProjectFile
     |> MSBuild "" "Build" (("Configuration", "Debug")::buildProps)
@@ -54,15 +60,15 @@ Target "msb" (fun _ ->
 )
 
 
-
 Target "dnx" (fun _ ->
     trace "DNX Build Task"
 
     let tag = "dnx_build"
     
-    Dotnet DotnetCommands.Restore BogusProject.Folder
-    //Dotnet DotnetCommands.Restore TestProject.Folder
-    DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
+    for project in NugetProjects do
+        Dotnet DotnetCommands.Restore project.Folder
+        //Dotnet DotnetCommands.Restore TestProject.Folder
+        DotnetBuild project (project.OutputDirectory @@ tag)
 )
 
 Target "restore" (fun _ -> 
@@ -88,7 +94,52 @@ open System.Xml
 Target "nuget" (fun _ ->
     trace "NuGet Task"
     
-    DotnetPack BogusProject Folders.Package   
+    for project in NugetProjects do
+        DotnetPack project Folders.Package
+
+    traceHeader "Injecting Version Ranges"
+
+    let exactNugetVersion = [ "Bogus" ]
+  
+    let extractNugetPackage (pkg : string) (extractPath : string) = 
+        use zip = new ZipFile(pkg)
+        zip.ExtractAll( extractPath )
+  
+    let repackNugetPackage (folderPath : string) (pkg : string) =
+        use zip = new ZipFile()
+        zip.AddDirectory(folderPath) |> ignore
+        zip.Save(pkg)
+  
+    for project in BogusPlugIns do 
+        let pkg = project.NugetPkg
+        let spec = project.NugetSpec
+
+        tracefn "FILE: %s" pkg
+  
+        let extractPath = Folders.Package @@ fileNameWithoutExt pkg
+  
+        extractNugetPackage pkg extractPath
+        DeleteFile pkg
+  
+        let nuspecFile = extractPath @@ spec
+  
+        let xmlns = [("def", "http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd")]
+  
+        let doc = new XmlDocument()
+        doc.Load nuspecFile
+  
+        for exact in exactNugetVersion do
+            let target = sprintf "//def:dependency[@id='%s']" exact
+            let nodes = XPathSelectAllNSDoc doc xmlns target
+            for node in nodes do
+                let version = getAttribute "version" node
+                node.Attributes.["version"].Value <- sprintf "[%s]" version
+        
+        doc.Save nuspecFile
+    
+        repackNugetPackage extractPath pkg
+        DeleteDir extractPath
+    
 )
 
 Target "push" (fun _ ->
@@ -102,7 +153,9 @@ Target "push" (fun _ ->
 Target "zip" (fun _ -> 
     trace "Zip Task"
 
-    !!(BogusProject.OutputDirectory @@ "**") |> Zip Folders.CompileOutput (Folders.Package @@ BogusProject.Zip)
+    !!(Folders.CompileOutput @@ "**")
+    --(Folders.CompileOutput @@ "**" @@ "*.deps.json")
+    |> Zip Folders.CompileOutput (Folders.Package @@ BogusProject.Zip)
 )
 
 open AssemblyInfoFile
@@ -123,14 +176,15 @@ Target "BuildInfo" (fun _ ->
     
     trace "Writing Assembly Build Info"
 
-    MakeBuildInfo BogusProject Folders (fun bip -> 
-        { bip with
-            ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
+    for project in NugetProjects do
+        MakeBuildInfo project Folders (fun bip -> 
+            { bip with
+                ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
 
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
 
-    let releaseNotes = History.NugetText Files.History GitHubUrl
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
+        let releaseNotes = History.NugetText Files.History GitHubUrl
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
 )
 
 
@@ -138,15 +192,16 @@ Target "Clean" (fun _ ->
     DeleteFile Files.TestResultFile
     CleanDirs [Folders.CompileOutput; Folders.Package]
 
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
+    for project in NugetProjects do
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
-    MakeBuildInfo BogusProject Folders (fun bip ->
-         {bip with
-            DateTime = System.DateTime.Parse("1/1/2015")
-            ExtraAttrs = MakeAttributes(false) } )
+        MakeBuildInfo project Folders (fun bip ->
+             {bip with
+                DateTime = System.DateTime.Parse("1/1/2015")
+                ExtraAttrs = MakeAttributes(false) } )
 
 )
 
@@ -187,8 +242,9 @@ Target "setup-snk"(fun _ ->
     let decryptSecret = environVarOrFail "SNKFILE_SECRET"
     decryptFile Projects.SnkFile decryptSecret
 
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
+    for project in NugetProjects do
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+        XmlPokeInnerText project.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
 

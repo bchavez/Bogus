@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.FakerTests
 {
     public class ValidationDeltaTests
     {

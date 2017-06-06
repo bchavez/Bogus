@@ -31,6 +31,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FakeItEasy, Version=3.3.2.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FakeItEasy.3.3.2\lib\net40\FakeItEasy.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions, Version=4.19.2.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentAssertions.4.19.2\lib\net45\FluentAssertions.dll</HintPath>
       <Private>True</Private>
@@ -39,9 +45,15 @@
       <HintPath>..\packages\FluentAssertions.4.19.2\lib\net45\FluentAssertions.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Moq, Version=4.7.25.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.7.25\lib\net45\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NSubstitute, Version=2.0.3.0, Culture=neutral, PublicKeyToken=92dd2e9066daa5ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\NSubstitute.2.0.3\lib\net45\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="Rant, Version=3.0.508.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Rant.3.0.508\lib\net45\Rant.dll</HintPath>
@@ -73,6 +85,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoFakerTests\AutoFakerFixture.cs" />
+    <Compile Include="AutoFakerTests\AutoGeneratorsFixture.cs" />
+    <Compile Include="AutoFakerTests\Mocks\FakeItEasyBinderFixture.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\DiscountBase.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\ICalculator.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\Order.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\OrderItem.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\Price.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\Product.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\Quantity.cs" />
+    <Compile Include="AutoFakerTests\Models\Complex\Status.cs" />
+    <Compile Include="AutoFakerTests\Helpers\GenerateAssertions.cs" />
+    <Compile Include="AutoFakerTests\Helpers\GenerateExtensions.cs" />
+    <Compile Include="AutoFakerTests\Models\Simple\TestAbstractClass.cs" />
+    <Compile Include="AutoFakerTests\Models\Simple\TestClass.cs" />
+    <Compile Include="AutoFakerTests\Models\Simple\TestEnum.cs" />
+    <Compile Include="AutoFakerTests\Models\Simple\TestInterface.cs" />
+    <Compile Include="AutoFakerTests\Models\Simple\TestStruct.cs" />
+    <Compile Include="AutoFakerTests\Mocks\MoqBinderFixture.cs" />
+    <Compile Include="AutoFakerTests\Mocks\NSubstituteBinderFixture.cs" />
     <Compile Include="DataSetTests\AddressTest.cs" />
     <Compile Include="DataSetTests\CardTests.cs" />
     <Compile Include="DataSetTests\CommerceTest.cs" />
@@ -81,7 +113,7 @@
     <Compile Include="DataSetTests\DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="DataSetTests\FinanceTest.cs" />
-    <Compile Include="FluentTests.cs" />
+    <Compile Include="FakerTests\FluentTests.cs" />
     <Compile Include="GitHubIssues\Issue10.cs" />
     <Compile Include="GitHubIssues\Issue13.cs" />
     <Compile Include="GitHubIssues\Issue23.cs" />
@@ -92,35 +124,47 @@
     <Compile Include="GitHubIssues\Issue61.cs" />
     <Compile Include="GitHubIssues\Issue70.cs" />
     <Compile Include="DataSetTests\HackerTests.cs" />
-    <Compile Include="HandleBarTests.cs" />
+    <Compile Include="FakerTests\HandleBarTests.cs" />
     <Compile Include="DataSetTests\ImageTest.cs" />
     <Compile Include="DataSetTests\InternetTests.cs" />
     <Compile Include="DataSetTests\LoremTests.cs" />
     <Compile Include="DataSetTests\NameTests.cs" />
-    <Compile Include="PersonTest.cs" />
+    <Compile Include="FakerTests\PersonTest.cs" />
     <Compile Include="DataSetTests\PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RandomizerTest.cs" />
+    <Compile Include="FakerTests\RandomizerTest.cs" />
     <Compile Include="DataSetTests\RantTests.cs" />
-    <Compile Include="Rant_Generator.cs" />
-    <Compile Include="README_Generator.cs" />
-    <Compile Include="RuleSetTests.cs" />
+    <Compile Include="Other\Rant_Generator.cs" />
+    <Compile Include="Other\README_Generator.cs" />
+    <Compile Include="FakerTests\RuleSetTests.cs" />
     <Compile Include="SeededTest.cs" />
-    <Compile Include="StrictModeTests.cs" />
+    <Compile Include="FakerTests\StrictModeTests.cs" />
     <Compile Include="DataSetTests\SystemTest.cs" />
-    <Compile Include="UniquenessTests.cs" />
-    <Compile Include="ValidationDeltaTests.cs" />
+    <Compile Include="FakerTests\UniquenessTests.cs" />
+    <Compile Include="FakerTests\ValidationDeltaTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Rantionary-3.0.17.rantpkg">
+    <None Include="Other\Rantionary-3.0.17.rantpkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bogus.FakeItEasy\Bogus.FakeItEasy.csproj">
+      <Project>{6c8b6be1-618c-4886-b3c8-7f02644a9252}</Project>
+      <Name>Bogus.FakeItEasy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bogus.Moq\Bogus.Moq.csproj">
+      <Project>{5e2dfb91-ae20-40d3-8937-7ede01aa34d9}</Project>
+      <Name>Bogus.Moq</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bogus.NSubstitute\Bogus.NSubstitute.csproj">
+      <Project>{872d5912-a473-44ba-b061-2278a37d00de}</Project>
+      <Name>Bogus.NSubstitute</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bogus\Bogus.csproj">
       <Project>{340a2fe9-5b52-4fd7-9d21-83ccf1621e09}</Project>
       <Name>Bogus</Name>

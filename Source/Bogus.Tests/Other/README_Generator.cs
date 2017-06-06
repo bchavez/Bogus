@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace Bogus.Tests
+namespace Bogus.Tests.Other
 {
     public class README_Generator
     {

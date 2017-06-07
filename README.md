@@ -30,6 +30,7 @@ Install-Package Bogus
 
 ##### Blog Posts
 * Mark Timmings - [Auto generating test data with Bogus](http://putridparrot.com/blog/auto-generating-test-data-with-bogus/)
+* [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
 
 Usage
 -----

@@ -12,6 +12,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
 [assembly: AssemblyDescriptionAttribute("https://github.com/bchavez/Bogus")]
 [assembly: InternalsVisibleToAttribute("Bogus.Tests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyTitle = "Bogus Fake Data Generator for .NET";

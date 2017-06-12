@@ -13,8 +13,9 @@ namespace Bogus
     public class Faker<T> : ILocaleAware, IRuleSet<T> where T : class
     {
 #pragma warning disable 1591
-        protected const string Default = "default";
+        protected static readonly string Default = Faker.DefaultRuleSetName;
         private static readonly string[] DefaultRuleSet = {Default};
+        private static readonly Func<Faker, T> DefaultInstantiator = faker => Activator.CreateInstance<T>();
         protected internal Faker FakerHub;
         protected internal IBinder binder;
         protected internal readonly MultiDictionary<string, string, PopulateAction<T>> Actions = new MultiDictionary<string, string, PopulateAction<T>>(StringComparer.OrdinalIgnoreCase);
@@ -57,7 +58,6 @@ namespace Bogus
             this.Locale = locale;
             FakerHub = new Faker(locale);
             TypeProperties = this.binder.GetMembers(typeof(T));
-            this.CreateActions[Default] = faker => Activator.CreateInstance<T>();
         }
 
         /// <summary>
@@ -283,15 +283,16 @@ namespace Bogus
         {
             Func<Faker, T> createRule = null;
             var cleanRules = ParseDirtyRulesSets(ruleSets);
-            
+            var defaultInstantiator = CreateActions.ContainsKey(Default) ? CreateActions[Default] : DefaultInstantiator;
+      
             if ( string.IsNullOrWhiteSpace(ruleSets) )
             {
-                createRule = CreateActions[Default];
+                createRule = defaultInstantiator;
             }
             else
             {
                 var firstRule = cleanRules[0];
-                createRule = CreateActions.TryGetValue(firstRule, out createRule) ? createRule : CreateActions[Default];
+                createRule = CreateActions.TryGetValue(firstRule, out createRule) ? createRule : defaultInstantiator;
             }
             var instance = createRule(this.FakerHub);
 

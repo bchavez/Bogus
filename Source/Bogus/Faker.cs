@@ -11,6 +11,8 @@ namespace Bogus
     /// </summary>
     public class Faker : ILocaleAware
     {
+        internal const string DefaultRuleSetName = "default";
+
         /// <summary>
         /// The default mode to use when generating objects. Strict mode ensures that all properties have rules.
         /// </summary>

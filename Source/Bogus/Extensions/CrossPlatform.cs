@@ -56,5 +56,41 @@ namespace Bogus.Extensions
             return type.IsEnum;
 #endif
         }
+
+        public static bool IsInterface(this Type type)
+        {
+#if STANDARD
+            return type.GetTypeInfo().IsInterface;
+#else
+            return type.IsInterface;
+#endif
+        }
+
+        public static bool IsAbstract(this Type type)
+        {
+#if STANDARD
+            return type.GetTypeInfo().IsAbstract;
+#else
+            return type.IsAbstract;
+#endif
+        }
+
+        public static bool IsClass(this Type type)
+        {
+#if STANDARD
+            return type.GetTypeInfo().IsClass;
+#else
+            return type.IsClass;
+#endif
+        }
+
+        public static bool IsValueType(this Type type)
+        {
+#if STANDARD
+            return type.GetTypeInfo().IsValueType;
+#else
+            return type.IsValueType;
+#endif
+        }
     }
 }

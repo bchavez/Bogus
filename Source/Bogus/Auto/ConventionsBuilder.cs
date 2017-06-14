@@ -17,9 +17,9 @@ namespace Bogus.Auto
         private IEnumerable<ConventionGroup> ConventionGroups { get; set; }
         private IList<Func<IConvention, bool>> SkipFilters { get; }
 
-        public ConventionsBuilder Add(IConvention convention)
+        public ConventionsBuilder Add(IConvention convention, ConventionPipeline where = ConventionPipeline.Default)
         {
-            Conventions.Add(convention);
+            Conventions.Add(convention, where);
             return this;
         }
 
@@ -54,32 +54,32 @@ namespace Bogus.Auto
 
         internal IEnumerable<IConvention> Build()
         {
-            var conventions = new List<IConvention>(Conventions._conventions);
+            var conventions = new List<IConvention>();
 
-            // Append the global conventions if not ignored
+            // Add the conventions needed at the start of the pipeline
+            Build(Conventions, ConventionPipeline.Start, conventions);
+
             if (ConventionGroups.Contains(ConventionGroup.Global))
             {
-                conventions.AddRange(GlobalConventions.Conventions._conventions);
+                Build(GlobalConventions.Conventions, ConventionPipeline.Start, conventions);
             }
 
-            // Filter any skipped conventions
-            foreach (var filter in SkipFilters)
+            // Then include those registered for as a default placement
+            Build(Conventions, ConventionPipeline.Default, conventions);
+
+            if (ConventionGroups.Contains(ConventionGroup.Global))
             {
-                conventions = (from c in conventions
-                               where !filter.Invoke(c)
-                               select c).ToList();
+                Build(GlobalConventions.Conventions, ConventionPipeline.Default, conventions);
             }
 
-            // Add a check that ensures recursive generation doesn't happen
+            // Register the default type and name bound generators
             conventions.Add(new RecursionGuard());
 
-            // Add the conventions used to generate values by name binding
             if (ConventionGroups.Contains(ConventionGroup.NameBinding))
             {
                 conventions.AddRange(ConventionsRegistry.NameBindingGenerators);
             }
 
-            // Finally add all the fall back type generators and binders
             conventions.AddRange(ConventionsRegistry.TypeBindingGenerators);
 
             conventions.Add(new ArrayGenerator());
@@ -91,7 +91,30 @@ namespace Bogus.Auto
             conventions.Add(new TypeActivator());
             conventions.Add(new MembersBinder());
 
+            // Finally, add any ending conventions
+            Build(Conventions, ConventionPipeline.End, conventions);
+
+            if (ConventionGroups.Contains(ConventionGroup.Global))
+            {
+                Build(GlobalConventions.Conventions, ConventionPipeline.End, conventions);
+            }
+
+            // Filter any skipped conventions
+            foreach (var filter in SkipFilters)
+            {
+                conventions = (from c in conventions
+                               where !filter.Invoke(c)
+                               select c).ToList();
+            }            
+
             return conventions;
+        }
+
+        private void Build(Conventions source, ConventionPipeline @where, List<IConvention> target)
+        {
+            target.AddRange(from p in source.Pipeline
+                            where p.Where == @where
+                            select p.Convention);
         }
     }
 }

@@ -53,5 +53,10 @@ namespace Bogus.Auto
         {
             Binder.Invoke(instance, value);
         }
+
+        public override string ToString()
+        {
+            return string.Concat(Type.FullName, " > ", Name);
+        }
     }
 }

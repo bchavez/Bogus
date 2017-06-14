@@ -27,7 +27,7 @@ namespace Bogus.Auto
 
         internal override bool IsValidGenericBinding(BindingInfo binding)
         {
-            return binding.Type.IsClass();
+            return !binding.Type.IsValueType();
         }
     }
 }

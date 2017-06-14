@@ -8,16 +8,23 @@ namespace Bogus.Tests.Auto
 {
     public class AutoTests
     {
-        private class Company
+        public interface IPayrollCalculator
         {
-            public Company(Guid id, string name)
+            decimal Calculate();
+        }
+
+        public class Company
+        {
+            public Company(Guid id, string name, IPayrollCalculator calculator)
             {
                 Id = id;
                 Name = name;
+                Calculator = calculator;
             }
 
             public Guid Id { get; }
             public string Name { get; }
+            public IPayrollCalculator Calculator { get; }
             public IEnumerable<PersonTest.User> Employees { get; set; }
         }
 
@@ -26,7 +33,8 @@ namespace Bogus.Tests.Auto
         {
             protected override bool CanInvoke<TType>(BindingInfo binding)
             {
-                return binding.Type.IsInterface || binding.Type.IsAbstract;
+                return binding.Value == null && 
+                      (binding.Type.IsInterface || binding.Type.IsAbstract);
             }
 
             protected override void Invoke<TType>(GenerateContext context)
@@ -35,24 +43,19 @@ namespace Bogus.Tests.Auto
             }
         }
 
-        private static bool Configured = false;
-
         [Fact]
         public void Should_Auto_Generate()
         {
             // Add a global convention to mock auto generated values
-            if (!Configured)
-            {
-                GlobalConventions.Conventions.Add(new NSubstituteConvention());
-                Configured = true;
-            }
+            GlobalConventions.Conventions.Clear();
+            GlobalConventions.Conventions.Add(new NSubstituteConvention(), ConventionPipeline.End);
 
             // Create and auto generate a company instance
             var faker = new Faker<Company>();
 
             var company1 = faker.AutoGenerate(options =>
             {
-                options.Add("Names", b => b.Name == "FirstName", c => c.Binding.Value = "TestFirstName");
+                options.Add("FirstName", b => b.Name == "FirstName", c => c.Binding.Value = "TestFirstName");
             });
 
             var company2 = faker.AutoGenerate(options =>

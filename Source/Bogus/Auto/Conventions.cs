@@ -1,25 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Bogus.Auto
 {
     public sealed class Conventions
     {
-        internal IList<IConvention> _conventions;
+        private IList<ConventionPipelineItem> _pipeline;
 
         internal Conventions()
         {
-            _conventions = new List<IConvention>();
+            _pipeline = new List<ConventionPipelineItem>();
         }
 
-        public void Add(IConvention convention)
-        {
-            if (convention == null)
-            {
-                throw new ArgumentNullException(nameof(convention));
-            }
+        internal IEnumerable<ConventionPipelineItem> Pipeline => _pipeline;
 
-            _conventions.Add(convention);
+        public void Add(IConvention convention, ConventionPipeline where = ConventionPipeline.Default)
+        {
+            var item = new ConventionPipelineItem(convention, where);
+            _pipeline.Add(item);
+        }
+
+        public void Clear()
+        {
+            _pipeline.Clear();
         }
     }
 }

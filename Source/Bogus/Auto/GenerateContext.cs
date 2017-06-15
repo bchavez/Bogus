@@ -17,5 +17,10 @@
         public IBinder Binder { get; }
         public BindingInfo Binding { get; }
         public Faker FakerHub { get; }
+
+        public override string ToString()
+        {
+            return Binding.ToString();
+        }
     }
 }

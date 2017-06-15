@@ -9,7 +9,7 @@ namespace Bogus.Auto
         {
           new NameBindingGenerator<string>(c => c.FakerHub.Name.FirstName(), "FirstName"),
           new NameBindingGenerator<string>(c => c.FakerHub.Name.LastName(), "LastName"),
-          new NameBindingGenerator<string>(c => c.FakerHub.Internet.Email(),"Email")
+          new NameBindingGenerator<string>(c => c.FakerHub.Internet.Email(), "Email")
         };
 
         internal static readonly IEnumerable<ITypeBindingGenerator> TypeBindingGenerators = new List<ITypeBindingGenerator>

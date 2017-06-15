@@ -9,13 +9,13 @@ namespace Bogus.Auto
         internal ConventionsBuilder()
         {
             Conventions = new Conventions();
-            ConventionGroups = Enum.GetValues(typeof(ConventionGroup)).Cast<ConventionGroup>();
             SkipFilters = new List<Func<IConvention, bool>>();
+            ConventionGroups = Enum.GetValues(typeof(ConventionGroup)).Cast<ConventionGroup>();
         }
 
         private Conventions Conventions { get; }
-        private IEnumerable<ConventionGroup> ConventionGroups { get; set; }
         private IList<Func<IConvention, bool>> SkipFilters { get; }
+        private IEnumerable<ConventionGroup> ConventionGroups { get; set; }
 
         public ConventionsBuilder Add(IConvention convention, ConventionPipeline where = ConventionPipeline.Default)
         {

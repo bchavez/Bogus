@@ -18,7 +18,7 @@ namespace Bogus.Tests.Auto
       Option3
     }
 
-    private const string DummyName = "DUMMY";
+    private const string DummyName = "NAME";
 
     private IGenerator _generator;
     private IBinder _binder;

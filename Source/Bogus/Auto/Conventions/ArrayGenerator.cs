@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Bogus.Auto
+﻿namespace Bogus.Auto
 {
     internal sealed class ArrayGenerator
         : IConditionalConvention

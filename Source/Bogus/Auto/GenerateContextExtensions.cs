@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Bogus.Auto
 {
     public static class GenerateContextExtensions
     {
-        private static readonly Type ListDefinition = typeof(List<>);
-
         public static object Generate(this GenerateContext context, BindingInfo binding)
         {
             if (context == null)
@@ -43,6 +40,11 @@ namespace Bogus.Auto
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
+            }
+
+            if (binding == null)
+            {
+                throw new ArgumentNullException(nameof(binding));
             }
 
             // Generate a value and add it to the return list

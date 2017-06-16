@@ -25,10 +25,10 @@ namespace Bogus.Auto
             foreach (var member in members.Values)
             {
                 // Generate the member value and bind it
-                var binding = new BindingInfo(member, context.Binding);
+                var binding = new BindingInfo(context.Binding, member);
                 var value = context.Generate(binding);
 
-                binding.Bind(context.Binding.Value, value);
+                binding.Bind(value);
             }
         }
     }

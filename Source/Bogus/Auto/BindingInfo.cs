@@ -17,9 +17,9 @@ namespace Bogus.Auto
             Binder = (i, v) => { };
         }
 
-        internal BindingInfo(MemberInfo member, BindingInfo parent)
+        internal BindingInfo(BindingInfo parent, MemberInfo member)
         {
-            Parent = parent;
+            Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
             // Resolve the member as either a field or property
             if (member is FieldInfo field)
@@ -49,9 +49,9 @@ namespace Bogus.Auto
 
         private Action<object, object> Binder { get; }
 
-        internal void Bind(object instance, object value)
+        internal void Bind(object value)
         {
-            Binder.Invoke(instance, value);
+            Binder.Invoke(Parent.Value, value);
         }
 
         public override string ToString()

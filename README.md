@@ -83,7 +83,7 @@ var testUsers = new Faker<User>()
     .RuleFor(u => u.FullName, (f, u) => u.FirstName + " " + u.LastName)
     //And composability of a complex collection.
     .RuleFor(u => u.Orders, f => testOrders.Generate(3).ToList())
-    //After all rules are applied finish with the following action
+    //Optional: After all rules are applied finish with the following action
     .FinishWith((f, u) =>
         {
             Console.WriteLine("User Created! Id={0}", u.Id);

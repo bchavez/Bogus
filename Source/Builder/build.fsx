@@ -80,6 +80,9 @@ Target "restore" (fun _ ->
                 ToolPath = toolPath
             }
         )
+
+     trace ".NET Core Restore"
+     Dotnet DotnetCommands.Restore BogusProject.Folder
  )
 
 open Ionic.Zip

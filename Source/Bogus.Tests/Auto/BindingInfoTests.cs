@@ -40,22 +40,6 @@ namespace Bogus.Tests.Auto
         public class MemberInfoTests
             : BindingInfoTests
         {
-            [Fact]
-            public void Should_Throw_Exception_If_Parent_Is_Null()
-            {
-                Action action = () => new BindingInfo(null, Property);
-
-                action.ShouldThrowExactly<ArgumentNullException>();
-            }
-
-            [Fact]
-            public void Should_Throw_Exception_If_MemberInfo_Is_Null()
-            {
-                Action action = () => new BindingInfo(_parent, null);
-
-                action.ShouldThrowExactly<ArgumentException>();
-            }
-
             [Theory]
             [MemberData("GetMemberInfos")]
             public void Should_Resolve_MemberInfo(MemberInfo memberInfo)

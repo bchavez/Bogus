@@ -75,12 +75,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auto\AssertionExtensions.cs" />
-    <Compile Include="Auto\AutoTests.cs" />
-    <Compile Include="Auto\BindingInfoTests.cs" />
-    <Compile Include="Auto\ConventionsBuilderTests.cs" />
-    <Compile Include="Auto\ConventionsTests.cs" />
-    <Compile Include="Auto\GenerationTests.cs" />
     <Compile Include="DataSetTests\AddressTest.cs" />
     <Compile Include="DataSetTests\CardTests.cs" />
     <Compile Include="DataSetTests\CommerceTest.cs" />

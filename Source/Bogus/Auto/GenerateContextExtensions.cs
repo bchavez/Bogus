@@ -3,51 +3,27 @@ using System.Linq;
 
 namespace Bogus.Auto
 {
-    public static class GenerateContextExtensions
+    internal static class GenerateContextExtensions
     {
-        public static object Generate(this GenerateContext context, BindingInfo binding)
+        internal static object Generate(this GenerateContext context, BindingInfo binding)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (binding == null)
-            {
-                throw new ArgumentNullException(nameof(binding));
-            }
-
             // Create a new binding to ensure the original is not overwritten
             binding = new BindingInfo(binding.Type, binding.Name, binding.Parent);
 
             // Generate and return the binding value
-            context.Generator.Generate(binding);
+            context = new GenerateContext(context.Count, context.Generator, context.Conventions, context.Binder, binding, context.FakerHub);
+            context.Generator.Generate(context);
+
             return binding.Value;
         }
 
-        public static Array GenerateMany(this GenerateContext context, BindingInfo binding)
+        internal static Array GenerateMany(this GenerateContext context, BindingInfo binding)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
             return context.GenerateMany(context.Count, binding);
         }
 
-        public static Array GenerateMany(this GenerateContext context, int count, BindingInfo binding)
+        internal static Array GenerateMany(this GenerateContext context, int count, BindingInfo binding)
         {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            if (binding == null)
-            {
-                throw new ArgumentNullException(nameof(binding));
-            }
-
-            // Generate a value and add it to the return list
             var items = Array.CreateInstance(binding.Type, count);
 
             foreach (var index in Enumerable.Range(0, count))

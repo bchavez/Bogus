@@ -1,6 +1,7 @@
 ﻿using Bogus.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Bogus.Auto
 {
@@ -20,7 +21,7 @@ namespace Bogus.Auto
         void IConvention.Invoke(GenerateContext context)
         {
             var members = context.Binder.GetMembers(context.Binding.Type);
-            members = members ?? new Dictionary<string, System.Reflection.MemberInfo>();
+            members = members ?? new Dictionary<string, MemberInfo>();
 
             foreach (var member in members.Values)
             {

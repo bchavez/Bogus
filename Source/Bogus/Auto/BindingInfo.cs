@@ -19,7 +19,7 @@ namespace Bogus.Auto
 
         internal BindingInfo(BindingInfo parent, MemberInfo member)
         {
-            Parent = parent ?? throw new ArgumentNullException(nameof(parent));
+            Parent = parent;
 
             // Resolve the member as either a field or property
             if (member is FieldInfo field)

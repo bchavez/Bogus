@@ -2,6 +2,6 @@
 {
     internal interface IGenerator
     {
-        void Generate(BindingInfo binding);
+        void Generate(GenerateContext context);
     }
 }

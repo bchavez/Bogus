@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Bogus.Auto
 {
@@ -11,7 +12,11 @@ namespace Bogus.Auto
             _pipeline = new List<ConventionPipelineItem>();
         }
 
-        internal IEnumerable<ConventionPipelineItem> Pipeline => _pipeline;
+        internal IEnumerable<ConventionPipelineItem> Pipeline
+        {
+            get { return _pipeline; }
+            set { _pipeline = new List<ConventionPipelineItem>(value ?? Enumerable.Empty<ConventionPipelineItem>()); }
+        }
 
         public void Add(IConvention convention, ConventionPipeline where = ConventionPipeline.Default)
         {

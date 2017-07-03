@@ -323,5 +323,36 @@ namespace Bogus.Tests
             result.OrderId.Should().Be(26);
             result.Item.Should().Be("Computer");
         }
+
+       public enum Colors
+       {
+          Red,
+          Blue,
+          Green
+       }
+
+       [Fact]
+       public void pick_random_exclude()
+       {
+          var faker = new Faker();
+          var m = faker.PickRandomWithExclude(Colors.Red, Colors.Green);
+          m.Should().Be(Colors.Blue);
+       }
+
+       [Fact]
+       public void pick_a_random_enum_only_from_the_param_list()
+       {
+          var faker = new Faker();
+          var f = faker.PickRandom(Colors.Red, Colors.Green);
+          f.Should().Be(Colors.Green);
+       }
+
+       [Fact]
+       public void can_pick_a_random_item_from_parameter_list()
+       {
+          var faker = new Faker();
+          var pet = faker.PickRandom("cat", "dog", "fish");
+          pet.Should().Be("dog");
+       }
     }
 }

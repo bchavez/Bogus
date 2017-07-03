@@ -173,6 +173,14 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Picks a random item of T specified in the parameter list.
+        /// </summary>
+        public T PickRandom<T>(params T[] items)
+        {
+           return this.Random.ArrayElement(items);
+        }
+
+        /// <summary>
         /// Helper to pick random subset of elements out of the list.
         /// </summary>
         /// <param name="amountToPick">amount of elements to pick of the list.</param>
@@ -233,6 +241,15 @@ namespace Bogus
         public T PickRandom<T>() where T : struct
         {
             return this.Random.Enum<T>();
+        }
+
+        /// <summary>
+        /// Picks a random Enum of T, excluding those passed as parameters.
+        /// </summary>
+        /// <param name="exclude">The items in the Enum of T to exclude from selection.</param>
+        public T PickRandomWithExclude<T>(params T[] exclude) where T : struct
+        {
+           return this.Random.Enum(exclude);
         }
 
         /// <summary>

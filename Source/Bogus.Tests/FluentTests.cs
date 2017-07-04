@@ -335,7 +335,7 @@ namespace Bogus.Tests
        public void pick_random_exclude()
        {
           var faker = new Faker();
-          var m = faker.PickRandomWithExclude(Colors.Red, Colors.Green);
+          var m = faker.PickRandomWithout(Colors.Red, Colors.Green);
           m.Should().Be(Colors.Blue);
        }
 

@@ -1,3 +1,7 @@
+## v15.0.4
+* Helper method: `f.PickRandomWithout(ExcludeItem1, ExcludeItem2)` added.
+* Helper method: `f.PickRandom("cat", "dog", "fish")` added. 
+
 ## v15.0.3
 * Added `f => f.Rant` to generate random user content like product reviews.
 * Added `new Faker[T].Rules( (f, t) => ...)` as a shortcut for building rules quickly.

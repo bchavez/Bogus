@@ -8,12 +8,21 @@ using FluentAssertions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
+using Xunit.Abstractions;
+using Z.ExtensionMethods;
 
 namespace Bogus.Tests
 {
     public class README_Generator
     {
-        [Fact]
+       private readonly ITestOutputHelper output;
+
+       public README_Generator(ITestOutputHelper output)
+       {
+          this.output = output;
+       }
+
+       [Fact]
         public void get_available_methods()
         {
             var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -66,11 +75,11 @@ namespace Bogus.Tests
                 if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
                 var methods = datasets[g.Key];
 
-                Console.WriteLine("* **`" + g.Key + "`**");
+                output.WriteLine("* **`" + g.Key + "`**");
                 foreach( var m in g )
                 {
                     if( !methods.Any(s => s.Contains(m.method)) ) continue; //check if it's accessible
-                    Console.WriteLine("\t* `" + m.method + "` - " + m.summary);
+                    output.WriteLine("\t* `" + m.method + "` - " + m.summary);
                 }
             }
         }
@@ -102,7 +111,55 @@ namespace Bogus.Tests
             var dataDir = Path.Combine(workingDir, @"..\..\..\Bogus\data");
             count.Should().Be(Directory.GetFiles(dataDir, "*.locale.json").Length);
 
-            Console.WriteLine(string.Join("\n", locales));
+            output.WriteLine(string.Join("\n", locales));
         }
+
+       [Fact]
+       public void get_extension_namespaces()
+       {
+          var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+          var bogusXml = Path.Combine(workingDir, "Bogus.XML");
+          var x = XElement.Load(bogusXml);
+          var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
+
+          var all = json.SelectTokens("doc.members.member").SelectMany(jt => jt)
+             .Select(m =>
+                {
+                   var member = m["@name"];
+                   var summary = m["summary"];
+                   if (member == null || summary == null) return null;
+
+                   var declare = member.ToString();
+                   if (!declare.StartsWith("M:Bogus.Extensions.")) return null;
+
+                   var method = declare.TrimStart('M', ':');
+                   if( method.Contains("#ctor") ) return null;
+
+                   //Bogus.Extensions.Canada.ExtensionsForCanada.Sin(Bogus.Person)
+                   var ns = method.GetBetween("Bogus.Extensions.", ".ExtensionsFor");
+                   if( ns.IsNullOrEmpty() )
+                   {
+                      return null;
+                   }
+                   ns = $"Bogus.Extensions.{ns}";
+                   var em = method.GetAfter("ExtensionsFor").GetAfter(".");
+
+                   return new { ns = ns,  em = em, summary = summary.ToString().Trim() };
+                })
+             .Where(a => a != null)
+             .GroupBy(k => k.ns)
+             .OrderBy(k => k.Key);
+
+
+          foreach (var g in all)
+          {
+             output.WriteLine("* **`using " + g.Key + ";`**");
+             foreach (var i in g)
+             {
+                output.WriteLine("\t* `" + i.em + "` - " + i.summary);
+             }
+          }
+
+      }
     }
 }

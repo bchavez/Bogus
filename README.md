@@ -367,6 +367,18 @@ public void Or_Using_DataSets_Directly()
 	* `Version` - Get a random `System.Version`
 	* `Exception` - Get a random `Exception` with a fake stack trace.
 
+#### API Extension Methods
+* **`using Bogus.Extensions.Brazil;`**
+	* `Cpf(Bogus.Person)` - Cadastro de Pessoas Físicas
+* **`using Bogus.Extensions.Canada;`**
+	* `Sin(Bogus.Person)` - Social Insurance Number for Canada
+* **`using Bogus.Extensions.Denmark;`**
+	* `Cpr(Bogus.Person)` - Danish Personal Identification number
+* **`using Bogus.Extensions.Finland;`**
+	* `Henkilötunnus(Bogus.Person)` - Finnish Henkilötunnus
+* **`using Bogus.Extensions.UnitedStates;`**
+	* `Ssn(Bogus.Person)` - Social Security Number
+
 
 ### Helper Methods
 

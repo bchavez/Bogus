@@ -13,7 +13,7 @@ namespace Bogus.Tests.DataSetTests
             card.FirstName.Should().Be("Lee");
             card.LastName.Should().Be("Brown");
             card.UserName.Should().Be("Lee_Brown3");
-            card.Email.Should().Be("Lee_Brown369@yahoo.com");
+            card.Email.Should().Be("Lee69@yahoo.com");
 
             card.Dump();
         }

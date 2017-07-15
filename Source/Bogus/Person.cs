@@ -53,7 +53,7 @@ namespace Bogus
             var ginternet = new Internet(locale);
 
             this.UserName = ginternet.UserName(this.FirstName, this.LastName);
-            this.Email = ginternet.Email(this.UserName, this.LastName);
+            this.Email = ginternet.Email(this.FirstName, this.LastName);
             this.Website = ginternet.DomainName();
             this.Avatar = ginternet.Avatar();
 

@@ -8,12 +8,20 @@ using Bogus.Extensions.Finland;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests
 {
     public class PersonTest : SeededTest
     {
-        public class User
+       private readonly ITestOutputHelper console;
+
+       public PersonTest(ITestOutputHelper console)
+       {
+          this.console = console;
+       }
+
+       public class User
         {
             public string FirstName { get; set; }
             public string Email { get; set; }
@@ -115,6 +123,26 @@ namespace Bogus.Tests
             a.Length.Should().Be(6);
             b.Length.Should().Be(4);
         }
+
+       [Fact]
+       public void check_emails()
+       {
+          var emails = Get(10, p => p.Email);
+
+         emails.Should().ContainInOrder(
+             "Lee69@yahoo.com",
+             "Michale_Stiedemann94@gmail.com",
+             "Grayson_Harvey@yahoo.com",
+             "Anne.Ruecker@gmail.com",
+             "Vilma.Beer51@yahoo.com",
+             "Loraine_Sipes@yahoo.com",
+             "Haylie_Reilly29@yahoo.com",
+             "Sandrine_Watsica76@gmail.com",
+             "Madisyn6@yahoo.com",
+             "Austin.Marks1@hotmail.com");
+
+          console.WriteLine(emails.DumpString());
+       }
 
         IEnumerable<string> Get(int times, Func<Person, string> a)
         {

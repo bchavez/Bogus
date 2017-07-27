@@ -1,3 +1,8 @@
+## v15.0.5
+* Add parameter for including `Currency` fund codes (BOV, CLF, COU, MXV, UYI).
+* Added new `PickRandomWithout` helper method.
+* Fixed minor issue in `Person.Email` having duplicate names.
+
 ## v15.0.4
 * Helper method: `f.PickRandomWithout(ExcludeItem1, ExcludeItem2)` added.
 * Helper method: `f.PickRandom("cat", "dog", "fish")` added. 

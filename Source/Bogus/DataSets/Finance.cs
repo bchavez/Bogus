@@ -22,6 +22,8 @@ namespace Bogus.DataSets
         /// The currency symbol. IE: $
         /// </summary>
         public string Symbol { get; set; }
+
+        public static Currency Default = new Currency { Description="US Dollar", Code="USD", Symbol="$" };
     }
 
 
@@ -79,7 +81,7 @@ namespace Bogus.DataSets
         /// Get a random currency.
         /// </summary>
         /// <returns></returns>
-        public Currency Currency()
+        public Currency Currency(bool includeFundCodes = false)
         {
             var obj = GetObject("currency");
             var keys = obj.Properties().ToArray();
@@ -87,8 +89,25 @@ namespace Bogus.DataSets
             
             var cur = prop.First.ToObject<Currency>();
             cur.Description = prop.Name;
+            
+           // GitHub Issue #80:
+           // Make sure we exclude currency fund codes by default unless
+           // the user wants them. See:
+           //https://github.com/bchavez/Bogus/issues/80
 
-            return cur;
+           if ( cur.Code.Contains( " " ) )
+           {  // We selecgted a currency fund code. Check if the user wants it.
+              if ( includeFundCodes )
+              {
+                 cur.Code = cur.Code.Split( ' ' )[1];
+                 return cur;
+              }
+              //If they don't want fund codes, send back a default USD.
+              //instead of selecting again (and possibly looping over and over).
+              return DataSets.Currency.Default;
+           }
+
+           return cur;
         }
 
         //We could do better at generating these I suppose.

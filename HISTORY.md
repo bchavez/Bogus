@@ -1,9 +1,10 @@
-## v15.0.4
+## v15.0.5
 * Add parameter for including `Currency` fund codes (BOV, CLF, COU, MXV, UYI).
 * Fixed minor issue in `Person.Email` having duplicate names.
 * Helper method: `f.PickRandomWithout(ExcludeItem1, ExcludeItem2)` added.
 * Helper method: `f.PickRandom("cat", "dog", "fish")` added.
-* Performance: 40% reduction in Bogus' DLL size and memory footprint by removing whitespace in **Json** data files.  
+* Performance: 40% reduction in Bogus' DLL size and memory footprint by removing whitespace in **Json** data files.
+* Newtonsoft dependency update 10.0.3.  
 
 ## v15.0.3
 * Added `f => f.Rant` to generate random user content like product reviews.

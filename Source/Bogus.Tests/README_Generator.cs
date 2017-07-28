@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using FluentAssertions;
+using MoreLinq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Xunit;
@@ -75,8 +76,10 @@ namespace Bogus.Tests
                 if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
                 var methods = datasets[g.Key];
 
+                var distinctMethods = g.DistinctBy( u => u.method );
+
                 output.WriteLine("* **`" + g.Key + "`**");
-                foreach( var m in g )
+                foreach( var m in distinctMethods)
                 {
                     if( !methods.Any(s => s.Contains(m.method)) ) continue; //check if it's accessible
                     output.WriteLine("\t* `" + m.method + "` - " + m.summary);

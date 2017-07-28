@@ -262,8 +262,7 @@ public void Or_Using_DataSets_Directly()
 	* `ProductMaterial` - Random product material.
 * **`Company`**
 	* `CompanySuffix` - Get a company suffix. "Inc" and "LLC" etc.
-	* `CompanyName` - Get a company name
-	* `CompanyName` - Get a company name. The format can use any name.* and company.* methods.
+	* `CompanyName` - Get a company name.
 	* `CatchPhrase` - Get a company catch phrase.
 	* `Bs` - Get a company BS phrase.
 * **`Database`**

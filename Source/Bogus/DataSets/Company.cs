@@ -31,7 +31,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get a company name
+        /// Get a company name.
         /// </summary>
         /// <param name="formatIndex">0: name + suffix, 1: name-name, 2: name, name and name."</param>
         public string CompanyName(int? formatIndex = null)

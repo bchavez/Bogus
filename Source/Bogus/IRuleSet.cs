@@ -52,5 +52,12 @@ namespace Bogus
         /// Creates a rule for a property.
         /// </summary>
         Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value);
+
+        /// <summary>
+        /// Gives you a way to specify multiple rules inside an action
+        /// without having to call RuleFor multiple times. Note: StrictMode
+        /// must be false since property rules cannot be individually checked.
+        /// </summary>
+        Faker<T> Rules(Action<Faker, T> setActions);
     }
 }

@@ -1,6 +1,8 @@
 using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests
 {
@@ -57,5 +59,41 @@ namespace Bogus.Tests
             Action act2 = () => faker2.AssertConfigurationIsValid();
             act2.ShouldThrow<ValidationException>();
         }
+
+        [Fact]
+        public void cannot_use_rules_with_strictmode_inside_rulesets()
+        {
+           const string myset = "myset";
+
+           var faker = new Faker<Examples.Order>()
+              .RuleSet(myset, set =>
+                 {
+                    set.Rules((f, o) =>
+                       {
+                          o.Quantity = f.Random.Number(1, 4);
+                          o.Item = f.Commerce.Product();
+                          o.OrderId = 25;
+                       });
+                    set.StrictMode(true);
+                 });
+
+           Action act = () => faker.AssertConfigurationIsValid();
+           act.ShouldThrow<ValidationException>();
+
+           var faker2 = new Faker<Examples.Order>()
+              .RuleSet(myset, set =>
+                 {
+                    set.StrictMode(true);
+                    set.Rules((f, o) =>
+                       {
+                          o.Quantity = f.Random.Number(1, 4);
+                          o.Item = f.Commerce.Product();
+                          o.OrderId = 25;
+                       });
+                 });
+
+           Action act2 = () => faker2.AssertConfigurationIsValid();
+           act2.ShouldThrow<ValidationException>();
+      }
     }
 }

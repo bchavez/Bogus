@@ -135,6 +135,25 @@ namespace Bogus.Tests
             results.Should().OnlyContain(c => c.Description == "overridden");
         }
 
+        [Fact]
+        public void should_be_able_to_use_rules_with_ruleset()
+        {
+            var testCustomers = new Faker<Customer>()
+                .RuleSet("Good",
+                    (set) =>
+                    {
+                        set.Rules((f, c) =>
+                        {
+                            c.Description = f.Lorem.Sentence();
+                            c.Description = "overridden";
+                        });
+                    });
+
+            var results = testCustomers.Generate(5, "Good");
+
+            results.Should().OnlyContain(c => c.Description == "overridden");
+        }
+
 
         public class EmptyObject
         {

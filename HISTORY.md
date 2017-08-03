@@ -1,3 +1,6 @@
+## v15.0.6
+* PR #87: Added `.Rules()` method on `RuleSet`. Thanks @digitalcyote.
+
 ## v15.0.5
 * Add parameter for including `Currency` fund codes (BOV, CLF, COU, MXV, UYI).
 * Fixed minor issue in `Person.Email` having duplicate names.

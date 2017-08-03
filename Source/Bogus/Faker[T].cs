@@ -142,7 +142,7 @@ namespace Bogus
                     Action = invoker,
                     RuleSet = currentRuleSet,
                     PropertyName = guid,
-                    ProhibtInStrictMode = true
+                    ProhibitInStrictMode = true
                 };
             this.Actions.Add(currentRuleSet, guid, rule);
             return this;
@@ -486,7 +486,7 @@ namespace Bogus
                     {
                         if( populateActions.TryGetValue(propOrFieldOfT, out var populateAction) )
                         {   // Very much a .Rules() action
-                            if( populateAction.ProhibtInStrictMode )
+                            if( populateAction.ProhibitInStrictMode )
                             {
                                 result.ExtraMessages.Add(
                                     $"When StrictMode is set to True the Faker<{typeof(T).Name}>.Rules(...) method cannot verify that all properties have rules. You need to use Faker<{typeof(T).Name}>.RuleFor( x => x.Prop, ...) for each property to ensure each property has an associated rule when StrictMode is true; otherwise, set StrictMode to False in order to use Faker<{typeof(T).Name}>.Rules() method.");

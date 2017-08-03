@@ -25,7 +25,7 @@ namespace Bogus
         /// <summary>
         /// Prohibits the rule from being applied in strict mode.
         /// </summary>
-        public bool ProhibtInStrictMode { get; set; } = false;
+        public bool ProhibitInStrictMode { get; set; } = false;
     }
 
     public class PopulateAction<T> : Rule<Func<Faker, T, object>>

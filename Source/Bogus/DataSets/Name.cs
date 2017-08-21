@@ -76,6 +76,15 @@
         }
 
         /// <summary>
+        /// Get a full name, concatenation of calling FirstName and LastName.
+        /// </summary>
+        /// <param name="gender">Gender of the name if supported by the locale.</param>
+        public string FullName(Gender? gender = null)
+        {
+           return $"{FirstName(gender)} {LastName(gender)}";
+        }
+
+        /// <summary>
         /// Gets a random prefix for a name
         /// </summary>
         /// <returns></returns>

@@ -1,3 +1,6 @@
+## v15.0.7
+* Issue #88 - API aesthetics: Added `Name.FullName()` convenience method to generate a full name.
+
 ## v15.0.6
 * PR #87: Added `.Rules()` method on `RuleSet`. Thanks @digitalcyote.
 

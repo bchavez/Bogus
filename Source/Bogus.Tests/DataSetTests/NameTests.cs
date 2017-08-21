@@ -120,5 +120,11 @@ namespace Bogus.Tests.DataSetTests
             //switch to EN
             n["en"].LastName().Should().Be("Schultz");
         }
+
+       [Fact]
+       public void can_get_a_full_name()
+       {
+          name.FullName().Should().Be("Lee Brown");
+       }
     }
 }

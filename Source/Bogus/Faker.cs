@@ -175,7 +175,7 @@ namespace Bogus
         /// <summary>
         /// Picks a random item of T specified in the parameter list.
         /// </summary>
-        public T PickRandom<T>(params T[] items)
+        public T PickRandomParam<T>(params T[] items)
         {
            return this.Random.ArrayElement(items);
         }
@@ -200,38 +200,39 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Helper method to call faker actions multiple times and return the result as IEnumerable
+        /// Helper method to call faker actions multiple times and return the result as IList of T
         /// </summary>
-        [Obsolete("Please use f => f.Make(...) instead of f => f.Generate(...).")]
-        public IEnumerable<T> Generate<T>(int count, Func<T> action)
-        {
-            return Make(count, action);
-        }
-
-        /// <summary>
-        /// Helper method to call faker actions multiple times and return the result as IEnumerable
-        /// </summary>
-        public IEnumerable<T> Make<T>(int count, Func<T> action)
+        public IList<T> Make<T>(int count, Func<T> action)
         {
             return Enumerable.Range(1, count).Select(n => action()).ToList();
         }
 
         /// <summary>
-        /// Helper method to call faker actions multiple times and return the result as IEnumerable.
+        /// Helper method to call faker actions multiple times and return the result as IList of T.
         /// This method passes in the current index of the generation.
         /// </summary>
-        [Obsolete("Please use f => f.Make(...) instead of f => f.Generate(...)")]
-        public IEnumerable<T> Generate<T>(int count, Func<int,T> action)
-        {
-            return Make(count, action);
-        }
-        /// <summary>
-        /// Helper method to call faker actions multiple times and return the result as IEnumerable.
-        /// This method passes in the current index of the generation.
-        /// </summary>
-        public IEnumerable<T> Make<T>(int count, Func<int, T> action)
+        public IList<T> Make<T>(int count, Func<int, T> action)
         {
             return Enumerable.Range(1, count).Select(action).ToList();
+        }
+
+        /// <summary>
+        /// Returns an IEnumerable[T] with LINQ deferred execution. Generated values
+        /// are not guaranteed to be repeatable until .ToList() is called.
+        /// </summary>
+        public IEnumerable<T> MakeLazy<T>(int count, Func<T> action)
+        {
+           return Enumerable.Range(1, count).Select(n => action());
+        }
+
+        /// <summary>
+        /// Same as Make() except this method passes in the current index of the generation. Also,
+        /// returns an IEnumerable[T] with LINQ deferred execution. Generated values are not
+        /// guaranteed to be repeatable until .ToList() is called.
+        /// </summary>
+        public IEnumerable<T> MakeLazy<T>(int count, Func<int, T> action)
+        {
+           return Enumerable.Range(1, count).Select(action);
         }
 
         /// <summary>

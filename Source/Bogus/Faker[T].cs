@@ -303,17 +303,27 @@ namespace Bogus
         /// <summary>
         /// Generates multiple fake objects of T.
         /// </summary>
-        public virtual IEnumerable<T> Generate(int count, string ruleSets = null)
+        public virtual IList<T> Generate(int count, string ruleSets = null)
         {
             return Enumerable.Range(1, count)
                 .Select(i => Generate(ruleSets))
                 .ToList();
         }
 
-        /// <summary>
-        /// Only populates an instance of T.
-        /// </summary>
-        public virtual void Populate(T instance, string ruleSets = null)
+       /// <summary>
+       /// Returns an IEnumerable[T] with LINQ deferred execution. Generated values
+       /// are not guaranteed to be repeatable until .ToList() is called.
+       /// </summary>
+       public virtual IEnumerable<T> GenerateLazy(int count, string ruleSets = null)
+       {
+          return Enumerable.Range(1, count)
+             .Select(i => Generate(ruleSets));
+       }
+
+      /// <summary>
+      /// Only populates an instance of T.
+      /// </summary>
+      public virtual void Populate(T instance, string ruleSets = null)
         {
             var cleanRules = ParseDirtyRulesSets(ruleSets);
             PopulateInternal(instance, cleanRules);

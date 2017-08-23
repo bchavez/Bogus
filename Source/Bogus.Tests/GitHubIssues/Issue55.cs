@@ -14,7 +14,7 @@ namespace Bogus.Tests.GitHubIssues
                 this.RuleFor(o => o.Dba, f => f.Company.CompanyName());
             }
 
-            public override IEnumerable<Issue55Object> Generate(int count, string ruleSets = null)
+            public override IList<Issue55Object> Generate(int count, string ruleSets = null)
             {
                 var list = base.Generate(count, ruleSets)
                     .OrderBy(o => o.Code)

@@ -343,7 +343,7 @@ namespace Bogus.Tests
        public void pick_a_random_enum_only_from_the_param_list()
        {
           var faker = new Faker();
-          var f = faker.PickRandom(Colors.Red, Colors.Green);
+          var f = faker.PickRandomParam(Colors.Red, Colors.Green);
           f.Should().Be(Colors.Green);
        }
 
@@ -351,7 +351,7 @@ namespace Bogus.Tests
        public void can_pick_a_random_item_from_parameter_list()
        {
           var faker = new Faker();
-          var pet = faker.PickRandom("cat", "dog", "fish");
+          var pet = faker.PickRandomParam("cat", "dog", "fish");
           pet.Should().Be("dog");
        }
     }

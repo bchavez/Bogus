@@ -98,6 +98,7 @@
     <Compile Include="GitHubIssues\Issue61.cs" />
     <Compile Include="GitHubIssues\Issue70.cs" />
     <Compile Include="DataSetTests\HackerTests.cs" />
+    <Compile Include="GitHubIssues\Issue93.cs" />
     <Compile Include="HandleBarTests.cs" />
     <Compile Include="DataSetTests\ImageTest.cs" />
     <Compile Include="DataSetTests\InternetTests.cs" />

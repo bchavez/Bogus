@@ -52,7 +52,7 @@ namespace Bogus.Tests
                 //Compound property with context, use the first/last name properties
                 .RuleFor(u => u.FullName, (f, u) => u.FirstName + " " + u.LastName)
                 //And composability of a complex collection.
-                .RuleFor(u => u.Orders, f => testOrders.Generate(3).ToList())
+                .RuleFor(u => u.Orders, f => testOrders.Generate(3))
                 //After all rules are applied finish with the following action
                 .FinishWith((f, u) =>
                     {

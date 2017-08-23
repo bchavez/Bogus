@@ -25,7 +25,7 @@ namespace Bogus.Tests.GitHubIssues
                     .RuleFor(x => x.Email, (y, x) => $"{x.Name}@xyz.com".Replace(" ", "").ToLower())
                     .RuleFor(x => x.Client, y => y.Random.Bool() ? clients.Generate(1).First() : null)
                     .RuleFor(x => x.UserName, (y, x) => x.Email)
-                    .Generate(4).ToList()
+                    .Generate(4)
             );
 
             users.Dump();

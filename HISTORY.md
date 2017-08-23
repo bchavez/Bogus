@@ -1,3 +1,6 @@
+## v16.0.1
+* BREAKING CHANGE: `Faker.Generate(n)` now calls `.ToList()` under the hood to escape LINQ deferred execution. Remembering to call `.ToList()` after `.Generate(n)` was a sticking point for new users writing test assertions on generated values. Please do not call `Faker.Generate(n).ToList()` as it would execute `.ToList()` twice. Simply, `Faker.Generate(n)` is enough.
+
 ## v15.0.7
 * Issue #88 - API aesthetics: Added `Name.FullName()` convenience method to generate a full name.
 

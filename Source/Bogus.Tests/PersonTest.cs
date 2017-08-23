@@ -36,7 +36,7 @@ namespace Bogus.Tests
                 .RuleFor(b => b.FirstName, f => f.Person.FirstName)
                 .RuleFor(b => b.LastName, f => f.Person.LastName);
 
-            var fakes = faker.Generate(3).ToList();
+            var fakes = faker.Generate(3);
 
             fakes.Select(f => f.Email).Distinct().Count().Should().Be(3);
             fakes.Select(f => f.FirstName).Distinct().Count().Should().Be(3);

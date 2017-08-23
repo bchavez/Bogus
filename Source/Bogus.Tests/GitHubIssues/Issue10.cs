@@ -68,7 +68,7 @@ namespace Bogus.Tests.GitHubIssues
 
             var result = Parallel.For(0, threadCount, i =>
                 {
-                    var fakes = faker.Generate(3).ToList();
+                    var fakes = faker.Generate(3);
                 });
 
             Console.WriteLine(barId);

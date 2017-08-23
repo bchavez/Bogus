@@ -213,7 +213,7 @@ namespace Bogus
         /// </summary>
         public IEnumerable<T> Make<T>(int count, Func<T> action)
         {
-            return Enumerable.Range(1, count).Select(n => action());
+            return Enumerable.Range(1, count).Select(n => action()).ToList();
         }
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Bogus
         /// </summary>
         public IEnumerable<T> Make<T>(int count, Func<int, T> action)
         {
-            return Enumerable.Range(1, count).Select(action);
+            return Enumerable.Range(1, count).Select(action).ToList();
         }
 
         /// <summary>

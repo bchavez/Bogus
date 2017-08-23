@@ -306,7 +306,8 @@ namespace Bogus
         public virtual IEnumerable<T> Generate(int count, string ruleSets = null)
         {
             return Enumerable.Range(1, count)
-                .Select(i => Generate(ruleSets));
+                .Select(i => Generate(ruleSets))
+                .ToList();
         }
 
         /// <summary>

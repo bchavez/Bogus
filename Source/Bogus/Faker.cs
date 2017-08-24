@@ -171,7 +171,37 @@ namespace Bogus
         {
             return this.Random.ArrayElement(items.ToArray());
         }
+        /// <summary>
+        /// Helper method to pick a random element.
+        /// </summary>
+        public T PickRandom<T>(IList<T> items)
+        {
+           return this.Random.ListItem(items);
+        }
+        /// <summary>
+        /// Helper method to pick a random element.
+        /// </summary>
+        public T PickRandom<T>(ICollection<T> items)
+        {
+           return this.Random.CollectionItem(items);
+        }
 
+        /// <summary>
+        /// Helper method to pick a random element.
+        /// </summary>
+        public T PickRandom<T>(List<T> items)
+        {
+           return this.Random.ListItem(items);
+        }
+
+        /// <summary>
+        /// Picks a random item of T specified in the parameter list.
+        /// </summary>
+        public T PickRandom<T>(params T[] items)
+        {
+           return this.Random.ArrayElement(items);
+        }
+        
         /// <summary>
         /// Picks a random item of T specified in the parameter list.
         /// </summary>

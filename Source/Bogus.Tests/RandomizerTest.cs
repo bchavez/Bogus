@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -254,5 +255,37 @@ namespace Bogus.Tests
             r.WordsArray(1, 80).Length.Should().BeInRange(1, 80); //.Should().BeInRange(1, 80);
             r.WordsArray(10, 20).Length.Should().BeInRange(10, 20);
         }
-    }
+
+       [Fact]
+       public void can_pick_random_item_from_ICollection()
+       {
+          var x = new List<int> {1, 2, 3} as ICollection<int>;
+
+          r.CollectionItem(x).Should().BeOneOf(1, 2, 3);
+       }
+
+       [Fact]
+       public void throw_an_exception_when_picking_nothing_from_collection()
+       {
+          var x = new List<int>() as ICollection<int>;
+          Action act = () => r.CollectionItem(x);
+          act.ShouldThrow<InvalidOperationException>();
+       }
+
+       [Fact]
+       public void can_pick_random_item_from_ilist()
+       {
+          var x = new List<int> {1, 2, 3} as IList<int>;
+
+          r.ListItem(x).Should().BeOneOf(1, 2, 3);
+       }
+
+       [Fact]
+       public void can_pick_random_item_from_list()
+       {
+          var x = new List<int> { 1, 2, 3 };
+
+          r.ListItem(x).Should().BeOneOf(1, 2, 3);
+       }
+   }
 }

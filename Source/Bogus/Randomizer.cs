@@ -283,8 +283,25 @@ namespace Bogus
         /// </summary>
         public T ListItem<T>(List<T> list)
         {
+           return ListItem(list as IList<T>);
+        }
+
+        /// <summary>
+        /// Get a random list item.
+        /// </summary>
+        public T ListItem<T>(IList<T> list)
+        {
             var r = Number(max: list.Count - 1);
             return list[r];
+        }
+
+        /// <summary>
+        /// Get a random collection item.
+        /// </summary>
+        public T CollectionItem<T>(ICollection<T> collection)
+        {
+           var r = Number(max: collection.Count - 1);
+           return collection.Skip(r).First();
         }
 
         /// <summary>

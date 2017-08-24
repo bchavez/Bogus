@@ -1,3 +1,6 @@
+## v16.0.3
+* With additional overloads for `.PickRandom(IList)` and `.PickRandom(ICollection)` we can now add `.PickRandom("cat", "dog", "fish")` back to the API. 
+
 ## v16.0.2
 * BREAKING CHANGE: `Faker.Generate(n)` now calls `.ToList()` under the hood to escape LINQ deferred execution. Remembering to call `.ToList()` after `.Generate(n)` was a sticking point for new users writing test assertions on generated values. Please do not call `Faker.Generate(n).ToList()` as it would execute `.ToList()` twice. Simply, `Faker.Generate(n)` is enough.
 * `f.Generate` and `f => f.Make` now return `IList<T>` to signify the breaking change above. 

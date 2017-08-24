@@ -343,7 +343,7 @@ namespace Bogus.Tests
        public void pick_a_random_enum_only_from_the_param_list()
        {
           var faker = new Faker();
-          var f = faker.PickRandomParam(Colors.Red, Colors.Green);
+          var f = faker.PickRandom(Colors.Red, Colors.Green);
           f.Should().Be(Colors.Green);
        }
 
@@ -351,8 +351,34 @@ namespace Bogus.Tests
        public void can_pick_a_random_item_from_parameter_list()
        {
           var faker = new Faker();
-          var pet = faker.PickRandomParam("cat", "dog", "fish");
+          var pet = faker.PickRandom("cat", "dog", "fish");
           pet.Should().Be("dog");
        }
-    }
+
+       [Fact]
+       public void can_pick_a_random_item_from_parameter_list2()
+       {
+          var faker = new Faker();
+          var n = faker.PickRandomParam(1, 2, 3);
+          n.Should().Be(2);
+       }
+
+       [Fact]
+       public void can_pick_a_random_number_int32array()
+       {
+          var numbers = new[] {1, 2, 3};
+          var faker = new Faker();
+          var n = faker.PickRandom(numbers);
+          n.Should().BeOneOf(1, 2, 3);
+       }
+
+       [Fact]
+       public void can_pick_random_item_of_linq_of_things()
+       {
+          var numbers = Enumerable.Range(1, 3).Select(i => i);
+          var faker = new Faker();
+          var n = faker.PickRandom(numbers);
+          n.Should().BeOneOf(1, 2, 3);
+       }
+   }
 }

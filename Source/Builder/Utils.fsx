@@ -175,7 +175,7 @@ let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams =
               Attribute.Version BuildContext.Version
               Attribute.FileVersion BuildContext.Version
               Attribute.InformationalVersion infoVersion
-              Attribute.Trademark "Apache License v2.0"
+              Attribute.Trademark "MIT License"
           ]
 
     CreateCSharpAssemblyInfo path (attrs @ bip.ExtraAttrs)

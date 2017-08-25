@@ -21,7 +21,7 @@ namespace System {
         internal const System.String AssemblyVersion = "0.0.0";
         internal const System.String AssemblyFileVersion = "0.0.0";
         internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 1/1/2015 12:00:00 AM";
-        internal const System.String AssemblyTrademark = "Apache License v2.0";
+        internal const System.String AssemblyTrademark = "MIT License";
         internal const System.String AssemblyDescription = "https://github.com/bchavez/Bogus";
         internal const System.String InternalsVisibleTo = "Bogus.Tests";
     }

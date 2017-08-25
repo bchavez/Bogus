@@ -1,3 +1,6 @@
+## v17.0.1
+* Migration to **.NET Standard 2.0**.
+
 ## v16.0.3
 * With additional overloads for `.PickRandom(IList)` and `.PickRandom(ICollection)` we can now add `.PickRandom("cat", "dog", "fish")` back to the API. 
 

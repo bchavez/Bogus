@@ -24,8 +24,7 @@ namespace Bogus
         /// </summary>
         private static JObject Initialize()
         {
-            //var asm = typeof(Database).Assembly;
-            var asm = typeof(Database).GetAssembly();
+            var asm = typeof(Database).Assembly;
             var root = new JObject();
 
             var resourcesFound = false;
@@ -35,7 +34,7 @@ namespace Bogus
                 resourcesFound = true;
                 if( resourceName.EndsWith(".locale.json") )
                 {
-                    using( var s = typeof(Database).GetAssembly().GetManifestResourceStream(resourceName) )
+                    using( var s = asm.GetManifestResourceStream(resourceName) )
                     using( var sr = new StreamReader(s) )
                     {
                         var serializer = new JsonSerializer();

@@ -1,6 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
-using Bogus.Extensions;
+using Bogus.Platform;
 using Newtonsoft.Json.Linq;
 
 namespace Bogus

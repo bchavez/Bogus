@@ -391,7 +391,7 @@ namespace Bogus
         public T Enum<T>(params T[] exclude) where T : struct
         {
             var e = typeof(T);
-            if(!e.IsEnum())
+            if(!e.IsEnum)
                 throw new ArgumentException("When calling Enum<T>() with no parameters T must be an enum.");
 
             var selection = System.Enum.GetNames(e);

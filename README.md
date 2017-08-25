@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20and%20Sane%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus) <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
-Bogus for .NET, C#, and F#
+Bogus for .NET: C#, F#, and VB.NET
 ======================
 
 Project Description
@@ -36,7 +36,7 @@ Install-Package Bogus
 
 Usage
 -----
-### The Great Example
+### The Great `C#` Example
 
 ```csharp
 public enum Gender
@@ -128,7 +128,7 @@ User Created! Id=0
 } */
 ```
 
-#### The **F#** Example
+#### The Fabolous `F#` Example
 ```
 open Bogus
 
@@ -157,6 +157,39 @@ faker.Generate() |> Dump |> ignore
   Age: 32
   Title: Senior Web Designer
 *)
+```
+
+#### The Very Basic `VB.NET` Example
+```
+Imports Bogus
+
+Public Class Customer
+    Public Property FirstName() As String
+    Public Property LastName() As String
+    Public Property Age() As Integer
+    Public Property Title() As String
+End Class
+
+Sub Main
+    Dim faker As New Faker(Of Customer)
+    
+    '-- Make a rule for each property
+    faker.RuleFor( Function(c) c.FirstName, Function(f) f.Name.FirstName) _
+         .RuleFor( Function(c) c.LastName, Function(f) f.Name.LastName) _
+         _
+         .Rules( Sub(f, c)   '-- Or, alternatively, in bulk with .Rules() 
+                   c.Age = f.Random.Int(18,35) 
+                   c.Title = f.Name.JobTitle()
+                 End Sub )
+            
+    faker.Generate.Dump
+End Sub
+
+' OUTPUT:
+' FirstName: Jeremie 
+' LastName: Mills 
+' Age: 32 
+' Title: Quality Supervisor 
 ```
 
 ### Locales

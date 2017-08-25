@@ -128,6 +128,31 @@ User Created! Id=0
 } */
 ```
 
+#### **F#** Example
+```
+open Bogus
+
+type Customer() =
+  member val FirstName = "" with get, set
+  member val LastName = "" with get, set
+
+type CustomerFaker() as this =
+  inherit Faker<Customer>()
+  do
+    this.RuleFor( (fun (c:Customer) -> c.FirstName), fun (f:Faker) -> f.Name.FirstName() )
+        .RuleFor( (fun (c:Customer) -> c.LastName), fun (f:Faker) -> f.Name.LastName() )
+        |> ignore
+                  
+let faker = new CustomerFaker()
+
+faker.Generate() |> Dump
+
+(* OUTPUT:
+  FirstName: Jarrell
+  LastName: Tremblay
+*)
+```
+
 ### Locales
 
 Since we're a port of **faker.js**, we support a whole bunch of different

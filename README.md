@@ -36,7 +36,7 @@ Install-Package Bogus
 
 Usage
 -----
-### The Great `C#` Example
+### The Great C# Example
 
 ```csharp
 public enum Gender
@@ -128,69 +128,7 @@ User Created! Id=0
 } */
 ```
 
-#### The Fabolous `F#` Example
-```
-open Bogus
-
-type Customer() =
-  member val FirstName = "" with get, set
-  member val LastName = "" with get, set
-  member val Age = 0 with get,set
-  member val Title = "" with get,set
-
-let faker = 
-        Faker<Customer>()
-          //Make a rule for each property
-          .RuleFor( (fun c -> c.FirstName), fun (f:Faker) -> f.Name.FirstName() )
-          .RuleFor( (fun c -> c.LastName), fun (f:Faker) -> f.Name.LastName() )
-
-          //Or, alternatively, in bulk with .Rules()
-          .Rules( fun f c -> 
-                    c.Age <- f.Random.Int(18,35) 
-                    c.Title <- f.Name.JobTitle() )
-  
-faker.Generate() |> Dump |> ignore
-
-(* OUTPUT:
-  FirstName: Jarrell
-  LastName: Tremblay
-  Age: 32
-  Title: Senior Web Designer
-*)
-```
-
-#### The Very Basic `VB.NET` Example
-```
-Imports Bogus
-
-Public Class Customer
-    Public Property FirstName() As String
-    Public Property LastName() As String
-    Public Property Age() As Integer
-    Public Property Title() As String
-End Class
-
-Sub Main
-    Dim faker As New Faker(Of Customer)
-    
-    '-- Make a rule for each property
-    faker.RuleFor( Function(c) c.FirstName, Function(f) f.Name.FirstName) _
-         .RuleFor( Function(c) c.LastName, Function(f) f.Name.LastName) _
-         _
-         .Rules( Sub(f, c)   '-- Or, alternatively, in bulk with .Rules() 
-                   c.Age = f.Random.Int(18,35) 
-                   c.Title = f.Name.JobTitle()
-                 End Sub )
-            
-    faker.Generate.Dump
-End Sub
-
-' OUTPUT:
-' FirstName: Jeremie 
-' LastName: Mills 
-' Age: 32 
-' Title: Quality Supervisor 
-```
+#### [**Click here for F# and VB.NET examples!**](#f-and-vbnet-examples)
 
 ### Locales
 
@@ -576,6 +514,74 @@ public void create_rules_for_an_object_the_easy_way()
 }
 ```
 ***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be indpendently checked to ensure each property has a rule.
+
+F# and VB.NET Examples
+----------------------
+#### The Fabolous F# Example
+```
+open Bogus
+
+type Customer() =
+  member val FirstName = "" with get, set
+  member val LastName = "" with get, set
+  member val Age = 0 with get,set
+  member val Title = "" with get,set
+
+let faker = 
+        Faker<Customer>()
+          //Make a rule for each property
+          .RuleFor( (fun c -> c.FirstName), fun (f:Faker) -> f.Name.FirstName() )
+          .RuleFor( (fun c -> c.LastName), fun (f:Faker) -> f.Name.LastName() )
+
+          //Or, alternatively, in bulk with .Rules()
+          .Rules( fun f c -> 
+                    c.Age <- f.Random.Int(18,35) 
+                    c.Title <- f.Name.JobTitle() )
+  
+faker.Generate() |> Dump |> ignore
+
+(* OUTPUT:
+  FirstName: Jarrell
+  LastName: Tremblay
+  Age: 32
+  Title: Senior Web Designer
+*)
+```
+
+#### The Very Basic VB.NET Example
+```
+Imports Bogus
+
+Public Class Customer
+    Public Property FirstName() As String
+    Public Property LastName() As String
+    Public Property Age() As Integer
+    Public Property Title() As String
+End Class
+
+Sub Main
+    Dim faker As New Faker(Of Customer)
+    
+    '-- Make a rule for each property
+    faker.RuleFor( Function(c) c.FirstName, Function(f) f.Name.FirstName) _
+         .RuleFor( Function(c) c.LastName, Function(f) f.Name.LastName) _
+         _
+         .Rules( Sub(f, c)   '-- Or, alternatively, in bulk with .Rules() 
+                   c.Age = f.Random.Int(18,35) 
+                   c.Title = f.Name.JobTitle()
+                 End Sub )
+            
+    faker.Generate.Dump
+End Sub
+
+' OUTPUT:
+' FirstName: Jeremie 
+' LastName: Mills 
+' Age: 32 
+' Title: Quality Supervisor 
+```
+
+
 
 Building
 --------

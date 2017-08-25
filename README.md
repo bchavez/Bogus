@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20and%20Sane%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus) <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
-Bogus for .NET/C#
+Bogus for .NET, C#, and F#
 ======================
 
 Project Description
@@ -128,28 +128,34 @@ User Created! Id=0
 } */
 ```
 
-#### **F#** Example
+#### The **F#** Example
 ```
 open Bogus
 
 type Customer() =
   member val FirstName = "" with get, set
   member val LastName = "" with get, set
+  member val Age = 0 with get,set
+  member val Title = "" with get,set
 
-type CustomerFaker() as this =
-  inherit Faker<Customer>()
-  do
-    this.RuleFor( (fun (c:Customer) -> c.FirstName), fun (f:Faker) -> f.Name.FirstName() )
-        .RuleFor( (fun (c:Customer) -> c.LastName), fun (f:Faker) -> f.Name.LastName() )
-        |> ignore
-                  
-let faker = new CustomerFaker()
+let faker = 
+        Faker<Customer>()
+          //Make a rule for each property
+          .RuleFor( (fun c -> c.FirstName), fun (f:Faker) -> f.Name.FirstName() )
+          .RuleFor( (fun c -> c.LastName), fun (f:Faker) -> f.Name.LastName() )
 
-faker.Generate() |> Dump
+          //Or, alternatively, in bulk with .Rules()
+          .Rules( fun f c -> 
+                    c.Age <- f.Random.Int(18,35) 
+                    c.Title <- f.Name.JobTitle() )
+  
+faker.Generate() |> Dump |> ignore
 
 (* OUTPUT:
   FirstName: Jarrell
   LastName: Tremblay
+  Age: 32
+  Title: Senior Web Designer
 *)
 ```
 

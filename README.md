@@ -6,7 +6,7 @@ Bogus for .NET: C#, F#, and VB.NET
 
 Project Description
 -------------------
-Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). Bogus is a simple and sane fake data generator for C# and .NET. Bogus is a C# port of [`faker.js`](https://github.com/marak/Faker.js/)
+Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). **Bogus** is a simple and sane fake data generator for **.NET** languages like **C#**, **F#** and **VB.NET**. **Bogus** is fundamentally a **C#** port of [`faker.js`](https://github.com/marak/Faker.js/)
 and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentValidation)'s syntax sugar.
 
 **Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile:
@@ -517,7 +517,7 @@ public void create_rules_for_an_object_the_easy_way()
 
 F# and VB.NET Examples
 ----------------------
-#### The Fabolous F# Example
+#### The Fabulous F# Example
 ```
 open Bogus
 

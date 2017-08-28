@@ -52,7 +52,7 @@ namespace Bogus
             this.minHashLength = minHashLength;
 
             if (this.alphabet.Length < 16)
-                throw new ArgumentException("alphabet must contain atleast 4 unique characters.", "alphabet");
+                throw new ArgumentException("alphabet must contain at least 4 unique characters.", "alphabet");
 
             this.SetupSeps();
             this.SetupGuards();

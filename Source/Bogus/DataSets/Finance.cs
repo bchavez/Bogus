@@ -96,7 +96,7 @@ namespace Bogus.DataSets
            //https://github.com/bchavez/Bogus/issues/80
 
            if ( cur.Code.Contains( " " ) )
-           {  // We selecgted a currency fund code. Check if the user wants it.
+           {  // We selected a currency fund code. Check if the user wants it.
               if ( includeFundCodes )
               {
                  cur.Code = cur.Code.Split( ' ' )[1];

@@ -78,7 +78,7 @@ namespace Bogus
                     })
                 .GroupBy(mi => mi.Name);
 
-            //Issue #70 we could get back mulitple keys
+            //Issue #70 we could get back multiple keys
             //when reflecting over a type. Consider:
             //
             //   ClassA { public int Value {get;set} }

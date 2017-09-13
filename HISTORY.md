@@ -11,7 +11,11 @@
 * Improved `f.PhoneNumbers`. More realistic US phone numbers.
 * Improved `f.Address.Latitude/Longitude` with min and max parameters.
 * Minimum for `f.Commerce.Price` is now $1.00 (not zero).
-* Locale updates for: `cz`, `de_AT`, `el`, `en`, `en_AU`, `en_CA`, `es_MX`, `fr`, `nl`, `pl`, `ru`, `sk`
+* Reduced assembly size by removing redundant locale data.
+* Locale updates:
+* `en_AU` - Update Australian postcode ranges.
+* `en_IND` - Indian postcodes are always numeric.
+* `ru` - Word corrections.
 
 ## v17.0.1
 * Migration to **.NET Standard 2.0**.

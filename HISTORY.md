@@ -1,4 +1,5 @@
 ## v18.0.1
+* Fixed bug in Finland's `f.Person.Henkilötunnus` personal identity code generator that sometimes produced 11 characters.
 * Added `f.Finance.Ethereum`. Generate an Ethereum address.
 * Added `f.Finance.CreditCardCvv`. Generate a random credit card CVV number.
 * Improved `f.Finance.CreditCardNumber`. Generate a random credit card number.

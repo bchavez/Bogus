@@ -42,7 +42,7 @@
          var n = int.Parse(ddMMyy) % 31;
 
          var q = n.ToString();
-         if (n > 10)
+         if (n >= 10)
             q = ((char)('A' + (n - 10))).ToString();
 
          //no idea if its female or male.

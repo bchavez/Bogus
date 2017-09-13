@@ -18,7 +18,8 @@ and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentVali
 ```
 Install-Package Bogus
 ```
-*Note:* ***.NET Core*** *is supported.*
+Minimum Requirements: **.NET Standard 2.0** or **.NET Framework 4.0**.
+
 ##### Projects That Use Bogus
 
 * [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)

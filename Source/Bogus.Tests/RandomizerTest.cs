@@ -287,5 +287,31 @@ namespace Bogus.Tests
 
           r.ListItem(x).Should().BeOneOf(1, 2, 3);
        }
+
+       [Fact]
+       public void can_generate_hexdec_string()
+       {
+          r.Hexadecimal().Should().StartWith("0x").And.Be("0x9");
+          r.Hexadecimal(20).Should().Be("0x1da090b74f2b910be0dd");
+          r.Hexadecimal(prefix: "").Should().Be("5");
+       }
+
+       [Fact]
+       public void can_get_random_subset_of_an_array()
+       {
+          var a = new[] {"a", "b", "c"};
+          r.ArrayElements(a).Should().Equal("a");
+
+          r.ArrayElements(a, 2).Should().Equal("c", "a");
+       }
+
+       [Fact]
+       public void can_get_random_subset_of_a_list()
+       {
+          var a = new List<string>() { "a", "b", "c" };
+          r.ListItems(a).Should().Equal("a");
+
+          r.ListItems(a, 2).Should().Equal("c", "a");
+       }
    }
 }

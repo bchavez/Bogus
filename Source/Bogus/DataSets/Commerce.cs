@@ -41,7 +41,7 @@ namespace Bogus.DataSets
         /// <summary>
         /// Get a random product price.
         /// </summary>
-        public string Price( decimal min = 0, decimal max = 1000, int decimals = 2, string symbol = "" )
+        public string Price( decimal min = 1, decimal max = 1000, int decimals = 2, string symbol = "" )
         {
             var amount = ( max - min );
             var part = (decimal)Random.Double() * amount;

@@ -48,6 +48,15 @@ namespace Bogus.DataSets
             return maxDate - partTimeSpan;
         }
 
+       /// <summary>
+       /// Get a date and time that will happen soon.
+       /// </summary>
+       /// <param name="days">A date no more than N days ahead.</param>
+       public DateTime Soon(int days = 1)
+       {
+           return Between(DateTime.Now, DateTime.Now.AddDays(days));
+       }
+
         /// <summary>
         /// Get a date in the future between refDate and years forward of that date.
         /// </summary>

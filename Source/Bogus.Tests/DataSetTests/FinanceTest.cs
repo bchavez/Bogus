@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
@@ -75,5 +78,57 @@ namespace Bogus.Tests.DataSetTests
         {
             finance.TransactionType().Should().Be("payment");
         }
-    }
+
+       [Fact]
+       public void can_get_random_credit_card_number()
+       {
+         finance.CreditCardNumber(CardType.Switch)
+             .Should().Be("6759-1860-6064-3917-52")
+             .And.Match(f => Luhn(f));
+         finance.CreditCardNumber(CardType.AmericanExpress)
+             .Should().Be("3407-908836-50694")
+             .And.Match(f => Luhn(f));
+         finance.CreditCardNumber(CardType.Instapayment)
+             .Should().Be("6375-5231-6819-9268")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Maestro)
+             .Should().Be("6759-9878-4250-4118")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Jcb)
+             .Should().Be("3528-1242-5366-4879")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Visa)
+             .Should().Be("4869-2879-7143-7822")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Mastercard)
+             .Should().Be("5481-1400-9339-3651")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Solo)
+             .Should().Be("6767-9010-0832-1613-169")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.DinersClub)
+             .Should().Be("5474-3198-2736-8655")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Discover)
+             .Should().Be("6493-6232-2435-7233-5952")
+             .And.Match(f => Luhn(f));
+          finance.CreditCardNumber(CardType.Laser)
+             .Should().Be("6771693455045167")
+             .And.Match(f => Luhn(f));
+
+          finance.CreditCardNumber().Should().Be("3731-282228-18252")
+             .And.Match(f => Luhn(f));
+       }
+
+       private static bool Luhn(string digits)
+       {
+          return digits.Where(char.IsDigit).Reverse()
+                    .Select(c => c - 48)
+                    .Select((thisNum, i) => i % 2 == 0
+                       ? thisNum
+                       : ((thisNum *= 2) > 9 ? thisNum - 9 : thisNum)
+                    ).Sum() % 10 == 0;
+       }
+   }
+
 }

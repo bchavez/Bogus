@@ -17,7 +17,7 @@ namespace Bogus.Tests.DataSetTests
         public void can_get_phone_number()
         {
             phone.PhoneNumber()
-                .Should().Be("186-060-6439 x1750");
+                .Should().Be("260-860-6439 x1750");
         }
 
         [Fact]
@@ -31,7 +31,7 @@ namespace Bogus.Tests.DataSetTests
         public void can_get_phone_number_via_formats_index()
         {
             phone.PhoneNumberFormat(1)
-                .Should().Be("(618) 606-0643");
+                .Should().Be("(686) 206-0643");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace Bogus.Tests
           this.output = output;
        }
 
-       [Fact]
+        [Fact]
         public void get_available_methods()
         {
             var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

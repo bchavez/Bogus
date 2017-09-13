@@ -120,5 +120,12 @@ namespace Bogus.Tests.DataSetTests
                 .And
                 .BeOnOrBefore(end);
         }
+
+       [Fact]
+       public void get_a_date_time_that_will_happen_soon()
+       {
+          var now = DateTime.Now;
+          date.Soon(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
+       }
     }
 }

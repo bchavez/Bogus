@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+
 namespace Bogus.DataSets
 {
     /// <summary>
@@ -22,7 +25,7 @@ namespace Bogus.DataSets
         public string PhoneNumber(string format = null)
         {
             format = !string.IsNullOrWhiteSpace(format) ? format : PhoneFormat();
-            return Random.Replace(format);
+            return Random.Replace(ReplaceExclamChar(format));
         }
 
         /// <summary>
@@ -44,6 +47,14 @@ namespace Bogus.DataSets
         protected virtual string PhoneFormat()
         {
             return GetRandomArrayItem("formats");
+        }
+
+        /// <summary>
+        /// Replaces special ! characters in phone number formats. 
+        /// </summary>
+        protected virtual string ReplaceExclamChar(string s)
+        {
+           return this.Random.ReplaceSymbols(s, '!', () => Convert.ToChar('0' + this.Random.Number(2, 9)));
         }
     }
 }

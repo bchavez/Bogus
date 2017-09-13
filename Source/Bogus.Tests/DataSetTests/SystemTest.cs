@@ -120,5 +120,17 @@ namespace Bogus.Tests.DataSetTests
                 .Distinct()
                 .ToArray().Dump();
         }
+
+       [Fact]
+       public void can_get_directory_path_unix()
+       {
+          system.DirectoryPath().Should().Be(@"/sys");
+       }
+
+       [Fact]
+       public void can_get_file_path_unix()
+       {
+          system.FilePath().Should().Be("/sys/bluetooth.js");
+       }
     }
 }

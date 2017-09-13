@@ -9,6 +9,7 @@
 * Added `f.Date.Soon`. Generates a date and time that will happen soon.
 * Added `f.Random.ArrayElements`. Gets a random subset of an array.
 * Added `f.Random.ListItems`. Gets a random subset of a list.
+* Added `f.Company.Cnpj` extension method for Brazil. Generates Brazilian company document.
 * Improved `f.PhoneNumbers`. More realistic US phone numbers.
 * Improved `f.Address.Latitude/Longitude` with min and max parameters.
 * Minimum for `f.Commerce.Price` is now $1.00 (not zero).

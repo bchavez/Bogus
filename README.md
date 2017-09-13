@@ -379,15 +379,16 @@ public void Or_Using_DataSets_Directly()
 
 #### API Extension Methods
 * **`using Bogus.Extensions.Brazil;`**
-	* `Cpf(Bogus.Person)` - Cadastro de Pessoas Físicas
+	* `Bogus.Person.Cpf()` - Cadastro de Pessoas Físicas
+	* `Bogus.DataSets.Company.Cnpj()` - Cadastro Nacional da Pessoa Jurídica
 * **`using Bogus.Extensions.Canada;`**
-	* `Sin(Bogus.Person)` - Social Insurance Number for Canada
+	* `Bogus.Person.Sin()` - Social Insurance Number for Canada
 * **`using Bogus.Extensions.Denmark;`**
-	* `Cpr(Bogus.Person)` - Danish Personal Identification number
+	* `Bogus.Person.Cpr()` - Danish Personal Identification number
 * **`using Bogus.Extensions.Finland;`**
-	* `Henkilötunnus(Bogus.Person)` - Finnish Henkilötunnus
+	* `Bogus.Person.Henkilötunnus()` - Finnish Henkilötunnus
 * **`using Bogus.Extensions.UnitedStates;`**
-	* `Ssn(Bogus.Person)` - Social Security Number
+	* `Bogus.Person.Ssn()` - Social Security Number
 
 
 ### Helper Methods

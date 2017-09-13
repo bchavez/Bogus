@@ -59,7 +59,6 @@ namespace Bogus.Extensions.Brazil
         /// <summary>
         /// Cadastro Nacional da Pessoa Jurídica
         /// </summary>
-        /// <returns></returns>
         public static string Cnpj(this Company c)
         {
             var digits = r.Digits(12);

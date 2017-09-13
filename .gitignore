@@ -5,6 +5,7 @@
 **.lock.json
 *.history.nuspec
 **/.vs/**
+**/.idea/**
 /Source/packages**
 paket.lock
 .fake

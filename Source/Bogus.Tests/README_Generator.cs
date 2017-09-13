@@ -159,7 +159,9 @@ namespace Bogus.Tests
              output.WriteLine("* **`using " + g.Key + ";`**");
              foreach (var i in g)
              {
-                output.WriteLine("\t* `" + i.em + "` - " + i.summary);
+                var method = i.em.GetBefore("(");
+                var objectExtends = i.em.GetBetween("(", ")");
+                output.WriteLine($"\t* `{objectExtends}.{method}()` - {i.summary}");
              }
           }
 

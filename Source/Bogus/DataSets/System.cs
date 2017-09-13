@@ -52,6 +52,21 @@ namespace Bogus.DataSets
             return filename;
         }
 
+        /// <summary>
+        /// Get a random directory path (Unix)
+        /// </summary>
+        public string DirectoryPath()
+        {
+           return GetRandomArrayItem("directoryPaths");
+        }
+
+        /// <summary>
+        /// Get a random file path (Unix)
+        /// </summary>
+        public string FilePath()
+        {
+           return $"{DirectoryPath()}/{FileName()}";
+        }
 
         public string CommonFileName(string ext = null)
         {

@@ -274,6 +274,7 @@ public void Or_Using_DataSets_Directly()
 	* `Engine` - Generates a storage engine.
 * **`Date`**
 	* `Past` - Get a date in the past between refDate and years past that date.
+	* `Soon` - Get a date and time that will happen soon.
 	* `Future` - Get a date in the future between refDate and years forward of that date.
 	* `Between` - Get a random date between start and end.
 	* `Recent` - Get a random date/time within the last few days since now.
@@ -286,8 +287,10 @@ public void Or_Using_DataSets_Directly()
 	* `Amount` - Get a random amount. Default 0 - 1000.
 	* `TransactionType` - Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
 	* `Currency` - Get a random currency.
-	* `CreditCardNumber` - Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
+	* `CreditCardNumber` - Generate a random credit card number with valid Luhn checksum.
+	* `CreditCardCvv` - Generate a credit card CVV
 	* `BitcoinAddress` - Generates a random bitcoin address
+	* `EthereumAddress` - Generate a random ethereum address
 	* `Bic` - Generates Bank Identifier Code (BIC) code.
 	* `Iban` - Generates an International Bank Account Number (IBAN).
 * **`Hacker`**
@@ -346,6 +349,7 @@ public void Or_Using_DataSets_Directly()
             male/female names, but not 'en' English.
 	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
             male/female names, but English ('en') does not.
+	* `FullName` - Get a full name, concatenation of calling FirstName and LastName.
 	* `Prefix` - Gets a random prefix for a name
 	* `Suffix` - Gets a random suffix for a name
 	* `FindName` - Gets a full name
@@ -361,6 +365,8 @@ public void Or_Using_DataSets_Directly()
 	* `Reviews` - Generate an array of random reviews.
 * **`System`**
 	* `FileName` - Get a random file name
+	* `DirectoryPath` - Get a random directory path (Unix)
+	* `FilePath` - Get a random file path (Unix)
 	* `MimeType` - Get a random mime type
 	* `CommonFileType` - Returns a commonly used file type
 	* `CommonFileExt` - Returns a commonly used file extension

@@ -278,6 +278,58 @@ namespace Bogus
             return array[r];
         }
 
+       /// <summary>
+       /// Helper method to get a random JProperty.
+       /// </summary>
+       public JToken ArrayElement(JProperty[] props)
+       {
+          var r = Number(max: props.Length - 1);
+          return props[r];
+       }
+
+       /// <summary>
+       /// Get a random array element.
+       /// </summary>
+       public string ArrayElement(Array array)
+       {
+          array = array ?? new[] { "a", "b", "c" };
+
+          var r = Number(max: array.Length - 1);
+
+          return array.GetValue(r).ToString();
+       }
+
+       /// <summary>
+       /// Helper method to get a random element inside a JArray
+       /// </summary>
+       public string ArrayElement(JArray array)
+       {
+          var r = Number(max: array.Count - 1);
+
+          return array[r].ToString();
+       }
+
+       internal T ArrayElement<T>(JArray array)
+       {
+          var r = Number(max: array.Count - 1);
+
+          return array[r].ToObject<T>();
+       }
+
+       /// <summary>
+       /// Get a random subset of an array.
+       /// </summary>
+       /// <param name="count">The number of elements to pick; otherwise, a random amount is picked.</param>
+       public T[] ArrayElements<T>(T[] array, int? count = null)
+       {
+          if( count > array.Length )
+             throw new ArgumentOutOfRangeException(nameof(count));
+          if( count is null )
+             count = Number(0, array.Length - 1);
+
+          return Shuffle(array).Take(count.Value).ToArray();
+       }
+
         /// <summary>
         /// Get a random list item.
         /// </summary>
@@ -295,6 +347,28 @@ namespace Bogus
             return list[r];
         }
 
+       /// <summary>
+       /// Get a random subset of a List.
+       /// </summary>
+       /// <param name="count">The number of items to pick; otherwise, a random amount is picked.</param>
+       public List<T> ListItems<T>(IList<T> items, int? count = null)
+       {
+          if (count > items.Count)
+             throw new ArgumentOutOfRangeException(nameof(count));
+          if (count is null)
+             count = Number(0, items.Count - 1);
+
+          return Shuffle(items).Take(count.Value).ToList();
+       }
+       /// <summary>
+       /// Get a random subset of a List.
+       /// </summary>
+       /// <param name="count">The number of items to pick; otherwise, a random amount is picked.</param>
+       public IList<T> ListItems<T>(List<T> items, int? count = null)
+       {
+          return ListItems(items as IList<T>, count);
+       }
+
         /// <summary>
         /// Get a random collection item.
         /// </summary>
@@ -305,55 +379,26 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Helper method to get a random JProperty.
-        /// </summary>
-        public JToken ArrayElement(JProperty[] props)
-        {
-            var r = Number(max: props.Length - 1);
-            return props[r];
-        }
-
-        /// <summary>
-        /// Get a random array element.
-        /// </summary>
-        public string ArrayElement(Array array)
-        {
-            array = array ?? new[] {"a", "b", "c"};
-
-            var r = Number(max: array.Length - 1);
-
-            return array.GetValue(r).ToString();
-        }
-
-        /// <summary>
-        /// Helper method to get a random element inside a JArray
-        /// </summary>
-        public string ArrayElement(JArray array)
-        {
-            var r = Number(max: array.Count - 1);
-
-            return array[r].ToString();
-        }
-
-        internal T ArrayElement<T>(JArray array)
-        {
-            var r = Number(max: array.Count - 1);
-
-            return array[r].ToObject<T>();
-        }
-
-        /// <summary>
         /// Replaces symbols with numbers. IE: ### -> 283
         /// </summary>
-        /// <param name="format"></param>
-        /// <param name="symbol"></param>
+        /// <param name="format">The string format</param>
+        /// <param name="symbol">The symbol to search for in format that will be replaced with a number</param>
         public string ReplaceNumbers(string format, char symbol = '#')
         {
-            var chars = format.Select(c => c == symbol ? Convert.ToChar('0' + Number(9)) : c)
-                .ToArray();
-
-            return new string(chars);
+           return ReplaceSymbols(format, symbol, () => Convert.ToChar('0' + Number(9)));
         }
+
+       /// <summary>
+       /// Replaces each character instance in a string. Func is called each time a symbol is encountered.
+       /// </summary>
+       /// <param name="format">The string with symbols to replace.</param>
+       /// <param name="symbol">The symbol to search for in the string.</param>
+       /// <param name="func">The function that produces a character for replacement. Invoked each time the replacement symbol is encountered.</param>
+       public string ReplaceSymbols(string format, char symbol, Func<char> func)
+       {
+          var chars = format.Select(c => c == symbol ? func() : c).ToArray();
+          return new string(chars);
+       }
 
         /// <summary>
         /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4. Letters are uppercase.
@@ -510,6 +555,21 @@ namespace Bogus
         {
             var sb = new StringBuilder();
             return Enumerable.Range(1, count).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
+        }
+
+        private static char[] HexChars =
+          {
+             '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+             'a', 'b', 'c', 'd', 'e', 'f'
+          };
+
+        /// <summary>
+        /// Generates a random hexadecimal string.
+        /// </summary>
+        public string Hexadecimal(int length = 1, string prefix = "0x")
+        {
+           var sb = new StringBuilder();
+           return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(HexChars)), b => $"{prefix}{b}");
         }
 
         //items are weighted by the decimal probability in their value

@@ -1,3 +1,18 @@
+## v18.0.1
+* Added `f.Finance.Ethereum`. Generate an Ethereum address.
+* Added `f.Finance.CreditCardCvv`. Generate a random credit card CVV number.
+* Improved `f.Finance.CreditCardNumber`. Generate a random credit card number.
+* Added `f.Random.Hexadecimal`. Generates a random hexadecimal string.
+* Added `f.System.DirectoryPath`. Generates a random directory path.
+* Added `f.System.FilePath`. Generates a random file path.
+* Added `f.Date.Soon`. Generates a date and time that will happen soon.
+* Added `f.Random.ArrayElements`. Gets a random subset of an array.
+* Added `f.Random.ListItems`. Gets a random subset of a list.
+* Improved `f.PhoneNumbers`. More realistic US phone numbers.
+* Improved `f.Address.Latitude/Longitude` with min and max parameters.
+* Minimum for `f.Commerce.Price` is now $1.00 (not zero).
+* Locale updates for: `cz`, `de_AT`, `el`, `en`, `en_AU`, `en_CA`, `es_MX`, `fr`, `nl`, `pl`, `ru`, `sk`
+
 ## v17.0.1
 * Migration to **.NET Standard 2.0**.
 

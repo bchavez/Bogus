@@ -168,18 +168,18 @@ namespace Bogus.DataSets
         /// Get a Latitude
         /// </summary>
         /// <returns></returns>
-        public double Latitude()
+        public double Latitude(double min = -90, double max = 90 )
         {
-            return Random.Number(180 * 10000) / 10000.0 - 90.0;
+            return Math.Round(Random.Double(min, max), 4);
         }
 
         /// <summary>
         /// Get a Longitude
         /// </summary>
         /// <returns></returns>
-        public double Longitude()
+        public double Longitude(double min = -180, double max = 180)
         {
-            return Random.Number(360 * 10000) / 10000.0 - 180.0;
+           return Math.Round(Random.Double(min, max), 4);
         }
     }
 }

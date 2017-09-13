@@ -1,7 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
+using Bogus.Platform;
 using Newtonsoft.Json.Linq;
+using Bogus.Extensions;
 
 namespace Bogus.DataSets
 {
@@ -25,6 +29,69 @@ namespace Bogus.DataSets
 
         public static Currency Default = new Currency { Description="US Dollar", Code="USD", Symbol="$" };
     }
+
+   /// <summary>
+   /// Represents an enumeration of all the supported card types.
+   /// </summary>
+   public class CardType
+   {
+      internal string Value { get; }
+
+      private CardType(string value)
+      {
+         this.Value = value;
+         All.Add(this);
+      }
+      /// <summary>
+      /// List of all card types.
+      /// </summary>
+      public static readonly List<CardType> All = new List<CardType>();
+
+      /// <summary>
+      /// Visa card number
+      /// </summary>
+      public static readonly CardType Visa = new CardType("visa");
+      /// <summary>
+      /// Mastercard card number
+      /// </summary>
+      public static readonly CardType Mastercard = new CardType("mastercard");
+      /// <summary>
+      /// Discover card number
+      /// </summary>
+      public static readonly CardType Discover = new CardType("discover");
+      /// <summary>
+      /// American Express card number
+      /// </summary>
+      public static readonly CardType AmericanExpress = new CardType("american_express");
+      /// <summary>
+      /// Diners Club card number
+      /// </summary>
+      public static readonly CardType DinersClub = new CardType("diners_club");
+      /// <summary>
+      /// JCB card number
+      /// </summary>
+      public static readonly CardType Jcb = new CardType("jcb");
+      /// <summary>
+      /// Switch card number
+      /// </summary>
+      public static readonly CardType Switch = new CardType("switch");
+      /// <summary>
+      /// Solo card number
+      /// </summary>
+      public static readonly CardType Solo = new CardType("solo");
+      /// <summary>
+      /// Maestro card number
+      /// </summary>
+      public static readonly CardType Maestro = new CardType("maestro");
+      /// <summary>
+      /// Laser card number
+      /// </summary>
+      public static readonly CardType Laser = new CardType("laser");
+      /// <summary>
+      /// Instapayment card number
+      /// </summary>
+      public static readonly CardType Instapayment = new CardType("instapayment");
+   }
 
 
     /// <summary>
@@ -110,32 +177,99 @@ namespace Bogus.DataSets
            return cur;
         }
 
-        //We could do better at generating these I suppose.
-        /// <summary>
-        /// Returns a credit card number that should pass validation. See [here](https://developers.braintreepayments.com/ios+ruby/reference/general/testing).
-        /// </summary>
-        /// <returns></returns>
-        public string CreditCardNumber()
-        {
-            var cards = new[]
-                {
-                    "378282246310005",
-                    "371449635398431",
-                    "6011111111111117",
-                    "3530111333300000",
-                    "6304000000000000",
-                    "5555555555554444",
-                    "4111111111111111",
-                    "4005519200000004",
-                    "4009348888881881",
-                    "4012000033330026",
-                    "4012000077777777",
-                    "4012888888881881",
-                    "4217651111111119",
-                    "4500600000000061"
-                };
+       /// <summary>
+       /// Generate a random credit card number with valid Luhn checksum.
+       /// </summary>
+       /// <param name="provider">The type of credit card to generate (ie: American Express, Discover, etc.). Passing null, a random card provider will be chosen.</param>
+       public string CreditCardNumber(CardType provider = null)
+       {
+          if( provider is null )
+          {
+             provider = this.Random.ListItem(CardType.All);
+          }
 
-            return Random.ArrayElement(cards);
+          var format = GetRandomArrayItem($"credit_card.{provider.Value}");
+
+          var symbol = '#';
+          var expandedFormat = RegexStyleStringParse(format); // replace [4-9] with a random number in range etc...
+          var cardNumber = this.Random.ReplaceNumbers(expandedFormat, symbol); // replace ### with random numbers
+
+          var numberList = cardNumber.Where(char.IsDigit)
+             .Select(c => int.Parse(c.ToString())).ToList();
+
+          var checkNum = numberList.CheckDigit();
+          return cardNumber.Replace("L", checkNum.ToString());
+
+          string RegexStyleStringParse(string str = "")
+          {
+             // Deal with range repeat `{min,max}`
+             var RANGE_REP_REG = new Regex(@"(.)\{(\d+)\,(\d+)\}");
+             var REP_REG = new Regex(@"(.)\{(\d+)\}");
+             var RANGE_REG = new Regex(@"\[(\d+)\-(\d+)\]");
+             int min, max, tmp, repetitions;
+             var token = RANGE_REP_REG.Match(str);
+             while( token.Success )
+             {
+                min = Int32.Parse(token.Groups[2].Value);
+                max = Int32.Parse(token.Groups[3].Value);
+
+                if( min > max )
+                {
+                   tmp = max;
+                   max = min;
+                   min = tmp;
+                }
+
+                repetitions = this.Random.Number(min, max);
+
+                str = str.Substring(0, token.Index) +
+                      new string(token.Groups[1].Value[0], repetitions) +
+                      str.Substring(token.Index + token.Groups[0].Length);
+
+                token = RANGE_REP_REG.Match(str);
+             }
+             // Deal with repeat `{num}`
+             token = REP_REG.Match(str);
+             while( token.Success )
+             {
+                repetitions = Int32.Parse(token.Groups[2].Value);
+
+                str = str.Substring(0, token.Index) +
+                      new string(token.Groups[1].Value[0], repetitions) +
+                      str.Substring(token.Index + token.Groups[0].Length);
+
+                token = REP_REG.Match(str);
+             }
+             // Deal with range `[min-max]` (only works with numbers for now)
+             //TODO: implement for letters e.g. [0-9a-zA-Z] etc.
+
+             token = RANGE_REG.Match(str);
+             while( token.Success )
+             {
+                min = Int32.Parse(token.Groups[1].Value); // This time we are not capturing the char befor `[]`
+                max = Int32.Parse(token.Groups[2].Value);
+                // switch min and max
+                if( min > max )
+                {
+                   tmp = max;
+                   max = min;
+                   min = tmp;
+                }
+                str = str.Substring(0, token.Index) +
+                      this.Random.Number(min, max) +
+                      str.Substring(token.Index + token.Groups[0].Length);
+                token = RANGE_REG.Match(str);
+             }
+             return str;
+          }
+       }
+
+        /// <summary>
+        /// Generate a credit card CVV
+        /// </summary>
+        public string CreditCardCvv()
+        {
+            return this.Random.Replace("###");
         }
 
         /// <summary>
@@ -150,6 +284,14 @@ namespace Bogus.DataSets
                 address += "*";
             }
             return Random.Replace(address);
+        }
+
+        /// <summary>
+        /// Generate a random ethereum address
+        /// </summary>
+        public string EthereumAddress()
+        {
+           return Random.Hexadecimal(40);
         }
 
         private static readonly string[] BicVowels = { "A", "E", "I", "O", "U" };

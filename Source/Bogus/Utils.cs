@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Bogus.Extensions;
 
 namespace Bogus
 {
@@ -15,13 +16,8 @@ namespace Bogus
         /// </summary>
         public static string Slugify(string txt)
         {
-            var str = txt.Replace(" ", "-");
-            return Regex.Replace(str, @"[^\w\.\-]+", "");
-        }
-
-        internal static string FormatWith(this string format, params object[] objs)
-        {
-            return string.Format(format, objs);
+            var str = txt.Replace(" ", "-").RemoveDiacritics();
+            return Regex.Replace(str, @"[^a-zA-Z0-9\.\-_]+", "");
         }
 
         /// <summary>

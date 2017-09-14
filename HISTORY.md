@@ -1,3 +1,7 @@
+## v18.0.2
+* Issue 86: Removed diacritic mark/accents (á, í, ó, ú, etc) from generated email addresses and user names.
+* Added `string.RemoveDiacritics` helper method.
+
 ## v18.0.1
 * Fixed bug in Finland's `f.Person.Henkilötunnus` personal identity code generator that sometimes produced 11 characters.
 * Added `f.Finance.Ethereum`. Generate an Ethereum address.

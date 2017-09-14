@@ -89,10 +89,9 @@ namespace Bogus.DataSets
                 result = firstName + Random.ArrayElement(new[] {".", "_"}) + lastName + Random.Number(99);
             }
 
-            result = result.Replace("'", "")
-                .Replace(" ", "");
+            result = result.Replace(" ", "");
 
-            return result;
+            return Utils.Slugify(result);
         }
 
         /// <summary>

@@ -9,7 +9,8 @@
         "#"
       ],
       "street_prefix": [
-        "Allée, Voie",
+        "Allée",
+        "Voie",
         "Rue",
         "Avenue",
         "Boulevard",

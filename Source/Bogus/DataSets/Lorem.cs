@@ -79,11 +79,11 @@ namespace Bogus.DataSets
         /// <summary>
         /// Get some sentences.
         /// </summary>
-        /// <param name="sentanceCount">The number of sentences</param>
+        /// <param name="sentenceCount">The number of sentences</param>
         /// <returns></returns>
-        public string Sentences(int? sentanceCount = null, string separator = "\n")
+        public string Sentences(int? sentenceCount = null, string separator = "\n")
         {
-            var sc = sentanceCount ?? this.Random.Number(2, 6);
+            var sc = sentenceCount ?? this.Random.Number(2, 6);
             var sentences = Enumerable.Range(1, sc)
                 .Select(s => Sentence());
 

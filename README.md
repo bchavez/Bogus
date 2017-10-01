@@ -149,48 +149,29 @@ public void With_Korean_Locale()
 
 **Bogus** has support following locales:
 
-| Locale Code  | Language      |
-|:------------:|:-------------:|
-|`az`          |Azerbaijani
-|`cz`          |Czech
-|`de`          |German
-|`de_AT`       |German (Austria)
-|`de_CH`       |German (Switzerland)
-|`el`          |Greek
-|`en`          |English
-|`en_AU`       |Australia (English)
-|`en_au_ocker` |Australia Ocker (English)
-|`en_BORK`     |Bork (English)
-|`en_CA`       |Canada (English)
-|`en_GB`       |Great Britain (English)
-|`en_IE`       |Ireland (English)
-|`en_IND`      |India (English)
-|`en_US`       |United States (English)
-|`es`          |Spanish
-|`es_MX`       |Spanish Mexico
-|`fa`          |Farsi
-|`fr`          |French
-|`fr_CA`       |Canada (French)
-|`ge`          |Georgian
-|`id_ID`       |Indonesia
-|`it`          |Italian
-|`ja`          |Japanese
-|`ko`          |Korean
-|`lv`          |Latvian
-|`nb_NO`       |Norwegian
-|`nep`         |Nepalese
-|`nl`          |Dutch
-|`pl`          |Polish
-|`pt_BR`       |Portuguese (Brazil)
-|`pt_PT`       |Portuguese (Portugal)
-|`ru`          |Russian
-|`sk`          |Slovakian
-|`sv`          |Swedish
-|`tr`          |Turkish
-|`uk`          |Ukrainian
-|`vi`          |Vietnamese
-|`zh_CN`       |Chinese
-|`zh_TW`       |Chinese (Taiwan)
+| Locale Code    | Language                | | Locale Code    | Language                 |
+|:--------------:|:-----------------------:|-|:--------------:|:------------------------:|
+|`az            `|Azerbaijani               ||`ge            `|Georgian                  |
+|`cz            `|Czech                     ||`id_ID         `|Indonesia                 |
+|`de            `|German                    ||`it            `|Italian                   |
+|`de_AT         `|German (Austria)          ||`ja            `|Japanese                  |
+|`de_CH         `|German (Switzerland)      ||`ko            `|Korean                    |
+|`el            `|Greek                     ||`lv            `|Latvian                   |
+|`en            `|English                   ||`nb_NO         `|Norwegian                 |
+|`en_AU         `|Australia (English)       ||`nep           `|Nepalese                  |
+|`en_au_ocker   `|Australia Ocker (English) ||`nl            `|Dutch                     |
+|`en_BORK       `|Bork (English)            ||`pl            `|Polish                    |
+|`en_CA         `|Canada (English)          ||`pt_BR         `|Portuguese (Brazil)       |
+|`en_GB         `|Great Britain (English)   ||`pt_PT         `|Portuguese (Portugal)     |
+|`en_IE         `|Ireland (English)         ||`ru            `|Russian                   |
+|`en_IND        `|India (English)           ||`sk            `|Slovakian                 |
+|`en_US         `|United States (English)   ||`sv            `|Swedish                   |
+|`es            `|Spanish                   ||`tr            `|Turkish                   |
+|`es_MX         `|Spanish Mexico            ||`uk            `|Ukrainian                 |
+|`fa            `|Farsi                     ||`vi            `|Vietnamese                |
+|`fr            `|French                    ||`zh_CN         `|Chinese                   |
+|`fr_CA         `|Canada (French)           ||`zh_TW         `|Chinese (Taiwan)          |
+
 
 
 ***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/Marak/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/Marak/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to the `en:lorem` data set.

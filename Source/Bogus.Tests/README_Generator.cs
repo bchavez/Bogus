@@ -96,18 +96,31 @@ namespace Bogus.Tests
 
             int count = 0;
 
-            foreach( var prop in data.Properties().OrderBy(p => p.Name) )
-            {
-                count++;
+            var lcs = data.Properties().OrderBy(p => p.Name).Select(p =>
+              {
+                 count++;
+                 var code = p.Name;
+                 var title = p.First["title"].ToString();
+                 title = title.Replace("Ελληνικά", "Greek");
 
-                var code = prop.Name;
-                var title = prop.First["title"].ToString();
+                 return new {code, title};
+              }).ToArray();
 
-                title = title.Replace("Ελληνικά", "Greek");
+           var col1 = lcs.Take(lcs.Length / 2 + lcs.Length % 2).ToArray();
+           var col2 = lcs.Skip(lcs.Length / 2 + lcs.Length % 2).ToArray();
 
-                var str = string.Format("|{0,-14}|{1}", "`" + code + "`", title);
-                locales.Add(str);
-            }
+           for( int i = 0; i < col1.Length; i++)
+           {
+              var c1 = col1[i];
+              var c2 = i == col2.Length ? null : col2[i];
+
+              var c2code = c2 is null ? string.Empty : $"`{c2.code,-14}`";
+              var c2title = c2 is null ? string.Empty : $"{c2.title,-26}";
+
+              var str = $"|`{c1.code,-14}`|{c1.title,-26}||{c2code}|{c2title}|";
+              locales.Add(str);
+           }
+
 
             //make sure # of embedded locales matches the number of imported on disk.
             var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);

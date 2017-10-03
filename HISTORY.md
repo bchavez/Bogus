@@ -1,5 +1,6 @@
 ## v18.0.3
 * Locale Update: street address prefixes in `fr` locale.
+* Added `Faker.GenerateForever` that returns `IEnumerable<T>` with unlimited items when iterated over.
 
 ## v18.0.2
 * Issue 86: Removed diacritic mark/accents (á, í, ó, ú, etc) from generated email addresses and user names.

@@ -380,5 +380,25 @@ namespace Bogus.Tests
           var n = faker.PickRandom(numbers);
           n.Should().BeOneOf(1, 2, 3);
        }
+
+       [Fact]
+       public void can_generate_forever()
+       {
+          var orderFaker = new Faker<Order>()
+             .RuleFor(o => o.OrderId, f => f.IndexVariable++)
+             .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
+             .RuleFor(o => o.Item, f => f.Commerce.Product());
+
+          var source = orderFaker.GenerateForever();
+          var count = 0;
+          foreach( var order in source )
+          {
+             order.Item.Should().NotBeNullOrWhiteSpace();
+             order.Quantity.Should().BeInRange(1, 3);
+             order.OrderId.Should().BeGreaterOrEqualTo(0);
+             count++;
+             if( count > 99 ) break;
+          }
+       }
    }
 }

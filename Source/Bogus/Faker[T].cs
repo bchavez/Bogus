@@ -10,6 +10,7 @@ namespace Bogus
     /// <summary>
     /// Generates fake objects of T.
     /// </summary>
+    /// <typeparam name="T">The object to fake.</typeparam>
     public class Faker<T> : ILocaleAware, IRuleSet<T> where T : class
     {
 #pragma warning disable 1591
@@ -318,6 +319,20 @@ namespace Bogus
        {
           return Enumerable.Range(1, count)
              .Select(i => Generate(ruleSets));
+       }
+
+      /// <summary>
+      /// Returns an <see cref="IEnumerable{T}"/> that can be used as an unlimited source 
+      /// of <typeparamref name="T"/> when iterated over. Useful for generating unlimited
+      /// amounts of data in a memory efficient way. Generated values *should* be repeatable
+      /// for a given seed when starting with the first item in the sequence.
+      /// </summary>
+      public virtual IEnumerable<T> GenerateForever(string ruleSets = null)
+       {
+          while( true )
+          {
+             yield return this.Generate();
+          }
        }
 
       /// <summary>

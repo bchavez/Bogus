@@ -14,16 +14,17 @@
         public readonly bool SupportsGenderFirstNames = false;
         public readonly bool SupportsGenderLastNames = false;
         public readonly bool SupportsGenderPrefixes = false;
-
+        public readonly bool HasFirstNameList = false;
         /// <summary>
         /// Default constructor
         /// </summary>
         /// <param name="locale"></param>
         public Name(string locale = "en") : base(locale)
         {
-            SupportsGenderFirstNames = Get("male_first_name") != null && Get("female_first_name") != null;
-            SupportsGenderLastNames = Get("male_last_name") != null && Get("female_last_name") != null;
-            SupportsGenderPrefixes = Get("male_prefix") != null && Get("female_prefix") != null;
+            SupportsGenderFirstNames = HasKey("male_first_name", false) && HasKey("female_first_name", false);
+            SupportsGenderLastNames = HasKey("male_last_name", false) && HasKey("female_last_name", false);
+            SupportsGenderPrefixes = HasKey("male_prefix", false) && HasKey("female_prefix", false);
+            HasFirstNameList = HasKey("first_name", false);
         }
 
         /// <summary>
@@ -33,30 +34,27 @@
         /// <returns></returns>
         public Name this[string switchLocale] => new Name(switchLocale);
 
-        /// <summary>
-        /// Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
-        /// male/female names, but not 'en' English.
-        /// </summary>
-        /// <param name="gender">For locale's that support Gender naming.</param>
-        public string FirstName(Gender? gender = null)
-        {
-            if( SupportsGenderFirstNames )
-            {
-                gender = gender ?? this.Random.Enum<Gender>();
+       /// <summary>
+       /// Get a first name. Getting a gender specific name is only supported on locales that support it.
+       /// </summary>
+       /// <param name="gender">For locale's that support Gender naming.</param>
+       public string FirstName(Gender? gender = null)
+       {
+          if( gender is null && HasFirstNameList)
+             return GetRandomArrayItem("first_name");
 
-                if( gender == Gender.Male )
-                {
-                    return GetRandomArrayItem("male_first_name");
-                }
-                return GetRandomArrayItem("female_first_name");
-            }
+         if( gender is null)
+            gender = this.Random.Enum<Gender>();
 
-            return GetRandomArrayItem("first_name");
-        }
+          if( gender == Gender.Male )
+          {
+             return GetRandomArrayItem("male_first_name");
+          }
+          return GetRandomArrayItem("female_first_name");
+       }
 
         /// <summary>
-        /// Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
-        /// male/female names, but English ('en') does not.
+        /// Get a first name. Getting a gender specific name is only supported on locales that support it.
         /// </summary>
         /// <param name="gender">For locale's that support Gender naming.</param>
         public string LastName(Gender? gender = null)
@@ -87,7 +85,6 @@
         /// <summary>
         /// Gets a random prefix for a name
         /// </summary>
-        /// <returns></returns>
         public string Prefix(Gender? gender = null)
         {
             gender = gender ?? this.Random.Enum<Gender>();
@@ -105,7 +102,6 @@
         /// <summary>
         /// Gets a random suffix for a name
         /// </summary>
-        /// <returns></returns>
         public string Suffix()
         {
             return GetRandomArrayItem("suffix");
@@ -118,7 +114,6 @@
         /// <param name="lastName">use this last name.</param>
         /// <param name="withPrefix">Add a prefix?</param>
         /// <param name="withSuffix">Add a suffix?</param>
-        /// <returns></returns>
         public string FindName(string firstName = "", string lastName = "", bool? withPrefix = null, bool? withSuffix = null, Gender? gender = null)
         {
             gender = gender ?? this.Random.Enum<Gender>();

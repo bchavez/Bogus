@@ -20,8 +20,20 @@ namespace Bogus.Tests.DataSetTests
         [Fact]
         public void can_generate_a_random_bitcoin_address()
         {
-            finance.BitcoinAddress().Dump();
+           finance.BitcoinAddress().Should().Be("1Q663EP0X8IP6K5F1U9GKXW2B1322JR8S");
         }
+
+       [Fact]
+       public void can_generate_a_random_ethereum_address()
+       {
+          finance.EthereumAddress().Should().Be("0x91da090b74f2b910be0dd5991af6398351ac2ef3");
+       }
+
+       [Fact]
+       public void can_generate_aba_routing_number()
+       {
+          finance.RoutingNumber().Should().Be("618606061");
+       }
 
         [Fact]
         public void can_generate_bic()

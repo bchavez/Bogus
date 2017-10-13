@@ -294,6 +294,26 @@ namespace Bogus.DataSets
            return Random.Hexadecimal(40);
         }
 
+        /// <summary>
+        /// Generates an ABA routing number with valid check digit.
+        /// </summary>
+        public string RoutingNumber()
+        {
+           var digits = this.Random.Digits(8);
+
+           var sum = 0;
+           for( var i = 0; i < digits.Length; i += 3 )
+           {
+              sum += 3 * digits.ElementAt(i);
+              sum += 7 * digits.ElementAt(i + 1);
+              sum += digits.ElementAtOrDefault(i + 2);
+           }
+
+           var checkDigit = Math.Ceiling(sum / 10d) * 10 - sum;
+
+           return digits.Aggregate("", (str, digit) => str + digit, str => str + checkDigit);
+        }
+
         private static readonly string[] BicVowels = { "A", "E", "I", "O", "U" };
         /// <summary>
         /// Generates Bank Identifier Code (BIC) code.

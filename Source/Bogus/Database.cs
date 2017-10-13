@@ -54,12 +54,36 @@ namespace Bogus
             return root;
         }
 
+       /// <summary>
+       /// Determines if a key exists in the locale.
+       /// </summary>
+       public static bool HasKey(string category, string key, string locale, string fallbackLocale = "en")
+       {
+          var localeJsonPath = FormatPath(locale, category, key);
+          var jtoken = Data.Value.SelectToken(localeJsonPath);
+          if( jtoken != null && jtoken.HasValues )
+             return true;
+          if( fallbackLocale == null ) return false;
+
+          localeJsonPath = FormatPath(fallbackLocale, category, key);
+          jtoken = Data.Value.SelectToken(localeJsonPath);
+          if( jtoken != null && jtoken.HasValues )
+             return true;
+
+          return false;
+       }
+
+       private static string FormatPath(string locale, string category, string key)
+       {
+          return $"{locale}.{category}.{key}";
+       }
+
         /// <summary>
         /// Returns the JToken of the locale.category.key. If the key does not exist, then the locale fallback is used.
         /// </summary>
         public static JToken Get(string category, string key, string locale = "en", string localeFallback = "en" )
         {
-            var path = $"{locale}.{category}.{key}";
+            var path = FormatPath(locale, category, key);
             var jtoken = Data.Value.SelectToken(path);
 
             if( jtoken != null && jtoken.HasValues )
@@ -68,7 +92,7 @@ namespace Bogus
             }
 
             //fallback path
-            var fallbackPath = $"{localeFallback}.{category}.{key}";
+            var fallbackPath = FormatPath(localeFallback,category,key);
 
             return Data.Value.SelectToken(fallbackPath);
         }

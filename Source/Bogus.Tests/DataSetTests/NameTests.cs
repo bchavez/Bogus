@@ -20,6 +20,18 @@ namespace Bogus.Tests.DataSetTests
         }
 
         [Fact]
+        public void can_get_female_first_name()
+        {
+            name.FirstName(Name.Gender.Female).Should().Be("Lindsay");
+        }
+
+        [Fact]
+        public void can_get_male_first_name()
+        {
+           name.FirstName(Name.Gender.Male).Should().Be("Stuart");
+        }
+
+      [Fact]
         public void can_get_first_name_when_locale_dataset_is_split_in_male_female()
         {
             var n = new Name("ru");

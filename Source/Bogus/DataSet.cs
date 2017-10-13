@@ -57,12 +57,23 @@ namespace Bogus
             return Database.Get(this.Category, keyOrSubPath, Locale);
         }
 
-        /// <summary>
-        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
-        /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
-        public JArray GetArray(string keyOrSubPath)
+       /// <summary>
+       /// Determines if a key exists in the locale.
+       /// </summary>
+       protected bool HasKey(string keyOrSubPath, bool includeFallback = true)
+       {
+          if( includeFallback )
+             return Database.HasKey(this.Category, keyOrSubPath, this.Locale);
+
+          return Database.HasKey(this.Category,keyOrSubPath, this.Locale, null);
+       }
+
+      /// <summary>
+      /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
+      /// </summary>
+      /// <param name="keyOrSubPath">key in the category</param>
+      /// <returns></returns>
+      public JArray GetArray(string keyOrSubPath)
         {
             return (JArray)Get(keyOrSubPath);
         }

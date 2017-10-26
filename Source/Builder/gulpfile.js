@@ -5,6 +5,7 @@ var l = require("lodash");
 
 var path = require("path");
 var fs = require("fs");
+var BSON = require("bson");
 
 var es = require("event-stream");
 
@@ -13,7 +14,7 @@ var localeFolders = gulp.src(["../fakerjs/lib/locales/*"]);
 var dataFolder = "../Bogus/data";
 var dataExtendFolder = "../Bogus/data_extend";
 
-gulp.task("build.locales", function () {
+gulp.task("build.locale.json", function () {
 
     return localeFolders
         .pipe($.plumber())
@@ -44,6 +45,26 @@ gulp.task("build.locales", function () {
         .pipe(gulp.dest(dataFolder));
 });
 
+gulp.task("build.locales", [], function(){
+    return gulp.src(`${dataFolder}/*.locale.json`)
+    .pipe($.plumber())
+    .pipe($.map(function(file) {
+        var json = JSON.parse(file.contents.toString());
+
+        var destName = `${file.relative}.bin`;
+
+        var b = new BSON();
+        var data = b.serialize(json, {checkKeys: false});
+
+        var vinyl = new $.util.File({
+            path: './' + destName,
+            contents: new Buffer(data)
+        });
+        return vinyl;
+    }))
+    .pipe($.print())
+    .pipe(gulp.dest(dataFolder));
+});
 
 //Helper Methods
 function log(msg) {

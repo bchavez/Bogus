@@ -1,7 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
+using Bogus.Bson;
 using Bogus.Platform;
-using Newtonsoft.Json.Linq;
 
 namespace Bogus
 {
@@ -52,20 +52,20 @@ namespace Bogus
         /// </summary>
         /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
-        public JToken Get(string keyOrSubPath)
+        public BValue Get(string path)
         {
-            return Database.Get(this.Category, keyOrSubPath, Locale);
+            return Database.Get(this.Category, path, Locale);
         }
 
        /// <summary>
        /// Determines if a key exists in the locale.
        /// </summary>
-       protected bool HasKey(string keyOrSubPath, bool includeFallback = true)
+       protected bool HasKey(string path, bool includeFallback = true)
        {
           if( includeFallback )
-             return Database.HasKey(this.Category, keyOrSubPath, this.Locale);
+             return Database.HasKey(this.Category, path, this.Locale);
 
-          return Database.HasKey(this.Category,keyOrSubPath, this.Locale, null);
+          return Database.HasKey(this.Category, path, this.Locale, null);
        }
 
       /// <summary>
@@ -73,9 +73,9 @@ namespace Bogus
       /// </summary>
       /// <param name="keyOrSubPath">key in the category</param>
       /// <returns></returns>
-      public JArray GetArray(string keyOrSubPath)
+      public BArray GetArray(string path)
         {
-            return (JArray)Get(keyOrSubPath);
+            return (BArray)Get(path);
         }
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace Bogus
         /// </summary>
         /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
-        public JObject GetObject(string keyOrSubPath)
+        public BObject GetObject(string path)
         {
-            return (JObject)Get(keyOrSubPath);
+           return (BObject)Get(path);
         }
 
         /// <summary>
@@ -94,9 +94,11 @@ namespace Bogus
         /// </summary>
         /// <param name="keyOrSubPath">key in the category</param>
         /// <returns></returns>
-        public string GetRandomArrayItem(string keyOrSubPath)
+        public string GetRandomArrayItem(string path)
         {
-            return Random.ArrayElement(GetArray(keyOrSubPath));
+            var arr = GetArray(path);
+            if( !arr.HasValues ) return string.Empty;
+            return Random.ArrayElement(GetArray(path));
         }
 
 
@@ -105,9 +107,9 @@ namespace Bogus
         /// </summary>
         /// <param name="keyOrSubPath">key in the category</param>
         /// <returns>System.String.</returns>
-        protected string GetFormattedValue( string keyOrSubPath )
+        protected string GetFormattedValue(string path )
         {
-            var value = GetRandomArrayItem( keyOrSubPath );
+            var value = GetRandomArrayItem( path );
 
             var tokenResult = ParseTokens( value );
 
@@ -125,18 +127,18 @@ namespace Bogus
             var cityResult = regex.Replace(value,
                 x =>
                     {
-                        JArray result;
+                        BArray result;
                         var groupValue = x.Groups[1].Value.ToLower().Split('.');
                         if( groupValue.Length == 1 )
                         {
-                            result = (JArray)Database.Get(Category, groupValue[0], Locale);
+                            result = (BArray)Database.Get(this.Category, groupValue[0], this.Locale);
                         }
                         else
                         {
-                            result = (JArray)Database.Get(groupValue[0], groupValue[1], Locale);
+                            result = (BArray)Database.Get(groupValue[0], groupValue[1], this.Locale);
                         }
 
-                        var randomElement = Random.ArrayElement(result);
+                        var randomElement = this.Random.ArrayElement(result);
 
                         //replace values
                         return ParseTokens(randomElement);

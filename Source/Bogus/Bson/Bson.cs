@@ -257,7 +257,7 @@ namespace Bogus.Bson
       Int32,
       Int64,
       Object
-   };
+   }
 
 
    public class BObject : BValue, IEnumerable
@@ -276,10 +276,14 @@ namespace Bogus.Bson
 
       public override BValue this[string key]
       {
-         get => map[key];
+         get
+         {
+            map.TryGetValue(key, out BValue val);
+            return val;
+         }
          set => map[key] = value;
       }
-      
+
       public override void Clear() => map.Clear();
 
       public override void Add(string key, BValue value) => map.Add(key, value);
@@ -313,6 +317,8 @@ namespace Bogus.Bson
          get { return items[index]; }
          set { items[index] = value; }
       }
+
+      public bool HasValues => items.Count > 0;
 
       public int Count => items.Count;
 

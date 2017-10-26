@@ -591,7 +591,7 @@ If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 3. Ensure, [NodeJS](https://nodejs.org/) and `gulp` are properly installed.
 4. `cd Source\Builder`
 5. `npm install` to install required dev dependencies.
-6. `gulp build.locales` to regenerate locales in `Source\Bogus\data`.
+6. `gulp import.locales` to regenerate locales in `Source\Bogus\data`.
 7. In solution explorer add any new locales not already included as an
 `EmbeddedResource`.
 8. Finally, run `build.bat`.

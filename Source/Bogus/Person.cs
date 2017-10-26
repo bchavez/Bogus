@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Generic;
 using Bogus.DataSets;
-using Newtonsoft.Json;
 
 namespace Bogus
 {
@@ -100,10 +99,5 @@ namespace Bogus
         public string Phone;
         public string Website;
         public CardCompany Company;
-        
-        public override string ToString()
-        {
-            return JsonConvert.SerializeObject(this, Formatting.Indented);
-        }
     }
 }

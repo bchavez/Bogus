@@ -1,6 +1,4 @@
 using System;
-using System.Text.RegularExpressions;
-using Newtonsoft.Json.Linq;
 
 namespace Bogus.DataSets
 {

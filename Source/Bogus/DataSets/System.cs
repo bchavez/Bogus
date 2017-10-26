@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json.Linq;
+using Bogus.Bson;
 
 namespace Bogus.DataSets
 {
@@ -16,15 +17,29 @@ namespace Bogus.DataSets
         /// <param name="locale"></param>
         public System(string locale = "en") : base(locale)
         {
-            mimes = this.GetObject("mimeTypes");
+            mimes = this.GetArray("mimeTypes");
 
-            mimeKeys = mimes.Properties()
-                .Select(p => p.Name)
+           lookup = mimes.OfType<BObject>()
+              .ToDictionary(o => o["mime"].StringValue);
+
+            mimeKeys = mimes
+                .OfType<BObject>()
+                .Select( o => o["mime"].StringValue )
                 .Distinct()
                 .ToArray();
 
-            exts = mimes.SelectTokens("*.extensions.[*]")
-                .Select(x => x.ToString()).ToArray();
+           exts = mimes
+              .OfType<BObject>()
+              .SelectMany(o =>
+                 {
+                    if( o.ContainsKey("extensions") )
+                    {
+                       var e = o["extensions"] as BArray;
+                       return e.OfType<BValue>().Select(s => s.StringValue);
+                    }
+                    return Enumerable.Empty<string>();
+                 })
+              .ToArray();
 
             types = mimeKeys.Select(k => k.Substring(0, k.IndexOf('/')))
                 .Distinct()
@@ -32,7 +47,8 @@ namespace Bogus.DataSets
         }
 
         protected Lorem Lorem = null;
-        private JObject mimes;
+       private Dictionary<string, BObject> lookup;
+        private BArray mimes;
         private string[] exts;
         private string[] types;
         private string[] mimeKeys;
@@ -131,26 +147,27 @@ namespace Bogus.DataSets
             return this.Random.ArrayElement(this.types);
         }
 
-        
-        /// <summary>
-        /// Gets a random extension for the given mime type.
-        /// </summary>
-        public string FileExt(string mimeType = null)
-        {
-            JToken mime;
-            if(mimeType != null && mimes.TryGetValue(mimeType,out mime) && mime.Type == JTokenType.Object)
-            {
-                var mimeObject = mime as JObject;
-                return this.Random.ArrayElement(mimeObject["extensions"] as JArray);
-            }
 
-            return this.Random.ArrayElement(exts);
-        }
+      /// <summary>
+      /// Gets a random extension for the given mime type.
+      /// </summary>
+      public string FileExt(string mimeType = null)
+      {
+         BObject mime;
+         if( mimeType != null &&
+            lookup.TryGetValue(mimeType, out mime)&&
+            mime.ContainsKey("extensions") )
+         {
+            return this.Random.ArrayElement(mime["extensions"] as BArray);
+         }
 
-        /// <summary>
-        /// Get a random semver version string.
-        /// </summary>
-        public string Semver()
+         return this.Random.ArrayElement(exts);
+      }
+
+      /// <summary>
+      /// Get a random semver version string.
+      /// </summary>
+      public string Semver()
         {
             return $"{this.Random.Number(9)}.{this.Random.Number(9)}.{this.Random.Number(9)}";
         }

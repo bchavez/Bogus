@@ -1,9 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using Bogus.Extensions;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Linq;
+using Bogus.Bson;
 
 namespace Bogus
 {
@@ -12,89 +11,133 @@ namespace Bogus
     /// </summary>
     public static class Database
     {
-        /// <summary>
-        /// The root of all locales in a single JObject. { de: { ... } ,  en: { ... } }
-        /// </summary>
-        public static Lazy<JObject> Data = new Lazy<JObject>(Initialize, isThreadSafe: true);
+      /// <summary>
+      /// The root of all locales in a single BObject. { de: { ... } ,  en: { ... } }
+      /// </summary>
+      public static Lazy<Dictionary<string, BObject>> Data = new Lazy<Dictionary<string, BObject>>(Initialize, isThreadSafe: true);
 
+       public static string[] GetAllLocales()
+       {
+         var asm = typeof(Database).Assembly;
 
-        /// <summary>
-        /// Initializes the database by going though all the locales in the assembly manifests.
-        /// and merges them into a single JObject like. IE: Root["en"] or Root["de"].
-        /// </summary>
-        private static JObject Initialize()
-        {
-            var asm = typeof(Database).Assembly;
-            var root = new JObject();
+          var localesFound = new List<string>();
+          //Do a quick scan of all the resources in the assembly.
+          foreach( var resourceName in asm.GetManifestResourceNames() )
+          {
+             if( resourceName.EndsWith(".locale.bson") )
+             {
+                var localeName = resourceName.Replace("Bogus.data.", "").Replace(".locale.bson", "");
+                localesFound.Add(localeName);
+             }
+          }
 
-            var resourcesFound = false;
-
-            foreach( var resourceName in asm.GetManifestResourceNames() )
-            {
-                resourcesFound = true;
-                if( resourceName.EndsWith(".locale.json") )
-                {
-                    using( var s = asm.GetManifestResourceStream(resourceName) )
-                    using( var sr = new StreamReader(s) )
-                    {
-                        var serializer = new JsonSerializer();
-                        var locale = serializer.Deserialize<JObject>(new JsonTextReader(sr));
-                        var props = locale.Properties();
-                        foreach( var prop in props )
-                            root.Add(prop.Name, prop.First);
-                    }
-                }
-            }
-
-            if( !resourcesFound )
-            {
-                throw new NotImplementedException("No Locale Resources Could Be Found.");
-            }
-
-            return root;
-        }
+          return localesFound.ToArray();
+       }
 
        /// <summary>
-       /// Determines if a key exists in the locale.
-       /// </summary>
-       public static bool HasKey(string category, string key, string locale, string fallbackLocale = "en")
-       {
-          var localeJsonPath = FormatPath(locale, category, key);
-          var jtoken = Data.Value.SelectToken(localeJsonPath);
-          if( jtoken != null && jtoken.HasValues )
-             return true;
-          if( fallbackLocale == null ) return false;
-
-          localeJsonPath = FormatPath(fallbackLocale, category, key);
-          jtoken = Data.Value.SelectToken(localeJsonPath);
-          if( jtoken != null && jtoken.HasValues )
-             return true;
-
-          return false;
-       }
-
-       private static string FormatPath(string locale, string category, string key)
-       {
-          return $"{locale}.{category}.{key}";
-       }
-
-        /// <summary>
-        /// Returns the JToken of the locale.category.key. If the key does not exist, then the locale fallback is used.
-        /// </summary>
-        public static JToken Get(string category, string key, string locale = "en", string localeFallback = "en" )
-        {
-            var path = FormatPath(locale, category, key);
-            var jtoken = Data.Value.SelectToken(path);
-
-            if( jtoken != null && jtoken.HasValues )
+      /// Initializes the database by going though all the locales in the assembly manifests.
+      /// and merges them into a single JObject like. IE: Root["en"] or Root["de"].
+      /// </summary>
+      private static Dictionary<string, BObject> Initialize()
+      {
+         //Just lazy load English only.
+         return new Dictionary<string, BObject>
             {
-                return jtoken;
+               {"en", InitLocale("en")}
+            };
+      }
+
+
+       internal static BObject InitLocale(string locale)
+       {
+          var asm = typeof(Database).Assembly;
+          var resourceName = $"Bogus.data.{locale}.locale.bson";
+
+          using( var s = asm.GetManifestResourceStream(resourceName) )
+          using( var ms = new MemoryStream() )
+          {
+             s.CopyTo(ms);
+
+             return Bson.Bson.Load(ms.ToArray());
+          }
+       }
+
+       public static BObject GetLocale(string locale)
+       {
+          if( !Data.Value.TryGetValue(locale, out BObject l) )
+          {
+             l = InitLocale(locale);
+             Data.Value.Add(locale, l);
+          }
+
+          return l;
+       }
+
+      /// <summary>
+      /// Determines if a key exists in the locale.
+      /// </summary>
+      public static bool HasKey(string category, string path, string locale, string fallbackLocale = "en")
+      {
+         var l = GetLocale(locale);
+         var value = Select(category, path, l);
+         if( value != null )
+            return true;
+
+         if( fallbackLocale == null ) return false;
+
+         l = GetLocale(fallbackLocale);
+         value = Select(category, path, l);
+
+         if( value != null )
+            return true;
+
+         return false;
+      }
+
+      /// <summary>
+      /// Returns the JToken of the locale category path. If the key does not exist, then the locale fallback is used.
+      /// </summary>
+      public static BValue Get(string category, string path, string locale = "en", string localeFallback = "en")
+      {
+         var l = GetLocale(locale);
+
+         var val = Select(category, path, l);
+
+         if( val != null )
+         {
+            return val;
+         }
+
+         //fallback path
+         var fallback = GetLocale(localeFallback);
+
+         return Select(category, path, fallback);
+      }
+
+      private static BValue Select(string category, string path, BValue localeRoot)
+      {
+         if( !localeRoot.ContainsKey(category) ) return null;
+
+         var section = localeRoot[category];
+
+         var current = 0;
+         while( true )
+         {
+            var len = path.IndexOf('.', current);
+
+            string key;
+
+            if( len < 0 )
+            {
+               //dot in path not found, final key
+               key = path.Substring(current);
+               return section[key];
             }
-
-            //fallback path
-            var fallbackPath = FormatPath(localeFallback,category,key);
-
-            return Data.Value.SelectToken(fallbackPath);
-        }
-    }
+            key = path.Substring(current, len);
+            section = section[key];
+            if( section is null ) return null;
+            current = len + 1;
+         }
+      }
+   }
 }

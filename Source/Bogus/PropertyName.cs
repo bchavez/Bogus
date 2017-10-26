@@ -11,16 +11,19 @@ namespace Bogus
             Expression body = expression.Body;
             return GetMemberName(body);
         }
+
         public static string For<T>(Expression<Func<T, object>> expression)
         {
             Expression body = expression.Body;
             return GetMemberName(body);
         }
+
         public static string For(Expression<Func<object>> expression)
         {
             Expression body = expression.Body;
             return GetMemberName(body);
         }
+
         public static string GetMemberName(Expression expression)
         {
             MemberExpression memberExpression;

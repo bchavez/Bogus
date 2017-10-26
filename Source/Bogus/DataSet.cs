@@ -6,7 +6,7 @@ using Bogus.Platform;
 namespace Bogus
 {
     /// <summary>
-    /// Data set methods that access the JSON database of locales.
+    /// Data set methods that access the BSON database of locales.
     /// </summary>
     public class DataSet : ILocaleAware
     {
@@ -48,13 +48,12 @@ namespace Bogus
         public string Locale { get; set; }
 
         /// <summary>
-        /// This method accesses the JSON path of a locale dataset LOCALE.CATEGORY.KEY and returns the JToken.
+        /// Returns a BSON value given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
+        /// <param name="path">path/key in the category</param>
         public BValue Get(string path)
         {
-            return Database.Get(this.Category, path, Locale);
+            return Database.Get(this.Category, path, this.Locale);
         }
 
        /// <summary>
@@ -68,32 +67,29 @@ namespace Bogus
           return Database.HasKey(this.Category, path, this.Locale, null);
        }
 
-      /// <summary>
-      /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
-      /// </summary>
-      /// <param name="keyOrSubPath">key in the category</param>
-      /// <returns></returns>
-      public BArray GetArray(string path)
+        /// <summary>
+        /// Returns a BSON array given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
+        /// </summary>
+        /// <param name="path">key in the category</param>
+        /// <returns></returns>
+        public BArray GetArray(string path)
         {
             return (BArray)Get(path);
         }
 
         /// <summary>
-        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JObject.
+        /// Returns a BSON object given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
+        /// <param name="path">path/key in the category</param>
         public BObject GetObject(string path)
         {
            return (BObject)Get(path);
         }
 
         /// <summary>
-        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns a random element.
-        /// It assumes LOCALE.CATEGORY.KEY is a JArray.
+        /// Picks a random string inside a BSON array. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
+        /// <param name="path">key in the category</param>
         public string GetRandomArrayItem(string path)
         {
             var arr = GetArray(path);
@@ -101,12 +97,10 @@ namespace Bogus
             return Random.ArrayElement(GetArray(path));
         }
 
-
         /// <summary>
-        /// Retrieves a random value from the locale info.
+        /// Picks a random string inside a BSON array, then formats it. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns>System.String.</returns>
+        /// <param name="path">key in the category</param>
         protected string GetFormattedValue(string path )
         {
             var value = GetRandomArrayItem( path );
@@ -117,10 +111,9 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Recursive parse the tokens in the string .
+        /// Recursive parse the tokens in the string.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>System.String.</returns>
         private string ParseTokens( string value )
         {
             var regex = new Regex( "\\#{(.*?)\\}" );

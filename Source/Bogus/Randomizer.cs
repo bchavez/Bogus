@@ -278,7 +278,7 @@ namespace Bogus
         }
 
        /// <summary>
-       /// Helper method to get a random JProperty.
+       /// Helper method to get a random element in a BSON array.
        /// </summary>
        public BValue ArrayElement(BArray props)
        {

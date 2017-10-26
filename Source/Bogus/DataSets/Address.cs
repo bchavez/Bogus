@@ -67,7 +67,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string CitySuffix()
         {
-            return GetRandomArrayItem("city_suffix");            
+            return GetRandomArrayItem("city_suffix");
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Bogus.DataSets
         }
 
         /// <summary>
-        /// Get the buildingnumber
+        /// Get a building number
         /// </summary>
         /// <returns></returns>
         public string BuildingNumber()

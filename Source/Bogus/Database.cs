@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Bogus.Bson;
 
 namespace Bogus
@@ -22,18 +23,10 @@ namespace Bogus
       {
          var asm = typeof(Database).Assembly;
 
-         var localesFound = new List<string>();
-         //Do a quick scan of all the resources in the assembly.
-         foreach( var resourceName in asm.GetManifestResourceNames() )
-         {
-            if( resourceName.EndsWith(".locale.bson") )
-            {
-               var localeName = resourceName.Replace("Bogus.data.", "").Replace(".locale.bson", "");
-               localesFound.Add(localeName);
-            }
-         }
-
-         return localesFound.ToArray();
+         return asm.GetManifestResourceNames()
+            .Where(name => name.EndsWith(".locale.bson"))
+            .Select(name => name.Replace("Bogus.data.", "").Replace(".locale.bson", ""))
+            .ToArray();
       }
 
       /// <summary>
@@ -63,6 +56,10 @@ namespace Bogus
          }
       }
 
+      /// <summary>
+      /// Gets a locale from the locale lookup cache, if the locale doesn't exist in the lookup cache,
+      /// the locale is read from the assembly manifest and added to the locale lookup cache.
+      /// </summary>
       public static BObject GetLocale(string locale)
       {
          if( !Data.Value.TryGetValue(locale, out BObject l) )
@@ -109,7 +106,7 @@ namespace Bogus
             return val;
          }
 
-         //fallback path
+         //fall back path
          var fallback = GetLocale(localeFallback);
 
          return Select(category, path, fallback);
@@ -117,9 +114,8 @@ namespace Bogus
 
       private static BValue Select(string category, string path, BValue localeRoot)
       {
-         if( !localeRoot.ContainsKey(category) ) return null;
-
          var section = localeRoot[category];
+         if( section is null ) return null;
 
          var current = 0;
          while( true )

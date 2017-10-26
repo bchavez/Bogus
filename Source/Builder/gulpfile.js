@@ -67,7 +67,7 @@ gulp.task("import.locales", ["import.locales.json"], function () {
          var destName = `${path.basename(file.relative, ".json")}.bson`;
 
          var b = new BSON();
-         var data = b.serialize(json, { checkKeys: false });
+         var data = b.serialize(json, { checkKeys: true });
 
          var vinyl = new $.util.File({
             path: './' + destName,

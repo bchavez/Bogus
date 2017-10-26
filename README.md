@@ -594,7 +594,7 @@ If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 6. `gulp import.locales` to regenerate locales in `Source\Bogus\data`.
 7. In solution explorer add any new locales not already included as an
 `EmbeddedResource`.
-8. Finally, run `build.bat`.
+8. Finally, run `build.cmd`.
 
 ### License
 * [MIT License](https://github.com/bchavez/Bogus/blob/master/LICENSE)

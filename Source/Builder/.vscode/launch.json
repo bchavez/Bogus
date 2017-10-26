@@ -12,6 +12,14 @@
             "args": [
                 "build.locales"
             ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch FakerJS Test",
+            "program": "${workspaceFolder}\\test.js",
+            "args": [
+            ]
         }
     ]
 }

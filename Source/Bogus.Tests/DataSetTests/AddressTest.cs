@@ -121,5 +121,12 @@ namespace Bogus.Tests.DataSetTests
        {
           address.BuildingNumber().Should().Be("1860");
        }
+
+       [Fact]
+       public void locales_with_no_state_should_return_null()
+       {
+          var a = new Address("az");
+          a.State().Should().BeNullOrEmpty();
+       }
     }
 }

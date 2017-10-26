@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Bogus.Bson;
 using FluentAssertions;
 using Xunit;
 using Z.ExtensionMethods;
@@ -115,8 +116,8 @@ namespace Bogus.Tests.DataSetTests
         [Fact]
         public void merge_test()
         {
-            system.GetObject("mimeTypes").Properties()
-                .Select(p => p.Name.Substring(0, p.Name.IndexOf('/')))
+            system.GetArray("mimeTypes").OfType<BObject>()
+                .Select(o => o["mime"].StringValue.Substring(0, o["mime"].StringValue.IndexOf('/')))
                 .Distinct()
                 .ToArray().Dump();
         }

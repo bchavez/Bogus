@@ -1,4 +1,6 @@
-## v18.0.3
+## v19.0.1
+* Using new BSON binary data format for locales.
+* Removed dependency on Newtonsoft.Json!
 * Locale Updates - 
 * `fr`: new street address prefixes.
 * `fa`: new street addresses.

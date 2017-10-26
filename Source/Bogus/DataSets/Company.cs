@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Bogus.Bson;
 
 namespace Bogus.DataSets
 {
@@ -78,7 +80,7 @@ namespace Bogus.DataSets
 #pragma warning disable 1591
         internal protected virtual string[] Suffexes()
         {
-            return GetArray("suffix").ToObject<string[]>();
+            return GetArray("suffix").OfType<BValue>().Select( s => s.StringValue).ToArray();
         }
 
         internal protected virtual string CatchPhraseAdjective()

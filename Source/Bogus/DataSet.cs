@@ -1,12 +1,12 @@
 using System;
 using System.Text.RegularExpressions;
+using Bogus.Bson;
 using Bogus.Platform;
-using Newtonsoft.Json.Linq;
 
 namespace Bogus
 {
     /// <summary>
-    /// Data set methods that access the JSON database of locales.
+    /// Data set methods that access the BSON database of locales.
     /// </summary>
     public class DataSet : ILocaleAware
     {
@@ -48,66 +48,62 @@ namespace Bogus
         public string Locale { get; set; }
 
         /// <summary>
-        /// This method accesses the JSON path of a locale dataset LOCALE.CATEGORY.KEY and returns the JToken.
+        /// Returns a BSON value given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
-        public JToken Get(string keyOrSubPath)
+        /// <param name="path">path/key in the category</param>
+        public BValue Get(string path)
         {
-            return Database.Get(this.Category, keyOrSubPath, Locale);
+            return Database.Get(this.Category, path, this.Locale);
         }
 
        /// <summary>
        /// Determines if a key exists in the locale.
        /// </summary>
-       protected bool HasKey(string keyOrSubPath, bool includeFallback = true)
+       protected bool HasKey(string path, bool includeFallback = true)
        {
           if( includeFallback )
-             return Database.HasKey(this.Category, keyOrSubPath, this.Locale);
+             return Database.HasKey(this.Category, path, this.Locale);
 
-          return Database.HasKey(this.Category,keyOrSubPath, this.Locale, null);
+          return Database.HasKey(this.Category, path, this.Locale, null);
        }
 
-      /// <summary>
-      /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JArray.
-      /// </summary>
-      /// <param name="keyOrSubPath">key in the category</param>
-      /// <returns></returns>
-      public JArray GetArray(string keyOrSubPath)
-        {
-            return (JArray)Get(keyOrSubPath);
-        }
-
         /// <summary>
-        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns it as a JObject.
+        /// Returns a BSON array given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
+        /// <param name="path">key in the category</param>
         /// <returns></returns>
-        public JObject GetObject(string keyOrSubPath)
+        public BArray GetArray(string path)
         {
-            return (JObject)Get(keyOrSubPath);
+            return (BArray)Get(path);
         }
 
         /// <summary>
-        /// Helper method to access LOCALE.CATEGORY.KEY of a locale data set and returns a random element.
-        /// It assumes LOCALE.CATEGORY.KEY is a JArray.
+        /// Returns a BSON object given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns></returns>
-        public string GetRandomArrayItem(string keyOrSubPath)
+        /// <param name="path">path/key in the category</param>
+        public BObject GetObject(string path)
         {
-            return Random.ArrayElement(GetArray(keyOrSubPath));
+           return (BObject)Get(path);
         }
 
+        /// <summary>
+        /// Picks a random string inside a BSON array. Only simple "." dotted JSON paths are supported.
+        /// </summary>
+        /// <param name="path">key in the category</param>
+        public string GetRandomArrayItem(string path)
+        {
+            var arr = GetArray(path);
+            if( !arr.HasValues ) return string.Empty;
+            return Random.ArrayElement(GetArray(path));
+        }
 
         /// <summary>
-        /// Retrieves a random value from the locale info.
+        /// Picks a random string inside a BSON array, then formats it. Only simple "." dotted JSON paths are supported.
         /// </summary>
-        /// <param name="keyOrSubPath">key in the category</param>
-        /// <returns>System.String.</returns>
-        protected string GetFormattedValue( string keyOrSubPath )
+        /// <param name="path">key in the category</param>
+        protected string GetFormattedValue(string path )
         {
-            var value = GetRandomArrayItem( keyOrSubPath );
+            var value = GetRandomArrayItem( path );
 
             var tokenResult = ParseTokens( value );
 
@@ -115,28 +111,27 @@ namespace Bogus
         }
 
         /// <summary>
-        /// Recursive parse the tokens in the string .
+        /// Recursive parse the tokens in the string.
         /// </summary>
         /// <param name="value">The value.</param>
-        /// <returns>System.String.</returns>
         private string ParseTokens( string value )
         {
             var regex = new Regex( "\\#{(.*?)\\}" );
             var cityResult = regex.Replace(value,
                 x =>
                     {
-                        JArray result;
+                        BArray result;
                         var groupValue = x.Groups[1].Value.ToLower().Split('.');
                         if( groupValue.Length == 1 )
                         {
-                            result = (JArray)Database.Get(Category, groupValue[0], Locale);
+                            result = (BArray)Database.Get(this.Category, groupValue[0], this.Locale);
                         }
                         else
                         {
-                            result = (JArray)Database.Get(groupValue[0], groupValue[1], Locale);
+                            result = (BArray)Database.Get(groupValue[0], groupValue[1], this.Locale);
                         }
 
-                        var randomElement = Random.ArrayElement(result);
+                        var randomElement = this.Random.ArrayElement(result);
 
                         //replace values
                         return ParseTokens(randomElement);

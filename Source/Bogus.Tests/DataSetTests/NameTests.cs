@@ -120,7 +120,7 @@ namespace Bogus.Tests.DataSetTests
         public void should_be_able_to_get_locale_full_name()
         {
             var n = new Name("ru");
-            n.FindName().Should().Contain(" ");
+            n.FindName().Should().Be("Анастасия Евсеева");
         }
 
         [Fact]
@@ -137,6 +137,17 @@ namespace Bogus.Tests.DataSetTests
        public void can_get_a_full_name()
        {
           name.FullName().Should().Be("Lee Brown");
+       }
+
+       [Fact]
+       public void locales_with_empty_array_suffix_should_be_null()
+       {
+          var n = new Name("ru");
+          n.Prefix().Should().BeNullOrEmpty();
+          n.Suffix().Should().BeNullOrEmpty();
+
+          n = new Name("it");
+          n.Suffix().Should().BeNullOrEmpty();
        }
     }
 }

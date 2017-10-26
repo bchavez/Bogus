@@ -97,5 +97,36 @@ namespace Bogus.Tests.DataSetTests
             var a = new Address("en_CA");
             a.ZipCode().Should().Be("C8Q 0Q0");
         }
+
+       [Fact]
+       public void can_get_a_city_prefix()
+       {
+          address.CityPrefix().Should().Be("New");
+       }
+
+       [Fact]
+       public void can_get_a_city_suffix()
+       {
+          address.CitySuffix().Should().Be("stad");
+       }
+
+       [Fact]
+       public void can_get_a_street_name()
+       {
+          address.StreetName().Should().Be("Brown Stravenue");
+       }
+
+       [Fact]
+       public void can_get_a_building_number()
+       {
+          address.BuildingNumber().Should().Be("1860");
+       }
+
+       [Fact]
+       public void locales_with_no_state_should_return_null()
+       {
+          var a = new Address("az");
+          a.State().Should().BeNullOrEmpty();
+       }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
 namespace Bogus.Vendor
 {
@@ -83,60 +82,72 @@ namespace Bogus.Vendor
             return this.Random.WeightedRandom(BrowserNames, BrowserWeights);
         }
 
-        private const string BrowserUsageJson =
-            @"
-    {
-        'chrome':    0.45132810566,
-        'iexplorer': 0.27477061836,
-        'firefox':   0.19384170608,
-        'safari':    0.06186781118,
-        'opera':     0.01574236955
-    }";
+       private static readonly string[] BrowserNames =
+          {
+             "chrome",
+             "iexplorer",
+             "firefox",
+             "safari",
+             "opera"
+          };
+       private static readonly float[] BrowserWeights =
+          {
+             0.45132810566f,
+             0.27477061836f,
+             0.19384170608f,
+             0.06186781118f,
+             0.01574236955f
+          };
 
-        private static readonly JObject BrowserUsage = JObject.Parse(BrowserUsageJson);
-        private static readonly string[] BrowserNames = BrowserUsage.Properties().Select(p => p.Name).ToArray();
-        private static readonly float[] BrowserWeights = BrowserUsage.PropertyValues().Select(pv => pv.Value<float>()).ToArray();
+       private static readonly MultiDictionary<string, string, float> BrowserOSUsage = new MultiDictionary<string, string, float>(StringComparer.Ordinal)
+          {
+             {"chrome", "win", 0.89f},
+             {"chrome", "mac", 0.09f},
+             {"chrome", "lin", 0.02f},
+             {"firefox", "win", 0.83f},
+             {"firefox", "mac", 0.16f},
+             {"firefox", "lin", 0.01f},
+             {"opera", "win", 0.91f},
+             {"opera", "mac", 0.03f},
+             {"opera", "lin", 0.06f},
+             {"safari", "win", 0.04f},
+             {"safari", "mac", 0.96f},
+             {"iexplorer", "win", 1f},
+          };
 
-        private const string BrowserOsUsageJson =
-            @"
-{
-        'chrome':  {'win': 0.89, 'mac': 0.09, 'lin': 0.02},
-        'firefox': {'win': 0.83, 'mac': 0.16, 'lin': 0.01},
-        'opera':   {'win': 0.91, 'mac': 0.03, 'lin': 0.06},
-        'safari':  {'win': 0.04, 'mac': 0.96  },
-        'iexplorer':  {'win': 1}
-}
-";
-        private static readonly JObject BrowserOsUsage = JObject.Parse(BrowserOsUsageJson);
+      internal string RandomOS(string browser)
+      {
+         //return random OS weighted by browser.
 
-        internal string RandomOS(string browser)
-        {
-            //return random OS weighted by browser.
+         var lookup = BrowserOSUsage[browser];
 
-            var osList = BrowserOsUsage[browser] as JObject;
+         var osNames = lookup.Keys.ToArray();
 
-            var osNames = osList.Properties().Select(p => p.Name).ToArray();
+         var weights = lookup.Values.ToArray();
 
-            var weights = osList.PropertyValues().Select(pv => pv.Value<float>()).ToArray();
+         return this.Random.WeightedRandom(osNames, weights);
+      }
 
-            return this.Random.WeightedRandom(osNames, weights);
-        }
-
-        private const string ProcJson = @"
-    {
-        lin: {'i686':   0.50, 'x86_64':  0.50 },
-        mac: {'Intel':  0.48, 'PPC':     0.01, 'U; Intel':  0.48, 'U; PPC':  0.01},
-        win: {'':       0.33, 'WOW64':   0.33, 'Win64; x64':0.33}
-    }
-";
-        private static readonly JObject Proc = JObject.Parse(ProcJson);
+       private static readonly MultiDictionary<string, string, float> Proc = new MultiDictionary<string, string, float>(StringComparer.Ordinal)
+          {
+             {"lin", "i686", 0.50f},
+             {"lin", "x86_64", 0.50f},
+             {"mac", "Intel", 0.48f},
+             {"mac", "PPC", 0.01f},
+             {"mac", "U; Intel", 0.48f},
+             {"mac", "U; PPC", 0.01f},
+             {"win", "", 0.33f},
+             {"win", "WOW64", 0.33f},
+             {"win", "Win64", 0.33f}
+          };
 
         internal string RandomProc(string os)
         {
-            var procList = Proc[os] as JObject;
+            var lookup = Proc[os];
 
-            var procNames = procList.Properties().Select(p => p.Name).ToArray();
-            var procWeights = procList.PropertyValues().Select(pv => pv.Value<float>()).ToArray();
+            var procNames = lookup.Keys.ToArray();
+
+            var procWeights = lookup.Values.ToArray();
 
             return this.Random.WeightedRandom(procNames, procWeights);
         }

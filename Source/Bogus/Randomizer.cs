@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Bogus.Bson;
 using Bogus.DataSets;
-using Bogus.Extensions;
-using Newtonsoft.Json.Linq;
 
 namespace Bogus
 {
@@ -279,11 +278,11 @@ namespace Bogus
         }
 
        /// <summary>
-       /// Helper method to get a random JProperty.
+       /// Helper method to get a random element in a BSON array.
        /// </summary>
-       public JToken ArrayElement(JProperty[] props)
+       public BValue ArrayElement(BArray props)
        {
-          var r = Number(max: props.Length - 1);
+          var r = Number(max: props.Count - 1);
           return props[r];
        }
 
@@ -299,28 +298,11 @@ namespace Bogus
           return array.GetValue(r).ToString();
        }
 
-       /// <summary>
-       /// Helper method to get a random element inside a JArray
-       /// </summary>
-       public string ArrayElement(JArray array)
-       {
-          var r = Number(max: array.Count - 1);
-
-          return array[r].ToString();
-       }
-
-       internal T ArrayElement<T>(JArray array)
-       {
-          var r = Number(max: array.Count - 1);
-
-          return array[r].ToObject<T>();
-       }
-
-       /// <summary>
-       /// Get a random subset of an array.
-       /// </summary>
-       /// <param name="count">The number of elements to pick; otherwise, a random amount is picked.</param>
-       public T[] ArrayElements<T>(T[] array, int? count = null)
+      /// <summary>
+      /// Get a random subset of an array.
+      /// </summary>
+      /// <param name="count">The number of elements to pick; otherwise, a random amount is picked.</param>
+      public T[] ArrayElements<T>(T[] array, int? count = null)
        {
           if( count > array.Length )
              throw new ArgumentOutOfRangeException(nameof(count));
@@ -536,8 +518,7 @@ namespace Bogus
         /// </summary>
         public string RandomLocale()
         {
-            var ele = ArrayElement(Database.Data.Value.Properties().ToArray()) as JProperty;
-            return ele.Name;
+           return this.ArrayElement(Database.GetAllLocales());
         }
 
 

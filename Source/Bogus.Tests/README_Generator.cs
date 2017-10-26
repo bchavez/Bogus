@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -96,11 +95,14 @@ namespace Bogus.Tests
 
             int count = 0;
 
-            var lcs = data.Properties().OrderBy(p => p.Name).Select(p =>
+            //load all locales
+            Database.GetAllLocales().Select(Database.GetLocale).ToArray();
+
+            var lcs = Database.Data.Value.OrderBy(kv => kv.Key).Select(kv =>
               {
                  count++;
-                 var code = p.Name;
-                 var title = p.First["title"].ToString();
+                 var code = kv.Key;
+                 var title = kv.Value["title"].StringValue;
                  title = title.Replace("Ελληνικά", "Greek");
 
                  return new {code, title};

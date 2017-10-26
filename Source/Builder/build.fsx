@@ -194,26 +194,10 @@ Target "setup-snk"(fun _ ->
     XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
-open Newtonsoft.Json
-open Newtonsoft.Json.Linq
-
-Target "compress-data" (fun _ ->
-   traceHeader "Compressing data folder and removing whitespace"
-   
-   for file in !!(BogusProject.Folder @@ "data" @@ "*.json") do
-      traceFAKE "Compressing %s" file
-      let jsonText = ReadFileAsString file
-      JObject.Parse(jsonText).ToString(Formatting.None)
-      |>
-      WriteStringToFile false file
-)
 
 "Clean"
     ==> "restore"
     ==> "BuildInfo"
-
-"compress-data"
-   =?> ("nuget", BuildContext.IsTaggedBuild)
 
 //build systems, order matters
 "BuildInfo"

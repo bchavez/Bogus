@@ -176,6 +176,8 @@ namespace Bogus.Tests
              {
                 var method = i.em.GetBefore("(");
                 var objectExtends = i.em.GetBetween("(", ")");
+                if( objectExtends.Contains(",") )
+                   objectExtends = objectExtends.GetBefore(",");
                 output.WriteLine($"\t* `{objectExtends}.{method}()` - {i.summary}");
              }
           }

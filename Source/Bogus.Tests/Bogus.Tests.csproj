@@ -87,6 +87,7 @@
     <Compile Include="DataSetTests\DateTest.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="DataSetTests\FinanceTest.cs" />
+    <Compile Include="ExtensionTests\ExtensionTest.cs" />
     <Compile Include="FluentTests.cs" />
     <Compile Include="GitHubIssues\Issue10.cs" />
     <Compile Include="GitHubIssues\Issue13.cs" />

@@ -1,5 +1,8 @@
 ﻿namespace Bogus.Extensions.Finland
 {
+   /// <summary>
+   /// API extensions specific for a geographical location.
+   /// </summary>
    public static class ExtensionsForFinland
    {
       /// <summary>

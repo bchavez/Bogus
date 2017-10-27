@@ -4,6 +4,9 @@ using Bogus.DataSets;
 
 namespace Bogus.Extensions.Brazil
 {
+    /// <summary>
+    /// API extensions specific for a geographical location.
+    /// </summary>
     public static class ExtensionsForBrazil
     {
         private static Randomizer r = new Randomizer();

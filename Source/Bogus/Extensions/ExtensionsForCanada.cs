@@ -2,7 +2,10 @@
 
 namespace Bogus.Extensions.Canada
 {
-    public static class ExtensionsForCanada
+   /// <summary>
+   /// API extensions specific for a geographical location.
+   /// </summary>
+   public static class ExtensionsForCanada
     {
         private static int[] Mask = {1, 2, 1,  2, 1, 2,  1, 2, 1};
 

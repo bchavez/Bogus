@@ -369,6 +369,8 @@ public void Or_Using_DataSets_Directly()
 	* `Bogus.Person.Cpr()` - Danish Personal Identification number
 * **`using Bogus.Extensions.Finland;`**
 	* `Bogus.Person.Henkilötunnus()` - Finnish Henkilötunnus
+* **`using Bogus.Extensions.UnitedKingdom;`**
+	* `Bogus.DataSets.Finance.ShortCode()` - Banking Short Code
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 

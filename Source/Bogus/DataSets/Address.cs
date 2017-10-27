@@ -179,5 +179,38 @@ namespace Bogus.DataSets
         {
            return Math.Round(Random.Double(min, max), 4);
         }
+
+       /// <summary>
+       /// Generates a cardinal or ordinal direction. IE: Northwest, South, SW, E.
+       /// </summary>
+       /// <param name="useAbbreviation">When true, directions such as Northwest turn into NW.</param>
+       public string Direction(bool useAbbreviation = false)
+       {
+          if( useAbbreviation )
+             return GetRandomArrayItem("direction_abbr");
+          return GetRandomArrayItem("direction");
+       }
+
+       /// <summary>
+       /// Generates a cardinal direction. IE: North, South, E, W.
+       /// </summary>
+       /// <param name="useAbbreviation">When true, directions such as West turn into W.</param>
+       public string CardinalDirection(bool useAbbreviation = false)
+       {
+          if( useAbbreviation )
+             return GetRandomArrayItem("direction_abbr", min: 0, max: 4);
+         return GetRandomArrayItem("direction", min: 0, max: 4);
+       }
+
+      /// <summary>
+      /// Generates an ordinal direction. IE: Northwest, Southeast, SW, NE.
+      /// </summary>
+      /// <param name="useAbbreviation">When true, directions such as Northwest turn into NW.</param>
+      public string OrdinalDirection(bool useAbbreviation = false)
+       {
+         if( useAbbreviation )
+             return GetRandomArrayItem("direction_abbr", min: 4, max: 8);
+          return GetRandomArrayItem("direction", min: 4, max: 8);
+      }
     }
 }

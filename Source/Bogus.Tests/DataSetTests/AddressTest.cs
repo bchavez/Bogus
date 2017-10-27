@@ -128,5 +128,26 @@ namespace Bogus.Tests.DataSetTests
           var a = new Address("az");
           a.State().Should().BeNullOrEmpty();
        }
+
+       [Fact]
+       public void can_generate_a_direction()
+       {
+          address.Direction().Should().Be("Northeast");
+          address.Direction(true).Should().Be("N");
+       }
+
+       [Fact]
+       public void can_generate_a_cardinal_direction()
+       {
+          address.CardinalDirection().Should().Be("South");
+          address.CardinalDirection(true).Should().Be("N");
+       }
+
+       [Fact]
+       public void can_generate_an_ordnial_direction()
+       {
+          address.OrdinalDirection().Should().Be("Southeast");
+          address.OrdinalDirection(true).Should().Be("NE");
+      }
     }
 }

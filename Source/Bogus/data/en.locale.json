@@ -1042,6 +1042,26 @@
     ],
     "default_country": [
       "United States of America"
+    ],
+    "direction": [
+      "North",
+      "East",
+      "South",
+      "West",
+      "Northeast",
+      "Northwest",
+      "Southeast",
+      "Southwest"
+    ],
+    "direction_abbr": [
+      "N",
+      "E",
+      "S",
+      "W",
+      "NE",
+      "NW",
+      "SE",
+      "SW"
     ]
   },
   "company": {

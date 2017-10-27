@@ -280,9 +280,9 @@ namespace Bogus
        /// <summary>
        /// Helper method to get a random element in a BSON array.
        /// </summary>
-       public BValue ArrayElement(BArray props)
+       public BValue ArrayElement(BArray props, int? min = null, int? max = null)
        {
-          var r = Number(max: props.Count - 1);
+          var r = Number(min: min ?? 0, max: max - 1?? props.Count - 1);
           return props[r];
        }
 

@@ -225,7 +225,7 @@ public void Or_Using_DataSets_Directly()
 	* `CityPrefix` - Get a city prefix.
 	* `CitySuffix` - Get a city suffix.
 	* `StreetName` - Get a street name.
-	* `BuildingNumber` - Get the buildingnumber
+	* `BuildingNumber` - Get a building number
 	* `StreetSuffix` - Get a street suffix.
 	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
 	* `County` - Get a county.
@@ -236,6 +236,9 @@ public void Or_Using_DataSets_Directly()
 	* `StateAbbr` - Get a state abbreviation.
 	* `Latitude` - Get a Latitude
 	* `Longitude` - Get a Longitude
+	* `Direction` - Generates a cardinal or ordinal direction. IE: Northwest, South, SW, E.
+	* `CardinalDirection` - Generates a cardinal direction. IE: North, South, E, W.
+	* `OrdinalDirection` - Generates an ordinal direction. IE: Northwest, Southeast, SW, NE.
 * **`Commerce`**
 	* `Department` - Get a random commerce department.
 	* `Price` - Get a random product price.
@@ -274,6 +277,7 @@ public void Or_Using_DataSets_Directly()
 	* `CreditCardCvv` - Generate a credit card CVV
 	* `BitcoinAddress` - Generates a random bitcoin address
 	* `EthereumAddress` - Generate a random ethereum address
+	* `RoutingNumber` - Generates an ABA routing number with valid check digit.
 	* `Bic` - Generates Bank Identifier Code (BIC) code.
 	* `Iban` - Generates an International Bank Account Number (IBAN).
 * **`Hacker`**
@@ -328,10 +332,8 @@ public void Or_Using_DataSets_Directly()
 	* `Text` - Get random text on a random lorem methods.
 	* `Lines` - Get lines of lorem
 * **`Name`**
-	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, 'ru' supports
-            male/female names, but not 'en' English.
-	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it. Example, Russian ('ru') supports
-            male/female names, but English ('en') does not.
+	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it.
+	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it.
 	* `FullName` - Get a full name, concatenation of calling FirstName and LastName.
 	* `Prefix` - Gets a random prefix for a name
 	* `Suffix` - Gets a random suffix for a name

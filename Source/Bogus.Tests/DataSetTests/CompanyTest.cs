@@ -29,7 +29,7 @@ namespace Bogus.Tests.DataSetTests
         [Fact]
         public void can_get_company_bs_phrase()
         {
-            company.Bs().Should().Be("seamless transform schemas"); //lol
+            company.Bs().Should().Be("maximize leading-edge schemas"); //lol
         }
 
         [Fact]

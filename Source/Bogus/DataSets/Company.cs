@@ -74,7 +74,7 @@ namespace Bogus.DataSets
         /// <returns></returns>
         public string Bs()
         {
-            return $"{BsAdjective()} {BsBuzz()} {BsNoun()}";
+            return $"{BsBuzz()} {BsAdjective()} {BsNoun()}";
         }
 
 #pragma warning disable 1591

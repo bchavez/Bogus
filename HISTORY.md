@@ -11,6 +11,10 @@
 * Added `f.Finance.RoutingNumber` - Generates an ABA routing number with valid check digit.
 * Added `Faker.GenerateForever` that returns `IEnumerable<T>` with unlimited generated items when iterated over.
 * Added United Kingdom extension method to generate bank ShortCodes on `f.Finance.ShortCode()`.
+* Re-ordered adjective and buzz in the `f.Company.Bs` for a correct gramatics.
+* Added `f.Address.Direction`. Generates cardinal or ordinal directions.
+* Added `f.Address.CardinalDirection`. Generates "North", "South", etc.
+* Added `f.Address.OrdinalDirection`. Generates "Northeast", "Southwest", etc.
 
 ## v18.0.2
 * Issue 86: Removed diacritic mark/accents (á, í, ó, ú, etc) from generated email addresses and user names.

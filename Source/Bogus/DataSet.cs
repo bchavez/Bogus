@@ -90,11 +90,11 @@ namespace Bogus
         /// Picks a random string inside a BSON array. Only simple "." dotted JSON paths are supported.
         /// </summary>
         /// <param name="path">key in the category</param>
-        public string GetRandomArrayItem(string path)
+        public string GetRandomArrayItem(string path, int? min = null, int? max = null)
         {
             var arr = GetArray(path);
             if( !arr.HasValues ) return string.Empty;
-            return Random.ArrayElement(GetArray(path));
+            return Random.ArrayElement(GetArray(path), min, max);
         }
 
         /// <summary>

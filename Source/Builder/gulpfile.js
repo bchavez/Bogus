@@ -58,7 +58,7 @@ gulp.task("import.locales.json", function () {
       .pipe(gulp.dest(dataFolder));
 });
 
-gulp.task("import.locales", ["import.locales.json"], function () {
+gulp.task("convert.locales.bson", ["import.locales.json"], function () {
    return gulp.src(`${dataFolder}/*.locale.json`)
       .pipe($.plumber())
       .pipe($.map(function (file) {
@@ -77,6 +77,14 @@ gulp.task("import.locales", ["import.locales.json"], function () {
       }))
       .pipe($.print())
       .pipe(gulp.dest(dataFolder));
+});
+
+gulp.task('compress-data', ["convert.locales.bson"],
+    $.shell.task('build.cmd compress-data', {cwd:'../../'}) 
+);
+
+gulp.task('import.locales', ["compress-data"], function(cb){
+      
 });
 
 function transformPostCodeByState(obj) {

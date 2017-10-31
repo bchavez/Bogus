@@ -4,3 +4,6 @@
 [submodule "Source/hashids"]
 	path = Source/hashids
 	url = https://github.com/ullmark/hashids.net.git
+[submodule "Source/lz4net"]
+	path = Source/lz4net
+	url = https://github.com/MiloszKrajewski/lz4net.git

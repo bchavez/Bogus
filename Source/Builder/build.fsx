@@ -194,6 +194,64 @@ Target "setup-snk"(fun _ ->
     XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
+open LZ4;
+open System.IO;
+
+Target "compress-data" (fun _ ->
+   traceHeader "Compressing data folder and removing whitespace"
+   
+   for file in !!(BogusProject.Folder @@ "data" @@ "*.bson") do
+      traceFAKE "Compressing %s" file
+      let bytes = File.ReadAllBytes(file)
+      let compressedBytes = LZ4Codec.WrapHC(bytes)
+      let compressedFileName = changeExt "bson.lz4" file
+      File.WriteAllBytes(compressedFileName, compressedBytes)
+)
+
+Target "import-lz4" (fun _ -> 
+
+   let files = [
+            "LZ4.silverlight\LZ4Codec.silverlight.cs";
+            "LZ4ps\LZ4Codec.cs";
+            "LZ4ps\LZ4Codec.Safe.cs";
+            "LZ4ps\LZ4Codec.Safe32.Dirty.cs";
+            "LZ4ps\LZ4Codec.Safe32HC.Dirty.cs";
+            "LZ4ps\LZ4Codec.Safe64.Dirty.cs";
+            "LZ4ps\LZ4Codec.Safe64HC.Dirty.cs";
+            "LZ4\ILZ4Service.cs";
+            "LZ4\LZ4Codec.cs";
+            "LZ4\LZ4Stream.cs";
+            "LZ4\LZ4Stream.windows.cs";
+            "LZ4\LZ4StreamFlags.cs";
+            "LZ4\LZ4StreamMode.cs";
+            "LZ4\Services\Safe32LZ4Service.cs";
+            "LZ4\Services\Safe64LZ4Service.cs";
+            ]
+   let lzDir = Folders.Source @@ "lz4net" @@ "src"
+   let compDir = BogusProject.Folder @@ "Compression"
+
+   trace lzDir
+   trace compDir
+
+   files
+   |> Seq.iter( fun f ->
+         let src = lzDir @@ f;
+         let dest = compDir @@ f;
+         CreateDir (directory dest)
+         CopyFile dest src)
+
+   for file in !!(BogusProject.Folder @@ "Compression" @@ "**/*.cs") do
+      traceFAKE "Enclosing namespace in %s" file
+      let lines = File.ReadAllLines file 
+                  |> List.ofArray
+      
+      let out = ["namespace Bogus.Compression {"] @ 
+                  lines @ 
+                  ["}"]          
+         
+      File.WriteAllLines(file, out)
+)
+
 
 "Clean"
     ==> "restore"

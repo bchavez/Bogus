@@ -36,7 +36,7 @@
     <DefineConstants>$(DefineConstants);STANDARD;STANDARD13</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="data\*.locale.bson" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <EmbeddedResource Include="data\*.locale.bson.lz4" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers" Version="1.5.0" PrivateAssets="All" />

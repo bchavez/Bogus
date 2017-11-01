@@ -1,3 +1,6 @@
+## v19.0.2
+* Fixed #99: Possible threading that can cause `System.ArgumentException`.
+
 ## v19.0.1
 * Using new BSON binary data format for locales.
 * Removed dependency on Newtonsoft.Json!

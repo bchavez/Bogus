@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using Bogus.Bson;
 
 namespace Bogus
@@ -14,7 +16,7 @@ namespace Bogus
       /// <summary>
       /// The root of all locales in a single BObject.
       /// </summary>
-      public static Lazy<Dictionary<string, BObject>> Data = new Lazy<Dictionary<string, BObject>>(Initialize, isThreadSafe: true);
+      public static Lazy<ConcurrentDictionary<string, BObject>> Data = new Lazy<ConcurrentDictionary<string, BObject>>(Initialize, LazyThreadSafetyMode.ExecutionAndPublication);
 
       /// <summary>
       /// Returns all locales available inside Bogus' assembly manifest.
@@ -32,13 +34,12 @@ namespace Bogus
       /// <summary>
       /// Initializes the default locale database.
       /// </summary>
-      private static Dictionary<string, BObject> Initialize()
+      private static ConcurrentDictionary<string, BObject> Initialize()
       {
          //Just lazy load English only.
-         return new Dictionary<string, BObject>
-            {
-               {"en", InitLocale("en")}
-            };
+         var d = new ConcurrentDictionary<string, BObject>();
+         d.TryAdd("en", InitLocale("en"));
+         return d;
       }
 
 
@@ -65,7 +66,7 @@ namespace Bogus
          if( !Data.Value.TryGetValue(locale, out BObject l) )
          {
             l = InitLocale(locale);
-            Data.Value.Add(locale, l);
+            Data.Value.TryAdd(locale, l);
          }
 
          return l;

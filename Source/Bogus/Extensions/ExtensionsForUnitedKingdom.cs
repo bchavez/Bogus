@@ -7,7 +7,6 @@ namespace Bogus.Extensions.UnitedKingdom
    /// </summary>
    public static class ExtensionsForUnitedKingdom
    {
-      private static Randomizer r = new Randomizer();
       /// <summary>
       /// Banking Short Code
       /// </summary>
@@ -18,10 +17,10 @@ namespace Bogus.Extensions.UnitedKingdom
 
          if( includeSeperator )
          {
-            return r.ReplaceNumbers(withSeperators);
+            return finance.Random.ReplaceNumbers(withSeperators);
          }
 
-         return r.ReplaceNumbers(withoutSeperators);
+         return finance.Random.ReplaceNumbers(withoutSeperators);
       }
    }
 }

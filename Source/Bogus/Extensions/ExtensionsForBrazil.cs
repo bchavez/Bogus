@@ -64,7 +64,7 @@ namespace Bogus.Extensions.Brazil
         /// </summary>
         public static string Cnpj(this Company c)
         {
-            var digits = r.Digits(12);
+            var digits = c.Random.Digits(12);
             digits[8] = 0;
             digits[9] = 0;
             digits[10] = 0;

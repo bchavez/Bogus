@@ -94,7 +94,7 @@ namespace Bogus
         {
             var arr = GetArray(path);
             if( !arr.HasValues ) return string.Empty;
-            return Random.ArrayElement(GetArray(path), min, max);
+            return Random.ArrayElement(arr, min, max);
         }
 
         /// <summary>

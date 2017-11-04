@@ -1,34 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using Bogus.Bson;
 using Bogus.Platform;
 
 namespace Bogus
 {
-   public interface IHasRandomizer
-   {
-      Randomizer Random { set; }
-   }
-   public class SeedNotifier<T> where T : class, IHasRandomizer
-   {
-      private List<T> registry = new List<T>();
-
-      public U Flow<U>(U item) where U : class, T, IHasRandomizer
-      {
-         this.registry.Add(item);
-         return item;
-      }
-
-      public void Notify(Randomizer r)
-      {
-         foreach( var item in registry )
-         {
-            item.Random = r;
-         }
-      }
-   }
-
     /// <summary>
     /// Data set methods that access the BSON database of locales.
     /// </summary>

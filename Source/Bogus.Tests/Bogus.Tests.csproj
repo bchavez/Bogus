@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CloneTests.cs" />
     <Compile Include="DataSetTests\AddressTest.cs" />
     <Compile Include="DataSetTests\CardTests.cs" />
     <Compile Include="DataSetTests\CommerceTest.cs" />

@@ -147,26 +147,27 @@ namespace Bogus.Tests.GitHubIssues
          CheckSequence(items);
       }
 
-      //[Fact]
-      //public void parallel_determinism()
-      //{
-      //   var orderFaker = new Faker<Examples.Order>()
-      //      .RuleFor(o => o.OrderId, f => f.IndexVariable++)
-      //      .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
-      //      .RuleFor(o => o.Item, f => f.Commerce.Product());
+      [Fact]
+      public void parallel_determinism()
+      {
+         var orderFaker = new Faker<Examples.Order>()
+            .RuleFor(o => o.OrderId, f => f.IndexVariable++)
+            .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
+            .RuleFor(o => o.Item, f => f.Commerce.Product());
 
-      //   var orders = ParallelEnumerable.Range(1, 5)
-      //      .Select(threadId =>
-      //         orderFaker
-      //            .UseSeed(88)
-      //            .Generate(4).ToArray()
-      //      ).ToArray();
+         var orders = ParallelEnumerable.Range(1, 5)
+            .Select(threadId =>
+               orderFaker
+                  .Clone()
+                  .UseSeed(88)
+                  .Generate(4).ToArray()
+            ).ToArray();
 
-      //   foreach( var orderOfFour in orders )
-      //   {
-      //      CheckSequence(orderOfFour);
-      //   }
-      //}
+         foreach( var orderOfFour in orders )
+         {
+            CheckSequence(orderOfFour);
+         }
+      }
 
       private void CheckSequence(Examples.Order[] items)
       {

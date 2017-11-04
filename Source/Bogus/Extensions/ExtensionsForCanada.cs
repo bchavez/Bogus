@@ -23,7 +23,7 @@ namespace Bogus.Extensions.Canada
             //bit verbose, but works. :)
             //could be mathematically simplified.
             //brute forced this one. yeah.
-            //
+            //d
             //should pass basic validation, but only some 
             //numbers dont start with 8 etc.
 
@@ -38,7 +38,7 @@ namespace Bogus.Extensions.Canada
             0 — Not used (Canada Revenue may assign fictitious SIN numbers beginning with zero to taxpayers who do not have SINs)
             */
 
-            var r = new Randomizer();
+            var r = p.Random;
             //get 8 numbers
             var numbers = r.Digits(8);
 

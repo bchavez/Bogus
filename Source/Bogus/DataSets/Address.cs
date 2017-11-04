@@ -18,7 +18,7 @@ namespace Bogus.DataSets
         /// <param name="locale"></param>
         public Address( string locale = "en" ) : base( locale )
         {
-            this.Name = new Name( locale );
+           this.Name = this.Notifier.Flow(new Name(locale));
         }
 
         /// <summary>
@@ -38,7 +38,6 @@ namespace Bogus.DataSets
         {
             return GetFormattedValue( "city" );
         }
-
         
 
         /// <summary>

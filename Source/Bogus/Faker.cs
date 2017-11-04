@@ -23,30 +23,47 @@ namespace Bogus
         {
             Locale = locale;
 
-            this.Address = new Address(locale);
-            this.Company = new Company(locale);
-            this.Date = new Date {Locale = locale};
-            this.Finance = new Finance {Locale = locale};
-            this.Hacker = new Hacker(locale);
-            this.Image = new Images(locale);
-            this.Internet = new Internet(locale);
-            this.Lorem = new Lorem(locale);
-            this.Name = new Name(locale);
-            this.Phone = new PhoneNumbers(locale);
-            this.System = new DataSets.System(locale);
-            this.Commerce = new Commerce(locale);
-            this.Database = new DataSets.Database();
-            this.Rant = new Rant();
+            this.Address = this.Notifier.Flow(new Address(locale));
+            this.Company = this.Notifier.Flow(new Company(locale));
+            this.Date = this.Notifier.Flow(new Date { Locale = locale });
+            this.Finance = this.Notifier.Flow(new Finance { Locale = locale });
+            this.Hacker = this.Notifier.Flow(new Hacker(locale));
+            this.Image = this.Notifier.Flow(new Images(locale));
+            this.Internet = this.Notifier.Flow(new Internet(locale));
+            this.Lorem = this.Notifier.Flow(new Lorem(locale));
+            this.Name = this.Notifier.Flow(new Name(locale));
 
-            this.Random = new Randomizer();
-
+            this.Phone = this.Notifier.Flow(new PhoneNumbers(locale));
+            this.System = this.Notifier.Flow(new DataSets.System(locale));
+            this.Commerce = this.Notifier.Flow(new Commerce(locale));
+            this.Database = this.Notifier.Flow(new DataSets.Database());
+            this.Rant = this.Notifier.Flow(new Rant());
+         
             this.Hashids = new Hashids();
         }
 
+        protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
+
+        private Randomizer randomizer;
+
         /// <summary>
-        /// Can parse a handle bar expression like "{{name.lastName}}, {{name.firstName}} {{name.suffix}}".
+        /// Generate numbers, booleans, and decimals.
         /// </summary>
-        public string Parse(string str)
+        [RegisterMustasheMethods]
+        public Randomizer Random
+        {
+           get => this.randomizer ?? (this.Random = new Randomizer());
+           set
+           {
+              this.randomizer = value;
+              this.Notifier.Notify(value);
+           }
+        }
+
+      /// <summary>
+      /// Can parse a handle bar expression like "{{name.lastName}}, {{name.firstName}} {{name.suffix}}".
+      /// </summary>
+      public string Parse(string str)
         {
             return Tokenizer.Parse(str,
                 this.Address,
@@ -71,9 +88,9 @@ namespace Bogus
         /// A contextually relevant fields of a person.
         /// </summary>
         [RegisterMustasheMethods]
-        public Person Person => person ?? (person = new Person(this.Locale));
+        public Person Person => person ?? (person = new Person(this.Random, this.Locale));
 
-        /// <summary>
+       /// <summary>
         /// Creates hacker gibberish.
         /// </summary>
         [RegisterMustasheMethods]
@@ -146,12 +163,6 @@ namespace Bogus
         public DataSets.System System { get; set; }
 
         /// <summary>
-        /// Generate numbers, booleans, and decimals.
-        /// </summary>
-        [RegisterMustasheMethods]
-        public Randomizer Random { get; set; }
-
-        /// <summary>
         /// Generates fake database things.
         /// </summary>
         [RegisterMustasheMethods]
@@ -162,7 +173,7 @@ namespace Bogus
         /// </summary>
         [RegisterMustasheMethods]
         public Rant Rant { get; set; }
-
+      
 
         /// <summary>
         /// Helper method to pick a random element.

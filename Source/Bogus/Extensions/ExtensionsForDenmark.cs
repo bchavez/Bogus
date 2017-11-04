@@ -16,7 +16,7 @@
             return p.context[Key] as string;
          }
 
-         var r = new Randomizer();
+         var r = p.Random;
          var final = $"{p.DateOfBirth:ddMMyy}-{r.Replace("####")}";
 
          p.context[Key] = final;

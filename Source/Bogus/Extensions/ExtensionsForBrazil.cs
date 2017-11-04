@@ -9,7 +9,6 @@ namespace Bogus.Extensions.Brazil
     /// </summary>
     public static class ExtensionsForBrazil
     {
-        private static Randomizer r = new Randomizer();
         private static readonly int[] CpfWeights = { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
         private static readonly int[] CnpjWeights = { 2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6 };
 
@@ -24,7 +23,7 @@ namespace Bogus.Extensions.Brazil
                 return p.context[Key] as string;
             }
 
-            var digits = r.Digits(9);
+            var digits = p.Random.Digits(9);
             var sum1 = digits.Zip(CpfWeights, (d, w) => d * w)
                 .Sum();
 

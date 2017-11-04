@@ -16,7 +16,7 @@ namespace Bogus.Tests
                 .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
 
             testOrders.Invoking(faker => faker.Generate())
-                .ShouldThrow<InvalidOperationException>();
+                .ShouldThrow<ValidationException>();
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Bogus.Tests
                 .RuleFor(o => o.OrderId, f => f.Random.Number());
 
             testOrders.Invoking(faker => faker.Generate())
-                .ShouldNotThrow<InvalidOperationException>();
+                .ShouldNotThrow<ValidationException>();
         }
 
         [Fact]

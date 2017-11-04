@@ -17,7 +17,7 @@
             return p.context[Key] as string;
          }
 
-         var randomizer = new Randomizer();
+         var randomizer = p.Random;
          var ssn = randomizer.ReplaceNumbers("###-##-####");
 
          p.context[Key] = ssn;

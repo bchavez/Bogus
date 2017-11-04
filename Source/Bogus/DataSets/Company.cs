@@ -20,7 +20,7 @@ namespace Bogus.DataSets
         /// <param name="locale"></param>
         public Company(string locale = "en") : base(locale)
         {
-            this.Name = new Name(locale);
+           this.Name = this.Notifier.Flow(new Name(locale));
         }
         
         /// <summary>

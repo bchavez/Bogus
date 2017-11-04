@@ -62,6 +62,18 @@ namespace Bogus
         }
 
         /// <summary>
+        /// Creates a seed locally scoped within this Faker[T] ignoring the globally scoped Randomzier.Seed.
+        /// If this method is never called the global Randomizer.Seed is used.
+        /// </summary>
+        /// <para name="seed">The seed value to use within this Faker[T] instance.</para>
+        public virtual Faker<T> UseSeed(int seed)
+        {
+           var r = new Randomizer(seed);
+           this.FakerHub.Random = r;
+           return this;
+        }
+
+        /// <summary>
         /// Uses the factory method to generate new instances.
         /// </summary>
         public virtual Faker<T> CustomInstantiator(Func<Faker, T> factoryMethod)
@@ -349,14 +361,16 @@ namespace Bogus
         /// </summary>
         protected virtual void PopulateInternal(T instance, string[] ruleSets)
         {
+            ValidationResult vr = null;
             if( !IsValid.HasValue ) 
             {
                 //run validation
-                this.IsValid = ValidateInternal(ruleSets).IsValid;
+                vr = ValidateInternal(ruleSets);
+                this.IsValid = vr.IsValid;
             }
             if( !IsValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have different number of actions rules. Also, check RuleSets.");
+               throw MakeValidationException(vr ?? ValidateInternal(ruleSets));
             }
 
             var typeProps = TypeProperties;

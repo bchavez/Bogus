@@ -62,7 +62,7 @@ namespace Bogus
          this.DsName = this.Notifier.Flow(new Name(locale));
          this.DsInternet = this.Notifier.Flow(new Internet(locale));
          this.DsInternet = this.Notifier.Flow(new Internet(locale));
-         this.DsDate = this.Notifier.Flow(new Date { Locale = locale });
+         this.DsDate = this.Notifier.Flow(new Date {Locale = locale});
          this.DsPhoneNumbers = this.Notifier.Flow(new PhoneNumbers(locale));
          this.DsAddress = this.Notifier.Flow(new Address(locale));
          this.DsCompany = this.Notifier.Flow(new Company(locale));
@@ -83,29 +83,30 @@ namespace Bogus
          this.Phone = this.DsPhoneNumbers.PhoneNumber();
 
          this.Address = new CardAddress
-         {
-            Street = this.DsAddress.StreetAddress(),
-            Suite = this.DsAddress.SecondaryAddress(),
-            City = this.DsAddress.City(),
-            ZipCode = this.DsAddress.ZipCode(),
-            Geo = new CardAddress.CardGeo
             {
-               Lat = this.DsAddress.Latitude(),
-               Lng = this.DsAddress.Longitude()
-            }
-         };
+               Street = this.DsAddress.StreetAddress(),
+               Suite = this.DsAddress.SecondaryAddress(),
+               City = this.DsAddress.City(),
+               ZipCode = this.DsAddress.ZipCode(),
+               Geo = new CardAddress.CardGeo
+                  {
+                     Lat = this.DsAddress.Latitude(),
+                     Lng = this.DsAddress.Longitude()
+                  }
+            };
 
          this.Company = new CardCompany
-         {
-            Name = this.DsCompany.CompanyName(),
-            CatchPhrase = this.DsCompany.CatchPhrase(),
-            Bs = this.DsCompany.Bs()
-         };
+            {
+               Name = this.DsCompany.CompanyName(),
+               CatchPhrase = this.DsCompany.CatchPhrase(),
+               Bs = this.DsCompany.Bs()
+            };
       }
 
       protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
 
       private Randomizer randomizer;
+
       public Randomizer Random
       {
          get => this.randomizer ?? (this.Random = new Randomizer());

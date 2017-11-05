@@ -16,7 +16,8 @@ namespace Bogus
       /// <summary>
       /// The root of all locales in a single BObject.
       /// </summary>
-      public static Lazy<ConcurrentDictionary<string, BObject>> Data = new Lazy<ConcurrentDictionary<string, BObject>>(Initialize, LazyThreadSafetyMode.ExecutionAndPublication);
+      public static Lazy<ConcurrentDictionary<string, BObject>> Data =
+         new Lazy<ConcurrentDictionary<string, BObject>>(Initialize, LazyThreadSafetyMode.ExecutionAndPublication);
 
       /// <summary>
       /// Returns all locales available inside Bogus' assembly manifest.

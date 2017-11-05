@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyVersionAttribute("0.0.0")]
 [assembly: AssemblyFileVersionAttribute("0.0.0")]
 [assembly: AssemblyInformationalVersionAttribute("0.0.0-localbuild built on 1/1/2015 12:00:00 AM")]
-[assembly: AssemblyTrademarkAttribute("Apache License v2.0")]
+[assembly: AssemblyTrademarkAttribute("MIT License")]
 [assembly: AssemblyDescriptionAttribute("https://github.com/bchavez/Bogus")]
 [assembly: InternalsVisibleToAttribute("Bogus.Tests")]
 namespace System {

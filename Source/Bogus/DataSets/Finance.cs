@@ -7,26 +7,28 @@ using Bogus.Extensions;
 
 namespace Bogus.DataSets
 {
-    /// <summary>
-    /// Represents a currency
-    /// </summary>
-    public class Currency
-    {
-        /// <summary>
-        /// The long for description of the currency. IE: "US Dollar"
-        /// </summary>
-        public string Description { get; set; }
-        /// <summary>
-        /// The currency code. iE: USD.
-        /// </summary>
-        public string Code { get; set; }
-        /// <summary>
-        /// The currency symbol. IE: $
-        /// </summary>
-        public string Symbol { get; set; }
+   /// <summary>
+   /// Represents a currency
+   /// </summary>
+   public class Currency
+   {
+      /// <summary>
+      /// The long for description of the currency. IE: "US Dollar"
+      /// </summary>
+      public string Description { get; set; }
 
-        public static Currency Default = new Currency { Description="US Dollar", Code="USD", Symbol="$" };
-    }
+      /// <summary>
+      /// The currency code. IE: USD.
+      /// </summary>
+      public string Code { get; set; }
+
+      /// <summary>
+      /// The currency symbol. IE: $
+      /// </summary>
+      public string Symbol { get; set; }
+
+      public static Currency Default = new Currency {Description = "US Dollar", Code = "USD", Symbol = "$"};
+   }
 
    /// <summary>
    /// Represents an enumeration of all the supported card types.
@@ -40,6 +42,7 @@ namespace Bogus.DataSets
          this.Value = value;
          All.Add(this);
       }
+
       /// <summary>
       /// List of all card types.
       /// </summary>
@@ -49,42 +52,52 @@ namespace Bogus.DataSets
       /// Visa card number
       /// </summary>
       public static readonly CardType Visa = new CardType("visa");
+
       /// <summary>
       /// Mastercard card number
       /// </summary>
       public static readonly CardType Mastercard = new CardType("mastercard");
+
       /// <summary>
       /// Discover card number
       /// </summary>
       public static readonly CardType Discover = new CardType("discover");
+
       /// <summary>
       /// American Express card number
       /// </summary>
       public static readonly CardType AmericanExpress = new CardType("american_express");
+
       /// <summary>
       /// Diners Club card number
       /// </summary>
       public static readonly CardType DinersClub = new CardType("diners_club");
+
       /// <summary>
       /// JCB card number
       /// </summary>
       public static readonly CardType Jcb = new CardType("jcb");
+
       /// <summary>
       /// Switch card number
       /// </summary>
       public static readonly CardType Switch = new CardType("switch");
+
       /// <summary>
       /// Solo card number
       /// </summary>
       public static readonly CardType Solo = new CardType("solo");
+
       /// <summary>
       /// Maestro card number
       /// </summary>
       public static readonly CardType Maestro = new CardType("maestro");
+
       /// <summary>
       /// Laser card number
       /// </summary>
       public static readonly CardType Laser = new CardType("laser");
+
       /// <summary>
       /// Instapayment card number
       /// </summary>
@@ -458,7 +471,8 @@ namespace Bogus.DataSets
             .ToArray();
       }
 
-      private static readonly string[] IbanAlpha = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+      private static readonly string[] IbanAlpha =
+            {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
       private static readonly string[] IbanPattern10 = {"01", "02", "03", "04", "05", "06", "07", "08", "09"};
 
@@ -483,5 +497,4 @@ namespace Bogus.DataSets
             "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "YU", "ZA", "ZM", "ZR", "ZW"
          };
    }
-
 }

@@ -29,6 +29,9 @@ namespace Bogus
     /// </summary>
     public class Binder : IBinder
     {
+        /// <summary>
+        /// The binding flags to use when reflecting over T.
+        /// </summary>
         protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
 
         /// <summary>

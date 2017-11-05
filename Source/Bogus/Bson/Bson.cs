@@ -1,3 +1,5 @@
+#pragma warning disable 1591
+
 using System;
 using System.IO;
 using System.Text;
@@ -6,7 +8,7 @@ namespace Bogus.Bson
 {
    public class Bson
    {
-      private MemoryStream stream;
+      private readonly MemoryStream stream;
       private BinaryReader reader;
 
       public static BObject Load(byte[] buf)

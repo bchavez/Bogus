@@ -1,3 +1,5 @@
+#pragma warning disable 1591
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -5,7 +7,7 @@ namespace Bogus.Bson
 {
    public class BArray : BValue, IEnumerable
    {
-      private List<BValue> items = new List<BValue>();
+      private readonly List<BValue> items = new List<BValue>();
 
       public BArray() : base(BValueType.Array)
       {
@@ -13,8 +15,8 @@ namespace Bogus.Bson
 
       public override BValue this[int index]
       {
-         get { return items[index]; }
-         set { items[index] = value; }
+         get => items[index];
+         set => items[index] = value;
       }
 
       public bool HasValues => items.Count > 0;

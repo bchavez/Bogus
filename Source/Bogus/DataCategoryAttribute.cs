@@ -12,8 +12,14 @@ namespace Bogus
     [AttributeUsage(AttributeTargets.Class)]
     public class DataCategoryAttribute : Attribute
     {
+        /// <summary>
+        /// The category name.
+        /// </summary>
         public string Name { get;set; }
-
+        
+        /// <summary>
+        /// Creates a data category attribute with a specified category name.
+        /// </summary>
         public DataCategoryAttribute(string name)
         {
             this.Name = name;

@@ -9,7 +9,7 @@ namespace Bogus.Extensions
    /// </summary>
    internal static class CheckDigitExtension
    {
-      static readonly int[] Results = { 0, 2, 4, 6, 8, 1, 3, 5, 7, 9 };
+      static readonly int[] Results = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 
       /// <summary>
       /// For a list of digits, compute the ending checkdigit 

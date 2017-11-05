@@ -12,7 +12,7 @@
       {
          const string Key = nameof(ExtensionsForUnitedStates) + "SSN";
 
-         if (p.context.ContainsKey(Key))
+         if( p.context.ContainsKey(Key) )
          {
             return p.context[Key] as string;
          }

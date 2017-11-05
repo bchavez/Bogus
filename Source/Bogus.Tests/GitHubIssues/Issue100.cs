@@ -93,10 +93,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          var orderFaker = new Faker<Examples.Order>()
             .UseSeed(88)
-            .RuleFor(o => o.Quantity, f =>
-               {
-                  return f.Random.Number(1, 3);
-               });
+            .RuleFor(o => o.Quantity, f => { return f.Random.Number(1, 3); });
 
          var order = orderFaker.Generate();
 

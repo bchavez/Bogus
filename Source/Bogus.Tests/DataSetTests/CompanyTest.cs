@@ -5,51 +5,51 @@ using Xunit;
 
 namespace Bogus.Tests.DataSetTests
 {
-    public class CompanyTest : SeededTest
-    {
-        public CompanyTest()
-        {
-            company = new Company();
-        }
+   public class CompanyTest : SeededTest
+   {
+      public CompanyTest()
+      {
+         company = new Company();
+      }
 
-        private readonly Company company;
+      private readonly Company company;
 
-        [Fact]
-        public void can_get_a_catch_phrase()
-        {
-            company.CatchPhrase().Should().Be("Phased background protocol");
-        }
+      [Fact]
+      public void can_get_a_catch_phrase()
+      {
+         company.CatchPhrase().Should().Be("Phased background protocol");
+      }
 
-        [Fact]
-        public void can_get_a_company_name_with_custom_format()
-        {
-            company.CompanyName(0).Should().Be("Mitchell Inc");
-        }
+      [Fact]
+      public void can_get_a_company_name_with_custom_format()
+      {
+         company.CompanyName(0).Should().Be("Mitchell Inc");
+      }
 
-        [Fact]
-        public void can_get_company_bs_phrase()
-        {
-            company.Bs().Should().Be("maximize leading-edge schemas"); //lol
-        }
+      [Fact]
+      public void can_get_company_bs_phrase()
+      {
+         company.Bs().Should().Be("maximize leading-edge schemas"); //lol
+      }
 
-        [Fact]
-        public void can_get_company_name()
-        {
-            company.CompanyName().Should().Be("Brown - Schultz");
-        }
+      [Fact]
+      public void can_get_company_name()
+      {
+         company.CompanyName().Should().Be("Brown - Schultz");
+      }
 
-        [Fact]
-        public void can_get_company_suffix_array()
-        {
-            var arr = company.Suffexes();
+      [Fact]
+      public void can_get_company_suffix_array()
+      {
+         var arr = company.Suffexes();
 
-            arr.Length.Should().NotBe(0);
-        }
+         arr.Length.Should().NotBe(0);
+      }
 
-        [Fact]
-        public void can_generate_cnpj_for_brazil()
-        {
-            company.Cnpj().Should().Be("61.860.606/0001-91");
-        }
-    }
+      [Fact]
+      public void can_generate_cnpj_for_brazil()
+      {
+         company.Cnpj().Should().Be("61.860.606/0001-91");
+      }
+   }
 }

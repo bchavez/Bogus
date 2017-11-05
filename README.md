@@ -36,6 +36,12 @@ Minimum Requirements: **.NET Standard 2.0** or **.NET Framework 4.0**.
 * Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
 * Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
 
+##### Tip Jar
+* :dollar: **Bitcoin**: `1ApWWgMjnT9pWx9jnQfwim8jPtrqDimxBh`
+* :pound: **Litecoin**: `LZgWtUgKeHfHiPdyqcYfpNjiSFEpSWCBuL`
+* :euro: **Ethereum**: `0xa0cE2692355135Cc7fcb89d3D213be4A0512A73c`
+
+
 Usage
 -----
 ### The Great C# Example

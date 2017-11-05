@@ -1,3 +1,8 @@
+## v20.0.1
+* Added `Faker<T>.Clone()`: Clones internal state of a `Faker<T>` and allows for complex faking scenarios and rule combinations.
+* Added `Faker<T>.UseSeed(n)`: Allows you to specify a localized seed value on a `Faker<T>` instead of a global static `Randomizer.Seed`.
+* Stronger `Seed` determinism for multi-threaded scenarios.
+
 ## v19.0.2
 * Fixed #99: Possible threading issue that can cause `System.ArgumentException`.
 

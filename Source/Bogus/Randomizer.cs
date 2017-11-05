@@ -20,6 +20,18 @@ namespace Bogus
 
         internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
+        public Randomizer()
+        {
+           this.localSeed = Seed;
+        }
+       
+        public Randomizer(int localSeed)
+        {
+           this.localSeed = new Random(localSeed);
+        }
+
+        private Random localSeed;
+
         /// <summary>
         /// Get an int from 0 to max.
         /// </summary>
@@ -63,7 +75,7 @@ namespace Bogus
             {
                 //Clamp max value, Issue #30.
                 max = max == int.MaxValue ? max : max + 1;
-                return Seed.Next(min, max);
+                return localSeed.Next(min, max);
             }
         }
 
@@ -111,10 +123,10 @@ namespace Bogus
                 if( min == 0.0d && max == 1.0d )
                 {
                     //use default implementation
-                    return Seed.NextDouble();
+                    return localSeed.NextDouble();
                 }
 
-                return Seed.NextDouble() * (max - min) + min;
+                return localSeed.NextDouble() * (max - min) + min;
             }
         }
 
@@ -157,7 +169,7 @@ namespace Bogus
             var arr = new byte[count];
             lock( Locker.Value )
             {
-                Seed.NextBytes(arr);
+                localSeed.NextBytes(arr);
             }
             return arr;
         }
@@ -410,12 +422,33 @@ namespace Bogus
             return new string(chars);
         }
 
-        /// <summary>
-        /// Picks a random Enum of T. Works only with Enums.
-        /// </summary>
-        /// <typeparam name="T">Must be an Enum</typeparam>
-        /// <param name="exclude">Exclude enum values from being returned</param>
-        public T Enum<T>(params T[] exclude) where T : struct
+       /// <summary>
+       /// Clamps the length of a string filling between min and max characters.
+       /// If the string is below the minimum, the string is appended with random characters up to the minimum length.
+       /// If the string is over the maximum, the string is truncated at maximum characters; additionally, if the result string ends with
+       /// whitespace, it is replaced with a random characters.
+       /// </summary>
+       public string ClampString(string str, int? min = null, int? max = null)
+       {
+          if( max != null && str.Length > max )
+          {
+             str = str.Substring(0, max.Value).Trim();
+          }
+          if( min != null && min > str.Length )
+          {
+             var missingChars = min - str.Length;
+             var fillerChars = this.Replace("".PadRight(missingChars.Value, '?'));
+             return str + fillerChars;
+          }
+          return str;
+       }
+
+      /// <summary>
+      /// Picks a random Enum of T. Works only with Enums.
+      /// </summary>
+      /// <typeparam name="T">Must be an Enum</typeparam>
+      /// <param name="exclude">Exclude enum values from being returned</param>
+      public T Enum<T>(params T[] exclude) where T : struct
         {
             var e = typeof(T);
             if(!e.IsEnum)
@@ -453,7 +486,7 @@ namespace Bogus
                 //lock any seed access, for thread safety.
                 lock(Locker.Value)
                 {
-                    j = Seed.Next(i, buffer.Count);
+                    j = this.localSeed.Next(i, buffer.Count);
                 }
                 yield return buffer[j];
 
@@ -461,12 +494,15 @@ namespace Bogus
             }
         }
 
+        private WordFunctions wordFunctions;
+
         /// <summary>
         /// Returns a single word or phrase in English.
         /// </summary>
         public string Word()
         {
-            var randomWordMethod = ListItem(WordFunctions.Functions);
+            this.wordFunctions = this.wordFunctions ?? new WordFunctions(this);
+            var randomWordMethod = ListItem(this.wordFunctions.Functions);
             return randomWordMethod();
         }
 
@@ -585,54 +621,66 @@ namespace Bogus
 
     }
 
-    public static class WordFunctions
-    {
-        public static List<Func<string>> Functions = new List<Func<string>>();
+   public class WordFunctions
+   {
+      public List<Func<string>> Functions { get; } = new List<Func<string>>();
 
-        static WordFunctions()
-        {
-            var commerce = new Commerce();
-            var company = new Company();
-            var address = new Address();
-            var finance = new Finance();
-            var hacker = new Hacker();
-            var name = new Name();
+      private Commerce Commerce { get; }
+      private Company Company { get; }
+      private Address Address { get; }
+      private Finance Finance { get; }
+      private Hacker Hacker { get; }
+      private Name Name { get; }
 
-            Functions.Add(() => commerce.Department());
-            Functions.Add(() => commerce.ProductName());
-            Functions.Add(() => commerce.ProductAdjective());
-            Functions.Add(() => commerce.ProductMaterial());
-            Functions.Add(() => commerce.ProductName());
-            Functions.Add(() => commerce.Color());
+      public WordFunctions(Randomizer r)
+      {
+         this.Commerce = new Commerce() { Random = r };
+         this.Company = new Company() { Random = r };
+         this.Address = new Address() { Random = r };
+         this.Finance = new Finance() { Random = r };
+         this.Hacker = new Hacker() { Random = r };
+         this.Name = new Name() { Random = r };
 
-            Functions.Add(() => company.CatchPhraseAdjective());
-            Functions.Add(() => company.CatchPhraseDescriptor());
-            Functions.Add(() => company.CatchPhraseNoun());
-            Functions.Add(() => company.BsAdjective());
-            Functions.Add(() => company.BsBuzz());
-            Functions.Add(() => company.BsNoun());
+         Init();
+      }
 
-            Functions.Add(() => address.StreetSuffix());
-            Functions.Add(() => address.County());
-            Functions.Add(() => address.Country());
-            Functions.Add(() => address.State());
-            
-            Functions.Add(() => address.StreetSuffix());
+      private void Init()
+      {
+         this.Functions.Add(() => this.Commerce.Department());
+         this.Functions.Add(() => this.Commerce.ProductName());
+         this.Functions.Add(() => this.Commerce.ProductAdjective());
+         this.Functions.Add(() => this.Commerce.ProductMaterial());
+         this.Functions.Add(() => this.Commerce.ProductName());
+         this.Functions.Add(() => this.Commerce.Color());
 
-            Functions.Add(() => finance.AccountName());
-            Functions.Add(() => finance.TransactionType());
-            Functions.Add(() => finance.Currency().Description);
+         this.Functions.Add(() => this.Company.CatchPhraseAdjective());
+         this.Functions.Add(() => this.Company.CatchPhraseDescriptor());
+         this.Functions.Add(() => this.Company.CatchPhraseNoun());
+         this.Functions.Add(() => this.Company.BsAdjective());
+         this.Functions.Add(() => this.Company.BsBuzz());
+         this.Functions.Add(() => this.Company.BsNoun());
 
-            Functions.Add(() => hacker.Noun());
-            Functions.Add(() => hacker.Verb());
-            Functions.Add(() => hacker.Adjective());
-            Functions.Add(() => hacker.IngVerb());
-            Functions.Add(() => hacker.Abbreviation());
+         this.Functions.Add(() => this.Address.StreetSuffix());
+         this.Functions.Add(() => this.Address.County());
+         this.Functions.Add(() => this.Address.Country());
+         this.Functions.Add(() => this.Address.State());
 
-            Functions.Add(() => name.JobDescriptor());
-            Functions.Add(() => name.JobArea());
-            Functions.Add(() => name.JobType());
-        }
-    }
+         this.Functions.Add(() => this.Address.StreetSuffix());
+
+         this.Functions.Add(() => this.Finance.AccountName());
+         this.Functions.Add(() => this.Finance.TransactionType());
+         this.Functions.Add(() => this.Finance.Currency().Description);
+
+         this.Functions.Add(() => this.Hacker.Noun());
+         this.Functions.Add(() => this.Hacker.Verb());
+         this.Functions.Add(() => this.Hacker.Adjective());
+         this.Functions.Add(() => this.Hacker.IngVerb());
+         this.Functions.Add(() => this.Hacker.Abbreviation());
+
+         this.Functions.Add(() => this.Name.JobDescriptor());
+         this.Functions.Add(() => this.Name.JobArea());
+         this.Functions.Add(() => this.Name.JobType());
+      }
+   }
 
 }

@@ -8,7 +8,7 @@ namespace Bogus
     /// <summary>
     /// Data set methods that access the BSON database of locales.
     /// </summary>
-    public class DataSet : ILocaleAware
+    public class DataSet : ILocaleAware, IHasRandomizer
     {
         /// <summary>
         /// Resolves the 'category' type of a dataset type; respects the 'DataCategory' attribute.
@@ -28,19 +28,29 @@ namespace Bogus
             this.Locale = locale;
 
             this.Category = ResolveCategory(this.GetType());
-
-            this.Random = new Randomizer();
         }
 
-        /// <summary>
-        /// The Randomizer
-        /// </summary>
-        public Randomizer Random { get; set; }
+      protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
 
-        /// <summary>
-        /// The category name inside the locale
-        /// </summary>
-        protected string Category { get; set; }
+      private Randomizer randomizer;
+
+      /// <summary>
+      /// The Randomizer
+      /// </summary>
+      public Randomizer Random
+      {
+         get => this.randomizer ?? (this.Random = new Randomizer());
+         set
+         {
+            this.randomizer = value;
+            this.Notifier.Notify(value);
+         }
+      }
+
+      /// <summary>
+      /// The category name inside the locale
+      /// </summary>
+      protected string Category { get; set; }
 
         /// <summary>
         /// Current locale of the data set.

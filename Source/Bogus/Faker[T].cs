@@ -26,7 +26,61 @@ namespace Bogus
         protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
         protected internal bool? IsValid;
         protected internal string currentRuleSet = Default;
+        protected internal int? localSeed; // if null, the global Randomizer.Seed is used.
 #pragma warning restore 1591
+
+      /// <summary>
+      /// Clones the internal state of a Faker[T] into a new Faker[T] so that
+      /// both are isolated from each other. The clone will have internal state
+      /// reset as if .Generate() was never
+      /// </summary>
+      public Faker<T> Clone()
+      {
+         var clone = new Faker<T>(this.Locale, this.binder);
+         
+         //copy internal state.
+         //strict modes.
+         foreach( var root in this.StrictModes )
+         {
+            clone.StrictModes.Add(root.Key, root.Value);
+         }
+
+         //ignores
+         foreach( var root in this.Ignores )
+         {
+            foreach( var str in root.Value )
+            {
+               clone.Ignores.Add(root.Key, str);
+            }
+         }
+
+         //create actions
+         foreach( var root in this.CreateActions )
+         {
+            clone.CreateActions[root.Key] = root.Value;
+         }
+         //finalize actions
+         foreach( var root in this.FinalizeActions )
+         {
+            clone.FinalizeActions.Add(root.Key, root.Value);
+         }
+         
+         //actions
+         foreach( var root in this.Actions )
+         {
+            foreach( var kv in root.Value )
+            {
+               clone.Actions.Add(root.Key, kv.Key, kv.Value);
+            }
+         }
+
+         if( localSeed.HasValue )
+         {
+            clone.UseSeed(localSeed.Value);
+         }
+
+         return clone;
+      }
 
         /// <summary>
         /// The current locale.
@@ -59,6 +113,18 @@ namespace Bogus
             FakerHub = new Faker(locale);
             TypeProperties = this.binder.GetMembers(typeof(T));
             this.CreateActions[Default] = faker => Activator.CreateInstance<T>();
+        }
+
+        /// <summary>
+        /// Creates a seed locally scoped within this Faker[T] ignoring the globally scoped Randomzier.Seed.
+        /// If this method is never called the global Randomizer.Seed is used.
+        /// </summary>
+        /// <para name="seed">The seed value to use within this Faker[T] instance.</para>
+        public virtual Faker<T> UseSeed(int seed)
+        {
+           this.localSeed = seed;
+           this.FakerHub.Random = new Randomizer(seed);
+           return this;
         }
 
         /// <summary>
@@ -349,14 +415,16 @@ namespace Bogus
         /// </summary>
         protected virtual void PopulateInternal(T instance, string[] ruleSets)
         {
+            ValidationResult vr = null;
             if( !IsValid.HasValue ) 
             {
                 //run validation
-                this.IsValid = ValidateInternal(ruleSets).IsValid;
+                vr = ValidateInternal(ruleSets);
+                this.IsValid = vr.IsValid;
             }
             if( !IsValid.GetValueOrDefault())
             {
-                throw new InvalidOperationException($"StrictMode validation failure on {typeof(T)}. The Binder found {TypeProperties.Count} properties/fields but have different number of actions rules. Also, check RuleSets.");
+               throw MakeValidationException(vr ?? ValidateInternal(ruleSets));
             }
 
             var typeProps = TypeProperties;

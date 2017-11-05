@@ -47,7 +47,7 @@ namespace Bogus.DataSets
         }
 
         protected Lorem Lorem = null;
-       private Dictionary<string, BObject> lookup;
+        private Dictionary<string, BObject> lookup;
         private BArray mimes;
         private string[] exts;
         private string[] types;

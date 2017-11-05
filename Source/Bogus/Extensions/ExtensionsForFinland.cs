@@ -30,7 +30,7 @@
          // string "0123456789ABCDEFHJKLMNPRSTUVWXY". For example, 311280888 divided by 31 
          // gives the remainder as 30, and since A=10, B=11, etc. ending up with Y=30.
 
-         var r = new Randomizer();
+         var r = p.Random;
 
          var year = p.DateOfBirth.Year;
 

@@ -20,17 +20,25 @@ namespace Bogus
 
       internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
+      /// <summary>
+      /// Constructor that uses the global static `<see cref="Seed"/>.
+      /// </summary>
       public Randomizer()
       {
          this.localSeed = Seed;
       }
 
+      /// <summary>
+      /// Constructor that uses <see cref="localSeed"/> parameter as a seed.
+      /// Completely ignores the global static <see cref="Seed"/>.
+      /// </summary>
+      /// <param name="localSeed"></param>
       public Randomizer(int localSeed)
       {
          this.localSeed = new Random(localSeed);
       }
 
-      private Random localSeed;
+      private readonly Random localSeed;
 
       /// <summary>
       /// Get an int from 0 to max.
@@ -312,6 +320,7 @@ namespace Bogus
       /// <summary>
       /// Get a random subset of an array.
       /// </summary>
+      /// <param name="array">The source of items to pick from.</param>
       /// <param name="count">The number of elements to pick; otherwise, a random amount is picked.</param>
       public T[] ArrayElements<T>(T[] array, int? count = null)
       {
@@ -343,6 +352,7 @@ namespace Bogus
       /// <summary>
       /// Get a random subset of a List.
       /// </summary>
+      /// <param name="items">The source of items to pick from.</param>
       /// <param name="count">The number of items to pick; otherwise, a random amount is picked.</param>
       public List<T> ListItems<T>(IList<T> items, int? count = null)
       {
@@ -357,6 +367,7 @@ namespace Bogus
       /// <summary>
       /// Get a random subset of a List.
       /// </summary>
+      /// <param name="items">The source of items to pick from.</param>
       /// <param name="count">The number of items to pick; otherwise, a random amount is picked.</param>
       public IList<T> ListItems<T>(List<T> items, int? count = null)
       {
@@ -621,8 +632,18 @@ namespace Bogus
       }
    }
 
+   /// <summary>
+   /// General word functions that are available across
+   /// data sets. The default locale of these word functions is
+   /// to 'en' and it is intentional.
+   /// </summary>
    public class WordFunctions
    {
+      /// <summary>
+      /// After the class is created, <see cref="Functions"/> is a list
+      /// of <see cref="Func{TResult}"/> strings used as a selection list
+      /// of word functions that generate English words or phrases.
+      /// </summary>
       public List<Func<string>> Functions { get; } = new List<Func<string>>();
 
       private Commerce Commerce { get; }
@@ -632,6 +653,9 @@ namespace Bogus
       private Hacker Hacker { get; }
       private Name Name { get; }
 
+      /// <summary>
+      /// Constructor for <see cref="WordFunctions"/>.
+      /// </summary>
       public WordFunctions(Randomizer r)
       {
          this.Commerce = new Commerce() {Random = r};

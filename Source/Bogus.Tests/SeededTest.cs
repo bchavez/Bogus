@@ -14,6 +14,11 @@ namespace Bogus.Tests
       public SeededTest()
       {
          //set the random gen manually to a seeded value
+         ResetGlobalSeed();
+      }
+
+      protected static void ResetGlobalSeed()
+      {
          Randomizer.Seed = new System.Random(3116);
       }
    }

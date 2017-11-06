@@ -22,6 +22,9 @@ namespace Bogus
 
       /// <summary>
       /// Constructor that uses the global static `<see cref="Seed"/>.
+      /// Changing the global static seed after this constructor runs
+      /// will have no effect. A new randomizer is needed to capture a new
+      /// global seed.
       /// </summary>
       public Randomizer()
       {
@@ -557,7 +560,8 @@ namespace Bogus
       /// </summary>
       public Guid Uuid()
       {
-         return Guid.NewGuid();
+         var guidBytes = this.Bytes(16);
+         return new Guid(guidBytes);
       }
 
       /// <summary>

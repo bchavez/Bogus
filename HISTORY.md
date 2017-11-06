@@ -1,3 +1,6 @@
+## v20.0.2
+* Fixed Issue 102: `f.Random.Uuid()` is now deterministic based on global or local seed.
+
 ## v20.0.1
 * Added `Faker<T>.Clone()`: Clones internal state of a `Faker<T>` and allows for complex faking scenarios and rule combinations.
 * Added `Faker<T>.UseSeed(n)`: Allows you to specify a localized seed value on a `Faker<T>` instead of a global static `Randomizer.Seed`.

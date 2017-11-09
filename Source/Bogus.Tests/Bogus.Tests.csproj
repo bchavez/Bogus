@@ -110,6 +110,7 @@
     <Compile Include="DataSetTests\InternetTests.cs" />
     <Compile Include="DataSetTests\LoremTests.cs" />
     <Compile Include="DataSetTests\NameTests.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="PersonTest.cs" />
     <Compile Include="DataSetTests\PhoneNumbersTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

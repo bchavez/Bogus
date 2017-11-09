@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests
 {
@@ -13,6 +14,11 @@ namespace Bogus.Tests
       public static string DumpString(this object obj)
       {
          return JsonConvert.SerializeObject(obj, Formatting.Indented);
+      }
+
+      public static void Dump(this ITestOutputHelper console, object obj)
+      {
+         console.WriteLine(obj.DumpString());
       }
    }
 }

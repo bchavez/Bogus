@@ -56,18 +56,20 @@ namespace Bogus.Tests
       {
          var obtained = Get(10, p => p.Sin());
 
+         console.Dump(obtained);
+
          var truth = new[]
             {
                "746 924 794",
                "595 169 327",
-               "947 986 089",
-               "845 442 110",
-               "035 435 247",
-               "386 828 776",
-               "045 289 626",
-               "079 899 753",
-               "620 761 643",
-               "574 964 227"
+               "083 194 845",
+               "335 860 631",
+               "865 181 952",
+               "320 968 522",
+               "949 882 807",
+               "003 727 773",
+               "678 373 663",
+               "250 448 792"
             };
 
          obtained.Should().Equal(truth);
@@ -78,19 +80,20 @@ namespace Bogus.Tests
       {
          var obtained = Get(10, p => p.Cpf());
 
+         console.Dump(obtained);
 
          var expect = new[]
             {
                "786.928.797-03",
-               "595.269.345-80",
+               "693.455.045-59",
                "073.298.888-85",
                "365.760.664-57",
-               "835.282.914-94",
-               "340.967.549-35",
-               "989.784.800-20",
+               "352.829.147-86",
+               "096.754.915-90",
+               "575.989.784-50",
                "003.525.756-38",
-               "658.676.631-16",
-               "210.847.792-69"
+               "919.359.823-89",
+               "399.334.225-96"
             };
 
          obtained.Should().Equal(expect);
@@ -129,17 +132,19 @@ namespace Bogus.Tests
       {
          var emails = Get(10, p => p.Email);
 
+         console.Dump(emails);
+
          emails.Should().ContainInOrder(
-            "Lee69@yahoo.com",
-            "Michale_Stiedemann94@gmail.com",
-            "Grayson_Harvey@yahoo.com",
-            "Anne.Ruecker@gmail.com",
-            "Vilma.Beer51@yahoo.com",
-            "Loraine_Sipes@yahoo.com",
-            "Haylie_Reilly29@yahoo.com",
-            "Sandrine_Watsica76@gmail.com",
-            "Madisyn6@yahoo.com",
-            "Austin.Marks1@hotmail.com");
+            "Doris69@yahoo.com",
+            "Betsy_Mraz19@hotmail.com",
+            "Alvin_Fahey@yahoo.com",
+            "Jeremy.Klein@gmail.com",
+            "Armando_Waelchi79@yahoo.com",
+            "Cecil91@gmail.com",
+            "Genevieve_Marvin@yahoo.com",
+            "Elijah56@hotmail.com",
+            "Gerardo_Leannon@hotmail.com",
+            "Laverne25@yahoo.com");
 
          console.WriteLine(emails.DumpString());
       }

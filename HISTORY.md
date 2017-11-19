@@ -1,3 +1,6 @@
+## v21.0.1
+* Added `Gender` field to `Person`. Deterministic sequences may have changed.
+
 ## v20.0.2
 * Fixed Issue 102: `f.Random.Uuid()` is now deterministic based on global or local seed.
 

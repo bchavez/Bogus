@@ -10,10 +10,10 @@ namespace Bogus.Tests.DataSetTests
       {
          var card = new Person();
 
-         card.FirstName.Should().Be("Lee");
-         card.LastName.Should().Be("Brown");
-         card.UserName.Should().Be("Lee_Brown3");
-         card.Email.Should().Be("Lee69@yahoo.com");
+         card.FirstName.Should().Be("Doris");
+         card.LastName.Should().Be("Schultz");
+         card.UserName.Should().Be("Doris.Schultz");
+         card.Email.Should().Be("Doris69@yahoo.com");
 
          card.Dump();
       }

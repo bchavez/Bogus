@@ -70,8 +70,9 @@ namespace Bogus
 
       protected internal virtual void Populate()
       {
-         this.FirstName = this.DsName.FirstName();
-         this.LastName = this.DsName.LastName();
+         this.Gender = this.Random.Enum<Name.Gender>();
+         this.FirstName = this.DsName.FirstName(this.Gender);
+         this.LastName = this.DsName.LastName(this.Gender);
 
          this.UserName = this.DsInternet.UserName(this.FirstName, this.LastName);
          this.Email = this.DsInternet.Email(this.FirstName, this.LastName);
@@ -117,8 +118,8 @@ namespace Bogus
          }
       }
 
+      public Name.Gender Gender;
       public string FirstName;
-
       public string LastName;
       public string UserName;
       public string Avatar;

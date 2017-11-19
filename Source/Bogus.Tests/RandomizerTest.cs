@@ -313,5 +313,14 @@ namespace Bogus.Tests
 
          r.ListItems(a, 2).Should().Equal("c", "a");
       }
+
+      [Fact]
+      public void can_get_a_weighted_true_value()
+      {
+         var bools = Enumerable.Range(1, 100).Select(i => r.Bool(0.20f));
+         var truths = bools.Count(b => b) / 100f;
+
+         truths.Should().BeLessThan(0.25f); // roughly
+      }
    }
 }

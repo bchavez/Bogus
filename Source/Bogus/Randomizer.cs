@@ -291,6 +291,15 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Get a random boolean
+      /// </summary>
+      /// <param name="weight">The probability of true. Ranges from 0 to 1.</param>
+      public bool Bool(float weight)
+      {
+          return Float() < weight;
+      }
+
+      /// <summary>
       /// Get a random array element.
       /// </summary>
       public T ArrayElement<T>(T[] array)

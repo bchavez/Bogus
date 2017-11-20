@@ -1,4 +1,7 @@
-﻿using Xunit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Xunit;
 
 namespace Bogus.Tests
 {
@@ -20,6 +23,12 @@ namespace Bogus.Tests
       protected static void ResetGlobalSeed()
       {
          Randomizer.Seed = new System.Random(3116);
+      }
+
+      protected IEnumerable<T> Make<T>(int times, Func<T> a)
+      {
+         return Enumerable.Range(0, times)
+            .Select(i => a()).ToArray();
       }
    }
 }

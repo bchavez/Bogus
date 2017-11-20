@@ -74,6 +74,15 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Reset, reload, and reinitialize the locale from Bogus' assembly resource.
+      /// Any patches or modifications to the specified locale are destroyed.
+      /// </summary>
+      public static void ResetLocale(string locale)
+      {
+         Data.Value[locale] = InitLocale(locale);
+      }
+
+      /// <summary>
       /// Determines if a key exists in the locale.
       /// </summary>
       public static bool HasKey(string category, string path, string locale, string fallbackLocale = "en")

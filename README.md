@@ -154,7 +154,7 @@ public void With_Korean_Locale()
 /* 국가는 무상으로 행위로 의무를 구성하지 신체의 처벌받지 예술가의 경우와 */
 ```
 
-**Bogus** has support following locales:
+**Bogus** supports the following locales:
 
 | Locale Code    | Language                | | Locale Code    | Language                 |
 |:--------------:|:-----------------------:|-|:--------------:|:------------------------:|

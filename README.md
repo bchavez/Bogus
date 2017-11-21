@@ -40,6 +40,7 @@ Minimum Requirements: **.NET Standard 2.0** or **.NET Framework 4.0**.
 * :dollar: **Bitcoin**: `1ApWWgMjnT9pWx9jnQfwim8jPtrqDimxBh`
 * :pound: **Litecoin**: `LZgWtUgKeHfHiPdyqcYfpNjiSFEpSWCBuL`
 * :euro: **Ethereum**: `0xa0cE2692355135Cc7fcb89d3D213be4A0512A73c`
+* :dog2: **Dogecoin**: `D6Y9oaf963cgcjp6AgD6sDWWLTXGGYx9r2`
 
 
 Usage

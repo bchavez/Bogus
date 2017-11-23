@@ -18,6 +18,24 @@ namespace Bogus.Tests.DataSetTests
       private readonly Finance finance;
 
       [Fact]
+      public void can_get_a_random_account_default()
+      {
+         finance.Account().Should().Be("61860606");
+      }
+
+      [Fact]
+      public void can_get_a_random_account_12()
+      {
+         finance.Account(12).Should().Be("618606064391");
+      }
+
+        [Fact]
+      public void can_get_a_random_account_name()
+      {
+         finance.AccountName().Should().Be("Home Loan Account");
+      }
+
+      [Fact]
       public void can_generate_a_random_bitcoin_address()
       {
          finance.BitcoinAddress().Should().Be("1Q663EP0X8IP6K5F1U9GKXW2B1322JR8S");
@@ -130,6 +148,12 @@ namespace Bogus.Tests.DataSetTests
 
          finance.CreditCardNumber().Should().Be("3731-282228-18252")
             .And.Match(f => Luhn(f));
+      }
+
+      [Fact]
+      public void can_get_random_credit_card_cvv()
+      {
+         finance.CreditCardCvv().Should().Be("618");
       }
 
       private static bool Luhn(string digits)

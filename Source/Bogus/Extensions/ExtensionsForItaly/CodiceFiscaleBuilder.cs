@@ -122,8 +122,6 @@ namespace Bogus.Extensions
             bool male,
             bool validChecksum = true)
         {
-            var faker = new Faker();
-
             var sb = new StringBuilder();
             sb.Append(GetFiscalCodeSqueezedName(lastName, false));
             sb.Append(GetFiscalCodeSqueezedName(firstName, true));

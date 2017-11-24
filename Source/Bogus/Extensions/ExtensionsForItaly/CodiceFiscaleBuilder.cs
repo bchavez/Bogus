@@ -246,7 +246,7 @@ namespace Bogus.Extensions
         /// Indicates whether a char is a vowel
         /// </summary>
         /// <param name="c">The char to test</param>
-        /// <returns>True if is is a wovel, false otherwise</returns>
+        /// <returns>True if is is a vowel, false otherwise</returns>
         private static bool IsVowel(char c)
         {
             var vowels = new char[] { 'A', 'E', 'I', 'O', 'U' };

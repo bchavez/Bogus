@@ -34,7 +34,7 @@ namespace Bogus.Extensions
         /// <param name="lastName">Lastname of the holder</param>
         /// <param name="firstName">Firstname of the holder</param>
         /// <param name="birthday">Birthday of the holder</param>
-        /// <param name="isMale">Indicated whether the holder is male</param>
+        /// <param name="isMale">Indicates whether the holder is male</param>
         /// <param name="validChecksum">
         ///   Indicates whether the generated Fiscal Code has a valid checksum or not
         /// </param>

@@ -1,0 +1,12 @@
+[*]
+charset=utf-8
+end_of_line=crlf
+trim_trailing_whitespace=false
+insert_final_newline=false
+indent_style=space
+indent_size=3
+
+[{*.yml,*.yaml}]
+indent_style=space
+indent_size=3
+

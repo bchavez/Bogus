@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using System.IO;
 using System.Reflection;
 
 namespace Bogus.Platform
@@ -7,21 +8,31 @@ namespace Bogus.Platform
    {
       public static T GetCustomAttributeX<T>(this Type type) where T : Attribute
       {
-#if STANDARD
+#if   STANDARD20
          return type.GetCustomAttribute<T>();
+#elif STANDARD13
+         return type.GetTypeInfo().GetCustomAttribute<T>();
 #else
          return Attribute.GetCustomAttribute(type, typeof(T)) as T;
 #endif
       }
-   }
 
-   internal class EnumValueAttribute : Attribute
-   {
-      public string Value { get; }
-
-      public EnumValueAttribute(string value)
+      public static bool IsEnum(this Type type)
       {
-         this.Value = value;
+#if STANDARD13
+         return type.GetTypeInfo().IsEnum;
+#else
+         return type.IsEnum;
+#endif
+      }
+
+      public static Assembly GetAssembly(this Type type)
+      {
+#if STANDARD13
+         return type.GetTypeInfo().Assembly;
+#else
+         return type.Assembly;
+#endif
       }
    }
 }

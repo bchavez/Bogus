@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using Bogus.Bson;
+using Bogus.Platform;
 
 namespace Bogus
 {
@@ -24,7 +25,7 @@ namespace Bogus
       /// </summary>
       public static string[] GetAllLocales()
       {
-         var asm = typeof(Database).Assembly;
+         var asm = typeof(Database).GetAssembly();
 
          return asm.GetManifestResourceNames()
             .Where(name => name.EndsWith(".locale.bson"))
@@ -46,7 +47,7 @@ namespace Bogus
 
       internal static BObject InitLocale(string locale)
       {
-         var asm = typeof(Database).Assembly;
+         var asm = typeof(Database).GetAssembly();
          var resourceName = $"Bogus.data.{locale}.locale.bson";
 
          using( var s = asm.GetManifestResourceStream(resourceName) )

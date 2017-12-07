@@ -18,7 +18,7 @@ and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentVali
 ```
 Install-Package Bogus
 ```
-Minimum Requirements: **.NET Standard 2.0** or **.NET Framework 4.0**.
+Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
 
 ##### Projects That Use Bogus
 

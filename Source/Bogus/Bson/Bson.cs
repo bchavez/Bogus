@@ -149,7 +149,7 @@ namespace Bogus.Bson
                   break;
                ms.WriteByte(buf);
             }
-            return Encoding.UTF8.GetString(ms.GetBuffer(), 0, (int)ms.Position);
+            return Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Position);
          }
       }
 
@@ -241,7 +241,7 @@ namespace Bogus.Bson
 
          var bw = new BinaryWriter(ms);
          bw.Write((Int32)(dms.Position + 4 + 1));
-         bw.Write(dms.GetBuffer(), 0, (int)dms.Position);
+         bw.Write(dms.ToArray(), 0, (int)dms.Position);
          bw.Write((byte)0);
       }
 

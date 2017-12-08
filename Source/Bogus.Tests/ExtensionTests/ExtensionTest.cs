@@ -1,6 +1,7 @@
 ﻿using Bogus.DataSets;
 using Bogus.Extensions;
 using Bogus.Extensions.UnitedKingdom;
+using Bogus.Extensions.Italy;
 using FluentAssertions;
 using System;
 using Xunit;

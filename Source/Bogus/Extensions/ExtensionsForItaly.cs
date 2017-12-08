@@ -1,7 +1,7 @@
 using Bogus.DataSets;
 using System;
 
-namespace Bogus.Extensions
+namespace Bogus.Extensions.Italy
 {
    /// <summary>
    /// Italian class extensions
@@ -9,7 +9,7 @@ namespace Bogus.Extensions
    public static class ExtensionsForItaly
    {
       /// <summary>
-      ///   Extends the Person class with Italian Fiscal Code
+      ///   Codice Fiscale
       /// </summary>
       /// <param name="p">The holder</param>
       /// <param name="validChecksum">
@@ -27,8 +27,7 @@ namespace Bogus.Extensions
       }
 
       /// <summary>
-      ///   Extends the Finance data set with Italian Fiscal Code and more
-      ///   fine grained parameters
+      ///   Codice Fiscale
       /// </summary>
       /// <param name="finance">An instance of the extended Finance class</param>
       /// <param name="lastName">Last name of the holder</param>

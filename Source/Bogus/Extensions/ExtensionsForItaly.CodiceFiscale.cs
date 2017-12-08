@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Bogus.Extensions
+namespace Bogus.Extensions.Italy
 {
    /// <summary>
    /// This class implements the principal routines of the Italian fiscal code,

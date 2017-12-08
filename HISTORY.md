@@ -1,4 +1,4 @@
-## v21.0.1 
+## v21.0.2 
 * Re-enabled **.NET Standard 1.3** targeting.
 * Added `Gender` field to `Person`. Deterministic sequences may have changed.
 * Added `Randomizer.Bool(weight)` to generate weighted boolean values of true.

@@ -62,7 +62,7 @@ namespace Bogus.Extensions
       private static readonly char[] monthChars = { 'A', 'B', 'C', 'D', 'E', 'H', 'L', 'M', 'P', 'R', 'S', 'T' };
 
       /// <summary>
-      /// Map used by the algoritm for odd characters
+      /// Map used by the algorithm for odd characters
       /// </summary>
       private static readonly Dictionary<char, int> oddMap = new Dictionary<char, int>
       {

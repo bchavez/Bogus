@@ -1,4 +1,4 @@
-﻿using Bogus.DataSets;
+using Bogus.DataSets;
 using System;
 
 namespace Bogus.Extensions
@@ -31,8 +31,8 @@ namespace Bogus.Extensions
       ///   fine grained parameters
       /// </summary>
       /// <param name="finance">An instance of the extended Finance class</param>
-      /// <param name="lastName">Lastname of the holder</param>
-      /// <param name="firstName">Firstname of the holder</param>
+      /// <param name="lastName">Last name of the holder</param>
+      /// <param name="firstName">First name of the holder</param>
       /// <param name="birthday">Birthday of the holder</param>
       /// <param name="isMale">Indicates whether the holder is male</param>
       /// <param name="validChecksum">

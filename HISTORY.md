@@ -1,3 +1,6 @@
+## v21.0.3
+* Fixed `f.Image` category in URL generation.
+
 ## v21.0.2 
 * Re-enabled **.NET Standard 1.3** targeting.
 * Added `Gender` field to `Person`. Deterministic sequences may have changed.

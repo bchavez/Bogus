@@ -107,6 +107,7 @@
     <Compile Include="GitHubIssues\Issue86.cs" />
     <Compile Include="GitHubIssues\Issue99.cs" />
     <Compile Include="GitHubIssues\Issue93.cs" />
+    <Compile Include="GitHubIssues\PullRequest113.cs" />
     <Compile Include="HandleBarTests.cs" />
     <Compile Include="DataSetTests\ImageTest.cs" />
     <Compile Include="DataSetTests\InternetTests.cs" />

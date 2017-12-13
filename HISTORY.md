@@ -1,5 +1,5 @@
-## v21.0.3
-* Fixed `f.Image` category in URL generation.
+## v21.0.4
+* Fixed `f.Image` URL generation.
 
 ## v21.0.2 
 * Re-enabled **.NET Standard 1.3** targeting.

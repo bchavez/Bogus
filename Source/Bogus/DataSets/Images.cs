@@ -41,7 +41,7 @@ namespace Bogus.DataSets
             proto = "https://";
          }
          var url = $"{proto}lorempixel.com/{width}/{height}";
-         if( string.IsNullOrWhiteSpace(category) )
+         if( !string.IsNullOrWhiteSpace(category) )
             url += $"/{category}";
          if( randomize )
             url += $"?{this.Random.Number()}";

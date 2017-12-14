@@ -280,6 +280,17 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Generate a random credit card number with valid Luhn checksum.
+      /// </summary>
+      /// <param name="provider">The type of credit card to generate (ie: American Express, Discover, etc.). Passing null, a random card provider will be chosen.</param>
+        public string CreditCardNumber(CardType provider = null, bool obfuscate = false)
+      {
+         string creditCardNumber = CreditCardNumber(provider);
+
+         return obfuscate ? $"****-****-****-{creditCardNumber.Substring(creditCardNumber.Length-4)}" : creditCardNumber;
+      }
+
+      /// <summary>
       /// Generate a credit card CVV
       /// </summary>
       public string CreditCardCvv()

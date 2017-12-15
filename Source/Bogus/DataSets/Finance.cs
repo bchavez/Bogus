@@ -301,6 +301,14 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Generates the last four digits for a credit card.
+      /// </summary>      
+      public string CreditCardNumberLastFourDigits()
+      {
+         return this.Random.ReplaceNumbers("####");
+      }
+
+      /// <summary>
       /// Generate a credit card CVV
       /// </summary>
       public string CreditCardCvv()

@@ -148,6 +148,14 @@ namespace Bogus.Tests
 
          console.WriteLine(emails.DumpString());
       }
+      
+      [Fact]
+      public void person_has_full_name()
+      {
+         var p = new Person();
+         p.FullName.Should().Be($"{p.FirstName} {p.LastName}");
+      }
+      
 
       IEnumerable<string> Get(int times, Func<Person, string> a)
       {

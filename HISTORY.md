@@ -1,3 +1,7 @@
+## v21.0.5
+* Better error support.
+* Added `Person.FullName` field.
+
 ## v21.0.4
 * Fixed `f.Image` URL generation.
 

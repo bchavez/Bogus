@@ -26,6 +26,17 @@ namespace Bogus
 
       public static string GetMemberName(Expression expression)
       {
+         var expressionString = expression.ToString();
+         if( expressionString.IndexOf('.') != expressionString.LastIndexOf('.') )
+         {
+            throw new ArgumentException(
+               $"Your expression '{expressionString}' cant be used. Nested accessors like 'o => o.NestedObject.Foo' at " +
+               $"a parent level are not allowed. You should create a dedicated faker for " +
+               $"NestedObject like new Faker<NestedObject>().RuleFor(o => o.Foo, ...) with its own rules " +
+               $"that define how 'Foo' is generated. " +
+               "See this GitHub issue for more info: https://github.com/bchavez/Bogus/issues/115");
+         }
+         
          MemberExpression memberExpression;
 
          var unary = expression as UnaryExpression;

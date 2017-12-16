@@ -1,6 +1,7 @@
 ## v21.0.5
 * Better error support.
 * Added `Person.FullName` field.
+* Allowed `Faker<T>.FinishWith` to be called multiple times. Last call wins.
 
 ## v21.0.4
 * Fixed `f.Image` URL generation.

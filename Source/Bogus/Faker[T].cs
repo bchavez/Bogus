@@ -330,7 +330,7 @@ namespace Bogus
                Action = action,
                RuleSet = currentRuleSet
             };
-         this.FinalizeActions.Add(currentRuleSet, rule);
+         this.FinalizeActions[currentRuleSet] = rule;
          return this;
       }
 

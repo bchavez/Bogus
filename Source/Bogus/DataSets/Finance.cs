@@ -280,24 +280,17 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Generate a random credit card number with valid Luhn checksum if <paramref name="obfuscate"/> is false. Otherwise creates an obfuscated credit card ****-****-****-1234.
+      /// Generate an obfuscated credit card ****-****-****-1234.
       /// </summary>
-      /// <param name="provider">The type of credit card to generate (ie: American Express, Discover, etc.). Passing null, a random card provider will be chosen.</param>
-      /// <param name="obfuscate">True to obfuscate the credit card.</param>
       /// <param name="separator">The string value to separate the obfucated credit card.</param>
-      public string CreditCardNumber(CardType provider = null, bool obfuscate = false, string separator = "-")
+      public string CreditCardNumberObfuscated(string separator = "-")
       {
-         if (obfuscate)
+         if (string.IsNullOrEmpty(separator))
          {
-            if (string.IsNullOrEmpty(separator))
-            {
-               separator = "-";
-            }
-
-            return this.Random.ReplaceNumbers($"****{separator}****{separator}****{separator}####");
+            separator = "";
          }
 
-         return CreditCardNumber(provider);
+         return this.Random.ReplaceNumbers($"****{separator}****{separator}****{separator}####");
       }
 
       /// <summary>

@@ -62,6 +62,12 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_a_random_country_code_alpha3()
+      {
+         address.CountryCode(Iso3166Format.Alpha3).Should().Be("MNP");
+      }
+
+      [Fact]
       public void can_get_a_state()
       {
          address.State().Should().Be("New Mexico");

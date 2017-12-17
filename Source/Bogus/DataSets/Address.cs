@@ -135,12 +135,21 @@ namespace Bogus.DataSets
          return $"{street}, {city}, {country}";
       }
 
+
       /// <summary>
-      /// Get a random country code.
+      /// Get a random ISO 3166-1 country code.
       /// </summary>
-      public string CountryCode()
+      public string CountryCode(Iso3166Format format = Iso3166Format.Alpha2)
       {
-         return GetRandomArrayItem("country_code");
+         if( format == Iso3166Format.Alpha2 )
+         {
+            return GetRandomArrayItem("country_code");
+         }
+         if( format == Iso3166Format.Alpha3 )
+         {
+            return GetRandomArrayItem("country_code3");
+         }
+         throw new ArgumentException("Invalid country code", nameof(format));
       }
 
       /// <summary>
@@ -211,5 +220,20 @@ namespace Bogus.DataSets
             return GetRandomArrayItem("direction_abbr", min: 4, max: 8);
          return GetRandomArrayItem("direction", min: 4, max: 8);
       }
+   }
+
+   /// <summary>
+   /// Defines format for ISO 3166-1 country codes.
+   /// </summary>
+   public enum Iso3166Format
+   {
+      /// <summary>
+      /// Two character ISO 3166-1 format.
+      /// </summary>
+      Alpha2 = 0x2,
+      /// <summary>
+      /// Three character ISO 3166-1 format.
+      /// </summary>
+      Alpha3
    }
 }

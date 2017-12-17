@@ -1,3 +1,6 @@
+## v21.0.6
+* Added `f.Address.CountryCode()` ISO 3166-1 alpha-3 country code generator.
+
 ## v21.0.5
 * Better error support.
 * Added `Person.FullName` field.

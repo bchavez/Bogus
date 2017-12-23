@@ -374,7 +374,7 @@ namespace Bogus
       /// <summary>
       /// Generates multiple fake objects of T.
       /// </summary>
-      public virtual IList<T> Generate(int count, string ruleSets = null)
+      public virtual List<T> Generate(int count, string ruleSets = null)
       {
          return Enumerable.Range(1, count)
             .Select(i => Generate(ruleSets))

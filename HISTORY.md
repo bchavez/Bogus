@@ -1,7 +1,9 @@
 ## v22.0.1
 * Issue 120: `.Generate(n)` now returns `List<T>` instead of `IList<T>`.
 * Added `f.Address.CountryCode()` ISO 3166-1 alpha-3 country code generator.
-* Added `Bogus.Extensions.Extra` namespace for generally useful helper methods.
+* New `Bogus.Extensions.Extras` namespace for generally useful helper methods.
+* Added `Finance.CreditCardNumberObfuscated()` extension to `Bogus.Extensions.Extras` namespace.
+* Moved credit card `CheckDigit()` extensions to `Bogus.Extensions.Extras` namespace. 
 
 ## v21.0.5
 * Better error support.

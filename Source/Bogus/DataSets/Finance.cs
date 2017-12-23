@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Bogus.Bson;
 using Bogus.Extensions;
+using Bogus.Extensions.Extras;
 
 namespace Bogus.DataSets
 {

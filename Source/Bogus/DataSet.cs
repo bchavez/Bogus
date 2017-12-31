@@ -108,6 +108,16 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Picks a random BObject inside an array.
+      /// </summary>
+      public BObject GetRandomBObject(string path)
+      {
+         var arr = GetArray(path);
+         if( !arr.HasValues ) return null;
+         return Random.ArrayElement(arr) as BObject;
+      }
+
+      /// <summary>
       /// Picks a random string inside a BSON array, then formats it. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>

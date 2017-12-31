@@ -162,8 +162,7 @@ namespace Bogus.DataSets
       /// <returns></returns>
       public Currency Currency(bool includeFundCodes = false)
       {
-         var arr = GetArray("currency");
-         var obj = Random.ArrayElement(arr) as BObject;
+         var obj = this.GetRandomBObject("currency");
 
          var cur = new Currency
             {

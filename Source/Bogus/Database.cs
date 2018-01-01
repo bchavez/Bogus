@@ -59,6 +59,17 @@ namespace Bogus
          }
       }
 
+      public static BValue ReadResource(System.Reflection.Assembly assembly, string resourceName)
+      {
+         using( var s = assembly.GetManifestResourceStream(resourceName) )
+         using( var ms = new MemoryStream() )
+         {
+            s.CopyTo(ms);
+
+            return Bson.Bson.Load(ms.ToArray());
+         }
+      }
+
       /// <summary>
       /// Gets a locale from the locale lookup cache, if the locale doesn't exist in the lookup cache,
       /// the locale is read from the assembly manifest and added to the locale lookup cache.

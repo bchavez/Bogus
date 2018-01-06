@@ -24,7 +24,6 @@ namespace Bogus
 
       protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new Dictionary<string, FinalizeAction<T>>(StringComparer.OrdinalIgnoreCase);
       protected internal Dictionary<string, Func<Faker, T>> CreateActions = new Dictionary<string, Func<Faker, T>>(StringComparer.OrdinalIgnoreCase);
-      protected internal readonly MultiSetDictionary<string, string> Ignores = new MultiSetDictionary<string, string>(StringComparer.OrdinalIgnoreCase);
       protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
       protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
       protected internal bool? IsValid;
@@ -46,15 +45,6 @@ namespace Bogus
          foreach( var root in this.StrictModes )
          {
             clone.StrictModes.Add(root.Key, root.Value);
-         }
-
-         //ignores
-         foreach( var root in this.Ignores )
-         {
-            foreach( var str in root.Value )
-            {
-               clone.Ignores.Add(root.Key, str);
-            }
          }
 
          //create actions
@@ -304,7 +294,15 @@ namespace Bogus
             throw new ArgumentException(
                $"The property or field {propNameOrField} was not found on {typeof(T)} during the binding discovery of T. Can't ignore something that doesn't exist.");
          }
-         this.Ignores.Add(currentRuleSet, propNameOrField);
+
+         var rule = new PopulateAction<T>
+            {
+               Action = null,
+               RuleSet = currentRuleSet,
+               PropertyName = propNameOrField
+            };
+
+         this.Actions.Add(currentRuleSet, propNameOrField, rule);
 
          return this;
       }
@@ -447,6 +445,7 @@ namespace Bogus
                   {
                      typeProps.TryGetValue(action.PropertyName, out MemberInfo member);
                      var valueFactory = action.Action;
+                     if( valueFactory is null ) continue; // An .Ignore() rule.
 
                      if( member != null )
                      {
@@ -552,18 +551,10 @@ namespace Bogus
             //If strictMode is not enabled, skip and move on to the next ruleSet.
             if( !strictMode ) continue;
 
-            //Otherwise, we need to take a diff of what the user
-            //specified and what the Binder found reflecting over
-            //type T.
-            this.Ignores.TryGetValue(rule, out HashSet<string> ignores);
-
             this.Actions.TryGetValue(rule, out var populateActions);
 
             var userSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            if( ignores != null )
-            {
-               userSet.UnionWith(ignores);
-            }
+
             if( populateActions != null )
             {
                userSet.UnionWith(populateActions.Keys);

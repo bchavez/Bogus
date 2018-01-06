@@ -95,6 +95,7 @@
     <Compile Include="GitHubIssues\Issue100.cs" />
     <Compile Include="GitHubIssues\Issue102.cs" />
     <Compile Include="GitHubIssues\Issue104.cs" />
+    <Compile Include="GitHubIssues\Issue121.cs" />
     <Compile Include="GitHubIssues\Issue115.cs" />
     <Compile Include="GitHubIssues\Issue114.cs" />
     <Compile Include="GitHubIssues\Issue13.cs" />

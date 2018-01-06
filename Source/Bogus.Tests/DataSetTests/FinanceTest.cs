@@ -38,7 +38,9 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_generate_a_random_bitcoin_address()
       {
-         finance.BitcoinAddress().Should().Be("1Q663EP0X8IP6K5F1U9GKXW2B1322JR8S");
+         var btc = finance.BitcoinAddress();
+         btc.Should().MatchRegex("^[13][a-km-zA-HJ-NP-Z1-9]{25,34}$");
+         btc.Should().Be("17PE5D8HxpXjM3igcWbTeyKns2YdAfLC");
       }
 
       [Fact]

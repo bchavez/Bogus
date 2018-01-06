@@ -1,3 +1,6 @@
+## v22.0.3 
+* Generate more realistic Bitcoin addresses.
+
 ## v22.0.2
 * Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.
 

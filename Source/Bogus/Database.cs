@@ -50,15 +50,12 @@ namespace Bogus
          var asm = typeof(Database).GetAssembly();
          var resourceName = $"Bogus.data.{locale}.locale.bson";
 
-         using( var s = asm.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
-
-            return Bson.Bson.Load(ms.ToArray());
-         }
+         return ReadResource(asm, resourceName) as BObject;
       }
 
+      /// <summary>
+      /// Reads a BSON resource from an assembly.
+      /// </summary>
       public static BValue ReadResource(System.Reflection.Assembly assembly, string resourceName)
       {
          using( var s = assembly.GetManifestResourceStream(resourceName) )

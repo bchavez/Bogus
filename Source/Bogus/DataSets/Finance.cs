@@ -287,18 +287,25 @@ namespace Bogus.DataSets
          return this.Random.Replace("###");
       }
 
+      private static readonly char[] BtcCharset =
+         {
+            '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
+            'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F',
+            'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+         };
+
       /// <summary>
       /// Generates a random bitcoin address
       /// </summary>
       public string BitcoinAddress()
       {
-         var addressLength = Math.Floor(this.Random.Double() * (36 - 27 + 1)) + 27;
-         var address = this.Random.ArrayElement(new[] {"1", "3"});
-         for( var i = 0; i < addressLength - 1; i++ )
+         var addressLength = this.Random.Number(25, 34);
+         var lastBits = new string(this.Random.ArrayElements(BtcCharset,addressLength));
+         if( this.Random.Bool() )
          {
-            address += "*";
+            return $"1{lastBits}";
          }
-         return Random.Replace(address);
+         return $"3{lastBits}";
       }
 
       /// <summary>

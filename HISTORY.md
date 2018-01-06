@@ -1,3 +1,6 @@
+## v22.0.2
+* Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.
+
 ## v22.0.1
 * Issue 120: `.Generate(n)` now returns `List<T>` instead of `IList<T>`.
 * Added `f.Address.CountryCode()` ISO 3166-1 alpha-3 country code generator.

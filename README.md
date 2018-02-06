@@ -234,13 +234,13 @@ public void Or_Using_DataSets_Directly()
 	* `CityPrefix` - Get a city prefix.
 	* `CitySuffix` - Get a city suffix.
 	* `StreetName` - Get a street name.
-	* `BuildingNumber` - Get a building number
+	* `BuildingNumber` - Get a building number.
 	* `StreetSuffix` - Get a street suffix.
 	* `SecondaryAddress` - Get a secondary address like 'Apt. 2' or 'Suite 321'.
 	* `County` - Get a county.
 	* `Country` - Get a country.
 	* `FullAddress` - Get a full address like Street, City, Country.
-	* `CountryCode` - Get a random country code.
+	* `CountryCode` - Get a random ISO 3166-1 country code.
 	* `State` - Get a state.
 	* `StateAbbr` - Get a state abbreviation.
 	* `Latitude` - Get a Latitude
@@ -251,7 +251,7 @@ public void Or_Using_DataSets_Directly()
 * **`Commerce`**
 	* `Department` - Get a random commerce department.
 	* `Price` - Get a random product price.
-	* `Categories` - Get random product categories
+	* `Categories` - Get random product categories.
 	* `ProductName` - Get a random product name.
 	* `Color` - Get a random color.
 	* `Product` - Get a random product.
@@ -284,8 +284,8 @@ public void Or_Using_DataSets_Directly()
 	* `Currency` - Get a random currency.
 	* `CreditCardNumber` - Generate a random credit card number with valid Luhn checksum.
 	* `CreditCardCvv` - Generate a credit card CVV
-	* `BitcoinAddress` - Generates a random bitcoin address
-	* `EthereumAddress` - Generate a random ethereum address
+	* `BitcoinAddress` - Generates a random Bitcoin address.
+	* `EthereumAddress` - Generate a random Ethereum address.
 	* `RoutingNumber` - Generates an ABA routing number with valid check digit.
 	* `Bic` - Generates Bank Identifier Code (BIC) code.
 	* `Iban` - Generates an International Bank Account Number (IBAN).
@@ -315,7 +315,7 @@ public void Or_Using_DataSets_Directly()
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
-	* `ExampleEmail` - Generates an example email with @example.com
+	* `ExampleEmail` - Generates an example email with @example.com.
 	* `UserName` - Generates user names.
 	* `DomainName` - Generates a random domain name.
 	* `DomainWord` - Generates a domain word used for domain names.
@@ -323,7 +323,7 @@ public void Or_Using_DataSets_Directly()
 	* `Ip` - Gets a random IP address.
 	* `Ipv6` - Generates a random IPv6 address.
 	* `UserAgent` - Generates a random user agent.
-	* `Mac` - Gets a random mac address
+	* `Mac` - Gets a random mac address.
 	* `Password` - Generates a random password.
 	* `Color` - Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
 	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
@@ -342,11 +342,11 @@ public void Or_Using_DataSets_Directly()
 	* `Lines` - Get lines of lorem
 * **`Name`**
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it.
-	* `LastName` - Get a first name. Getting a gender specific name is only supported on locales that support it.
+	* `LastName` - Get a last name. Getting a gender specific name is only supported on locales that support it.
 	* `FullName` - Get a full name, concatenation of calling FirstName and LastName.
-	* `Prefix` - Gets a random prefix for a name
-	* `Suffix` - Gets a random suffix for a name
-	* `FindName` - Gets a full name
+	* `Prefix` - Gets a random prefix for a name.
+	* `Suffix` - Gets a random suffix for a name.
+	* `FindName` - Gets a full name.
 	* `JobTitle` - Gets a random job title.
 	* `JobDescriptor` - Get a job description.
 	* `JobArea` - Get a job area expertise.
@@ -358,16 +358,16 @@ public void Or_Using_DataSets_Directly()
 	* `Review` - Generates a random user review.
 	* `Reviews` - Generate an array of random reviews.
 * **`System`**
-	* `FileName` - Get a random file name
-	* `DirectoryPath` - Get a random directory path (Unix)
-	* `FilePath` - Get a random file path (Unix)
+	* `FileName` - Get a random file name.
+	* `DirectoryPath` - Get a random directory path (Unix).
+	* `FilePath` - Get a random file path (Unix).
 	* `MimeType` - Get a random mime type
-	* `CommonFileType` - Returns a commonly used file type
-	* `CommonFileExt` - Returns a commonly used file extension
-	* `FileType` - Returns any file type available as mime-type
+	* `CommonFileType` - Returns a commonly used file type.
+	* `CommonFileExt` - Returns a commonly used file extension.
+	* `FileType` - Returns any file type available as mime-type.
 	* `FileExt` - Gets a random extension for the given mime type.
 	* `Semver` - Get a random semver version string.
-	* `Version` - Get a random `System.Version`
+	* `Version` - Get a random `System.Version`.
 	* `Exception` - Get a random `Exception` with a fake stack trace.
 
 #### API Extension Methods

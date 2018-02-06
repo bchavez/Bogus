@@ -49,7 +49,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get random product categories
+      /// Get random product categories.
       /// </summary>
       public string[] Categories(int num)
       {

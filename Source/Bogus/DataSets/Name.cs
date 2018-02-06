@@ -55,7 +55,7 @@
       }
 
       /// <summary>
-      /// Get a first name. Getting a gender specific name is only supported on locales that support it.
+      /// Get a last name. Getting a gender specific name is only supported on locales that support it.
       /// </summary>
       /// <param name="gender">For locale's that support Gender naming.</param>
       public string LastName(Gender? gender = null)
@@ -84,7 +84,7 @@
       }
 
       /// <summary>
-      /// Gets a random prefix for a name
+      /// Gets a random prefix for a name.
       /// </summary>
       public string Prefix(Gender? gender = null)
       {
@@ -101,7 +101,7 @@
       }
 
       /// <summary>
-      /// Gets a random suffix for a name
+      /// Gets a random suffix for a name.
       /// </summary>
       public string Suffix()
       {
@@ -109,7 +109,7 @@
       }
 
       /// <summary>
-      /// Gets a full name
+      /// Gets a full name.
       /// </summary>
       /// <param name="firstName">Use this first name.</param>
       /// <param name="lastName">use this last name.</param>

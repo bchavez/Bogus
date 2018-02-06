@@ -295,7 +295,7 @@ namespace Bogus.DataSets
          };
 
       /// <summary>
-      /// Generates a random bitcoin address
+      /// Generates a random Bitcoin address.
       /// </summary>
       public string BitcoinAddress()
       {
@@ -309,7 +309,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Generate a random ethereum address
+      /// Generate a random Ethereum address.
       /// </summary>
       public string EthereumAddress()
       {

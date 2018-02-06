@@ -13,7 +13,7 @@ namespace Bogus.DataSets
       protected Name Name;
 
       /// <summary>
-      /// Default constructor
+      /// Default constructor.
       /// </summary>
       /// <param name="locale"></param>
       public Address(string locale = "en") : base(locale)
@@ -79,7 +79,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a building number
+      /// Get a building number.
       /// </summary>
       /// <returns></returns>
       public string BuildingNumber()

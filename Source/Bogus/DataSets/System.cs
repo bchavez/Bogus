@@ -54,7 +54,7 @@ namespace Bogus.DataSets
       private string[] mimeKeys;
 
       /// <summary>
-      /// Get a random file name
+      /// Get a random file name.
       /// </summary>
       public string FileName(string ext = null)
       {
@@ -69,7 +69,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random directory path (Unix)
+      /// Get a random directory path (Unix).
       /// </summary>
       public string DirectoryPath()
       {
@@ -77,7 +77,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random file path (Unix)
+      /// Get a random file path (Unix).
       /// </summary>
       public string FilePath()
       {
@@ -107,7 +107,7 @@ namespace Bogus.DataSets
 
 
       /// <summary>
-      /// Returns a commonly used file type
+      /// Returns a commonly used file type.
       /// </summary>
       public string CommonFileType()
       {
@@ -117,7 +117,7 @@ namespace Bogus.DataSets
 
 
       /// <summary>
-      /// Returns a commonly used file extension
+      /// Returns a commonly used file extension.
       /// </summary>
       /// <returns></returns>
       public string CommonFileExt()
@@ -140,7 +140,7 @@ namespace Bogus.DataSets
 
 
       /// <summary>
-      /// Returns any file type available as mime-type
+      /// Returns any file type available as mime-type.
       /// </summary>
       public string FileType()
       {
@@ -173,7 +173,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random `System.Version`
+      /// Get a random `System.Version`.
       /// </summary>
       public Version Version()
       {

@@ -51,7 +51,7 @@ namespace Bogus.DataSets
 
 
       /// <summary>
-      /// Generates an example email with @example.com
+      /// Generates an example email with @example.com.
       /// </summary>
       /// <param name="firstName">Optional: first name of the user</param>
       /// <param name="lastName">Optional: last name of the user</param>
@@ -153,7 +153,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Gets a random mac address
+      /// Gets a random mac address.
       /// </summary>
       public string Mac(string separator = ":")
       {

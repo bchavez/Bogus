@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Bogus.Platform
 {
-   internal static class ExtensionsForType
+   public static class ExtensionsForType
    {
       public static T GetCustomAttributeX<T>(this Type type) where T : Attribute
       {

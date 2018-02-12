@@ -104,7 +104,7 @@ namespace Bogus
             };
       }
 
-      protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
+      protected SeedNotifier Notifier = new SeedNotifier();
 
       private Randomizer randomizer;
 

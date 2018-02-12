@@ -30,7 +30,7 @@ namespace Bogus
          this.Category = ResolveCategory(this.GetType());
       }
 
-      protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
+      protected SeedNotifier Notifier = new SeedNotifier();
 
       private Randomizer randomizer;
 
@@ -61,7 +61,7 @@ namespace Bogus
       /// Returns a BSON value given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">path/key in the category</param>
-      protected internal BValue Get(string path)
+      protected internal virtual BValue Get(string path)
       {
          return Database.Get(this.Category, path, this.Locale);
       }
@@ -69,7 +69,7 @@ namespace Bogus
       /// <summary>
       /// Determines if a key exists in the locale.
       /// </summary>
-      protected bool HasKey(string path, bool includeFallback = true)
+      protected internal virtual bool HasKey(string path, bool includeFallback = true)
       {
          if( includeFallback )
             return Database.HasKey(this.Category, path, this.Locale);
@@ -82,7 +82,7 @@ namespace Bogus
       /// </summary>
       /// <param name="path">key in the category</param>
       /// <returns></returns>
-      protected internal BArray GetArray(string path)
+      protected internal virtual BArray GetArray(string path)
       {
          return (BArray)Get(path);
       }
@@ -91,7 +91,7 @@ namespace Bogus
       /// Returns a BSON object given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">path/key in the category</param>
-      protected internal BObject GetObject(string path)
+      protected internal virtual BObject GetObject(string path)
       {
          return (BObject)Get(path);
       }
@@ -100,7 +100,7 @@ namespace Bogus
       /// Picks a random string inside a BSON array. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>
-      protected internal string GetRandomArrayItem(string path, int? min = null, int? max = null)
+      protected internal virtual string GetRandomArrayItem(string path, int? min = null, int? max = null)
       {
          var arr = GetArray(path);
          if( !arr.HasValues ) return string.Empty;
@@ -110,7 +110,7 @@ namespace Bogus
       /// <summary>
       /// Picks a random BObject inside an array.
       /// </summary>
-      protected internal BObject GetRandomBObject(string path)
+      protected internal virtual BObject GetRandomBObject(string path)
       {
          var arr = GetArray(path);
          if( !arr.HasValues ) return null;
@@ -121,7 +121,7 @@ namespace Bogus
       /// Picks a random string inside a BSON array, then formats it. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>
-      protected internal string GetFormattedValue(string path)
+      protected internal virtual string GetFormattedValue(string path)
       {
          var value = GetRandomArrayItem(path);
 

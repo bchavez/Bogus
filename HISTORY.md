@@ -1,5 +1,6 @@
 ## v22.0.3 
 * Generate more realistic Bitcoin addresses.
+* New extension method `Faker<T>.GenerateBetween(min, max)` that generates N objects between `min` and `max`. Located in `Bogus.Extensions`. N should be considered non-deterministic but technically depends on the parameters each time this extension method was called. 
 
 ## v22.0.2
 * Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.

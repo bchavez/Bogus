@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Bogus.Extensions;
 using Bogus.Tests.Models;
 using FluentAssertions;
 using Xunit;
@@ -48,6 +49,19 @@ namespace Bogus.Tests.GitHubIssues
 
          var fakes = faker.Generate(1, 10);
          fakes.Count.Should().BeGreaterOrEqualTo(1).And.BeLessOrEqualTo(10);
+         console.Dump(fakes.Count);
+      }
+
+      [Fact]
+      public void can_generate_random_amount_with_builtin_generate_between_extension_method()
+      {
+         var faker = new Faker<Order>()
+            .RuleFor(x => x.Item, f => f.Commerce.Product())
+            .RuleFor(x => x.Quantity, f => f.Random.Number(1, 10))
+            .RuleFor(x => x.OrderId, f => f.UniqueIndex);
+
+         var fakes = faker.GenerateBetween(2, 10);
+         fakes.Count.Should().BeGreaterOrEqualTo(2).And.BeLessOrEqualTo(10);
          console.Dump(fakes.Count);
       }
    }

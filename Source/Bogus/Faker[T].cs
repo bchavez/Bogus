@@ -8,10 +8,22 @@ using System.Text;
 namespace Bogus
 {
    /// <summary>
+   /// Hidden API implemented explicitly on <see cref="Faker{T}"/> that, when casted explicitly to <see cref="IFakerTInternal"/>, 
+   /// reveals some internal protected internal objects of <see cref="Faker{T}"/> without needing to derive
+   /// from <see cref="Faker{T}"/>. Useful for extensions methods that need access to <see cref="Faker"/>, <see cref="IBinder"/> and <see cref="LocalSeed"/>.
+   /// </summary>
+   public interface IFakerTInternal
+   {
+      Faker FakerHub { get; }
+      IBinder Binder { get; }
+      int? LocalSeed { get; }
+   }
+
+   /// <summary>
    /// Generates fake objects of T.
    /// </summary>
    /// <typeparam name="T">The object to fake.</typeparam>
-   public class Faker<T> : ILocaleAware, IRuleSet<T> where T : class
+   public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : class
    {
 #pragma warning disable 1591
       protected const string Default = "default";
@@ -30,6 +42,12 @@ namespace Bogus
       protected internal string currentRuleSet = Default;
       protected internal int? localSeed; // if null, the global Randomizer.Seed is used.
 #pragma warning restore 1591
+
+      Faker IFakerTInternal.FakerHub => this.FakerHub;
+
+      IBinder IFakerTInternal.Binder => this.binder;
+
+      int? IFakerTInternal.LocalSeed => this.localSeed;
 
       /// <summary>
       /// Clones the internal state of a Faker[T] into a new Faker[T] so that
@@ -347,7 +365,6 @@ namespace Bogus
       /// <summary>
       /// Generates a fake object of T.
       /// </summary>
-      /// <returns></returns>
       public virtual T Generate(string ruleSets = null)
       {
          Func<Faker, T> createRule = null;

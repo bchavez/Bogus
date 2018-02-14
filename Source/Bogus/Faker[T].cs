@@ -8,15 +8,31 @@ using System.Text;
 namespace Bogus
 {
    /// <summary>
-   /// Hidden API implemented explicitly on <see cref="Faker{T}"/> that, when casted explicitly to <see cref="IFakerTInternal"/>, 
-   /// reveals some internal protected internal objects of <see cref="Faker{T}"/> without needing to derive
-   /// from <see cref="Faker{T}"/>. Useful for extensions methods that need access to <see cref="Faker"/>, <see cref="IBinder"/> and <see cref="LocalSeed"/>.
+   /// Hidden API implemented explicitly on <see cref="Faker{T}"/>. When <see cref="Faker{T}"/> is casted explicitly to <see cref="IFakerTInternal"/>, 
+   /// the cast reveals some protected internal objects of <see cref="Faker{T}"/> without needing to derive
+   /// from <see cref="Faker{T}"/>. This is useful for extensions methods that need access internal variables of <see cref="Faker{T}"/> like <see cref="Faker"/>, <see cref="IBinder"/>, <see cref="LocalSeed"/>, and type of T.
    /// </summary>
    public interface IFakerTInternal
    {
+      /// <summary>
+      /// The internal FakerHub object that is used in f => f rules. Usually used to gain access to a source of randomness by extension methods.
+      /// </summary>
       Faker FakerHub { get; }
+
+      /// <summary>
+      /// The field/property binder used by <see cref="Faker{T}"/>.
+      /// </summary>
       IBinder Binder { get; }
+
+      /// <summary>
+      /// The local seed of <see cref="Faker{T}"/> if available. Null local seed means the Global <see cref="Randomizer.Seed"/> property is being used.
+      /// </summary>
       int? LocalSeed { get; }
+
+      /// <summary>
+      /// The type of T in <see cref="Faker{T}"/>.
+      /// </summary>
+      Type TypeOfT { get; }
    }
 
    /// <summary>
@@ -48,6 +64,8 @@ namespace Bogus
       IBinder IFakerTInternal.Binder => this.binder;
 
       int? IFakerTInternal.LocalSeed => this.localSeed;
+
+      Type IFakerTInternal.TypeOfT => typeof(T);
 
       /// <summary>
       /// Clones the internal state of a Faker[T] into a new Faker[T] so that

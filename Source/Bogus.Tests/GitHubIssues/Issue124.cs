@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -19,14 +21,83 @@ namespace Bogus.Tests.GitHubIssues
          var faker = new Faker<Person>()
             .RuleFor(p => p.Guid, f => f.Random.NullableUuid())
             .RuleFor(p => p.Name, f => f.Person.FullName);
+
+         var fakes = faker.Generate(10);
+
+         fakes.Should()
+            .Contain(p => p.Guid == null)
+            .And
+            .Contain(p => p.Guid != null);
       }
 
       [Fact]
-      public void test_nullable2()
+      public void test_nullable_struct()
       {
          var faker = new Faker<Person>()
             .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull())
             .RuleFor(p => p.Name, f => f.Person.FullName);
+
+         var fakes = faker.Generate(10);
+
+         console.Dump(fakes);
+
+         fakes.Should()
+            .Contain(p => p.Guid == null)
+            .And
+            .Contain(p => p.Guid != null);
+      }
+
+      [Fact]
+      public void test_null_reference_type()
+      {
+         var faker = new Faker<Foo>()
+            .RuleFor(x => x.Id, f => f.Random.Uuid())
+            .RuleFor(x => x.Bar, f => new object().OrNull());
+
+         var fakes = faker.Generate(10);
+
+         console.Dump(fakes);
+
+         fakes.Should()
+            .Contain(f => f.Bar == null)
+            .And
+            .Contain(f => f.Bar != null);
+      }
+
+      [Fact]
+      public void test_null_reference_type_between_fakers()
+      {
+         var personFaker = new Faker<Person>()
+            .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull())
+            .RuleFor(p => p.Name, f => f.Person.FullName);
+
+         var barFaker = new Faker<Bar>()
+            .RuleFor(x => x.Id, f => f.Random.Uuid())
+            .RuleFor(x => x.Person, f => personFaker.Generate().OrNull() );
+
+         var fakes = barFaker.Generate(20);
+         console.Dump(fakes);
+
+         fakes.Should()
+            .Contain(f => f.Person == null)
+            .And
+            .Contain(f => f.Person != null)
+            .And
+            .Contain(f => f.Person != null && f.Person.Guid == null)
+            .And
+            .Contain(f => f.Person != null && f.Person.Guid != null);
+      }
+
+      public class Foo
+      {
+         public Guid Id { get; set; }
+         public object Bar { get; set; }
+      }
+
+      public class Bar
+      {
+         public Guid Id { get; set; }
+         public Person Person { get; set; }
       }
    }
 
@@ -38,16 +109,9 @@ namespace Bogus.Tests.GitHubIssues
 
    public static class ObjectExtensions
    {
-      public static T? OrNull<T>(this T? value)
-         where T : struct
+      public static object OrNull(this object value)
       {
          return value.GetHashCode() % 2 == 0 ? value : null;
-      }
-
-      public static T? OrNull<T>(this T value)
-         where T : struct
-      {
-         return value.GetHashCode() % 2 == 0 ? (T?)value : null;
       }
 
       public static Guid? NullableUuid(this Randomizer r)
@@ -55,6 +119,4 @@ namespace Bogus.Tests.GitHubIssues
          return r.Bool() ? r.Uuid() : (Guid?)null;
       }
    }
-
-
 }

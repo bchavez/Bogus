@@ -34,7 +34,7 @@ namespace Bogus.Tests.GitHubIssues
       public void test_nullable_struct()
       {
          var faker = new Faker<Person>()
-            .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull())
+            .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull(f))
             .RuleFor(p => p.Name, f => f.Person.FullName);
 
          var fakes = faker.Generate(10);
@@ -52,7 +52,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          var faker = new Faker<Foo>()
             .RuleFor(x => x.Id, f => f.Random.Uuid())
-            .RuleFor(x => x.Bar, f => new object().OrNull());
+            .RuleFor(x => x.Bar, f => new object().OrNull(f));
 
          var fakes = faker.Generate(10);
 
@@ -68,12 +68,12 @@ namespace Bogus.Tests.GitHubIssues
       public void test_null_reference_type_between_fakers()
       {
          var personFaker = new Faker<Person>()
-            .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull())
+            .RuleFor(p => p.Guid, f => f.Random.Uuid().OrNull(f))
             .RuleFor(p => p.Name, f => f.Person.FullName);
 
          var barFaker = new Faker<Bar>()
             .RuleFor(x => x.Id, f => f.Random.Uuid())
-            .RuleFor(x => x.Person, f => personFaker.Generate().OrNull() );
+            .RuleFor(x => x.Person, f => personFaker.Generate().OrNull(f) );
 
          var fakes = barFaker.Generate(20);
          console.Dump(fakes);
@@ -86,6 +86,35 @@ namespace Bogus.Tests.GitHubIssues
             .Contain(f => f.Person != null && f.Person.Guid == null)
             .And
             .Contain(f => f.Person != null && f.Person.Guid != null);
+      }
+
+      [Fact]
+      public void test_deterministic_ornull()
+      {
+         var faker = new Faker<Foo>()
+            .RuleFor(x => x.Id, f => f.Random.Uuid())
+            .RuleFor(x => x.Bar, f => new object().OrNull(f));
+
+         var fakes = faker.Generate(10);
+
+         console.Dump(fakes);
+
+         var bars = fakes.Select(f => f.Bar).ToArray();
+
+         var notNullObjects = bars.Where(b => b != null).ToArray();
+
+         bars.Should()
+            .ContainInOrder(
+               null,
+               notNullObjects[0],
+               notNullObjects[1],
+               null,
+               notNullObjects[2],
+               null,
+               null,
+               notNullObjects[3],
+               notNullObjects[4],
+               null);
       }
 
       public class Foo
@@ -109,9 +138,12 @@ namespace Bogus.Tests.GitHubIssues
 
    public static class ObjectExtensions
    {
-      public static object OrNull(this object value)
+      /// <summary>
+      /// Even cooler trick to make OrNull deterministic by using Faker f.
+      /// </summary>
+      public static object OrNull(this object value, Faker f)
       {
-         return value.GetHashCode() % 2 == 0 ? value : null;
+         return f.Random.Bool() ? value : null;
       }
 
       public static Guid? NullableUuid(this Randomizer r)

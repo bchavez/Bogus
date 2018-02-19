@@ -31,7 +31,7 @@ namespace Bogus.Premium
          }
 
          var dataset = factory();
-         var notifier = (f as IHasNotifier).GetNotifier();
+         var notifier = (f as IHasRandomizer).GetNotifier();
          notifier.Flow(dataset);
 
          context[key] = dataset;

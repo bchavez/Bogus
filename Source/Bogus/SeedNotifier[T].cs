@@ -15,6 +15,11 @@ namespace Bogus
       /// via <see cref="SeedNotifier.Notify"/>. 
       /// </summary>
       Randomizer Random { set; }
+
+      /// <summary>
+      /// Retrieves the internal notifier registry for this object.
+      /// </summary>
+      SeedNotifier GetNotifier();
    }
 
    /// <summary>
@@ -49,16 +54,5 @@ namespace Bogus
             item.Random = r;
          }
       }
-   }
-
-   /// <summary>
-   /// Objects that have a Notifier must specify this interface
-   /// </summary>
-   public interface IHasNotifier
-   {
-      /// <summary>
-      /// Retrieves the internal notifier registry for this object.
-      /// </summary>
-      SeedNotifier GetNotifier();
    }
 }

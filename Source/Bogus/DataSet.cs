@@ -30,6 +30,9 @@ namespace Bogus
          this.Category = ResolveCategory(this.GetType());
       }
 
+      /// <summary>
+      /// See <see cref="SeedNotifier"/>
+      /// </summary>
       protected SeedNotifier Notifier = new SeedNotifier();
 
       private Randomizer randomizer;
@@ -45,6 +48,11 @@ namespace Bogus
             this.randomizer = value;
             this.Notifier.Notify(value);
          }
+      }
+
+      SeedNotifier IHasRandomizer.GetNotifier()
+      {
+         return this.Notifier;
       }
 
       /// <summary>

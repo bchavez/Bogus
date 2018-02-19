@@ -9,7 +9,7 @@ namespace Bogus
    /// <summary>
    /// A hub of all the categories merged into a single class to ease fluent syntax API.
    /// </summary>
-   public class Faker : ILocaleAware, IHasNotifier, IHasContext
+   public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    {
       /// <summary>
       /// The default mode to use when generating objects. Strict mode ensures that all properties have rules.
@@ -42,19 +42,17 @@ namespace Bogus
          this.Hashids = new Hashids();
       }
 
+      Dictionary<string, object> IHasContext.Context { get; } = new Dictionary<string, object>();
+
       /// <summary>
       /// See <see cref="SeedNotifier"/>
       /// </summary>
       protected SeedNotifier Notifier = new SeedNotifier();
 
-      SeedNotifier IHasNotifier.GetNotifier()
+      SeedNotifier IHasRandomizer.GetNotifier()
       {
-         return Notifier;
+         return this.Notifier;
       }
-
-      Dictionary<string, object> IHasContext.Context { get; } = new Dictionary<string, object>();
-
-
 
       private Randomizer randomizer;
 

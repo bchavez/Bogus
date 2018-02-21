@@ -5,7 +5,8 @@
 * Added improved XML doc comments and parameter names on `Lorem.Paragraph`.
 * UK extension method `.ShortCode()` renamed to `.SortCode()` as originally intended.
 * Marked `DataSet.Get/.GetObject/BObject` methods as `protected internal`. Reducing API surface noise.
-* Added new `.OrNull` in `Bogus.Extensions` to help create randomly null values. Example: `.RuleFor(x=>x.Prop, f=>f.Random.Word().OrNull(f))`
+* Added new `.OrNull` in `Bogus.Extensions` to help create randomly null values. Example: `.RuleFor(x=>x.Prop, f=>f.Random.Word().OrNull(f))`.
+* New groundwork for extending Bogus with premium (paid) data sets and tooling.
 
 ## v22.0.2
 * Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.

@@ -1,4 +1,7 @@
-using System;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+using System.Reflection;
+using Bogus.Bson;
 
 namespace Bogus.Premium
 {
@@ -7,41 +10,46 @@ namespace Bogus.Premium
    /// </summary>
    public abstract class PremiumDataSet : DataSet
    {
-      public override string GetRandomArrayItem(string path, int? min = null, int? max = null)
+      public override BValue Get(string path)
       {
          CheckLicense();
-         return base.GetRandomArrayItem(path, min, max);
+         return base.Get(path);
       }
 
-      /// <summary>
-      /// Called to check the license state
-      /// </summary>
-      protected abstract void CheckLicense();
-   }
-
-   public static class ContextHelper
-   {
-      public static T GetOrSet<T>(string key, Faker f, Func<T> factory) where T : DataSet, new()
+      protected override bool HasKey(string path, bool includeFallback = true)
       {
-         var context = (f as IHasContext).Context;
+         CheckLicense();
+         return base.HasKey(path, includeFallback);
+      }
 
-         if( context.TryGetValue(key, out var t) )
+      protected virtual void CheckLicense()
+      {
+         if( !string.IsNullOrWhiteSpace(License.LicenseTo) &&
+             !string.IsNullOrWhiteSpace(License.LicenseKey) &&
+             LicenseVerifier.VerifyLicense(License.LicenseTo, License.LicenseKey) )
          {
-            return t as T;
+            this.Initialize();
+            return;
          }
 
-         var dataset = factory();
-         var notifier = (f as IHasRandomizer).GetNotifier();
-         notifier.Flow(dataset);
-
-         context[key] = dataset;
-         return dataset;
+         throw new BogusException(
+            "A premium license is required to use this API. " +
+            "The premium license for extended datasets is invalid. " +
+            $"Please double check that {nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseTo)} and {nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseKey)} are correct and complete.");
       }
 
-      public static T GetOrSet<T>(Faker f, Func<T> factory) where T : DataSet, new()
+      protected abstract void Initialize();
+
+      protected void LoadResource(Assembly asm, string resourceName)
       {
-         var key = typeof(T).Name.ToLower();
-         return GetOrSet($"__{key}", f, factory);
+         var obj = ResourceHelper.ReadBObjectResource(asm, resourceName);
+         //patch
+         var enLocale = Database.GetLocale("en");
+
+         foreach( var val in obj.Keys )
+         {
+            enLocale[val] = obj[val];
+         }
       }
    }
 }

@@ -1,14 +1,19 @@
+using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 using Z.ExtensionMethods;
 
 namespace Bogus.Tests.DataSetTests
 {
    public class LoremTests : SeededTest
    {
-      public LoremTests()
+      private readonly ITestOutputHelper console;
+
+      public LoremTests(ITestOutputHelper console)
       {
+         this.console = console;
          lorem = new Lorem();
       }
 
@@ -56,6 +61,18 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void paragrah_with_zero_setnaces()
+      {
+         var text = lorem.Paragraph(0);
+
+         text.Count(c => c == '.')
+            .Should()
+            .BeGreaterOrEqualTo(0)
+            .And
+            .BeLessOrEqualTo(3);
+      }
+
+      [Fact]
       public void can_get_a_random_word()
       {
          lorem.Word().Should().Be("id");
@@ -86,6 +103,32 @@ namespace Bogus.Tests.DataSetTests
       {
          lorem.Paragraphs()
             .Split("\n\n").Length.Should().Be(3);
+      }
+
+      [Fact]
+      public void can_get_random_number_of_paragraphs()
+      {
+         var text = lorem.Paragraphs(5, 7);
+
+         console.Dump(text);
+
+         text.Split("\n\n")
+            .Length.Should()
+            .BeGreaterOrEqualTo(5)
+            .And
+            .BeLessOrEqualTo(7);
+      }
+
+      [Fact]
+      public void check_sperator_works()
+      {
+         var text = lorem.Paragraphs(5, 7, "<br/>");
+
+         text.Split("<br/>").Length
+            .Should()
+            .BeGreaterOrEqualTo(5)
+            .And
+            .BeLessOrEqualTo(7);
       }
 
       [Fact]

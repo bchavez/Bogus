@@ -28,7 +28,6 @@ namespace Bogus.DataSets
       /// Get some lorem words
       /// </summary>
       /// <param name="num"></param>
-      /// <returns></returns>
       public string[] Words(int num = 3)
       {
          return Enumerable.Range(1, num).Select(f => Word()).ToArray(); // lol
@@ -38,7 +37,6 @@ namespace Bogus.DataSets
       /// Get a character letter.
       /// </summary>
       /// <param name="num">Number of characters to return.</param>
-      /// <returns></returns>
       public string Letter(int num = 1)
       {
          if( num <= 0 )
@@ -67,20 +65,9 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Slugify lorem words.
-      /// </summary>
-      /// <param name="wordcount"></param>
-      public string Slug(int wordcount = 3)
-      {
-         var words = Words(wordcount);
-         return Utils.Slugify(string.Join(" ", words));
-      }
-
-      /// <summary>
       /// Get some sentences.
       /// </summary>
       /// <param name="sentenceCount">The number of sentences</param>
-      /// <returns></returns>
       public string Sentences(int? sentenceCount = null, string separator = "\n")
       {
          var sc = sentenceCount ?? this.Random.Number(2, 6);
@@ -93,24 +80,35 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a paragraph.
       /// </summary>
-      /// <param name="count">The number of paragraphs</param>
-      /// <returns></returns>
-      public string Paragraph(int count = 3)
+      /// <param name="min">The minimum number of sentences in the paragraph.
+      /// The final number of sentences returned in the paragraph is bound between [min, min + 3], inclusive.
+      /// If you want an exact number of sentences, use the <seealso cref="Sentences"/> method.</param>
+      public string Paragraph(int min = 3)
       {
-         return Sentences(count + Random.Number(3), " ");
+         return Sentences(min + Random.Number(3), " ");
       }
 
       /// <summary>
-      /// Get some paragraphs with tabs n all.
+      /// Get a specified number of paragraphs.
       /// </summary>
-      /// <param name="count"></param>
-      /// <returns></returns>
+      /// <param name="count">Number of paragraphs</param>
       public string Paragraphs(int count = 3, string separator = "\n\n")
       {
          var paras = Enumerable.Range(1, count)
             .Select(i => Paragraph());
 
          return string.Join(separator, paras);
+      }
+
+      /// <summary>
+      /// Get a random number of paragraphs between <paramref name="min"/> and <paramref name="max"/>.
+      /// </summary>
+      /// <param name="min">Minimum number of paragraphs</param>
+      /// <param name="max">Maximum number of paragraphs</param>
+      public string Paragraphs(int min, int max, string separator = "\n\n")
+      {
+         var n = this.Random.Number(min, max);
+         return Paragraphs(n, separator);
       }
 
       /// <summary>
@@ -125,7 +123,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get lines of lorem
+      /// Get lines of lorem.
       /// </summary>
       /// <returns></returns>
       public string Lines(int? lineCount = null, string seperator = "\n")
@@ -133,6 +131,16 @@ namespace Bogus.DataSets
          var lc = lineCount ?? this.Random.Number(1, 5);
 
          return Sentences(lc, seperator);
+      }
+
+      /// <summary>
+      /// Slugify lorem words.
+      /// </summary>
+      /// <param name="wordcount"></param>
+      public string Slug(int wordcount = 3)
+      {
+         var words = Words(wordcount);
+         return Utils.Slugify(string.Join(" ", words));
       }
    }
 }

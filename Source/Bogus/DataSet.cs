@@ -61,7 +61,7 @@ namespace Bogus
       /// Returns a BSON value given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">path/key in the category</param>
-      public BValue Get(string path)
+      protected internal BValue Get(string path)
       {
          return Database.Get(this.Category, path, this.Locale);
       }
@@ -82,7 +82,7 @@ namespace Bogus
       /// </summary>
       /// <param name="path">key in the category</param>
       /// <returns></returns>
-      public BArray GetArray(string path)
+      protected internal BArray GetArray(string path)
       {
          return (BArray)Get(path);
       }
@@ -91,7 +91,7 @@ namespace Bogus
       /// Returns a BSON object given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">path/key in the category</param>
-      public BObject GetObject(string path)
+      protected internal BObject GetObject(string path)
       {
          return (BObject)Get(path);
       }
@@ -100,7 +100,7 @@ namespace Bogus
       /// Picks a random string inside a BSON array. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>
-      public string GetRandomArrayItem(string path, int? min = null, int? max = null)
+      protected internal string GetRandomArrayItem(string path, int? min = null, int? max = null)
       {
          var arr = GetArray(path);
          if( !arr.HasValues ) return string.Empty;
@@ -110,7 +110,7 @@ namespace Bogus
       /// <summary>
       /// Picks a random BObject inside an array.
       /// </summary>
-      public BObject GetRandomBObject(string path)
+      protected internal BObject GetRandomBObject(string path)
       {
          var arr = GetArray(path);
          if( !arr.HasValues ) return null;
@@ -121,7 +121,7 @@ namespace Bogus
       /// Picks a random string inside a BSON array, then formats it. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>
-      protected string GetFormattedValue(string path)
+      protected internal string GetFormattedValue(string path)
       {
          var value = GetRandomArrayItem(path);
 

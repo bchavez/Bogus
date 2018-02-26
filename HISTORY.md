@@ -3,6 +3,7 @@
 * New extension method `Faker<T>.GenerateBetween(min, max)` that generates N objects between `min` and `max`. Located in `Bogus.Extensions`. N should be considered non-deterministic but technically depends on the parameters each time this extension method was called. 
 * Added `Lorem.Paragraphs(min, max)` overload.
 * Added improved XML doc comments and parameter names on `Lorem.Paragraph`.
+* Marked `DataSet.Get/.GetObject/BObject` methods as `protected internal`. Reducing API surface noise.
 
 ## v22.0.2
 * Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.

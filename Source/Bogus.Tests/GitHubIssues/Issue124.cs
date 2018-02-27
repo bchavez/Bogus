@@ -3,6 +3,7 @@ using System.Linq;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using Bogus.Extensions;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -138,14 +139,6 @@ namespace Bogus.Tests.GitHubIssues
 
    public static class ObjectExtensions
    {
-      /// <summary>
-      /// Even cooler trick to make OrNull deterministic by using Faker f.
-      /// </summary>
-      public static object OrNull(this object value, Faker f)
-      {
-         return f.Random.Bool() ? value : null;
-      }
-
       public static Guid? NullableUuid(this Randomizer r)
       {
          return r.Bool() ? r.Uuid() : (Guid?)null;

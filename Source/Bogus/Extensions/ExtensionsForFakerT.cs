@@ -21,5 +21,14 @@ namespace Bogus.Extensions
          var n = r.Number(min, max);
          return faker.Generate(n, ruleSets);
       }
+
+      /// <summary>
+      /// Helpful extension for creating randomly null values for <seealso cref="Faker{T}"/>.RuleFor() rules.
+      /// Example: .RuleFor(x=>x.Prop, f=>f.Random.Word().OrNull(f))
+      /// </summary>
+      public static object OrNull(this object value, Faker f)
+      {
+         return f.Random.Bool() ? value : null;
+      }
    }
 }

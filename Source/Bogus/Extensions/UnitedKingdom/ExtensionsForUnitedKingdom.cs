@@ -8,9 +8,9 @@ namespace Bogus.Extensions.UnitedKingdom
    public static class ExtensionsForUnitedKingdom
    {
       /// <summary>
-      /// Banking Short Code
+      /// Banking Sort Code
       /// </summary>
-      public static string ShortCode(this Finance finance, bool includeSeperator = true)
+      public static string SortCode(this Finance finance, bool includeSeperator = true)
       {
          const string withSeperators = "##-##-##";
          const string withoutSeperators = "######";

@@ -384,7 +384,7 @@ public void Or_Using_DataSets_Directly()
 	* `Bogus.Person.CodiceFiscale()` - Codice Fiscale
 	* `Bogus.DataSets.Finance.CodiceFiscale()` - Codice Fiscale
 * **`using Bogus.Extensions.UnitedKingdom;`**
-	* `Bogus.DataSets.Finance.ShortCode()` - Banking Short Code
+	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 

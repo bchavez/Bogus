@@ -11,11 +11,11 @@ namespace Bogus.Tests.ExtensionTests
     public class ExtensionTest : SeededTest
     {
         [Fact]
-        public void can_create_shortcode()
+        public void can_create_sortcode()
         {
             var f = new Finance();
-            f.ShortCode().Should().Be("61-86-06");
-            f.ShortCode(false).Should().Be("064391");
+            f.SortCode().Should().Be("61-86-06");
+            f.SortCode(false).Should().Be("064391");
         }
 
         [Fact]

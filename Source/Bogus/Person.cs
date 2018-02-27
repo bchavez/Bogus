@@ -9,11 +9,13 @@ namespace Bogus
    /// <summary>
    /// Uses Faker to generate a person with contextually relevant fields.
    /// </summary>
-   public class Person : IHasRandomizer
+   public class Person : IHasRandomizer, IHasContext
    {
       //context variable to store state from Bogus.Extensions so, they
       //keep returning the result on each person.
       internal Dictionary<string, object> context = new Dictionary<string, object>();
+
+      Dictionary<string, object> IHasContext.Context => this.context;
 
       public class CardAddress
       {
@@ -104,7 +106,7 @@ namespace Bogus
             };
       }
 
-      protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
+      protected SeedNotifier Notifier = new SeedNotifier();
 
       private Randomizer randomizer;
 
@@ -116,6 +118,11 @@ namespace Bogus
             this.randomizer = value;
             this.Notifier.Notify(value);
          }
+      }
+
+      SeedNotifier IHasRandomizer.GetNotifier()
+      {
+         return this.Notifier;
       }
 
       public Name.Gender Gender;

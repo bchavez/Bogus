@@ -9,7 +9,7 @@ namespace Bogus
    /// <summary>
    /// A hub of all the categories merged into a single class to ease fluent syntax API.
    /// </summary>
-   public class Faker : ILocaleAware
+   public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    {
       /// <summary>
       /// The default mode to use when generating objects. Strict mode ensures that all properties have rules.
@@ -22,7 +22,7 @@ namespace Bogus
       public Faker(string locale = "en")
       {
          Locale = locale;
-
+         
          this.Address = this.Notifier.Flow(new Address(locale));
          this.Company = this.Notifier.Flow(new Company(locale));
          this.Date = this.Notifier.Flow(new Date {Locale = locale});
@@ -42,7 +42,17 @@ namespace Bogus
          this.Hashids = new Hashids();
       }
 
-      protected SeedNotifier<DataSet> Notifier = new SeedNotifier<DataSet>();
+      Dictionary<string, object> IHasContext.Context { get; } = new Dictionary<string, object>();
+
+      /// <summary>
+      /// See <see cref="SeedNotifier"/>
+      /// </summary>
+      protected SeedNotifier Notifier = new SeedNotifier();
+
+      SeedNotifier IHasRandomizer.GetNotifier()
+      {
+         return this.Notifier;
+      }
 
       private Randomizer randomizer;
 

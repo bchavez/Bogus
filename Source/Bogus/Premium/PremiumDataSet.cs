@@ -10,13 +10,13 @@ namespace Bogus.Premium
    /// </summary>
    public abstract class PremiumDataSet : DataSet
    {
-      public override BValue Get(string path)
+      protected internal override BValue Get(string path)
       {
          CheckLicense();
          return base.Get(path);
       }
 
-      protected override bool HasKey(string path, bool includeFallback = true)
+      protected internal override bool HasKey(string path, bool includeFallback = true)
       {
          CheckLicense();
          return base.HasKey(path, includeFallback);

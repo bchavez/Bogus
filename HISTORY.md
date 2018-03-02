@@ -1,3 +1,6 @@
+## v22.0.4
+* Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.
+
 ## v22.0.3 
 * Generate more realistic Bitcoin addresses.
 * New extension method `Faker<T>.GenerateBetween(min, max)` that generates N objects between `min` and `max`. Located in `Bogus.Extensions`. N should be considered non-deterministic but technically depends on the parameters each time this extension method was called. 

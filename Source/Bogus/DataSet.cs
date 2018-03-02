@@ -25,6 +25,11 @@ namespace Bogus
       /// <param name="locale"></param>
       public DataSet(string locale = "en")
       {
+         if( !Database.LocaleResourceExists(locale) )
+            throw new BogusException(
+               $"The locale '{locale}' does not exist. To see all available locales visit {AssemblyVersionInformation.AssemblyDescription}."
+               );
+
          this.Locale = locale;
 
          this.Category = ResolveCategory(this.GetType());

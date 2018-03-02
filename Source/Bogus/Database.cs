@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Concurrent;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using Bogus.Bson;
@@ -26,10 +25,37 @@ namespace Bogus
       {
          var asm = typeof(Database).GetAssembly();
 
+         var parts = ResourceNameFormat.Split(new[] {"{0}"}, StringSplitOptions.None);
+
+         var prefix = parts[0];
+         var suffix = parts[1];
+
          return asm.GetManifestResourceNames()
-            .Where(name => name.EndsWith(".locale.bson"))
-            .Select(name => name.Replace("Bogus.data.", "").Replace(".locale.bson", ""))
+            .Where(name => name.EndsWith(suffix))
+            .Select(name => name.Replace(prefix, "").Replace(suffix, ""))
             .ToArray();
+      }
+
+      /// <summary>
+      /// Checks if a locale exists in Bogus.
+      /// </summary>
+      public static bool LocaleResourceExists(string locale)
+      {
+         var asm = typeof(Database).GetAssembly();
+
+         var resourceName = GetLocaleResourceName(locale);
+
+         return ResourceHelper.ResourceExists(asm, resourceName);
+      }
+
+      /// <summary>
+      /// Format of locale resource names.
+      /// </summary>
+      public const string ResourceNameFormat = "Bogus.data.{0}.locale.bson";
+
+      private static string GetLocaleResourceName(string locale)
+      {
+         return string.Format(ResourceNameFormat, locale);
       }
 
       /// <summary>
@@ -46,7 +72,7 @@ namespace Bogus
       internal static BObject DeserializeLocale(string locale)
       {
          var asm = typeof(Database).GetAssembly();
-         var resourceName = $"Bogus.data.{locale}.locale.bson";
+         var resourceName = GetLocaleResourceName(locale);
 
          return ResourceHelper.ReadBObjectResource(asm, resourceName);
       }
@@ -138,54 +164,6 @@ namespace Bogus
             section = section[key];
             if( section is null ) return null;
             current = len + 1;
-         }
-      }
-   }
-
-   /// <summary>
-   /// Helper utility class to read resource manifest streams.
-   /// </summary>
-   public static class ResourceHelper
-   {
-      /// <summary>
-      /// Reads a byte[] resource from an assembly.
-      /// </summary>
-      public static byte[] ReadResource(System.Reflection.Assembly assembly, string resourceName)
-      {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
-
-            return ms.ToArray();
-         }
-      }
-
-      /// <summary>
-      /// Reads a BSON <see cref="BValue"/> resource from an assembly.
-      /// </summary>
-      public static BValue ReadBValueResource(System.Reflection.Assembly assembly, string resourceName)
-      {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
-
-            return Bson.Bson.Load(ms.ToArray());
-         }
-      }
-
-      /// <summary>
-      /// Reads a BSON <see cref="BObject"/> resource from an assembly.
-      /// </summary>
-      public static BObject ReadBObjectResource(System.Reflection.Assembly assembly, string resourceName)
-      {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
-
-            return Bson.Bson.Load(ms.ToArray());
          }
       }
    }

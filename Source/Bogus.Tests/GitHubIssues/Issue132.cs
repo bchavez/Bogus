@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using Bogus.DataSets;
+using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -44,6 +46,124 @@ namespace Bogus.Tests.GitHubIssues
             .And.Message
             .Should().Contain("https://github.com/bchavez/Bogus");
 
+      }
+
+      [Fact]
+      public void fr_locale()
+      {
+         CultureInfo.GetCultureInfo("fr-CA")
+            .ToBogusLocale()
+            .Should().Be("fr_CA");
+
+         CultureInfo.GetCultureInfo("fr-BE")
+            .ToBogusLocale()
+            .Should().Be("fr");
+      }
+
+
+      [Fact]
+      public void nb_NO_locale()
+      {
+         CultureInfo.GetCultureInfo("nn-NO")
+            .ToBogusLocale()
+            .Should().Be("nb_NO");
+
+         CultureInfo.GetCultureInfo("nb-NO")
+            .ToBogusLocale()
+            .Should().Be("nb_NO");
+
+         CultureInfo.GetCultureInfo("no")
+            .ToBogusLocale()
+            .Should().Be("nb_NO");
+
+         CultureInfo.GetCultureInfo("nb")
+            .ToBogusLocale()
+            .Should().Be("nb_NO");
+
+         CultureInfo.GetCultureInfo("nn")
+            .ToBogusLocale()
+            .Should().Be("nb_NO");
+      }
+
+
+      [Fact]
+      public void id_ID_locale()
+      {
+         CultureInfo.GetCultureInfo("id-ID")
+            .ToBogusLocale()
+            .Should().Be("id_ID");
+
+         CultureInfo.GetCultureInfo("id")
+            .ToBogusLocale()
+            .Should().Be("id_ID");
+      }
+
+      [Fact]
+      public void nep_locale()
+      {
+         CultureInfo.GetCultureInfo("ne-NP")
+            .ToBogusLocale()
+            .Should().Be("nep");
+
+         CultureInfo.GetCultureInfo("ne")
+            .ToBogusLocale()
+            .Should().Be("nep");
+      }
+
+      [Fact]
+      public void ge_locale()
+      {
+         CultureInfo.GetCultureInfo("ka-GE")
+            .ToBogusLocale()
+            .Should().Be("ge");
+
+         CultureInfo.GetCultureInfo("ka")
+            .ToBogusLocale()
+            .Should().Be("ge");
+      }
+
+      [Fact]
+      public void ind_locale()
+      {
+         CultureInfo.GetCultureInfo("en-IN")
+            .ToBogusLocale()
+            .Should().Be("en_IND");
+      }
+
+      [Fact]
+      public void cz_locale()
+      {
+         CultureInfo.GetCultureInfo("cs")
+            .ToBogusLocale()
+            .Should().Be("cz");
+
+         CultureInfo.GetCultureInfo("cs-CZ")
+            .ToBogusLocale()
+            .Should().Be("cz");
+      }
+
+      [Fact]
+      public void en_US_locale()
+      {
+         CultureInfo.GetCultureInfo("en-US")
+            .ToBogusLocale()
+            .Should().Be("en_US");
+      }
+
+      [Fact]
+      public void de_locale()
+      {
+         CultureInfo.GetCultureInfo("de-AT")
+            .ToBogusLocale()
+            .Should().Be("de_AT");
+
+         CultureInfo.GetCultureInfo("de-CH")
+            .ToBogusLocale()
+            .Should().Be("de_CH");
+
+         CultureInfo.GetCultureInfo("de-LI")
+            .ToBogusLocale()
+            .Should().Be("de");
       }
    }
 }

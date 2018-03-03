@@ -1,5 +1,6 @@
 ## v22.0.4
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.
+* New extension method `.ToBogusLocale()` on `System.Globalization.CultureInfo` to help translate from **.NET** locale codes to **Bogus** locale codes.
 
 ## v22.0.3 
 * Generate more realistic Bitcoin addresses.

@@ -4,7 +4,7 @@ using System.Globalization;
 namespace Bogus.Extensions
 {
    /// <summary>
-   /// Helper extension that maps .NET <seealso cref="CultureInfo"/> to Bogus locale codes like 'en_US`.
+   /// Extension methods over <seealso cref="CultureInfo"/>.
    /// </summary>
    public static class ExtensionsForCultureInfo
    {
@@ -19,6 +19,9 @@ namespace Bogus.Extensions
             {"nn", "nb_NO"}
          };
 
+      /// <summary>
+      /// Helper extension that maps .NET <seealso cref="CultureInfo"/> to Bogus locale codes like 'en_US`.
+      /// </summary>
       public static string ToBogusLocale(this CultureInfo ci)
       {
          /*

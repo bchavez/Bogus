@@ -325,7 +325,7 @@ public void Or_Using_DataSets_Directly()
 	* `UserAgent` - Generates a random user agent.
 	* `Mac` - Gets a random mac address.
 	* `Password` - Generates a random password.
-	* `Color` - Gets a random aesthetically pleasing color near the base R,G.B. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
+	* `Color` - Gets a random aesthetically pleasing color near the base RGB. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
 	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
 	* `Url` - Generates a random URL.
 	* `UrlWithPath` - Get a random URL with random path.

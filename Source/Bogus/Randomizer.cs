@@ -281,6 +281,31 @@ namespace Bogus
          return arr;
       }
 
+      /// <summary>
+      /// Get a string of characters of a specific length. Uses <seealso cref="Chars"/>.
+      /// </summary>
+      /// <param name="length">The exact length of the result string. If null, a random length is chosen between 40 and 80.</param>
+      /// <param name="minChar">Min character value, default char.MinValue</param>
+      /// <param name="maxChar">Max character value, default char.MaxValue</param>
+      public string String(int? length = null, char minChar = char.MinValue, char maxChar = char.MaxValue)
+      {
+         var l = length ?? this.Number(40, 80);
+
+         return new string(Chars(minChar, maxChar, l));
+      }
+
+      /// <summary>
+      /// Get a string of characters between <paramref name="minLength" /> and <paramref name="maxLength"/>. Uses <seealso cref="Chars"/>.
+      /// </summary>
+      /// <param name="minLength">Lower-bound string length. Inclusive.</param>
+      /// <param name="maxLength">Upper-bound string length. Inclusive.</param>
+      /// <param name="minChar">Min character value, default char.MinValue</param>
+      /// <param name="maxChar">Max character value, default char.MaxValue</param>
+      public string String(int minLength, int maxLength, char minChar = char.MinValue, char maxChar = char.MaxValue)
+      {
+         var length = this.Number(minLength, maxLength);
+         return String(length, minChar, maxChar);
+      }
 
       /// <summary>
       /// Get a random boolean
@@ -594,10 +619,10 @@ namespace Bogus
       /// <summary>
       /// Returns a random set of alpha numeric characters 0-9, a-z
       /// </summary>
-      public string AlphaNumeric(int count)
+      public string AlphaNumeric(int length)
       {
          var sb = new StringBuilder();
-         return Enumerable.Range(1, count).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
+         return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
       }
 
       private static char[] HexChars =

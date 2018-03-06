@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests
 {
    public class RandomizerTest : SeededTest
    {
+      private readonly ITestOutputHelper console;
       private Randomizer r;
 
-      public RandomizerTest()
+      public RandomizerTest(ITestOutputHelper console)
       {
+         this.console = console;
          r = new Randomizer();
       }
 
@@ -244,6 +248,47 @@ namespace Bogus.Tests
             '\ub0d6',
             '\u7a91',
             '\u4d58');
+      }
+
+      [Fact]
+      public void generate_string_range_check()
+      {
+         r.String()
+            .Length.Should()
+            .BeGreaterOrEqualTo(40)
+            .And
+            .BeLessOrEqualTo(80);
+      }
+
+      [Fact]
+      public void generate_string_byte_check()
+      {
+         var x = r.String(3);
+
+         x.Length.Should().Be(3);
+
+         var rawBytes = new byte[]
+            {
+               233,
+               170,
+               128,
+               225,
+               176,
+               151,
+               237,
+               130,
+               137
+            };
+
+         Encoding.UTF8.GetBytes(x)
+            .Should().Equal(rawBytes);
+      }
+
+      [Fact]
+      public void generate_string_AZ()
+      {
+         r.String(minChar: 'A', maxChar: 'Z')
+            .Should().Be("CVQAQBRMHYESPCASXAVVIPPCRZKFPOFICRUEYZGQKYXUWMHOBLCFHCHMFOJRRMXT");
       }
 
       [Fact]

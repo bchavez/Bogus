@@ -1,3 +1,6 @@
+## v22.0.6
+* Added `Randomizer.String` method to generate strings. Uses `Chars()` method.
+
 ## v22.0.5
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.
 * New extension method `.ToBogusLocale()` on `System.Globalization.CultureInfo` to help translate from **.NET** locale codes to **Bogus** locale codes.

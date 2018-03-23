@@ -106,11 +106,13 @@ type Project(name : string, folders : Folders) =
 //Like an Extension Method in C#
 type Project with 
     member this.Zip = sprintf "%s.zip" this.Name
+    member this.MsBuildBin (configName: string) = this.Folder @@ "bin" @@ configName
+    member this.MsBuildBinRelease = this.MsBuildBin "Release"
 
 type TestProject(name : string, folders : Folders) =
     inherit Project(name, folders)
     
-    let testAssembly = base.Folder @@ "bin/Debug/" @@ sprintf "%s.dll" base.Name
+    let testAssembly = base.MsBuildBin("Debug") @@ sprintf "%s.dll" base.Name
     member this.TestAssembly = testAssembly
 
 

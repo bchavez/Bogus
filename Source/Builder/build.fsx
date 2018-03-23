@@ -43,10 +43,14 @@ Target "msb" (fun _ ->
                         "SignAssembly", BuildContext.IsTaggedBuild.ToString()
                      ]
 
+    //DO NOT OVERRIDE THE OutputPath PROPERTY as it is very dangerous
+    //to do so with multi-target builds (net45;netstandard2.0)
     !! BogusProject.ProjectFile
-    |> MSBuildReleaseExt (BogusProject.OutputDirectory @@ tag) buildProps "Build"
+    |> MSBuildReleaseExt null buildProps "Build"
     |> Log "AppBuild-Output: "
 
+    traceFAKE "Copying MS Build outputs..."
+    CopyDir (BogusProject.OutputDirectory @@ tag) BogusProject.MsBuildBinRelease allFiles
 
     !! TestProject.ProjectFile
     |> MSBuild "" "Build" (("Configuration", "Debug")::buildProps)

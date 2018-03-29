@@ -1,5 +1,6 @@
 ## v22.0.6
 * Added `Randomizer.String` method to generate strings. Uses `Chars()` method.
+* PR 136: Improve speed of `DataSet.ParseTokens()`. Thanks @danij!
 
 ## v22.0.5
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.

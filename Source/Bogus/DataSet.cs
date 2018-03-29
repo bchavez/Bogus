@@ -143,14 +143,15 @@ namespace Bogus
          return Random.Replace(tokenResult);
       }
 
+      private static readonly Regex parseTokensRegex = new Regex("\\#{(.*?)\\}", RegexOptions.Compiled);
+
       /// <summary>
       /// Recursive parse the tokens in the string.
       /// </summary>
       /// <param name="value">The value.</param>
       private string ParseTokens(string value)
       {
-         var regex = new Regex("\\#{(.*?)\\}");
-         var cityResult = regex.Replace(value,
+         var cityResult = parseTokensRegex.Replace(value,
             x =>
                {
                   BArray result;

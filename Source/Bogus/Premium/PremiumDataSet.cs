@@ -24,6 +24,17 @@ namespace Bogus.Premium
 
       protected virtual void CheckLicense()
       {
+         if( string.IsNullOrWhiteSpace(License.LicenseTo) ||
+             string.IsNullOrWhiteSpace(License.LicenseKey))
+         {
+            var path = LicenseVerifier.FindLicense();
+            if( path != null )
+            {
+               LicenseVerifier.ReadLicense(path, out var licenseTo, out var licenseKey);
+               License.LicenseTo = licenseTo;
+               License.LicenseKey = licenseKey;
+            }
+         }
          if( !string.IsNullOrWhiteSpace(License.LicenseTo) &&
              !string.IsNullOrWhiteSpace(License.LicenseKey) &&
              LicenseVerifier.VerifyLicense(License.LicenseTo, License.LicenseKey) )
@@ -34,9 +45,14 @@ namespace Bogus.Premium
 
          throw new BogusException(
             "A premium license is required to use this API. " +
-            "The premium license for extended datasets is invalid. " +
-            $"Please double check that {nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseTo)} and {nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseKey)} are correct and complete.");
+            $"Please double check that your '{LicenseVerifier.LicenseFile}' file exists in the same folder as Bogus.dll. " +
+            $"Also, you can add additional probing paths for the license file in {nameof(LicenseVerifier)}.{nameof(LicenseVerifier.ProbePaths)}. " +
+            $"Lastly, you can set the following static properties manually: " +
+            $"{nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseTo)} and " +
+            $"{nameof(Bogus)}.{nameof(License)}.{nameof(License.LicenseKey)}. "+
+            "For more information, please visit: https://github.com/bchavez/Bogus/wiki/Bogus-Premium");
       }
+
 
       protected abstract void Initialize();
 

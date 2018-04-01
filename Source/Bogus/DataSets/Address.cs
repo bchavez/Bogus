@@ -1,7 +1,4 @@
 ﻿using System;
-using Bogus.Extensions;
-using Bogus.Models;
-using static System.Math;
 
 namespace Bogus.DataSets
 {
@@ -222,93 +219,6 @@ namespace Bogus.DataSets
          if( useAbbreviation )
             return GetRandomArrayItem("direction_abbr", min: 4, max: 8);
          return GetRandomArrayItem("direction", min: 4, max: 8);
-      }
-
-      /// <summary>
-      /// Generates a random Geohash. [See](https://en.wikipedia.org/wiki/Geohash).
-      /// </summary>
-      /// <param name="length">By default, includes 7 characters of accuracy.</param>
-      public string Geohash(int length = 7)
-      {
-         return this.Random.String2(length, "0123456789bcdefghjkmnpqrstuvwxyz");
-      }
-
-      /// <summary>
-      /// Generate a random depth, in meters. Default max depth is -10994m (Mariana Trench). Depths are always negative.
-      /// </summary>
-      /// <param name="min">By default, maximum depth is -10994 meters (depth of the Mariana Trench).</param>
-      public double Depth(double min = -10994)
-      {
-         if( min >= 0 ) throw new ArgumentOutOfRangeException(nameof(min), "Depths must be negative.");
-         return this.Random.Double(min, 0);
-      }
-
-      /// <summary>
-      /// Generate a random altitude, in meters. Default max height is 8848m (Mount Everest). Heights are always positive.
-      /// </summary>
-      /// <param name="max"></param>
-      public double Altitude(double max = 8848)
-      {
-         if( max <= 0 ) throw new ArgumentOutOfRangeException(nameof(max), "Heights must be positive.");
-         return this.Random.Double(0, max);
-      }
-
-      /// <summary>
-      /// Get a latitude and longitude within a specific radius in meters.
-      /// </summary>
-      /// <param name="centerLat">The center latitude point</param>
-      /// <param name="centerLon">The center longitude point</param>
-      /// <param name="radiusMeters">Radial distance from center in meters</param>
-      public LatLon GeoAreaCircle(double centerLat, double centerLon, double radiusMeters)
-      {
-         // https://github.com/chrisveness/geodesy/blob/master/latlon-spherical.js
-         // https://www.movable-type.co.uk/scripts/latlong.html
-         //Formula: φ2 = asin(sin φ1 ⋅ cos δ + cos φ1 ⋅ sin δ ⋅ cos θ)
-         //         λ2 = λ1 + atan2(sin θ ⋅ sin δ ⋅ cos φ1, cos δ − sin φ1 ⋅ sin φ2)
-         //
-         // where φ is latitude
-         // where λ is longitude
-         // where θ is the bearing (clockwise from north)
-         // where δ is the angular distance d/R;
-         // where d being the distance traveled
-         // where R the earth’s radius
-         //
-         // (all angles in radians)
-
-         const double TwoPI = 2 * PI;
-
-         const int R = 6371000; // Earth's radius in meters
-
-         var φ1 = centerLat.ToRadians();
-         var λ1 = centerLon.ToRadians();
-
-         // Get a distance shorter than radiusMeters.
-         var d = radiusMeters * this.Random.Double();
-
-         // Get a random bearing between [0, 2pi] radians (0-360°)
-         var brng = this.Random.Double(0, TwoPI);
-
-         var φ2 = Asin(Sin(φ1) * Cos(d / R) +
-                       Cos(φ1) * Sin(d / R) * Cos(brng));
-         var λ2 = λ1 + Atan2(
-                     Sin(brng) * Sin(d / R) * Cos(φ1),
-                     Cos(d / R) - Sin(φ1) * Sin(φ2)
-                  );
-
-         var destLat = φ2.ToDegrees();
-         var destLon = λ2.ToDegrees().NomralizeLongitude();
-
-         return new LatLon { Latitude = destLat, Longitude = destLon};
-      }
-
-      /// <summary>
-      /// Get a latitude and longitude within a specific radius in meters.
-      /// </summary>
-      /// <param name="center">The center of the circle </param>
-      /// <param name="radiusMeters">Distance being traveled, in meters</param>
-      public LatLon GeoAreaCircle(LatLon center, double radiusMeters)
-      {
-         return GeoAreaCircle(center.Latitude, center.Longitude, radiusMeters);
       }
    }
 

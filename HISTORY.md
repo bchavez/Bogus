@@ -1,8 +1,4 @@
 ## v22.0.7
-* New `Address.AreaCircle(lat,lon,rad)` to generate random latitude/longitude GPS points within a specified radius.
-* New `Address.Geohash()` generates a random Geohash.
-* New `Address.Depth()` generates a random depth (down to Mariana Trench).
-* New `Address.Altitude()` generate a random height (up to Mount Everest). 
 * New `Internet.Color()` format options: CSS `rgb(...)` and delimited RGB.
 * New `System.AndroidId()` to generate GCM registration ID.
 * New `System.ApplePushToken()` to generate a random Apple Push Token.

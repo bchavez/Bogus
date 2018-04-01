@@ -1,10 +1,7 @@
 ﻿using Bogus.DataSets;
-using Bogus.Extensions;
-using Bogus.Models;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using static System.Math;
 
 namespace Bogus.Tests.DataSetTests
 {
@@ -161,63 +158,6 @@ namespace Bogus.Tests.DataSetTests
       {
          address.OrdinalDirection().Should().Be("Southeast");
          address.OrdinalDirection(true).Should().Be("NE");
-      }
-
-      [Fact]
-      public void can_generate_a_geohash()
-      {
-         address.Geohash().Should().Be("m3un1m1");
-         address.Geohash(5).Should().Be("qg9y5");
-      }
-
-      [Fact]
-      public void can_generate_depth()
-      {
-         address.Depth().Should().BeLessThan(0)
-            .And.BeGreaterOrEqualTo(-10994);
-      }
-
-      [Fact]
-      public void can_generate_height()
-      {
-         address.Altitude().Should().BeGreaterThan(0)
-            .And.BeLessOrEqualTo(8848);
-      }
-
-      [Fact]
-      public void can_get_range()
-      {
-         var center = new LatLon // somewhere in the middle of Colorado.
-            {
-               Latitude = 39, //north
-               Longitude = -105, //west
-            };
-         var newPoint = address.GeoAreaCircle(center.Latitude, center.Longitude, 1000 * 1000); //radial search around 1000 km.
-         console.Dump(newPoint);
-         var distance = GetDistance(center, newPoint);
-         console.Dump(distance);
-         distance.Should().BeLessOrEqualTo(1000 * 1000);
-      }
-
-      double GetDistance(LatLon x, LatLon y)
-      {
-         // https://github.com/chrisveness/geodesy/blob/master/latlon-spherical.js
-         // a = sin²(Δφ/2) + cos(φ1)⋅cos(φ2)⋅sin²(Δλ/2)
-         // tanδ = √(a) / √(1−a)
-
-         const int R = 6371000; // Earth's radius in meters
-         var φ1 = x.Latitude.ToRadians(); var λ1 = x.Longitude.ToRadians();
-         var φ2 = y.Latitude.ToRadians(); var λ2 = y.Longitude.ToRadians();
-         var Δφ = φ2 - φ1;
-         var Δλ = λ2 - λ1;
-
-         var a = Sin(Δφ / 2) * Sin(Δφ / 2)
-                 + Cos(φ1) * Cos(φ2)
-                                * Sin(Δλ / 2) * Sin(Δλ / 2);
-         var c = 2 * Atan2(Sqrt(a), Sqrt(1 - a));
-         var d = R * c;
-
-         return d;
       }
    }
 }

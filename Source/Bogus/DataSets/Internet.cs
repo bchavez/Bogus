@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Bogus.Vendor;
 
@@ -213,13 +211,36 @@ namespace Bogus.DataSets
       /// <param name="baseRed">Red base color</param>
       /// <param name="baseGreen">Green base color</param>
       /// <param name="baseBlue">Blue base color</param>
-      public string Color(byte baseRed = 0, byte baseGreen = 0, byte baseBlue = 0)
+      /// <param name="grayscale">Output a gray scale color</param>
+      /// <param name="format">The color format</param>
+      public string Color(byte baseRed = 0, byte baseGreen = 0, byte baseBlue = 0, bool grayscale = false, ColorFormat format = ColorFormat.Hex)
       {
          var red = Math.Floor((Random.Number(256) + (double)baseRed) / 2);
          var green = Math.Floor((Random.Number(256) + (double)baseGreen) / 2);
          var blue = Math.Floor((Random.Number(256) + (double)baseBlue) / 2);
 
-         return string.Format("#{0:x02}{1:x02}{2:x02}", (byte)red, (byte)green, (byte)blue);
+         if( grayscale )
+         {
+            green = red;
+            blue = red;
+         }
+
+         if( format == ColorFormat.Hex )
+         {
+            return string.Format("#{0:x02}{1:x02}{2:x02}", (byte)red, (byte)green, (byte)blue);
+         }
+
+         if( format == ColorFormat.Delimited )
+         {
+            return DelimitedRgb();
+         }
+
+         return $"rgb({DelimitedRgb()})";
+
+         string DelimitedRgb()
+         {
+            return $"{(byte)red},{(byte)green},{(byte)blue}";
+         }
       }
 
       /// <summary>

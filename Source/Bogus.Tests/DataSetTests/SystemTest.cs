@@ -133,5 +133,23 @@ namespace Bogus.Tests.DataSetTests
       {
          system.FilePath().Should().Be("/sys/bluetooth.js");
       }
+
+      [Fact]
+      public void can_get_an_android_id()
+      {
+         system.AndroidId().Should().Be("APA91D6QF2E3IvkYaKB52JW1SSkDC5IZpfBzfk6IPaXZfFrXVNTuiA3r6cj6jweAnGGuVMKTEVjTNYPcrpKQeeIRa9s20_qkYoDA-Y1830SoibG9q6IVOqm8-RjLkISEw_XqmfeunBMcolz-wjEWkwyz1vC8GjQoaeTjhhQaUeycF8MGilg13Xk");
+      }
+
+      [Fact]
+      public void can_get_an_apple_push_token()
+      {
+         system.ApplePushToken().Should().Be("91da090b74f2b910be0dd5991af6398351ac2ef3a6eecd74806134147385aa7e");
+      }
+
+      [Fact]
+      public void can_get_a_black_berry_pin()
+      {
+         system.BlackBerryPin().Should().Be("91da090b");
+      }
    }
 }

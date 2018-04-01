@@ -339,9 +339,20 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Return a random hex hash. Default 40 characters, aka SHA-1.
+      /// </summary>
+      /// <param name="length">The length of the hash string. Default, 40 characters, aka SHA-1.</param>
+      /// <param name="upperCase">Returns the hex string with uppercase characters.</param>
+      public string Hash(int length = 40, bool upperCase = false)
+      {
+         if( upperCase )
+            return String2(length, Bogus.Chars.HexUpperCase);
+         return String2(length, Bogus.Chars.HexLowerCase);
+      }
+
+      /// <summary>
       /// Get a random boolean
       /// </summary>
-      /// <returns></returns>
       public bool Bool()
       {
          return Number() == 0;

@@ -192,8 +192,8 @@ namespace Bogus.Tests.DataSetTests
                Latitude = 39, //north
                Longitude = -105, //west
             };
-         var newPoint = address.AreaCircle(center.Latitude, center.Longitude, 1000 * 1000); //radial search around 1000 km.
-
+         var newPoint = address.GeoAreaCircle(center.Latitude, center.Longitude, 1000 * 1000); //radial search around 1000 km.
+         console.Dump(newPoint);
          var distance = GetDistance(center, newPoint);
          console.Dump(distance);
          distance.Should().BeLessOrEqualTo(1000 * 1000);

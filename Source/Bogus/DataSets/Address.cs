@@ -259,7 +259,7 @@ namespace Bogus.DataSets
       /// <param name="centerLat">The center latitude point</param>
       /// <param name="centerLon">The center longitude point</param>
       /// <param name="radiusMeters">Radial distance from center in meters</param>
-      public LatLon AreaCircle(double centerLat, double centerLon, double radiusMeters)
+      public LatLon GeoAreaCircle(double centerLat, double centerLon, double radiusMeters)
       {
          // https://github.com/chrisveness/geodesy/blob/master/latlon-spherical.js
          // https://www.movable-type.co.uk/scripts/latlong.html
@@ -296,7 +296,7 @@ namespace Bogus.DataSets
                   );
 
          var destLat = φ2.ToDegrees();
-         var destLon = ((λ2.ToDegrees() + 540) % 360) - 180; //and normalize to −180°...+180°
+         var destLon = λ2.ToDegrees().NomralizeLongitude();
 
          return new LatLon { Latitude = destLat, Longitude = destLon};
       }
@@ -306,9 +306,9 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="center">The center of the circle </param>
       /// <param name="radiusMeters">Distance being traveled, in meters</param>
-      public LatLon AreaCircle(LatLon center, double radiusMeters)
+      public LatLon GeoAreaCircle(LatLon center, double radiusMeters)
       {
-         return AreaCircle(center.Latitude, center.Longitude, radiusMeters);
+         return GeoAreaCircle(center.Latitude, center.Longitude, radiusMeters);
       }
    }
 

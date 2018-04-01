@@ -22,5 +22,13 @@ namespace Bogus.Extensions
       {
          return degrees * PI / 180;
       }
+
+      /// <summary>
+      /// Normalize longitude to −180°...+180°
+      /// </summary>
+      public static double NomralizeLongitude(this double degrees)
+      {
+         return ((degrees + 540) % 360) - 180;
+      }
    }
 }

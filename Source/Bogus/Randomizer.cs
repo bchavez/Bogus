@@ -345,9 +345,7 @@ namespace Bogus
       /// <param name="upperCase">Returns the hex string with uppercase characters.</param>
       public string Hash(int length = 40, bool upperCase = false)
       {
-         if( upperCase )
-            return String2(length, Bogus.Chars.HexUpperCase);
-         return String2(length, Bogus.Chars.HexLowerCase);
+         return String2(length, upperCase ? Bogus.Chars.HexUpperCase : Bogus.Chars.HexLowerCase);
       }
 
       /// <summary>

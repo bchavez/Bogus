@@ -334,12 +334,12 @@ public void Or_Using_DataSets_Directly()
 	* `Words` - Get some lorem words
 	* `Letter` - Get a character letter.
 	* `Sentence` - Get a random sentence of specific number of words.
-	* `Slug` - Slugify lorem words.
 	* `Sentences` - Get some sentences.
 	* `Paragraph` - Get a paragraph.
-	* `Paragraphs` - Get some paragraphs with tabs n all.
+	* `Paragraphs` - Get a specified number of paragraphs.
 	* `Text` - Get random text on a random lorem methods.
-	* `Lines` - Get lines of lorem
+	* `Lines` - Get lines of lorem.
+	* `Slug` - Slugify lorem words.
 * **`Name`**
 	* `FirstName` - Get a first name. Getting a gender specific name is only supported on locales that support it.
 	* `LastName` - Get a last name. Getting a gender specific name is only supported on locales that support it.
@@ -369,6 +369,9 @@ public void Or_Using_DataSets_Directly()
 	* `Semver` - Get a random semver version string.
 	* `Version` - Get a random `System.Version`.
 	* `Exception` - Get a random `Exception` with a fake stack trace.
+	* `AndroidId` - Get a random GCM registration ID.
+	* `ApplePushToken` - Get a random Apple Push Token
+	* `BlackBerryPin` - Get a random BlackBerry Device PIN
 
 #### API Extension Methods
 * **`using Bogus.Extensions.Brazil;`**

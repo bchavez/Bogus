@@ -55,25 +55,42 @@ namespace Bogus.Premium
 
       public static string FindLicense()
       {
-         foreach( var probePath in ProbePaths )
+         foreach (var probePath in ProbePaths)
          {
-            if( probePath.EndsWith(LicenseFile) && File.Exists(probePath) ) return probePath;
+            var licFile = FindLicense(probePath);
+            if (licFile != null) return licFile;
+         }
 
-            var dir = Path.GetDirectoryName(probePath);
-            while( dir != null )
+         return null;
+      }
+
+      public static string FindLicense(string probePath)
+      {
+         if (probePath.EndsWith(LicenseFile) && File.Exists(probePath)) return probePath;
+
+         string dir;
+         if (Directory.Exists(probePath))
+         {
+            dir = probePath;
+         }
+         else
+         {
+            dir = Path.GetDirectoryName(probePath);
+         }
+
+         while (dir != null)
+         {
+            var licFile = Path.Combine(dir, LicenseFile);
+
+            if (File.Exists(licFile))
             {
-               var licFile = Path.Combine(dir, LicenseFile);
-
-               if( File.Exists(licFile) )
-               {
-                  return licFile;
-               }
-               
-               if( dir == Path.GetPathRoot(dir) || string.IsNullOrWhiteSpace(dir) )
-                  break;
-
-               dir = Path.GetFullPath(Path.Combine(dir, ".."));
+               return licFile;
             }
+
+            if (dir == Path.GetPathRoot(dir) || string.IsNullOrWhiteSpace(dir))
+               break;
+
+            dir = Path.GetFullPath(Path.Combine(dir, ".."));
          }
 
          return null;
@@ -86,7 +103,7 @@ namespace Bogus.Premium
          key = lines[1];
       }
 
-      public static List<string> ProbePaths => new List<string>()
+      public static List<string> ProbePaths { get; } = new List<string>()
          {
 #if STANDARD
             AppContext.BaseDirectory,

@@ -1,3 +1,6 @@
+## v22.0.8
+* New `Company.EIN()` to generate employer identification numbers.
+
 ## v22.0.7
 * New `Internet.Color()` format options: CSS `rgb(...)` and delimited RGB.
 * New `System.AndroidId()` to generate GCM registration ID.

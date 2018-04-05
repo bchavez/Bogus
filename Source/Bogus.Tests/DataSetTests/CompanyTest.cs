@@ -1,5 +1,6 @@
 using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
+using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
 using Xunit;
 
@@ -50,6 +51,12 @@ namespace Bogus.Tests.DataSetTests
       public void can_generate_cnpj_for_brazil()
       {
          company.Cnpj().Should().Be("61.860.606/0001-91");
+      }
+
+      [Fact]
+      public void can_generate_an_EIN()
+      {
+         company.Ein().Should().Be("61-8606064");
       }
    }
 }

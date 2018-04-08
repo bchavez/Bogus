@@ -37,6 +37,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
 * [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
 * Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
 * Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
+* [Jared Nance](https://twitter.com/jaredcnance) - [Leveling Up Your .Net Testing Patterns](http://nance.io/leveling-up-your-dotnet-testing/)
 
 ##### Tip Jar
 * :dollar: **Bitcoin**: `1ApWWgMjnT9pWx9jnQfwim8jPtrqDimxBh`

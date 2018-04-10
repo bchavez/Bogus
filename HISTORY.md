@@ -1,5 +1,6 @@
 ## v22.0.8
 * New `Company.EIN()` to generate employer identification numbers.
+* Preparing release of extended data sets for Bogus.
 
 ## v22.0.7
 * New `Internet.Color()` format options: CSS `rgb(...)` and delimited RGB.

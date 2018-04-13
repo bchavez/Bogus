@@ -23,6 +23,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
 ##### Projects That Use Bogus
 
 * [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
+* [**Windows-XAML / Template10**](https://github.com/Windows-XAML/Template10) [[code]](https://github.com/Windows-XAML/Template10/blob/beed5e58a4f8ab381cff6f063d2a91db5b4fc3bc/Basics/PrismSample/Services/DataService.cs#L1)
 * [**RethinkDb.Driver**](https://github.com/bchavez/RethinkDb.Driver) - A RethinkDB database driver.
 
 ##### Featured In

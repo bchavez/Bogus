@@ -40,10 +40,8 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
 * Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
 * [Jared Nance](https://twitter.com/jaredcnance) - [Leveling Up Your .Net Testing Patterns](http://nance.io/leveling-up-your-dotnet-testing/)
 
-##### Tip Jar
-* :dollar: **Bitcoin**: `1ApWWgMjnT9pWx9jnQfwim8jPtrqDimxBh`
-* :pound: **Litecoin**: `LZgWtUgKeHfHiPdyqcYfpNjiSFEpSWCBuL`
-* :euro: **Ethereum**: `0xa0cE2692355135Cc7fcb89d3D213be4A0512A73c`
+##### The Crypto Tip Jar!
+<a href="https://commerce.coinbase.com/checkout/2faa393a-6fc3-4365-993a-6cc110bc4d35"><img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/tipjar.png" /></a>
 * :dog2: **Dogecoin**: `D6Y9oaf963cgcjp6AgD6sDWWLTXGGYx9r2`
 
 

@@ -1,3 +1,6 @@
+## v22.0.9
+* Fixed typo in XML docs.
+
 ## v22.0.8
 * New `Company.Ein()` to generate employer identification numbers.
 * Preparing release of extended data sets for Bogus.

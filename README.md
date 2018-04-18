@@ -15,7 +15,7 @@ and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentVali
 ### Download & Install
 **Nuget Package [Bogus](https://www.nuget.org/packages/Bogus/)**
 
-```
+```powershell
 Install-Package Bogus
 ```
 Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.

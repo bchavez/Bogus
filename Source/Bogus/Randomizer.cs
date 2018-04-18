@@ -107,7 +107,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random even number
+      /// Returns a random odd number
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>

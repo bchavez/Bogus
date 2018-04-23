@@ -86,7 +86,7 @@ var testUsers = new Faker<User>()
     .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
     .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
     .RuleFor(u => u.SomethingUnique, f => $"Value {f.UniqueIndex}")
-    .RuleFor(u => u.SomeGuid, Guid.NewGuid)
+    .RuleFor(u => u.SomeGuid, f=> Guid.NewGuid)
 
     //Use an enum outside scope.
     .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())

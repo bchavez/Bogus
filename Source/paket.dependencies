@@ -1,13 +1,13 @@
 version 4.4.0
 
-source https://www.nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
 
 nuget Newtonsoft.Json == 10.0.3
 
 group build
     generate_load_scripts: true
     
-    source https://www.nuget.org/api/v2
+    source https://api.nuget.org/v3/index.json
 
     nuget FAKE == 4.61.2
     nuget FSharp.Data

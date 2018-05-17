@@ -323,6 +323,13 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Checks if the internal state is ready to be used by <seealso cref="Faker{T}"/>.
+      /// In other words, has NewContext ever been called since this object was created?
+      /// See Issue 143. https://github.com/bchavez/Bogus/issues/143
+      /// </summary>
+      internal bool HasContext => this.IndexFaker != -1;
+
+      /// <summary>
       /// A global variable that is automatically incremented on every
       /// new object created by Bogus. Useful for composing property values that require
       /// uniqueness.

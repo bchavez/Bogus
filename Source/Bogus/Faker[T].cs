@@ -397,6 +397,12 @@ namespace Bogus
             var firstRule = cleanRules[0];
             createRule = CreateActions.TryGetValue(firstRule, out createRule) ? createRule : CreateActions[Default];
          }
+
+         //Issue 143 - We need a new FakerHub context before calling the
+         //            constructor. Associated Issue 57: Again, before any
+         //            rules execute, we need a context to capture IndexGlobal
+         //            and IndexFaker variables.
+         FakerHub.NewContext();
          var instance = createRule(this.FakerHub);
 
          PopulateInternal(instance, cleanRules);
@@ -469,8 +475,11 @@ namespace Bogus
          lock( Randomizer.Locker.Value )
          {
             //Issue 57 - Make sure you generate a new context
-            //before executing any rules.
-            FakerHub.NewContext();
+            //           before executing any rules.
+            //Issue 143 - If the FakerHub doesn't have any context
+            //            (eg NewContext() has never been called), then call it
+            //            so we can increment IndexGlobal and IndexFaker.
+            if( !this.FakerHub.HasContext ) FakerHub.NewContext();
 
             foreach( var ruleSet in ruleSets )
             {

@@ -1,5 +1,5 @@
 ## v22.0.9
-* Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation. 
+* Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation.
 * Fixed typo in XML docs.
 
 ## v22.0.8

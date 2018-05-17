@@ -528,10 +528,65 @@ public void create_rules_for_an_object_the_easy_way()
 
 F# and VB.NET Examples
 ----------------------
-#### The Fabulous F# Example
-```
-open Bogus
+#### The Fabulous F# Examples
+* Using the `Faker` facade with immutable **F#** record types:
 
+```fsharp
+type Customer = { FirstName : string
+                  LastName : string
+                  Age : int
+                  Title : string }
+
+//The faker facade
+let f = Faker();
+
+let generator() = 
+   { FirstName = f.Name.FirstName()
+     LastName  = f.Name.LastName()
+     Age       = f.Random.Number(18,60)
+     Title     = f.Name.JobTitle() }
+     
+generator() |> Dump |> ignore
+
+(* OUTPUT:
+  FirstName = "Russell"
+  LastName = "Nader"
+  Age = 34
+  Title = "Senior Web Officer"
+*)
+```
+
+* Using the `Faker<T>` class with immutable **F#** record types:
+
+```fsharp
+type Customer = { FirstName : string
+                  LastName : string
+                  Age : int
+                  Title : string }
+
+let customerFaker =
+    Bogus
+        .Faker<Customer>()
+        .CustomInstantiator(fun f ->
+             { FirstName = f.Name.FirstName()
+               LastName  = f.Name.LastName()
+               Age       = f.Random.Number(18,60)
+               Title     = f.Name.JobTitle() })
+
+customerFaker.Generate() |> Dump |> ignore
+
+(* OUTPUT:
+  FirstName = "Sasha"
+  LastName = "Roberts"
+  Age = 20;
+  Title = "Internal Security Specialist"
+*)
+```
+
+* Using the `Faker<T>` class with mutable classes in **F#**:
+
+```fsharp
+open Bogus
 type Customer() =
   member val FirstName = "" with get, set
   member val LastName = "" with get, set
@@ -560,7 +615,7 @@ faker.Generate() |> Dump |> ignore
 ```
 
 #### The Very Basic VB.NET Example
-```
+```visualbasic
 Imports Bogus
 
 Public Class Customer

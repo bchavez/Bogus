@@ -60,7 +60,7 @@ namespace Bogus
       {
          var start = str.IndexOf("{{", StringComparison.Ordinal);
          var end = str.IndexOf("}}", StringComparison.Ordinal);
-         if (start == -1 && end == -1)
+         if( start == -1 && end == -1 )
          {
             return str;
          }
@@ -88,7 +88,7 @@ namespace Bogus
 
          var module = dataSets.FirstOrDefault(o => o.GetType() == mm.Method.DeclaringType);
 
-         if (module == null)
+         if( module == null )
          {
             throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the dataSets parameter.");
          }
@@ -161,7 +161,7 @@ namespace Bogus
       [Obsolete]
       public static string ParseOld(string expr, params DataSet[] dataSets)
       {
-         if (dataSets.Length == 0)
+         if( dataSets.Length == 0 )
          {
             throw new ArgumentOutOfRangeException("dataSets", "One or more data sets is required in order to evaluate a handlebar expression.");
          }
@@ -170,7 +170,7 @@ namespace Bogus
             .OfType<Match>().Select(d => d.Value.ToUpperInvariant())
             .Distinct();
 
-         foreach (var func in funcCalls)
+         foreach( var func in funcCalls )
          {
             var handle = string.Format("{{{{{0}}}}}", func);
 
@@ -178,11 +178,11 @@ namespace Bogus
 
             MustashMethods.TryGetValue(func, out mustashMethod);
 
-            if (mustashMethod == null) continue;
+            if( mustashMethod == null ) continue;
 
             var module = dataSets.FirstOrDefault(o => o.GetType() == mustashMethod.Method.DeclaringType);
 
-            if (module == null)
+            if( module == null )
                throw new ArgumentException($"Can't parse {handle} because the dataset was not provided in the dataSets parameter.");
 
             var val = mustashMethod.Method.Invoke(module, null) as string;

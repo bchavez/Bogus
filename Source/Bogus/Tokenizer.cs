@@ -124,8 +124,7 @@ namespace Bogus
          try
          {
             return mm.Method.GetParameters()
-                            .Zip(parameters,
-                                 (pi, pn) => Convert.ChangeType(pn, pi.ParameterType))
+                            .Zip(parameters, GetValueForParameter)
                             .ToArray();
          }
          catch (OverflowException ex)
@@ -142,6 +141,14 @@ namespace Bogus
          }
       }
 
+      private static object GetValueForParameter(ParameterInfo parameterInfo, string parameterValue)
+      {
+         var type = Nullable.GetUnderlyingType(parameterInfo.ParameterType) ?? parameterInfo.ParameterType;
+
+         return typeof(Enum).IsAssignableFrom(type) ? Enum.Parse(type, parameterValue)
+                                                    : Convert.ChangeType(parameterValue, type);
+      }
+
       private static string GetArgumentsString(string methodCall, int parametersStart)
       {
          var parametersEnd = methodCall.IndexOf(')');
@@ -151,6 +158,7 @@ namespace Bogus
          return methodCall.Substring(parametersStart + 1, parametersEnd - parametersStart - 1);
       }
 
+      [Obsolete]
       public static string ParseOld(string expr, params DataSet[] dataSets)
       {
          if (dataSets.Length == 0)

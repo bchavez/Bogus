@@ -64,7 +64,7 @@ namespace Bogus.Tests.HandlebarsTests
       public void cant_parse_random_string_request_with_not_enough_arguments()
       {
          var faker = new Faker();
-         Assert.Throws<ArgumentException>(() => faker.Parse("{{randomizer.string (5)}}"));
+         Assert.Throws<ArgumentException>(() => faker.Parse("{{randomizer.ReplaceNumbers}}"));
       }
 
       [Fact]
@@ -90,6 +90,13 @@ namespace Bogus.Tests.HandlebarsTests
       {
          var faker = new Faker();
          faker.Parse("{{date.between(2015-10-04, 2017-11-03)}}").Should().Be("05-Jan-17 6:43:51 AM");
+      }
+
+      [Fact]
+      public void can_parse_enum_argument()
+      {
+         var faker = new Faker();
+         faker.Parse("{{name.firstname(Female)}} {{name.firstname(Male)}}").Should().Be("Lindsay Jonathan");
       }
    }
 }

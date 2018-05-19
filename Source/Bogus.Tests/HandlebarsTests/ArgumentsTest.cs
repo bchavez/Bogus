@@ -86,13 +86,6 @@ namespace Bogus.Tests.HandlebarsTests
       }
 
       [Fact]
-      public void can_parse_datetime_request_with_arguments()
-      {
-         var faker = new Faker();
-         faker.Parse("{{date.between(2015-10-04, 2017-11-03)}}").Should().Be("05-Jan-17 6:43:51 AM");
-      }
-
-      [Fact]
       public void can_parse_enum_argument()
       {
          var faker = new Faker();

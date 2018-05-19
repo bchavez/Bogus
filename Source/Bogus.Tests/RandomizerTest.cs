@@ -292,6 +292,43 @@ namespace Bogus.Tests
       }
 
       [Fact]
+      public void generate_string2_pool()
+      {
+         r.String2(5).Should().Be("pcvqa");
+      }
+
+      [Fact]
+      public void generate_string2_pool_custom()
+      {
+         r.String2(5, "abc").Should().Be("bacba");
+      }
+
+      [Fact]
+      public void generate_string2_pool_min_max()
+      {
+         var x = r.String2(5, 10, "xyz");
+
+         x.Length.Should()
+            .BeGreaterOrEqualTo(5)
+            .And
+            .BeLessOrEqualTo(10);
+
+         x.Should().Be("xzyxyxzy");
+      }
+
+      [Fact]
+      public void generate_hash()
+      {
+         r.Hash().Should().Be("91da090b74f2b910be0dd5991af6398351ac2ef3");
+      }
+
+      [Fact]
+      public void generate_small_hash()
+      {
+         r.Hash(20).Should().Be("91da090b74f2b910be0d");
+      }
+
+      [Fact]
       public void random_word_tests()
       {
          //r.Words(3).Should().Be("");

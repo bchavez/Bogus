@@ -80,6 +80,16 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Returns a BSON value given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
+      /// </summary>
+      /// <param name="category">Overrides the category name on the dataset</param>
+      /// <param name="path">path/key in the category</param>
+      protected internal virtual BValue Get(string category, string path)
+      {
+         return Database.Get(category, path, this.Locale);
+      }
+
+      /// <summary>
       /// Determines if a key exists in the locale.
       /// </summary>
       protected internal virtual bool HasKey(string path, bool includeFallback = true)
@@ -143,14 +153,15 @@ namespace Bogus
          return Random.Replace(tokenResult);
       }
 
+      private static readonly Regex parseTokensRegex = new Regex("\\#{(.*?)\\}", RegexOptions.Compiled);
+
       /// <summary>
       /// Recursive parse the tokens in the string.
       /// </summary>
       /// <param name="value">The value.</param>
       private string ParseTokens(string value)
       {
-         var regex = new Regex("\\#{(.*?)\\}");
-         var cityResult = regex.Replace(value,
+         var cityResult = parseTokensRegex.Replace(value,
             x =>
                {
                   BArray result;

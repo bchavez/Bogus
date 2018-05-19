@@ -1,8 +1,12 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Bogus.Platform;
 
 namespace Bogus.Premium
 {
@@ -46,5 +50,69 @@ namespace Bogus.Premium
       private static void AssertKeyIsNotBanned(string licenseKey)
       {
       }
+
+      public const string LicenseFile = "Bogus.Premium.LicenseKey";
+
+      public static string FindLicense()
+      {
+         foreach (var probePath in ProbePaths)
+         {
+            var licFile = FindLicense(probePath);
+            if (licFile != null) return licFile;
+         }
+
+         return null;
+      }
+
+      public static string FindLicense(string probePath)
+      {
+         if (probePath.EndsWith(LicenseFile) && File.Exists(probePath)) return probePath;
+
+         string dir;
+         if (Directory.Exists(probePath))
+         {
+            dir = probePath;
+         }
+         else
+         {
+            dir = Path.GetDirectoryName(probePath);
+         }
+
+         while (dir != null)
+         {
+            var licFile = Path.Combine(dir, LicenseFile);
+
+            if (File.Exists(licFile))
+            {
+               return licFile;
+            }
+
+            if (dir == Path.GetPathRoot(dir) || string.IsNullOrWhiteSpace(dir))
+               break;
+
+            dir = Path.GetFullPath(Path.Combine(dir, ".."));
+         }
+
+         return null;
+      }
+
+      public static void ReadLicense(string path, out string name, out string key)
+      {
+         var lines = File.ReadLines(path).Take(2).ToArray();
+         name = lines[0];
+         key = lines[1];
+      }
+
+      public static List<string> ProbePaths { get; } = new List<string>()
+         {
+#if STANDARD
+            AppContext.BaseDirectory,
+#endif
+#if !STANDARD13
+            typeof(License).GetAssembly().Location,
+#endif
+            Directory.GetCurrentDirectory()
+         };
+
    }
 }

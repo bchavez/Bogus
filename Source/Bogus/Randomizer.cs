@@ -107,7 +107,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random even number
+      /// Returns a random odd number
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
@@ -308,9 +308,49 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
+      /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
+      /// </summary>
+      /// <param name="length">The length of the string to return.</param>
+      /// <param name="chars">The pool of characters to draw from. The returned string may contain repeat characters from the pool.</param>
+      public string String2(int length, string chars = "abcdefghijklmnopqrstuvwxyz")
+      {
+         var target = new char[length];
+
+         for (int i = 0; i < length; i++)
+         {
+            var idx = this.Number(0, chars.Length - 1);
+            target[i] = chars[idx];
+         }
+
+         return new string(target);
+      }
+      /// <summary>
+      /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
+      /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
+      /// </summary>
+      /// <param name="minLength">The minimum length of the string to return.</param>
+      /// <param name="maxLength">The maximum length of the string to return.</param>
+      /// <param name="chars">The pool of characters to draw from. The returned string may contain repeat characters from the pool.</param>
+      public string String2(int minLength, int maxLength, string chars = "abcdefghijklmnopqrstuvwxyz")
+      {
+         var length = this.Number(minLength, maxLength);
+         return String2(length, chars);
+      }
+
+      /// <summary>
+      /// Return a random hex hash. Default 40 characters, aka SHA-1.
+      /// </summary>
+      /// <param name="length">The length of the hash string. Default, 40 characters, aka SHA-1.</param>
+      /// <param name="upperCase">Returns the hex string with uppercase characters.</param>
+      public string Hash(int length = 40, bool upperCase = false)
+      {
+         return String2(length, upperCase ? Bogus.Chars.HexUpperCase : Bogus.Chars.HexLowerCase);
+      }
+
+      /// <summary>
       /// Get a random boolean
       /// </summary>
-      /// <returns></returns>
       public bool Bool()
       {
          return Number() == 0;

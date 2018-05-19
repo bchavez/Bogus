@@ -7,7 +7,7 @@
     <Authors>Brian Chavez</Authors>
     <TargetFrameworks>net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
-    <CodeAnalysisRuleSet>Default.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Bogus.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
@@ -48,5 +48,8 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="System.Globalization.Extensions" Version="4.3.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

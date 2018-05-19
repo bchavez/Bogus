@@ -1,5 +1,22 @@
+## v22.0.9
+* Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation.
+* Fixed typo in XML docs.
+
+## v22.0.8
+* New `Company.Ein()` to generate employer identification numbers.
+* Preparing release of extended data sets for Bogus.
+
+## v22.0.7
+* New `Internet.Color()` format options: CSS `rgb(...)` and delimited RGB.
+* New `System.AndroidId()` to generate GCM registration ID.
+* New `System.ApplePushToken()` to generate a random Apple Push Token.
+* New `System.BlackBerryPin()` to generate a random Black Berry PIN.
+* New `Randomizer.Hash()` to generate random hashes of specified length.
+* New `Randomizer.String2()` to generate random strings with specified character sets.
+
 ## v22.0.6
 * Added `Randomizer.String` method to generate strings. Uses `Chars()` method.
+* PR 136: Improve speed of `DataSet.ParseTokens()`. Thanks @danij!
 
 ## v22.0.5
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.

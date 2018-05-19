@@ -315,5 +315,29 @@ namespace Bogus.DataSets
 
          return exe;
       }
+
+      /// <summary>
+      /// Get a random GCM registration ID.
+      /// </summary>
+      public string AndroidId()
+      {
+         return $"APA91{this.Random.String2(178, "0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_")}";
+      }
+
+      /// <summary>
+      /// Get a random Apple Push Token
+      /// </summary>
+      public string ApplePushToken()
+      {
+         return this.Random.String2(64, Chars.HexLowerCase);
+      }
+
+      /// <summary>
+      /// Get a random BlackBerry Device PIN
+      /// </summary>
+      public string BlackBerryPin()
+      {
+         return this.Random.Hash(8);
+      }
    }
 }

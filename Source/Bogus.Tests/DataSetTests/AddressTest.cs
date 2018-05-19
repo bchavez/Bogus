@@ -1,13 +1,17 @@
-using Bogus.DataSets;
+﻿using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests.DataSetTests
 {
    public class AddressTest : SeededTest
    {
-      public AddressTest()
+      private readonly ITestOutputHelper console;
+
+      public AddressTest(ITestOutputHelper console)
       {
+         this.console = console;
          address = new Address();
       }
 

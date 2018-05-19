@@ -1,4 +1,6 @@
-﻿namespace Bogus.Extensions.UnitedStates
+﻿using Bogus.DataSets;
+
+namespace Bogus.Extensions.UnitedStates
 {
    /// <summary>
    /// API extensions specific for a geographical location.
@@ -23,6 +25,14 @@
          p.context[Key] = ssn;
 
          return ssn;
+      }
+
+      /// <summary>
+      /// Employer Identification Number
+      /// </summary>
+      public static string Ein(this Company c)
+      {
+         return c.Random.ReplaceNumbers("##-#######");
       }
    }
 }

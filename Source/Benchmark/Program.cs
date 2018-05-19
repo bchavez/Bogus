@@ -10,7 +10,7 @@ namespace Benchmark
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<BenchRandomSubset>();
+            BenchmarkRunner.Run<BenchStringFill>();
         }
     }
 }

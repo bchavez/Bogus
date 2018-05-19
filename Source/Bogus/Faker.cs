@@ -88,7 +88,8 @@ namespace Bogus
             this.Phone,
             this.System,
             this.Commerce,
-            this.Database);
+            this.Database,
+            this.Random);
       }
 
 

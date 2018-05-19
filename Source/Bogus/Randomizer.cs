@@ -12,7 +12,7 @@ namespace Bogus
    /// <summary>
    /// The randomizer. It randoms things.
    /// </summary>
-   public class Randomizer
+   public class Randomizer : IDataset
    {
       /// <summary>
       /// Set the random number generator manually with a seed to get reproducible results.

@@ -8,7 +8,7 @@ namespace Bogus
    /// <summary>
    /// Data set methods that access the BSON database of locales.
    /// </summary>
-   public class DataSet : ILocaleAware, IHasRandomizer, IDataset
+   public class DataSet : ILocaleAware, IHasRandomizer, IDataSet
    {
       /// <summary>
       /// Resolves the 'category' type of a dataset type; respects the 'DataCategory' attribute.
@@ -188,7 +188,7 @@ namespace Bogus
    /// <summary>
    /// Declarative interface. Having the common interface allows using types that does not have Dataset as a parent
    /// </summary>
-   public interface IDataset
+   public interface IDataSet
    {
    }
 }

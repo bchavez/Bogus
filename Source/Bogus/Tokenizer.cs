@@ -56,7 +56,7 @@ namespace Bogus
 
       internal static Regex ParseMatcher = new Regex("(?<={{).+?(?=}})");
 
-      public static string Parse(string str, params IDataset[] dataSets)
+      public static string Parse(string str, params IDataSet[] dataSets)
       {
          var start = str.IndexOf("{{", StringComparison.Ordinal);
          var end = str.IndexOf("}}", StringComparison.Ordinal);

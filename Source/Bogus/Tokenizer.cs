@@ -98,15 +98,18 @@ namespace Bogus
 
       private static MustashMethod FindCorrectMustashMethod(string methodName, string[] arguments)
       {
-         var method = MustashMethods[methodName].OrderBy(mm => mm.Method.GetParameters().Count(pi => pi.IsOptional) - arguments.Length)
-                                                        .FirstOrDefault(mm => mm.Method.GetParameters().Length >= arguments.Length
-                                                                           && mm.OptionalArgs.Length + arguments.Length >= mm.Method.GetParameters().Length)
-                      ?? throw new ArgumentException($"Cannot find a method '{methodName}' that could accept {arguments.Length} arguments");
+         var selection =
+            from mm in MustashMethods[methodName]
+            orderby mm.Method.GetParameters().Count(pi => pi.IsOptional) - arguments.Length
+            where mm.Method.GetParameters().Length >= arguments.Length
+            where mm.OptionalArgs.Length + arguments.Length >= mm.Method.GetParameters().Length
+            select mm;
 
-         return method;
+         var found = selection.FirstOrDefault();
+         return found ?? throw new ArgumentException($"Cannot find a method '{methodName}' that could accept {arguments.Length} arguments");
       }
 
-      private static object[] GetArgumentListForCall(string []parameters, MustashMethod mm)
+      private static object[] GetArgumentListForCall(string[] parameters, MustashMethod mm)
       {
          try
          {

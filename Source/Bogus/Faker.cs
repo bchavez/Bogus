@@ -98,7 +98,6 @@ namespace Bogus
       /// <summary>
       /// A contextually relevant fields of a person.
       /// </summary>
-      [RegisterMustasheMethods]
       public Person Person => person ?? (person = new Person(this.Random, this.Locale));
 
       /// <summary>

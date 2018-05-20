@@ -2,14 +2,17 @@ using Bogus.DataSets;
 using FluentAssertions;
 using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests.HandlebarsTests
 {
    public class ArgumentsTest : SeededTest
    {
-      public ArgumentsTest()
+      private readonly ITestOutputHelper console;
+
+      public ArgumentsTest(ITestOutputHelper console)
       {
-        
+         this.console = console;
       }
 
 
@@ -90,6 +93,50 @@ namespace Bogus.Tests.HandlebarsTests
       {
          var faker = new Faker();
          faker.Parse("{{name.firstname(Female)}} {{name.firstname(Male)}}").Should().Be("Lindsay Jonathan");
+      }
+
+      [Fact]
+      public void can_parse_string_argument()
+      {
+         var faker = new Faker();
+         faker.Parse(@"{{randomizer.string2(9, wxyz)}}").Should().Be("ywzywywyx");
+      }
+
+      [Fact]
+      public void can_parse_bool_argument()
+      {
+         var faker = new Faker();
+         faker.Parse(@"{{randomizer.hash(5, true)}}").Should().Be("91DA0");
+      }
+
+      [Fact]
+      public void can_parse_datetime_with_arguments()
+      {
+         var faker = new Faker();
+         var dtString = faker.Parse("{{date.between(2015-10-04, 2017-11-03) }}");
+         var dt = DateTimeOffset.Parse(dtString);
+         dt.Should()
+            .BeAfter(new DateTime(2015, 10, 04))
+            .And
+            .BeBefore(new DateTime(2017, 11, 03));
+      }
+
+      [Fact]
+      public void unmached_brace_should_throw()
+      {
+         var faker = new Faker();
+         //easy to miss the closing ) with }} handle bars.
+         Action a = () => faker.Parse("{{randomizer.number(100 }}");
+         a.ShouldThrow<ArgumentException>();
+      }
+
+      [Fact]
+      public void can_parse_timespan_with_arguments()
+      {
+         var faker = new Faker();
+
+         faker.Parse("{{date.timespan(00:00:25)}}")
+            .Should().Be("00:00:15.0880571");
       }
    }
 }

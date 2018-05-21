@@ -45,6 +45,8 @@ namespace Bogus
 
       public static string Parse(string str, params IDataSet[] dataSets)
       {
+         //Recursive base case. If there are no more {{ }} handle bars,
+         //return.
          var start = str.IndexOf("{{", StringComparison.Ordinal);
          var end = str.IndexOf("}}", StringComparison.Ordinal);
          if( start == -1 && end == -1 )
@@ -52,51 +54,67 @@ namespace Bogus
             return str;
          }
 
-         var methodCall = str.Substring(start + 2, end - start - 2)
-            .Replace("}}", "")
-            .Replace("{{", "");
-         string methodName = methodCall;
+         //We have some handlebars to process. Get the method name and arguments.
+         ParseMustashText(str, start, end, out var methodName, out var arguments);
 
-         string argumentsString = String.Empty;
-         var argumentsStart = methodCall.IndexOf("(", StringComparison.Ordinal);
-         if (argumentsStart != -1)
-         {
-            argumentsString = GetArgumentsString(methodCall, argumentsStart);
-            methodName = methodCall.Substring(0, argumentsStart).Trim();
-         }
+         if( !MustashMethods.Contains(methodName) ) throw new ArgumentException($"Unknown method {methodName} can't be found.");
 
-         methodName = methodName.ToUpperInvariant();
-         if (!MustashMethods.Contains(methodName))
-         {
-            throw new ArgumentException($"Unknown method {methodName} can't be found.");
-         }
+         //At this point, we have a methodName like: RANDOMIZER.NUMBER
+         //and if the dataset was registered with RegisterMustasheMethodsAttribute
+         //we should be able to extract the dataset given it's methodName.
+         var dataSet = FindDataSetWithMethod(dataSets, methodName);
 
-         MustashMethod mm = MustashMethods[methodName].FirstOrDefault();
-
-         var module = dataSets.FirstOrDefault(o => o.GetType() == mm.Method.DeclaringType);
-
-         if( module == null )
-         {
-            throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
-         }
-         
-         var arguments = argumentsString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
-         mm = FindCorrectMustashMethod(methodName, arguments);
-         var providedArgumentList = GetArgumentListForCall(arguments, mm);
+         //Considering arguments, lets get the best method overload
+         //that maps to a registered MustashMethod.
+         var mm = FindMustashMethod(methodName, arguments);
+         var providedArgumentList = ConvertStringArgumentsToObjects(arguments, mm);
          var optionalArgs = mm.OptionalArgs.Take(mm.Method.GetParameters().Length - providedArgumentList.Length);
          var argumentList = providedArgumentList.Concat(optionalArgs).ToArray();
 
-         var fakeVal = mm.Method.Invoke(module, argumentList).ToString();
+         //make the actual invocation.
+         var fakeVal = mm.Method.Invoke(dataSet, argumentList).ToString();
 
          var sb = new StringBuilder();
-         sb.Append(str.Substring(0, start));
+         sb.Append(str, 0, start);
          sb.Append(fakeVal);
          sb.Append(str.Substring(end + 2));
 
          return Parse(sb.ToString(), dataSets);
       }
 
-      private static MustashMethod FindCorrectMustashMethod(string methodName, string[] arguments)
+      private static IDataSet FindDataSetWithMethod(IDataSet[] dataSets, string methodName)
+      {
+         var dataSetType = MustashMethods[methodName].First().Method.DeclaringType;
+
+         var ds = dataSets.FirstOrDefault(o => o.GetType() == dataSetType);
+
+         if (ds == null) throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
+         return ds;
+      }
+
+      private static void ParseMustashText(string str, int start, int end, out string methodName, out string[] arguments)
+      {
+         var methodCall = str.Substring(start + 2, end - start - 2)
+            .Replace("}}", "")
+            .Replace("{{", "");
+
+         var argumentsStart = methodCall.IndexOf("(", StringComparison.Ordinal);
+         if (argumentsStart != -1)
+         {
+            var argumentsString = GetArgumentsString(methodCall, argumentsStart);
+            methodName = methodCall.Substring(0, argumentsStart).Trim();
+            arguments = argumentsString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+         }
+         else
+         {
+            methodName = methodCall;
+            arguments = new string[0];
+         }
+
+         methodName = methodName.ToUpperInvariant();
+      }
+
+      private static MustashMethod FindMustashMethod(string methodName, string[] arguments)
       {
          var selection =
             from mm in MustashMethods[methodName]
@@ -109,7 +127,7 @@ namespace Bogus
          return found ?? throw new ArgumentException($"Cannot find a method '{methodName}' that could accept {arguments.Length} arguments");
       }
 
-      private static object[] GetArgumentListForCall(string[] parameters, MustashMethod mm)
+      private static object[] ConvertStringArgumentsToObjects(string[] parameters, MustashMethod mm)
       {
          try
          {

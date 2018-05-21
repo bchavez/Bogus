@@ -1,9 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace Bogus
 {
@@ -16,48 +14,39 @@ namespace Bogus
 
    public class Tokenizer
    {
-      public static Dictionary<string, MustashMethod> MustashMethods;
+      public static ILookup<string, MustashMethod> MustashMethods;
 
       static Tokenizer()
       {
-         RegisterMustashMethods();
+         RegisterMustashMethods(typeof(Faker));
       }
 
-      private static void RegisterMustashMethods()
+      public static void RegisterMustashMethods(Type type)
       {
-         MustashMethods = typeof(Faker).GetProperties()
+         MustashMethods = type.GetProperties()
             .Where(p => p.IsDefined(typeof(RegisterMustasheMethodsAttribute), true))
             .SelectMany(p =>
                {
                   return p.PropertyType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                     .Where(mi =>
-                        {
-                           if( mi.GetParameters().Length == 0 || mi.GetParameters().All(pi => pi.IsOptional) )
-                           {
-                              if( mi.GetGenericArguments().Length == 0 )
-                              {
-                                 return true;
-                              }
-                           }
-                           return false;
-                        })
-                     .Select(mi =>
-                        {
-                           var mm = new MustashMethod
-                              {
-                                 Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
-                                 Method = mi,
-                                 OptionalArgs = Enumerable.Repeat(Type.Missing, mi.GetParameters().Length).ToArray()
-                              };
-                           return mm;
-                        });
-               }).ToDictionary(mm => mm.Name);
+                   .Where(mi => mi.GetGenericArguments().Length == 0)
+                   .Select(mi =>
+                   {
+                      var mm = new MustashMethod
+                      {
+                         Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
+                         Method = mi,
+                         OptionalArgs = mi.GetParameters().Where(pi => pi.IsOptional).Select(_ => Type.Missing).ToArray()
+                      };
+                      return mm;
+                   });
+               })
+            .ToLookup(mm => mm.Name);
       }
 
-      internal static Regex ParseMatcher = new Regex("(?<={{).+?(?=}})");
-
-      public static string Parse(string str, params DataSet[] dataSets)
+      public static string Parse(string str, params object[] dataSets)
       {
+         //Recursive base case. If there are no more {{ }} handle bars,
+         //return.
          var start = str.IndexOf("{{", StringComparison.Ordinal);
          var end = str.IndexOf("}}", StringComparison.Ordinal);
          if( start == -1 && end == -1 )
@@ -65,70 +54,131 @@ namespace Bogus
             return str;
          }
 
-         var methodName = str.Substring(start + 2, end - start - 2)
-            .Replace("}}", "")
-            .Replace("{{", "")
-            .ToUpperInvariant();
+         //We have some handlebars to process. Get the method name and arguments.
+         ParseMustashText(str, start, end, out var methodName, out var arguments);
 
-         MustashMethod mm;
-         if( !MustashMethods.TryGetValue(methodName, out mm) )
+         if( !MustashMethods.Contains(methodName) )
          {
             throw new ArgumentException($"Unknown method {methodName} can't be found.");
          }
 
-         var module = dataSets.FirstOrDefault(o => o.GetType() == mm.Method.DeclaringType);
+         //At this point, we have a methodName like: RANDOMIZER.NUMBER
+         //and if the dataset was registered with RegisterMustasheMethodsAttribute
+         //we should be able to extract the dataset given it's methodName.
+         var dataSet = FindDataSetWithMethod(dataSets, methodName);
 
-         if( module == null )
-         {
-            throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the dataSets parameter.");
-         }
+         //Considering arguments, lets get the best method overload
+         //that maps to a registered MustashMethod.
+         var mm = FindMustashMethod(methodName, arguments);
+         var providedArgumentList = ConvertStringArgumentsToObjects(arguments, mm);
+         var optionalArgs = mm.OptionalArgs.Take(mm.Method.GetParameters().Length - providedArgumentList.Length);
+         var argumentList = providedArgumentList.Concat(optionalArgs).ToArray();
 
-         var fakeVal = mm.Method.Invoke(module, mm.OptionalArgs) as string;
+         //make the actual invocation.
+         var fakeVal = mm.Method.Invoke(dataSet, argumentList).ToString();
 
          var sb = new StringBuilder();
-         sb.Append(str.Substring(0, start));
+         sb.Append(str, 0, start);
          sb.Append(fakeVal);
          sb.Append(str.Substring(end + 2));
 
          return Parse(sb.ToString(), dataSets);
       }
 
-      public static string ParseOld(string expr, params DataSet[] dataSets)
+      private static object FindDataSetWithMethod(object[] dataSets, string methodName)
       {
-         if( dataSets.Length == 0 )
+         var dataSetType = MustashMethods[methodName].First().Method.DeclaringType;
+
+         var ds = dataSets.FirstOrDefault(o => o.GetType() == dataSetType);
+
+         if( ds == null )
          {
-            throw new ArgumentOutOfRangeException("dataSets", "One or more data sets is required in order to evaluate a handlebar expression.");
+            throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
+         }
+         return ds;
+      }
+
+      private static void ParseMustashText(string str, int start, int end, out string methodName, out string[] arguments)
+      {
+         var methodCall = str.Substring(start + 2, end - start - 2)
+            .Replace("}}", "")
+            .Replace("{{", "");
+
+         var argumentsStart = methodCall.IndexOf("(", StringComparison.Ordinal);
+         if (argumentsStart != -1)
+         {
+            var argumentsString = GetArgumentsString(methodCall, argumentsStart);
+            methodName = methodCall.Substring(0, argumentsStart).Trim();
+            arguments = argumentsString.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).Select(s => s.Trim()).ToArray();
+         }
+         else
+         {
+            methodName = methodCall;
+            arguments = new string[0];
          }
 
-         var funcCalls = ParseMatcher.Matches(expr)
-            .OfType<Match>().Select(d => d.Value.ToUpperInvariant())
-            .Distinct();
+         methodName = methodName.ToUpperInvariant();
+      }
 
-         foreach( var func in funcCalls )
+      private static MustashMethod FindMustashMethod(string methodName, string[] arguments)
+      {
+         var selection =
+            from mm in MustashMethods[methodName]
+            orderby mm.Method.GetParameters().Count(pi => pi.IsOptional) - arguments.Length
+            where mm.Method.GetParameters().Length >= arguments.Length
+            where mm.OptionalArgs.Length + arguments.Length >= mm.Method.GetParameters().Length
+            select mm;
+
+         var found = selection.FirstOrDefault();
+         return found ?? throw new ArgumentException($"Cannot find a method '{methodName}' that could accept {arguments.Length} arguments");
+      }
+
+      private static object[] ConvertStringArgumentsToObjects(string[] parameters, MustashMethod mm)
+      {
+         try
          {
-            var handle = string.Format("{{{{{0}}}}}", func);
+            return mm.Method.GetParameters()
+                            .Zip(parameters, GetValueForParameter)
+                            .ToArray();
+         }
+         catch (OverflowException ex)
+         {
+            throw new ArgumentOutOfRangeException($"One of the arguments for {mm.Name} is out of supported range. Argument list: {string.Join(",", parameters)}", ex);
+         }
+         catch (Exception ex) when (ex is InvalidCastException || ex is FormatException)
+         {
+            throw new ArgumentException($"One of the arguments for {mm.Name} cannot be converted to target type. Argument list: {string.Join(",", parameters)}", ex);
+         }
+         catch (Exception ex)
+         {
+            throw new ArgumentException($"Cannot parse arguments for {mm.Name}. Argument list: {string.Join(",", parameters)}", ex);
+         }
+      }
 
-            MustashMethod mustashMethod;
+      private static object GetValueForParameter(ParameterInfo parameterInfo, string parameterValue)
+      {
+         var type = Nullable.GetUnderlyingType(parameterInfo.ParameterType) ?? parameterInfo.ParameterType;
 
-            MustashMethods.TryGetValue(func, out mustashMethod);
+         if( typeof(Enum).IsAssignableFrom(type)) return Enum.Parse(type, parameterValue);
 
-            if( mustashMethod == null ) continue;
+         if( typeof(TimeSpan) == type ) return TimeSpan.Parse(parameterValue);
 
-            var module = dataSets.FirstOrDefault(o => o.GetType() == mustashMethod.Method.DeclaringType);
+         return Convert.ChangeType(parameterValue, type);
+      }
 
-            if( module == null )
-               throw new ArgumentException($"Can't parse {handle} because the dataset was not provided in the dataSets parameter.");
-
-            var val = mustashMethod.Method.Invoke(module, null) as string;
-
-            expr = Regex.Replace(expr, handle, val, RegexOptions.IgnoreCase);
+      private static string GetArgumentsString(string methodCall, int parametersStart)
+      {
+         var parametersEnd = methodCall.IndexOf(')');
+         if( parametersEnd == -1 )
+         {
+            throw new ArgumentException($"The method call '{methodCall}' is missing a terminating ')' character.");
          }
 
-         return expr;
+         return methodCall.Substring(parametersStart + 1, parametersEnd - parametersStart - 1);
       }
    }
 
-   [AttributeUsage((AttributeTargets.Property))]
+   [AttributeUsage(AttributeTargets.Property)]
    internal class RegisterMustasheMethodsAttribute : Attribute
    {
    }

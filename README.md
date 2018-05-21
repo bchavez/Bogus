@@ -476,6 +476,23 @@ public void Handlebar()
 "Roob, Michale PhD"
 */
 ```
+The name of a dataset is determined using `DataCategory` attribute or class name otherwise. (i.e `PhoneNumber` dataset in handlebars expression should be named as `phone_number`)
+
+You can pass parameters to methods using braces:
+
+```csharp
+[Test]
+public void HandlebarWithParameters()
+{
+    var faker = new Faker();
+    var randomName = faker.Parse("{{name.firstname(Female)}}, {{name.firstname(Male)}}");
+    randomName.Dump();
+}
+
+/* OUTPUT:
+"Lindsay, Jonathan"
+*/
+```
 
 #### Implicit and Explicit Type Conversion
 You can also use implicit type conversion to make your code look cleaner without having to explicitly call `Faker<T>.Generate()`.

@@ -18,12 +18,12 @@ namespace Bogus
 
       static Tokenizer()
       {
-         RegisterMustashMethods();
+         RegisterMustashMethods(typeof(Faker));
       }
 
-      private static void RegisterMustashMethods()
+      public static void RegisterMustashMethods(Type type)
       {
-         MustashMethods = typeof(Faker).GetProperties()
+         MustashMethods = type.GetProperties()
             .Where(p => p.IsDefined(typeof(RegisterMustasheMethodsAttribute), true))
             .SelectMany(p =>
                {
@@ -43,7 +43,7 @@ namespace Bogus
             .ToLookup(mm => mm.Name);
       }
 
-      public static string Parse(string str, params IDataSet[] dataSets)
+      public static string Parse(string str, params object[] dataSets)
       {
          //Recursive base case. If there are no more {{ }} handle bars,
          //return.
@@ -57,7 +57,10 @@ namespace Bogus
          //We have some handlebars to process. Get the method name and arguments.
          ParseMustashText(str, start, end, out var methodName, out var arguments);
 
-         if( !MustashMethods.Contains(methodName) ) throw new ArgumentException($"Unknown method {methodName} can't be found.");
+         if( !MustashMethods.Contains(methodName) )
+         {
+            throw new ArgumentException($"Unknown method {methodName} can't be found.");
+         }
 
          //At this point, we have a methodName like: RANDOMIZER.NUMBER
          //and if the dataset was registered with RegisterMustasheMethodsAttribute
@@ -82,13 +85,16 @@ namespace Bogus
          return Parse(sb.ToString(), dataSets);
       }
 
-      private static IDataSet FindDataSetWithMethod(IDataSet[] dataSets, string methodName)
+      private static object FindDataSetWithMethod(object[] dataSets, string methodName)
       {
          var dataSetType = MustashMethods[methodName].First().Method.DeclaringType;
 
          var ds = dataSets.FirstOrDefault(o => o.GetType() == dataSetType);
 
-         if (ds == null) throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
+         if( ds == null )
+         {
+            throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
+         }
          return ds;
       }
 
@@ -163,7 +169,10 @@ namespace Bogus
       private static string GetArgumentsString(string methodCall, int parametersStart)
       {
          var parametersEnd = methodCall.IndexOf(')');
-         if (parametersEnd == -1) throw new ArgumentException($"The method call '{methodCall}' is missing a terminating ')' character.");
+         if( parametersEnd == -1 )
+         {
+            throw new ArgumentException($"The method call '{methodCall}' is missing a terminating ')' character.");
+         }
 
          return methodCall.Substring(parametersStart + 1, parametersEnd - parametersStart - 1);
       }

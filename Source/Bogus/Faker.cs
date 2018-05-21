@@ -292,7 +292,7 @@ namespace Bogus
       /// Picks a random Enum of T. Works only with Enums.
       /// </summary>
       /// <typeparam name="T">Must be an Enum</typeparam>
-      public T PickRandom<T>() where T : struct
+      public T PickRandom<T>() where T : struct, Enum
       {
          return this.Random.Enum<T>();
       }
@@ -301,7 +301,7 @@ namespace Bogus
       /// Picks a random Enum of T, excluding those passed as parameters.
       /// </summary>
       /// <param name="exclude">The items in the Enum of T to exclude from selection.</param>
-      public T PickRandomWithout<T>(params T[] exclude) where T : struct
+      public T PickRandomWithout<T>(params T[] exclude) where T : struct, Enum
       {
          return this.Random.Enum(exclude);
       }

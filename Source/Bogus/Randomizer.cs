@@ -537,7 +537,7 @@ namespace Bogus
       /// </summary>
       /// <typeparam name="T">Must be an Enum</typeparam>
       /// <param name="exclude">Exclude enum values from being returned</param>
-      public T Enum<T>(params T[] exclude) where T : struct
+      public T Enum<T>(params T[] exclude) where T : struct, Enum
       {
          var e = typeof(T);
          if( !e.IsEnum() )
@@ -558,8 +558,7 @@ namespace Bogus
 
          var val = this.ArrayElement(selection);
 
-         T picked;
-         System.Enum.TryParse(val, out picked);
+         System.Enum.TryParse(val, out T picked);
          return picked;
       }
 

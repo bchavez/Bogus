@@ -1,5 +1,6 @@
 ## v22.1.1
 * PR 144: Argument support for mustache handlebars. Example: `{{name.firstname(Male)}}`
+* Using **C# 7.3** generic `Enum` constraints for methods that only accept enums. Example: `f.PickRandom<Enum>()`.
 
 ## v22.0.9
 * Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation.

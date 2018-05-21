@@ -1,3 +1,6 @@
+## v22.1.1
+* PR 144: Argument support for mustache handlebars. Example: `{{name.firstname(Male)}}`
+
 ## v22.0.9
 * Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation.
 * Fixed typo in XML docs.

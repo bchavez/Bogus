@@ -1,3 +1,6 @@
+## v22.1.2
+* Improved XML documentation comments on `Faker[T]` API.
+
 ## v22.1.1
 * PR 144: Argument support for mustache handlebars. Example: `{{name.firstname(Male)}}`
 * Using **C# 7.3** generic `Enum` constraints for methods that only accept enums. Example: `f.PickRandom<Enum>()`.

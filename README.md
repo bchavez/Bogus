@@ -90,7 +90,6 @@ var testUsers = new Faker<User>()
     .RuleFor(u => u.UserName, (f, u) => f.Internet.UserName(u.FirstName, u.LastName))
     .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.FirstName, u.LastName))
     .RuleFor(u => u.SomethingUnique, f => $"Value {f.UniqueIndex}")
-    .RuleFor(u => u.SomeGuid, f => Guid.NewGuid)
 
     //Use a method outside scope.
     .RuleFor(u => u.CartId, f => Guid.NewGuid())
@@ -194,8 +193,12 @@ for more info.
 
 ### Without Fluent Syntax
 
-You can use **Bogus** without a fluent setup. Just use the `Faker` facade or a **dataset** directly.
+You can use **Bogus** without a fluent setup. The examples below highlight three alternative ways to use **Bogus** without a fluent syntax setup.
+1. Using the `Faker` facade.
+2. Using **DataSets** directly.
+3. Using `Faker<T>` **inheritance**.
 
+All three alternative styles of using **Bogus** produce the same `Order` result as demonstrated below:
 ```csharp
 public void Using_The_Faker_Facade()
 {
@@ -208,10 +211,10 @@ public void Using_The_Faker_Facade()
         };
     o.Dump()
 }
-public void Or_Using_DataSets_Directly()
+public void Using_DataSets_Directly()
 {
     var random = new Bogus.Randomizer();
-    var lorem = new Bogus.DataSets.Lorem();
+    var lorem = new Bogus.DataSets.Lorem("en");
     var o = new Order()
         {
             OrderId = random.Number(1, 100),
@@ -219,6 +222,19 @@ public void Or_Using_DataSets_Directly()
             Quantity = random.Number(1, 10)
         };
     o.Dump();
+}
+public void Using_FakerT_Inheritance()
+{
+   public class OrderFaker : Faker<Order> {
+      public OrderFaker() {
+         RuleFor(o => o.OrderId, f => f.Random.Number(1, 100));
+         RuleFor(o => o.Item, f => f.Lorem.Sentence());
+         RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
+      }
+   }
+   var orderFaker = new OrderFaker();
+   var o = orderFaker.Generate();
+   o.Dump();
 }
 /* OUTPUT:
 {

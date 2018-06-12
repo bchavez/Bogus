@@ -75,7 +75,7 @@ namespace Bogus.Tests
       public void Without_Fluent_Syntax()
       {
          var random = new Randomizer();
-         var lorem = new Lorem();
+         var lorem = new Lorem("en");
          var o = new Order()
             {
                OrderId = random.Number(1, 100),
@@ -99,6 +99,24 @@ namespace Bogus.Tests
             };
          o.OrderId.Should().Be(61);
          o.Quantity.Should().Be(7);
+         o.Dump();
+      }
+
+      public class OrderFaker : Faker<Order>
+      {
+         public OrderFaker() : base("en")
+         {
+            RuleFor(o => o.OrderId, f => f.Random.Number(1, 100));
+            RuleFor(o => o.Item, f => f.Lorem.Sentence());
+            RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
+         }
+      }
+
+      [Fact]
+      public void Using_FakerT_Inheritance()
+      {
+         var orderFaker = new OrderFaker();
+         var o = orderFaker.Generate();
          o.Dump();
       }
 

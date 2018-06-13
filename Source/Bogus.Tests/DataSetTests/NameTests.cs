@@ -140,6 +140,16 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void full_name_component_genders_should_match()
+      {
+         var n = new Name("ru")
+            {
+               Random = new Randomizer(31337)
+            };
+         n.FullName().Should().Be("Людмила Тетерина");
+      }
+
+      [Fact]
       public void locales_with_empty_array_suffix_should_be_null()
       {
          var n = new Name("ru");

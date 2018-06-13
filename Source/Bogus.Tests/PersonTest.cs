@@ -61,15 +61,15 @@ namespace Bogus.Tests
          var truth = new[]
             {
                "746 924 794",
-               "595 169 327",
-               "083 194 845",
-               "335 860 631",
-               "865 181 952",
+               "377 136 593",
+               "307 629 840",
+               "586 063 471",
+               "372 429 126",
                "320 968 522",
-               "949 882 807",
-               "003 727 773",
+               "485 558 597",
+               "400 037 271",
                "678 373 663",
-               "250 448 792"
+               "488 539 966"
             };
 
          obtained.Should().Equal(truth);
@@ -85,15 +85,15 @@ namespace Bogus.Tests
          var expect = new[]
             {
                "786.928.797-03",
-               "693.455.045-59",
-               "073.298.888-85",
-               "365.760.664-57",
-               "352.829.147-86",
-               "096.754.915-90",
-               "575.989.784-50",
-               "003.525.756-38",
-               "919.359.823-89",
-               "399.334.225-96"
+               "359.526.934-90",
+               "307.329.888-61",
+               "412.365.760-55",
+               "818.542.835-29",
+               "989.340.967-56",
+               "475.157.598-87",
+               "400.035.257-16",
+               "658.676.631-16",
+               "847.792.478-37"
             };
 
          obtained.Should().Equal(expect);
@@ -138,13 +138,13 @@ namespace Bogus.Tests
             "Doris69@yahoo.com",
             "Betsy_Mraz19@hotmail.com",
             "Alvin_Fahey@yahoo.com",
-            "Jeremy.Klein@gmail.com",
-            "Armando_Waelchi79@yahoo.com",
-            "Cecil91@gmail.com",
-            "Genevieve_Marvin@yahoo.com",
-            "Elijah56@hotmail.com",
-            "Gerardo_Leannon@hotmail.com",
-            "Laverne25@yahoo.com");
+            "Malcolm96@gmail.com",
+            "Rosemarie_Rath@hotmail.com",
+            "Kelley_Emard84@hotmail.com",
+            "Stacey.Kerluke79@hotmail.com",
+            "Bernadette8@hotmail.com",
+            "Sylvia94@yahoo.com",
+            "Angelo_Hyatt@hotmail.com");
 
          console.WriteLine(emails.DumpString());
       }

@@ -31,7 +31,6 @@ namespace Bogus.Tests.DataSetTests
          var email = internet.ExampleEmail();
 
          email.Should().EndWith("@example.com");
-         email.GetBefore("@").Should().Contain(".");
       }
 
       [Fact]
@@ -49,7 +48,7 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_a_domain_name()
       {
-         internet.DomainName().Should().Be("lee.com");
+         internet.DomainName().Should().Be("doris.net");
       }
 
       [Fact]
@@ -81,7 +80,7 @@ namespace Bogus.Tests.DataSetTests
       {
          var email = internet.Email();
 
-         email.Should().Be("Bernhard.Schultz@yahoo.com");
+         email.Should().Be("Carroll62@yahoo.com");
       }
 
       [Fact]
@@ -89,7 +88,7 @@ namespace Bogus.Tests.DataSetTests
       {
          var user = internet.UserName();
 
-         user.Should().Be("Lee_Brown3");
+         user.Should().Be("Doris.Schultz");
       }
 
       [Fact]
@@ -121,13 +120,13 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_url_with_path()
       {
-         internet.UrlWithPath().Should().Be("https://ambrose.net/soft/deposit");
+         internet.UrlWithPath().Should().Be("https://kerry.info/soft/deposit");
       }
 
       [Fact]
       public void can_gets_a_domain_word()
       {
-         internet.DomainWord().Should().Be("lee");
+         internet.DomainWord().Should().Be("doris");
       }
 
       [Fact]
@@ -135,7 +134,7 @@ namespace Bogus.Tests.DataSetTests
       {
          var email = internet.Email(provider: "x.y.z.com");
 
-         email.Should().Be("Lee_Brown3@x.y.z.com");
+         email.Should().Be("Doris.Schultz@x.y.z.com");
 
          email = internet.Email("cowboy");
 

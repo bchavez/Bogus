@@ -116,6 +116,7 @@
     <Compile Include="GitHubIssues\Issue99.cs" />
     <Compile Include="GitHubIssues\Issue93.cs" />
     <Compile Include="GitHubIssues\PullRequest113.cs" />
+    <Compile Include="GitHubIssues\PullRequest149.cs" />
     <Compile Include="HandlebarsTests\ArgumentsTest.cs" />
     <Compile Include="HandleBarTests.cs" />
     <Compile Include="DataSetTests\ImageTest.cs" />

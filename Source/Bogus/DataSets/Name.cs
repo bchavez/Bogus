@@ -80,7 +80,13 @@
       /// <param name="gender">Gender of the name if supported by the locale.</param>
       public string FullName(Gender? gender = null)
       {
-         if( SupportsGenderFirstNames && SupportsGenderLastNames )
+         // PR#148 - 'ru' locale requires a gender to be
+         // specified for both first and last name. Gender is not
+         // picked when 'en' locale is specified because
+         // SupportsGenderLastNames = false when 'en' is used.
+         // SupportsGenderLastNames is false because 'en' doesn't have
+         // en: male_last_name and en: female_last_name JSON fields.
+         if ( SupportsGenderFirstNames && SupportsGenderLastNames )
            gender = gender ?? this.Random.Enum<Gender>();
 
          return $"{FirstName(gender)} {LastName(gender)}";

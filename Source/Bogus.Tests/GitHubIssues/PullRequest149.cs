@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System;
+using FluentAssertions;
 using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
@@ -6,11 +7,11 @@ namespace Bogus.Tests.GitHubIssues
    public class PullRequest149
    {
       [Fact]
-      public void can_use_arabic_locale()
+      public void ensure_arabic_locale_exists()
       {
-         var f = new Faker("ar");
+         Action a = () => new Faker("ar");
 
-         f.Name.FirstName().Should().Be("عبير");
+         a.ShouldNotThrow();
       }
    }
 }

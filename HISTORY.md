@@ -1,5 +1,6 @@
 ## v22.1.3
-* PR 148: Fixed `.FullName()` for locales where both first/last name have genders. Thanks binarycode. 
+* PR 149: Added new Arabic 'ar' locale. Thanks Saied!
+* PR 148: Fixed `.FullName()` for locales where both first/last name have genders. Thanks binarycoder!
 
 ## v22.1.2
 * Improved XML documentation comments on `Faker[T]` API.

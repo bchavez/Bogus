@@ -20,7 +20,7 @@ namespace Bogus.Tests
          var s = Tokenizer.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}", f.Name);
 
          console.Dump(s);
-         s.Should().Be("Mitchell, Carroll MD");
+         s.Should().Be("Mitchell, Bernhard DDS");
       }
    }
 }

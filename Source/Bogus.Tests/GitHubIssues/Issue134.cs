@@ -22,9 +22,9 @@ namespace Bogus.Tests.GitHubIssues
 
          var foo = faker.Generate();
 
-         foo.FirstName.Should().Be("Doris");
-         foo.LastName.Should().Be("Schultz");
-         foo.StreetAddress.Should().Be("43917 Bechtelar Rest");
+         foo.FirstName.Should().Be("Lee");
+         foo.LastName.Should().Be("Brown");
+         foo.StreetAddress.Should().Be("6439 Lindsey Cape");
       }
    }
 

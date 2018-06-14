@@ -14,6 +14,7 @@
       public readonly bool SupportsGenderFirstNames = false;
       public readonly bool SupportsGenderLastNames = false;
       public readonly bool SupportsGenderPrefixes = false;
+      public readonly bool HasFirstNameList = false;
 
       /// <summary>
       /// Default constructor
@@ -24,6 +25,7 @@
          SupportsGenderFirstNames = HasKey("male_first_name", false) && HasKey("female_first_name", false);
          SupportsGenderLastNames = HasKey("male_last_name", false) && HasKey("female_last_name", false);
          SupportsGenderPrefixes = HasKey("male_prefix", false) && HasKey("female_prefix", false);
+         HasFirstNameList = HasKey("first_name", false);
       }
 
       /// <summary>
@@ -39,18 +41,17 @@
       /// <param name="gender">For locale's that support Gender naming.</param>
       public string FirstName(Gender? gender = null)
       {
-         if( SupportsGenderFirstNames )
+         if( gender is null && HasFirstNameList )
+            return GetRandomArrayItem("first_name");
+
+         if( gender is null )
+            gender = this.Random.Enum<Gender>();
+
+         if( gender == Gender.Male )
          {
-            gender = gender ?? this.Random.Enum<Gender>();
-
-            if( gender == Gender.Male )
-            {
-               return GetRandomArrayItem("male_first_name");
-            }
-            return GetRandomArrayItem("female_first_name");
+            return GetRandomArrayItem("male_first_name");
          }
-
-         return GetRandomArrayItem("first_name");
+         return GetRandomArrayItem("female_first_name");
       }
 
       /// <summary>
@@ -79,7 +80,9 @@
       /// <param name="gender">Gender of the name if supported by the locale.</param>
       public string FullName(Gender? gender = null)
       {
-         gender = gender ?? this.Random.Enum<Gender>();
+         if( SupportsGenderFirstNames && SupportsGenderLastNames )
+           gender = gender ?? this.Random.Enum<Gender>();
+
          return $"{FirstName(gender)} {LastName(gender)}";
       }
 

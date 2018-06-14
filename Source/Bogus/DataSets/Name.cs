@@ -80,6 +80,9 @@
       /// <param name="gender">Gender of the name if supported by the locale.</param>
       public string FullName(Gender? gender = null)
       {
+         if( SupportsGenderFirstNames && SupportsGenderLastNames )
+           gender = gender ?? this.Random.Enum<Gender>();
+
          return $"{FirstName(gender)} {LastName(gender)}";
       }
 

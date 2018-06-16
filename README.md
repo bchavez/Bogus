@@ -410,6 +410,16 @@ public void Using_FakerT_Inheritance()
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 
+#### Amazing Community Extensions
+* [**AutoBogus**](https://github.com/nickdodd79/AutoBogus) ([`NuGet Package`](https://www.nuget.org/packages?q=AutoBogus)) by [@nickdodd79](https://github.com/nickdodd79/) - Extends **Bogus** by adding automatic `.RuleFor()` creation and population capabilities.
+* [**NaughtyStrings.Bogus**](https://github.com/SimonCropp/NaughtyStrings) ([`NuGet Package`](https://www.nuget.org/packages/NaughtyStrings.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Extends **Bogus** with list of naughty strings which have a high probability of causing issues when used as user-input data. Examples:
+    * `.SQLInjection()` - Strings which can cause a SQL injection if inputs are not sanitized.
+    * `.ScriptInjection()` - Strings which attempt to invoke a benign script injection; shows vulnerability to XSS.
+    * `.iOSVulnerabilities()` - Strings which crashed iMessage in various versions of iOS. 
+    * `.KnownCVEsandVulnerabilities()` - Strings that test for known vulnerabilities.
+    * `.ServerCodeInjection()` - Strings which can cause user to run code on server as a privileged user.
+    * and more!
+* [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.      
 
 ### Helper Methods
 

@@ -40,13 +40,19 @@ namespace Bogus.DataSets
       /// <param name="firstName">Always use this first name.</param>
       /// <param name="lastName">Sometimes used depending on randomness. See 'UserName'.</param>
       /// <param name="provider">Always use the provider.</param>
-      public string Email(string firstName = null, string lastName = null, string provider = null)
+      /// <param name="uniqueSuffix">This parameter is appended to
+      /// the email account just before the @ symbol. This is useful for situations
+      /// where you might have a unique email constraint in your database or application.
+      /// Passing var f = new Faker(); f.UniqueIndex is a good choice. Or you can supply
+      /// your own unique changing suffix too like Guid.NewGuid; just be sure to change the
+      /// <paramref name="uniqueSuffix"/> value each time before calling this method
+      /// to ensure that email accounts that are generated are totally unique.</param>
+      public string Email(string firstName = null, string lastName = null, string provider = null, string uniqueSuffix = null)
       {
          provider = provider ?? GetRandomArrayItem("free_email");
-
-         return Utils.Slugify(UserName(firstName, lastName)) + "@" + provider;
+         
+         return Utils.Slugify(UserName(firstName, lastName)) + uniqueSuffix + "@" + provider;
       }
-
 
       /// <summary>
       /// Generates an example email with @example.com.

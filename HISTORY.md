@@ -1,3 +1,6 @@
+## v22.1.4
+* Added `uniqueSuffix` parameter to `Internet.Email()` to help with unique email constraints. 
+
 ## v22.1.3
 * PR 149: Added new Arabic 'ar' locale. Thanks Saied!
 * PR 148: Fixed `.FullName()` for locales where both first/last name have genders. Thanks binarycoder!

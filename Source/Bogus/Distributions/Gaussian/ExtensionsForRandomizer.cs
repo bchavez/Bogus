@@ -2,9 +2,7 @@
 
 namespace Bogus.Distributions.Gaussian
 {
-   /// <summary>
-   /// 
-   /// </summary>
+
    public static class ExtensionsForRandomizer
     {
 
@@ -25,7 +23,7 @@ namespace Bogus.Distributions.Gaussian
        private const double AklamsHighBreakPoint = 1.0d - AklamsLowBreakPoint;
 
 
-       /// <summary>
+      /// <summary>
       /// This algorithm follows Peter J Acklam's Inverse Normal Cumulative Distribution function.
       /// Reference: P.J. Acklam, "An algorithm for computing the inverse normal cumulative distribution function," 2010
       /// </summary>
@@ -35,7 +33,6 @@ namespace Bogus.Distributions.Gaussian
       /// </returns>
       private static double InverseNCD(double probability)
       {
-
          // Rational approximation for lower region of distirbution
          if (probability < AklamsLowBreakPoint)
          {
@@ -138,13 +135,6 @@ namespace Bogus.Distributions.Gaussian
        {
           return Convert.ToDecimal(DoubleGaussian(rnd, mean, standardDeviation));
        }
-
-       public static long LongGaussian(this Randomizer rnd, double mean, double standardDeviation)
-       {
-          return Convert.ToInt64(DoubleGaussian(rnd, mean, standardDeviation));
-       }
-
-
 
    }
 }

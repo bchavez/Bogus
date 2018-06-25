@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Xml.Schema;
 using Bogus.Bson;
 using Bogus.DataSets;
 using Bogus.Platform;
@@ -20,8 +19,7 @@ namespace Bogus
       /// </summary>
       public static Random Seed = new Random();
 
-      internal static Lazy<object> Locker =
-         new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+      internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
       /// <summary>
       /// Constructor that uses the global static `<see cref="Seed"/>.
@@ -65,17 +63,14 @@ namespace Bogus
       /// <returns></returns>
       public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
       {
-         if (maxDigit > 9 || maxDigit < 0)
-            throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
-         if (minDigit > 9 || minDigit < 0)
-            throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
+         if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
+         if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
 
          var digits = new int[count];
-         for (var i = 0; i < count; i++)
+         for( var i = 0; i < count; i++ )
          {
             digits[i] = Number(min: minDigit, max: maxDigit);
          }
-
          return digits;
       }
 
@@ -88,7 +83,7 @@ namespace Bogus
       public int Number(int min = 0, int max = 1)
       {
          //lock any seed access, for thread safety.
-         lock (Locker.Value)
+         lock( Locker.Value )
          {
             //Clamp max value, Issue #30.
             max = max == int.MaxValue ? max : max + 1;
@@ -107,8 +102,7 @@ namespace Bogus
          do //could do this better by just +1 or -1 if it's not an even/odd number
          {
             result = Number(min, max);
-         } while (result % 2 == 1);
-
+         } while( result % 2 == 1 );
          return result;
       }
 
@@ -123,89 +117,13 @@ namespace Bogus
          do //could do this better by just +1 or -1 if it's not an even/odd number
          {
             result = Number(min, max);
-         } while (result % 2 == 0);
-
+         } while( result % 2 == 0 );
          return result;
       }
 
 
-      // Coefficients in rational approximations
-      private static readonly double[] coefficientA =
-         {-39.696830d, 220.946098d, -275.928510d, 138.357751d, -30.664798d, 2.506628d};
-
-      private static readonly double[] coefficientB = {-54.476098d, 161.585836d, -155.698979d, 66.801311d, -13.280681d};
-
-      private static readonly double[] coefficientC =
-         {-0.007784894002d, -0.32239645d, -2.400758d, -2.549732d, 4.374664d, 2.938163d};
-
-      private static readonly double[] coefficientD = {0.007784695709d, 0.32246712d, 2.445134d, 3.754408d};
-
+      
       /// <summary>
-      /// This algorithm follows Peter J Acklam's Inverse Normal Cumulative Distribution function.
-      /// Reference: P.J. Acklam, "An algorithm for computing the inverse normal cumulative distribution function," 2010
-      /// </summary>
-      /// <param name="probability"></param>
-      /// <returns>
-      /// </returns>
-      private static double InverseCumulativeStandardNormalDistribution(double probability)
-      {
-
-         // Define break-points.
-         double pLow = 0.02425d;
-         double pHigh = 1.0d - pLow;
-
-         // Rational approximation for lower region:
-         if (probability < pLow)
-         {
-            double q = System.Math.Sqrt(-2 * Math.Log(probability));
-            return (((((coefficientC[0] * q + coefficientC[1]) * q + coefficientC[2]) * q + coefficientC[3]) * q +
-                     coefficientC[4]) * q + coefficientC[5]) /
-                   ((((coefficientD[0] * q + coefficientD[1]) * q + coefficientD[2]) * q + coefficientD[3]) * q + 1);
-         }
-
-         // Rational approximation for upper region:
-         if (pHigh < probability)
-         {
-            double q = Math.Sqrt(-2 * Math.Log(1 - probability));
-            return -(((((coefficientC[0] * q + coefficientC[1]) * q + coefficientC[2]) * q + coefficientC[3]) * q +
-                      coefficientC[4]) * q + coefficientC[5]) /
-                   ((((coefficientD[0] * q + coefficientD[1]) * q + coefficientD[2]) * q + coefficientD[3]) * q + 1);
-         }
-
-         // Rational approximation for central region:
-         {
-            double q = probability - 0.5f;
-            double r = q * q;
-            return (((((coefficientA[0] * r + coefficientA[1]) * r + coefficientA[2]) * r + coefficientA[3]) * r +
-                     coefficientA[4]) * r + coefficientA[5]) * q /
-                   (((((coefficientB[0] * r + coefficientB[1]) * r + coefficientB[2]) * r + coefficientB[3]) * r +
-                     coefficientB[4]) * r + 1);
-         }
-
-      }
-
-      /// <summary>
-      /// Get a random double that approximates the quantile function of a normal distribution. 
-      /// </summary>
-      /// <param name="mean">Mean value of the Normal Distribution</param>
-      /// <param name="standardDeviation">Standard Deviation of the Normal Distribution</param>
-      /// <returns></returns>
-      public double DoubleFromNormDistribution(double mean, double standardDeviation)
-      {
-         //lock any seed access, for thread safety.
-         lock (Locker.Value)
-         {
-            double p = InverseCumulativeStandardNormalDistribution(localSeed.NextDouble());
-            return (p * standardDeviation) + mean;
-         }
-      }
-
-      public int IntFromNormDistribution(double mean, double standardDeviation)
-      {
-         return Convert.ToInt32(DoubleFromNormDistribution(mean, standardDeviation));
-      }
-
-   /// <summary>
       /// Get a random double, between 0.0 and 1.0.
       /// </summary>
       /// <param name="min">Minimum, default 0.0</param>
@@ -235,6 +153,7 @@ namespace Bogus
          return Convert.ToDecimal(Double()) * (max - min) + min;
       }
 
+
       /// <summary>
       /// Get a random float, between 0.0 and 1.0
       /// </summary>
@@ -244,6 +163,7 @@ namespace Bogus
       {
          return Convert.ToSingle(Double()) * (max - min) + min;
       }
+
 
       /// <summary>
       /// Generate a random byte between 0 and 255.

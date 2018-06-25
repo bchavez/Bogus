@@ -20,12 +20,12 @@ namespace Bogus.Tests.DistributionTests
       }
       
       /// <summary>
-      /// Given a reasonable number of generated random numbers, the mean of those numbers should
-      /// be close to the mean that was requested.
+      /// Given a reasonable number of generated random numbers using the Gaussian methods, the mean and
+      /// standard deviation of those generated numbers should be very close the mean and standard deviation
+      /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10%
-      /// tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
       /// </remarks>
       [Fact]
       public void generated_doubles_should_match_specified_parameters()
@@ -66,12 +66,12 @@ namespace Bogus.Tests.DistributionTests
 
 
       /// <summary>
-      /// Given a reasonable number of generated random numbers, the mean of those numbers should
-      /// be close to the mean that was requested.
+      /// Given a reasonable number of generated random numbers using the Gaussian methods, the mean and
+      /// standard deviation of those generated numbers should be very close the mean and standard deviation
+      /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10%
-      /// tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
       /// </remarks>
       [Fact]
       public void generated_decimals_should_match_specified_parameters()
@@ -112,12 +112,12 @@ namespace Bogus.Tests.DistributionTests
 
 
       /// <summary>
-      /// Given a reasonable number of generated random numbers, the mean of those numbers should
-      /// be close to the mean that was requested.
+      /// Given a reasonable number of generated random numbers using the Gaussian methods, the mean and
+      /// standard deviation of those generated numbers should be very close the mean and standard deviation
+      /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10%
-      /// tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
       /// </remarks>
       [Fact]
       public void generated_ints_should_match_specified_parameters()
@@ -159,12 +159,12 @@ namespace Bogus.Tests.DistributionTests
 
 
       /// <summary>
-      /// Given a reasonable number of generated random numbers, the mean of those numbers should
-      /// be close to the mean that was requested.
+      /// Given a reasonable number of generated random numbers using the Gaussian methods, the mean and
+      /// standard deviation of those generated numbers should be very close the mean and standard deviation
+      /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10%
-      /// tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
       /// </remarks>
       [Fact]
       public void generated_floats_should_match_specified_parameters()
@@ -202,7 +202,6 @@ namespace Bogus.Tests.DistributionTests
          // Must be withing a tollerance of 10%
          standardDeviation.Should().BeInRange(desiredStandardDeviation * 0.9, desiredStandardDeviation * 1.1);
       }
-
-
+      
    }
 }

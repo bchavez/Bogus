@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bogus.Distributions.Gussian
+namespace Bogus.Distributions.Gaussian
 {
    /// <summary>
    /// 
@@ -33,7 +33,7 @@ namespace Bogus.Distributions.Gussian
       /// <returns>
       /// A double between 0.0 and 1.0
       /// </returns>
-      private static double InverseCumulativeStandardNormalDistribution(double probability)
+      private static double InverseNCD(double probability)
       {
 
          // Rational approximation for lower region of distirbution
@@ -66,54 +66,82 @@ namespace Bogus.Distributions.Gussian
       }
 
 
-       /// <summary>
-       /// Generate a random double, based on the specified normal distribution.
-       /// </summary>
-       /// <param name="rnd"></param>
-       /// <param name="mean">Mean value of the normal distribution</param>
-       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
-       public static double Double(this Randomizer rnd, double mean, double standardDeviation)
+      /// <summary>
+      /// Generate a random double, based on the specified normal distribution.
+      /// <example>
+      /// To create random values around an average height of 69.1
+      /// inches with a standard deviation of 2.9 inches away from the mean
+      /// <code>
+      /// DoubleGaussian(69.1, 2.9)
+      /// </code>
+      /// </example>
+      /// </summary>
+      /// <param name="rnd"></param>
+      /// <param name="mean">Mean value of the normal distribution</param>
+      /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
+      public static double DoubleGaussian(this Randomizer rnd, double mean, double standardDeviation)
        {
-             double p = InverseCumulativeStandardNormalDistribution(rnd.Double(0D, 1D));
+             double p = InverseNCD(rnd.Double(0D, 1D));
              return (p * standardDeviation) + mean;
        }
 
-       /// <summary>
-       /// Generate a random int, based on the specified normal distribution.
-       /// </summary>
-       /// <param name="rnd"></param>
-       /// <param name="mean">Mean average of the normal distribution</param>
-       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
-       public static int Int(this Randomizer rnd, double mean, double standardDeviation)
+      /// <summary>
+      /// Generate a random int, based on the specified normal distribution.
+      /// <example>
+      /// To create random int values around an avergae age of 35 years, with
+      /// a standard deviation of 4 years away from the mean.
+      /// </example>
+      /// <code>
+      /// call IntGaussian(35, 4)
+      /// </code>
+      /// </summary>
+      /// <param name="rnd"></param>
+      /// <param name="mean">Mean average of the normal distribution</param>
+      /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
+      public static int IntGaussian(this Randomizer rnd, double mean, double standardDeviation)
        {
-          return Convert.ToInt32(Double(rnd, mean, standardDeviation));
+         return Convert.ToInt32(DoubleGaussian(rnd, mean, standardDeviation));
+      }
+
+      /// <summary>
+      /// Generate a float decimal, based on the specified normal distribution.
+      /// <example>
+      /// To create random float values around an average height of 69.1
+      /// inches with a standard deviation of 2.9 inches away from the mean
+      /// <code>
+      /// FloatGaussian(69.1, 2.9)
+      /// </code>
+      /// </example>
+      /// </summary>
+      /// <param name="rnd"></param>
+      /// <param name="mean"></param>
+      /// <param name="standardDeviation"></param>
+      public static float FloatGaussian(this Randomizer rnd, double mean, double standardDeviation)
+       {
+          return Convert.ToSingle(DoubleGaussian(rnd, mean, standardDeviation));
        }
 
-       /// <summary>
-       /// Generate a random float, based on the specified normal distribution.
-       /// </summary>
-       /// <param name="rnd"></param>
-       /// <param name="mean">Mean average of the normal distribution</param>
-       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
-       public static float Float(this Randomizer rnd, double mean, double standardDeviation)
+      /// <summary>
+      /// Generate a random decimal, based on the specified normal distribution.
+      /// <example>
+      /// To create random values around an average height of 69.1
+      /// inches with a standard deviation of 2.9 inches away from the mean
+      /// <code>
+      /// DecimalGaussian(69.1, 2.9)
+      /// </code>
+      /// </example>
+      /// </summary>
+      /// <param name="rnd"></param>
+      /// <param name="mean"></param>
+      /// <param name="standardDeviation"></param>
+      public static decimal DecimalGaussian(this Randomizer rnd, double mean, double standardDeviation)
        {
-          return Convert.ToSingle(Double(rnd, mean, standardDeviation));
+          return Convert.ToDecimal(DoubleGaussian(rnd, mean, standardDeviation));
        }
 
-       /// <summary>
-       /// Generate a random decimal, based on the specified normal distribution.
-       /// </summary>
-       /// <param name="rnd"></param>
-       /// <param name="mean">Mean average of the normal distribution</param>
-       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
-       public static decimal Decimal(this Randomizer rnd, double mean, double standardDeviation)
+       public static long LongGaussian(this Randomizer rnd, double mean, double standardDeviation)
        {
-          return Convert.ToDecimal(Double(rnd, mean, standardDeviation));
-       }
-
-       public static long Long(this Randomizer rnd, double mean, double standardDeviation)
-       {
-          return Convert.ToInt64(Double(rnd, mean, standardDeviation));
+          return Convert.ToInt64(DoubleGaussian(rnd, mean, standardDeviation));
        }
 
 

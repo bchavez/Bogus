@@ -9,7 +9,7 @@ namespace Bogus.Distributions.Gussian
     {
 
        // Coefficients used in Acklam's Inverse Normal Cumulative Distribution function.
-       private static readonly double[] AklmasCoefficientA =
+       private static readonly double[] AklamsCoefficientA =
           {-39.696830d, 220.946098d, -275.928510d, 138.357751d, -30.664798d, 2.506628d};
 
        private static readonly double[] AklamsCoefficientB =
@@ -58,8 +58,8 @@ namespace Bogus.Distributions.Gussian
          {
             double q = probability - 0.5d;
             double r = q * q;
-            return (((((AklmasCoefficientA[0] * r + AklmasCoefficientA[1]) * r + AklmasCoefficientA[2]) * r + AklmasCoefficientA[3]) * r +
-                     AklmasCoefficientA[4]) * r + AklmasCoefficientA[5]) * q /
+            return (((((AklamsCoefficientA[0] * r + AklamsCoefficientA[1]) * r + AklamsCoefficientA[2]) * r + AklamsCoefficientA[3]) * r +
+                     AklamsCoefficientA[4]) * r + AklamsCoefficientA[5]) * q /
                    (((((AklamsCoefficientB[0] * r + AklamsCoefficientB[1]) * r + AklamsCoefficientB[2]) * r + AklamsCoefficientB[3]) * r +
                      AklamsCoefficientB[4]) * r + 1);
          }
@@ -110,6 +110,12 @@ namespace Bogus.Distributions.Gussian
        {
           return Convert.ToDecimal(Double(rnd, mean, standardDeviation));
        }
+
+       public static long Long(this Randomizer rnd, double mean, double standardDeviation)
+       {
+          return Convert.ToInt64(Double(rnd, mean, standardDeviation));
+       }
+
 
 
    }

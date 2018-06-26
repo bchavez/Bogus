@@ -87,6 +87,7 @@
     <Compile Include="DataSetTests\CompanyTest.cs" />
     <Compile Include="DataSetTests\DatabaseTests.cs" />
     <Compile Include="DataSetTests\DateTest.cs" />
+    <Compile Include="DistributionTests\GaussianTests.cs" />
     <Compile Include="ExtensionsForTesting.cs" />
     <Compile Include="DataSetTests\FinanceTest.cs" />
     <Compile Include="ExtensionTests\ExtensionTest.cs" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

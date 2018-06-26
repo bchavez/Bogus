@@ -409,7 +409,12 @@ public void Using_FakerT_Inheritance()
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
-
+* **`using Bogus.Distributions.Gaussian;`**
+    * `Randomizer.GaussianInt()` - Generate an `int` based on a specific normal distribution.
+    * `Randomizer.GaussianFloat()` - Generate a `float` based on a specific normal distribution.
+    * `Randomizer.GaussianDouble()` - Generate a `double` based on a specific normal distribution.
+    * `Randomizer.GaussianDecimal()` - Generate a `decimal` based on a specific normal distribution.
+    
 #### Amazing Community Extensions
 * [**AutoBogus**](https://github.com/nickdodd79/AutoBogus) ([`NuGet Package`](https://www.nuget.org/packages?q=AutoBogus)) by [@nickdodd79](https://github.com/nickdodd79/) - Extends **Bogus** by adding automatic `.RuleFor()` creation and population capabilities.
 * [**NaughtyStrings.Bogus**](https://github.com/SimonCropp/NaughtyStrings) ([`NuGet Package`](https://www.nuget.org/packages/NaughtyStrings.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Extends **Bogus** with list of naughty strings which have a high probability of causing issues when used as user-input data. Examples:

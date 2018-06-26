@@ -122,7 +122,6 @@ namespace Bogus
       }
 
 
-      
       /// <summary>
       /// Get a random double, between 0.0 and 1.0.
       /// </summary>
@@ -153,7 +152,6 @@ namespace Bogus
          return Convert.ToDecimal(Double()) * (max - min) + min;
       }
 
-
       /// <summary>
       /// Get a random float, between 0.0 and 1.0
       /// </summary>
@@ -163,7 +161,6 @@ namespace Bogus
       {
          return Convert.ToSingle(Double()) * (max - min) + min;
       }
-
 
       /// <summary>
       /// Generate a random byte between 0 and 255.

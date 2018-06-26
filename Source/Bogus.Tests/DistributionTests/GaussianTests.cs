@@ -38,7 +38,7 @@ namespace Bogus.Tests.DistributionTests
 
          for (int i = 0; i < desiredSampleSize; i++)
          {
-            double value = r.DoubleGaussian(desiredMean, desiredStandardDeviation);
+            double value = r.GaussianDouble(desiredMean, desiredStandardDeviation);
             sum += value;
             dataPoints[i] = value;
          }
@@ -84,7 +84,7 @@ namespace Bogus.Tests.DistributionTests
 
          for (int i = 0; i < desiredSampleSize; i++)
          {
-            decimal value = r.DecimalGaussian(desiredMean, desiredStandardDeviation);
+            decimal value = r.GaussianDecimal(desiredMean, desiredStandardDeviation);
             sum += value;
             dataPoints[i] = value;
          }
@@ -130,7 +130,7 @@ namespace Bogus.Tests.DistributionTests
 
          for (int i = 0; i < desiredSampleSize; i++)
          {
-            int value = r.IntGaussian(desiredMean, desiredStandardDeviation);
+            int value = r.GaussianInt(desiredMean, desiredStandardDeviation);
             sum += value;
             dataPoints[i] = value;
          }
@@ -177,7 +177,7 @@ namespace Bogus.Tests.DistributionTests
 
          for (int i = 0; i < desiredSampleSize; i++)
          {
-            float value = r.FloatGaussian(desiredMean, desiredStandardDeviation);
+            float value = r.GaussianFloat(desiredMean, desiredStandardDeviation);
             sum += value;
             dataPoints[i] = value;
          }

@@ -426,7 +426,78 @@ public void Using_FakerT_Inheritance()
     * and more!
 * [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.      
 
+### Bogus Premium Extensions!
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo_green.png" align='left' height="42px" width="42px" style="padding-right: 15px" /> **Bogus Premium** [[**Purchase Now!**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium)] by [@bchavez](https://github.com/bchavez)<br/>Come help support the **Bogus** open source project by purchasing a [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license! With an active premium license you'll be supporting this cool open-source **Bogus** project and you'll gain new superpowers that extended **Bogus** with new features and exclusive data sets! Check 'em out below!
+
+* **Premium:** [**Bogus.Tools.Analyzer**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Tools.Analyzer/)) - Save time using this handy Roslyn analyzer to generate and detect missing `.RuleFor()` rules at development & compile time! This tool comes with the [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license!
+  <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/bogus_premium_tools_analyzer_demo.gif" />
+* **Premium:** [**Bogus.Locations**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Locations/)) - A dataset that contains real geographical information for places and things. Create fake GPS points and paths. Helpful for creating geodesic data for location-based aware apps.
+  * **`Location`**
+    * `Altitude` - Generate a random altitude, in meters. Default max height is 8848m (Mount Everest). Heights are always positive.
+    * `AreaCircle` - Get a latitude and longitude within a specific radius in meters.
+    * `Depth` - Generate a random depth, in meters. Default max depth is -10994m (Mariana Trench). Depths are always negative.
+    * `Geohash` - Generates a random Geohash. [See](https://en.wikipedia.org/wiki/Geohash).
+* **Premium:** [**Bogus.Healthcare**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Healthcare/)) - A data set for the Healthcare industry. Generate fake medical records, injuries, diagnosis, drugs, dosages, human anatomy, and ICD-9 medical codes. Especially helpful in HIPAA regulated environments!
+  * **`Drugs`**
+    * `Administration` - Get how a drug should be administered. IE: oral, nasal, injection.
+    * `Dosage` - Get a drug dosage with MG units
+    * `DosageAmount` - Get a drug dosage.
+    * `DosageForm` - Get the form of a drug. IE: tablet, capsule, gel.
+    * `Ingredient` - Get a drug ingredient. IE: folic acid, magnesium hydroxide, ibuprofen.
+    * `Vitamin` - Get a random vitamin.
+  * **`Human`**
+    * `BloodType` - Get a random blood type. Ex: A+, OB
+    * `BodyPartExternal` - Get an external body part name. IE: Head, Arm, Leg.
+    * `BodyPartInternal` - Get an internal body part name. IE: Bladder, Lung, Heart.
+    * `BodyRegion` - Get a human body region. IE: Head and Neck, Thorax.
+    * `BodySystem` - Get a human body system. IE: Digestive, Nervous, Circulatory.
+    * `Diagnosis` - Shortcut to Icd9.DiagnosisLongDescription".
+    * `InfectiousDisease` - Get an infectious disease. IE: Chickenpox, Polio, Zika Fever.
+    * `Pain` - Get a human pain. Ex: Chest pain, Headache, Toothache.
+    * `Plasma` - Get a random plasma type. Ex: O, A, B, AB
+    * `Procedure` - Shortcut to Icd9.ProcedureLongDescription.
+  * **`Icd9`**
+    * `DiagnosisCode` - Get a ICD9 diagnosis code.
+    * `DiagnosisEntry` - Get a medical diagnosis.
+    * `DiagnosisLongDescription` - Get a medical diagnosis description. IE: Meningitis due to coxsackie virus.
+    * `DiagnosisShortDescription` - Get a short description of a medical diagnosis.
+    * `ProcedureCode` - Get a ICD9 procedure code.
+    * `ProcedureEntry` - Get a medical procedure.
+    * `ProcedureLongDescription` - Get a medical procedure description.
+    * `ProcedureShortDescription` - Get a short description of a medical procedure.
+  * **`Medical`**
+    * `Hospital` - Get a random hospital.
+    * `HospitalCity` - Get a hospital city.
+    * `HospitalName` - Get a random hospital name. IE: UCLA Medical Center
+    * `HospitalState` - Get a hospital state.
+    * `HospitalStreetAddress` - Get a hospital street address.
+    * `HospitalZipCode` - Get a hospital ZipCode.
+    * `Phrase` - Get a random medical phrase.
+    * `Word` - Get a medical word.
+* **Premium:** [**Bogus.Hollywood**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Hollywood/))- A dataset for the Entertainment industry.
+  * **`Movies`**
+    * `ActorName` - Get a famous actor. IE: Keanu Reeves, Liam Neeson, and Natalie Portman.
+    * `MovieCollection` - Get a random movie collection. IE: Star Wars Collection, Indiana Jones Collection.
+    * `MovieOverview` - Get a random movie overview
+    * `MovieReleaseDate` - Get a random movie release date.
+    * `MovieTagline` - Get a random movie tagline.
+    * `MovieTitle` - Get a random movie title
+    * `Production` - Get a production company.
+  * **`Tv`**
+    * `ActorName` - Get a famous actor. IE: Keanu Reeves, Liam Neeson, and Natalie Portman.
+    * `Network` - Get a random TV network. IE: BBC, ABC, NBC, FOX.
+    * `Production` - Get a production company
+    * `Series` - Get a name of a TV series. IE: Rick and Morty, Silicon Valley, The Walking Dead
+* **Premium:** [**Bogus.Text**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Text/)) - A dataset that contains historical texts in the public domain. Create fake sentences from famous speeches, classic books, and law
+  * **`Literature`**
+    * `CommonSense` - Text from "Common Sense, by Thomas Paine (1776)"
+    * `JfkSpeech` - Text from "JFK's Inaugural Address"
+    * `Knowledge` - Text from "A Treatise Concerning the Principles of Human knowledge, by George Berkeley (1710)"
+
+---
+
 ### Helper Methods
+The features shown below come standard with the [**Bogus**](https://www.nuget.org/packages/Bogus/) NuGet package.
 
 #### Person
 If you want to generate a `Person` with context relevant properties like

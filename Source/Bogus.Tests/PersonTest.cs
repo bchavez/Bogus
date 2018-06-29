@@ -100,7 +100,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void can_generate_cpr_nummer_for_denmark()
+      public void can_generate_cpr_number_for_denmark()
       {
          var p = new Person();
          var obtained = p.Cpr();

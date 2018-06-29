@@ -39,7 +39,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void should_be_valid_and_no_excpetions_on_complete_rules()
+      public void should_be_valid_and_no_exceptions_on_complete_rules()
       {
          var testOrders = new Faker<Examples.Order>()
                .StrictMode(true)
@@ -53,7 +53,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void should_be_valid_no_excpetions_on_incomplete_rules_when_strict_false()
+      public void should_be_valid_no_exceptions_on_incomplete_rules_when_strict_false()
       {
          var testOrders = new Faker<Examples.Order>()
             .StrictMode(false)

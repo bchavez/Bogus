@@ -7,7 +7,7 @@ namespace Bogus.Tests.GitHubIssues
    public class Issue70 : SeededTest
    {
       [Fact]
-      public void should_be_able_to_create_derrived_faker_with_class_hierarchy()
+      public void should_be_able_to_create_derived_faker_with_class_hierarchy()
       {
          var baseBFaker = new Faker<BaseB>()
             .RuleFor(b => b.Value, f => f.Random.Int(1, 5));

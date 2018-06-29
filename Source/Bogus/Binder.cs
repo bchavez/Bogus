@@ -74,7 +74,7 @@ namespace Bogus
                   if( m is FieldInfo fi )
                   {
                      //No private fields.
-                     //Github Issue #13
+                     //GitHub Issue #13
                      return !fi.IsPrivate;
                   }
                   return false;

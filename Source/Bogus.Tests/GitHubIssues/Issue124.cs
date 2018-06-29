@@ -90,7 +90,7 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void test_deterministic_ornull()
+      public void test_deterministic_or_null()
       {
          var faker = new Faker<Foo>()
             .RuleFor(x => x.Id, f => f.Random.Uuid())

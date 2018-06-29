@@ -126,11 +126,11 @@ namespace Bogus.DataSets
       /// Get lines of lorem.
       /// </summary>
       /// <returns></returns>
-      public string Lines(int? lineCount = null, string seperator = "\n")
+      public string Lines(int? lineCount = null, string separator = "\n")
       {
          var lc = lineCount ?? this.Random.Number(1, 5);
 
-         return Sentences(lc, seperator);
+         return Sentences(lc, separator);
       }
 
       /// <summary>

@@ -45,7 +45,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void should_be_able_to_run_two_rules_with_last_one_taking_presidence()
+      public void should_be_able_to_run_two_rules_with_last_one_taking_precedence()
       {
          var orderIds = 0;
          var testCustomers = new Faker<Customer>()

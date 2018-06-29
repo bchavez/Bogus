@@ -22,7 +22,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void every_new_generation_should_have_a_new_unqiue_index()
+      public void every_new_generation_should_have_a_new_unique_index()
       {
          var faker = new Faker<User>()
             .RuleFor(u => u.FirstName, f => f.Person.FirstName)
@@ -102,7 +102,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void issue_57_unique_index_not_really_unique_in_parentchild_generation()
+      public void issue_57_unique_index_not_really_unique_in_parent_child_generation()
       {
          var childFaker = new Faker<Issue57Child>()
             .RuleFor(u => u.Id, f => f.IndexGlobal);
@@ -122,7 +122,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void issue_57_reordering_rules_shouldn_matter()
+      public void issue_57_reordering_rules_shouldnt_matter()
       {
          var childFaker = new Faker<Issue57Child>()
             .RuleFor(u => u.Id, f => f.IndexGlobal);
@@ -153,7 +153,7 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void should_be_able_to_control_indexvariable()
+      public void should_be_able_to_control_index_variable()
       {
          var childFaker = new Faker<Issue57Child>()
             .RuleFor(u => u.Id, f => f.IndexVariable++ + 50);

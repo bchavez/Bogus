@@ -10,17 +10,17 @@ namespace Bogus.Extensions.UnitedKingdom
       /// <summary>
       /// Banking Sort Code
       /// </summary>
-      public static string SortCode(this Finance finance, bool includeSeperator = true)
+      public static string SortCode(this Finance finance, bool includeSeparator = true)
       {
-         const string withSeperators = "##-##-##";
-         const string withoutSeperators = "######";
+         const string withSeparator = "##-##-##";
+         const string withoutSeparator = "######";
 
-         if( includeSeperator )
+         if( includeSeparator )
          {
-            return finance.Random.ReplaceNumbers(withSeperators);
+            return finance.Random.ReplaceNumbers(withSeparator);
          }
 
-         return finance.Random.ReplaceNumbers(withoutSeperators);
+         return finance.Random.ReplaceNumbers(withoutSeparator);
       }
    }
 }

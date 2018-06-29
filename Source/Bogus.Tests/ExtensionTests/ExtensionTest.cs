@@ -109,7 +109,7 @@ namespace Bogus.Tests.ExtensionTests
         }
 
         [Fact]
-        public void more_than_three_consonants_in_firstname_are_squeezed()
+        public void more_than_three_consonants_in_first_name_are_squeezed()
         {
             var f = new Faker("it");
             var person = f.Person;
@@ -122,7 +122,7 @@ namespace Bogus.Tests.ExtensionTests
         }
 
         [Fact]
-        public void more_than_three_consonants_in_lastname_are_squeezed()
+        public void more_than_three_consonants_in_last_name_are_squeezed()
         {
             var f = new Faker("it");
             var person = f.Person;

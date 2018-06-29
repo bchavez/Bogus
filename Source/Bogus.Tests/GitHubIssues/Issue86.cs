@@ -27,7 +27,7 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void should_remove_diactric_marks_in_username()
+      public void should_remove_diacritic_marks_in_username()
       {
          internet.UserName("ßri'ÄÖÜían", "chaÄÖÜíez").Should().Be("riAOUian.chaAOUiez");
       }

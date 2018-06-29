@@ -138,10 +138,10 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random month
       /// </summary>
-      public string Month(bool abbrivation = false, bool useContext = false)
+      public string Month(bool abbreviation = false, bool useContext = false)
       {
          var type = "wide";
-         if( abbrivation )
+         if( abbreviation )
             type = "abbr";
 
          if( useContext &&
@@ -157,10 +157,10 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random weekday
       /// </summary>
-      public string Weekday(bool abbrivation = false, bool useContext = false)
+      public string Weekday(bool abbreviation = false, bool useContext = false)
       {
          var type = "wide";
-         if( abbrivation )
+         if( abbreviation )
             type = "abbr";
 
          if( useContext &&

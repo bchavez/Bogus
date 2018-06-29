@@ -34,7 +34,7 @@ namespace Bogus.Tests.HandlebarsTests
 
 
       [Fact]
-      public void can_parse_random_number_parametized_request()
+      public void can_parse_random_number_parameterized_request()
       {
          var faker = new Faker();
          var result = faker.Parse("{{randomizer.number (100)}}");
@@ -42,7 +42,7 @@ namespace Bogus.Tests.HandlebarsTests
       }
 
       [Fact]
-      public void can_parse_random_number_parametized_request_overload()
+      public void can_parse_random_number_parameterized_request_overload()
       {
          var faker = new Faker();
          var result = faker.Parse("{{randomizer.number (50, 100)}}");
@@ -50,14 +50,14 @@ namespace Bogus.Tests.HandlebarsTests
       }
 
       [Fact]
-      public void cant_parse_random_number_parametized_request_incorrect_overload()
+      public void cant_parse_random_number_parameterized_request_incorrect_overload()
       {
          var faker = new Faker();
          Assert.Throws<ArgumentException>(() => faker.Parse("{{randomizer.number (50, 100, 1000)}}"));
       }
 
       [Fact]
-      public void cant_parse_random_number_parametized_request_incorrect_type()
+      public void cant_parse_random_number_parameterized_request_incorrect_type()
       {
          var faker = new Faker();
          Assert.Throws<ArgumentException>(() => faker.Parse("{{randomizer.number (a)}}"));

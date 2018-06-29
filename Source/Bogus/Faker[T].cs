@@ -397,7 +397,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       public virtual T Generate(string ruleSets = null)
       {
@@ -436,7 +436,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       public virtual List<T> Generate(int count, string ruleSets = null)
       {
@@ -455,7 +455,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       public virtual IEnumerable<T> GenerateLazy(int count, string ruleSets = null)
       {
@@ -474,7 +474,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       public virtual IEnumerable<T> GenerateForever(string ruleSets = null)
       {
@@ -494,7 +494,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       public virtual void Populate(T instance, string ruleSets = null)
       {
@@ -512,7 +512,7 @@ namespace Bogus
       /// When a custom rule set name is provided in <paramref name="ruleSets"/> as parameter,
       /// the `default` rules will not run. If you want rules without an explicit rule set to run
       /// you'll need to include the `default` rule set name in the comma separated
-      /// list of rules to run. (ex: "rulesetA, rulesetB, default")
+      /// list of rules to run. (ex: "ruleSetA, ruleSetB, default")
       /// </param>
       protected virtual void PopulateInternal(T instance, string[] ruleSets)
       {

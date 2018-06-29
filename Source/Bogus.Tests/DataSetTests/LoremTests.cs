@@ -57,11 +57,11 @@ namespace Bogus.Tests.DataSetTests
       public void can_get_a_paragraph()
       {
          lorem.Paragraph()
-            .Split(". ").Length.Should().Be(5); // para of 5 sentances.
+            .Split(". ").Length.Should().Be(5); // para of 5 sentences.
       }
 
       [Fact]
-      public void paragrah_with_zero_setnaces()
+      public void paragraph_with_zero_sentences()
       {
          var text = lorem.Paragraph(0);
 
@@ -93,7 +93,7 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void can_get_a_setnance_with_range_option()
+      public void can_get_a_sentences_with_range_option()
       {
          lorem.Sentence(10, 5).Split(' ').Length.Should().Be(13);
       }
@@ -120,7 +120,7 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void check_sperator_works()
+      public void check_separator_works()
       {
          var text = lorem.Paragraphs(5, 7, "<br/>");
 

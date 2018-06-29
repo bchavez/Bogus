@@ -16,8 +16,8 @@ namespace Bogus.Extensions
       /// <param name="max">Maximum number of T objects to create. Inclusive.</param>
       public static List<T> GenerateBetween<T>(this Faker<T> faker, int min, int max, string ruleSets = null) where T : class
       {
-         var itnernals = faker as IFakerTInternal;
-         var r = itnernals.FakerHub.Random;
+         var internals = faker as IFakerTInternal;
+         var r = internals.FakerHub.Random;
          var n = r.Number(min, max);
          return faker.Generate(n, ruleSets);
       }

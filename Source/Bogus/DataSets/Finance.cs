@@ -261,7 +261,7 @@ namespace Bogus.DataSets
             token = RANGE_REG.Match(str);
             while( token.Success )
             {
-               min = Int32.Parse(token.Groups[1].Value); // This time we are not capturing the char befor `[]`
+               min = Int32.Parse(token.Groups[1].Value); // This time we are not capturing the char before `[]`
                max = Int32.Parse(token.Groups[2].Value);
                // switch min and max
                if( min > max )

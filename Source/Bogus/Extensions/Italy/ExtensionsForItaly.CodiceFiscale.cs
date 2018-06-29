@@ -107,8 +107,8 @@ namespace Bogus.Extensions.Italy
       /// <summary>
       ///   Generates an Italian Fiscal Code
       /// </summary>
-      /// <param name="lastName">Lastname of the holder</param>
-      /// <param name="firstName">Firstname of the holder</param>
+      /// <param name="lastName">Last name of the holder</param>
+      /// <param name="firstName">First name of the holder</param>
       /// <param name="birthday">Birthday of the holder</param>
       /// <param name="male">Indicates whether the holder is male</param>
       /// <param name="validChecksum">
@@ -130,7 +130,7 @@ namespace Bogus.Extensions.Italy
          sb.Append((birthday.Day + (male ? 0 : 40)).ToString("00"));
 
          //To guarantee code stability for a person, we generate
-         //fake city-of-birth code through surname and birthdate.
+         //fake city-of-birth code through surname and birth date.
          //Using actual city code database would be too heavy.
          sb.Append(lastName[0].ToString().ToUpper());
          var birthDatePositiveHash = Math.Abs(birthday.GetHashCode());
@@ -143,7 +143,7 @@ namespace Bogus.Extensions.Italy
       }
 
       /// <summary>
-      /// Checksum computation algoritm
+      /// Checksum computation algorithm
       /// </summary>
       /// <param name="prefix">The code</param>
       /// <param name="validChecksum">Indicates whether the computed checksum must be valid or not</param>
@@ -183,7 +183,7 @@ namespace Bogus.Extensions.Italy
          var regex = new Regex("[^A-Z]");
          normalizedName = regex.Replace(normalizedName, string.Empty);
 
-         // manages firstname special case (first names having more than 3 consonants -> the 2nd
+         // manages first name special case (first names having more than 3 consonants -> the 2nd
          // is skipped)
          var consonantToSkipIdx = -1;
          if( isFirstName )

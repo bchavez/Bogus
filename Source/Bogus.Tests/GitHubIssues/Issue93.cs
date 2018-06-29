@@ -17,7 +17,7 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void should_be_able_to_use_list_of_objects_and_pickrandom()
+      public void should_be_able_to_use_list_of_objects_and_pick_random()
       {
          var myObjFaker = new Faker<MyObj>()
             .RuleFor(m => m.SomeString, f => f.Lorem.Sentence());

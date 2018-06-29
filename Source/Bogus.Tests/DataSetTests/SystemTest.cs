@@ -73,7 +73,7 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void can_get_soem_random_mime_types()
+      public void can_get_some_random_mime_types()
       {
          system.MimeType().Should().Be("application/vnd.uoml+xml");
          system.MimeType().Should().Be("application/nss");

@@ -1,3 +1,6 @@
+## v22.2.1
+* PR 153: Possible breaking changes: Minor typo & spelling corrections made to some parameter names. Thanks for the corrections Simon!
+
 ## v22.1.4
 * PR 151: Added `Bogus.Distributions.Gaussian` namespace for numerical Normal Distribution generated values! Thanks codersg! 
 * Added `uniqueSuffix` parameter to `Internet.Email()` to help with unique email constraints.

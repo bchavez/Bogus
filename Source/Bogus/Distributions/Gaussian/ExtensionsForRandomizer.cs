@@ -7,20 +7,20 @@ namespace Bogus.Distributions.Gaussian
     {
 
        // Coefficients used in Acklam's Inverse Normal Cumulative Distribution function.
-       private static readonly double[] AklamsCoefficientA =
+       private static readonly double[] AcklamsCoefficientA =
           {-39.696830d, 220.946098d, -275.928510d, 138.357751d, -30.664798d, 2.506628d};
 
-       private static readonly double[] AklamsCoefficientB =
+       private static readonly double[] AcklamsCoefficientB =
           {-54.476098d, 161.585836d, -155.698979d, 66.801311d, -13.280681d};
 
-       private static readonly double[] AklamsCoefficientC =
+       private static readonly double[] AcklamsCoefficientC =
           {-0.007784894002d, -0.32239645d, -2.400758d, -2.549732d, 4.374664d, 2.938163d};
 
-       private static readonly double[] AklamsCoefficientD = { 0.007784695709d, 0.32246712d, 2.445134d, 3.754408d };
+       private static readonly double[] AcklamsCoefficientD = { 0.007784695709d, 0.32246712d, 2.445134d, 3.754408d };
 
-       // Break-Points used in Aklam's Inverse Normal Cumulative Distribution function.
-       private const double AklamsLowBreakPoint = 0.02425d;
-       private const double AklamsHighBreakPoint = 1.0d - AklamsLowBreakPoint;
+       // Break-Points used in Acklam's Inverse Normal Cumulative Distribution function.
+       private const double AcklamsLowBreakPoint = 0.02425d;
+       private const double AcklamsHighBreakPoint = 1.0d - AcklamsLowBreakPoint;
 
 
       /// <summary>
@@ -33,32 +33,32 @@ namespace Bogus.Distributions.Gaussian
       /// </returns>
       private static double InverseNCD(double probability)
       {
-         // Rational approximation for lower region of distirbution
-         if (probability < AklamsLowBreakPoint)
+         // Rational approximation for lower region of distribution
+         if (probability < AcklamsLowBreakPoint)
          {
             double q = Math.Sqrt(-2 * Math.Log(probability));
-            return (((((AklamsCoefficientC[0] * q + AklamsCoefficientC[1]) * q + AklamsCoefficientC[2]) * q + AklamsCoefficientC[3]) * q +
-                     AklamsCoefficientC[4]) * q + AklamsCoefficientC[5]) /
-                   ((((AklamsCoefficientD[0] * q + AklamsCoefficientD[1]) * q + AklamsCoefficientD[2]) * q + AklamsCoefficientD[3]) * q + 1);
+            return (((((AcklamsCoefficientC[0] * q + AcklamsCoefficientC[1]) * q + AcklamsCoefficientC[2]) * q + AcklamsCoefficientC[3]) * q +
+                     AcklamsCoefficientC[4]) * q + AcklamsCoefficientC[5]) /
+                   ((((AcklamsCoefficientD[0] * q + AcklamsCoefficientD[1]) * q + AcklamsCoefficientD[2]) * q + AcklamsCoefficientD[3]) * q + 1);
          }
 
          // Rational approximation for upper region of distribution
-         if (AklamsHighBreakPoint < probability)
+         if (AcklamsHighBreakPoint < probability)
          {
             double q = Math.Sqrt(-2 * Math.Log(1 - probability));
-            return -(((((AklamsCoefficientC[0] * q + AklamsCoefficientC[1]) * q + AklamsCoefficientC[2]) * q + AklamsCoefficientC[3]) * q +
-                      AklamsCoefficientC[4]) * q + AklamsCoefficientC[5]) /
-                   ((((AklamsCoefficientD[0] * q + AklamsCoefficientD[1]) * q + AklamsCoefficientD[2]) * q + AklamsCoefficientD[3]) * q + 1);
+            return -(((((AcklamsCoefficientC[0] * q + AcklamsCoefficientC[1]) * q + AcklamsCoefficientC[2]) * q + AcklamsCoefficientC[3]) * q +
+                      AcklamsCoefficientC[4]) * q + AcklamsCoefficientC[5]) /
+                   ((((AcklamsCoefficientD[0] * q + AcklamsCoefficientD[1]) * q + AcklamsCoefficientD[2]) * q + AcklamsCoefficientD[3]) * q + 1);
          }
 
-         // Rational approximation for central region of disribution
+         // Rational approximation for central region of distribution
          {
             double q = probability - 0.5d;
             double r = q * q;
-            return (((((AklamsCoefficientA[0] * r + AklamsCoefficientA[1]) * r + AklamsCoefficientA[2]) * r + AklamsCoefficientA[3]) * r +
-                     AklamsCoefficientA[4]) * r + AklamsCoefficientA[5]) * q /
-                   (((((AklamsCoefficientB[0] * r + AklamsCoefficientB[1]) * r + AklamsCoefficientB[2]) * r + AklamsCoefficientB[3]) * r +
-                     AklamsCoefficientB[4]) * r + 1);
+            return (((((AcklamsCoefficientA[0] * r + AcklamsCoefficientA[1]) * r + AcklamsCoefficientA[2]) * r + AcklamsCoefficientA[3]) * r +
+                     AcklamsCoefficientA[4]) * r + AcklamsCoefficientA[5]) * q /
+                   (((((AcklamsCoefficientB[0] * r + AcklamsCoefficientB[1]) * r + AcklamsCoefficientB[2]) * r + AcklamsCoefficientB[3]) * r +
+                     AcklamsCoefficientB[4]) * r + 1);
          }
       }
 
@@ -85,7 +85,7 @@ namespace Bogus.Distributions.Gaussian
       /// <summary>
       /// Generate a random int, based on the specified normal distribution.
       /// <example>
-      /// To create random int values around an avergae age of 35 years, with
+      /// To create random int values around an average age of 35 years, with
       /// a standard deviation of 4 years away from the mean.
       /// </example>
       /// <code>

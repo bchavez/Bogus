@@ -154,7 +154,7 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void can_generate_an_ordnial_direction()
+      public void can_generate_an_ordinal_direction()
       {
          address.OrdinalDirection().Should().Be("Southeast");
          address.OrdinalDirection(true).Should().Be("NE");

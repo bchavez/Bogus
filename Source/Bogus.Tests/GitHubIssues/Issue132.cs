@@ -25,7 +25,7 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void should_throw_exception_on_invalid_loclate_with_faker()
+      public void should_throw_exception_on_invalid_locate_with_faker()
       {
          Action a = () => new Faker("fe fi fo fum");
 

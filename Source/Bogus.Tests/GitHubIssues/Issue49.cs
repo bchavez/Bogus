@@ -8,7 +8,7 @@ namespace Bogus.Tests.GitHubIssues
    public class Issue49 : SeededTest
    {
       [Fact]
-      public void issue_49_pr_51_pickrandom_subset()
+      public void issue_49_pr_51_pick_random_subset()
       {
          var items = Enumerable.Range(1, 10).ToArray();
 

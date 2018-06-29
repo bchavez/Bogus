@@ -18,14 +18,14 @@ namespace Bogus.Tests.DistributionTests
          this.console = console;
          r = new Randomizer();
       }
-      
+
       /// <summary>
       /// Given a reasonable number of generated random numbers using the Gaussian methods, the mean and
       /// standard deviation of those generated numbers should be very close the mean and standard deviation
       /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tolerance.
       /// </remarks>
       [Fact]
       public void generated_doubles_should_match_specified_parameters()
@@ -46,21 +46,21 @@ namespace Bogus.Tests.DistributionTests
          double mean = sum / desiredSampleSize;
          console.WriteLine($"Desired Mean: {desiredMean}; Actual Mean: {mean}");
 
-         // Must be within tollerance of 10%
+         // Must be within tolerance of 10%
          mean.Should().BeInRange(desiredMean * 0.9, desiredMean * 1.1);
 
          // Calculate the Standard Deviation, now that we have the mean
-         double sumSqaures = 0;
+         double sumSquares = 0;
          for (int i = 0; i < desiredSampleSize; i++)
          {
-            sumSqaures += (dataPoints[i] - mean) * (dataPoints[i] - mean);
+            sumSquares += (dataPoints[i] - mean) * (dataPoints[i] - mean);
          }
 
-         double standardDeviation = Math.Sqrt(sumSqaures / desiredSampleSize);
+         double standardDeviation = Math.Sqrt(sumSquares / desiredSampleSize);
          console.WriteLine(
             $"Desired Standard Deviation: {desiredStandardDeviation}; Actual Standard Deviation {standardDeviation}");
 
-         // Must be withing a tollerance of 10%
+         // Must be withing a tolerance of 10%
          standardDeviation.Should().BeInRange(desiredStandardDeviation * 0.9, desiredStandardDeviation * 1.1);
       }
 
@@ -71,7 +71,7 @@ namespace Bogus.Tests.DistributionTests
       /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tolerance.
       /// </remarks>
       [Fact]
       public void generated_decimals_should_match_specified_parameters()
@@ -92,7 +92,7 @@ namespace Bogus.Tests.DistributionTests
          double mean = (double) (sum / desiredSampleSize);
          console.WriteLine($"Desired Mean: {desiredMean}; Actual Mean: {mean}");
 
-         // Must be within tollerance of 10%
+         // Must be within tolerance of 10%
          mean.Should().BeInRange(desiredMean * 0.9d, desiredMean * 1.1d);
 
          // Calculate the Standard Deviation, now that we have the mean
@@ -106,7 +106,7 @@ namespace Bogus.Tests.DistributionTests
          console.WriteLine(
             $"Desired Standard Deviation: {desiredStandardDeviation}; Actual Standard Deviation {standardDeviation}");
 
-         // Must be withing a tollerance of 10%
+         // Must be withing a tolerance of 10%
          standardDeviation.Should().BeInRange(desiredStandardDeviation * 0.9, desiredStandardDeviation * 1.1);
       }
 
@@ -117,7 +117,7 @@ namespace Bogus.Tests.DistributionTests
       /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tolerance.
       /// </remarks>
       [Fact]
       public void generated_ints_should_match_specified_parameters()
@@ -138,7 +138,7 @@ namespace Bogus.Tests.DistributionTests
          double mean = (double) sum / desiredSampleSize;
          console.WriteLine($"Desired Mean: {desiredMean}; Actual Mean: {mean}");
 
-         // Must be within tollerance of 10%
+         // Must be within tolerance of 10%
          mean.Should().BeInRange(desiredMean * 0.9, desiredMean * 1.1);
 
          // Calculate the Standard Deviation, now that we have the mean
@@ -152,7 +152,7 @@ namespace Bogus.Tests.DistributionTests
          console.WriteLine(
             $"Desired Standard Deviation: {desiredStandardDeviation}; Actual Standard Deviation {standardDeviation}");
 
-         // Must be withing a tollerance of 10%
+         // Must be withing a tolerance of 10%
          standardDeviation.Should().BeInRange(desiredStandardDeviation * 0.9, desiredStandardDeviation * 1.1);
 
       }
@@ -164,7 +164,7 @@ namespace Bogus.Tests.DistributionTests
       /// that was specified when generating those numbers.
       /// </summary>
       /// <remarks>
-      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tollerance.
+      /// Because we can't expect the mean and standard deviation to match exactly, we allow a 10% tolerance.
       /// </remarks>
       [Fact]
       public void generated_floats_should_match_specified_parameters()
@@ -185,7 +185,7 @@ namespace Bogus.Tests.DistributionTests
          double mean = sum / desiredSampleSize;
          console.WriteLine($"Desired Mean: {desiredMean}; Actual Mean: {mean}");
 
-         // Must be within tollerance of 10%
+         // Must be within tolerance of 10%
          mean.Should().BeInRange(desiredMean * 0.9d, desiredMean * 1.1d);
 
          // Calculate the Standard Deviation, now that we have the mean
@@ -199,7 +199,7 @@ namespace Bogus.Tests.DistributionTests
          console.WriteLine(
             $"Desired Standard Deviation: {desiredStandardDeviation}; Actual Standard Deviation {standardDeviation}");
 
-         // Must be withing a tollerance of 10%
+         // Must be withing a tolerance of 10%
          standardDeviation.Should().BeInRange(desiredStandardDeviation * 0.9, desiredStandardDeviation * 1.1);
       }
       

@@ -9,7 +9,7 @@ Project Description
 Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). **Bogus** is a simple and sane fake data generator for **.NET** languages like **C#**, **F#** and **VB.NET**. **Bogus** is fundamentally a **C#** port of [`faker.js`](https://github.com/marak/Faker.js/)
 and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentValidation)'s syntax sugar.
 
-**Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile:
+**Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile: If you find **Bogus** useful consider supporting the project by purchasing a [**Bogus Premium**](#bogus-premium-extensions) license that gives you extra **Bogus** superpowers! :dizzy: :muscle: 
 
 
 ### Download & Install
@@ -426,10 +426,10 @@ public void Using_FakerT_Inheritance()
     * and more!
 * [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.      
 
-### Bogus Premium Extensions!
-<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo_green.png" align='left' height="42px" width="42px" style="padding-right: 15px" /> **Bogus Premium** [[**Purchase Now!**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium)] by [@bchavez](https://github.com/bchavez)<br/>Come help support the **Bogus** open source project by purchasing a [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license! With an active premium license you'll be supporting this cool open-source **Bogus** project and you'll gain new superpowers that extended **Bogus** with new features and exclusive data sets! Check 'em out below!
+## Bogus Premium Extensions!
+<img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo_green.png" align='left' height="42px" width="42px" style="padding-right: 15px" /> **Bogus Premium** [[**Purchase Now!**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium)] by [@bchavez](https://github.com/bchavez)<br/>You can help support the **Bogus** open source project by purchasing a [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license! With an active premium license you'll be supporting this cool open-source project. You'll also gain new superpowers that extended **Bogus** with new features and exclusive data sets! Check 'em out below!
 
-* **Premium:** [**Bogus.Tools.Analyzer**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Tools.Analyzer/)) - Save time using this handy Roslyn analyzer to generate and detect missing `.RuleFor()` rules at development & compile time! This tool comes with the [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license!
+* **Premium:** [**Bogus.Tools.Analyzer**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Tools.Analyzer/)) - Save time using this handy Roslyn analyzer to generate and detect missing `.RuleFor()` rules at development & compile time! This tool is included with the [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license!
   <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/bogus_premium_tools_analyzer_demo.gif" />
 * **Premium:** [**Bogus.Locations**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) ([NuGet Package](https://www.nuget.org/packages/Bogus.Locations/)) - A dataset that contains real geographical information for places and things. Create fake GPS points and paths. Helpful for creating geodesic data for location-based aware apps.
   * **`Location`**

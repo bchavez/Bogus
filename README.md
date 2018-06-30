@@ -424,7 +424,8 @@ public void Using_FakerT_Inheritance()
     * `.KnownCVEsandVulnerabilities()` - Strings that test for known vulnerabilities.
     * `.ServerCodeInjection()` - Strings which can cause user to run code on server as a privileged user.
     * and more!
-* [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.      
+* [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.
+* [**NodaTime.Bogus**](https://github.com/SimonCropp/NodaTime.Bogus) ([`NuGet Package`](https://www.nuget.org/packages/NodaTime.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Adds support for [NodaTime](https://nodatime.org/) to **Bogus**. 
 
 ## Bogus Premium Extensions!
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo_green.png" align='left' height="42px" width="42px" style="padding-right: 15px" /> **Bogus Premium** [[**Purchase Now!**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium)] by [@bchavez](https://github.com/bchavez)<br/>You can help support the **Bogus** open source project by purchasing a [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license! With an active premium license you'll be supporting this cool open-source project. You'll also gain new superpowers that extended **Bogus** with new features and exclusive data sets! Check 'em out below!

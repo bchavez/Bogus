@@ -22,5 +22,21 @@ namespace Bogus.Extensions.UnitedKingdom
 
          return finance.Random.ReplaceNumbers(withoutSeparator);
       }
+      
+      /// <summary>
+      /// National Insurance Number
+      /// </summary>
+      public static string Nin(this Finance finance, bool includeSeparator = true)
+      {
+         const string withSeparator = "?? ## ## ## ?";
+         const string withoutSeparator = "??######?";
+         
+         if( includeSeparator )
+         {
+            return finance.Random.Replace(withSeparator);
+         }
+
+         return finance.Random.Replace(withoutSeparator);
+      }
    }
 }

@@ -63,7 +63,7 @@ namespace Bogus.DataSets
 
       TimeSpan RandomTimeSpanFromTicks(long totalTimeSpanTicks)
       {
-//find % of the timespan
+         //find % of the timespan
          var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
          return TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
       }

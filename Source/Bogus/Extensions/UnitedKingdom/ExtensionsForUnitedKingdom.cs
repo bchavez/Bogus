@@ -1,4 +1,5 @@
-﻿using Bogus.DataSets;
+using System.Linq;
+using Bogus.DataSets;
 
 namespace Bogus.Extensions.UnitedKingdom
 {

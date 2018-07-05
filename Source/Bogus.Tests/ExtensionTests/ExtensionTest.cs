@@ -17,6 +17,24 @@ namespace Bogus.Tests.ExtensionTests
             f.SortCode().Should().Be("61-86-06");
             f.SortCode(false).Should().Be("064391");
         }
+        
+        [Fact]
+        public void can_create_nino()
+        {
+            var f = new Finance();
+            var nino = f.Nino(false);
+            var regex = @"^[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z][0-9]{2}[0-9]{2}[0-9]{2}[ABCD]";
+            nino.Should().MatchRegex(regex);
+        }
+
+        [Fact]
+        public void can_create_separated_nino()
+        {
+           var f = new Finance();
+           var nino = f.Nino();
+           var regex = @"^[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z]\s[0-9]{2}\s[0-9]{2}\s[0-9]{2}\s[ABCD]";
+           nino.Should().MatchRegex(regex);
+        }
 
         [Fact]
         public void can_create_codice_fiscale()

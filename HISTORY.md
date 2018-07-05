@@ -1,7 +1,8 @@
 ## v22.3.1
+* PR 159: Add UK National Insurance Number `f.Finance.Nino()` in `Bogus.Extensions.UnitedKingdom`. Thanks mortware!
 * PR 160: `DateTimeOffset` support added to `f.Date` dataset. Methods are suffixed by "Offset". IE: `f.Date.SoonOffset`. Thanks Simon!
 * Added `refDate` parameter to `f.Date.Soon` and `f.Date.Recent`.
-* `f.Date.Between(start, end)` now respects `DateTimeKind.Utc`
+* `f.Date.Between(start, end)` now respects `DateTimeKind.Utc`.
 
 ## v22.2.1
 * PR 153: Possible breaking changes: Minor typo & spelling corrections made to some parameter names. Thanks for the corrections Simon!

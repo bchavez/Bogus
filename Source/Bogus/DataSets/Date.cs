@@ -26,11 +26,10 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a date in the past between refDate and years past that date.
+      /// Get a date in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
       /// </summary>
-      /// <param name="yearsToGoBack">Years to go back from refDate. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is now.</param>
-      /// <returns></returns>
+      /// <param name="yearsToGoBack">Years to go back from <paramref name="refDate"/>. Default is 1 year.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Past(int yearsToGoBack = 1, DateTime? refDate = null)
       {
          var maxDate = refDate ?? DateTime.Now;
@@ -48,7 +47,6 @@ namespace Bogus.DataSets
       {
 //find % of the timespan
          var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
          return TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
       }
 
@@ -62,10 +60,10 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a date in the future between refDate and years forward of that date.
+      /// Get a date in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
       /// </summary>
-      /// <param name="yearsToGoForward">Years to go forward from refDate. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is now.</param>
+      /// <param name="yearsToGoForward">Years to go forward from <paramref name="refDate"/>. Default is 1 year.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Future(int yearsToGoForward = 1, DateTime? refDate = null)
       {
          var minDate = refDate ?? DateTime.Now;
@@ -80,11 +78,10 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random date between start and end.
+      /// Get a random date between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
       /// <param name="start">Starting</param>
       /// <param name="end">Ending</param>
-      /// <returns></returns>
       public DateTime Between(DateTime start, DateTime end)
       {
          var minTicks = Math.Min(start.Ticks, end.Ticks);
@@ -101,7 +98,6 @@ namespace Bogus.DataSets
       /// Get a random date/time within the last few days since now.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      /// <returns></returns>
       public DateTime Recent(int days = 1)
       {
          var maxDate = DateTime.Now;
@@ -116,7 +112,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random span of time.
+      /// Get a random <see cref="Timespan"/>.
       /// </summary>
       /// <param name="maxSpan">Maximum of time to span. Default 1 week/7 days.</param>
       public TimeSpan Timespan(TimeSpan? maxSpan = null)

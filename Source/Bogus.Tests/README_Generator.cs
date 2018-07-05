@@ -126,7 +126,7 @@ namespace Bogus.Tests
 
          //make sure # of embedded locales matches the number of imported on disk.
          var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-         var dataDir = Path.Combine(workingDir, @"..\..\..\Bogus\data");
+         var dataDir = Path.Combine(workingDir, @"..\..\..\..\Bogus\data");
          count.Should().Be(Directory.GetFiles(dataDir, "*.locale.json").Length);
 
          output.WriteLine(string.Join("\n", locales));

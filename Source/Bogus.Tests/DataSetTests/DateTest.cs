@@ -51,10 +51,30 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_dateOffset_in_future()
+      {
+         var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.FutureOffset(refDate: starting).Should()
+            .BeOnOrBefore(starting.AddYears(1))
+            .And
+            .BeOnOrAfter(starting);
+      }
+
+      [Fact]
       public void can_get_date_in_future_with_options()
       {
          var starting = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
          date.Future(refDate: starting, yearsToGoForward: 5).Should()
+            .BeOnOrBefore(starting.AddYears(5))
+            .And
+            .BeOnOrAfter(starting);
+      }
+
+      [Fact]
+      public void can_get_dateOffset_in_future_with_options()
+      {
+         var starting = DateTimeOffset.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
+         date.FutureOffset(refDate: starting, yearsToGoForward: 5).Should()
             .BeOnOrBefore(starting.AddYears(5))
             .And
             .BeOnOrAfter(starting);
@@ -71,6 +91,16 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_dateOffset_in_past()
+      {
+         var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.PastOffset(refDate: starting).Should()
+            .BeOnOrBefore(starting)
+            .And
+            .BeOnOrAfter(starting.AddYears(-1));
+      }
+
+      [Fact]
       public void can_get_date_in_past_0_days_results_in_random_time()
       {
          date.Recent(0).Should()
@@ -80,10 +110,29 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_dateOffset_in_past_0_days_results_in_random_time()
+      {
+         date.RecentOffset(0).Should()
+            .BeOnOrBefore(DateTimeOffset.Now)
+            .And
+            .BeOnOrAfter(DateTimeOffset.Now.Date);
+      }
+
+      [Fact]
       public void can_get_date_in_past_with_custom_options()
       {
          var starting = DateTime.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
          date.Past(refDate: starting, yearsToGoBack: 5).Should()
+            .BeOnOrBefore(starting)
+            .And
+            .BeOnOrAfter(starting.AddYears(-5));
+      }
+
+      [Fact]
+      public void can_get_dateOffset_in_past_with_custom_options()
+      {
+         var starting = DateTimeOffset.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
+         date.PastOffset(refDate: starting, yearsToGoBack: 5).Should()
             .BeOnOrBefore(starting)
             .And
             .BeOnOrAfter(starting.AddYears(-5));
@@ -100,6 +149,16 @@ namespace Bogus.Tests.DataSetTests
             .BeOnOrAfter(start.AddDays(-1));
       }
 
+      [Fact]
+      public void can_get_dateOffset_recently_within_the_year()
+      {
+         var start = DateTimeOffset.Now;
+         date.RecentOffset()
+            .Should()
+            .BeOnOrBefore(start)
+            .And
+            .BeOnOrAfter(start.AddDays(-1));
+      }
 
       [Fact]
       public void can_get_random_time_between_two_dates()
@@ -122,10 +181,37 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void get_a_date_time_that_will_happen_soon()
+      public void can_get_random_time_between_two_dateOffsets()
+      {
+         var start = DateTimeOffset.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
+         var end = DateTimeOffset.Parse("8/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
+
+         date.BetweenOffset(start, end)
+            .Should()
+            .BeOnOrAfter(start)
+            .And
+            .BeOnOrBefore(end);
+
+         //and reverse...
+         date.BetweenOffset(end, start)
+            .Should()
+            .BeOnOrAfter(start)
+            .And
+            .BeOnOrBefore(end);
+      }
+
+      [Fact]
+      public void get_a_date_that_will_happen_soon()
       {
          var now = DateTime.Now;
          date.Soon(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
+      }
+
+      [Fact]
+      public void get_a_dateOffsets_that_will_happen_soon()
+      {
+         var now = DateTimeOffset.Now;
+         date.SoonOffset(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
       }
    }
 }

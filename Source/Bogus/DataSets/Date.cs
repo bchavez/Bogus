@@ -39,12 +39,17 @@ namespace Bogus.DataSets
 
          var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 
-         //find % of the timespan
-         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
-         var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
          return maxDate - partTimeSpan;
+      }
+
+      TimeSpan RandomTimeSpanFromTicks(long totalTimeSpanTicks)
+      {
+//find % of the timespan
+         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
+
+         return TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
       }
 
       /// <summary>
@@ -69,10 +74,7 @@ namespace Bogus.DataSets
 
          var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 
-         //find % of the timespan
-         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
-         var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
          return minDate + partTimeSpan;
       }
@@ -90,9 +92,7 @@ namespace Bogus.DataSets
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
-         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
-         var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
          return new DateTime(minTicks) + partTimeSpan;
       }
@@ -110,10 +110,7 @@ namespace Bogus.DataSets
 
          var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 
-         //find % of the timespan
-         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
-         var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
+         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
          return maxDate - partTimeSpan;
       }
@@ -126,13 +123,7 @@ namespace Bogus.DataSets
       {
          var span = maxSpan ?? TimeSpan.FromDays(7);
 
-         var totalTimeSpanTicks = span.Ticks;
-
-         var partTimeSpanTicks = Random.Double() * totalTimeSpanTicks;
-
-         var partTimeSpan = TimeSpan.FromTicks(Convert.ToInt64(partTimeSpanTicks));
-
-         return partTimeSpan;
+         return RandomTimeSpanFromTicks(span.Ticks);
       }
 
       /// <summary>

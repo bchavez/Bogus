@@ -71,7 +71,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a <see cref="DateTime"/> that will happen soon.
       /// </summary>
-      /// <param name="days">A date no more than N days ahead.</param>
+      /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
       public DateTime Soon(int days = 1)
       {
          return Between(DateTime.Now, DateTime.Now.AddDays(days));
@@ -80,7 +80,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a <see cref="DateTimeOffset"/> that will happen soon.
       /// </summary>
-      /// <param name="days">A date no more than N days ahead.</param>
+      /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
       public DateTimeOffset SoonOffset(int days = 1)
       {
          return BetweenOffset(DateTimeOffset.Now, DateTimeOffset.Now.AddDays(days));

@@ -29,20 +29,29 @@ namespace Bogus.Extensions.UnitedKingdom
       /// </summary>
       public static string Nino(this Finance finance, bool includeSeparator = true)
       {
-         string[] invalidPrefixes = { "GB", "BG", "NK", "KN", "TN", "NT", "ZZ" };
-         char[] valid1stPrefixChars = { 'A','B','C','E','G','H','J','K','L','M','N','O','P','R','S','T','W','X','Y','Z' };
-         char[] valid2ndPrefixChars = { 'A','B','C','E','G','H','J','K','L','M','N',    'P','R','S','T','W','X','Y','Z' };
-         char[] validSuffixChars = { 'A', 'B', 'C', 'D' };
+         const string valid1stPrefixChars =   "ABCEGHJKLMNOPRSTWXYZ";
+         //const string valid2ndPrefixChars = "ABCEGHJKLMN PRSTWXYZ";
+         const string validSuffixChars = "ABCD";
 
-         string prefix;
-         do
+         var prefix = finance.Random.String2(2, chars: valid1stPrefixChars);
+
+         if (prefix.EndsWith("O"))
+         {  //second character in prefix can't end with an 'O'
+            //Remap O to an X.
+            prefix = prefix.Replace('O', 'X');
+         }
+
+         //check for invalid prefixes
+         if (prefix == "GB" || prefix == "BG" || prefix == "NK" ||
+             prefix == "KN" || prefix == "TN" || prefix == "NT" ||
+             prefix == "ZZ")
          {
-            prefix = "";
-            prefix += finance.Random.ArrayElement(valid1stPrefixChars);
-            prefix += finance.Random.ArrayElement(valid2ndPrefixChars);
-         } while (invalidPrefixes.Any(x => x.Equals(prefix)));
+            //if the prefix is any of the invalid prefixes,
+            //Remap an invalid prefix to a well known valid one.
+            prefix = "CE";
+         }
 
-         char suffix = finance.Random.ArrayElement(validSuffixChars);
+         var suffix = finance.Random.String2(1, validSuffixChars);
 
          if (includeSeparator)
          {

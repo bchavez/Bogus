@@ -26,7 +26,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a date in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
+      /// Get a <see cref="DateTime"/> in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
       /// </summary>
       /// <param name="yearsToGoBack">Years to go back from <paramref name="refDate"/>. Default is 1 year.</param>
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
@@ -51,7 +51,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a date and time that will happen soon.
+      /// Get a <see cref="DateTime"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than N days ahead.</param>
       public DateTime Soon(int days = 1)
@@ -60,7 +60,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a date in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
+      /// Get a <see cref="DateTime"/> in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
       /// </summary>
       /// <param name="yearsToGoForward">Years to go forward from <paramref name="refDate"/>. Default is 1 year.</param>
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
@@ -78,7 +78,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random date between <paramref name="start"/> and <paramref name="end"/>.
+      /// Get a random <see cref="DateTime"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
       /// <param name="start">Starting</param>
       /// <param name="end">Ending</param>
@@ -95,7 +95,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random date/time within the last few days since now.
+      /// Get a random <see cref="DateTime"/> within the last few days since now.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
       public DateTime Recent(int days = 1)

@@ -72,18 +72,22 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTime"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
-      public DateTime Soon(int days = 1)
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      public DateTime Soon(int days = 1, DateTime? refDate = null)
       {
-         return Between(DateTime.Now, DateTime.Now.AddDays(days));
+         var dt = refDate ?? DateTime.Now;
+         return Between(dt, dt.AddDays(days));
       }
 
       /// <summary>
       /// Get a <see cref="DateTimeOffset"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
-      public DateTimeOffset SoonOffset(int days = 1)
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      public DateTimeOffset SoonOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         return BetweenOffset(DateTimeOffset.Now, DateTimeOffset.Now.AddDays(days));
+         var dt = refDate ?? DateTimeOffset.Now;
+         return BetweenOffset(dt, dt.AddDays(days));
       }
 
       /// <summary>
@@ -125,8 +129,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random <see cref="DateTime"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
-      /// <param name="start">Starting</param>
-      /// <param name="end">Ending</param>
+      /// <param name="start">Start time - The returned <seealso cref="DateTimeKind"/> is used from this parameter.</param>
+      /// <param name="end">End time</param>
       public DateTime Between(DateTime start, DateTime end)
       {
          var minTicks = Math.Min(start.Ticks, end.Ticks);
@@ -136,14 +140,14 @@ namespace Bogus.DataSets
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTime(minTicks) + partTimeSpan;
+         return new DateTime(minTicks, start.Kind) + partTimeSpan;
       }
 
       /// <summary>
       /// Get a random <see cref="DateTimeOffset"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
-      /// <param name="start">Starting</param>
-      /// <param name="end">Ending</param>
+      /// <param name="start">Start time - The returned <seealso cref="DateTimeOffset"/> offset value is used from this parameter</param>
+      /// <param name="end">End time</param>
       public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
       {
          var minTicks = Math.Min(start.Ticks, end.Ticks);
@@ -153,16 +157,17 @@ namespace Bogus.DataSets
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTimeOffset(minTicks, DateTimeOffset.Now.Offset) + partTimeSpan;
+         return new DateTimeOffset(minTicks, start.Offset) + partTimeSpan;
       }
 
       /// <summary>
-      /// Get a random <see cref="DateTime"/> within the last few days since DateTime.Now.
+      /// Get a random <see cref="DateTime"/> within the last few days.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      public DateTime Recent(int days = 1)
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
+      public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
-         var maxDate = DateTime.Now;
+         var maxDate = refDate ?? DateTime.Now;
 
          var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
 
@@ -174,12 +179,13 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random <see cref="DateTimeOffset"/> within the last few days since <see cref="DateTimeOffset.Now"/>.
+      /// Get a random <see cref="DateTimeOffset"/> within the last few days.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      public DateTimeOffset RecentOffset(int days = 1)
+      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = DateTimeOffset.Now;
+         var maxDate = refDate ?? DateTimeOffset.Now;
 
          var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
 
@@ -191,7 +197,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random <see cref="Timespan"/>.
+      /// Get a random <see cref="TimeSpan"/>.
       /// </summary>
       /// <param name="maxSpan">Maximum of time to span. Default 1 week/7 days.</param>
       public TimeSpan Timespan(TimeSpan? maxSpan = null)

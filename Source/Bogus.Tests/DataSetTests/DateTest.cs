@@ -213,5 +213,107 @@ namespace Bogus.Tests.DataSetTests
          var now = DateTimeOffset.Now;
          date.SoonOffset(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
       }
+
+      [Fact]
+      public void soon_explicit_refdate_in_utc_should_return_utc_kind()
+      {
+         const int days = 3;
+         var dt = DateTime.Parse("7/5/2018 9:00 AM");
+         var utc = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+         var utcEnd = utc.AddDays(days);
+         var result = date.Soon(days, utc);
+         
+         result.Kind.Should().Be(DateTimeKind.Utc);
+
+         result.Should()
+            .BeOnOrAfter(utc)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
+
+      [Fact]
+      public void soon_explicit_refdate_offset_should_return_explicit_offset()
+      {
+         const int days = 3;
+         var offset = TimeSpan.FromHours(-3);
+         var utc = DateTimeOffset.Parse("7/5/2018 9:00 AM").ToOffset(offset);
+         var utcEnd = utc.AddDays(days);
+         var result = date.SoonOffset(days, utc);
+
+         result.Offset.Should().Be(offset);
+
+         result.Should()
+            .BeOnOrAfter(utc)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
+
+      [Fact]
+      public void recent_explicit_refdate_in_utc_should_return_utc_kind()
+      {
+         const int days = 3;
+         var dt = DateTime.Parse("7/5/2018 9:00 AM");
+         var utcEnd = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+         var utcPast = utcEnd.AddDays(-days);
+         var result = date.Recent(days, utcEnd);
+
+         result.Kind.Should().Be(DateTimeKind.Utc);
+
+         result.Should()
+            .BeOnOrAfter(utcPast)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
+
+      [Fact]
+      public void recent_explicit_refdate_offset_should_return_explicit_offset()
+      {
+         const int days = 3;
+         var offset = TimeSpan.FromHours(-3);
+         var utcEnd = DateTimeOffset.Parse("7/5/2018 9:00 AM").ToOffset(offset);
+         var utcPast = utcEnd.AddDays(-days);
+         var result = date.RecentOffset(days, utcEnd);
+
+         result.Offset.Should().Be(offset);
+
+         result.Should()
+            .BeOnOrAfter(utcPast)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
+
+      [Fact]
+      public void between_explicit_refdate_in_utc_should_return_utc_kind()
+      {
+         const int days = 3;
+         var dt = DateTime.Parse("8/8/2017 10:00 AM");
+         var utc = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
+         var utcEnd = utc.AddDays(days);
+         var result = date.Between(utc, utcEnd);
+
+         result.Kind.Should().Be(DateTimeKind.Utc);
+
+         result.Should()
+            .BeOnOrAfter(utc)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
+
+      [Fact]
+      public void between_explicit_start_offset_should_return_explicit_offset()
+      {
+         const int days = 3;
+         var offset = TimeSpan.FromHours(-3);
+         var utc = DateTimeOffset.Parse("8/8/2017 10:00 AM").ToOffset(offset);
+         var utcEnd = utc.AddDays(days);
+         var result = date.BetweenOffset(utc, utcEnd);
+
+         result.Offset.Should().Be(offset);
+
+         result.Should()
+            .BeOnOrAfter(utc)
+            .And
+            .BeOnOrBefore(utcEnd);
+      }
    }
 }

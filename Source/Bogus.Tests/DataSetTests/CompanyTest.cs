@@ -42,7 +42,7 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_company_suffix_array()
       {
-         var arr = company.Suffexes();
+         var arr = company.Suffixes();
 
          arr.Length.Should().NotBe(0);
       }

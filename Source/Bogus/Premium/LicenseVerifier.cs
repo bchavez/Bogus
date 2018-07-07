@@ -103,8 +103,8 @@ namespace Bogus.Premium
          key = lines[1];
       }
 
-      public static List<string> ProbePaths { get; } = new List<string>()
          {
+      public static List<string> ProbePaths { get; } = new List<string>
 #if STANDARD
             AppContext.BaseDirectory,
 #endif

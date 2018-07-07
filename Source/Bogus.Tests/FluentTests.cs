@@ -76,8 +76,8 @@ namespace Bogus.Tests
       {
          var random = new Randomizer();
          var lorem = new Lorem("en");
-         var o = new Order()
             {
+         var o = new Order
                OrderId = random.Number(1, 100),
                Item = lorem.Sentence(),
                Quantity = random.Number(1, 10)
@@ -91,8 +91,8 @@ namespace Bogus.Tests
       public void With_Faker_Facade()
       {
          var faker = new Faker("en");
-         var o = new Order()
             {
+         var o = new Order
                OrderId = faker.Random.Number(1, 100),
                Item = faker.Lorem.Sentence(),
                Quantity = faker.Random.Number(1, 10)

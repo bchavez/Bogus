@@ -731,12 +731,12 @@ namespace Bogus
       /// </summary>
       public WordFunctions(Randomizer r)
       {
-         this.Commerce = new Commerce() {Random = r};
-         this.Company = new Company() {Random = r};
-         this.Address = new Address() {Random = r};
-         this.Finance = new Finance() {Random = r};
-         this.Hacker = new Hacker() {Random = r};
-         this.Name = new Name() {Random = r};
+         this.Commerce = new Commerce {Random = r};
+         this.Company = new Company {Random = r};
+         this.Address = new Address {Random = r};
+         this.Finance = new Finance {Random = r};
+         this.Hacker = new Hacker {Random = r};
+         this.Name = new Name {Random = r};
 
          Init();
       }

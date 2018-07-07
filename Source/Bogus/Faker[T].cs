@@ -235,8 +235,8 @@ namespace Bogus
                return null;
             };
          var guid = Guid.NewGuid().ToString();
-         var rule = new PopulateAction<T>()
             {
+         var rule = new PopulateAction<T>
                Action = invoker,
                RuleSet = currentRuleSet,
                PropertyName = guid,

@@ -222,7 +222,7 @@ namespace Bogus.Tests.DataSetTests
          var utc = DateTime.SpecifyKind(dt, DateTimeKind.Utc);
          var utcEnd = utc.AddDays(days);
          var result = date.Soon(days, utc);
-         
+
          result.Kind.Should().Be(DateTimeKind.Utc);
 
          result.Should()

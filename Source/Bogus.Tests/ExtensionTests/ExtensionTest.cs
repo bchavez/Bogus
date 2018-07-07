@@ -1,5 +1,4 @@
 ﻿using Bogus.DataSets;
-using Bogus.Extensions;
 using Bogus.Extensions.UnitedKingdom;
 using Bogus.Extensions.Italy;
 using FluentAssertions;
@@ -17,7 +16,7 @@ namespace Bogus.Tests.ExtensionTests
             f.SortCode().Should().Be("61-86-06");
             f.SortCode(false).Should().Be("064391");
         }
-        
+
         [Fact]
         public void can_create_nino()
         {

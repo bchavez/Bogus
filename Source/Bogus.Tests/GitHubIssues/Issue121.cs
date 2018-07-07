@@ -1,5 +1,4 @@
 ﻿using System;
-using Bogus.Tests.Models;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;

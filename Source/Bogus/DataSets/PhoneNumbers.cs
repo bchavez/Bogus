@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 
 namespace Bogus.DataSets
 {
@@ -18,7 +17,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a phone number. 
+      /// Get a phone number.
       /// </summary>
       /// <param name="format">Format of phone number in any format. Replaces # characters with numbers. IE: '###-###-####' or '(###) ###-####'</param>
       /// <returns></returns>
@@ -50,7 +49,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Replaces special ! characters in phone number formats. 
+      /// Replaces special ! characters in phone number formats.
       /// </summary>
       protected virtual string ReplaceExclamChar(string s)
       {

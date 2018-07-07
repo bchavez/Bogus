@@ -1,7 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Xml.Linq;
 using FluentAssertions;
 using MoreLinq;
@@ -25,8 +28,8 @@ namespace Bogus.Tests
       [Fact]
       public void get_available_methods()
       {
-         var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-         var bogusXml = Path.Combine(workingDir, "Bogus.XML");
+         var (_, buildDir) = GetWorkingFolders();
+         var bogusXml = Path.Combine(buildDir, "Bogus.XML");
          var x = XElement.Load(bogusXml);
          var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
 
@@ -125,8 +128,9 @@ namespace Bogus.Tests
 
 
          //make sure # of embedded locales matches the number of imported on disk.
-         var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-         var dataDir = Path.Combine(workingDir, @"..\..\..\Bogus\data");
+         //var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+         var (projectDir, _) = GetWorkingFolders();
+         var dataDir = projectDir.PathCombine(@"..\Bogus\data");
          count.Should().Be(Directory.GetFiles(dataDir, "*.locale.json").Length);
 
          output.WriteLine(string.Join("\n", locales));
@@ -135,8 +139,8 @@ namespace Bogus.Tests
       [Fact]
       public void get_extension_namespaces()
       {
-         var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-         var bogusXml = Path.Combine(workingDir, "Bogus.XML");
+         var (_, buildDir) = GetWorkingFolders();
+         var bogusXml = Path.Combine(buildDir, "Bogus.XML");
          var x = XElement.Load(bogusXml);
          var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
 
@@ -181,6 +185,33 @@ namespace Bogus.Tests
                output.WriteLine($"\t* `{objectExtends}.{method}()` - {i.summary}");
             }
          }
+      }
+
+
+      //ReSharper, .NET Full Framework, and .NET Core all 
+      //screw up the working folder path; this brings some
+      //sanity back. Very hack, but works.
+      private (string projectDir, string buildDir) GetWorkingFolders()
+      {
+         string FindRoot(string path)
+         {
+            if( path.ToUpper().EndsWith("BOGUS.TESTS") )
+               return path;
+
+            return FindRoot(Path.GetFullPath(path.PathCombine("..")));
+         }
+
+         var asmLoc = typeof(README_Generator).GetTypeInfo().Assembly.Location;
+         var asmDir = Path.GetDirectoryName(asmLoc);
+         var iniFile = Path.Combine(asmDir, "__AssemblyInfo__.ini");
+         if( File.Exists(iniFile) )
+         {
+            var content = File.ReadAllText(iniFile, Encoding.Unicode);
+            var file = content.GetAfter("file:///").GetBefore("\0");
+            return (FindRoot(file), Path.GetDirectoryName(file));
+         }
+
+         return (FindRoot(asmLoc), Path.GetDirectoryName(asmLoc));
       }
    }
 }

@@ -65,7 +65,7 @@ Target "dnx" (fun _ ->
     let tag = "dnx_build"
     
     Dotnet DotnetCommands.Restore BogusProject.Folder
-    //Dotnet DotnetCommands.Restore TestProject.Folder
+    Dotnet DotnetCommands.Restore TestProject.Folder
     DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
 )
 
@@ -76,17 +76,18 @@ Target "restore" (fun _ ->
 
      tracefn "NuGet Tool Path: %s" toolPath
 
-     Projects.SolutionFile
-     |> RestoreMSSolutionPackages (fun p ->
-            { 
-              p with 
-                OutputPath = (Folders.Source @@ "packages" )
-                ToolPath = toolPath
-            }
-        )
+     //Projects.SolutionFile
+     //|> RestoreMSSolutionPackages (fun p ->
+     //       { 
+     //         p with 
+     //           OutputPath = (Folders.Source @@ "packages" )
+     //           ToolPath = toolPath
+     //       }
+     //   )
 
      trace ".NET Core Restore"
      Dotnet DotnetCommands.Restore BogusProject.Folder
+     Dotnet DotnetCommands.Restore TestProject.Folder
  )
 
 open Ionic.Zip

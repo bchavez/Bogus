@@ -112,7 +112,7 @@ type Project with
 type TestProject(name : string, folders : Folders) =
     inherit Project(name, folders)
     
-    let testAssembly = base.MsBuildBin("Debug") @@ sprintf "%s.dll" base.Name
+    let testAssembly = base.MsBuildBin("Debug") @@ "net471" @@ sprintf "%s.dll" base.Name
     member this.TestAssembly = testAssembly
 
 

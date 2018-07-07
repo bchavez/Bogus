@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Exporters;
 using Bogus;
@@ -52,7 +51,6 @@ namespace Benchmark
          }
 
          this.result = new string(target);
-
       }
    }
 }

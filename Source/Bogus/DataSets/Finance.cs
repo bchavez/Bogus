@@ -113,8 +113,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get an account number. Default length is 8 digits.
       /// </summary>
-      /// <param name="length"></param>
-      /// <returns></returns>
       public string Account(int length = 8)
       {
          var template = new string('#', length);
@@ -124,7 +122,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get an account name. Like "savings", "checking", "Home Loan" etc..
       /// </summary>
-      /// <returns></returns>
       public string AccountName()
       {
          var type = GetRandomArrayItem("account_type");
@@ -137,7 +134,6 @@ namespace Bogus.DataSets
       /// <param name="min">Min value. Default 0.</param>
       /// <param name="max">Max value. Default 1000.</param>
       /// <param name="decimals">Decimal places. Default 2.</param>
-      /// <returns></returns>
       public decimal Amount(decimal min = 0, decimal max = 1000, int decimals = 2)
       {
          var amount = (max - min);
@@ -149,7 +145,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
       /// </summary>
-      /// <returns></returns>
       public string TransactionType()
       {
          return GetRandomArrayItem("transaction_type");
@@ -158,7 +153,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random currency.
       /// </summary>
-      /// <returns></returns>
       public Currency Currency(bool includeFundCodes = false)
       {
          var obj = this.GetRandomBObject("currency");
@@ -353,8 +347,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates an International Bank Account Number (IBAN).
       /// </summary>
-      /// <param name="formatted"></param>
-      /// <returns></returns>
       public string Iban(bool formatted = false)
       {
          var ibanFormat = this.RandomIbanFormat();

@@ -27,7 +27,6 @@ namespace Bogus.Distributions.Gaussian
       /// This algorithm follows Peter J Acklam's Inverse Normal Cumulative Distribution function.
       /// Reference: P.J. Acklam, "An algorithm for computing the inverse normal cumulative distribution function," 2010
       /// </summary>
-      /// <param name="probability"></param>
       /// <returns>
       /// A double between 0.0 and 1.0
       /// </returns>
@@ -73,7 +72,6 @@ namespace Bogus.Distributions.Gaussian
       /// </code>
       /// </example>
       /// </summary>
-      /// <param name="rnd"></param>
       /// <param name="mean">Mean value of the normal distribution</param>
       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
       public static double GaussianDouble(this Randomizer rnd, double mean, double standardDeviation)
@@ -92,7 +90,6 @@ namespace Bogus.Distributions.Gaussian
       /// call GaussianInt(35, 4)
       /// </code>
       /// </summary>
-      /// <param name="rnd"></param>
       /// <param name="mean">Mean average of the normal distribution</param>
       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
       public static int GaussianInt(this Randomizer rnd, double mean, double standardDeviation)
@@ -110,9 +107,6 @@ namespace Bogus.Distributions.Gaussian
       /// </code>
       /// </example>
       /// </summary>
-      /// <param name="rnd"></param>
-      /// <param name="mean"></param>
-      /// <param name="standardDeviation"></param>
       public static float GaussianFloat(this Randomizer rnd, double mean, double standardDeviation)
        {
           return Convert.ToSingle(GaussianDouble(rnd, mean, standardDeviation));
@@ -128,9 +122,6 @@ namespace Bogus.Distributions.Gaussian
       /// </code>
       /// </example>
       /// </summary>
-      /// <param name="rnd"></param>
-      /// <param name="mean"></param>
-      /// <param name="standardDeviation"></param>
       public static decimal GaussianDecimal(this Randomizer rnd, double mean, double standardDeviation)
        {
           return Convert.ToDecimal(GaussianDouble(rnd, mean, standardDeviation));

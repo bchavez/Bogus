@@ -31,16 +31,12 @@ namespace Bogus
       /// <summary>
       /// Ignore a property or field when using StrictMode.
       /// </summary>
-      /// <typeparam name="TPropertyOrField"></typeparam>
-      /// <param name="propertyOrField"></param>
-      /// <returns></returns>
       Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField);
 
       /// <summary>
       /// Ensures all properties of T have rules.
       /// </summary>
       /// <param name="ensureRulesForAllProperties">Overrides any global setting in Faker.DefaultStrictMode</param>
-      /// <returns></returns>
       Faker<T> StrictMode(bool ensureRulesForAllProperties);
 
       /// <summary>

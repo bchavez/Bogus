@@ -11,7 +11,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Images(string locale = "en") : base(locale)
       {
       }

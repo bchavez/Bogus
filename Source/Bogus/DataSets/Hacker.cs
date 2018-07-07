@@ -15,7 +15,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns an abbreviation.
       /// </summary>
-      /// <returns></returns>
       public string Abbreviation()
       {
          return GetRandomArrayItem("abbreviation");
@@ -24,7 +23,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a adjective.
       /// </summary>
-      /// <returns></returns>
       public string Adjective()
       {
          return GetRandomArrayItem("adjective");
@@ -33,7 +31,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a noun.
       /// </summary>
-      /// <returns></returns>
       public string Noun()
       {
          return GetRandomArrayItem("noun");
@@ -42,7 +39,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a verb.
       /// </summary>
-      /// <returns></returns>
       public string Verb()
       {
          return GetRandomArrayItem("verb");
@@ -51,7 +47,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns an -ing verb.
       /// </summary>
-      /// <returns></returns>
       public string IngVerb()
       {
          return GetRandomArrayItem("ingverb");
@@ -60,7 +55,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a phrase.
       /// </summary>
-      /// <returns></returns>
       public string Phrase()
       {
          var phrase = GetRandomArrayItem("phrase");

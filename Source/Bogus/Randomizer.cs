@@ -36,7 +36,6 @@ namespace Bogus
       /// Constructor that uses <see cref="localSeed"/> parameter as a seed.
       /// Completely ignores the global static <see cref="Seed"/>.
       /// </summary>
-      /// <param name="localSeed"></param>
       public Randomizer(int localSeed)
       {
          this.localSeed = new Random(localSeed);
@@ -48,7 +47,6 @@ namespace Bogus
       /// Get an int from 0 to max.
       /// </summary>
       /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
-      /// <returns></returns>
       public int Number(int max)
       {
          return Number(0, max);
@@ -60,7 +58,6 @@ namespace Bogus
       /// <param name="count">How many</param>
       /// <param name="minDigit">minimum digit, inclusive</param>
       /// <param name="maxDigit">maximum digit, inclusive</param>
-      /// <returns></returns>
       public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
       {
          if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
@@ -79,7 +76,6 @@ namespace Bogus
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
-      /// <returns></returns>
       public int Number(int min = 0, int max = 1)
       {
          //lock any seed access, for thread safety.
@@ -486,7 +482,6 @@ namespace Bogus
       /// <summary>
       /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4. Letters are uppercase.
       /// </summary>
-      /// <param name="format"></param>
       public string Replace(string format)
       {
          var chars = format.Select(c =>

@@ -22,7 +22,6 @@ namespace Bogus
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public DataSet(string locale = "en")
       {
          if( !Database.LocaleResourceExists(locale) )
@@ -104,7 +103,6 @@ namespace Bogus
       /// Returns a BSON array given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
       /// <param name="path">key in the category</param>
-      /// <returns></returns>
       protected internal virtual BArray GetArray(string path)
       {
          return (BArray)Get(path);

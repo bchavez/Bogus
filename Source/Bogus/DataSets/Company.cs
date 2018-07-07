@@ -16,7 +16,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Company(string locale = "en") : base(locale)
       {
          this.Name = this.Notifier.Flow(new Name(locale));
@@ -25,7 +24,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company suffix. "Inc" and "LLC" etc.
       /// </summary>
-      /// <returns></returns>
       public string CompanySuffix()
       {
          return Random.ArrayElement(Suffixes());
@@ -61,7 +59,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company catch phrase.
       /// </summary>
-      /// <returns></returns>
       public string CatchPhrase()
       {
          return $"{CatchPhraseAdjective()} {CatchPhraseDescriptor()} {CatchPhraseNoun()}";
@@ -70,7 +67,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company BS phrase.
       /// </summary>
-      /// <returns></returns>
       public string Bs()
       {
          return $"{BsBuzz()} {BsAdjective()} {BsNoun()}";

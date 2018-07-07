@@ -325,8 +325,6 @@ namespace Bogus
       /// <summary>
       /// Ignores a property or field when <seealso cref="StrictMode"/> is enabled.
       /// </summary>
-      /// <typeparam name="TPropertyOrField"></typeparam>
-      /// <param name="propertyOrField"></param>
       public virtual Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
       {
          var propNameOrField = PropertyName.For(propertyOrField);

@@ -39,6 +39,9 @@ namespace Bogus
       /// <summary>
       /// Instantiates a new Hashids en/de-coder.
       /// </summary>
+      /// <param name="salt"></param>
+      /// <param name="minHashLength"></param>
+      /// <param name="alphabet"></param>
       public Hashids(string salt = "", int minHashLength = 0, string alphabet = DEFAULT_ALPHABET, string seps = DEFAULT_SEPS)
       {
          if( string.IsNullOrWhiteSpace(alphabet) )
@@ -90,6 +93,8 @@ namespace Bogus
       /// <summary>
       /// Encodes the provided hex string to a hashids hash.
       /// </summary>
+      /// <param name="hex"></param>
+      /// <returns></returns>
       public virtual string EncodeHex(string hex)
       {
          if( !hexValidator.IsMatch(hex) )
@@ -110,6 +115,8 @@ namespace Bogus
       /// <summary>
       /// Decodes the provided hash into a hex-string
       /// </summary>
+      /// <param name="hash"></param>
+      /// <returns></returns>
       public virtual string DecodeHex(string hash)
       {
          var ret = new StringBuilder();
@@ -165,6 +172,8 @@ namespace Bogus
       /// <summary>
       /// Encrypts the provided hex string to a hashids hash.
       /// </summary>
+      /// <param name="hex"></param>
+      /// <returns></returns>
       [Obsolete("Use 'EncodeHex' instead. The method was renamed to better explain what it actually does.")]
       public virtual string EncryptHex(string hex)
       {
@@ -185,12 +194,17 @@ namespace Bogus
       /// <summary>
       /// Decodes the provided hash to a hex-string
       /// </summary>
+      /// <param name="hash"></param>
+      /// <returns></returns>
       [Obsolete("Use 'DecodeHex' instead. The method was renamed to better explain what it actually does.")]
       public virtual string DecryptHex(string hash)
       {
          return DecodeHex(hash);
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
       private void SetupSeps()
       {
          // seps should contain only characters present in alphabet; 
@@ -221,6 +235,9 @@ namespace Bogus
          alphabet = ConsistentShuffle(alphabet, salt);
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
       private void SetupGuards()
       {
          var guardCount = (int)Math.Ceiling(alphabet.Length / GUARD_DIV);
@@ -243,6 +260,8 @@ namespace Bogus
       /// <summary>
       /// Internal function that does the work of creating the hash
       /// </summary>
+      /// <param name="numbers"></param>
+      /// <returns></returns>
       private string GenerateHashFrom(long[] numbers)
       {
          if( numbers == null || numbers.Length == 0 )
@@ -377,6 +396,12 @@ namespace Bogus
          return ret.ToArray();
       }
 
+      /// <summary>
+      /// 
+      /// </summary>
+      /// <param name="alphabet"></param>
+      /// <param name="salt"></param>
+      /// <returns></returns>
       private string ConsistentShuffle(string alphabet, string salt)
       {
          if( string.IsNullOrWhiteSpace(salt) )

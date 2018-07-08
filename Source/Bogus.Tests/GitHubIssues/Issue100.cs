@@ -39,9 +39,9 @@ namespace Bogus.Tests.GitHubIssues
       [Fact]
       public void faker_test()
       {
-            {
          var f = new Faker
-               Random = new Randomizer(54321)
+            {
+                Random = new Randomizer(54321)
             };
 
          f.Commerce.Product().Should().Be("Shirt");

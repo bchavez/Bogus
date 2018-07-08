@@ -1,4 +1,3 @@
-using System.Linq;
 using Bogus.DataSets;
 
 namespace Bogus.Extensions.UnitedKingdom
@@ -23,7 +22,7 @@ namespace Bogus.Extensions.UnitedKingdom
 
          return finance.Random.ReplaceNumbers(withoutSeparator);
       }
-      
+
       /// <summary>
       /// National Insurance Number
       /// </summary>

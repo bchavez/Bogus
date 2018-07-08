@@ -16,7 +16,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      /// <param name="locale"></param>
       public Date(string locale = "en") : base(locale)
       {
          this.hasMonthWideContext = Get("month.wide_context") != null;

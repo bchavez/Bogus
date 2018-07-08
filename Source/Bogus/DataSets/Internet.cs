@@ -18,7 +18,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Internet(string locale = "en") : base(locale)
       {
          this.Name = this.Notifier.Flow(new Name(locale));
@@ -28,7 +27,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a legit Internet URL avatar from twitter accounts.
       /// </summary>
-      /// <returns></returns>
       public string Avatar()
       {
          return GetRandomArrayItem("avatar_uri");
@@ -59,7 +57,6 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="firstName">Optional: first name of the user</param>
       /// <param name="lastName">Optional: last name of the user</param>
-      /// <returns></returns>
       public string ExampleEmail(string firstName = null, string lastName = null)
       {
          var provider = GetRandomArrayItem("example_email");
@@ -101,7 +98,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random domain name.
       /// </summary>
-      /// <returns></returns>
       public string DomainName()
       {
          return DomainWord() + "." + DomainSuffix();
@@ -111,7 +107,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a domain word used for domain names.
       /// </summary>
-      /// <returns></returns>
       public string DomainWord()
       {
          var domain = Name.FirstName().ToLower();
@@ -138,7 +133,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random IPv6 address.
       /// </summary>
-      /// <returns></returns>
       public string Ipv6()
       {
          var bytes = Random.Bytes(16);

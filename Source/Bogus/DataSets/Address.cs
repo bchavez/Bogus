@@ -15,7 +15,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor.
       /// </summary>
-      /// <param name="locale"></param>
       public Address(string locale = "en") : base(locale)
       {
          this.Name = this.Notifier.Flow(new Name(locale));
@@ -24,7 +23,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a zipcode.
       /// </summary>
-      /// <returns></returns>
       public string ZipCode(string format = null)
       {
          return format == null ? GetFormattedValue("postcode") : Random.Replace(format);
@@ -33,7 +31,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a city name.
       /// </summary>
-      /// <returns></returns>
       public string City()
       {
          return GetFormattedValue("city");
@@ -43,8 +40,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a street address.
       /// </summary>
-      /// <param name="useFullAddress"></param>
-      /// <returns></returns>
       public string StreetAddress(bool useFullAddress = false)
       {
          var streetAddress = GetFormattedValue("street_address");
@@ -54,7 +49,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a city prefix.
       /// </summary>
-      /// <returns></returns>
       public string CityPrefix()
       {
          return GetRandomArrayItem("city_prefix");
@@ -63,7 +57,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a city suffix.
       /// </summary>
-      /// <returns></returns>
       public string CitySuffix()
       {
          return GetRandomArrayItem("city_suffix");
@@ -72,7 +65,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a street name.
       /// </summary>
-      /// <returns></returns>
       public string StreetName()
       {
          return GetFormattedValue("street_name");
@@ -81,7 +73,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a building number.
       /// </summary>
-      /// <returns></returns>
       public string BuildingNumber()
       {
          return GetFormattedValue("building_number");
@@ -90,7 +81,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a street suffix.
       /// </summary>
-      /// <returns></returns>
       public string StreetSuffix()
       {
          return GetRandomArrayItem("street_suffix");
@@ -99,7 +89,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a secondary address like 'Apt. 2' or 'Suite 321'.
       /// </summary>
-      /// <returns></returns>
       public string SecondaryAddress()
       {
          return GetFormattedValue("secondary_address");
@@ -108,7 +97,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a county.
       /// </summary>
-      /// <returns></returns>
       public string County()
       {
          return GetRandomArrayItem("county");
@@ -117,7 +105,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a country.
       /// </summary>
-      /// <returns></returns>
       public string Country()
       {
          return GetRandomArrayItem("country");
@@ -126,7 +113,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a full address like Street, City, Country.
       /// </summary>
-      /// <returns></returns>
       public string FullAddress()
       {
          var street = StreetAddress();
@@ -155,7 +141,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a state.
       /// </summary>
-      /// <returns></returns>
       public string State()
       {
          return GetRandomArrayItem("state");
@@ -164,7 +149,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a state abbreviation.
       /// </summary>
-      /// <returns></returns>
       public string StateAbbr()
       {
          return GetRandomArrayItem("state_abbr");
@@ -173,7 +157,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a Latitude
       /// </summary>
-      /// <returns></returns>
       public double Latitude(double min = -90, double max = 90)
       {
          return Math.Round(Random.Double(min, max), 4);
@@ -182,7 +165,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a Longitude
       /// </summary>
-      /// <returns></returns>
       public double Longitude(double min = -180, double max = 180)
       {
          return Math.Round(Random.Double(min, max), 4);

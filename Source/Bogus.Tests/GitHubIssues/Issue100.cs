@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
@@ -40,9 +39,9 @@ namespace Bogus.Tests.GitHubIssues
       [Fact]
       public void faker_test()
       {
-         var f = new Faker()
+         var f = new Faker
             {
-               Random = new Randomizer(54321)
+                Random = new Randomizer(54321)
             };
 
          f.Commerce.Product().Should().Be("Shirt");

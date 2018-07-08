@@ -390,7 +390,7 @@ namespace Bogus.Tests
       [Fact]
       public void can_get_random_subset_of_a_list()
       {
-         var a = new List<string>() {"a", "b", "c"};
+         var a = new List<string> {"a", "b", "c"};
          r.ListItems(a).Should().Equal("a");
 
          r.ListItems(a, 2).Should().Equal("c", "a");

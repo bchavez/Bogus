@@ -19,7 +19,6 @@
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Name(string locale = "en") : base(locale)
       {
          SupportsGenderFirstNames = HasKey("male_first_name", false) && HasKey("female_first_name", false);
@@ -31,8 +30,6 @@
       /// <summary>
       /// Switches locale
       /// </summary>
-      /// <param name="switchLocale"></param>
-      /// <returns></returns>
       public Name this[string switchLocale] => new Name(switchLocale);
 
       /// <summary>
@@ -166,7 +163,6 @@
       /// <summary>
       /// Get a job area expertise.
       /// </summary>
-      /// <returns></returns>
       public string JobArea()
       {
          return GetRandomArrayItem("title.level");

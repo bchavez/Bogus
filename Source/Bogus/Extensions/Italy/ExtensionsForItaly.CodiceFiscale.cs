@@ -147,7 +147,6 @@ namespace Bogus.Extensions.Italy
       /// </summary>
       /// <param name="prefix">The code</param>
       /// <param name="validChecksum">Indicates whether the computed checksum must be valid or not</param>
-      /// <returns></returns>
       private static char ComputeChecksumCodiceFiscale(string prefix, bool validChecksum)
       {
          int total = 0;

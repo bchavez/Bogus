@@ -8,7 +8,7 @@ using System.Text;
 namespace Bogus
 {
    /// <summary>
-   /// Hidden API implemented explicitly on <see cref="Faker{T}"/>. When <see cref="Faker{T}"/> is casted explicitly to <see cref="IFakerTInternal"/>, 
+   /// Hidden API implemented explicitly on <see cref="Faker{T}"/>. When <see cref="Faker{T}"/> is casted explicitly to <see cref="IFakerTInternal"/>,
    /// the cast reveals some protected internal objects of <see cref="Faker{T}"/> without needing to derive
    /// from <see cref="Faker{T}"/>. This is useful for extensions methods that need access internal variables of <see cref="Faker{T}"/> like <see cref="Faker"/>, <see cref="IBinder"/>, <see cref="LocalSeed"/>, and type of T.
    /// </summary>
@@ -235,7 +235,7 @@ namespace Bogus
                return null;
             };
          var guid = Guid.NewGuid().ToString();
-         var rule = new PopulateAction<T>()
+         var rule = new PopulateAction<T>
             {
                Action = invoker,
                RuleSet = currentRuleSet,
@@ -325,8 +325,6 @@ namespace Bogus
       /// <summary>
       /// Ignores a property or field when <seealso cref="StrictMode"/> is enabled.
       /// </summary>
-      /// <typeparam name="TPropertyOrField"></typeparam>
-      /// <param name="propertyOrField"></param>
       public virtual Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
       {
          var propNameOrField = PropertyName.For(propertyOrField);
@@ -348,7 +346,7 @@ namespace Bogus
 
          return this;
       }
-      
+
       /// <summary>
       /// When set to true, ensures all properties and public fields of <typeparamref name="T"/> have rules
       /// before an object of <typeparamref name="T"/> is populated or generated. Manual assertion
@@ -464,7 +462,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns an <see cref="IEnumerable{T}"/> that can be used as an unlimited source 
+      /// Returns an <see cref="IEnumerable{T}"/> that can be used as an unlimited source
       /// of <typeparamref name="T"/> when iterated over. Useful for generating unlimited
       /// amounts of data in a memory efficient way. Generated values *should* be repeatable
       /// for a given seed when starting with the first item in the sequence.

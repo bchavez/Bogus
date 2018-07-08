@@ -14,7 +14,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public System(string locale = "en") : base(locale)
       {
          mimes = this.GetArray("mimeTypes");
@@ -119,7 +118,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a commonly used file extension.
       /// </summary>
-      /// <returns></returns>
       public string CommonFileExt()
       {
          var types = new[]

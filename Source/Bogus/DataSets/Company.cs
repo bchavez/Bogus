@@ -1,4 +1,3 @@
-using System;
 using System.Linq;
 using Bogus.Bson;
 
@@ -17,7 +16,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Company(string locale = "en") : base(locale)
       {
          this.Name = this.Notifier.Flow(new Name(locale));
@@ -26,10 +24,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company suffix. "Inc" and "LLC" etc.
       /// </summary>
-      /// <returns></returns>
       public string CompanySuffix()
       {
-         return Random.ArrayElement(Suffexes());
+         return Random.ArrayElement(Suffixes());
       }
 
       /// <summary>
@@ -62,7 +59,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company catch phrase.
       /// </summary>
-      /// <returns></returns>
       public string CatchPhrase()
       {
          return $"{CatchPhraseAdjective()} {CatchPhraseDescriptor()} {CatchPhraseNoun()}";
@@ -71,14 +67,13 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a company BS phrase.
       /// </summary>
-      /// <returns></returns>
       public string Bs()
       {
          return $"{BsBuzz()} {BsAdjective()} {BsNoun()}";
       }
 
 #pragma warning disable 1591
-      internal protected virtual string[] Suffexes()
+      internal protected virtual string[] Suffixes()
       {
          return GetArray("suffix").OfType<BValue>().Select(s => s.StringValue).ToArray();
       }

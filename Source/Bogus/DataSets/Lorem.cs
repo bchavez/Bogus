@@ -11,7 +11,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Default constructor
       /// </summary>
-      /// <param name="locale"></param>
       public Lorem(string locale = "en") : base(locale)
       {
       }
@@ -27,7 +26,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get some lorem words
       /// </summary>
-      /// <param name="num"></param>
       public string[] Words(int num = 3)
       {
          return Enumerable.Range(1, num).Select(f => Word()).ToArray(); // lol
@@ -125,7 +123,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get lines of lorem.
       /// </summary>
-      /// <returns></returns>
       public string Lines(int? lineCount = null, string separator = "\n")
       {
          var lc = lineCount ?? this.Random.Number(1, 5);
@@ -136,7 +133,6 @@ namespace Bogus.DataSets
       /// <summary>
       /// Slugify lorem words.
       /// </summary>
-      /// <param name="wordcount"></param>
       public string Slug(int wordcount = 3)
       {
          var words = Words(wordcount);

@@ -21,13 +21,13 @@
          // DD
          // MM
          // YY - DOB
-         // C - Centry
+         // C - Century
          // ZZZ odd for males, even for females
-         // Q = The control character is calculated as the remainder of DDMMYYZZZ 
-         // divided by 31, i.e. drop the century sign and divide the resulting nine 
+         // Q = The control character is calculated as the remainder of DDMMYYZZZ
+         // divided by 31, i.e. drop the century sign and divide the resulting nine
          // digit number by 31. For remainders below ten, the remainder itself is
          // the control character, otherwise pick the corresponding character from
-         // string "0123456789ABCDEFHJKLMNPRSTUVWXY". For example, 311280888 divided by 31 
+         // string "0123456789ABCDEFHJKLMNPRSTUVWXY". For example, 311280888 divided by 31
          // gives the remainder as 30, and since A=10, B=11, etc. ending up with Y=30.
 
          var r = p.Random;

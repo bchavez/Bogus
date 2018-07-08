@@ -93,7 +93,7 @@ namespace Bogus.Distributions.Gaussian
       /// <param name="mean">Mean average of the normal distribution</param>
       /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
       public static int GaussianInt(this Randomizer rnd, double mean, double standardDeviation)
-       {
+      {
          return Convert.ToInt32(GaussianDouble(rnd, mean, standardDeviation));
       }
 
@@ -107,10 +107,12 @@ namespace Bogus.Distributions.Gaussian
       /// </code>
       /// </example>
       /// </summary>
+      /// <param name="mean">Mean average of the normal distribution</param>
+      /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
       public static float GaussianFloat(this Randomizer rnd, double mean, double standardDeviation)
-       {
+      {
           return Convert.ToSingle(GaussianDouble(rnd, mean, standardDeviation));
-       }
+      }
 
       /// <summary>
       /// Generate a random decimal, based on the specified normal distribution.
@@ -122,10 +124,12 @@ namespace Bogus.Distributions.Gaussian
       /// </code>
       /// </example>
       /// </summary>
+      /// <param name="mean">Mean average of the normal distribution</param>
+      /// <param name="standardDeviation">Standard deviation of the normal distribution</param>
       public static decimal GaussianDecimal(this Randomizer rnd, double mean, double standardDeviation)
-       {
+      {
           return Convert.ToDecimal(GaussianDouble(rnd, mean, standardDeviation));
-       }
+      }
 
    }
 }

@@ -1,3 +1,6 @@
+## v22.3.2
+* Added `f.Random.Guid()` for better GUID discoverability.
+
 ## v22.3.1
 * PR 159: Add UK National Insurance Number `f.Finance.Nino()` in `Bogus.Extensions.UnitedKingdom`. Thanks mortware!
 * PR 160: `DateTimeOffset` support added to `f.Date` dataset. Methods are suffixed by "Offset". IE: `f.Date.SoonOffset`. Thanks Simon!

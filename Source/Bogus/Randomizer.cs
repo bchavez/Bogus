@@ -10,7 +10,7 @@ using Bogus.Platform;
 namespace Bogus
 {
    /// <summary>
-   /// The randomizer. It randoms things.
+   /// A randomizer that randomizes things.
    /// </summary>
    public class Randomizer
    {
@@ -622,6 +622,15 @@ namespace Bogus
          return Enumerable.Range(1, count)
             .Select(f => Word())
             .ToArray(); // lol.
+      }
+
+      /// <summary>
+      /// Get a random GUID.
+      /// </summary>
+      public Guid Guid()
+      {
+         var guidBytes = this.Bytes(16);
+         return new Guid(guidBytes);
       }
 
       /// <summary>

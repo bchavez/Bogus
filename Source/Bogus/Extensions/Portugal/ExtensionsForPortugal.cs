@@ -47,8 +47,8 @@ namespace Bogus.Extensions.Portugal
          {
             return p.context[Key] as string;
          }
-
-         var id = new int[1] { NifIdentify[new Random().Next(0, NifIdentify.Length)] };
+         
+         var id =  new int[1] { NifIdentify[p.Random.Int(0, NifIdentify.Length)] };
          var digits = p.Random.Digits(7);
 
          var nifNumber = id.Concat(digits).ToArray();
@@ -67,7 +67,7 @@ namespace Bogus.Extensions.Portugal
       /// <param name="c">Object will receive the NIPC value</param>
       public static string Nipc(this Company c)
       {
-         var id = new int[1] { NipcIdentify[new Random().Next(0, NipcIdentify.Length)] };
+         var id = new int[1] { NipcIdentify[c.Random.Int(0, NipcIdentify.Length)] };
          var digits = c.Random.Digits(7);
 
          var nipcNumber = id.Concat(digits).ToArray();

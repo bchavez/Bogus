@@ -1,6 +1,7 @@
 ﻿using Bogus.DataSets;
 using Bogus.Extensions.UnitedKingdom;
 using Bogus.Extensions.Italy;
+using Bogus.Extensions.Portugal;
 using FluentAssertions;
 using System;
 using Xunit;
@@ -251,5 +252,34 @@ namespace Bogus.Tests.ExtensionTests
 
             codiceFiscale.Should().StartWith("RSSMRA90D23");
         }
-    }
+       [Fact]
+       public void nif_generator_for_person()
+       {
+          //Arrange
+          var regex = @"^[0-9]{9}$";
+          var f = new Faker("pt_PT");
+          var person = f.Person;
+
+          //Act
+          var nifNumber = person.Nif();
+
+          //Assert
+          nifNumber.Should().MatchRegex(regex).And.HaveLength(9).And.Match(p => p.Substring(0, 1) == "1" || p.Substring(0, 1) == "2");
+       }
+
+       [Fact]
+       public void nif_generator_for_company()
+       {
+          //Arrange
+          var regex = @"^[0-9]{9}$";
+          var f = new Faker("pt_PT");
+          var company = f.Company;
+
+          //Act
+          var nipcNumber = company.Nipc();
+
+          //Assert
+          nipcNumber.Should().MatchRegex(regex).And.HaveLength(9).And.Match(p => p.Substring(0, 1) == "5" || p.Substring(0, 1) == "6" || p.Substring(0, 1) == "8" || p.Substring(0, 1) == "9");
+       }
+   }
 }

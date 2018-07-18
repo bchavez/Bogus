@@ -1,5 +1,6 @@
 ## v22.3.2
 * Added `f.Random.Guid()` for better GUID discoverability.
+* PR 164: Added new Tax ID extensions `Person.Nif()` and `Company.Nipc()` for Portugal. Thanks JoseJr!  
 
 ## v22.3.1
 * PR 159: Add UK National Insurance Number `f.Finance.Nino()` in `Bogus.Extensions.UnitedKingdom`. Thanks mortware!

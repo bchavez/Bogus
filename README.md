@@ -405,11 +405,15 @@ public void Using_FakerT_Inheritance()
 * **`using Bogus.Extensions.Italy;`**
 	* `Bogus.Person.CodiceFiscale()` - Codice Fiscale
 	* `Bogus.DataSets.Finance.CodiceFiscale()` - Codice Fiscale
+* **`using Bogus.Extensions.Portugal;`**
+	* `Bogus.Person.Nif()` - Número de Identificação Fiscal (NIF)
+	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)
 * **`using Bogus.Extensions.UnitedKingdom;`**
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
+	* `Bogus.DataSets.Company.Ein()` - Employer Identification Number
 * **`using Bogus.Distributions.Gaussian;`**
     * `Randomizer.GaussianInt()` - Generate an `int` based on a specific normal distribution.
     * `Randomizer.GaussianFloat()` - Generate a `float` based on a specific normal distribution.

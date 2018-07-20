@@ -7,21 +7,54 @@ namespace Bogus.DataSets
    /// </summary>
    public class Date : DataSet
    {
+      private Func<DateTime> dateTimeNow;
+      private Func<DateTimeOffset> dateTimeOffsetNow;
       private bool hasMonthWideContext;
       private bool hasMonthAbbrContext;
       private bool hasWeekdayWideContext;
       private bool hasWeekdayAbbrContext;
-
+      private static Func<DateTimeOffset> defaultDateTimeOffsetNow = () => DateTimeOffset.Now;
+      private static Func<DateTime> defaultDateTimeNow=() => DateTime.Now;
 
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      public Date(string locale = "en") : base(locale)
+      public Date(string locale = "en", Func<DateTime> dateTimeNow=null, Func<DateTimeOffset> dateTimeOffsetNow = null) : base(locale)
       {
+         if (dateTimeNow == null)
+         {
+            this.dateTimeNow = defaultDateTimeNow;
+         }
+         else
+         {
+            this.dateTimeNow = dateTimeNow;
+         }
+         if (dateTimeOffsetNow == null)
+         {
+            this.dateTimeOffsetNow = defaultDateTimeOffsetNow;
+         }
+         else
+         {
+            this.dateTimeOffsetNow = dateTimeOffsetNow;
+         }
+
          this.hasMonthWideContext = Get("month.wide_context") != null;
          this.hasMonthAbbrContext = Get("month.abbr_context") != null;
          this.hasWeekdayWideContext = Get("weekday.wide_context") != null;
          this.hasWeekdayAbbrContext = Get("weekday.abbr_context") != null;
+      }
+
+      /// <summary>
+      /// Sets the default global datetime "Now" generation.
+      /// </summary>
+      public static void SetDefaultNowGeneration(Func<DateTime> defaultDateTimeNow, Func<DateTimeOffset> defaultDateTimeOffsetNow)
+      {
+         if (defaultDateTimeNow == null)
+            throw new ArgumentNullException(nameof(defaultDateTimeNow));
+         if (defaultDateTimeOffsetNow == null)
+            throw new ArgumentNullException(nameof(defaultDateTimeOffsetNow));
+         Date.defaultDateTimeOffsetNow = defaultDateTimeOffsetNow;
+         Date.defaultDateTimeNow = defaultDateTimeNow;
       }
 
       /// <summary>
@@ -31,7 +64,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Past(int yearsToGoBack = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? DateTime.Now;
+         var maxDate = refDate ?? dateTimeNow();
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
@@ -49,7 +82,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset PastOffset(int yearsToGoBack = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? DateTimeOffset.Now;
+         var maxDate = refDate ?? dateTimeOffsetNow();
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
@@ -74,7 +107,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTime Soon(int days = 1, DateTime? refDate = null)
       {
-         var dt = refDate ?? DateTime.Now;
+         var dt = refDate ?? dateTimeNow();
          return Between(dt, dt.AddDays(days));
       }
 
@@ -85,7 +118,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset SoonOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var dt = refDate ?? DateTimeOffset.Now;
+         var dt = refDate ?? dateTimeOffsetNow();
          return BetweenOffset(dt, dt.AddDays(days));
       }
 
@@ -96,7 +129,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Future(int yearsToGoForward = 1, DateTime? refDate = null)
       {
-         var minDate = refDate ?? DateTime.Now;
+         var minDate = refDate ?? dateTimeNow();
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
@@ -114,7 +147,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset FutureOffset(int yearsToGoForward = 1, DateTimeOffset? refDate = null)
       {
-         var minDate = refDate ?? DateTimeOffset.Now;
+         var minDate = refDate ?? dateTimeOffsetNow();
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
@@ -166,9 +199,9 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? DateTime.Now;
+         var maxDate = refDate ?? dateTimeNow();
 
-         var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
+         var minDate = days == 0 ? dateTimeNow().Date : maxDate.AddDays(-days);
 
          var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 
@@ -184,9 +217,9 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? DateTimeOffset.Now;
+         var maxDate = refDate ?? dateTimeOffsetNow();
 
-         var minDate = days == 0 ? DateTime.Now.Date : maxDate.AddDays(-days);
+         var minDate = days == 0 ? dateTimeOffsetNow().Date : maxDate.AddDays(-days);
 
          var totalTimeSpanTicks = (maxDate - minDate).Ticks;
 

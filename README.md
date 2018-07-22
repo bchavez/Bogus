@@ -431,7 +431,7 @@ public void Using_FakerT_Inheritance()
     * and more!
 * [**WaffleGenerator.Bogus**](https://github.com/SimonCropp/WaffleGenerator) ([`NuGet Package`](https://www.nuget.org/packages/WaffleGenerator.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - The Waffle Generator produces of text which, on first glance, looks like real, ponderous, prose; replete with clichés.
 * [**NodaTime.Bogus**](https://github.com/SimonCropp/NodaTime.Bogus) ([`NuGet Package`](https://www.nuget.org/packages/NodaTime.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Adds support for [NodaTime](https://nodatime.org/) to **Bogus**. 
-* [**CountryData.Bogus**](https://github.com/SimonCropp/CountryData) ([`NuGet Package`](https://www.nuget.org/packages/CountryData.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Adds support for [NodaTime](https://nodatime.org/) to **Bogus**. Examples:
+* [**CountryData.Bogus**](https://github.com/SimonCropp/CountryData) ([`NuGet Package`](https://www.nuget.org/packages/CountryData.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Wrapper around [GeoNames Data](https://www.geonames.org/). Examples:
     * `.Country().Name()` - Random country name.
     * `.Country().CurrencyCode()` - Random currency code.
     * `.Australia().Capital()` - Country capital.

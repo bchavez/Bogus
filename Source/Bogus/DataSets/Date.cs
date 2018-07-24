@@ -7,37 +7,18 @@ namespace Bogus.DataSets
    /// </summary>
    public class Date : DataSet
    {
-      private Func<DateTime> dateTimeNow;
-      private Func<DateTimeOffset> dateTimeOffsetNow;
       private bool hasMonthWideContext;
       private bool hasMonthAbbrContext;
       private bool hasWeekdayWideContext;
       private bool hasWeekdayAbbrContext;
-      private static Func<DateTimeOffset> defaultDateTimeOffsetNow = () => DateTimeOffset.Now;
-      private static Func<DateTime> defaultDateTimeNow=() => DateTime.Now;
+      private static Func<DateTimeOffset> dateTimeOffsetNow = () => DateTimeOffset.Now;
+      private static Func<DateTime> dateTimeNow=() => DateTime.Now;
 
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      public Date(string locale = "en", Func<DateTime> dateTimeNow=null, Func<DateTimeOffset> dateTimeOffsetNow = null) : base(locale)
+      public Date(string locale = "en") : base(locale)
       {
-         if (dateTimeNow == null)
-         {
-            this.dateTimeNow = defaultDateTimeNow;
-         }
-         else
-         {
-            this.dateTimeNow = dateTimeNow;
-         }
-         if (dateTimeOffsetNow == null)
-         {
-            this.dateTimeOffsetNow = defaultDateTimeOffsetNow;
-         }
-         else
-         {
-            this.dateTimeOffsetNow = dateTimeOffsetNow;
-         }
-
          this.hasMonthWideContext = Get("month.wide_context") != null;
          this.hasMonthAbbrContext = Get("month.abbr_context") != null;
          this.hasWeekdayWideContext = Get("weekday.wide_context") != null;
@@ -47,14 +28,14 @@ namespace Bogus.DataSets
       /// <summary>
       /// Sets the default global datetime "Now" generation.
       /// </summary>
-      public static void SetDefaultNowGeneration(Func<DateTime> defaultDateTimeNow, Func<DateTimeOffset> defaultDateTimeOffsetNow)
+      public static void SetDefaultNowGeneration(Func<DateTime> dateTimeNow, Func<DateTimeOffset> dateTimeOffsetNow)
       {
-         if (defaultDateTimeNow == null)
-            throw new ArgumentNullException(nameof(defaultDateTimeNow));
-         if (defaultDateTimeOffsetNow == null)
-            throw new ArgumentNullException(nameof(defaultDateTimeOffsetNow));
-         Date.defaultDateTimeOffsetNow = defaultDateTimeOffsetNow;
-         Date.defaultDateTimeNow = defaultDateTimeNow;
+         if (dateTimeNow == null)
+            throw new ArgumentNullException(nameof(dateTimeNow));
+         if (dateTimeOffsetNow == null)
+            throw new ArgumentNullException(nameof(dateTimeOffsetNow));
+         Date.dateTimeOffsetNow = dateTimeOffsetNow;
+         Date.dateTimeNow = dateTimeNow;
       }
 
       /// <summary>

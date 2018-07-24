@@ -19,13 +19,13 @@ namespace Bogus
       /// <summary>
       /// Create a Faker with a specific locale.
       /// </summary>
-      public Faker(string locale = "en", Func<DateTime> dateTimeNow = null, Func<DateTimeOffset> dateTimeOffsetNow = null)
+      public Faker(string locale = "en")
       {
          Locale = locale;
 
          this.Address = this.Notifier.Flow(new Address(locale));
          this.Company = this.Notifier.Flow(new Company(locale));
-         this.Date = this.Notifier.Flow(new Date (locale, dateTimeNow, dateTimeOffsetNow));
+         this.Date = this.Notifier.Flow(new Date (locale));
          this.Finance = this.Notifier.Flow(new Finance {Locale = locale});
          this.Hacker = this.Notifier.Flow(new Hacker(locale));
          this.Image = this.Notifier.Flow(new Images(locale));

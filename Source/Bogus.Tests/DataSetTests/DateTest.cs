@@ -315,5 +315,36 @@ namespace Bogus.Tests.DataSetTests
             .And
             .BeOnOrBefore(utcEnd);
       }
+
+
+      [Fact]
+      public void can_set_global_static_time_source()
+      {
+         Date.SystemClock = () => DateTime.UtcNow;
+
+         var d = new Date();
+
+         d.Soon().Kind.Should().Be(DateTimeKind.Utc);
+         d.Future().Kind.Should().Be(DateTimeKind.Utc);
+         d.Past().Kind.Should().Be(DateTimeKind.Utc);
+         d.Recent().Kind.Should().Be(DateTimeKind.Utc);
+
+         d.SoonOffset().Offset.Should().Be(DateTimeOffset.UtcNow.Offset);
+         d.FutureOffset().Offset.Should().Be(DateTimeOffset.UtcNow.Offset);
+         d.PastOffset().Offset.Should().Be(DateTimeOffset.UtcNow.Offset);
+         d.RecentOffset().Offset.Should().Be(DateTimeOffset.UtcNow.Offset);
+
+         Date.SystemClock = () => DateTime.Now;
+
+         d.Soon().Kind.Should().Be(DateTimeKind.Local);
+         d.Future().Kind.Should().Be(DateTimeKind.Local);
+         d.Past().Kind.Should().Be(DateTimeKind.Local);
+         d.Recent().Kind.Should().Be(DateTimeKind.Local);
+
+         d.SoonOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
+         d.FutureOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
+         d.PastOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
+         d.RecentOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
+      }
    }
 }

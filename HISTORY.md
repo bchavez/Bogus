@@ -1,3 +1,6 @@
+## v22.3.3
+* Added `Date.SystemClock` static property for setting global time Bogus uses for date calculations.
+
 ## v22.3.2
 * Added `f.Random.Guid()` for better GUID discoverability.
 * PR 164: Added new Tax ID extensions `Person.Nif()` and `Company.Nipc()` for Portugal. Thanks JoseJr!  

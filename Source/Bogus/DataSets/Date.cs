@@ -253,7 +253,7 @@ namespace Bogus.DataSets
             type += "_context";
          }
 
-         return GetRandomArrayItem("month." + type);
+         return GetRandomArrayItem("weekday." + type);
       }
    }
 }

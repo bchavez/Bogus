@@ -1,7 +1,8 @@
-## v23.0.1
+## v23.0.2
 * BREAKING CHANGE: Deterministic sequence values may have changed. Unit tests expecting specific values may be different if `Bogus.Person` is used.
 * Issue 168: Added `Bogus.Person.Address.State` field.
 * Issue 139: Added `Date.SystemClock` static property for setting global time Bogus uses for date calculations.
+* Issue 169: `Date.Weekday()` should return a weekday not a month.  
 
 ## v22.3.2
 * Added `f.Random.Guid()` for better GUID discoverability.

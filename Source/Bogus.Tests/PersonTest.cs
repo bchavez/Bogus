@@ -48,7 +48,7 @@ namespace Bogus.Tests
       public void check_ssn_on_person()
       {
          var p = new Person();
-         p.Ssn().Should().Be("786-92-8797");
+         p.Ssn().Should().Be("869-28-7971");
       }
 
       [Fact]
@@ -60,16 +60,16 @@ namespace Bogus.Tests
 
          var truth = new[]
             {
-               "746 924 794",
-               "595 169 327",
-               "083 194 845",
-               "335 860 631",
-               "865 181 952",
-               "320 968 522",
-               "949 882 807",
-               "003 727 773",
-               "678 373 663",
-               "250 448 792"
+               "839 188 984",
+               "325 702 553",
+               "319 484 895",
+               "586 063 471",
+               "518 195 482",
+               "964 093 777",
+               "779 498 823",
+               "920 006 517",
+               "933 919 375",
+               "399 632 215"
             };
 
          obtained.Should().Equal(truth);
@@ -84,16 +84,16 @@ namespace Bogus.Tests
 
          var expect = new[]
             {
-               "786.928.797-03",
-               "693.455.045-59",
-               "073.298.888-85",
-               "365.760.664-57",
-               "352.829.147-86",
-               "096.754.915-90",
-               "575.989.784-50",
-               "003.525.756-38",
-               "919.359.823-89",
-               "399.334.225-96"
+               "869.287.971-18",
+               "595.269.345-80",
+               "798.307.329-16",
+               "885.844.123-01",
+               "818.542.835-29",
+               "963.989.340-40",
+               "006.475.157-09",
+               "629.400.035-13",
+               "658.676.631-16",
+               "792.478.139-05"
             };
 
          obtained.Should().Equal(expect);
@@ -136,16 +136,16 @@ namespace Bogus.Tests
 
          emails.Should().ContainInOrder(
             "Doris69@yahoo.com",
-            "Betsy_Mraz19@hotmail.com",
-            "Alvin_Fahey@yahoo.com",
-            "Jeremy.Klein@gmail.com",
-            "Armando_Waelchi79@yahoo.com",
-            "Cecil91@gmail.com",
+            "Natasha_Turcotte19@hotmail.com",
+            "Melba47@gmail.com",
+            "Ismael.Murray3@gmail.com",
+            "Brendan.Beer51@yahoo.com",
+            "Kathleen_Nader@yahoo.com",
             "Genevieve_Marvin@yahoo.com",
-            "Elijah56@hotmail.com",
+            "Regina_King44@yahoo.com",
             "Gerardo_Leannon@hotmail.com",
-            "Laverne25@yahoo.com");
-
+            "Theodore_Funk24@hotmail.com"
+         );
          console.WriteLine(emails.DumpString());
       }
       

@@ -28,6 +28,7 @@ namespace Bogus
          public string Street;
          public string Suite;
          public string City;
+         public string State;
          public string ZipCode;
          public CardGeo Geo;
       }
@@ -90,6 +91,7 @@ namespace Bogus
                Street = this.DsAddress.StreetAddress(),
                Suite = this.DsAddress.SecondaryAddress(),
                City = this.DsAddress.City(),
+               State = this.DsAddress.State(),
                ZipCode = this.DsAddress.ZipCode(),
                Geo = new CardAddress.CardGeo
                   {

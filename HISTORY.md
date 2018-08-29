@@ -1,3 +1,6 @@
+## v23.0.3
+* PR 170: Faster `Faker[T].Generate()` with setter cache. Approx 1.7x speedup. Thanks Mpdreamz!
+
 ## v23.0.2
 * BREAKING CHANGE: Deterministic sequence values may have changed. Unit tests expecting specific values may be different if `Bogus.Person` is used.
 * Issue 168: Added `Bogus.Person.Address.State` field.

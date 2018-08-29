@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text;
+using Bogus.Extensions;
 
 namespace Bogus
 {
@@ -53,6 +55,8 @@ namespace Bogus
       protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new Dictionary<string, FinalizeAction<T>>(StringComparer.OrdinalIgnoreCase);
       protected internal Dictionary<string, Func<Faker, T>> CreateActions = new Dictionary<string, Func<Faker, T>>(StringComparer.OrdinalIgnoreCase);
       protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
+      protected internal readonly Dictionary<string, Action<T, object>> TypePropertiesSetters = new Dictionary<string, Action<T, object>>(StringComparer.OrdinalIgnoreCase);
+      
       protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
       protected internal bool? IsValid;
       protected internal string currentRuleSet = Default;
@@ -526,8 +530,6 @@ namespace Bogus
             throw MakeValidationException(vr ?? ValidateInternal(ruleSets));
          }
 
-         var typeProps = TypeProperties;
-
          lock( Randomizer.Locker.Value )
          {
             //Issue 57 - Make sure you generate a new context
@@ -543,23 +545,7 @@ namespace Bogus
                {
                   foreach( var action in populateActions.Values )
                   {
-                     typeProps.TryGetValue(action.PropertyName, out MemberInfo member);
-                     var valueFactory = action.Action;
-                     if( valueFactory is null ) continue; // An .Ignore() rule.
-
-                     if( member != null )
-                     {
-                        var prop = member as PropertyInfo;
-                        prop?.SetValue(instance, valueFactory(FakerHub, instance), null);
-
-                        var field = member as FieldInfo;
-                        field?.SetValue(instance, valueFactory(FakerHub, instance));
-                     }
-                     else // member would be null if this was an RuleForObject.
-                     {
-                        //Invoke this if this is a basic rule which does not select a property or a field.
-                        var outputValue = valueFactory(FakerHub, instance);
-                     }
+                     PopulateProperty(instance, action);
                   }
                }
             }
@@ -574,6 +560,42 @@ namespace Bogus
          }
       }
 
+      private readonly object _setterCreateLock = new object();
+      private void PopulateProperty(T instance, PopulateAction<T> action)
+      {
+         var valueFactory = action.Action;
+         if (valueFactory is null) return;
+         
+         var value = valueFactory(FakerHub, instance);
+         
+         if (TypePropertiesSetters.TryGetValue(action.PropertyName, out var setter))
+         {
+            setter(instance, value);
+            return;
+         }
+         
+         if (!TypeProperties.TryGetValue(action.PropertyName, out var member)) return;
+         if (member == null) return;
+
+         lock (_setterCreateLock)
+         {
+            if (TypePropertiesSetters.TryGetValue(action.PropertyName, out setter))
+            {
+               setter(instance, value);
+               return;
+            }
+
+            if (member is PropertyInfo prop) 
+               setter = prop.CreateSetter<T>();
+            // TODO FieldInfo will need to rely on ILEmit to create a delegate 
+            else if (member is FieldInfo field)
+               setter = (i, v) => field?.SetValue(i, v);
+            if (setter == null) return;
+               
+            TypePropertiesSetters.Add(action.PropertyName, setter);
+            setter(instance, value);
+         }
+      }
       /// <summary>
       /// When <seealso cref="StrictMode"/> is enabled, checks if all properties or fields of <typeparamref name="T"/> have
       /// rules defined. Returns true if all rules are defined, false otherwise.

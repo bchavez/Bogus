@@ -2,11 +2,11 @@
 
 namespace Benchmark
 {
-    class Program
-    {
-        static void Main()
-        {
-            BenchmarkRunner.Run<BenchStringFill>();
-        }
-    }
+   class Program
+   {
+      static void Main()
+      {
+         BenchmarkRunner.Run<BenchGenerate>();
+      }
+   }
 }

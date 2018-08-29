@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Text;
 using Bogus.Extensions;
 
@@ -55,7 +54,7 @@ namespace Bogus
       protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new Dictionary<string, FinalizeAction<T>>(StringComparer.OrdinalIgnoreCase);
       protected internal Dictionary<string, Func<Faker, T>> CreateActions = new Dictionary<string, Func<Faker, T>>(StringComparer.OrdinalIgnoreCase);
       protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
-      protected internal readonly Dictionary<string, Action<T, object>> TypePropertiesSetters = new Dictionary<string, Action<T, object>>(StringComparer.OrdinalIgnoreCase);
+      protected internal readonly Dictionary<string, Action<T, object>> SetterCache = new Dictionary<string, Action<T, object>>(StringComparer.OrdinalIgnoreCase);
       
       protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
       protected internal bool? IsValid;
@@ -564,35 +563,37 @@ namespace Bogus
       private void PopulateProperty(T instance, PopulateAction<T> action)
       {
          var valueFactory = action.Action;
-         if (valueFactory is null) return;
-         
+         if (valueFactory is null) return; // An .Ignore() rule.
+
          var value = valueFactory(FakerHub, instance);
          
-         if (TypePropertiesSetters.TryGetValue(action.PropertyName, out var setter))
+         if (SetterCache.TryGetValue(action.PropertyName, out var setter))
          {
             setter(instance, value);
             return;
          }
          
          if (!TypeProperties.TryGetValue(action.PropertyName, out var member)) return;
-         if (member == null) return;
+         if (member == null) return; // Member would be null if this was a .Rules()
+                                     // The valueFactory is already invoked
+                                     // which does not select a property or field.
 
          lock (_setterCreateLock)
          {
-            if (TypePropertiesSetters.TryGetValue(action.PropertyName, out setter))
+            if (SetterCache.TryGetValue(action.PropertyName, out setter))
             {
                setter(instance, value);
                return;
             }
 
-            if (member is PropertyInfo prop) 
+            if (member is PropertyInfo prop)
                setter = prop.CreateSetter<T>();
             // TODO FieldInfo will need to rely on ILEmit to create a delegate 
             else if (member is FieldInfo field)
                setter = (i, v) => field?.SetValue(i, v);
             if (setter == null) return;
                
-            TypePropertiesSetters.Add(action.PropertyName, setter);
+            SetterCache.Add(action.PropertyName, setter);
             setter(instance, value);
          }
       }

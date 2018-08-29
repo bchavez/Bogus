@@ -8,10 +8,6 @@ namespace Bogus.Extensions
       private static readonly MethodInfo GenericSetterCreationMethod = 
          typeof(ExtensionsForPropertyInfo).GetMethod(nameof(CreateSetterGeneric), BindingFlags.Static | BindingFlags.NonPublic);
 
-      public static Action<T, object> CreateSetterOld<T>(this PropertyInfo property)
-      {
-         return (i, v) => property.SetValue((object)i, v, null);
-      }
       public static Action<T, object> CreateSetter<T>(this PropertyInfo property)
       {
          if (property == null) throw new ArgumentNullException(nameof(property));

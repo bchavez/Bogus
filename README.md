@@ -18,13 +18,14 @@ and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentVali
 ```powershell
 Install-Package Bogus
 ```
-Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
+Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET Framework 4.0**.
 
 ##### Projects That Use Bogus
 
 * [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
-* [**Windows-XAML / Template10**](https://github.com/Windows-XAML/Template10) [[code]](https://github.com/Windows-XAML/Template10/blob/beed5e58a4f8ab381cff6f063d2a91db5b4fc3bc/Basics/PrismSample/Services/DataService.cs#L1)
+* [**Microsoft Windows-XAML / Template10**](https://github.com/Windows-XAML/Template10) [[code]](https://github.com/Windows-XAML/Template10/blob/beed5e58a4f8ab381cff6f063d2a91db5b4fc3bc/Basics/PrismSample/Services/DataService.cs#L1)
 * [**Microsoft Learning / Developing Microsoft Azure Solutions**](https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions) [[code]](https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions/blob/4bb595f6b908798f8b3d49773455699102650806/Allfiles/Mod03/Labfiles/Starter/Contoso.Events.Data/ContextInitializer.cs)
+* [**Microsoft OfficeDev / Microsoft Teams Sample Connector**](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp) [[code]](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp/blob/8805bb1acb136949905e4644c4e714dd7b70a61a/TeamsToDoAppConnector/Utils/TaskHelper.cs)
 
 ##### Featured In
 * [**Microsoft Build 2018 - Azure Tips and Tricks - May 8th, 2018**](https://www.youtube.com/watch?v=088e5IUqF6g&t=12m31s)
@@ -35,6 +36,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Framework 4.0**.
 ##### Blog Posts
 * [Jack Histon](https://twitter.com/jackhiston) - [How to Create Bogus Data in C#](http://jackhiston.com/2017/10/1/how-to-create-bogus-data-in-c/)
 * [Christos Matskas](https://twitter.com/christosmatskas) - [Creating .NET fakes using Bogus](https://cmatskas.com/creating-net-fakes-using-bogus-2/)
+* [Jason Roberts](https://twitter.com/robertsjason) - [Lifelike Test Data Generation with Bogus](http://dontcodetired.com/blog/post/Lifelike-Test-Data-Generation-with-Bogus)
 * Mark Timmings - [Auto generating test data with Bogus](http://putridparrot.com/blog/auto-generating-test-data-with-bogus/)
 * [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
 * Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)

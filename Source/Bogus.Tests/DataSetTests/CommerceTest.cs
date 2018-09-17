@@ -61,5 +61,17 @@ namespace Bogus.Tests.DataSetTests
       {
          commerce.Price(symbol: "$").Dump();
       }
+
+      [Fact]
+      public void can_get_ean8_barcode()
+      {
+         commerce.Ean8().Should().Be("61860605");
+      }
+
+      [Fact]
+      public void can_get_an_ean13_barcode()
+      {
+         commerce.Ean13().Should().Be("6186060643914");
+      }
    }
 }

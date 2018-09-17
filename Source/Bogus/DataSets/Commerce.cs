@@ -101,5 +101,47 @@ namespace Bogus.DataSets
       {
          return GetRandomArrayItem("product_name.material");
       }
+
+      /// <summary>
+      /// EAN-8 checksum weights.
+      /// </summary>
+      protected static int[] Ean8Weights = {3, 1, 3, 1, 3, 1, 3};
+
+      /// <summary>
+      /// Get a random EAN-8 barcode number.
+      /// </summary>
+      public string Ean8()
+      {
+         //[3, 1, 3, 1, 3, 1, 3]
+         return this.Ean(8, Ean8Weights);
+      }
+
+      /// <summary>
+      /// EAN-18 checksum weights.
+      /// </summary>
+      protected static int[] Ean13Weights = { 1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3 };
+
+      /// <summary>
+      /// Get a random EAN-13 barcode number.
+      /// </summary>
+      public string Ean13()
+      {
+         //[1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3]
+         return this.Ean(13, Ean13Weights);
+      }
+
+      private string Ean(int length, int[] weights)
+      {
+         var digits = this.Random.Digits(length - 1);
+
+         var weightedSum =
+            digits.Zip(weights,
+                  (d, w) => d * w)
+               .Sum();
+
+         var checkDigit = (10 - weightedSum % 10) % 10;
+
+         return string.Join("", digits) + checkDigit;
+      }
    }
 }

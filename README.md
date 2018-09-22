@@ -438,6 +438,13 @@ public void Using_FakerT_Inheritance()
     * `.Country().CurrencyCode()` - Random currency code.
     * `.Australia().Capital()` - Country capital.
     * `.Country().Iceland().PostCode()` - Random country post code.
+* [**AustralianElectorates.Bogus**](https://github.com/SimonCropp/AustralianElectorates) ([`NuGet Package`](https://www.nuget.org/packages/AustralianElectorates.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Wrapper around Australian Electoral Commission (AEC) data (https://www.aec.gov.au/). Examples:
+    * `.AustralianElectorates().Electorate()` - Random electorate.
+    * `.AustralianElectorates().Name()` - Random electorate name.
+    * `.AustralianElectorates().CurrentMember()` - Random current electorate member for parliament.
+    * `.AustralianElectorates().CurrentMemberName()` - Random name of current a electorate member for parliament.
+    * `.AustralianElectorates().Member()` - Random electorate member for parliament.
+    * `.AustralianElectorates().MemberName()` - Random name of a electorate member for parliament.
 
 ## Bogus Premium Extensions!
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo_green.png" align='left' height="42px" width="42px" style="padding-right: 15px" /> **Bogus Premium** [[**Purchase Now!**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium)] by [@bchavez](https://github.com/bchavez)<br/>You can help support the **Bogus** open source project by purchasing a [**Bogus Premium**](https://github.com/bchavez/Bogus/wiki/Bogus-Premium) license! With an active premium license you'll be supporting this cool open-source project. You'll also gain new superpowers that extended **Bogus** with new features and exclusive data sets! Check 'em out below!

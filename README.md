@@ -164,28 +164,29 @@ public void With_Korean_Locale()
 
 | Locale Code    | Language                | | Locale Code    | Language                 |
 |:--------------:|:-----------------------:|-|:--------------:|:------------------------:|
-|`ar            `|Arabic                    ||`id_ID         `|Indonesia                 |
-|`az            `|Azerbaijani               ||`it            `|Italian                   |
-|`cz            `|Czech                     ||`ja            `|Japanese                  |
-|`de            `|German                    ||`ko            `|Korean                    |
-|`de_AT         `|German (Austria)          ||`lv            `|Latvian                   |
-|`de_CH         `|German (Switzerland)      ||`nb_NO         `|Norwegian                 |
-|`el            `|Greek                     ||`nep           `|Nepalese                  |
-|`en            `|English                   ||`nl            `|Dutch                     |
-|`en_AU         `|Australia (English)       ||`nl_BE         `|Dutch (Belgium)           |
-|`en_au_ocker   `|Australia Ocker (English) ||`pl            `|Polish                    |
-|`en_BORK       `|Bork (English)            ||`pt_BR         `|Portuguese (Brazil)       |
-|`en_CA         `|Canada (English)          ||`pt_PT         `|Portuguese (Portugal)     |
-|`en_GB         `|Great Britain (English)   ||`ro            `|Romanian                  |
-|`en_IE         `|Ireland (English)         ||`ru            `|Russian                   |
-|`en_IND        `|India (English)           ||`sk            `|Slovakian                 |
-|`en_US         `|United States (English)   ||`sv            `|Swedish                   |
+|`ar            `|Arabic                    ||`ge            `|Georgian                  |
+|`az            `|Azerbaijani               ||`id_ID         `|Indonesia                 |
+|`cz            `|Czech                     ||`it            `|Italian                   |
+|`de            `|German                    ||`ja            `|Japanese                  |
+|`de_AT         `|German (Austria)          ||`ko            `|Korean                    |
+|`de_CH         `|German (Switzerland)      ||`lv            `|Latvian                   |
+|`el            `|Greek                     ||`nb_NO         `|Norwegian                 |
+|`en            `|English                   ||`nep           `|Nepalese                  |
+|`en_AU         `|Australia (English)       ||`nl            `|Dutch                     |
+|`en_au_ocker   `|Australia Ocker (English) ||`nl_BE         `|Dutch (Belgium)           |
+|`en_BORK       `|Bork (English)            ||`pl            `|Polish                    |
+|`en_CA         `|Canada (English)          ||`pt_BR         `|Portuguese (Brazil)       |
+|`en_GB         `|Great Britain (English)   ||`pt_PT         `|Portuguese (Portugal)     |
+|`en_IE         `|Ireland (English)         ||`ro            `|Romanian                  |
+|`en_IND        `|India (English)           ||`ru            `|Russian                   |
+|`en_US         `|United States (English)   ||`sk            `|Slovakian                 |
+|`en_ZA         `|South Africa (English)    ||`sv            `|Swedish                   |
 |`es            `|Spanish                   ||`tr            `|Turkish                   |
 |`es_MX         `|Spanish Mexico            ||`uk            `|Ukrainian                 |
 |`fa            `|Farsi                     ||`vi            `|Vietnamese                |
 |`fr            `|French                    ||`zh_CN         `|Chinese                   |
 |`fr_CA         `|Canada (French)           ||`zh_TW         `|Chinese (Taiwan)          |
-|`ge            `|Georgian                  ||||
+|`fr_CH         `|French (Switzerland)      ||||
 
 
 ***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/Marak/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/Marak/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to the `en:lorem` data set.
@@ -278,6 +279,8 @@ public void Using_FakerT_Inheritance()
 	* `Product` - Get a random product.
 	* `ProductAdjective` - Random product adjective.
 	* `ProductMaterial` - Random product material.
+	* `Ean8` - Get a random EAN-8 barcode number.
+	* `Ean13` - Get a random EAN-13 barcode number.
 * **`Company`**
 	* `CompanySuffix` - Get a company suffix. "Inc" and "LLC" etc.
 	* `CompanyName` - Get a company name.
@@ -289,12 +292,17 @@ public void Using_FakerT_Inheritance()
 	* `Collation` - Generates a collation.
 	* `Engine` - Generates a storage engine.
 * **`Date`**
-	* `Past` - Get a date in the past between refDate and years past that date.
-	* `Soon` - Get a date and time that will happen soon.
-	* `Future` - Get a date in the future between refDate and years forward of that date.
-	* `Between` - Get a random date between start and end.
-	* `Recent` - Get a random date/time within the last few days since now.
-	* `Timespan` - Get a random span of time.
+	* `Past` - Get a `DateTime` in the past between `refDate` and `yearsToGoBack`.
+	* `PastOffset` - Get a `DateTimeOffset` in the past between `refDate` and `yearsToGoBack`.
+	* `Soon` - Get a `DateTime` that will happen soon.
+	* `SoonOffset` - Get a `DateTimeOffset` that will happen soon.
+	* `Future` - Get a `DateTime` in the future between `refDate` and `yearsToGoForward`.
+	* `FutureOffset` - Get a `DateTimeOffset` in the future between `refDate` and `yearsToGoForward`.
+	* `Between` - Get a random `DateTime` between `start` and `end`.
+	* `BetweenOffset` - Get a random `DateTimeOffset` between `start` and `end`.
+	* `Recent` - Get a random `DateTime` within the last few days.
+	* `RecentOffset` - Get a random `DateTimeOffset` within the last few days.
+	* `Timespan` - Get a random `TimeSpan`.
 	* `Month` - Get a random month
 	* `Weekday` - Get a random weekday
 * **`Finance`**
@@ -388,7 +396,7 @@ public void Using_FakerT_Inheritance()
 	* `FileType` - Returns any file type available as mime-type.
 	* `FileExt` - Gets a random extension for the given mime type.
 	* `Semver` - Get a random semver version string.
-	* `Version` - Get a random `System.Version`.
+	* `Version` - Get a random `Version`.
 	* `Exception` - Get a random `Exception` with a fake stack trace.
 	* `AndroidId` - Get a random GCM registration ID.
 	* `ApplePushToken` - Get a random Apple Push Token

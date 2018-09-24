@@ -89,7 +89,7 @@ namespace Bogus.Tests.DataSetTests
       {
          var user = internet.UserName();
 
-         user.Should().Be("Lee_Brown3");
+         user.Should().Be("Lee_Brekke3");
       }
 
       [Fact]
@@ -135,11 +135,11 @@ namespace Bogus.Tests.DataSetTests
       {
          var email = internet.Email(provider: "x.y.z.com");
 
-         email.Should().Be("Lee_Brown3@x.y.z.com");
+         email.Should().Be("Lee_Brekke3@x.y.z.com");
 
          email = internet.Email("cowboy");
 
-         email.Should().Be("cowboy.Bechtelar30@yahoo.com");
+         email.Should().Be("cowboy.Beatty30@yahoo.com");
       }
 
 

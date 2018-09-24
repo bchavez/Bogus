@@ -142,9 +142,9 @@ namespace Bogus.Tests
             "Brendan.Beer51@yahoo.com",
             "Kathleen_Nader@yahoo.com",
             "Genevieve_Marvin@yahoo.com",
-            "Regina_King44@yahoo.com",
+            "Regina_Kirlin44@yahoo.com",
             "Gerardo_Leannon@hotmail.com",
-            "Theodore_Funk24@hotmail.com"
+            "Theodore_Gaylord24@hotmail.com"
          );
          console.WriteLine(emails.DumpString());
       }

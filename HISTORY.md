@@ -1,3 +1,13 @@
+## v24.0.0
+* BREAKING: Deterministic values may have changed. Parity with **faker.js** @ 07f39bd3.
+* `en_ZA` - South Africa (English) locale added.
+* `fr_CH` - French (Switzerland) locale added.
+* `pl` locale "phone numbers" updated.
+* `sv` locale "names" section updated.
+* `en`, `de`, `de_AT` "names" section updated.
+* Added `f.Commerce.Ean8` EAN-8 product barcode number generator.
+* Added `f.Commerce.Ean13` EAN-13 product barcode number generator.
+
 ## v23.0.3
 * PR 170: Faster `Faker[T].Generate()` with setter cache. Approx 1.7x speedup. Thanks Mpdreamz!
 

@@ -10,7 +10,12 @@ var BSON = require("bson");
 
 var es = require("event-stream");
 
-var localeFolders = gulp.src(["../fakerjs/lib/locales/*"]);
+var localeFolders = gulp.src(
+   [
+      "../fakerjs/lib/locales/*",
+      "!../fakerjs/lib/locales/ar" // 2018.09.23 - Exclude this locale, has problems upstream.
+                                   // https://github.com/Marak/faker.js/pull/505/files#r219737439
+   ]);
 
 var dataFolder = "../Bogus/data";
 var dataExtendFolder = "../Bogus/data_extend";

@@ -123,7 +123,7 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_a_street_name()
       {
-         address.StreetName().Should().Be("Brown Stravenue");
+         address.StreetName().Should().Be("Brekke Stravenue");
       }
 
       [Fact]

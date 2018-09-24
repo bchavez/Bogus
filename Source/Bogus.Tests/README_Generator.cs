@@ -3,7 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using FluentAssertions;
 using MoreLinq;
 using Newtonsoft.Json;
@@ -23,45 +25,67 @@ namespace Bogus.Tests
          this.output = output;
       }
 
+      public class Record
+      {
+         public string Dataset;
+         public string Method;
+         public string Summary;
+      }
+
       [Fact]
       public void get_available_methods()
       {
          var (_, buildDir) = GetWorkingFolders();
          var bogusXml = Path.Combine(buildDir, "Bogus.XML");
-         var x = XElement.Load(bogusXml);
-         var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
+         var xml = XDocument.Load(bogusXml);
 
-         var all = json.SelectTokens("doc.members.member").SelectMany(jt => jt)
-            .Select(m =>
+         var nav = xml.CreateNavigator();
+         var sel = nav.Select("/doc/members/member");
+
+         var list = new List<Record>();
+
+         foreach (XPathNavigator node in sel)
+         {
+            if( !node.HasAttributes ) continue;
+
+            var member = node.GetAttribute("name", "");
+            var summaryNode = node.SelectSingleNode("summary");
+            if (summaryNode == null) continue;
+
+            var summary = summaryNode.ExtractContent()
+               .Replace("`System.", "`");
+
+            var declare = member;
+            var argPos = declare.IndexOf('(');
+            if (argPos > 0)
+            {
+               declare = declare.Substring(0, argPos);
+            }
+
+            if( !declare.StartsWith("M:Bogus.DataSets.") ) continue;
+
+            var method = declare.TrimStart('M', ':');
+            method = method.Replace("Bogus.DataSets.", "");
+
+            var methodSplit = method.Split('.');
+
+            var dataset = methodSplit[0];
+            var call = methodSplit[1];
+
+            if (call == "#ctor") continue;
+
+            var r = new Record
                {
-                  var member = m["@name"];
-                  var summary = m["summary"];
-                  if( member == null || summary == null ) return null;
+                  Dataset = dataset,
+                  Method = call,
+                  Summary = summary
+               };
+            list.Add(r);
+         }
 
-                  var declare = member.ToString();
-                  var argPos = declare.IndexOf('(');
-                  if( argPos > 0 )
-                  {
-                     declare = declare.Substring(0, argPos);
-                  }
-                  if( !declare.StartsWith("M:Bogus.DataSets.") ) return null;
-
-                  var method = declare.TrimStart('M', ':');
-                  method = method.Replace("Bogus.DataSets.", "");
-
-                  var methodSplit = method.Split('.');
-
-                  var dataset = methodSplit[0];
-                  var call = methodSplit[1];
-
-                  if( call == "#ctor" ) return null;
-
-                  return new {dataset = dataset, method = call, summary = summary.ToString().Trim()};
-               })
-            .Where(a => a != null)
-            .GroupBy(k => k.dataset)
+         var all = list
+            .GroupBy(k => k.Dataset)
             .OrderBy(k => k.Key);
-
 
          //get all publicly accessible types.
          var datasets = typeof(DataSet).Assembly.ExportedTypes
@@ -76,13 +100,13 @@ namespace Bogus.Tests
             if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
             var methods = datasets[g.Key];
 
-            var distinctMethods = g.DistinctBy(u => u.method);
+            var distinctMethods = g.DistinctBy(u => u.Method);
 
             output.WriteLine("* **`" + g.Key + "`**");
             foreach( var m in distinctMethods )
             {
-               if( !methods.Any(s => s.Contains(m.method)) ) continue; //check if it's accessible
-               output.WriteLine("\t* `" + m.method + "` - " + m.summary);
+               if( !methods.Any(s => s.Contains(m.Method)) ) continue; //check if it's accessible
+               output.WriteLine("\t* `" + m.Method + "` - " + m.Summary);
             }
          }
       }
@@ -210,6 +234,36 @@ namespace Bogus.Tests
          }
 
          return (FindRoot(asmLoc), Path.GetDirectoryName(asmLoc));
+      }
+   }
+
+
+   public static class XmlExtensions
+   {
+      private static Regex ParamPattern = new Regex(@"<(see|paramref) (name|cref)=""([TPF]{1}:)?(?<display>.+?)"" />");
+      private static Regex ConstPattern = new Regex(@"<c>(?<display>.+?)</c>");
+      /// <summary>
+      /// Extracts the display content of the specified <paramref name="node"/>, replacing
+      /// paramref and c tags with a human-readable equivalent.
+      /// </summary>
+      /// <param name="node">The XML node from which to extract content.</param>
+      /// <returns>The extracted content.</returns>
+      public static string ExtractContent(this XPathNavigator node)
+      {
+         if (node == null) return null;
+         return ConstPattern.Replace(
+            ParamPattern.Replace(node.InnerXml, GetParamRefName),
+            GetConstRefName).Trim();
+      }
+      private static string GetConstRefName(Match match)
+      {
+         if (match.Groups.Count != 2) return null;
+         return match.Groups["display"].Value;
+      }
+      private static string GetParamRefName(Match match)
+      {
+         if (match.Groups.Count != 5) return null;
+         return "`" + match.Groups["display"].Value + "`";
       }
    }
 }

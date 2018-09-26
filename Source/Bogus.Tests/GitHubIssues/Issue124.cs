@@ -106,16 +106,17 @@ namespace Bogus.Tests.GitHubIssues
 
          bars.Should()
             .ContainInOrder(
-               null,
                notNullObjects[0],
+               null,
+               null,
                notNullObjects[1],
                null,
                notNullObjects[2],
-               null,
-               null,
                notNullObjects[3],
-               notNullObjects[4],
-               null);
+               null,
+               null,
+               notNullObjects[4]
+               );
       }
 
       public class Foo

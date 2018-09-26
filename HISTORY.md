@@ -1,3 +1,6 @@
+## v24.0.1
+* Added `nullWeight` parameter to `.OrNull()` extension method for weighted generation of null values.
+
 ## v24.0.0
 * BREAKING: Deterministic values may have changed. Parity with **faker.js** @ 07f39bd3.
 * `en_ZA` - South Africa (English) locale added.

@@ -29,10 +29,22 @@ namespace Bogus.Extensions
       /// </summary>
       /// <param name="f">The Faker facade. This is usually the f from f => lambda.</param>
       /// <param name="nullWeight">The probability of null occuring. Range [1.0f - 0.0f] (100% and 0%) respectively. For example, if 15% null is desired pass nullWeight = 0.15f.</param>
-      public static object OrNull(this object value, Faker f, double nullWeight = 0.5f)
+      public static object OrNull(this object value, Faker f, float nullWeight = 0.5f)
       {
          if (nullWeight > 1 || nullWeight < 0) throw new ArgumentOutOfRangeException(nameof(nullWeight), $".{nameof(OrNull)}() {nameof(nullWeight)} of '{nullWeight}' must be between 1.0f and 0.0f. ");
          return f.Random.Float() > nullWeight ? value : null;
+      }
+
+      /// <summary>
+      /// Helpful extension for creating randomly default(T) values for <seealso cref="Faker{T}"/>.RuleFor() rules.
+      /// Example: .RuleFor(x=>x.Prop, f=>f.Random.Word().OrDefault(f))
+      /// </summary>
+      /// <param name="f">The Faker facade. This is usually the f from f => lambda.</param>
+      /// <param name="defaultWeight">The probability of default(T) occuring. Range [1.0f - 0.0f] (100% and 0%) respectively. For example, if 15% default(T) is desired pass defaultWeight = 0.15f.</param>
+      public static T OrDefault<T>(this T value, Faker f, float defaultWeight = 0.5f)
+      {
+         if (defaultWeight > 1 || defaultWeight < 0) throw new ArgumentOutOfRangeException(nameof(defaultWeight), $".{nameof(OrDefault)}() {nameof(defaultWeight)} of '{defaultWeight}' must be between 1.0f and 0.0f. ");
+         return f.Random.Float() > defaultWeight ? value : default;
       }
    }
 }

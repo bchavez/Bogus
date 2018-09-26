@@ -1,5 +1,6 @@
-## v24.0.1
+## v24.1.0
 * Added `nullWeight` parameter to `.OrNull()` extension method for weighted generation of null values.
+* Added new `.OrDefault()` extension method. Thanks @anorborg!
 
 ## v24.0.0
 * BREAKING: Deterministic values may have changed. Parity with **faker.js** @ 07f39bd3.

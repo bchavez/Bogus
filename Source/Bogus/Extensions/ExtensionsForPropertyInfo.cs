@@ -12,7 +12,7 @@ namespace Bogus.Extensions
       {
          if (property == null) throw new ArgumentNullException(nameof(property));
 
-         var setter = property.GetSetMethod();
+         var setter = property.GetSetMethod(true);
          if (setter == null) throw new ArgumentException("The specified property does not have a public setter.");
 
          var genericHelper = GenericSetterCreationMethod.MakeGenericMethod(property.DeclaringType, property.PropertyType);

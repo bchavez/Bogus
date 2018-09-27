@@ -1,3 +1,6 @@
+## v24.2.0
+* Issue 179: Fixed regression introduced in 23.0.3 that forbid setting of internal/non-public members of `T` in when `Faker<T>` is used.
+
 ## v24.1.0
 * Added `nullWeight` parameter to `.OrNull()` extension method for weighted generation of null values.
 * Added new `.OrDefault()` extension method. Thanks @anorborg!

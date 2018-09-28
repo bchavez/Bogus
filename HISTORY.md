@@ -1,3 +1,13 @@
+## v24.3.0
+* Data / feature parity with faker.js @ 9dd5a52
+* `af_ZA` - New South Africa (Afrikaans) locale added.
+* `zu_ZA` - New South Africa (Zulu) locale added.
+* `en_ZA` - South Africa (English) locale updated
+* `ru` - Russian locale updated.
+* `id_ID` - Indonesia locale updated.
+* `es` - Spanish locale updated.
+* `f.Images.DatUri` now accepts an HTML color parameter.
+
 ## v24.2.0
 * Issue 179: Fixed regression introduced in 23.0.3 that forbid setting of internal/non-public members of `T` in when `Faker<T>` is used.
 

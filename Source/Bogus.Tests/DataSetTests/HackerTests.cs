@@ -25,8 +25,8 @@ namespace Bogus.Tests.DataSetTests
          var ruhacker = new Hacker("ru");
          ruhacker.Adjective().Should().Be("многобайтный");
          ruhacker.Noun().Should().Be("ограничитель");
-         ruhacker.Verb().Should().Be("передать");
-         ruhacker.IngVerb().Should().Be("определение количества");
+         ruhacker.Verb().Should().Be("ввести");
+         ruhacker.IngVerb().Should().Be("генерация");
       }
    }
 }

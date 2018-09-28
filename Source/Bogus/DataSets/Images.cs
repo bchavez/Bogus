@@ -213,15 +213,12 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="width">Width of the image.</param>
       /// <param name="height">Height of the image.</param>
-      public string DataUri(int width, int height)
+      /// <param name="htmlColor">An html color in named format 'grey', RGB format 'rgb(r,g,b)', or hex format '#888888'.</param>
+      public string DataUri(int width, int height, string htmlColor = "grey")
       {
          var rawPrefix = "data:image/svg+xml;charset=UTF-8,";
          var svgString =
-            $@"<svg xmlns=""http://www.w3.org/2000/svg"" version=""1.1"" baseProfile=""full"" width=""{width}"" height=""{
-                  height
-               }""> <rect width=""100%"" height=""100%"" fill=""grey""/>  <text x=""0"" y=""20"" font-size=""20"" text-anchor=""start"" fill=""white"">{width}x{
-                  height
-               }</text> </svg>";
+            $@"<svg xmlns=""http://www.w3.org/2000/svg"" version=""1.1"" baseProfile=""full"" width=""{width}"" height=""{height}""><rect width=""100%"" height=""100%"" fill=""{htmlColor}""/><text x=""{width / 2}"" y=""{height / 2}"" font-size=""20"" alignment-baseline=""middle"" text-anchor=""middle"" fill=""white"">{width}x{height}</text></svg>";
 
          return rawPrefix + Uri.EscapeDataString(svgString);
       }

@@ -1,0 +1,51 @@
+{
+  "title": "South Africa (Afrikaans)",
+  "address": {
+    "default_country": [
+      "South Africa"
+    ],
+    "postcode": [
+      "#####",
+      "####"
+    ]
+  },
+  "internet": {
+    "domain_suffix": [
+      "co.za",
+      "com",
+      "org.za",
+      "info",
+      "net.za"
+    ]
+  },
+  "phone_number": {
+    "formats": [
+      "01# ### #####",
+      "02# ### #####",
+      "03# ### #####",
+      "04# ### #####",
+      "05# ### #####",
+      "0800 ### ###",
+      "0860 ### ###",
+      "01#########",
+      "01# ########"
+    ]
+  },
+  "cell_phone": {
+    "formats": [
+      "082 ### ####",
+      "084 ### ####",
+      "083 ### ####",
+      "065 ### ####",
+      "082#######",
+      "082 #######"
+    ]
+  },
+  "company": {
+    "suffix": [
+      "Pty Ltd",
+      "Ltd",
+      "CC"
+    ]
+  }
+}

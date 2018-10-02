@@ -16,7 +16,7 @@ namespace Bogus
       public static string ResolveCategory(Type type)
       {
          var categoryAttribute = type.GetCustomAttributeX<DataCategoryAttribute>();
-         return categoryAttribute != null ? categoryAttribute.Name : type.Name.ToLower();
+         return categoryAttribute != null ? categoryAttribute.Name : type.Name.ToLowerInvariant();
       }
 
       /// <summary>

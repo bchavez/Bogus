@@ -164,28 +164,29 @@ public void With_Korean_Locale()
 
 | Locale Code    | Language                | | Locale Code    | Language                 |
 |:--------------:|:-----------------------:|-|:--------------:|:------------------------:|
-|`ar            `|Arabic                    ||`ge            `|Georgian                  |
-|`az            `|Azerbaijani               ||`id_ID         `|Indonesia                 |
-|`cz            `|Czech                     ||`it            `|Italian                   |
-|`de            `|German                    ||`ja            `|Japanese                  |
-|`de_AT         `|German (Austria)          ||`ko            `|Korean                    |
-|`de_CH         `|German (Switzerland)      ||`lv            `|Latvian                   |
-|`el            `|Greek                     ||`nb_NO         `|Norwegian                 |
-|`en            `|English                   ||`nep           `|Nepalese                  |
-|`en_AU         `|Australia (English)       ||`nl            `|Dutch                     |
-|`en_au_ocker   `|Australia Ocker (English) ||`nl_BE         `|Dutch (Belgium)           |
-|`en_BORK       `|Bork (English)            ||`pl            `|Polish                    |
-|`en_CA         `|Canada (English)          ||`pt_BR         `|Portuguese (Brazil)       |
-|`en_GB         `|Great Britain (English)   ||`pt_PT         `|Portuguese (Portugal)     |
-|`en_IE         `|Ireland (English)         ||`ro            `|Romanian                  |
-|`en_IND        `|India (English)           ||`ru            `|Russian                   |
-|`en_US         `|United States (English)   ||`sk            `|Slovakian                 |
-|`en_ZA         `|South Africa (English)    ||`sv            `|Swedish                   |
-|`es            `|Spanish                   ||`tr            `|Turkish                   |
-|`es_MX         `|Spanish Mexico            ||`uk            `|Ukrainian                 |
-|`fa            `|Farsi                     ||`vi            `|Vietnamese                |
-|`fr            `|French                    ||`zh_CN         `|Chinese                   |
-|`fr_CA         `|Canada (French)           ||`zh_TW         `|Chinese (Taiwan)          |
+|`af_ZA         `|South Africa (Afrikaans)  ||`ge            `|Georgian                  |
+|`ar            `|Arabic                    ||`id_ID         `|Indonesia                 |
+|`az            `|Azerbaijani               ||`it            `|Italian                   |
+|`cz            `|Czech                     ||`ja            `|Japanese                  |
+|`de            `|German                    ||`ko            `|Korean                    |
+|`de_AT         `|German (Austria)          ||`lv            `|Latvian                   |
+|`de_CH         `|German (Switzerland)      ||`nb_NO         `|Norwegian                 |
+|`el            `|Greek                     ||`nep           `|Nepalese                  |
+|`en            `|English                   ||`nl            `|Dutch                     |
+|`en_AU         `|Australia (English)       ||`nl_BE         `|Dutch (Belgium)           |
+|`en_au_ocker   `|Australia Ocker (English) ||`pl            `|Polish                    |
+|`en_BORK       `|Bork (English)            ||`pt_BR         `|Portuguese (Brazil)       |
+|`en_CA         `|Canada (English)          ||`pt_PT         `|Portuguese (Portugal)     |
+|`en_GB         `|Great Britain (English)   ||`ro            `|Romanian                  |
+|`en_IE         `|Ireland (English)         ||`ru            `|Russian                   |
+|`en_IND        `|India (English)           ||`sk            `|Slovakian                 |
+|`en_US         `|United States (English)   ||`sv            `|Swedish                   |
+|`en_ZA         `|South Africa (English)    ||`tr            `|Turkish                   |
+|`es            `|Spanish                   ||`uk            `|Ukrainian                 |
+|`es_MX         `|Spanish Mexico            ||`vi            `|Vietnamese                |
+|`fa            `|Farsi                     ||`zh_CN         `|Chinese                   |
+|`fr            `|French                    ||`zh_TW         `|Chinese (Taiwan)          |
+|`fr_CA         `|Canada (French)           ||`zu_ZA         `|South Africa (Zulu)       |
 |`fr_CH         `|French (Switzerland)      ||||
 
 

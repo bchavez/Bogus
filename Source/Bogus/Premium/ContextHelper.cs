@@ -25,7 +25,7 @@ namespace Bogus.Premium
 
       public static T GetOrSet<T>(Faker f, Func<T> factory) where T : DataSet
       {
-         var key = typeof(T).Name.ToLower();
+         var key = typeof(T).Name.ToLowerInvariant();
          return GetOrSet($"__{key}", f, factory);
       }
    }

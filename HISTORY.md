@@ -7,6 +7,7 @@
 * `id_ID` - Indonesia locale updated.
 * `es` - Spanish locale updated.
 * `f.Images.DatUri` now accepts an HTML color parameter.
+* PR 180: Resolved Turkish Culture `.ToLower` causing invalid JSON dataset path `.ToLowerInvariant` now used. 
 
 ## v24.2.0
 * Issue 179: Fixed regression introduced in 23.0.3 that forbid setting of internal/non-public members of `T` in when `Faker<T>` is used.

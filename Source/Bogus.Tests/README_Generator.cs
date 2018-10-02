@@ -217,7 +217,7 @@ namespace Bogus.Tests
       {
          string FindRoot(string path)
          {
-            if( path.ToUpper().EndsWith("BOGUS.TESTS") )
+            if( path.ToUpperInvariant().EndsWith("BOGUS.TESTS") )
                return path;
 
             return FindRoot(Path.GetFullPath(path.PathCombine("..")));

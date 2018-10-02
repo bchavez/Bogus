@@ -163,7 +163,7 @@ namespace Bogus
             x =>
                {
                   BArray result;
-                  var groupValue = x.Groups[1].Value.ToLower().Split('.');
+                  var groupValue = x.Groups[1].Value.ToLowerInvariant().Split('.');
                   if( groupValue.Length == 1 )
                   {
                      result = (BArray)Database.Get(this.Category, groupValue[0], this.Locale);

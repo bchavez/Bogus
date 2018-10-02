@@ -196,7 +196,7 @@ namespace Bogus.DataSets
          c = Convert.ToChar(n).ToString();
          if( memorable )
          {
-            c = c.ToLower();
+            c = c.ToLowerInvariant();
          }
          if( !Regex.IsMatch(c, regexPattern) )
          {

@@ -447,7 +447,7 @@ public void Using_FakerT_Inheritance()
     * `.Country().CurrencyCode()` - Random currency code.
     * `.Australia().Capital()` - Country capital.
     * `.Country().Iceland().PostCode()` - Random country post code.
-* [**AustralianElectorates.Bogus**](https://github.com/SimonCropp/AustralianElectorates) ([`NuGet Package`](https://www.nuget.org/packages/AustralianElectorates.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Wrapper around Australian Electoral Commission (AEC) data (https://www.aec.gov.au/). Examples:
+* [**AustralianElectorates.Bogus**](https://github.com/pmcau/AustralianElectorates) ([`NuGet Package`](https://www.nuget.org/packages/AustralianElectorates.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Wrapper around Australian Electoral Commission (AEC) data (https://www.aec.gov.au/). Examples:
     * `.AustralianElectorates().Electorate()` - Random electorate.
     * `.AustralianElectorates().Name()` - Random electorate name.
     * `.AustralianElectorates().CurrentMember()` - Random current electorate member for parliament.

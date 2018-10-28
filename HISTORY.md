@@ -1,3 +1,6 @@
+## v24.3.1
+* `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir! 
+
 ## v24.3.0
 * Data / feature parity with faker.js @ 9dd5a52
 * `af_ZA` - New South Africa (Afrikaans) locale added.

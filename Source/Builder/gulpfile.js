@@ -47,7 +47,18 @@ gulp.task("import.locales.json", function () {
          var extendPath = path.resolve(dataExtendFolder, destName);
          if (fs.existsSync(extendPath)) {
             var extendData = JSON.parse(fs.readFileSync(extendPath, 'utf8'));
-            bogusLocale = l.merge(locale, extendData);
+
+            // By default, _.merge replaces items in arrays. IE:
+            // _.merge([1,2,3,4], [9,9]) = [9,9,3,4], in our case
+            // data extend locale files should replace the full contents
+            // of the array, not replace items.
+            // https://lodash.com/docs/4.17.10#mergeWith
+            var replacer = (objValue, srcValue) => {
+               if( _.isArray(objValue) ) {
+                  return objValue = srcValue;
+               }
+            };
+            bogusLocale = l.mergeWith(locale, extendData, replacer);
          } else {
             bogusLocale = locale;
          }

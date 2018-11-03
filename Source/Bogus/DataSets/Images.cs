@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Bogus.DataSets
 {
@@ -221,6 +222,39 @@ namespace Bogus.DataSets
             $@"<svg xmlns=""http://www.w3.org/2000/svg"" version=""1.1"" baseProfile=""full"" width=""{width}"" height=""{height}""><rect width=""100%"" height=""100%"" fill=""{htmlColor}""/><text x=""{width / 2}"" y=""{height / 2}"" font-size=""20"" alignment-baseline=""middle"" text-anchor=""middle"" fill=""white"">{width}x{height}</text></svg>";
 
          return rawPrefix + Uri.EscapeDataString(svgString);
+      }
+
+      /// <summary>
+      /// Get an image from the https://picsum.photos service.
+      /// </summary>
+      /// <param name="width">Width of the image.</param>
+      /// <param name="height">Height of the image.</param>
+      /// <param name="grayscale">Grayscale (no color) image.</param>
+      /// <param name="blur">Blurry image.</param>
+      /// <param name="imageId">Optional Image ID found here https://picsum.photos/images</param>
+      public string PicsumUrl(int width = 640, int height = 480, bool grayscale = false, bool blur = false, int? imageId = null )
+      {
+         const string Url = "https://picsum.photos";
+
+         var sb = new StringBuilder();
+
+         if (grayscale)
+         {
+            sb.Append("/g");
+
+         }
+
+         sb.Append($"/{width}/{height}");
+         
+         var n = imageId ?? this.Random.Number(0, 1084);
+         sb.Append($"/?image={n}");
+
+         if (blur)
+         {
+            sb.Append("&blur");
+         }
+
+         return Url + sb;
       }
    }
 }

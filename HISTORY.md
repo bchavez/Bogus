@@ -1,5 +1,6 @@
 ## v24.3.1
-* `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir! 
+* `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir!
+* Added `f.Image.PicsumUrl` (https://picsum.photos) service as faster alternative to Lorem Pixel. 
 
 ## v24.3.0
 * Data / feature parity with faker.js @ 9dd5a52

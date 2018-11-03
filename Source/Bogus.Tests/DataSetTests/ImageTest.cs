@@ -71,5 +71,15 @@ namespace Bogus.Tests.DataSetTests
       {
          image.Sports(https: true).Should().StartWith("https://");
       }
+
+      [Fact]
+      public void can_use_picsum_Url()
+      {
+         var url = image.PicsumUrl(200, 300);
+         url.Should().Be("https://picsum.photos/200/300/?image=654");
+
+         url = image.PicsumUrl(300, 200, true, true);
+         url.Should().Be("https://picsum.photos/g/300/200/?image=119&blur");
+      }
    }
 }

@@ -342,6 +342,7 @@ public void Using_FakerT_Inheritance()
 	* `Technics` - Get a technology related image.
 	* `Transport` - Get a transportation related image.
 	* `DataUri` - Get a SVG data URI image with a specific width and height.
+	* `PicsumUrl` - Get an image from the https://picsum.photos service.
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.

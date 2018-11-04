@@ -1,3 +1,6 @@
+## v24.3.2
+* Add SourceLink compatibility with Visual Studio 2017.
+
 ## v24.3.1
 * `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir!
 * Added `f.Image.PicsumUrl` (https://picsum.photos) service as faster alternative to Lorem Pixel. 

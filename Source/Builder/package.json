@@ -10,7 +10,7 @@
   "license": "MIT",
    "devDependencies": {
       "bson": "^1.0.4",
-      "event-stream": "^3.3.1",
+      "event-stream": "3.3.4",
       "gulp": "^3.9.0",
       "gulp-cr-lf-replace": "0.0.4",
       "gulp-load-plugins": "^1.0.0-rc.1",

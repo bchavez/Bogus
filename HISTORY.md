@@ -1,5 +1,6 @@
-## v24.3.2
+## v25.0.1
 * Add SourceLink compatibility with Visual Studio 2017.
+* Obsoleted **LoremPixel.com** `Image` categories. The image service is usually down or very slow. Consider using `Images.PicsumUrl()` as a replacement. This version is an obsolete-warn, next release will have Image category APIs removed.
 
 ## v24.3.1
 * `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir!

@@ -4,6 +4,7 @@ using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using static Bogus.DataSets.LoremPixelCategory;
 
 namespace Bogus.Tests.DataSetTests
 {
@@ -23,19 +24,19 @@ namespace Bogus.Tests.DataSetTests
       public void DownloadAllTest()
       {
          var wc = new WebClient();
-         wc.DownloadFile(image.Abstract(), "abstract.jpg");
-         wc.DownloadFile(image.Animals(), "animals.jpg");
-         wc.DownloadFile(image.Business(), "business.jpg");
-         wc.DownloadFile(image.Cats(), "cats.jpg");
-         wc.DownloadFile(image.City(), "city.jpg");
-         wc.DownloadFile(image.Food(), "food.jpg");
-         wc.DownloadFile(image.Nightlife(), "nightlife.jpg");
-         wc.DownloadFile(image.Fashion(), "fashion.jpg");
-         wc.DownloadFile(image.People(), "people.jpg");
-         wc.DownloadFile(image.Nature(), "nature.jpg");
-         wc.DownloadFile(image.Sports(), "sports.jpg");
-         wc.DownloadFile(image.Technics(), "technics.jpg");
-         wc.DownloadFile(image.Transport(), "transport.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Abstract), "abstract.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Animals), "animals.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Business), "business.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Cats), "cats.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(City), "city.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Food), "food.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Nightlife), "nightlife.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Fashion), "fashion.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(People), "people.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Nature), "nature.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Sports), "sports.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Technics), "technics.jpg");
+         wc.DownloadFile(image.LoremPixelUrl(Transport), "transport.jpg");
       }
 
       [Fact]
@@ -53,7 +54,7 @@ namespace Bogus.Tests.DataSetTests
 ";
 
          var dataUri = image.DataUri(200, 300, "red");
-
+         
          console.Dump(dataUri);
          var content = html.Replace("{imgdata}", dataUri);
          var filename = Path.ChangeExtension(Path.GetRandomFileName(), "html");
@@ -69,7 +70,7 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void url_generated_should_have_https()
       {
-         image.Sports(https: true).Should().StartWith("https://");
+         image.LoremPixelUrl(Sports, https: true).Should().StartWith("https://");
       }
 
       [Fact]

@@ -327,22 +327,24 @@ public void Using_FakerT_Inheritance()
 	* `IngVerb` - Returns an -ing verb.
 	* `Phrase` - Returns a phrase.
 * **`Images`**
-	* `Image` - Gets a random image.
-	* `Abstract` - Gets an abstract looking image.
-	* `Animals` - Gets an image of an animal.
-	* `Business` - Gets a business looking image.
-	* `Cats` - Gets a picture of a cat.
-	* `City` - Gets a city looking image.
-	* `Food` - Gets an image of food.
-	* `Nightlife` - Gets an image with city looking nightlife.
-	* `Fashion` - Gets an image in the fashion category.
-	* `People` - Gets an image of humans.
-	* `Nature` - Gets an image of nature.
-	* `Sports` - Gets an image related to sports.
-	* `Technics` - Get a technology related image.
-	* `Transport` - Get a transportation related image.
 	* `DataUri` - Get a SVG data URI image with a specific width and height.
 	* `PicsumUrl` - Get an image from the https://picsum.photos service.
+	* `LoremPixelUrl` - Gets a random image from https://lorempixel.com. This **LoremPixel** is slow. Consider using `PicsumUrl` instead.
+        `LoremPixelCategory`:
+    	* `Abstract` - Gets an abstract looking image.
+    	* `Animals` - Gets an image of an animal.
+    	* `Business` - Gets a business looking image.
+    	* `Cats` - Gets a picture of a cat.
+    	* `City` - Gets a city looking image.
+    	* `Food` - Gets an image of food.
+    	* `Nightlife` - Gets an image with city looking nightlife.
+    	* `Fashion` - Gets an image in the fashion category.
+    	* `People` - Gets an image of humans.
+    	* `Nature` - Gets an image of nature.
+    	* `Sports` - Gets an image related to sports.
+    	* `Technics` - Get a technology related image.
+    	* `Transport` - Get a transportation related image.
+
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.

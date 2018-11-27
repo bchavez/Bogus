@@ -1,6 +1,7 @@
 ﻿using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using static Bogus.DataSets.LoremPixelCategory;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -11,7 +12,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          var images = new Images();
 
-         images.Cats().Should().Contain("cat");
+         images.LoremPixelUrl(Cats).Should().Contain("cat");
       }
    }
 }

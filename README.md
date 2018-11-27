@@ -329,8 +329,7 @@ public void Using_FakerT_Inheritance()
 * **`Images`**
 	* `DataUri` - Get a SVG data URI image with a specific width and height.
 	* `PicsumUrl` - Get an image from the https://picsum.photos service.
-	* `LoremPixelUrl` - Gets a random image from https://lorempixel.com. This **LoremPixel** is slow. Consider using `PicsumUrl` instead.
-        `LoremPixelCategory`:
+	* `LoremPixelUrl` - Gets a random image from https://lorempixel.com. This **LoremPixel** is slow. Consider using `PicsumUrl` instead. Available categories in `LoremPixelCategory`:
     	* `Abstract` - Gets an abstract looking image.
     	* `Animals` - Gets an image of an animal.
     	* `Business` - Gets a business looking image.

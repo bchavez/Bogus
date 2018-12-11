@@ -142,6 +142,19 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     
     member this.Title = assemblyTitle
 
+    member this.GetTargetFrameworks() =
+         //Basically, check the TargetFrameworks (plural) MSBuild property
+         let frameworks = XMLRead true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/text()"
+
+         if Seq.isEmpty(frameworks) then 
+             //Otherwise, it's the singular one.
+             XMLRead true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFramework/text()"
+               |> Seq.toArray
+         else
+            frameworks
+               |> Seq.head
+               |> (fun x -> x.Split(';'))
+
 
 let ReadFileAsHexString file =
     let bytes = ReadFileAsBytes file
@@ -330,37 +343,34 @@ module Helpers =
         let args = sprintf "-decrypt %s.enc -secret %s" file secret
         shellExecSecret secureFile args "."
   
-    let dotnet args workingDir = 
-        let executable = findOnPath "dotnet.exe"
-        shellExec executable args workingDir
+    let DotnetPack (np: NugetProject) (output: string) =
+        //let packArgs = sprintf "pack --include-symbols --include-source --configuration Release --output %s" output
+        //dotnet packArgs np.Folder
+        DotNetCli.Pack(fun p -> 
+           { p with 
+               Configuration = "Release"
+               WorkingDir = np.Folder
+               OutputPath = output
+               AdditionalArgs = []
+           })
 
-                                                          
-    type DotnetCommands =
-        | Restore
-        | Build
-        | Publish
-     
-    let Dotnet command target = 
-        match command with
-            | Restore -> (dotnet "restore" target)
-            | Build -> (dotnet "build --configuration release" target)
-            | Publish -> (failwith "Only CI server should publish on NuGet")
-
-    let DotnetPack (project: NugetProject) (output: string) =
-        let packArgs = sprintf "pack --include-symbols --include-source --configuration Release --output %s" output
-        dotnet packArgs project.Folder
-
-    let DotnetBuild (target: NugetProject) (output: string) = 
-        //let projectJson = JsonValue.Parse(File.ReadAllText(target.ProjectJson))
-        let frameworks = XMLRead true target.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/text()"
-                         |> Seq.head
-                         |> (fun x -> x.Split(';'))
+    let DotnetBuild (np: NugetProject) (tag: string) = 
+        let frameworks = np.GetTargetFrameworks()
                      
         for framework in frameworks do
-            //let moniker, _ = framework;
-            let moniker = framework;
-            let buildArgs = sprintf "build --configuration Release --output %s\\%s --framework %s" output moniker moniker
-            dotnet buildArgs target.Folder
+            DotNetCli.Build( fun p ->
+             { p with
+                  Configuration = "Release"
+                  Output = (np.OutputDirectory @@ tag @@ framework)
+                  WorkingDir = np.Folder
+                  Framework = framework
+             })
+
+    let DotnetRestore (np : Project) =
+           DotNetCli.Restore( fun p ->
+            { p with 
+               WorkingDir = np.Folder
+            })
 
     let XBuild target output =
         let buildArgs = sprintf "%s /p:OutDir=%s" target output

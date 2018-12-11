@@ -64,9 +64,9 @@ Target "dnx" (fun _ ->
 
     let tag = "dnx_build"
     
-    Dotnet DotnetCommands.Restore BogusProject.Folder
-    Dotnet DotnetCommands.Restore TestProject.Folder
-    DotnetBuild BogusProject (BogusProject.OutputDirectory @@ tag)
+    //Dotnet DotnetCommands.Restore BogusProject.Folder
+    //Dotnet DotnetCommands.Restore TestProject.Folder
+    DotnetBuild BogusProject tag
 )
 
 Target "restore" (fun _ -> 
@@ -86,8 +86,8 @@ Target "restore" (fun _ ->
      //   )
 
      trace ".NET Core Restore"
-     Dotnet DotnetCommands.Restore BogusProject.Folder
-     Dotnet DotnetCommands.Restore TestProject.Folder
+     DotnetRestore BogusProject
+     DotnetRestore TestProject
  )
 
 open Ionic.Zip

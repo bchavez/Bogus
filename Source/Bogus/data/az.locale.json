@@ -843,7 +843,10 @@
       "MMC",
       "QSC"
     ],
-    "suffix": [],
+    "suffix": [
+      "Qrup",
+      "Holdinqlər"
+    ],
     "name": [
       "#{prefix} #{Name.female_first_name}",
       "#{prefix} #{Name.male_first_name}",

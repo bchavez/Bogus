@@ -40,6 +40,8 @@ gulp.task("import.locales.json", function () {
 
          ensureAllArraysAreStrings(locale);
 
+         specializeLocale(locale, localeCode);
+
          var destName = localeCode + ".locale.json";
          log2(destName);
          var bogusLocale = {};
@@ -139,6 +141,10 @@ function transformMimeTypes(obj) {
    });
 
    obj["system"]["mimeTypes"] = arr;
+}
+
+function specializeLocale(locale, localeCode) {
+   
 }
 
 

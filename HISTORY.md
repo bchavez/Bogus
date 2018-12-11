@@ -1,3 +1,6 @@
+## v25.0.2
+* Issue 192: Fixed IndexOutOfRangeException when `Company.CompanyName()` is used with `az` locale.
+
 ## v25.0.1
 * Add SourceLink compatibility with Visual Studio 2017.
 * Obsoleted **LoremPixel.com** `Image` categories. The image service is usually down or very slow. Consider using `Images.PicsumUrl()` as a replacement. This version is an obsolete-warn, next release will have Image category APIs removed.

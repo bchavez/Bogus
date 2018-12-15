@@ -53,7 +53,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random sequence of digits
+      /// Get a random sequence of digits.
       /// </summary>
       /// <param name="count">How many</param>
       /// <param name="minDigit">minimum digit, inclusive</param>
@@ -88,7 +88,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random even number
+      /// Returns a random even number.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
@@ -103,7 +103,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random odd number
+      /// Returns a random odd number.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
@@ -139,7 +139,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random decimal, between 0.0 and 1.0
+      /// Get a random decimal, between 0.0 and 1.0.
       /// </summary>
       /// <param name="min">Minimum, default 0.0</param>
       /// <param name="max">Maximum, default 1.0</param>
@@ -149,7 +149,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random float, between 0.0 and 1.0
+      /// Get a random float, between 0.0 and 1.0.
       /// </summary>
       /// <param name="min">Minimum, default 0.0</param>
       /// <param name="max">Maximum, default 1.0</param>
@@ -278,7 +278,8 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a string of characters of a specific length. Uses <seealso cref="Chars"/>.
+      /// Get a string of characters of a specific length.
+      /// Uses <seealso cref="Chars"/>.
       /// </summary>
       /// <param name="length">The exact length of the result string. If null, a random length is chosen between 40 and 80.</param>
       /// <param name="minChar">Min character value, default char.MinValue</param>
@@ -345,7 +346,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random boolean
+      /// Get a random boolean.
       /// </summary>
       public bool Bool()
       {
@@ -353,7 +354,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random boolean
+      /// Get a random boolean.
       /// </summary>
       /// <param name="weight">The probability of true. Ranges from 0 to 1.</param>
       public bool Bool(float weight)
@@ -458,7 +459,8 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Replaces symbols with numbers. IE: ### -> 283
+      /// Replaces symbols with numbers.
+      /// IE: ### -> 283
       /// </summary>
       /// <param name="format">The string format</param>
       /// <param name="symbol">The symbol to search for in format that will be replaced with a number</param>
@@ -468,7 +470,8 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Replaces each character instance in a string. Func is called each time a symbol is encountered.
+      /// Replaces each character instance in a string.
+      /// Func is called each time a symbol is encountered.
       /// </summary>
       /// <param name="format">The string with symbols to replace.</param>
       /// <param name="symbol">The symbol to search for in the string.</param>
@@ -480,7 +483,8 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter. IE: ###???* -> 283QED4. Letters are uppercase.
+      /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter.
+      /// IE: ###???* -> 283QED4. Letters are uppercase.
       /// </summary>
       public string Replace(string format)
       {
@@ -507,7 +511,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Clamps the length of a string filling between min and max characters.
+      /// Clamps the length of a string between min and max characters.
       /// If the string is below the minimum, the string is appended with random characters up to the minimum length.
       /// If the string is over the maximum, the string is truncated at maximum characters; additionally, if the result string ends with
       /// whitespace, it is replaced with a random characters.
@@ -604,7 +608,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a range of words in an array (English)
+      /// Get a range of words in an array (English).
       /// </summary>
       /// <param name="min">Minimum word count.</param>
       /// <param name="max">Maximum word count.</param>
@@ -634,7 +638,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a random unique GUID.
+      /// Get a random GUID. Alias for Randomizer.Guid().
       /// </summary>
       public Guid Uuid()
       {
@@ -660,7 +664,7 @@ namespace Bogus
          };
 
       /// <summary>
-      /// Returns a random set of alpha numeric characters 0-9, a-z
+      /// Returns a random set of alpha numeric characters 0-9, a-z.
       /// </summary>
       public string AlphaNumeric(int length)
       {
@@ -685,10 +689,10 @@ namespace Bogus
 
       //items are weighted by the decimal probability in their value
       /// <summary>
-      /// Returns a selection of T[] based on a weighted distribution of probability
+      /// Returns a selection of T[] based on a weighted distribution of probability.
       /// </summary>
       /// <param name="items">Items to draw the selection from.</param>
-      /// <param name="weights">Weights in decimal form: ie:[.25, .50, .25] for total of 3 items. Should add up to 1.</param>
+      /// <param name="weights">Weights in decimal form: IE:[.25, .50, .25] for total of 3 items. Should add up to 1.</param>
       public T WeightedRandom<T>(T[] items, float[] weights)
       {
          if( weights.Length != items.Length ) throw new ArgumentOutOfRangeException($"{nameof(items)}.Length and {nameof(weights)}.Length must be the same.");

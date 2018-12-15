@@ -111,6 +111,97 @@ namespace Bogus.Tests
          }
       }
 
+
+      [Fact]
+      public void get_randomizer_methods()
+      {
+         var (_, buildDir) = GetWorkingFolders();
+         var bogusXml = Path.Combine(buildDir, "Bogus.XML");
+         var xml = XDocument.Load(bogusXml);
+
+         var nav = xml.CreateNavigator();
+         var sel = nav.Select("/doc/members/member");
+
+         var list = new List<Record>();
+
+         foreach (XPathNavigator node in sel)
+         {
+            if (!node.HasAttributes) continue;
+
+            var member = node.GetAttribute("name", "");
+            var summaryNode = node.SelectSingleNode("summary");
+            if (summaryNode == null) continue;
+
+            var summary = summaryNode.ExtractContent()
+               .Replace("`System.", "`");
+
+            var declare = member;
+            var argPos = declare.IndexOf('(');
+            if (argPos > 0)
+            {
+               declare = declare.Substring(0, argPos);
+            }
+
+            if (!declare.StartsWith("M:Bogus.Randomizer.")) continue;
+
+            if( summary.Contains("\r") )
+               summary = summary.GetBefore("\r");
+
+            var method = declare.TrimStart('M', ':');
+            method = method.Replace("Bogus.", "");
+
+            var methodSplit = method.Split('.');
+
+            var dataset = methodSplit[0];
+            var call = methodSplit[1];
+
+            if (call == "#ctor") continue;
+
+            call = call.Replace("``1", "<T>");
+
+            var r = new Record
+            {
+               Dataset = dataset,
+               Method = call,
+               Summary = summary
+            };
+            list.Add(r);
+         }
+
+         var all = list
+            .GroupBy(k => k.Dataset)
+            .OrderBy(k => k.Key);
+
+         //get all publicly accessible types.
+         var publicMethods = typeof(Randomizer)
+            .GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+            .Select(mi => new {dataset = mi.DeclaringType.Name, method = mi.Name});
+            //.GroupBy(g => g.dataset, u => u.method)
+            //.ToDictionary(g => g.Key);
+
+         foreach (var g in all)
+         {
+            //if (!datasets.ContainsKey(g.Key)) return; //check if it's accessible
+            var distinctMethods = g
+               .OrderBy(x => x.Method)
+               .ThenBy(x => x.Summary.Length)
+               .DistinctBy(u => u.Method);
+            //we need to do this ordering so we select the most
+            //succinct description for any method overloads.
+
+            //then just preserve the ordering as source code in source code
+            distinctMethods = g.Intersect(distinctMethods);
+
+            output.WriteLine("* **`Random`/`" + g.Key + "`**");
+            foreach (var m in distinctMethods)
+            {
+               if (!publicMethods.Any(s => m.Method.Contains(s.method))) continue; //check if it's accessible
+               output.WriteLine("\t* `" + m.Method + "` - " + m.Summary);
+            }
+         }
+      }
+
+
       [Fact]
       public void get_all_locales()
       {

@@ -406,6 +406,50 @@ public void Using_FakerT_Inheritance()
 	* `AndroidId` - Get a random GCM registration ID.
 	* `ApplePushToken` - Get a random Apple Push Token
 	* `BlackBerryPin` - Get a random BlackBerry Device PIN
+* **`Random`/`Randomizer`**
+	* `Number` - Get an int from 0 to max.
+	* `Digits` - Get a random sequence of digits.
+	* `Even` - Returns a random even number.
+	* `Odd` - Returns a random odd number.
+	* `Double` - Get a random double, between 0.0 and 1.0.
+	* `Decimal` - Get a random decimal, between 0.0 and 1.0.
+	* `Float` - Get a random float, between 0.0 and 1.0.
+	* `Byte` - Generate a random byte between 0 and 255.
+	* `Bytes` - Get a random sequence of bytes.
+	* `SByte` - Generate a random sbyte between -128 and 127.
+	* `Int` - Generate a random int between MinValue and MaxValue.
+	* `UInt` - Generate a random uint between MinValue and MaxValue.
+	* `ULong` - Generate a random ulong between -128 and 127.
+	* `Long` - Generate a random long between MinValue and MaxValue.
+	* `Short` - Generate a random short between MinValue and MaxValue.
+	* `UShort` - Generate a random ushort between MinValue and MaxValue.
+	* `Char` - Generate a random char between MinValue and MaxValue.
+	* `Chars` - Generate a random chars between MinValue and MaxValue.
+	* `String` - Get a string of characters of a specific length.
+	* `String2` - Get a string of characters with a specific length drawing characters from `chars`.
+	* `Hash` - Return a random hex hash. Default 40 characters, aka SHA-1.
+	* `Bool` - Get a random boolean.
+	* `ArrayElement<T>` - Get a random array element.
+	* `ArrayElement` - Get a random array element.
+	* `ArrayElements<T>` - Get a random subset of an array.
+	* `ListItem<T>` - Get a random list item.
+	* `ListItems<T>` - Get a random subset of a List.
+	* `CollectionItem<T>` - Get a random collection item.
+	* `ReplaceNumbers` - Replaces symbols with numbers.
+	* `ReplaceSymbols` - Replaces each character instance in a string.
+	* `Replace` - Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter.
+	* `ClampString` - Clamps the length of a string between min and max characters.
+	* `Enum<T>` - Picks a random Enum of T. Works only with Enums.
+	* `Shuffle<T>` - Shuffles an IEnumerable source.
+	* `Word` - Returns a single word or phrase in English.
+	* `Words` - Gets some random words and phrases in English.
+	* `WordsArray` - Get a range of words in an array (English).
+	* `Guid` - Get a random GUID.
+	* `Uuid` - Get a random GUID. Alias for Randomizer.Guid().
+	* `RandomLocale` - Returns a random locale.
+	* `AlphaNumeric` - Returns a random set of alpha numeric characters 0-9, a-z.
+	* `Hexadecimal` - Generates a random hexadecimal string.
+	* `WeightedRandom<T>` - Returns a selection of T[] based on a weighted distribution of probability.
 
 #### API Extension Methods
 * **`using Bogus.Extensions.Brazil;`**

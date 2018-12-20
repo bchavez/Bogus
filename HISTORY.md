@@ -1,3 +1,6 @@
+## v25.0.3
+* Issue 193: Turkish :tr: state/providence names added to 'tr' locale.
+
 ## v25.0.2
 * Issue 192: Fixed IndexOutOfRangeException when `Company.CompanyName()` is used with `az` locale.
 

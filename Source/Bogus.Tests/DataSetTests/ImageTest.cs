@@ -82,5 +82,33 @@ namespace Bogus.Tests.DataSetTests
          url = image.PicsumUrl(300, 200, true, true);
          url.Should().Be("https://picsum.photos/g/300/200/?image=119&blur");
       }
+
+      [Fact]
+      public void can_use_loremflickr()
+      {
+         var img = image.LoremFlickrUrl(640, 480, "dog");
+
+         img.Should().Be("https://loremflickr.com/640/480/dog/any?lock=1296054234");
+         
+         img = image.LoremFlickrUrl(100, 100, "cat");
+
+         img.Should().Be("https://loremflickr.com/100/100/cat/any?lock=235660067");
+
+         img = image.LoremFlickrUrl(100, 100, "cat,bird");
+
+         img.Should().Be("https://loremflickr.com/100/100/cat,bird/any?lock=1749342364");
+
+         img = image.LoremFlickrUrl(100, 100, "cat,bird", lockId: -1, grascale: true);
+
+         img.Should().Be("https://loremflickr.com/g/100/100/cat,bird/any");
+
+         img = image.LoremFlickrUrl(100, 100, "cat    bird", lockId: -1, grascale: true, matchAllKeywords:true);
+
+         img.Should().Be("https://loremflickr.com/g/100/100/cat,bird/all");
+
+         img = image.LoremFlickrUrl(100, 100, "cat    bird", lockId: 227, grascale: true, matchAllKeywords: true);
+
+         img.Should().Be("https://loremflickr.com/g/100/100/cat,bird/all?lock=227");
+      }
    }
 }

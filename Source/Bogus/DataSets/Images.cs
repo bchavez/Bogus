@@ -108,5 +108,55 @@ namespace Bogus.DataSets
 
          return Url + sb;
       }
+
+      /// <summary>
+      /// Get an image from https://loremflickr.com service.
+      /// </summary>
+      /// <param name="keywords">Space or comma delimited list of keywords you want the picture to contain. IE: "cat, dog" for images with cats and dogs.</param>
+      /// <param name="width">The image width.</param>
+      /// <param name="height">The image height.</param>
+      /// <param name="grascale">Grayscale the image.</param>
+      /// <param name="matchAllKeywords">True tries to match an image with all specified keywords. False tries to match an image with any specified keyword.</param>
+      /// <param name="lockId">Deterministic image id. By default, this method generates URLs with image lock ids.
+      /// So, if a random seed is set, repeat runs of this method will generate the same lock id sequence
+      /// for images. If you want explicit control over the lock id, you can pass it as a parameter here.
+      /// Additionally, if you don't want any lock ids, pass -1 for this parameter this method will generate
+      /// a URL that will result in a new random image every time the HTTP URL is hit.
+      /// </param>
+      public string LoremFlickrUrl(
+         int width = 320, int height = 240,
+         string keywords = null,
+         bool grascale = false,
+         bool matchAllKeywords = false, int? lockId = null)
+      {
+         const string Url = "https://loremflickr.com";
+
+         var sb = new StringBuilder();
+         if (grascale)
+         {
+            sb.Append("/g");
+         }
+
+         sb.Append($"/{width}/{height}");
+
+         if (keywords != null)
+         {
+            var tags = keywords.Split(new[] { ' ', ',' }, StringSplitOptions.RemoveEmptyEntries);
+            var cleanTags = string.Join(",", tags);
+            var match = matchAllKeywords ? "all" : "any";
+            sb.Append($"/{cleanTags}/{match}");
+         }
+
+         if( lockId is null )
+         {
+            lockId = this.Random.Number(int.MaxValue);
+         }
+         if( lockId >= 0 )
+         {
+            sb.Append($"?lock={lockId}");
+         }
+
+         return Url + sb;
+      }
    }
 }

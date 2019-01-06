@@ -1,4 +1,5 @@
 ## v25.0.3
+* Added `f.Images.LoremFlickr()` (https://loremflickr.com) image service.
 * Issue 193: Turkish :tr: state/providence names added to 'tr' locale.
 
 ## v25.0.2

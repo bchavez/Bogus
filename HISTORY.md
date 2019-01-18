@@ -1,3 +1,6 @@
+## v25.0.4
+* PR 194: Update Dutch `nl` locale with extra `name.first_name`, `address.street_suffix`, and `company.suffix`.
+
 ## v25.0.3
 * Added `f.Images.LoremFlickrUrl()` (https://loremflickr.com) image service.
 * Issue 193: Turkish :tr: state/providence names added to 'tr' locale.

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Bogus.Bson;
 using Bogus.Extensions.Extras;
@@ -113,6 +114,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get an account number. Default length is 8 digits.
       /// </summary>
+      /// <param name="length">The length of the account number.</param>
       public string Account(int length = 8)
       {
          var template = new string('#', length);
@@ -350,7 +352,7 @@ namespace Bogus.DataSets
       public string Iban(bool formatted = false)
       {
          var ibanFormat = this.RandomIbanFormat();
-         var s = "";
+         var stringBuilder = new StringBuilder();
          var count = 0;
          for( var b = 0; b < ibanFormat.Bban.Length; b++ )
          {
@@ -361,17 +363,17 @@ namespace Bogus.DataSets
             {
                if( bban.Type == "a" )
                {
-                  s += this.Random.ArrayElement(IbanAlpha);
+                  stringBuilder.Append(this.Random.ArrayElement(IbanAlpha));
                }
                else if( bban.Type == "c" )
                {
                   if( this.Random.Number(100) < 80 )
                   {
-                     s += this.Random.Number(9);
+                     stringBuilder.Append(this.Random.Number(9));
                   }
                   else
                   {
-                     s += this.Random.ArrayElement(IbanAlpha);
+                     stringBuilder.Append(this.Random.ArrayElement(IbanAlpha));
                   }
                }
                else
@@ -380,26 +382,27 @@ namespace Bogus.DataSets
                   {
                      if( this.Random.Bool() )
                      {
-                        s += this.Random.ArrayElement(IbanPattern100);
+                        stringBuilder.Append(this.Random.ArrayElement(IbanPattern100));
                         c -= 2;
                      }
                      else
                      {
-                        s += this.Random.ArrayElement(IbanPattern10);
+                        stringBuilder.Append(this.Random.ArrayElement(IbanPattern10));
                         c--;
                      }
                   }
                   else
                   {
-                     s += this.Random.Number(9);
+                     stringBuilder.Append(this.Random.Number(9));
                   }
                }
                c--;
             }
-            s = s.Substring(0, count);
+
+            stringBuilder = stringBuilder.Remove(count, stringBuilder.Length - count);
          }
-         var checksum = 98 - IbanMod97(IbanToDigitString(s + ibanFormat.Country + "00"));
-         var iban = ibanFormat.Country + checksum.ToString("00") + s;
+         var checksum = 98 - IbanMod97(IbanToDigitString(stringBuilder + ibanFormat.Country + "00"));
+         var iban = ibanFormat.Country + checksum.ToString("00") + stringBuilder;
 
          if( formatted )
          {

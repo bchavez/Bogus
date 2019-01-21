@@ -48,7 +48,7 @@ namespace Bogus
       private Randomizer randomizer;
 
       /// <summary>
-      /// Gets or sets the random used to generate values.
+      /// Gets or sets the <see cref="Randomizer"/> used to generate values.
       /// </summary>
       public Randomizer Random
       {
@@ -60,6 +60,11 @@ namespace Bogus
          }
       }
 
+      SeedNotifier IHasRandomizer.GetNotifier()
+      {
+         return this.Notifier;
+      }
+
       /// <summary>
       /// Resolves the 'category' type of a dataset type; respects the 'DataCategory' attribute.
       /// </summary>
@@ -69,11 +74,6 @@ namespace Bogus
       {
          var categoryAttribute = type.GetCustomAttributeX<DataCategoryAttribute>();
          return categoryAttribute != null ? categoryAttribute.Name : type.Name.ToLowerInvariant();
-      }
-
-      SeedNotifier IHasRandomizer.GetNotifier()
-      {
-         return this.Notifier;
       }
 
       /// <summary>
@@ -188,7 +188,7 @@ namespace Bogus
       /// <returns>The parsed token.</returns>
       private string ParseTokens(string value)
       {
-         return parseTokensRegex.Replace(
+         var parseResult = parseTokensRegex.Replace(
             value,
             x =>
                {
@@ -208,6 +208,8 @@ namespace Bogus
                   // replace values
                   return ParseTokens(randomElement);
                });
+
+         return parseResult;
       }
    }
 }

@@ -147,12 +147,12 @@ namespace Bogus.DataSets
       /// <returns>A random country code.</returns>
       public string CountryCode(Iso3166Format format = Iso3166Format.Alpha2)
       {
-         if (format == Iso3166Format.Alpha2)
+         if( format == Iso3166Format.Alpha2 )
          {
             return GetRandomArrayItem("country_code");
          }
 
-         if (format == Iso3166Format.Alpha3)
+         if( format == Iso3166Format.Alpha3 )
          {
             return GetRandomArrayItem("country_code3");
          }
@@ -207,7 +207,7 @@ namespace Bogus.DataSets
       /// <returns>A random cardinal or ordinal direction.</returns>
       public string Direction(bool useAbbreviation = false)
       {
-         if (useAbbreviation)
+         if( useAbbreviation )
          {
             return GetRandomArrayItem("direction_abbr");
          }
@@ -222,7 +222,7 @@ namespace Bogus.DataSets
       /// <returns>A random cardinal direction</returns>
       public string CardinalDirection(bool useAbbreviation = false)
       {
-         if (useAbbreviation)
+         if( useAbbreviation )
          {
             return GetRandomArrayItem("direction_abbr", min: 0, max: 4);
          }
@@ -237,7 +237,7 @@ namespace Bogus.DataSets
       /// <returns>A random ordinal direction.</returns>
       public string OrdinalDirection(bool useAbbreviation = false)
       {
-         if (useAbbreviation)
+         if( useAbbreviation )
          {
             return GetRandomArrayItem("direction_abbr", min: 4, max: 8);
          }

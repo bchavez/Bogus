@@ -52,7 +52,7 @@ namespace Bogus
       /// </summary>
       public Randomizer Random
       {
-         get => this.randomizer ?? (this.randomizer = new Randomizer());
+         get => this.randomizer ?? (this.Random = new Randomizer());
          set
          {
             this.randomizer = value;
@@ -103,8 +103,12 @@ namespace Bogus
       /// <returns>A boolean to indicate if the locale exists.</returns>
       protected internal virtual bool HasKey(string path, bool includeFallback = true)
       {
-         return includeFallback ? Database.HasKey(this.Category, path, this.Locale)
-                   : Database.HasKey(this.Category, path, this.Locale, null);
+         if (includeFallback)
+         {
+            return Database.HasKey(this.Category, path, this.Locale);
+         }
+
+         return Database.HasKey(this.Category, path, this.Locale, null);
       }
 
       /// <summary>

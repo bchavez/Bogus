@@ -26,13 +26,13 @@ namespace Bogus.DataSets
       {
          var num = max;
 
-         if (!returnMax)
+         if( !returnMax )
          {
             num = this.Random.Number(1, max);
          }
 
          var cats = Categories(num);
-         if (num > 1)
+         if( num > 1 )
          {
             return string.Format("{0} & {1}", string.Join(", ", cats.Take(cats.Length - 1)),
                cats.Last());
@@ -67,7 +67,7 @@ namespace Bogus.DataSets
       {
          var result = new string[num];
 
-         for (var i = 0; i < num; i++)
+         for( var i = 0; i < num; i++ )
          {
             result[i] = GetRandomArrayItem("department");
          }
@@ -155,8 +155,8 @@ namespace Bogus.DataSets
          var digits = this.Random.Digits(length - 1);
 
          var weightedSum =
-            digits.Zip(
-                  weights, (d, w) => d * w)
+            digits.Zip(weights,
+                  (d, w) => d * w)
                .Sum();
 
          var checkDigit = (10 - weightedSum % 10) % 10;

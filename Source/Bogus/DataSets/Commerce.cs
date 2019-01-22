@@ -20,7 +20,7 @@ namespace Bogus.DataSets
       /// Get a random commerce department.
       /// </summary>
       /// <param name="max">The maximum amount of departments</param>
-      /// <param name="returnMax">True if it should always return the max amount of values, else it will be random from 1 to the max.</param>
+      /// <param name="returnMax">If true the method returns the max amount of values, otherwise the number of categories returned is between 1 and max.</param>
       /// <returns>A random commerce department.</returns>
       public string Department(int max = 3, bool returnMax = false)
       {
@@ -46,8 +46,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random product price.
       /// </summary>
-      /// <param name="min">The minimum value.</param>
-      /// <param name="max">The maximum value.</param>
+      /// <param name="min">The minimum price.</param>
+      /// <param name="max">The maximum price.</param>
       /// <param name="decimals">How many decimals the number may include.</param>
       /// <param name="symbol">The symbol in front of the price.</param>
       /// <returns>A randomly generated price.</returns>
@@ -62,7 +62,7 @@ namespace Bogus.DataSets
       /// Get random product categories.
       /// </summary>
       /// <param name="num">The amount of categories to be generated.</param>
-      /// <returns>An collection of random product categories.</returns>
+      /// <returns>A collection of random product categories.</returns>
       public string[] Categories(int num)
       {
          var result = new string[num];

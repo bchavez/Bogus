@@ -708,7 +708,8 @@ var anotherOrder = (Order)orderFaker;
 
 #### Bulk Rules
 Sometimes writing `.RuleFor(x => x.Prop, ...)` can get repetitive, use the `.Rules((f, t) => {...})` shortcut to specify rules in bulk as shown below:
-```
+
+```csharp
 public void create_rules_for_an_object_the_easy_way()
 {
     var faker = new Faker<Order>()
@@ -722,6 +723,7 @@ public void create_rules_for_an_object_the_easy_way()
     Order o = faker.Generate();
 }
 ```
+
 ***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be indpendently checked to ensure each property has a rule.
 
 F# and VB.NET Examples
@@ -813,7 +815,7 @@ faker.Generate() |> Dump |> ignore
 ```
 
 #### The Very Basic VB.NET Example
-```visualbasic
+```vb
 Imports Bogus
 
 Public Class Customer

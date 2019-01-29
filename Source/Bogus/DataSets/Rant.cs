@@ -10,6 +10,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random user review.
       /// </summary>
+      /// <param name="product">The name of the product.</param>
+      /// <returns>A user review as a string.</returns>
       public string Review(string product = "product")
       {
          return this.GetRandomArrayItem("review")
@@ -19,6 +21,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generate an array of random reviews.
       /// </summary>
+      /// <param name="product">The name of the product.</param>
+      /// <param name="lines">The number of reviews to be generated.</param>
+      /// <returns>A string array of user reviews.</returns>
       public string[] Reviews(string product = "product", int lines = 2)
       {
          return Enumerable.Range(1, lines)

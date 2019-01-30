@@ -16,8 +16,9 @@ namespace Bogus.DataSets
       protected Name Name = null;
 
       /// <summary>
-      /// Default constructor
+      /// Initializes a new instance of the <see cref="Internet"/> class.
       /// </summary>
+      /// <param name="locale">The locale used to generate values.</param>
       public Internet(string locale = "en") : base(locale)
       {
          this.Name = this.Notifier.Flow(new Name(locale));
@@ -27,6 +28,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a legit Internet URL avatar from twitter accounts.
       /// </summary>
+      /// <returns>A string containing a URL avatar from twitter accounts.</returns>
       public string Avatar()
       {
          return GetRandomArrayItem("avatar_uri");
@@ -45,18 +47,20 @@ namespace Bogus.DataSets
       /// your own unique changing suffix too like Guid.NewGuid; just be sure to change the
       /// <paramref name="uniqueSuffix"/> value each time before calling this method
       /// to ensure that email accounts that are generated are totally unique.</param>
+      /// <returns>An email address</returns>
       public string Email(string firstName = null, string lastName = null, string provider = null, string uniqueSuffix = null)
       {
          provider = provider ?? GetRandomArrayItem("free_email");
-         
+
          return Utils.Slugify(UserName(firstName, lastName)) + uniqueSuffix + "@" + provider;
       }
 
       /// <summary>
       /// Generates an example email with @example.com.
       /// </summary>
-      /// <param name="firstName">Optional: first name of the user</param>
-      /// <param name="lastName">Optional: last name of the user</param>
+      /// <param name="firstName">Optional: first name of the user.</param>
+      /// <param name="lastName">Optional: last name of the user.</param>
+      /// <returns>An example email ending with @example.com.</returns>
       public string ExampleEmail(string firstName = null, string lastName = null)
       {
          var provider = GetRandomArrayItem("example_email");
@@ -68,6 +72,7 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="firstName">Always used.</param>
       /// <param name="lastName">Sometimes used depending on randomness.</param>
+      /// <returns>A random user name.</returns>
       public string UserName(string firstName = null, string lastName = null)
       {
          firstName = firstName ?? Name.FirstName();
@@ -90,7 +95,7 @@ namespace Bogus.DataSets
             result = firstName + Random.ArrayElement(new[] {".", "_"}) + lastName + Random.Number(99);
          }
 
-         result = result.Replace(" ", "");
+         result = result.Replace(" ", string.Empty);
 
          return Utils.Slugify(result);
       }
@@ -98,6 +103,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random domain name.
       /// </summary>
+      /// <returns>A random domain name.</returns>
       public string DomainName()
       {
          return DomainWord() + "." + DomainSuffix();
@@ -107,16 +113,18 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a domain word used for domain names.
       /// </summary>
+      /// <returns>A random domain word.</returns>
       public string DomainWord()
       {
          var domain = Name.FirstName().ToLower();
 
-         return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""'])", "");
+         return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""'])", string.Empty);
       }
 
       /// <summary>
       /// Generates a domain name suffix like .com, .net, .org
       /// </summary>
+      /// <returns>A random domain suffix.</returns>
       public string DomainSuffix()
       {
          return GetRandomArrayItem("domain_suffix");
@@ -125,6 +133,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Gets a random IP address.
       /// </summary>
+      /// <returns>A random IP address.</returns>
       public string Ip()
       {
          return $"{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
@@ -133,6 +142,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random IPv6 address.
       /// </summary>
+      /// <returns>A random IPv6 address.</returns>
       public string Ipv6()
       {
          var bytes = Random.Bytes(16);
@@ -145,6 +155,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random user agent.
       /// </summary>
+      /// <returns>A random user agent.</returns>
       public string UserAgent()
       {
          return userAgentGenerator.Generate();
@@ -153,10 +164,12 @@ namespace Bogus.DataSets
       /// <summary>
       /// Gets a random mac address.
       /// </summary>
+      /// <param name="separator">The string the mac address should be separated with.</param>
+      /// <returns>A random mac address.</returns>
       public string Mac(string separator = ":")
       {
          var arr = Enumerable.Range(0, 6)
-            .Select(s => this.Random.Number(0, 255).ToString("x2"));
+            .Select(_ => this.Random.Number(0, 255).ToString("x2"));
 
          return string.Join(separator, arr);
       }
@@ -168,19 +181,18 @@ namespace Bogus.DataSets
       /// <param name="memorable">A memorable password (ie: all lower case).</param>
       /// <param name="regexPattern">Regex pattern that the password should follow.</param>
       /// <param name="prefix">Password prefix.</param>
+      /// <returns>A random password.</returns>
       public string Password(int length = 10, bool memorable = false, string regexPattern = "\\w", string prefix = "")
       {
          string consonant, vowel;
          vowel = "[aeiouAEIOU]$";
          consonant = "[bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ]";
 
-         string c;
-         int n;
-
          if( prefix.Length >= length )
          {
             return prefix;
          }
+
          if( memorable )
          {
             if( Regex.IsMatch(prefix, consonant) )
@@ -192,17 +204,20 @@ namespace Bogus.DataSets
                regexPattern = consonant;
             }
          }
-         n = this.Random.Number(32, 126); //ascii
-         c = Convert.ToChar(n).ToString();
+
+         var asciiNumber = this.Random.Number(32, 126); //ascii
+         var character = Convert.ToChar(asciiNumber).ToString();
          if( memorable )
          {
-            c = c.ToLowerInvariant();
+            character = character.ToLowerInvariant();
          }
-         if( !Regex.IsMatch(c, regexPattern) )
+
+         if( !Regex.IsMatch(character, regexPattern) )
          {
             return Password(length, memorable, regexPattern, prefix);
          }
-         return Password(length, memorable, regexPattern, "" + prefix + c);
+
+         return Password(length, memorable, regexPattern, prefix + character);
       }
 
       /// <summary>
@@ -213,6 +228,7 @@ namespace Bogus.DataSets
       /// <param name="baseBlue">Blue base color</param>
       /// <param name="grayscale">Output a gray scale color</param>
       /// <param name="format">The color format</param>
+      /// <returns>A random color.</returns>
       public string Color(byte baseRed = 0, byte baseGreen = 0, byte baseBlue = 0, bool grayscale = false, ColorFormat format = ColorFormat.Hex)
       {
          var red = Math.Floor((Random.Number(256) + (double)baseRed) / 2);
@@ -246,6 +262,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a random protocol. HTTP or HTTPS.
       /// </summary>
+      /// <returns>A random protocol.</returns>
       public string Protocol()
       {
          var protocols = new[] {"http", "https"};
@@ -256,14 +273,10 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates a random URL.
       /// </summary>
+      /// <returns>A random URL.</returns>
       public string Url()
       {
          return Url(null, null);
-      }
-
-      private string Url(string protocol, string domain)
-      {
-         return $"{protocol ?? Protocol()}://{domain ?? DomainName()}";
       }
 
       /// <summary>
@@ -271,6 +284,7 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="protocol">Protocol part of the URL, random if null</param>
       /// <param name="domain">Domain part of the URL, random if null</param>
+      /// <returns>An URL with a random path.</returns>
       public string UrlWithPath(string protocol = null, string domain = null)
       {
          var words = Random.WordsArray(1, 3)
@@ -278,7 +292,12 @@ namespace Bogus.DataSets
             .Select(s => s.ToLower())
             .ToArray();
 
-         return $"{Url(protocol, domain)}/{Utils.Slashify(words, "/")}";
+         return $"{Url(protocol, domain)}/{Utils.Slashify(words)}";
+      }
+
+      private string Url(string protocol, string domain)
+      {
+         return $"{protocol ?? Protocol()}://{domain ?? DomainName()}";
       }
    }
 }

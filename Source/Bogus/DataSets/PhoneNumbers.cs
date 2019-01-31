@@ -35,9 +35,9 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Gets a phone number based on <paramref name="phoneFormatsArrayIndex"/>.
+      /// Gets a phone number based on the locale's phone_number.formats[] array index.
       /// </summary>
-      /// <param name="phoneFormatsArrayIndex">array index as defined in a locale's phone_number.formats[] array.</param>
+      /// <param name="phoneFormatsArrayIndex">The array index as defined in the locale's phone_number.formats[] array.</param>
       /// <returns>A random phone number.</returns>
       public string PhoneNumberFormat(int phoneFormatsArrayIndex = 0)
       {

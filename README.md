@@ -266,10 +266,10 @@ public void Using_FakerT_Inheritance()
 	* `Country` - Get a country.
 	* `FullAddress` - Get a full address like Street, City, Country.
 	* `CountryCode` - Get a random ISO 3166-1 country code.
-	* `State` - Get a state.
+	* `State` - Get a random state state.
 	* `StateAbbr` - Get a state abbreviation.
-	* `Latitude` - Get a Latitude
-	* `Longitude` - Get a Longitude
+	* `Latitude` - Get a Latitude.
+	* `Longitude` - Get a Longitude.
 	* `Direction` - Generates a cardinal or ordinal direction. IE: Northwest, South, SW, E.
 	* `CardinalDirection` - Generates a cardinal direction. IE: North, South, E, W.
 	* `OrdinalDirection` - Generates an ordinal direction. IE: Northwest, Southeast, SW, NE.
@@ -326,13 +326,13 @@ public void Using_FakerT_Inheritance()
 	* `Adjective` - Returns a adjective.
 	* `Noun` - Returns a noun.
 	* `Verb` - Returns a verb.
-	* `IngVerb` - Returns an -ing verb.
+	* `IngVerb` - Returns a verb ending with -ing.
 	* `Phrase` - Returns a phrase.
 * **`Images`**
 	* `DataUri` - Get a SVG data URI image with a specific width and height.
 	* `PicsumUrl` - Get an image from the https://picsum.photos service.
 	* `LoremFlickrUrl` - Get an image from https://loremflickr.com service.
-	* `LoremPixelUrl` - Gets a random image from https://lorempixel.com. This **LoremPixel** is slow. Consider using `PicsumUrl` instead. Available categories in `LoremPixelCategory`:
+	* `LoremPixelUrl` - Creates an image URL with http://lorempixel.com. Note: This service is slow. Consider using PicsumUrl() as a faster alternative.
     	* `Abstract` - Gets an abstract looking image.
     	* `Animals` - Gets an image of an animal.
     	* `Business` - Gets a business looking image.
@@ -346,7 +346,6 @@ public void Using_FakerT_Inheritance()
     	* `Sports` - Gets an image related to sports.
     	* `Technics` - Get a technology related image.
     	* `Transport` - Get a transportation related image.
-
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
@@ -388,7 +387,7 @@ public void Using_FakerT_Inheritance()
 	* `JobType` - Get a type of job.
 * **`PhoneNumbers`**
 	* `PhoneNumber` - Get a phone number.
-	* `PhoneNumberFormat` - Gets a phone number via format array index as defined in a locale's phone_number.formats[] array.
+	* `PhoneNumberFormat` - Gets a phone number based on the locale's phone_number.formats[] array index.
 * **`Rant`**
 	* `Review` - Generates a random user review.
 	* `Reviews` - Generate an array of random reviews.
@@ -407,6 +406,12 @@ public void Using_FakerT_Inheritance()
 	* `AndroidId` - Get a random GCM registration ID.
 	* `ApplePushToken` - Get a random Apple Push Token
 	* `BlackBerryPin` - Get a random BlackBerry Device PIN
+* **`Vehicle`**
+	* `Vin` - Generate a vehicle identification number (VIN).
+	* `Manufacturer` - Get a vehicle manufacture name. IE: Toyota, Ford, Porsche.
+	* `Model` - Get a vehicle model. IE: Camry, Civic, Accord.
+	* `Type` - Get a vehicle type. IE: Minivan, SUV, Sedan.
+	* `Fuel` - Get a vehicle fuel type. IE: Electric, Gasoline, Diesel.
 * **`Random`/`Randomizer`**
 	* `Number` - Get an int from 0 to max.
 	* `Digits` - Get a random sequence of digits.

@@ -1,3 +1,14 @@
+## v26.0.1
+* Data and feature parity with faker.js @ d3ce6f1
+* New `Vehicle` data set added.
+* `en_IND` state abbreviations and state names updated.
+* `en_CA`, `fr_CA` improved Canadian postal codes.
+* `pt_PT` locale updated with new and changed data.
+* `en` company names updated.
+* `pt_PT` locale updated.
+* Minor bug in `Date.Weekday` and `Date.Month` that could cause locale weekday/month values to default to `en`.
+* Note: deterministic sequences may have changed.
+
 ## v25.0.4
 * PR 194: Update Dutch `nl` locale with extra `name.first_name`, `address.street_suffix`, and `company.suffix`.
 

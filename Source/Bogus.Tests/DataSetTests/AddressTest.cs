@@ -105,7 +105,7 @@ namespace Bogus.Tests.DataSetTests
       public void can_get_canadian_zip_code()
       {
          var a = new Address("en_CA");
-         a.ZipCode().Should().Be("C8Q 0Q0");
+         a.ZipCode().Should().Be("N1V 6A6");
       }
 
       [Fact]

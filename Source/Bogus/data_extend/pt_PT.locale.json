@@ -1,0 +1,86 @@
+{
+   "address": {
+      "city_prefix": [
+         "Câmara de",
+         "Caldas da",
+         "Oliveira de",
+         "Vila Nova de",
+         "São",
+         "Vale de"
+      ],
+      "city_suffix": [
+         "do Douro",
+         "do Minho",
+         "do Hospital",
+         "de Ferreira",
+         "da Feira",
+         "do Sul"
+      ],
+      "street_suffix": [
+         "Rua",
+         "Avenida",
+         "Travessa",
+         "Ponte",
+         "Alameda",
+         "Marginal",
+         "Viela",
+         "Estrada"
+      ],
+      "secondary_address": [
+         "Apto. ###",
+         "Casa #",
+         "Lote ##",
+         "Bloco ##"
+      ],
+      "state": [
+         "Aveiro",
+         "Beja",
+         "Braga",
+         "Bragança",
+         "Castelo Branco",
+         "Coimbra",
+         "Évora",
+         "Faro",
+         "Guarda",
+         "Leiria",
+         "Lisboa",
+         "Portalegre",
+         "Porto",
+         "Santarém",
+         "Setúbal",
+         "Viana do Castelo",
+         "Vila Real",
+         "Viseu"
+      ]
+   },
+   "company": {
+      "suffix": [
+         "S.A.",
+         "LTDA",
+         "e Associados",
+         "Comércio"
+      ],
+      "name": [
+         "#{Name.last_name} #{suffix}",
+         "#{Name.last_name}-#{Name.last_name}",
+         "#{Name.last_name}, #{Name.last_name} e #{Name.last_name}"
+      ]
+   },
+   "name": {
+      "suffix": [
+         "Jr.",
+         "Neto",
+         "Filho"
+      ]
+   },
+   "phone_number": {
+      "formats": [
+         "2########",
+         "3########",
+         "9########",
+         "+351 2########",
+         "+351 3########",
+         "+351 9########"
+      ]
+   }
+}

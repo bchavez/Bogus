@@ -17,51 +17,6 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Creates an image URL with http://lorempixel.com. Note: This service is slow. Consider using PicsumUrl() as a faster alternative.
-      /// </summary>
-      public string LoremPixelUrl(string category = LoremPixelCategory.Random, int width = 640, int height = 480, bool randomize = false, bool https = false)
-      {
-         if( category == LoremPixelCategory.Random )
-         {
-            var categories = new[]
-               {
-                  LoremPixelCategory.Abstract,
-                  LoremPixelCategory.Animals,
-                  LoremPixelCategory.Business,
-                  LoremPixelCategory.Cats,
-                  LoremPixelCategory.City,
-                  LoremPixelCategory.Food,
-                  LoremPixelCategory.Nightlife,
-                  LoremPixelCategory.Fashion,
-                  LoremPixelCategory.People,
-                  LoremPixelCategory.Nature,
-                  LoremPixelCategory.Sports,
-                  LoremPixelCategory.Technics,
-                  LoremPixelCategory.Transport
-               };
-
-            category = this.Random.ArrayElement(categories);
-         }
-
-         var proto = "http://";
-         if( https )
-         {
-            proto = "https://";
-         }
-         var url = $"{proto}lorempixel.com/{width}/{height}";
-         if( !string.IsNullOrWhiteSpace(category) )
-         {
-            url += $"/{category}";
-            if( randomize )
-            {
-               url += $"/{this.Random.Number(1, 10)}";
-            }
-         }
-
-         return url;
-      }
-
-      /// <summary>
       /// Get a SVG data URI image with a specific width and height.
       /// </summary>
       /// <param name="width">Width of the image.</param>
@@ -157,6 +112,51 @@ namespace Bogus.DataSets
          }
 
          return Url + sb;
+      }
+
+      /// <summary>
+      /// Creates an image URL with http://lorempixel.com. Note: This service is slow. Consider using PicsumUrl() as a faster alternative.
+      /// </summary>
+      public string LoremPixelUrl(string category = LoremPixelCategory.Random, int width = 640, int height = 480, bool randomize = false, bool https = false)
+      {
+         if( category == LoremPixelCategory.Random )
+         {
+            var categories = new[]
+               {
+                  LoremPixelCategory.Abstract,
+                  LoremPixelCategory.Animals,
+                  LoremPixelCategory.Business,
+                  LoremPixelCategory.Cats,
+                  LoremPixelCategory.City,
+                  LoremPixelCategory.Food,
+                  LoremPixelCategory.Nightlife,
+                  LoremPixelCategory.Fashion,
+                  LoremPixelCategory.People,
+                  LoremPixelCategory.Nature,
+                  LoremPixelCategory.Sports,
+                  LoremPixelCategory.Technics,
+                  LoremPixelCategory.Transport
+               };
+
+            category = this.Random.ArrayElement(categories);
+         }
+
+         var proto = "http://";
+         if( https )
+         {
+            proto = "https://";
+         }
+         var url = $"{proto}lorempixel.com/{width}/{height}";
+         if( !string.IsNullOrWhiteSpace(category) )
+         {
+            url += $"/{category}";
+            if( randomize )
+            {
+               url += $"/{this.Random.Number(1, 10)}";
+            }
+         }
+
+         return url;
       }
    }
 }

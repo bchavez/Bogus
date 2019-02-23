@@ -29,5 +29,16 @@ namespace Bogus
       /// Hexadecimal, 0-9 and A-F.
       /// </summary>
       public const string HexUpperCase = Numbers + "ABCDEF";
+
+
+      /// <summary>
+      /// Alphanumeric upper case 0-9 and A-Z.
+      /// </summary>
+      public const string AlphaNumericUpperCase = Numbers + UpperCase;
+      
+      /// <summary>
+      /// Alphanumeric lower case 0-9 and a-z.
+      /// </summary>
+      public const string AlphaNumericLowerCase = Numbers + LowerCase;
    }
 }

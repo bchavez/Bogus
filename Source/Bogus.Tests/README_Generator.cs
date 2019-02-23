@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -91,6 +92,7 @@ namespace Bogus.Tests
          var datasets = typeof(DataSet).Assembly.ExportedTypes
             .Where(t => typeof(DataSet).IsAssignableFrom(t) && t != typeof(DataSet))
             .SelectMany(t => t.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly))
+            .Where( m => m.GetCustomAttribute<ObsoleteAttribute>() == null)
             .Select(mi => new {dataset = mi.DeclaringType.Name, method = mi.Name})
             .GroupBy(g => g.dataset, u => u.method)
             .ToDictionary(g => g.Key);

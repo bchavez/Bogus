@@ -179,7 +179,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a Latitude
+      /// Get a Latitude.
       /// </summary>
       /// <param name="min">The minimum value.</param>
       /// <param name="max">The maximum value.</param>

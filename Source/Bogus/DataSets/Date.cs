@@ -27,10 +27,10 @@ namespace Bogus.DataSets
       /// </summary>
       public Date(string locale = "en") : base(locale)
       {
-         this.hasMonthWideContext = Get("month.wide_context") != null;
-         this.hasMonthAbbrContext = Get("month.abbr_context") != null;
-         this.hasWeekdayWideContext = Get("weekday.wide_context") != null;
-         this.hasWeekdayAbbrContext = Get("weekday.abbr_context") != null;
+         this.hasMonthWideContext = HasKey("month.wide_context", false);
+         this.hasMonthAbbrContext = HasKey("month.abbr_context", false);
+         this.hasWeekdayWideContext = HasKey("weekday.wide_context", false);
+         this.hasWeekdayAbbrContext = HasKey("weekday.abbr_context", false);
       }
 
       /// <summary>

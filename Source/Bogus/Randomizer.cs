@@ -280,6 +280,8 @@ namespace Bogus
       /// <summary>
       /// Get a string of characters of a specific length.
       /// Uses <seealso cref="Chars"/>.
+      /// Note: This method can return ill-formed UTF16 Unicode strings with unpaired surrogates.
+      /// Use <seealso cref="Utf16String"/> for technically valid Unicode.
       /// </summary>
       /// <param name="length">The exact length of the result string. If null, a random length is chosen between 40 and 80.</param>
       /// <param name="minChar">Min character value, default char.MinValue</param>
@@ -292,7 +294,10 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a string of characters between <paramref name="minLength" /> and <paramref name="maxLength"/>. Uses <seealso cref="Chars"/>.
+      /// Get a string of characters between <paramref name="minLength" /> and <paramref name="maxLength"/>.
+      /// Uses <seealso cref="Chars"/>.
+      /// Note: This method can return ill-formed UTF16 Unicode strings with unpaired surrogates.
+      /// Use <seealso cref="Utf16String"/> for technically valid Unicode.
       /// </summary>
       /// <param name="minLength">Lower-bound string length. Inclusive.</param>
       /// <param name="maxLength">Upper-bound string length. Inclusive.</param>
@@ -322,6 +327,7 @@ namespace Bogus
 
          return new string(target);
       }
+
       /// <summary>
       /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
       /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
@@ -333,6 +339,24 @@ namespace Bogus
       {
          var length = this.Number(minLength, maxLength);
          return String2(length, chars);
+      }
+
+      /// <summary>
+      /// Get a string of valid Unicode characters.
+      /// </summary>
+      /// <param name="minLength"></param>
+      /// <param name="maxLength"></param>
+      /// <param name="excludeSurrogates"></param>
+      /// <returns></returns>
+      public string Utf16String(int minLength = 40, int maxLength = 80, bool excludeSurrogates = false)
+      {
+         var length = this.Number(minLength, maxLength);
+
+         var target = new char[length];
+         for( int i = 0; i < length; i++ )
+         {
+            var idx = 
+         }
       }
 
       /// <summary>

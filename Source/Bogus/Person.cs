@@ -47,9 +47,13 @@ namespace Bogus
       protected Address DsAddress { get; set; }
       protected Company DsCompany { get; set; }
 
-      public Person(string locale = "en")
+      public Person(string locale = "en", int? seed = null)
       {
          this.GetDataSources(locale);
+         if( seed.HasValue )
+         {
+            this.Random = new Randomizer(seed.Value);
+         }
          this.Populate();
       }
 
@@ -82,7 +86,7 @@ namespace Bogus
          this.Website = this.DsInternet.DomainName();
          this.Avatar = this.DsInternet.Avatar();
 
-         this.DateOfBirth = this.DsDate.Past(50, DateTime.Now.AddYears(-20));
+         this.DateOfBirth = this.DsDate.Past(50, Date.SystemClock().AddYears(-20));
 
          this.Phone = this.DsPhoneNumbers.PhoneNumber();
 

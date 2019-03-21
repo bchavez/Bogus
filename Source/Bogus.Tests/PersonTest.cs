@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Bogus.Extensions.Canada;
 using Bogus.Extensions.Denmark;
@@ -154,6 +155,35 @@ namespace Bogus.Tests
       {
          var p = new Person();
          p.FullName.Should().Be($"{p.FirstName} {p.LastName}");
+      }
+
+      [Fact]
+      public void can_use_local_seed_for_person()
+      {
+         Date.SystemClock = () => new DateTime(2019, 3, 21, 1, 1, 1);
+
+         var p1 = new Person(seed: 1337);
+         var p2 = new Person(seed: 1337);
+         var q = new Person(seed: 7331);
+
+         p1.FullName.Should().Be("Samuel Haley");
+         p2.FullName.Should().Be(p1.FullName);
+         q.FullName.Should().Be("Lynette Beatty");
+         q.FullName.Should().NotBe(p1.FullName);
+
+         p1.FirstName.Should().Be(p2.FirstName);
+         p1.LastName.Should().Be(p2.LastName);
+         p1.Avatar.Should().Be(p2.Avatar);
+         p1.DateOfBirth.Should().Be(p2.DateOfBirth);
+         p1.Email.Should().Be(p2.Email);
+         p1.Phone.Should().Be(p2.Phone);
+         p1.UserName.Should().Be(p2.UserName);
+         p1.Gender.Should().Be(p2.Gender);
+         p1.Website.Should().Be(p2.Website);
+
+         p1.ShouldBeEquivalentTo(p2);
+
+         Date.SystemClock = () => DateTime.Now;
       }
       
 

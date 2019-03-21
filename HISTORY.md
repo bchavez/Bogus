@@ -1,3 +1,7 @@
+## v26.0.2
+* New `Person(seed)` constructor for seeding person objects by integer. Thanks @sgoguen!
+* Fixed `Person.DateOfBirth` not using `Date.SystemClock` as 'now' reference.
+
 ## v26.0.1
 * Data and feature parity with faker.js @ d3ce6f1
 * New `Vehicle` data set added.

@@ -61,7 +61,7 @@ public enum Gender
     Female
 }
 
-//Set the randomzier seed if you wish to generate repeatable data sets.
+//Set the randomizer seed if you wish to generate repeatable data sets.
 Randomizer.Seed = new Random(8675309);
 
 var fruit = new[] { "apple", "banana", "orange", "strawberry", "kiwi" };

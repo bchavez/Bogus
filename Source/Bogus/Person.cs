@@ -47,6 +47,14 @@ namespace Bogus
       protected Address DsAddress { get; set; }
       protected Company DsCompany { get; set; }
 
+      /// <summary>
+      /// Creates a new Person object.
+      /// </summary>
+      /// <param name="locale">The locale to use. Defaults to 'en'.</param>
+      /// <param name="seed">The seed used to generate person data. When a <paramref name="seed"/> is specified,
+      /// the Randomizer.Seed global static is ignored and a locally isolated derived seed is used to derive randomness.
+      /// However, if the <paramref name="seed"/> parameter is null, then the Randomizer.Seed global static is used to derive randomness.
+      /// </param>
       public Person(string locale = "en", int? seed = null)
       {
          this.GetDataSources(locale);

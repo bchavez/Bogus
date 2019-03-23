@@ -1,8 +1,12 @@
 ## v26.0.2
+Release Date: 2019-03-22
+
 * New `Person(seed)` constructor for seeding person objects by integer. Thanks @sgoguen!
 * Fixed `Person.DateOfBirth` not using `Date.SystemClock` as 'now' reference.
 
 ## v26.0.1
+Release Date: 2019-02-26
+
 * Data and feature parity with faker.js @ d3ce6f1
 * New `Vehicle` data set added.
 * `en_IND` state abbreviations and state names updated.
@@ -14,24 +18,36 @@
 * Note: deterministic sequences may have changed.
 
 ## v25.0.4
+Release Date: 2019-01-17
+
 * PR 194: Update Dutch `nl` locale with extra `name.first_name`, `address.street_suffix`, and `company.suffix`.
 
 ## v25.0.3
+Release Date: 2019-01-06
+
 * Added `f.Images.LoremFlickrUrl()` (https://loremflickr.com) image service.
 * Issue 193: Turkish :tr: state/providence names added to 'tr' locale.
 
 ## v25.0.2
+Release Date: 2018-12-11
+
 * Issue 192: Fixed IndexOutOfRangeException when `Company.CompanyName()` is used with `az` locale.
 
 ## v25.0.1
+Release Date: 2018-11-27
+
 * Add SourceLink compatibility with Visual Studio 2017.
 * Obsoleted **LoremPixel.com** `Image` categories. The image service is usually down or very slow. Consider using `Images.PicsumUrl()` as a replacement. This version is an obsolete-warn, next release will have Image category APIs removed.
 
 ## v24.3.1
+Release Date: 2018-11-03
+
 * `tr` - Turkish locale first/last names updated. Lorem data set updated. Thanks ahmetcanaydemir!
 * Added `f.Image.PicsumUrl` (https://picsum.photos) service as faster alternative to Lorem Pixel. 
 
 ## v24.3.0
+Release Date: 2018-10-02
+
 * Data / feature parity with faker.js @ 9dd5a52
 * `af_ZA` - New South Africa (Afrikaans) locale added.
 * `zu_ZA` - New South Africa (Zulu) locale added.
@@ -43,13 +59,19 @@
 * PR 180: Resolved Turkish Culture `.ToLower` causing invalid JSON dataset path `.ToLowerInvariant` now used. 
 
 ## v24.2.0
+Release Date: 2018-09-27
+
 * Issue 179: Fixed regression introduced in 23.0.3 that forbid setting of internal/non-public members of `T` in when `Faker<T>` is used.
 
 ## v24.1.0
+Release Date: 2018-09-26, UNPUBLISHED FROM NUGET
+
 * Added `nullWeight` parameter to `.OrNull()` extension method for weighted generation of null values.
 * Added new `.OrDefault()` extension method. Thanks @anorborg!
 
 ## v24.0.0
+Release Date: 2018-09-26, UNPUBLISHED FROM NUGET
+
 * BREAKING: Deterministic values may have changed. Parity with **faker.js** @ 07f39bd3.
 * `en_ZA` - South Africa (English) locale added.
 * `fr_CH` - French (Switzerland) locale added.
@@ -60,51 +82,75 @@
 * Added `f.Commerce.Ean13` EAN-13 product barcode number generator.
 
 ## v23.0.3
+Release Date: 2018-08-29, UNPUBLISHED FROM NUGET 
+
 * PR 170: Faster `Faker[T].Generate()` with setter cache. Approx 1.7x speedup. Thanks Mpdreamz!
 
 ## v23.0.2
+Release Date: 2018-08-13
+
 * BREAKING CHANGE: Deterministic sequence values may have changed. Unit tests expecting specific values may be different if `Bogus.Person` is used.
 * Issue 168: Added `Bogus.Person.Address.State` field.
 * Issue 139: Added `Date.SystemClock` static property for setting global time Bogus uses for date calculations.
 * Issue 169: `Date.Weekday()` should return a weekday not a month.  
 
 ## v22.3.2
+Release Date: 2018-07-18
+
 * Added `f.Random.Guid()` for better GUID discoverability.
 * PR 164: Added new Tax ID extensions `Person.Nif()` and `Company.Nipc()` for Portugal. Thanks JoseJr!  
 
 ## v22.3.1
+Release Date: 2018-07-05
+
 * PR 159: Add UK National Insurance Number `f.Finance.Nino()` in `Bogus.Extensions.UnitedKingdom`. Thanks mortware!
 * PR 160: `DateTimeOffset` support added to `f.Date` dataset. Methods are suffixed by "Offset". IE: `f.Date.SoonOffset`. Thanks Simon!
 * Added `refDate` parameter to `f.Date.Soon` and `f.Date.Recent`.
 * `f.Date.Between(start, end)` now respects `DateTimeKind.Utc`.
 
 ## v22.2.1
+Release Date: 2018-06-29
+
 * PR 153: Possible breaking changes: Minor typo & spelling corrections made to some parameter names. Thanks for the corrections Simon!
 
 ## v22.1.4
+Release Date: 2018-06-26
+
 * PR 151: Added `Bogus.Distributions.Gaussian` namespace for numerical Normal Distribution generated values! Thanks codersg! 
 * Added `uniqueSuffix` parameter to `Internet.Email()` to help with unique email constraints.
  
 ## v22.1.3
+Release Date: 2018-06-14
+
 * PR 149: Added new Arabic 'ar' locale. Thanks Saied!
 * PR 148: Fixed `.FullName()` for locales where both first/last name have genders. Thanks binarycode!
 
 ## v22.1.2
+Release Date: 2018-05-29
+
 * Improved XML documentation comments on `Faker[T]` API.
 
 ## v22.1.1
+Release Date: 2018-05-20
+
 * PR 144: Argument support for mustache handlebars. Example: `{{name.firstname(Male)}}`
 * Using **C# 7.3** generic `Enum` constraints for methods that only accept enums. Example: `f.PickRandom<Enum>()`.
 
 ## v22.0.9
+Release Date: 2018-05-17
+
 * Issue 143: Fixed rare case when `f.IndexGlobal` could be zero twice at start of generation.
 * Fixed typo in XML docs.
 
 ## v22.0.8
+Release Date: 2018-04-09
+
 * New `Company.Ein()` to generate employer identification numbers.
 * Preparing release of extended data sets for Bogus.
 
 ## v22.0.7
+Release Date: 2018-04-01
+
 * New `Internet.Color()` format options: CSS `rgb(...)` and delimited RGB.
 * New `System.AndroidId()` to generate GCM registration ID.
 * New `System.ApplePushToken()` to generate a random Apple Push Token.
@@ -113,10 +159,14 @@
 * New `Randomizer.String2()` to generate random strings with specified character sets.
 
 ## v22.0.6
+Release Date: 2018-03-29
+
 * Added `Randomizer.String` method to generate strings. Uses `Chars()` method.
 * PR 136: Improve speed of `DataSet.ParseTokens()`. Thanks @danij!
 
 ## v22.0.5
+Release Date: 2018-03-02
+
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.
 * New extension method `.ToBogusLocale()` on `System.Globalization.CultureInfo` to help translate from **.NET** locale codes to **Bogus** locale codes.
 
@@ -131,9 +181,13 @@
 * New groundwork for extending Bogus with premium (paid) data sets and tooling.
 
 ## v22.0.2
+Release Date: 2018-01-05
+
 * Issue 121: Fixes the inability to `.Ignore(...)` a property or field after a rule had already been set.
 
 ## v22.0.1
+Release Date: 2017-12-23
+
 * Issue 120: `.Generate(n)` now returns `List<T>` instead of `IList<T>`.
 * Added `f.Address.CountryCode()` ISO 3166-1 alpha-3 country code generator.
 * New `Bogus.Extensions.Extras` namespace for generally useful helper methods.
@@ -141,11 +195,15 @@
 * Moved credit card `CheckDigit()` extensions to `Bogus.Extensions.Extras` namespace. 
 
 ## v21.0.5
+Release Date: 2017-12-16
+
 * Better error support.
 * Added `Person.FullName` field.
 * Allowed `Faker<T>.FinishWith` to be called multiple times. Last call wins.
 
 ## v21.0.4
+Release Date: 2017-12-13
+
 * Fixed `f.Image` URL generation.
 
 ## v21.0.2 
@@ -155,17 +213,25 @@
 * Italian `CodiceFiscale()` extension method added. Extends `Person` and `Finance`.
 
 ## v20.0.2
+Release Date: 2017-11-06
+
 * Fixed Issue 102: `f.Random.Uuid()` is now deterministic based on global or local seed.
 
 ## v20.0.1
+Release Date: 2017-11-04
+
 * Added `Faker<T>.Clone()`: Clones internal state of a `Faker<T>` and allows for complex faking scenarios and rule combinations.
 * Added `Faker<T>.UseSeed(n)`: Allows you to specify a localized seed value on a `Faker<T>` instead of a global static `Randomizer.Seed`.
 * Stronger `Seed` determinism for multi-threaded scenarios.
 
 ## v19.0.2
+Release Date: 2017-11-01
+
 * Fixed #99: Possible threading issue that can cause `System.ArgumentException`.
 
 ## v19.0.1
+Release Date: 2017-10-26, UNPUBLISHED FROM NUGET
+
 * Using new BSON binary data format for locales.
 * Removed dependency on Newtonsoft.Json!
 * Locale Updates - 
@@ -184,10 +250,14 @@
 * Added `f.Address.OrdinalDirection`. Generates "Northeast", "Southwest", etc.
 
 ## v18.0.2
+Release Date: 2017-09-14
+
 * Issue 86: Removed diacritic mark/accents (á, í, ó, ú, etc) from generated email addresses and user names.
 * Added `string.RemoveDiacritics` helper method.
 
 ## v18.0.1
+Release Date: 2017-09-13
+
 * Fixed bug in Finland's `f.Person.Henkilötunnus` personal identity code generator that sometimes produced 11 characters.
 * Added `f.Finance.Ethereum`. Generate an Ethereum address.
 * Added `f.Finance.CreditCardCvv`. Generate a random credit card CVV number.
@@ -209,12 +279,18 @@
 * `ru` - Word corrections.
 
 ## v17.0.1
+Release Date: 2017-08-24
+
 * Migration to **.NET Standard 2.0**.
 
 ## v16.0.3
+Release Date: 2017-08-24
+
 * With additional overloads for `.PickRandom(IList)` and `.PickRandom(ICollection)` we can now add `.PickRandom("cat", "dog", "fish")` back to the API. 
 
 ## v16.0.2
+Release Date: 2017-08-23
+
 * BREAKING CHANGE: `Faker.Generate(n)` now calls `.ToList()` under the hood to escape LINQ deferred execution. Remembering to call `.ToList()` after `.Generate(n)` was a sticking point for new users writing test assertions on generated values. Please do not call `Faker.Generate(n).ToList()` as it would execute `.ToList()` twice. Simply, `Faker.Generate(n)` is enough.
 * `f.Generate` and `f => f.Make` now return `IList<T>` to signify the breaking change above. 
 * Issue #92: Added `.GenerateLazy` to keep old behavior and returns `IEnumerable<T>`.
@@ -223,12 +299,18 @@
 * Removed `[Obsolete]` methods. 
 
 ## v15.0.7
+Release Date: 2017-08-20
+
 * Issue #88 - API aesthetics: Added `Name.FullName()` convenience method to generate a full name.
 
 ## v15.0.6
+Release Date: 2017-08-02
+
 * PR #87: Added `.Rules()` method on `RuleSet`. Thanks @digitalcyote.
 
 ## v15.0.5
+Release Date: 2017-07-28
+
 * Add parameter for including `Currency` fund codes (BOV, CLF, COU, MXV, UYI).
 * Fixed minor issue in `Person.Email` having duplicate names.
 * Helper method: `f.PickRandomWithout(ExcludeItem1, ExcludeItem2)` added.
@@ -237,6 +319,8 @@
 * Newtonsoft dependency update 10.0.3.  
 
 ## v15.0.3
+Release Date: 2017-05-06
+
 * Added `f => f.Rant` to generate random user content like product reviews.
 * Added `new Faker[T].Rules( (f, t) => ...)` as a shortcut for building rules quickly.
 * Added `Address.FullAddress`
@@ -247,6 +331,8 @@
 * Using new C# 7 features. =)
 
 ## v15.0.1
+Release Date: 2017-04-11
+
 * Building with Visual Studio 2017.
 * Issue 70: Fixed `ArgumentException` that occurs with derived hidden `new` properties.
 
@@ -254,23 +340,35 @@
 * `f => f.Generate(n, i => ...)` overload allows use of index when using `f.Generate`.
 
 ## v12.0.1
+Release Date: 2017-03-27
+
 * PR 64: Improved `.PickRandom(IEnumerable)` performance. Thanks @chuuddo.
 * Added `"string".ClampLength(max,min)` extension method to clamp length of strings between min and max.
 * Issue 67: Fixed `Randomizer.Int(int.MaxValue, int.MinValue)` range overflow not returning random `int32` values.
 
 ## v11.0.5
+Release Date: 2017-03-20
+
 * Compatibility with `Newtonsoft.Json` v10.0.1
 
 ## v11.0.4
+Release Date: 2017-03-14
+
 * Added `.RuleFor(x.Item, "foo")`. Eliminates ceremony of `f =>` for simple values.
 
 ## v11.0.3
+Release Date: 2017-03-13
+
 * Added range option to `Sentence`.
 
 ## v11.0.2
+Release Date: 2017-02-23
+
 * New Feature: Allow implicit and explicit type casts: `Order o = orderFaker` and `var o = (Order)orderFaker` without having to call `orderFaker.Generate()`.
 
 ## v11.0.1
+Release Date: 2017-02-21
+
 * Added `IndexGlobal` alias for `UniqueIndex`.
 * Added `IndexFaker` for uniqueness in Faker[T] lifetime.
 * Added `IndexVariable` a developer controlled index convenience variable. 
@@ -280,6 +378,8 @@
 * Reached feature/data parity with `faker.js` v4.1.0.
 
 ## v10.0.1
+Release Date: 2017-02-18
+
 * `Internet.UserAgent` - Generates browser user agent strings.
 * `Internet.Password` - Generates user passwords using regex.
 * Added `az`/Azerbaijani locale.
@@ -294,35 +394,55 @@
 * `Database` data set for generating column, collation, type stuff.
 
 ## v9.0.2
+Release Date: 2017-01-19
+
 * Bug: Issue 54: Work around for Visual Studio IntelliSense.
 
 ## v9.0.1
+Release Date: 2017-01-18
+
 * New Feature: Bogus is now a signed assembly; PublicToken: fa1bb3f3f218129a
 
 ## v8.0.4
+Release Date: 2017-01-16
+
 * New Feature: Added `PickRandom(IEnumerable)` overload. Thanks joleharkes.
 
 ## v8.0.3
+Release Date: 2016-12-20
+
 * New Feature: `RuleForType(typeof(string))` allows bulk/default for a particular type on a class. Useful for very large classes with a specific type.
 
 ## v8.0.2
+Release Date: 2016-12-07
+
 * Issue 46. Fixed threading deadlock situation with static faker initialization. Thanks Mpdreamz.
 * Added `f => f.Generate(count, ()=> f.Phone.PhoneNumber())` helper for better fluency when filling properties with `List` of `T`.
 
 ## v8.0.1
+Release Date: 2016-11-25
+
 * Added `pt_PT` Portuguese (Portugal) locale. 
 
 ## v8.0.1-beta-1
+Release Date: 2016-10-22
+
 * Allow `Faker<T>.RuleFor` rules to be overridden. Last set rule wins.
 
 ## v7.1.7
+Release Date: 2016-10-11
+
 * `Faker<T>.AssertConfigurationIsValid` to help in unit testing scenarios.
 * Add `Internet.Ipv6` method to generate IPv6 addresses.
 
 ## v7.1.6
+Release Date: 2016-08-07
+
 * Added `f => f.Commerce` on `Faker`.
 
 ## v7.1.5
+Release Date: 2016-07-27
+
 * Added `cz`/Czech locale
 * Updated `en`, `nl`, `pl`, `sk`, `sv` locales.
 * Realistic Dutch city naming
@@ -331,26 +451,40 @@
 * Added convenience `Randomizer` for random `Decimal`, `Float`, `Byte`, `Bytes`, `SByte`, `Int`, `UInt`, `ULong`, `Long`, `Short`, `UShort`, `Char` and `Chars`.
 
 ## v7.1.4
+Release Date: 2016-07-06
+
 * Newtonsoft Json 9.0.1 dependency support.
 
 ## v7.1.3
+Release Date: 2016-06-27
+
 * :boom: .NET Core 1.0 RTM Support.
 
 ## v7.1.3-beta-1
+Release Date: 2016-05-20
+
 * Compatibility with .NET Standard 1.3 and .NET Core RC2.
 
 ## v7.1.2
+Release Date: 2016-05-16
+
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v7.1.2-beta-1
+Release Date: 2016-05-16
+
 * Clamp Randomizer maximum value to int.MaxValue.
 
 ## v7.1.1
+Release Date: 2016-05-15
+
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v7.1.1-beta-1
+Release Date: 2016-05-15
+
 * Locale update
 * Date.Recent(0) generates random times for current date between midnight and now.
 * New `System` data set for generating fake file names and mime-types.
@@ -363,41 +497,59 @@
 * WARN: Address.City may have changed in some random seeds
 
 ## v6.1.1
+Release Date: 2016-03-29
+
 * Roll-up Release for .NET Framework since last non-beta release.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v6.1.1-beta-1
+Release Date: 2016-03-29
+
 * Fixed index out of bounds bug in faker.Random.Word().
 * Commerce.Department output may have changed as a result of this fix.
 
 ## v5.1.1-beta-3
+Release Date: 2016-03-23
+
 * Removed RuleFor(x = x.Prop, constantValue), was confusing the API.
 * Added 0-arity RuleFor(x = x.Prop, () => someValue)
 
 ## v5.1.1-beta-2
+Release Date: 2016-03-22
+
 * Make f.UniqueIndex as int for convenience.
 * Use generic RuleFor(x = x.Prop, constantValue).
 
 ## v5.1.1-beta-1
+Release Date: 2016-03-21
+
 * New RuleFor(x = x.Prop, constantValue)
 * Support for Hashids.net: RuleFor(x = x.Id, f = f.Hashids.Encode())
 * New f.UniqueIndex, useful for composing property values that require uniqueness.
 
 ## v5.0.1
+Release Date: 2016-02-25
+
 * Roll-up Release for .NET Framework since v4.0.1.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v5.0.1-beta-2
+Release Date: 2016-02-25
+
 * JvanderStad PR15: Lazy load Person. Avoids extra Seed.Next calls that may interfere with seeded content.
 * JvanderStad PR16: Better address generation. Respects locale address formats.
 * Added "dotnet5.4" moniker support.
 * BREAKING: Fake "seeded" data generated by Bogus may be different from previous versions.
 
 ## v4.0.1
+Release Date: 2016-02-15
+
 * Roll-up Release for .NET Framework since v3.0.6.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v4.0.1-beta-1
+Release Date: 2016-02-15
+
 * Bogus - Feature parity with faker.js.
 * System module added. Generate random file names and extensions.
 * Randomizer - Added Uuid().
@@ -409,37 +561,55 @@
 * Lorem - Better API methods: Seeded tests based on "content" will fail due to upgrade.
 
 ## v3.0.6
+Release Date: 2016-01-21
+
 * Roll-up Release for .NET Framework since v3.0.5.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.6-beta-1
+Release Date: 2016-01-21
+
 * Issue #13: Fixed StrictMode to exclude private fields.
 * New Feature: Ignore property or field in StrictMode: Faker[Order].Ignore(o => o.OrderId).
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5
+Release Date: 2016-01-20
+
 * Roll-up Release for .NET Framework since v3.0.4.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5-beta-4
+Release Date: 2016-01-19
+
 * Issue #13: StrictMode() now ignores read-only properties.
 * Newtonsoft.Json v8 compatibility.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5-beta-3
+Release Date: 2016-01-18
+
 * Issue #12: Make Bogus thread-safe on Generate() and DataSets. Avoids threading issues in test runners.
 * CoreCLR users please continue using latest beta release until CoreCLR is RTM.
 
 ## v3.0.5-beta-2
+Release Date: 2016-01-11
+
 * CoreCLR support (CoreCLR users please continue using latest beta release until CoreCLR is RTM.).
 
 ## v3.0.4
+Release Date: 2015-12-10
+
 * Issue 10: Make Bogus work with fields also, not just properties. Fixes LINQPad issues.
 
 ## v3.0.3
+Release Date: 2015-12-09
+
 * PR 9: quantumplation - Fixed typo in Lorem.Sentance() -> Lorem.Sentence()
 
 ## v3.0.2
+Release Date: 2015-11-24
+
 * Generate US: SSN - Social Security Numbers.
 * Generate Canada: SIN - Social Insurance Numbers.
 * Generate Brazil: Cadastro de Pessoas Fisicas - CPF Numbers.
@@ -451,6 +621,8 @@
 * Can switch locale on Name: f.Name["en"].LastName()
 
 ## v3.0.1
+Release Date: 2015-10-22
+
 * Added debug symbols to symbolsource.org.
 * PR#6: Fixed lastname and empty list exception -salixzs
 * Switch to semantic versioning at par with FakerJS.
@@ -461,12 +633,18 @@
 * Added Spanish Mexico (es_MX) locale.
 
 ## v3.0.0.3
+Release Date: 2015-07-21
+
 * Issue #2: Use latest Newtonsoft.Json 7.0.0.0 -Mpdreamz
 
 ## v3.0.0.2
+Release Date: 2015-07-11
+
 * Includes Ireland (English) locale.
 
 ## v3.0.0.1
+Release Date: 2015-07-11
+
 * Migrated to new FakerJS datafile format. Build system uses gulp file to directly import FakerJS locales.
 * Faker.Parse() can now tokenize and replace handlebar formats.
 * Added Faker.Hacker and Faker.Company properties.
@@ -482,22 +660,32 @@
 * Support for gender names, but only for locales that support it. Russian('ru') but not English('en').
 * Corrected abbreviation for Yukon to reflect its official abbreviation of "YT".
 
-## v2.1.5.2:
+## v2.1.5.2
+Release Date: 2015-06-22
+
 * Fixed instantiating a Person in a non-US locale. -antongeorgiev
 
-## v2.1.5.1:
+## v2.1.5.1
+Release Date: 2015-06-11
+
 * Added Georgian, Turkish, and Chinese (Taiwan) locales.
 * Added Name.JobTitle()
 * Added Internet.Url() and Internet.Protocol().
 * Sync'd up with faker.js v2.1.5.
 
-## v2.1.4.2:
+## v2.1.4.2
+Release Date: 2015-06-11
+
 * Fixed bug in Faker.Person and Faker[T] that generates new person context after every new object.
 * Added support for .FinishWith() for post-processing that runs after all rules but before returning new instance.
 * Added Newtonsoft.Json as NuGet dependency.
 
-## v2.1.4.1:
+## v2.1.4.1
+Release Date: 2015-06-10
+
 * Minor changes, mostly XML doc update and Person moved from DataSet to Bogus namespace.
 
-## v2.1.4.0:
+## v2.1.4
+Release Date: 2015-06-08
+
 * Initial port from faker.js 2.1.4.

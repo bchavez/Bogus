@@ -13,7 +13,7 @@
     <SignAssembly>false</SignAssembly>
     <AssemblyName>Bogus</AssemblyName>
     <PackageId>Bogus</PackageId>
-    <PackageTags>fake;bogus;poco;data;generator;database;seed;values;test-data;test;data;tdd;testing;faker;.net;EF</PackageTags>
+    <PackageTags>faker;fake;bogus;poco;data;generator;database;seed;values;test-data;test;data;tdd;testing;.net;EF</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</PackageLicenseUrl>

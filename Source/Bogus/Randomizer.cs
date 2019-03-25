@@ -362,12 +362,12 @@ namespace Bogus
 
             if (!excludeSurrogates && spaceLeft >= 2 && this.Bool())
             {
-               block = this.ArrayElement(UnicodeRanges.SurrogatePairs);
+               block = this.ArrayElement(SafeUnicodeRanges.SurrogatePairs);
                alignment = 1;
             }
             else
             {
-               block = this.ArrayElement(UnicodeRanges.Scalars);
+               block = this.ArrayElement(SafeUnicodeRanges.Basic);
                alignment = 0;
             }
 

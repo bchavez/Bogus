@@ -5,6 +5,7 @@ using System.Text;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using Z.ExtensionMethods;
 
 namespace Bogus.Tests
 {
@@ -403,6 +404,67 @@ namespace Bogus.Tests
          var truths = bools.Count(b => b) / 100f;
 
          truths.Should().BeLessThan(0.25f); // roughly
+      }
+
+
+      public static IEnumerable<object[]> ExactLenUtf16(int maxTest)
+      {
+         return Enumerable.Range(1, maxTest)
+            .Select(i => new object[] {i, i});
+      }
+
+      public static IEnumerable<object[]> VarLenUtf16(int maxTest)
+      {
+         return Enumerable.Range(1, maxTest)
+            .Select(i => new object[] { i, i+20 });
+      }
+
+      [Theory]
+      [MemberData(nameof(ExactLenUtf16), parameters: 100)]
+      [MemberData(nameof(VarLenUtf16), parameters: 100)]
+      public void can_generate_valid_utf16_string_with_surrogates(int min, int max)
+      {
+         var x = r.Utf16String(min, max);
+
+         x.Length.Should().BeGreaterOrEqualTo(min)
+            .And
+            .BeLessOrEqualTo(max);
+
+         for( int i = 0; i < x.Length; i++ )
+         {
+            var current = x[i];
+            if( char.IsSurrogate(current) )
+            {
+               char.IsLetterOrDigit(x, i).Should().BeTrue();
+               i++;
+            }
+            else
+            {
+               char.IsLetterOrDigit(current).Should().BeTrue();
+            }
+         }
+      }
+
+      [Theory]
+      [MemberData(nameof(ExactLenUtf16), parameters: 100)]
+      [MemberData(nameof(VarLenUtf16), parameters: 100)]
+      public void can_generate_valid_utf16_without_surrogates(int min, int max)
+      {
+         var x = r.Utf16String(min, max, excludeSurrogates: true);
+
+         x.Length.Should().BeGreaterOrEqualTo(min)
+            .And
+            .BeLessOrEqualTo(max);
+
+         x.Any(char.IsSurrogate).Should().BeFalse();
+         x.All(char.IsLetterOrDigit).Should().BeTrue();
+      }
+
+      [Fact]
+      public void static_utf16_tests()
+      {
+         r.Utf16String().Should().Be("𦊕𡰴ဩਢۥ侀ゞᜡﷴ𠸮𝒾ⶱﹱຂⱪ𝒟𝚪𝒩𝝵ೡཧΐ뢫ⱜੳ𣽇𐨖ਆ𐀼ฏളﾺ𐏈𦵻𐠸𝕋ꡨ𝔇ずరᢔﬣ𐨟𝔚ઐష");
+         r.Utf16String().Should().Be("னమወ𡂑ப𐠁ஞ𦂰ઐ𢂍ᬒ𒀓𨴽𝜅𧊆𦑆ආ𝜂ଭ𐀪ಋΊ౦౨ㆳꠁⶺ𝛈𡓎𡯸ᜑ𐁁𝜹લ𩠺ଐ𦕲ﬔჁⶂム𝐾𣭄ງヾ༤𝒪ᙵͼ၅𦛃𩕾ﷸ𝜦ⱶ");
       }
    }
 }

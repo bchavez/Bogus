@@ -280,6 +280,8 @@ namespace Bogus
       /// <summary>
       /// Get a string of characters of a specific length.
       /// Uses <seealso cref="Chars"/>.
+      /// Note: This method can return ill-formed UTF16 Unicode strings with unpaired surrogates.
+      /// Use <seealso cref="Utf16String"/> for technically valid Unicode.
       /// </summary>
       /// <param name="length">The exact length of the result string. If null, a random length is chosen between 40 and 80.</param>
       /// <param name="minChar">Min character value, default char.MinValue</param>
@@ -292,7 +294,10 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a string of characters between <paramref name="minLength" /> and <paramref name="maxLength"/>. Uses <seealso cref="Chars"/>.
+      /// Get a string of characters between <paramref name="minLength" /> and <paramref name="maxLength"/>.
+      /// Uses <seealso cref="Chars"/>.
+      /// Note: This method can return ill-formed UTF16 Unicode strings with unpaired surrogates.
+      /// Use <seealso cref="Utf16String"/> for technically valid Unicode.
       /// </summary>
       /// <param name="minLength">Lower-bound string length. Inclusive.</param>
       /// <param name="maxLength">Upper-bound string length. Inclusive.</param>
@@ -322,6 +327,7 @@ namespace Bogus
 
          return new string(target);
       }
+
       /// <summary>
       /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
       /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
@@ -333,6 +339,55 @@ namespace Bogus
       {
          var length = this.Number(minLength, maxLength);
          return String2(length, chars);
+      }
+
+      /// <summary>
+      /// Get a string of valid UTF16 Unicode characters.
+      /// This method returns a string where each character IsLetterOrDigit() is true.
+      /// </summary>
+      /// <param name="minLength">The minimum length of the string to return.</param>
+      /// <param name="maxLength">The maximum length of the string to return.</param>
+      /// <param name="excludeSurrogates">Excludes surrogate pairs from the returned string.</param>
+      public string Utf16String(int minLength = 40, int maxLength = 80, bool excludeSurrogates = false)
+      {
+         var targetLength = minLength == maxLength ? minLength : this.Number(minLength, maxLength);
+
+         var sb = new StringBuilder();
+
+         while( sb.Length < targetLength)
+         {
+            int spaceLeft = targetLength - sb.Length;
+            string block = null;
+            int alignment = 0;
+
+            if (!excludeSurrogates && spaceLeft >= 2 && this.Bool())
+            {
+               block = this.ArrayElement(SafeUnicodeRanges.SurrogatePairs);
+               alignment = 1;
+            }
+            else
+            {
+               block = this.ArrayElement(SafeUnicodeRanges.Basic);
+               alignment = 0;
+            }
+
+            char rangeStart = block[alignment];
+            char rangeEnd = block[2 + alignment * 2];
+
+            char pickedChar = (char)this.UShort(rangeStart, rangeEnd);
+
+            if (alignment == 1)
+            {
+               sb.Append(block[0]);
+               sb.Append(pickedChar);
+            }
+            else
+            {
+               sb.Append(pickedChar);
+            }
+         }
+
+         return sb.ToString();
       }
 
       /// <summary>

@@ -342,21 +342,52 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Get a string of valid Unicode characters.
+      /// Get a string of valid UTF16 Unicode characters.
+      /// This method returns a string where each character IsLetterOrDigit() is true.
       /// </summary>
-      /// <param name="minLength"></param>
-      /// <param name="maxLength"></param>
-      /// <param name="excludeSurrogates"></param>
-      /// <returns></returns>
+      /// <param name="minLength">The minimum length of the string to return.</param>
+      /// <param name="maxLength">The maximum length of the string to return.</param>
+      /// <param name="excludeSurrogates">Excludes surrogate pairs from the returned string.</param>
       public string Utf16String(int minLength = 40, int maxLength = 80, bool excludeSurrogates = false)
       {
-         var length = this.Number(minLength, maxLength);
+         var targetLength = minLength == maxLength ? minLength : this.Number(minLength, maxLength);
 
-         var target = new char[length];
-         for( int i = 0; i < length; i++ )
+         var sb = new StringBuilder();
+
+         while( sb.Length < targetLength)
          {
-            var idx = 
+            int spaceLeft = targetLength - sb.Length;
+            string block = null;
+            int alignment = 0;
+
+            if (!excludeSurrogates && spaceLeft >= 2 && this.Bool())
+            {
+               block = this.ArrayElement(UnicodeRanges.SurrogatePairs);
+               alignment = 1;
+            }
+            else
+            {
+               block = this.ArrayElement(UnicodeRanges.Scalars);
+               alignment = 0;
+            }
+
+            char rangeStart = block[alignment];
+            char rangeEnd = block[2 + alignment * 2];
+
+            char pickedChar = (char)this.UShort(rangeStart, rangeEnd);
+
+            if (alignment == 1)
+            {
+               sb.Append(block[0]);
+               sb.Append(pickedChar);
+            }
+            else
+            {
+               sb.Append(pickedChar);
+            }
          }
+
+         return sb.ToString();
       }
 
       /// <summary>

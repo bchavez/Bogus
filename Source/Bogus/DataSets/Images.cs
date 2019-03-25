@@ -43,7 +43,7 @@ namespace Bogus.DataSets
       {
          const string Url = "https://picsum.photos";
 
-         var sb = new StringBuilder();
+         var sb = new StringBuilder(Url);
 
          if (grayscale)
          {
@@ -61,7 +61,41 @@ namespace Bogus.DataSets
             sb.Append("&blur");
          }
 
-         return Url + sb;
+         return sb.ToString();
+      }
+
+      /// <summary>
+      /// Get an image from https://placeholder.com service.
+      /// </summary>
+      /// <param name="width">Width of the image.</param>
+      /// <param name="height">Height of the image.</param>
+      /// <param name="text"></param>
+      /// <param name="format">Image format. Supported values: 'jpg', 'jpeg', 'png', 'gif', 'webp'.</param>
+      /// <param name="backColor">HTML color code for the background color.</param>
+      /// <param name="textColor">HTML color code for the foreground (text) color.</param>
+      public string PlaceholderUrl(int width, int height, string text = null, string backColor = "cccccc", string textColor = "9c9c9c", string format = "png")
+      {
+         const string Url = "https://via.placeholder.com/";
+
+         var sb = new StringBuilder(Url);
+
+         sb.Append(width)
+            .Append("x")
+            .Append(height)
+            .Append("/")
+            .Append(backColor)
+            .Append("/")
+            .Append(textColor)
+            .Append(".")
+            .Append(format);
+
+         if( text != null )
+         {
+            sb.Append("?text=")
+               .Append(Uri.EscapeUriString(text));
+         }
+
+         return sb.ToString();
       }
 
       /// <summary>

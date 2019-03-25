@@ -84,6 +84,16 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_use_placeholder_url()
+      {
+         var url = image.PlaceholderUrl(200, 300, "foobar is today", "090", "ddd");
+         url.Should().Be("https://via.placeholder.com/200x300/090/ddd.png?text=foobar%20is%20today");
+
+         url = image.PlaceholderUrl(300, 200);
+         url.Should().Be("https://via.placeholder.com/300x200/cccccc/9c9c9c.png");
+      }
+
+      [Fact]
       public void can_use_loremflickr()
       {
          var img = image.LoremFlickrUrl(640, 480, "dog");

@@ -731,27 +731,44 @@ public void create_rules_for_an_object_the_easy_way()
 
 ***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be independently checked to ensure each property has a rule.
 
-ProTips, Guidance, and Best Practices
---------------------------------------
+
+### Using `Enumerable.Range()` and LINQ 
+The `Enumerable.Range()` and LINQ are a great supplement when creating data with **Bogus**. Here's how to generate a simple list of email addresses:
+
+```csharp
+var faker = new Faker("en");
+
+var emailList = Enumerable.Range(1, 5)
+      .Select(_ => faker.Internet.Email())
+      .ToList();
+
+//OUTPUT:
+Gustave83@hotmail.com    
+Evie33@gmail.com 
+Abby_Wilkinson@yahoo.com 
+Cecilia.Hahn@yahoo.com   
+Jasen.Waelchi85@gmail.com     
+```
+
+Advanced Topics, Guidance, and Best Practices
+---------------------------------------------
 ### Determinism
 Determinism is a first class concept in **Bogus**. **Bogus** goes to great lengths so developers can generate the same sequence of data over multiple program executions. **Bogus** has two strategies of setting up deterministic behavior:
 
-1. **Global Static** determinism.
-    * The global `Randomizer.Seed` property.
-       
-    ***Pros:*** Easy to get data setup quickly.
-    ***Cons:*** Not a long term solution, especially for unit tests.
+1. **Global Seed** determinism through the `Randomizer.Seed` **global static** property.  
+    ***Pros:*** Easy to get deterministic data setup quickly.  
+    ***Cons:*** Code changes can impact other data values. Not so good for unit tests.
 
-2. Instance **Property** and **Method** determinism.
-    * The `Faker<T>.UseSeed(int)` method.
-    * The `.Random` property on the `Faker` facade and **DataSets**.
-    
-    ***Pros:*** Can be a long term solution, especially for unit tests.
-    ***Cons:*** Requires some upfront and forethought in design.
+2. **Local Seed** determinism through instance **properties** and **methods**. Specifically,  
+    * The `Faker<T>.UseSeed(int)` **method**.  
+    * The `.Random` **property** on the `Faker` facade and **DataSets**.
+  
+    ***Pros:*** Code changes can be isolated with minimal impact on determinism. Good for unit tests.    
+    ***Cons:*** Requires some forethought in design.
 
-When an instance **property** or **method** is used to set a seed value, the **global static** source of randomness is ignored. This has some interesting implications as described below.
+When **Local Seed** determinism is used to set a seed value, the **global static** source of randomness is ignored. This has some interesting implications as described below.
 
-#### Using Global Static determinism
+#### Using Global Seed determinism
 The easiest way to get deterministic data values over multiple executions of a program is to set the `Randomizer.Seed` property as demonstrated below:
 
 ```csharp
@@ -763,16 +780,15 @@ var orderFaker = new Faker<Order>()
     .RuleFor(o => o.Quantity, f => f.Random.Number(1, 5));
 
 orderFaker.Generate(5).Dump();
-┌─────────┬────────┬──────────┐
-│ OrderId │ Item   │ Quantity │
-├─────────┼────────┼──────────┤
-│ 0       │ Fish   │ 3        │
-│ 1       │ Chair  │ 1        │
-│ 2       │ Gloves │ 5        │
-│ 3       │ Shirt  │ 4        │
-│ 4       │ Hat    │ 4        │
-└─────────┴────────┴──────────┘
 ```
+|  OrderId  |  Item    |  Quantity  |
+|:---------:|:--------:|:----------:|
+|  0        |  Fish    |  3         |
+|  1        |  Chair   |  1         |
+|  2        |  Gloves  |  5         |
+|  3        |  Shirt   |  4         |
+|  4        |  Hat     |  4         |
+
 
 Re-running the code above with `1338` as a global static seed value will produce the same table of data over and over again.
 
@@ -787,25 +803,23 @@ var orderFaker = new Faker<Order>()
     .RuleFor(o => o.Quantity, f => f.Random.Number(1, 5));
 
 orderFaker.Generate(5).Dump();
-┌─────────┬────────────┬───────────────┬──────────┐
-│ OrderId │ Item       │ Description   │ Quantity │
-├─────────┼────────────┼───────────────┼──────────┤
-│ 0       │ Fish       │ Fantastic     │ * 1      │
-│ 1       │ * Keyboard │ * Gorgeous    │ * 5      │
-│ 2       │ * Shirt    │ * Handcrafted │ * 3      │
-│ 3       │ * Tuna     │ * Small       │ * 1      │
-│ 4       │ * Table    │ * Awesome     │ * 3      │
-└─────────┴────────────┴───────────────┴──────────┘
 ```
+| OrderId | Item     | Description | Quantity |
+|---------|----------|-------------|----------|
+| 0       | Fish     | Fantastic   | :triangular_flag_on_post: 1 |
+| 1       | :triangular_flag_on_post: Keyboard | :triangular_flag_on_post: Gorgeous    | :triangular_flag_on_post: 5 |
+| 2       | :triangular_flag_on_post: Shirt    | :triangular_flag_on_post: Handcrafted | :triangular_flag_on_post: 3 |
+| 3       | :triangular_flag_on_post: Tuna     | :triangular_flag_on_post: Small       | :triangular_flag_on_post: 1 |
+| 4       | :triangular_flag_on_post: Table    | :triangular_flag_on_post: Awesome     | :triangular_flag_on_post: 3 |
 
 A couple of observations:
 * `Order 0: Item` value `Fish` remained the same.
 * `Order 0: Quantity` changed from `3` to `1`.
 * `Order 1: Item` has changed from a `Chair` to a `Keyboard`.
 
-In fact, every data value with an asterisk `*` has changed. This is due to the newly added property which has the effect of shifting the entire global static pseudo-random sequence off by +1. This rippling effect can be a problem if unit tests are expecting data values to remain the same. The following section below shows how we can improve the situation.
+In fact, every data value with a :triangular_flag_on_post: icon has changed. This is due to the newly added property which has the effect of shifting the entire global static pseudo-random sequence off by +1. This rippling effect can be a problem if unit tests are expecting data values to remain the same. The following section below shows how we can improve the situation.
 
-#### Using Instance Method and Property determinism
+#### Using Local Seed determinism
 Making use of the `Faker<T>.UseSeed(int)` method can help limit the impact of POCO schema changes on deterministic data values that span across an entire run. Consider the following code that uses a seed value for each instance of a POCO object:
 ```csharp
 var orderIds = 0;
@@ -823,16 +837,15 @@ var orders = Enumerable.Range(1, 5)
    .ToList();
 
 orders.Dump();
-┌─────────┬────────┬──────────┐
-│ OrderId │ Item   │ Quantity │
-├─────────┼────────┼──────────┤
-│ 0       │ Bike   │ 1        │
-│ 1       │ Cheese │ 3        │
-│ 2       │ Gloves │ 4        │
-│ 3       │ Bacon  │ 5        │
-│ 4       │ Pants  │ 2        │
-└─────────┴────────┴──────────┘
 ```
+|  OrderId  |  Item    |  Quantity  |
+|:---------:|:--------:|:----------:|
+| 0         | Bike     | 1        |
+| 1         | Cheese   | 3        |
+| 2         | Gloves   | 4        |
+| 3         | Bacon    | 5        |
+| 4         | Pants    | 2        |
+
 
 Next, adding the `Description` property to the `Order` class and examining the output:
 
@@ -841,7 +854,7 @@ var orderIds = 0;
 var orderFaker = new Faker<Order>()
     .RuleFor(o => o.OrderId, f => orderIds++)
     .RuleFor(o => o.Item, f => f.Commerce.Product())
-    .RuleFor(o => o.Description, f => f.Commerce.ProductAdjective())
+    .RuleFor(o => o.Description, f => f.Commerce.ProductAdjective()) //New Rule
     .RuleFor(o => o.Quantity, f => f.Random.Number(1, 5));
     
 Order SeededOrder(int seed){
@@ -853,17 +866,18 @@ var orders = Enumerable.Range(1,5)
    .ToList();
 
 orders.Dump();
-┌─────────┬────────┬─────────────┬──────────┐
-│ OrderId │ Item   │ Description │ Quantity │
-├─────────┼────────┼─────────────┼──────────┤
-│ 0       │ Bike   │ Ergonomic   │ * 3      │
-│ 1       │ Cheese │ Fantastic   │ * 1      │
-│ 2       │ Gloves │ Handcrafted │ * 5      │
-│ 3       │ Bacon  │ Tasty       │ * 3      │
-│ 4       │ Pants  │ Gorgeous    │ * 2      │
-└─────────┴────────┴─────────────┴──────────┘
 ```
-Progress! This time only the `Quantity` data values changed. The `Item` column remained the same before and after the new addition of the `Description` property.
+
+| OrderId | Item   | Description | Quantity |
+|---------|--------|-------------|----------|
+| 0       | Bike   | Ergonomic   | :triangular_flag_on_post: 3 |
+| 1       | Cheese | Fantastic   | :triangular_flag_on_post: 1 |
+| 2       | Gloves | Handcrafted | :triangular_flag_on_post: 5 |
+| 3       | Bacon  | Tasty       | :triangular_flag_on_post: 3 |
+| 4       | Pants  | Gorgeous    | :triangular_flag_on_post: 2 |
+
+
+Progress! This time only the `Quantity` data values with the :triangular_flag_on_post: icon have changed. The `Item` column remained the same before and after the new addition of the `Description` property.
 
 We can further prevent the `Quantity` data values from changing by moving the `RuleFor(o => o.Description,...)` rule line to the end of the `Faker<Order>` declaration as shown below:
 
@@ -873,7 +887,7 @@ var orderFaker = new Faker<Order>()
     .RuleFor(o => o.OrderId, f => orderIds++)
     .RuleFor(o => o.Item, f => f.Commerce.Product())
     .RuleFor(o => o.Quantity, f => f.Random.Number(1, 5))
-    .RuleFor(o => o.Description, f => f.Commerce.ProductAdjective());
+    .RuleFor(o => o.Description, f => f.Commerce.ProductAdjective()); //New Rule
     
 Order MakeOrder(int seed){
    return orderFaker.UseSeed(seed).Generate();
@@ -884,25 +898,30 @@ var orders = Enumerable.Range(1,5)
    .ToList();;
 
 orders.Dump();
-┌─────────┬────────┬──────────┬─────────────┐
-│ OrderId │ Item   │ Quantity │ Description │
-├─────────┼────────┼──────────┼─────────────┤
-│ 0       │ Bike   │ 1        │ Practical   │
-│ 1       │ Cheese │ 3        │ Rustic      │
-│ 2       │ Gloves │ 4        │ Refined     │
-│ 3       │ Bacon  │ 5        │ Awesome     │
-│ 4       │ Pants  │ 2        │ Gorgeous    │
-└─────────┴────────┴──────────┴─────────────┘
 ````
+| OrderId | Item   | Quantity | Description |
+|:---------:|:--------:|:----------:|:-------------:|
+| 0       | Bike   | 1        | Practical   |
+| 1       | Cheese | 3        | Rustic      |
+| 2       | Gloves | 4        | Refined     |
+| 3       | Bacon  | 5        | Awesome     |
+| 4       | Pants  | 2        | Gorgeous    |
 
-Much success! The `Item` and `Quantity` values remain unchanged! The new `Description` property is added to the POCO object without any impact to other deterministic data values.
+Much success! :100: :tada: The `Item` and `Quantity` values remain unchanged! The new `Description` property is added to the POCO object without any impact to other deterministic data values.
 
 As a best practice, to achieve maximum deterministic behavior and unit test robustness with **Bogus**:
 
-* :heavy_check_mark: Add new `RuleFor` rules last in `Faker<T>` declarations.
-* :heavy_check_mark: Avoid changing existing rules.
-* :heavy_check_mark: Always use `Faker<T>.UseSeed(int)` to avoid using the global static seed as a source for randomness.
-* :heavy_check_mark: When possible assert that a value exists, not the literal value itself.
+* :heavy_check_mark: Add new `RuleFor` rules last in `Faker<T>` declarations.  
+* :heavy_check_mark: Avoid changing existing rules.  
+* :heavy_check_mark: Always use `Faker<T>.UseSeed(int)` to avoid using the global static seed as a source for randomness.  
+* :heavy_check_mark: When possible assert that a value exists, not the literal value itself. In other words,
+  ```csharp
+  // Don't do this:
+  firstOrder.Item.Should().Be("Bike");
+
+  //Instead, do this:
+  firstOrder.Item.Should().NotBeNullOrWhiteSpace();
+  ```
 
 -------
 
@@ -922,28 +941,30 @@ lorem.Word().Dump();
 //OUTPUT:
 minus
 minus
-``` 
+```
 
-### Using `Enumerable.Range()` and LINQ 
-The `Enumerable.Range()` and LINQ are a great supplement when creating data with **Bogus**. Here's how to generate a simple list of email addresses:
+The `.Random` property can be set multiple times without any ill effects. 
 
-```csharp
-var faker = new Faker("en");
+#### Versioning can effect determinism
+Updating to new versions of **Bogus** on NuGet can effect determinism too. For example, when **Bogus** updates locales from **faker.js** or issues bug fixes, sometimes deterministic sequences can change. Changes to deterministic outputs are usually highlighted in the [release notes](https://github.com/bchavez/Bogus/blob/master/HISTORY.md). Changes to deterministic outputs is also considered a breaking change. **Bogus** generally follows semantic versioning rules. For example:
 
-var emailList = Enumerable.Range(1, 5)
-      .Select(_ => faker.Internet.Email())
-      .ToList();
-┌───────────────────────────┐
-│ Email                     │
-├───────────────────────────┤
-│ Gustave83@hotmail.com     │
-│ Evie33@gmail.com          │
-│ Abby_Wilkinson@yahoo.com  │
-│ Cecilia.Hahn@yahoo.com    │
-│ Jasen.Waelchi85@gmail.com │
-└───────────────────────────┘
-```  
+| Version | Description |
+|---------|-------------|
+| **Bogus** v25.0.**1** | Initial version.                                                                           |
+| **Bogus** v25.0.**2** | No change to deterministic outputs or breaking changes. Possible bug fixes & improvements. |
+| **Bogus** v**26**.0.1 | Deterministic outputs may have changed or may include other breaking changes.              |
 
+As a general rule of thumb,
+
+* :heavy_check_mark: For maximum stability for unit tests, stay within the same major versions of **Bogus**.  
+* :heavy_check_mark: For those wanting to stay up to date, assert that a value exists, not a literal value itself. In other words,
+  ```csharp
+  // Don't do this:
+  firstOrder.Item.Should().Be("Bike");
+
+  //Instead, do this:
+  firstOrder.Item.Should().NotBeNullOrWhiteSpace();
+  ```
 
 F# and VB.NET Examples
 ----------------------

@@ -385,7 +385,7 @@ public void Using_FakerT_Inheritance()
 	* `JobDescriptor` - Get a job description.
 	* `JobArea` - Get a job area expertise.
 	* `JobType` - Get a type of job.
-* **`PhoneNumbers`**
+* **`Phone`**
 	* `PhoneNumber` - Get a phone number.
 	* `PhoneNumberFormat` - Gets a phone number based on the locale's phone_number.formats[] array index.
 * **`Rant`**

@@ -676,8 +676,13 @@ namespace Bogus
          var binderPropsOrFieldsOfT = this.TypeProperties.Keys;
          foreach( var rule in ruleSets )
          {
-            var strictMode = Faker.DefaultStrictMode;
-            this.StrictModes.TryGetValue(rule, out strictMode);
+            if( this.StrictModes.TryGetValue(rule, out var strictMode) )
+            {
+            }
+            else
+            {
+               strictMode = Faker.DefaultStrictMode;
+            }
 
             //If strictMode is not enabled, skip and move on to the next ruleSet.
             if( !strictMode ) continue;

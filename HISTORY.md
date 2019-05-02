@@ -1,5 +1,7 @@
-## v26.0.3 - /master current
-Release Date: UNRELEASED
+## v27.0.1
+Release Date: 2019-05-02
+
+* Issue 218: Fixed bug that prevented global static `Faker.DefaultStrictMode` from working.
 * Issue 210: Added `Randomizer.Utf16String` that generates technically valid Unicode with paired high/low surrogates.
 * Added `placeholder.com` image service.
 

@@ -5,22 +5,59 @@
 //#endif
 
 // include Fake lib
-#I @"../packages/build/FAKE/tools"
-#I @"../packages/build/DotNetZip/lib/net20"
-#r @"FakeLib.dll"
-#r @"DotNetZip.dll"
+
+#r "paket:
+
+nuget Fake.Core                    = 5.8.4
+nuget Fake.Core.Target             = 5.13.5
+nuget Fake.Core.Xml                = 5.13.5
+nuget Fake.Runtime                 = 5.13.5
+nuget Fake.DotNet.NuGet            = 5.13.5
+nuget Fake.DotNet.Cli              = 5.13.5
+nuget Fake.DotNet.AssemblyInfoFile = 5.13.5
+nuget Fake.DotNet.MSBuild          = 5.13.5
+nuget Fake.JavaScript.Npm          = 5.13.5
+nuget Fake.IO.FileSystem           = 5.13.5
+nuget Fake.IO.Zip                  = 5.13.5
+nuget Fake.Tools.Git               = 5.13.5
+nuget Fake.DotNet.Testing.xUnit2   = 5.13.5
+nuget Fake.BuildServer.AppVeyor    = 5.13.5
+
+nuget SharpCompress = 0.22.0
+nuget FSharp.Data = 2.4.6
+
+nuget Z.ExtensionMethods.WithTwoNamespace
+nuget System.Runtime.Caching //"
+
+#load ".\\.fake\\build.fsx\\intellisense.fsx"
 
 #load @"Utils.fsx"
 
+#if !FAKE
+  #r "netstandard"
+#endif
+
 open Fake
 open Utils
+open Fake.IO
+open Fake.IO.Globbing.Operators
+open Fake.IO.FileSystemOperators
+open Fake.DotNet
+open Fake.Core
+open Fake.IO.Globbing
+open Fake.JavaScript
+open Utils
+open Z.ExtensionMethods
+
 open System.Reflection
-open Helpers
-open Fake.Testing.NUnit3
+open System.Collections.Generic
+open SharpCompress
+open SharpCompress.Archives
+open Newtonsoft.Json
 
 let workingDir = ChangeWorkingFolder();
 
-trace (sprintf "WORKING DIR: %s" workingDir)
+Trace.trace (sprintf "WORKING DIR: %s" workingDir)
 
 let ProjectName = "Bogus";
 let GitHubUrl = "https://github.com/bchavez/Bogus"
@@ -33,123 +70,109 @@ let BogusProject = NugetProject("Bogus", "Bogus Fake Data Generator for .NET", F
 let TestProject = TestProject("Bogus.Tests", Folders)
 
 
+Target.description "MAIN BUILD TASK"
+Target.create "dnx" (fun _ ->
+    Trace.trace "DNX Build Task"
 
-Target "msb" (fun _ ->
+    let releaseConfig (opts : DotNet.BuildOptions) =
+        {opts with 
+              Configuration = DotNet.BuildConfiguration.Release }
     
-    let tag = "msb_build";
+    let debugConfig (opts : DotNet.BuildOptions) =
+        { opts with 
+               Configuration = DotNet.BuildConfiguration.Debug }
 
-    let buildProps = [ 
-                        "AssemblyOriginatorKeyFile", Projects.SnkFile
-                        "SignAssembly", BuildContext.IsTaggedBuild.ToString()
-                     ]
+    DotNet.build releaseConfig BogusProject.Folder
+    DotNet.build debugConfig BogusProject.Folder
 
-    //DO NOT OVERRIDE THE OutputPath PROPERTY as it is very dangerous
-    //to do so with multi-target builds (net45;netstandard2.0)
-    !! BogusProject.ProjectFile
-    |> MSBuildReleaseExt null buildProps "Build"
-    |> Log "AppBuild-Output: "
-
-    traceFAKE "Copying MS Build outputs..."
-    CopyDir (BogusProject.OutputDirectory @@ tag) BogusProject.MsBuildBinRelease allFiles
-
-    !! TestProject.ProjectFile
-    |> MSBuild "" "Build" (("Configuration", "Debug")::buildProps)
-    |> Log "AppBuild-Output: "
+    Shell.copyDir BogusProject.OutputDirectory (BogusProject.Folder @@ "bin") FileFilter.allFiles
 )
 
+Target.description "NUGET PACKAGE RESTORE TASK"
+Target.create "restore" (fun _ -> 
+     //Trace.trace "MS NuGet Project Restore"
+     //let lookIn = Folders.Lib @@ "build"
+     //let toolPath = Tools.findToolInSubPath "NuGet.exe" lookIn
 
+     //Trace.tracefn "NuGet Tool Path: %s" toolPath
 
-Target "dnx" (fun _ ->
-    trace "DNX Build Task"
-
-    let tag = "dnx_build"
-    
-    //Dotnet DotnetCommands.Restore BogusProject.Folder
-    //Dotnet DotnetCommands.Restore TestProject.Folder
-    DotnetBuild BogusProject tag
+     Trace.trace ".NET Core Restore"
+     DotNet.restore id BogusProject.Folder
+     DotNet.restore id TestProject.Folder
 )
 
-Target "restore" (fun _ -> 
-     trace "MS NuGet Project Restore"
-     let lookIn = Folders.Lib @@ "build"
-     let toolPath = findToolInSubPath "NuGet.exe" lookIn
-
-     tracefn "NuGet Tool Path: %s" toolPath
-
-     //Projects.SolutionFile
-     //|> RestoreMSSolutionPackages (fun p ->
-     //       { 
-     //         p with 
-     //           OutputPath = (Folders.Source @@ "packages" )
-     //           ToolPath = toolPath
-     //       }
-     //   )
-
-     trace ".NET Core Restore"
-     DotnetRestore BogusProject
-     DotnetRestore TestProject
- )
-
-open Ionic.Zip
 open System.Xml
 
-Target "nuget" (fun _ ->
-    trace "NuGet Task"
+Target.description "NUGET PACKAGE TASK"
+Target.create "nuget" (fun _ ->
+    Trace.trace "NuGet Task"
+
+    let config (opts: DotNet.PackOptions) =
+         {opts with
+               Configuration = DotNet.BuildConfiguration.Release
+               OutputPath = Some(Folders.Package) }
     
-    DotnetPack BogusProject Folders.Package   
+    //DotnetPack BogusProject Folders.Package
+    DotNet.pack config BogusProject.Folder
 )
 
-Target "push" (fun _ ->
-    trace "NuGet Push Task"
+Target.create "push" (fun _ ->
+    Trace.trace "NuGet Push Task"
     
     failwith "Only CI server should publish on NuGet"
 )
 
 
+Target.description "PROJECT ZIP TASK"
+Target.create "zip" (fun _ -> 
+    Trace.trace "Zip Task"
 
-Target "zip" (fun _ -> 
-    trace "Zip Task"
-
-    !!(BogusProject.OutputDirectory @@ "**") |> Zip Folders.CompileOutput (Folders.Package @@ BogusProject.Zip)
+    !!(BogusProject.OutputDirectory @@ "**")
+    |> Zip.zip Folders.CompileOutput (Folders.Package @@ BogusProject.Zip)
 )
 
-open AssemblyInfoFile
 
 let MakeAttributes (includeSnk:bool) =
     let attrs = [
-                    Attribute.Description GitHubUrl
+                    AssemblyInfo.Description GitHubUrl
                 ]
     if includeSnk then
         let pubKey = ReadFileAsHexString Projects.SnkFilePublic
         let visibleTo = sprintf "%s, PublicKey=%s" TestProject.Name pubKey
-        attrs @ [ Attribute.InternalsVisibleTo(visibleTo) ]
+        attrs @ [ AssemblyInfo.InternalsVisibleTo(visibleTo) ]
     else
-        attrs @ [ Attribute.InternalsVisibleTo(TestProject.Name) ]
+        attrs @ [ AssemblyInfo.InternalsVisibleTo(TestProject.Name) ]
 
-
-Target "BuildInfo" (fun _ ->
+Target.description "PROJECT BUILDINFO TASK"
+Target.create "BuildInfo" (fun _ ->
     
-    trace "Writing Assembly Build Info"
+    Trace.trace "Writing Assembly Build Info"
 
     MakeBuildInfo BogusProject Folders (fun bip -> 
         { bip with
             ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
 
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
 
     let releaseNotes = History.NugetText Files.History GitHubUrl
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" releaseNotes
 )
 
+Target.description "PROJECT CLEAN TASK"
+Target.create "Clean" (fun _ ->
+    File.delete Files.TestResultFile
+    Shell.cleanDirs [Folders.CompileOutput; Folders.Package;]
 
-Target "Clean" (fun _ ->
-    DeleteFile Files.TestResultFile
-    CleanDirs [Folders.CompileOutput; Folders.Package]
+    let projects = [BogusProject.Folder; TestProject.Folder;]
 
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
+    for project in projects do
+      Shell.cleanDir (project @@ "bin")
+      Shell.cleanDir (project @@ "obj")
+
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" "0.0.0-localbuild"
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/PackageReleaseNotes" ""
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
@@ -158,47 +181,53 @@ Target "Clean" (fun _ ->
 
 )
 
-open Fake.Testing
+open Fake.DotNet.Testing
 
 let RunTests() =
-    CreateDir Folders.Test
-    let xunit = findToolInSubPath "xunit.console.exe" Folders.Lib
+    Directory.create Folders.Test
+    let xunit = Tools.findToolInSubPath "xunit.console.exe" Folders.Lib
 
     !! TestProject.TestAssembly
-    |> xUnit2 (fun p -> { p with 
-                            ToolPath = xunit
-                            ShadowCopy = false
-                            XmlOutputPath = Some(Files.TestResultFile)
-                            ErrorLevel = TestRunnerErrorLevel.Error }) 
+    |> XUnit2.run (fun p -> { p with 
+                               ToolPath = xunit
+                               ShadowCopy = false
+                               XmlOutputPath = Some(Files.TestResultFile)
+                               ErrorLevel = Testing.Common.TestRunnerErrorLevel.Error }) 
 
 
-open Fake.AppVeyor
+open Fake.BuildServer
 
-Target "ci" (fun _ ->
-    trace "ci Task"
+Target.create "ci" (fun _ ->
+    Trace.trace "ci Task"
 )
 
-Target "test" (fun _ ->
-    trace "TEST"
+Target.description "PROJECT TEST TASK"
+Target.create "test" (fun _ ->
+    Trace.trace "TEST"
     RunTests()
 )
 
-Target "citest" (fun _ ->
-    trace "CI TEST"
+Target.description "CI TEST TASK"
+Target.create "citest" (fun _ ->
+    Trace.trace "CI TEST"
     RunTests()
-    UploadTestResultsXml TestResultsType.Xunit Folders.Test
+    
+    Files.TestResultFile
+    |> Trace.publish( ImportData.Xunit )
+    
 )
 
+Target.description "PROJECT SIGNING KEY SETUP TASK"
+Target.create "setup-snk"(fun _ ->
+    Trace.trace "Decrypting Strong Name Key (SNK) file."
+    let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
+    Helpers.decryptFile Projects.SnkFile decryptSecret
 
-Target "setup-snk"(fun _ ->
-    trace "Decrypting Strong Name Key (SNK) file."
-    let decryptSecret = environVarOrFail "SNKFILE_SECRET"
-    decryptFile Projects.SnkFile decryptSecret
-
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
-    XmlPokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
+open Fake.Core.TargetOperators
 
 "Clean"
     ==> "restore"
@@ -212,7 +241,6 @@ Target "setup-snk"(fun _ ->
 
 "BuildInfo"
     =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "msb"
     ==> "zip"
 
 "BuildInfo"
@@ -233,11 +261,7 @@ Target "setup-snk"(fun _ ->
     ==> "ci"
 
 
-//test task depends on msbuild
-"msb"
-    ==> "test"
-
 
 
 // start build
-RunTargetOrDefault "msb"
+Target.runOrDefault "dnx"

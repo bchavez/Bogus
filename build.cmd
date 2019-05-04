@@ -1,12 +1,20 @@
 @echo off
 cls
 
-pushd Source\
-.paket\paket.exe install
+SET BUILDER=Source\Builder
+
+IF NOT EXIST "%BUILDER%\fake.exe" (
+  dotnet tool install fake-cli ^
+    --tool-path ./%BUILDER% ^
+    --version 5.13.5
+)
+
 if errorlevel 1 (
-  popd
   exit /b %errorlevel%
 )
-popd
 
-"Source\packages\build\FAKE\tools\Fake.exe" .\Source\Builder\build.fsx %1
+"%BUILDER%/fake.exe" run %BUILDER%\build.fsx target %1
+
+if errorlevel 1 (
+  exit /b %errorlevel%
+)

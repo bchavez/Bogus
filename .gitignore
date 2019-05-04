@@ -9,6 +9,7 @@
 /Source/packages**
 paket.lock
 .fake
+.store
 .paket/paket.exe
 /Source/.paket/**
 __test

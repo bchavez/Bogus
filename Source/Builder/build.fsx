@@ -26,6 +26,9 @@ nuget Fake.BuildServer.AppVeyor    = 5.13.5
 nuget SharpCompress = 0.22.0
 nuget FSharp.Data = 2.4.6
 
+nuget xunit.runner.console         = 2.3.1
+nuget secure-file
+
 nuget Z.ExtensionMethods.WithTwoNamespace
 nuget System.Runtime.Caching //"
 
@@ -86,6 +89,8 @@ Target.create "dnx" (fun _ ->
     DotNet.build debugConfig BogusProject.Folder
 
     Shell.copyDir BogusProject.OutputDirectory (BogusProject.Folder @@ "bin") FileFilter.allFiles
+
+    DotNet.build debugConfig TestProject.Folder
 )
 
 Target.description "NUGET PACKAGE RESTORE TASK"
@@ -184,16 +189,19 @@ Target.create "Clean" (fun _ ->
 open Fake.DotNet.Testing
 
 let RunTests() =
-    Directory.create Folders.Test
-    let xunit = Tools.findToolInSubPath "xunit.console.exe" Folders.Lib
+   //  Directory.create Folders.Test
+   //  let xunit = Tools.findToolInSubPath "xunit.console.exe" (Folders.Lib @@ "xunit.runner.console" @@ "2.3.1")
 
-    !! TestProject.TestAssembly
-    |> XUnit2.run (fun p -> { p with 
-                               ToolPath = xunit
-                               ShadowCopy = false
-                               XmlOutputPath = Some(Files.TestResultFile)
-                               ErrorLevel = Testing.Common.TestRunnerErrorLevel.Error }) 
-
+   //  !! TestProject.TestAssembly
+   //  |> XUnit2.run (fun p -> { p with 
+   //                             ToolPath = xunit
+   //                             ShadowCopy = false
+   //                             XmlOutputPath = Some(Files.TestResultFile)
+   //                             ErrorLevel = Testing.Common.TestRunnerErrorLevel.Error }) 
+   let config (opts: DotNet.TestOptions) =
+      {opts with  
+            NoBuild = true }
+   DotNet.test config TestProject.Folder
 
 open Fake.BuildServer
 
@@ -251,6 +259,10 @@ open Fake.Core.TargetOperators
     ==> "nuget"
 
 
+// "dnx"
+//     ==> "test"
+
+
 "nuget"
     ==> "ci"
 
@@ -259,6 +271,7 @@ open Fake.Core.TargetOperators
 
 "zip"
     ==> "ci"
+
 
 
 

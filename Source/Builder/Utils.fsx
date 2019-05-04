@@ -1,4 +1,6 @@
 ﻿module Utils
+open Fake.DotNet
+open Fake.Runtime
 
 #nowarn "52"
 
@@ -68,7 +70,9 @@ module Setup =
         let package = workingFolder @@ "__package"
         let test = workingFolder @@ "__test"
         let source = workingFolder @@ "Source"
-        let lib = source @@ "packages"
+
+        let nugetPackagePath = Environment.GetFolderPath Environment.SpecialFolder.UserProfile
+        let lib =  nugetPackagePath @@ ".nuget" @@ "packages"
         let builder = workingFolder @@ "Builder"
     
         member this.WorkingFolder = workingFolder
@@ -176,6 +180,7 @@ let ReadFileAsHexString file =
                 ) sb
     acc.ToString()
 
+[<NoComparisonAttribute>]
 type BuildInfoParams = { DateTime:System.DateTime; ExtraAttrs:list<AssemblyInfoFile.Attribute> }
 
 let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams = 

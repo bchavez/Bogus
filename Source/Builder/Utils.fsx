@@ -49,6 +49,7 @@ module BuildContext =
     let IsTaggedBuild =
         Fake.BuildServer.AppVeyor.Environment.RepoTag
 
+
 open System
 open System.IO
 
@@ -71,41 +72,43 @@ module Setup =
         let test = workingFolder @@ "__test"
         let source = workingFolder @@ "Source"
 
-        let nugetPackagePath = Environment.GetFolderPath Environment.SpecialFolder.UserProfile
-        let lib =  nugetPackagePath @@ ".nuget" @@ "packages"
         let builder = workingFolder @@ "Builder"
     
         member this.WorkingFolder = workingFolder
         member this.CompileOutput = compileOutput
         member this.Package = package
         member this.Source = source
-        member this.Lib = lib
+
         member this.Builder = builder
         member this.Test = test
 
-    type Files(folders : Folders) =
+        static member NuGetPackagePath =
+           let userProfile = Environment.GetFolderPath Environment.SpecialFolder.UserProfile
+           userProfile @@ ".nuget" @@ "packages"
+
+
+    type Files(projectName : string, folders : Folders) =
         let history = folders.WorkingFolder @@ "HISTORY.md"
         let testResultFile = folders.Test @@ "results.xml"
-        
-        member this.History = history
-        member this.TestResultFile = testResultFile
 
-    type Projects(projectName : string, folders : Folders) = 
         let solutionFile = folders.Source @@ sprintf "%s.sln" projectName
-        //let globalJson = folders.Source @@ "global.json"
         let snkFile = folders.Source @@ sprintf "%s.snk" projectName
         let snkFilePublic = folders.Source @@ sprintf "%s.snk.pub" projectName 
 
+        //let globalJson = folders.Source @@ "global.json"
         //let dnvmVersion = 
         //    let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
         //    json?sdk?version.AsString()
 
-        member this.SolutionFile = solutionFile
         //member this.GlobalJson = globalJson
         //member this.DnvmVersion = dnvmVersion
+        
+        member this.History = history
+        member this.TestResultFile = testResultFile
+
+        member this.SolutionFile = solutionFile
         member this.SnkFile = snkFile
         member this.SnkFilePublic = snkFilePublic
-
 
 open Setup
 open Fake.IO
@@ -305,6 +308,10 @@ module Helpers =
     open FSharp.Data
     open FSharp.Data.JsonExtensions
     open Fake.IO.Globbing
+
+    let FindNuGetTool (cmdFileName : string) (nugetPackageName : string) (version : string option) =
+         let probePath = if version.IsSome then version.Value else String.Empty
+         Tools.findToolInSubPath cmdFileName (Folders.NuGetPackagePath @@ nugetPackageName @@ probePath)
     
     let shellExec cmdPath args workingDir = 
         CreateProcess.fromRawCommandLine cmdPath args
@@ -328,41 +335,13 @@ module Helpers =
             | None -> failwith (sprintf "'%s' can't find" name)
 
     let encryptFile file secret =
-        let secureFile = Tools.findToolInSubPath "secure-file.exe" "."
+        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
         let args = sprintf "-encrypt %s -secret %s" file secret
         shellExecSecret secureFile args "."
 
     let decryptFile file secret =
-        let secureFile = Tools.findToolInSubPath "secure-file.exe" "."
+        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
         let args = sprintf "-decrypt %s.enc -secret %s" file secret
         shellExecSecret secureFile args "."
   
-    //let DotnetPack (np: NugetProject) (output: string) =
-    //    //let packArgs = sprintf "pack --include-symbols --include-source --configuration Release --output %s" output
-    //    //dotnet packArgs np.Folder
-    //    DotNetCli.Pack(fun p -> 
-    //       { p with 
-    //           Configuration = "Release"
-    //           WorkingDir = np.Folder
-    //           OutputPath = output
-    //           AdditionalArgs = []
-    //       })
-
-    //let DotnetBuild (np: NugetProject) (tag: string) = 
-    //    let frameworks = np.GetTargetFrameworks()
-                     
-    //    for framework in frameworks do
-    //        DotNetCli.Build( fun p ->
-    //         { p with
-    //              Configuration = "Release"
-    //              Output = (np.OutputDirectory @@ tag @@ framework)
-    //              WorkingDir = np.Folder
-    //              Framework = framework
-    //         })
-
-    //let DotnetRestore (np : Project) =
-    //       DotNetCli.Restore( fun p ->
-    //        { p with 
-    //           WorkingDir = np.Folder
-    //        })
-
+    

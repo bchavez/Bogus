@@ -26,11 +26,12 @@ nuget Fake.BuildServer.AppVeyor    = 5.13.5
 nuget SharpCompress = 0.22.0
 nuget FSharp.Data = 2.4.6
 
-nuget xunit.runner.console         = 2.3.1
-nuget secure-file
+nuget secure-file                  = 1.0.31
 
 nuget Z.ExtensionMethods.WithTwoNamespace
 nuget System.Runtime.Caching //"
+
+
 
 #load ".\\.fake\\build.fsx\\intellisense.fsx"
 
@@ -66,8 +67,7 @@ let ProjectName = "Bogus";
 let GitHubUrl = "https://github.com/bchavez/Bogus"
 
 let Folders = Setup.Folders(workingDir)
-let Files = Setup.Files(Folders)
-let Projects = Setup.Projects(ProjectName, Folders)
+let Files = Setup.Files(ProjectName, Folders)
 
 let BogusProject = NugetProject("Bogus", "Bogus Fake Data Generator for .NET", Folders)
 let TestProject = TestProject("Bogus.Tests", Folders)
@@ -95,13 +95,8 @@ Target.create "dnx" (fun _ ->
 
 Target.description "NUGET PACKAGE RESTORE TASK"
 Target.create "restore" (fun _ -> 
-     //Trace.trace "MS NuGet Project Restore"
-     //let lookIn = Folders.Lib @@ "build"
-     //let toolPath = Tools.findToolInSubPath "NuGet.exe" lookIn
-
-     //Trace.tracefn "NuGet Tool Path: %s" toolPath
-
      Trace.trace ".NET Core Restore"
+     
      DotNet.restore id BogusProject.Folder
      DotNet.restore id TestProject.Folder
 )
@@ -142,7 +137,7 @@ let MakeAttributes (includeSnk:bool) =
                     AssemblyInfo.Description GitHubUrl
                 ]
     if includeSnk then
-        let pubKey = ReadFileAsHexString Projects.SnkFilePublic
+        let pubKey = ReadFileAsHexString Files.SnkFilePublic
         let visibleTo = sprintf "%s, PublicKey=%s" TestProject.Name pubKey
         attrs @ [ AssemblyInfo.InternalsVisibleTo(visibleTo) ]
     else
@@ -189,15 +184,6 @@ Target.create "Clean" (fun _ ->
 open Fake.DotNet.Testing
 
 let RunTests() =
-   //  Directory.create Folders.Test
-   //  let xunit = Tools.findToolInSubPath "xunit.console.exe" (Folders.Lib @@ "xunit.runner.console" @@ "2.3.1")
-
-   //  !! TestProject.TestAssembly
-   //  |> XUnit2.run (fun p -> { p with 
-   //                             ToolPath = xunit
-   //                             ShadowCopy = false
-   //                             XmlOutputPath = Some(Files.TestResultFile)
-   //                             ErrorLevel = Testing.Common.TestRunnerErrorLevel.Error }) 
    let config (opts: DotNet.TestOptions) =
       {opts with  
             NoBuild = true }
@@ -229,9 +215,9 @@ Target.description "PROJECT SIGNING KEY SETUP TASK"
 Target.create "setup-snk"(fun _ ->
     Trace.trace "Decrypting Strong Name Key (SNK) file."
     let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
-    Helpers.decryptFile Projects.SnkFile decryptSecret
+    Helpers.decryptFile Files.SnkFile decryptSecret
 
-    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Projects.SnkFile
+    Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Files.SnkFile
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 

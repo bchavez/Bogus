@@ -21,13 +21,18 @@ namespace Bogus.Tests
       }
    }
 
-   public class BsonTests : SeededTest
+   public class BsonTests : SeededTest, IDisposable
    {
       private readonly ITestOutputHelper console;
 
       public BsonTests(ITestOutputHelper console)
       {
          this.console = console;
+      }
+
+      public void Dispose()
+      {
+         Database.ResetLocale("en");
       }
 
       [Fact]
@@ -91,7 +96,6 @@ namespace Bogus.Tests
       }
 
 
-
       private void PatchEnLocaleWithExtraStuff()
       {
          var patch = CreateExtraData();
@@ -128,8 +132,6 @@ namespace Bogus.Tests
                }
             };
       }
-
-
    }
 
 }

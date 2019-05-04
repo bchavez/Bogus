@@ -1,14 +1,27 @@
 ﻿module Utils
+open Fake.DotNet
+open Fake.Runtime
 
-// include Fake lib
-#load @"../.paket/load/build/build.group.fsx"
+#nowarn "52"
 
-#I @"../packages/build/FAKE/tools"
-#r @"FakeLib.dll"
+#load ".\\.fake\\build.fsx\\intellisense.fsx"
+
+#r "System.Xml.Linq.dll"
+
+#if !FAKE
+  #r "netstandard"
+#endif
 
 open Fake
-open AssemblyInfoFile
-open Fake.AppVeyor
+open Fake.Runtime
+open Z.ExtensionMethods
+
+open Fake.IO
+open Fake.IO.Globbing.Operators
+open Fake.IO.FileSystemOperators
+open Fake.DotNet
+open Fake.Core
+open Fake.Tools.Git
 
 module BuildContext =     
 
@@ -21,10 +34,10 @@ module BuildContext =
         if dash > 0 then Some(ver.Substring(dash + 1)) else None
 
     let FullVersion = 
-        let forced = environVarOrNone "FORCE_VERSION"
-        let tagname = environVarOrNone "APPVEYOR_REPO_TAG_NAME"
-        let buildver = environVarOrNone "APPVEYOR_BUILD_VERSION"
-
+        let forced = Environment.environVarOrNone "FORCE_VERSION"
+        let tagname = Environment.environVarOrNone "APPVEYOR_REPO_TAG_NAME"
+        let buildver = Environment.environVarOrNone "APPVEYOR_BUILD_VERSION"
+        
         match (forced, tagname, buildver) with
         | (Some f, _, _) -> f
         | (_, Some t, _) -> t.Trim(' ', 'v')
@@ -34,14 +47,14 @@ module BuildContext =
     let Version = WithoutPreReleaseName FullVersion
 
     let IsTaggedBuild =
-        AppVeyorEnvironment.RepoTag
+        Fake.BuildServer.AppVeyor.Environment.RepoTag
 
 
 open System
 open System.IO
 
 let ChangeWorkingFolder() =
-        let workingDir = currentDirectory
+        let workingDir = Directory.GetCurrentDirectory()
         if File.Exists("build.cmd") then 
             System.IO.Directory.SetCurrentDirectory workingDir
         else
@@ -58,43 +71,47 @@ module Setup =
         let package = workingFolder @@ "__package"
         let test = workingFolder @@ "__test"
         let source = workingFolder @@ "Source"
-        let lib = source @@ "packages"
+
         let builder = workingFolder @@ "Builder"
     
         member this.WorkingFolder = workingFolder
         member this.CompileOutput = compileOutput
         member this.Package = package
         member this.Source = source
-        member this.Lib = lib
+
         member this.Builder = builder
         member this.Test = test
 
-    type Files(folders : Folders) =
+        static member NuGetPackagePath =
+           let userProfile = Environment.GetFolderPath Environment.SpecialFolder.UserProfile
+           userProfile @@ ".nuget" @@ "packages"
+
+
+    type Files(projectName : string, folders : Folders) =
         let history = folders.WorkingFolder @@ "HISTORY.md"
         let testResultFile = folders.Test @@ "results.xml"
-        
-        member this.History = history
-        member this.TestResultFile = testResultFile
 
-    type Projects(projectName : string, folders : Folders) = 
         let solutionFile = folders.Source @@ sprintf "%s.sln" projectName
-        //let globalJson = folders.Source @@ "global.json"
         let snkFile = folders.Source @@ sprintf "%s.snk" projectName
         let snkFilePublic = folders.Source @@ sprintf "%s.snk.pub" projectName 
 
+        //let globalJson = folders.Source @@ "global.json"
         //let dnvmVersion = 
         //    let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
         //    json?sdk?version.AsString()
 
-        member this.SolutionFile = solutionFile
         //member this.GlobalJson = globalJson
         //member this.DnvmVersion = dnvmVersion
+        
+        member this.History = history
+        member this.TestResultFile = testResultFile
+
+        member this.SolutionFile = solutionFile
         member this.SnkFile = snkFile
         member this.SnkFilePublic = snkFilePublic
 
-
 open Setup
-
+open Fake.IO
 
 type Project(name : string, folders : Folders) =
     let folder = folders.Source @@ name
@@ -127,7 +144,6 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
 
     let nugetSpecFileName = sprintf "%s.nuspec" name
     let nugetPkg = folders.Package @@ sprintf "%s.%s.nupkg" name BuildContext.FullVersion
-    let nugetPkgSymbols = changeExt "symbols.nupkg" nugetPkg
 
 
     let zip = folders.Package @@ sprintf "%s.zip" name
@@ -138,17 +154,16 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     
     member this.NugetSpec = nugetSpecFileName
     member this.NugetPkg = nugetPkg
-    member this.NugetPkgSymbols = nugetPkgSymbols
     
     member this.Title = assemblyTitle
 
     member this.GetTargetFrameworks() =
          //Basically, check the TargetFrameworks (plural) MSBuild property
-         let frameworks = XMLRead true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/text()"
+         let frameworks = Xml.read true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFrameworks/text()"
 
          if Seq.isEmpty(frameworks) then 
              //Otherwise, it's the singular one.
-             XMLRead true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFramework/text()"
+             Xml.read true this.ProjectFile "" "" "/Project/PropertyGroup/TargetFramework/text()"
                |> Seq.toArray
          else
             frameworks
@@ -157,7 +172,7 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
 
 
 let ReadFileAsHexString file =
-    let bytes = ReadFileAsBytes file
+    let bytes = File.readAsBytes file
     let sb = new System.Text.StringBuilder()
     let toHex (b : byte)=
         b.ToString("x2")
@@ -168,6 +183,7 @@ let ReadFileAsHexString file =
                 ) sb
     acc.ToString()
 
+[<NoComparisonAttribute>]
 type BuildInfoParams = { DateTime:System.DateTime; ExtraAttrs:list<AssemblyInfoFile.Attribute> }
 
 let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams = 
@@ -180,20 +196,22 @@ let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams =
     let path = folders.Source @@ project.Name @@ "/Properties/AssemblyInfo.cs"
     let infoVersion = sprintf "%s built on %s" BuildContext.FullVersion (bip.DateTime.ToString())
     let copyright = sprintf "Brian Chavez © %i" (bip.DateTime.Year)
-
+    let config = AssemblyInfoFileConfig(true, emitResharperSupressions=false);
     let attrs = 
           [
-              Attribute.Title project.Title
-              Attribute.Product project.Name
-              Attribute.Company "Brian Chavez"  
-              Attribute.Copyright copyright
-              Attribute.Version BuildContext.Version
-              Attribute.FileVersion BuildContext.Version
-              Attribute.InformationalVersion infoVersion
-              Attribute.Trademark "MIT License"
+              AssemblyInfo.Title project.Title
+              AssemblyInfo.Product project.Name
+              AssemblyInfo.Company "Brian Chavez"  
+              AssemblyInfo.Copyright copyright
+              AssemblyInfo.Version BuildContext.Version
+              AssemblyInfo.FileVersion BuildContext.Version
+              AssemblyInfo.InformationalVersion infoVersion
+              AssemblyInfo.Trademark "MIT License"
           ]
 
-    CreateCSharpAssemblyInfo path (attrs @ bip.ExtraAttrs)
+    AssemblyInfoFile.create path (attrs @ bip.ExtraAttrs) (Some config)
+
+    Async.Sleep 100 |> Async.RunSynchronously
 
 
 open System.Reflection
@@ -204,27 +222,8 @@ let DynInvoke (instance : obj) (methodName : string) (args : obj[]) =
     ()
 
 
-let NuGetWorkingDir (project : NugetProject) =
-    project.OutputDirectory @@ "dnx_build" @@ "release"
-
-
-let NuGetSourceDir (project : NugetProject) =
-    let dirInfo = directoryInfo project.Folder
-    (dirInfo.FullName @@ @"**\*.cs", Some "src", Some @"**\obj\**")
-
-
-let SetupNuGetPaths (p : NuGetParams) (project : NugetProject) =
-    let workingDir = NuGetWorkingDir project
-    let srcDir = NuGetSourceDir project
-    {p with 
-        WorkingDir = workingDir
-        Files = [ srcDir ]
-        }
-
-
 module History =
-    open Z.Core.Extensions
-    open Z.Collections.Extensions
+    open Z.ExtensionMethods
     open System.Linq
     
     let All historyFile =
@@ -308,73 +307,41 @@ let SetDependency (dependency:string) (dependencyVersion: string) (projectJson: 
 module Helpers = 
     open FSharp.Data
     open FSharp.Data.JsonExtensions
+    open Fake.IO.Globbing
 
+    let FindNuGetTool (cmdFileName : string) (nugetPackageName : string) (version : string option) =
+         let probePath = if version.IsSome then version.Value else String.Empty
+         Tools.findToolInSubPath cmdFileName (Folders.NuGetPackagePath @@ nugetPackageName @@ probePath)
+    
     let shellExec cmdPath args workingDir = 
-        let result = ExecProcess (
-                      fun info ->
-                        info.FileName <- cmdPath
-                        info.WorkingDirectory <- workingDir
-                        info.Arguments <- args
-                      ) System.TimeSpan.MaxValue
-        if result <> 0 then failwith (sprintf "'%s' failed" cmdPath + " " + args)
+        CreateProcess.fromRawCommandLine cmdPath args
+               |> CreateProcess.ensureExitCode
+               |> CreateProcess.withWorkingDirectory workingDir
+               |> CreateProcess.withTimeout System.TimeSpan.MaxValue
+               |> Proc.run
 
     let shellExecSecret cmdPath args workingDir = 
-        let ok = directExec (
-                      fun info ->
-                        info.FileName <- cmdPath
-                        info.WorkingDirectory <- workingDir
-                        info.Arguments <- args
-                      )
-        if not ok then failwith (sprintf "'%s' failed" cmdPath)
+        
+        let result = CreateProcess.fromRawCommandLine cmdPath args
+                  |> CreateProcess.withWorkingDirectory workingDir
+                  |> Proc.run
+
+        if result.ExitCode <> 0 then failwith (sprintf "'%s' failed" cmdPath)
 
     let findOnPath name = 
-        let executable = tryFindFileOnPath name
+        let executable = ProcessUtils.tryFindFileOnPath name
         match executable with
             | Some exec -> exec
             | None -> failwith (sprintf "'%s' can't find" name)
 
     let encryptFile file secret =
-        let secureFile = findToolInSubPath "secure-file.exe" "."
+        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
         let args = sprintf "-encrypt %s -secret %s" file secret
         shellExecSecret secureFile args "."
 
     let decryptFile file secret =
-        let secureFile = findToolInSubPath "secure-file.exe" "."
+        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
         let args = sprintf "-decrypt %s.enc -secret %s" file secret
         shellExecSecret secureFile args "."
   
-    let DotnetPack (np: NugetProject) (output: string) =
-        //let packArgs = sprintf "pack --include-symbols --include-source --configuration Release --output %s" output
-        //dotnet packArgs np.Folder
-        DotNetCli.Pack(fun p -> 
-           { p with 
-               Configuration = "Release"
-               WorkingDir = np.Folder
-               OutputPath = output
-               AdditionalArgs = []
-           })
-
-    let DotnetBuild (np: NugetProject) (tag: string) = 
-        let frameworks = np.GetTargetFrameworks()
-                     
-        for framework in frameworks do
-            DotNetCli.Build( fun p ->
-             { p with
-                  Configuration = "Release"
-                  Output = (np.OutputDirectory @@ tag @@ framework)
-                  WorkingDir = np.Folder
-                  Framework = framework
-             })
-
-    let DotnetRestore (np : Project) =
-           DotNetCli.Restore( fun p ->
-            { p with 
-               WorkingDir = np.Folder
-            })
-
-    let XBuild target output =
-        let buildArgs = sprintf "%s /p:OutDir=%s" target output
-        let monopath = ProgramFilesX86 @@ "Mono" @@ "bin"
-
-        shellExec (monopath @@ "xbuild.bat") buildArgs ""
     

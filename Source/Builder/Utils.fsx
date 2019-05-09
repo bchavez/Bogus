@@ -58,7 +58,7 @@ let ChangeWorkingFolder() =
         if File.Exists("build.cmd") then 
             System.IO.Directory.SetCurrentDirectory workingDir
         else
-            failwith (sprintf "I don't know where I am... '%s'" workingDir)  
+            failwithf "I don't know where I am... '%s'" workingDir
         System.IO.Directory.GetCurrentDirectory()
 
 
@@ -326,13 +326,13 @@ module Helpers =
                   |> CreateProcess.withWorkingDirectory workingDir
                   |> Proc.run
 
-        if result.ExitCode <> 0 then failwith (sprintf "'%s' failed" cmdPath)
+        if result.ExitCode <> 0 then failwithf "'%s' failed" cmdPath
 
     let findOnPath name = 
         let executable = ProcessUtils.tryFindFileOnPath name
         match executable with
             | Some exec -> exec
-            | None -> failwith (sprintf "'%s' can't find" name)
+            | None -> failwithf "'%s' can't find" name
 
     let encryptFile file secret =
         let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")

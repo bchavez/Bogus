@@ -116,13 +116,6 @@ Target.create "nuget" (fun _ ->
     DotNet.pack config BogusProject.Folder
 )
 
-Target.create "push" (fun _ ->
-    Trace.trace "NuGet Push Task"
-    
-    failwith "Only CI server should publish on NuGet"
-)
-
-
 Target.description "PROJECT ZIP TASK"
 Target.create "zip" (fun _ -> 
     Trace.trace "Zip Task"
@@ -223,43 +216,27 @@ Target.create "setup-snk"(fun _ ->
 
 open Fake.Core.TargetOperators
 
-"Clean"
-    ==> "restore"
-    ==> "BuildInfo"
+// Build order and dependencies are read from left to right. For example,
+// Do_This_First ==> Do_This_Second ==> Do_This_Third
+//     Clean     ==>     Restore    ==>     Build
+//
+// REFERENCE:
+//  ( ==> ) x y               | Defines a dependency - y is dependent on x
+//  ( =?> ) x (y, condition)  | Defines a conditional dependency - y is dependent on x if the condition is true
+//  ( <== ) x y
+//  ( <=> ) x y               | Defines that x and y are not dependent on each other but y is dependent on all dependencies of x.
+//  ( <=? ) y x
+//  ( ?=> ) x y               | Defines a soft dependency. x must run before y, if it is present, but y does not require x to be run.
 
-//build systems, order matters
-"BuildInfo"
-    =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "dnx"
-    ==> "zip"
+"Clean" ==> "restore" ==> "BuildInfo"
 
-"BuildInfo"
-    =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "zip"
+"BuildInfo" =?> ("setup-snk", BuildContext.IsTaggedBuild) ==> "dnx" ==> "zip"
 
-"BuildInfo"
-    =?> ("setup-snk", BuildContext.IsTaggedBuild)
-    ==> "zip"
+"dnx" ==> "nuget"
 
-"dnx"
-    ==> "nuget"
+"dnx" ==> "test"
 
-
-// "dnx"
-//     ==> "test"
-
-
-"nuget"
-    ==> "ci"
-
-"nuget"
-    ==> "push"
-
-"zip"
-    ==> "ci"
-
-
-
+"nuget" <=> "zip" ==> "ci"
 
 
 // start build

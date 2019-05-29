@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20and%20Sane%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus) <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
+[![Downloads](https://img.shields.io/nuget/dt/Bogus.svg)](https://www.nuget.org/packages/Bogus/) [![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20and%20Sane%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/bchavez/Bogus) <a href="http://www.jetbrains.com/resharper"><img src="http://i61.tinypic.com/15qvwj7.jpg" alt="ReSharper" title="ReSharper"></a>
 <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 Bogus for .NET: C#, F#, and VB.NET
@@ -545,6 +545,15 @@ public void Using_FakerT_Inheritance()
     * `DiagnosisLongDescription` - Get a medical diagnosis description. IE: Meningitis due to coxsackie virus.
     * `DiagnosisShortDescription` - Get a short description of a medical diagnosis.
     * `ProcedureCode` - Get a ICD9 procedure code.
+    * `ProcedureEntry` - Get a medical procedure.
+    * `ProcedureLongDescription` - Get a medical procedure description.
+    * `ProcedureShortDescription` - Get a short description of a medical procedure.
+  * **`Icd10`**
+    * `DiagnosisCode` - Get a ICD10 diagnosis code.
+    * `DiagnosisEntry` - Get a medical diagnosis.
+    * `DiagnosisLongDescription` - Get a medical diagnosis description. IE: Meningitis due to coxsackie virus.
+    * `DiagnosisShortDescription` - Get a short description of a medical diagnosis.
+    * `ProcedureCode` - Get a ICD10 procedure code.
     * `ProcedureEntry` - Get a medical procedure.
     * `ProcedureLongDescription` - Get a medical procedure description.
     * `ProcedureShortDescription` - Get a short description of a medical procedure.

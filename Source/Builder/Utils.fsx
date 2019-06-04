@@ -25,7 +25,7 @@ open Fake.Tools.Git
 
 module BuildContext =     
 
-    let private WithoutPreReleaseName (ver : string) =
+    let WithoutPreReleaseName (ver : string) =
         let dash = ver.IndexOf("-")
         if dash > 0 then ver.Substring(0, dash) else ver.Trim()
     
@@ -184,15 +184,27 @@ let ReadFileAsHexString file =
     acc.ToString()
 
 [<NoComparisonAttribute>]
-type BuildInfoParams = { DateTime:System.DateTime; ExtraAttrs:list<AssemblyInfoFile.Attribute> }
+type BuildInfoParams = { 
+                         DateTime:System.DateTime;
+                         ExtraAttrs:list<AssemblyInfoFile.Attribute>;
+                         VersionContext:string option
+                       }
 
 let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams = 
     
     let bip : BuildInfoParams = { 
                                     DateTime = System.DateTime.UtcNow
                                     ExtraAttrs = []
+                                    VersionContext = None
                                 } |> setParams
     
+    //get the version context. If one was set by the caller, use it,
+    //otherwise, get the version from the executing build context.
+    let fullVersion = match bip.VersionContext with
+                       | Some s -> s
+                       | None -> BuildContext.Version
+    let version = BuildContext.WithoutPreReleaseName fullVersion
+
     let path = folders.Source @@ project.Name @@ "/Properties/AssemblyInfo.cs"
     let infoVersion = sprintf "%s built on %s" BuildContext.FullVersion (bip.DateTime.ToString())
     let copyright = sprintf "Brian Chavez © %i" (bip.DateTime.Year)

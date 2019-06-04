@@ -59,6 +59,12 @@ open SharpCompress
 open SharpCompress.Archives
 open Newtonsoft.Json
 
+open Fake.BuildServer
+
+BuildServer.install[
+   AppVeyor.Installer
+]
+
 let workingDir = ChangeWorkingFolder();
 
 Trace.trace (sprintf "WORKING DIR: %s" workingDir)
@@ -170,7 +176,8 @@ Target.create "Clean" (fun _ ->
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
             DateTime = System.DateTime.Parse("1/1/2015")
-            ExtraAttrs = MakeAttributes(false) } )
+            ExtraAttrs = MakeAttributes(false) 
+            VersionContext = Some "0.0.0-localbuild" })
 
 )
 

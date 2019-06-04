@@ -1098,11 +1098,13 @@ End Sub
 
 
 
-Building
+Building From Source
 --------
-#### Minimum Requirements
 
-* **Windows 7** or later
+The following section is only useful for people looking to contribute to **Bogus** or make custom modifications to **Bogus**. This section includes information about building **Bogus** from source code and is not required to operate or run **Bogus** in **.NET** applications.
+
+The minimum requirements to build **Bogus** from source code are as follows:
+* **Windows 7** or later.
 * [**Git for Windows**](https://git-scm.com/downloads) `v2.17.1` or later.
 * [**.NET Core SDK**](https://dotnet.microsoft.com/download/dotnet-core/2.2) `SDK v2.2.204` or later.
 
@@ -1113,17 +1115,17 @@ Building
     * `build resotre` - restores all project references.
     * `build dnx` - the main dotnet build task.
     * `build zip` - creates a nice zip file with debug and release binaries.
-    * `build nuget` - builds nuget packages.
+    * `build nuget` - builds **NuGet** packages.
     * `build test` - runs all unit tests. 
     
 Upon a successful build, the following folders will be created:
  * `\__compile` - binary output folder for the compiler.
- * `\__package` - zip and nuget packages
+ * `\__package` - output folder for zip and **NuGet** packages.
  * `\__test` - test results folder.
 
 #### Build Environment Variables
-* `set FORCE_VERSION=1.2.3`
-   If `FORCE_VERSION` environment variable is set with a semantic version number (eg: `x.y.z`), the build tasks will use the `FORCE_VERSION` to produce builds with the exact version number. Useful for testing out-of-band custom builds. However, it is not possible to reproduce exact binary equivalents of released **NuGet** packages because packages release on **NuGet** contain assemblies that are digitally signed with assembly singing enabled. The public does not have access to the singing key. 
+* `set FORCE_VERSION=1.2.3`  
+   If `FORCE_VERSION` environment variable is set with a semantic version number (eg: `x.y.z`), the build tasks will use the `FORCE_VERSION` to produce builds with the exact version number. Useful for testing out-of-band custom builds. However, it is not possible to reproduce exact binary equivalents of released **NuGet** packages because packages release on **NuGet** contain assemblies that are digitally signed with assembly signing enabled. The public does not have access to the signing key. 
 
 #### Rebundling Locales
 If you wish to re-bundle the latest **faker.js** locales, you'll need to first:

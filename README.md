@@ -1100,13 +1100,30 @@ End Sub
 
 Building
 --------
-* Download the source code.
-* Run `build.cmd`.
+#### Minimum Requirements
 
-Upon a successful build, the results will be in the `\__compile` directory.
-The `build.cmd` compiles the C# code and embeds the locales in `Source\Bogus\data`.
-If you want to rebuild the NuGet packages run `build.cmd pack` and the NuGet
-packages will be in `__package`.
+* **Windows 7** or later
+* [**Git for Windows**](https://git-scm.com/downloads) `v2.17.1` or later.
+* [**.NET Core SDK**](https://dotnet.microsoft.com/download/dotnet-core/2.2) `SDK v2.2.204` or later.
+
+#### Build Instructions
+* Download the source code.
+* Open command prompt and run `build.cmd`:
+    * `build clean` - cleans sources and files.
+    * `build resotre` - restores all project references.
+    * `build dnx` - the main dotnet build task.
+    * `build zip` - creates a nice zip file with debug and release binaries.
+    * `build nuget` - builds nuget packages.
+    * `build test` - runs all unit tests. 
+    
+Upon a successful build, the following folders will be created:
+ * `\__compile` - binary output folder for the compiler.
+ * `\__package` - zip and nuget packages
+ * `\__test` - test results folder.
+
+#### Build Environment Variables
+* `set FORCE_VERSION=1.2.3`
+   If `FORCE_VERSION` environment variable is set with a semantic version number (eg: `x.y.z`), the build tasks will use the `FORCE_VERSION` to produce builds with the exact version number. Useful for testing out-of-band custom builds. However, it is not possible to reproduce exact binary equivalents of released **NuGet** packages because packages release on **NuGet** contain assemblies that are digitally signed with assembly singing enabled. The public does not have access to the singing key. 
 
 #### Rebundling Locales
 If you wish to re-bundle the latest **faker.js** locales, you'll need to first:

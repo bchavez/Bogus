@@ -94,14 +94,6 @@ module Setup =
         let solutionFile = folders.Source @@ sprintf "%s.sln" projectName
         let snkFile = folders.Source @@ sprintf "%s.snk" projectName
         let snkFilePublic = folders.Source @@ sprintf "%s.snk.pub" projectName 
-
-        //let globalJson = folders.Source @@ "global.json"
-        //let dnvmVersion = 
-        //    let json = JsonValue.Parse(System.IO.File.ReadAllText(globalJson))
-        //    json?sdk?version.AsString()
-
-        //member this.GlobalJson = globalJson
-        //member this.DnvmVersion = dnvmVersion
         
         member this.History = history
         member this.TestResultFile = testResultFile
@@ -140,13 +132,9 @@ type NugetProject(name : string, assemblyTitle : string, folders : Folders) =
     //let projectJson = base.Folder @@ "project.json"
     let outputDirectory = folders.CompileOutput @@ name
     let outputDll = outputDirectory @@ sprintf "%s.dll" name
-    let packageDir = folders.Package @@ name
-
+    
     let nugetSpecFileName = sprintf "%s.nuspec" name
     let nugetPkg = folders.Package @@ sprintf "%s.%s.nupkg" name BuildContext.FullVersion
-
-
-    let zip = folders.Package @@ sprintf "%s.zip" name
 
     //member this.ProjectJson = projectJson
     member this.OutputDirectory = outputDirectory
@@ -215,8 +203,8 @@ let MakeBuildInfo (project: NugetProject) (folders : Folders) setParams =
               AssemblyInfo.Product project.Name
               AssemblyInfo.Company "Brian Chavez"  
               AssemblyInfo.Copyright copyright
-              AssemblyInfo.Version BuildContext.Version
-              AssemblyInfo.FileVersion BuildContext.Version
+              AssemblyInfo.Version version
+              AssemblyInfo.FileVersion version
               AssemblyInfo.InformationalVersion infoVersion
               AssemblyInfo.Trademark "MIT License"
           ]
@@ -230,8 +218,8 @@ open System.Reflection
 
 let DynInvoke (instance : obj) (methodName : string) (args : obj[]) =
     let objType = instance.GetType();
-    let invoke = objType.InvokeMember(methodName, BindingFlags.Instance ||| BindingFlags.Public ||| BindingFlags.InvokeMethod, null, instance, args )
-    ()
+    objType.InvokeMember(methodName, BindingFlags.Instance ||| BindingFlags.Public ||| BindingFlags.InvokeMethod, null, instance, args )
+    |> ignore
 
 
 module History =

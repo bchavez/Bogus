@@ -32,9 +32,16 @@ namespace Bogus
          bool mark = false
       )
       {
-         if( !SymbolMap.TryGetValue(lang, out var symbol) )
+         if( symbols && SymbolMap.TryGetValue(lang, out var symbol) )
+         {
+         }
+         else if( symbols )
          {
             symbol = SymbolMap["en"];
+         }
+         else
+         {
+            symbol = EmptyDictionary;
          }
 
          if( !LangCharMap.TryGetValue(lang, out var langChar) )
@@ -50,6 +57,9 @@ namespace Bogus
          if( mark ) allowedChars.Append(MarkChars);
 
          allowedChars.Append(separator);
+         var temp = allowedChars.ToString();
+         allowedChars.Clear();
+         allowedChars.Append(EscapeChars(temp));
 
          var allowedCharsRegex = new Regex($@"[^\w\s{allowedChars}_-]", RegexOptions.Compiled);
 
@@ -104,6 +114,9 @@ namespace Bogus
                      ch = foundCharMap;
                   }
                }
+
+               lastCharWasSymbol = false;
+               lastCharWasDiatric = false;
             }
             else if( DiatricMap.TryGetValue(ch, out var foundDiatric) )
             {
@@ -118,8 +131,8 @@ namespace Bogus
             }
             else if(
                symbol.TryGetValue(ch, out var foundSymbol)
-               && (!uric && Array.IndexOf(UricChars, ch[0]) != -1)
-               && (!uricNoSlash && Array.IndexOf(UricNoShashChars, ch[0]) != -1) )
+               && !(uric && Array.IndexOf(UricChars, ch[0]) != -1)
+               && !(uricNoSlash && Array.IndexOf(UricNoShashChars, ch[0]) != -1) )
             {
                if( lastCharWasSymbol || IsAZaz09(LastChar(result)) )
                {
@@ -158,27 +171,41 @@ namespace Bogus
             result.Append(replaced);
          }
 
-         if( titleCase )
-         {
-
-         }
 
          var final_result = result.ToString();
+
+         if (titleCase)
+         {
+            final_result = TitleCaseRegex.Replace(final_result, m =>
+               {
+                  if( m.Groups.Count == 3 )
+                  {
+                     return m.Groups[1].Value.ToUpper() + m.Groups[2].Value;
+
+                  }
+
+                  if( m.Groups.Count == 2)
+                  {
+                     return m.Groups[1].Value.ToUpper();
+                  }
+
+                  return "";
+               });
+         }
+         
          final_result = SpacesRegex.Replace(final_result, separator);
          final_result = new Regex($@"\{separator}+").Replace(final_result, separator);
-         final_result = new Regex($@"(^\{separator}+|\{separator}+$)").Replace(final_result, separator);
+         final_result = new Regex($@"(^\{separator}+|\{separator}+$)").Replace(final_result, "");
 
          if( truncate < final_result.Length )
          {
             var lucky = final_result.Substring(truncate.Value, 1) == separator;
 
+            final_result = final_result.Substring(0, truncate.Value);
+
             if( !lucky )
             {
                final_result = final_result.Substring(0, final_result.LastIndexOf(separator, StringComparison.Ordinal));
-            }
-            else
-            {
-               final_result = final_result.Substring(0, truncate.Value);
             }
          }
 
@@ -207,5 +234,11 @@ namespace Bogus
       public static Regex SpacesRegex = new Regex(@"\s+");
       public static Regex AZaz09Regex = new Regex(@"[A-Za-z0-9]", RegexOptions.Compiled);
       public static Regex EscapeRegex = new Regex(@"[-\\^$*+?.()|[\]{}\/]", RegexOptions.Compiled);
+      public static Regex TitleCaseRegex = new Regex(@"(\w)(\S*)", RegexOptions.Compiled);
+      public static Dictionary<string, string> EmptyDictionary = new Dictionary<string, string>();
    }
+
+
+
+
 }

@@ -1,6 +1,8 @@
 var faker = require('../fakerjs');
+var fs = require('fs');
+var _ = require('lodash');
+var getSlug = require('../speakingurl')
 
-//faker.setLocale("ar");
-var val = faker.vehicle.vin();
+var val = getSlug('Schöner Titel läßt grüßen!? Bel été !');
 
 console.log(val);

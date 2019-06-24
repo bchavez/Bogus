@@ -155,3 +155,113 @@ function log(msg) {
 function log2(msg) {
    $.util.log($.util.colors.green(msg));
 }
+
+
+gulp.task("import.speakingurl", () => {
+   //strip out the module scoping of the library
+   var src = fs.readFileSync('../speakingurl/lib/speakingurl.js', 'utf8');
+   var lines = src.split('\n');
+   var moduleEnd = _.findIndex(lines, i => i.includes("typeof module") )
+   var fixedSource = lines.splice(2, moduleEnd - 2).join('\n');
+
+   //evaluate the whole module without function scoping
+   //exposing intenral variables that we can dump.
+   eval(fixedSource)
+
+   //varables we get after eval():
+   // charMap, lookAheadCharArray, diatricMap, langCharMap, symbolMap, uricChars, uricNoSlashChars, markChars
+   //So... let's convert everything to C#.
+
+   //Some helpful render templates.
+   function renderKv(key, val){
+      if( val === '"') val = '""'
+      return `         {@"${key}", @"${val}"},`
+   }
+   function renderChar(v){
+      if(v === "'") v = "\\'";
+      return ` '${v}'`;
+   }
+
+   function renderNestedDict(k, obj){
+
+      var nested = _.map(obj, (subvalue, subkey)=>{
+                  return '    '+renderKv(subkey, subvalue);
+         }).join('\r\n');
+                           
+      var template = `         { @"${k}",  new Dictionary<string,string>{
+${nested}}
+        },`;
+        return template;
+   }
+
+   //convert to C# dictionary entries.
+   var charMapItems = _.map(charMap, (v,k)=>{
+                           return renderKv(k, v);
+                        });
+   var lookAheadItems = _.map(lookAheadCharArray, v =>{
+                           return renderChar(v);
+                        });
+
+   var diatricMapItems = _.map(diatricMap, (v,k)=>{
+                           return renderKv(k, v)
+                        });
+   var langCharMapItems = _.map(langCharMap, (v,k)=>{
+                           return renderNestedDict(k, v)
+                        });
+
+   var symbolMapItems = _.map(symbolMap, (v,k)=>{
+      return renderNestedDict(k, v);
+   });
+
+   var uricCharItems = _.map(uricChars, v =>{
+      return renderChar(v);
+   });
+
+   var uricNoSlashCharsItems = _.map(uricNoSlashChars, v => {
+      return renderChar(v);
+   });
+
+   var markCharsItems = _.map(markChars, v =>{
+      return renderChar(v);
+   });
+
+
+   var template = `
+// AUTO GENERATED FILE. DO NOT MODIFY.
+// SEE Builder/gulpfile.js import.speakingurl task.
+using System.Collections.Generic;
+namespace Bogus
+{
+   public static partial class Slugger
+   {
+      public static char[] LookAheadArray = new char[]{${lookAheadItems.join(',')} };
+      public static char[] UricChars = new char[]{${uricCharItems.join(',')} };
+      public static char[] UricNoShashChars = new char[]{${uricNoSlashCharsItems.join(',')} };
+      public static char[] MarkChars = new char[]{${markCharsItems.join(',')} };
+
+      public static Dictionary<string,string> CharMap = new Dictionary<string,string>()
+      {
+${charMapItems.join('\r\n')}
+      };
+
+      public static Dictionary<string,string> DiatricMap = new Dictionary<string,string>()
+      {
+${diatricMapItems.join('\r\n')}
+      };
+
+      public static Dictionary<string, Dictionary<string, string>> LangCharMap = new Dictionary<string, Dictionary<string, string>>()
+      {
+${langCharMapItems.join('\r\n')}
+      };
+
+      public static Dictionary<string, Dictionary<string, string>> SymbolMap = new Dictionary<string, Dictionary<string, string>>()
+      {
+${symbolMapItems.join('\r\n')}
+      };
+   }
+}
+`
+
+   fs.writeFileSync('../Bogus/Slugger.Generated.cs', template);
+
+});

@@ -44,6 +44,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
 * Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
 * Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
+* [Volkan Paksoy](https://twitter.com/volkan_paksoy) - [Generating Test Data with Bogus](https://volkanpaksoy.com/archive/2019/06/27/Generating-Test-Data-with-Bogus/)
 
 ##### The Crypto Tip Jar!
 <a href="https://commerce.coinbase.com/checkout/2faa393a-6fc3-4365-993a-6cc110bc4d35"><img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/tipjar.png" /></a>

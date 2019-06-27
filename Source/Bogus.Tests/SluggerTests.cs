@@ -116,6 +116,7 @@ namespace Bogus.Tests
       {
          Transliterate.Translate("À").Should().Be("A");
          Transliterate.Translate("ден").Should().Be("MKD");
+         Transliterate.Translate("စျ").Should().Be("za");
       }
    }
 }

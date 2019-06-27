@@ -265,3 +265,100 @@ ${symbolMapItems.join('\r\n')}
    fs.writeFileSync('../Bogus/Slugger.Generated.cs', template);
 
 });
+
+
+gulp.task("import.transliterate", () => {
+
+   //strip out the module scoping of the library
+   var src = fs.readFileSync('../speakingurl/lib/speakingurl.js', 'utf8');
+   var lines = src.split('\n');
+   var moduleEnd = _.findIndex(lines, i => i.includes("typeof module") )
+   var fixedSource = lines.splice(2, moduleEnd - 2).join('\n');
+
+   //evaluate the whole module without function scoping
+   //exposing intenral variables that we can dump.
+   eval(fixedSource);
+   // a, ae
+   function renderTrieItem(input, idx, val){
+      var pad = l.padStart('',12*(idx+1), ' ');
+      if( val === '"') val = '""'
+      if( idx == input.length - 1 ){
+         return `
+${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
+${pad}            {
+${pad}               Value = @"${val}"
+${pad}            }
+${pad}},`
+      }
+      else {
+         
+         var nestedTrie = renderTrieItem(input, idx + 1, val)
+         return `
+${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
+${pad}            {
+${pad}               Map = new Dictionary<string, Trie>
+${pad}               {
+${pad}                           ${nestedTrie}
+${pad}               }
+${pad}            }
+${pad}},`
+
+      }
+         
+      
+   }
+   function renderRoot(dict){
+      var entries = _.map(dict, (v,k)=>{
+            return renderTrieItem(k, 0, v);
+      });
+
+      entries = entries.join('\r\n');
+
+      return `new Trie{
+         Map = new Dictionary<string, Trie>{
+            ${entries}
+         } 
+      };`
+   }
+
+   function insertKv(trie, key, val){
+      
+   }
+
+   function buildTrie(obj){
+      var root = {};
+      var kvs = [];
+      _.map( obj, (v,k) => {
+           return kvs.push({key: k, val: v});
+      });
+
+      for(var i = 0; i < kvs.length; i++){
+         insertKv(root, kvs[i].key, kvs[i].val);
+      }
+
+   }
+
+
+   //convert to C# dictionary entries.
+   //var charMapTrie = renderRoot(charMap);
+   var charMapTrie = buildTrie(charMap)
+
+   var template = `
+   // AUTO GENERATED FILE. DO NOT MODIFY.
+   // SEE Builder/gulpfile.js import.speakingurl task.
+   using System.Collections.Generic;
+   namespace Bogus
+   {
+      public static partial class Transliterate
+      {
+         public static Trie CharMap = ${charMapTrie}
+   
+      }
+   }
+   `
+   
+   
+   fs.writeFileSync('../Bogus/Transliterate.Generated.cs', template);
+
+
+});

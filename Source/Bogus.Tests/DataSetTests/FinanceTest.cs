@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
@@ -65,6 +66,27 @@ namespace Bogus.Tests.DataSetTests
          finance.Iban().Should().Be("MT78CVQA0491707AV6092536EZ69UM5");
 
          finance.Iban(true).Should().Be("BH95 LCFH 2236 87QH UU47 F6");
+      }
+
+      [Fact]
+      public void can_generate_iban2()
+      {
+         finance.Iban(countryCode: "ro").Should().Be("RO36PCVQ663E5098I56K5218");
+         finance.Iban(countryCode: "sa", formatted: true).Should().Be("SA90 19G4 X820 1322 3687 QHUU");
+      }
+
+      [Fact]
+      public void iban_throws_key_not_found_on_invalid_iso3166()
+      {
+         Action a = () => finance.Iban(countryCode: "zz");
+         a.ShouldThrow<KeyNotFoundException>();
+      }
+
+      [Fact]
+      public void iban_thows_on_invalid_iso3166_length()
+      {
+         Action a = () => finance.Iban(countryCode: "fff");
+         a.ShouldThrow<ArgumentOutOfRangeException>();
       }
 
       [Fact]

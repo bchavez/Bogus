@@ -331,7 +331,7 @@ namespace Bogus.DataSets
          return digits.Aggregate("", (str, digit) => str + digit, str => str + checkDigit);
       }
 
-      private static readonly string[] BicVowels = { "A", "E", "I", "O", "U" };
+      protected static readonly string[] BicVowels = { "A", "E", "I", "O", "U" };
 
       /// <summary>
       /// Generates Bank Identifier Code (BIC) code.
@@ -349,9 +349,43 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates an International Bank Account Number (IBAN).
       /// </summary>
-      public string Iban(bool formatted = false)
+      /// <param name="formatted">Formatted IBAN containing spaces.</param>
+      /// <param name="countryCode">A two letter ISO3166 country code. Throws an exception if the country code is not found or is an invalid length.</param>
+      /// <exception cref="KeyNotFoundException">An exception is thrown if the ISO3166 country code is not found.</exception>
+      public string Iban(bool formatted = false, string countryCode = null)
       {
-         var ibanFormat = this.RandomIbanFormat();
+         var arr = this.GetArray("iban_formats");
+
+         IBanFormat ibanFormat;
+         if( countryCode is null )
+         {
+            var formatEntry = this.Random.ArrayElement(arr) as BObject;
+            ibanFormat = this.GetIbanFormat(formatEntry);
+         }
+         else
+         {
+            if( countryCode.Length != 2 )
+            {
+               throw new ArgumentOutOfRangeException(nameof(countryCode), countryCode.Length, "The country code must be an ISO3166 two-letter country code.");
+            }
+
+            var formatEntry = arr.OfType<BObject>()
+               .Where(b => countryCode.Equals(b["country"].StringValue, StringComparison.OrdinalIgnoreCase))
+               .FirstOrDefault();
+
+            if (formatEntry is null)
+            {
+               throw new KeyNotFoundException($"The ISO3166 IBAN country code '{countryCode}' was not found.");
+            }
+
+            ibanFormat = this.GetIbanFormat(formatEntry);
+         }
+
+         return Iban(ibanFormat, formatted);
+      }
+
+      protected string Iban(IBanFormat ibanFormat, bool formatted)
+      {
          var stringBuilder = new StringBuilder();
          var count = 0;
          for (var b = 0; b < ibanFormat.Bban.Length; b++)
@@ -415,7 +449,7 @@ namespace Bogus.DataSets
          return iban;
       }
 
-      private int IbanMod97(string digitStr)
+      protected int IbanMod97(string digitStr)
       {
          var m = 0;
          for (int i = 0; i < digitStr.Length; i++)
@@ -425,12 +459,12 @@ namespace Bogus.DataSets
          return m;
       }
 
-      private string IbanToDigitString(string str)
+      protected string IbanToDigitString(string str)
       {
          return Regex.Replace(str, "[A-Z]", (m) => (Convert.ToChar(m.Value) - 55).ToString());
       }
 
-      private class IBanFormat
+      protected class IBanFormat
       {
          public class BbanItem
          {
@@ -444,23 +478,20 @@ namespace Bogus.DataSets
          public string Format { get; set; }
       }
 
-      private IBanFormat RandomIbanFormat()
+      protected IBanFormat GetIbanFormat(BObject obj)
       {
-         var arr = this.GetArray("iban_formats");
-         var obj = this.Random.ArrayElement(arr) as BObject;
-
          var bbitems = GetBbanItems(obj);
 
          return new IBanFormat
-         {
-            Country = obj["country"].StringValue,
-            Total = obj["total"].Int32Value,
-            Format = obj["format"].StringValue,
-            Bban = bbitems
-         };
+            {
+               Country = obj["country"].StringValue,
+               Total = obj["total"].Int32Value,
+               Format = obj["format"].StringValue,
+               Bban = bbitems
+            };
       }
 
-      private IBanFormat.BbanItem[] GetBbanItems(BObject obj)
+      protected IBanFormat.BbanItem[] GetBbanItems(BObject obj)
       {
          var arr = obj["bban"] as BArray;
          return arr.OfType<BObject>()
@@ -472,14 +503,14 @@ namespace Bogus.DataSets
             .ToArray();
       }
 
-      private static readonly string[] IbanAlpha =
+      protected static readonly string[] IbanAlpha =
             {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 
-      private static readonly string[] IbanPattern10 = { "01", "02", "03", "04", "05", "06", "07", "08", "09" };
+      protected static readonly string[] IbanPattern10 = { "01", "02", "03", "04", "05", "06", "07", "08", "09" };
 
-      private static readonly string[] IbanPattern100 = { "001", "002", "003", "004", "005", "006", "007", "008", "009" };
+      protected static readonly string[] IbanPattern100 = { "001", "002", "003", "004", "005", "006", "007", "008", "009" };
 
-      private static readonly string[] IbanIso3166 =
+      protected static readonly string[] IbanIso3166 =
          {
             "AC", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AN", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ",
             "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BU",

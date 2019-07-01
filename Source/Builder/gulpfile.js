@@ -279,86 +279,160 @@ gulp.task("import.transliterate", () => {
    //exposing intenral variables that we can dump.
    eval(fixedSource);
    // a, ae
-   function renderTrieItem(input, idx, val){
-      var pad = l.padStart('',12*(idx+1), ' ');
-      if( val === '"') val = '""'
-      if( idx == input.length - 1 ){
-         return `
-${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
-${pad}            {
-${pad}               Value = @"${val}"
-${pad}            }
-${pad}},`
-      }
-      else {
+//    function renderTrieItem(input, idx, val){
+//       var pad = l.padStart('',12*(idx+1), ' ');
+//       if( val === '"') val = '""'
+//       if( idx == input.length - 1 ){
+//          return `
+// ${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
+// ${pad}            {
+// ${pad}               Value = @"${val}"
+// ${pad}            }
+// ${pad}},`
+//       }
+//       else {
          
-         var nestedTrie = renderTrieItem(input, idx + 1, val)
-         return `
-${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
-${pad}            {
-${pad}               Map = new Dictionary<string, Trie>
-${pad}               {
-${pad}                           ${nestedTrie}
-${pad}               }
-${pad}            }
-${pad}},`
+//          var nestedTrie = renderTrieItem(input, idx + 1, val)
+//          return `
+// ${pad}{ @"${input[idx]}", new Trie(@"${input[idx]}")
+// ${pad}            {
+// ${pad}               Map = new Dictionary<string, Trie>
+// ${pad}               {
+// ${pad}                           ${nestedTrie}
+// ${pad}               }
+// ${pad}            }
+// ${pad}},`
 
-      }
+//       }
+//    }
+   // function renderRoot(dict){
+   //    var entries = _.map(dict, (v,k)=>{
+   //          return renderTrieItem(k, 0, v);
+   //    });
+
+   //    entries = entries.join('\r\n');
+
+   //    return `new Trie{
+   //       Map = new Dictionary<string, Trie>{
+   //          ${entries}
+   //       } 
+   //    };`
+   // }
+
+   // var rootSample = [
+   //    {key: 'a',
+   //     val: 'aa',
+   //     map: [
+   //             {key:'b',
+   //              val: 'ab',
+   //              map: [
+   //                     {key:'z',
+   //                      val:'abz'}
+   //                ]
+   //             },
+   //             {key:'c',
+   //              val: 'ac'}
+   //          ]
+   //    }
+   // ]
+
+
+   // function insertTrie(node, key, val){
+   //    for(var i = 0; i < key.length; i++){
+   //       var ch = key[i];
+   //       if( node[ch] === undefined ){
+   //          node[ch] = {};
+   //       }
+   //       node = node[ch];
+   //    }
+   //    node.val = val;
+   // }
+
+   // function buildTrie(obj){
+   //    var root = {};
+   //    var kvs = [];
+   //    _.map( obj, (v,k) => {
+   //         return kvs.push({key: k, val: v});
+   //    });
+
+   //    for(var i = 0; i < kvs.length; i++){
+   //       var key = kvs[i].key;
+   //       var val = kvs[i].val;
          
-      
-   }
-   function renderRoot(dict){
-      var entries = _.map(dict, (v,k)=>{
-            return renderTrieItem(k, 0, v);
-      });
+   //       insertTrie(root, key, val);
+   //    }
 
-      entries = entries.join('\r\n');
-
-      return `new Trie{
-         Map = new Dictionary<string, Trie>{
-            ${entries}
-         } 
-      };`
-   }
-
-   function insertKv(trie, key, val){
-      
-   }
-
-   function buildTrie(obj){
-      var root = {};
-      var kvs = [];
-      _.map( obj, (v,k) => {
-           return kvs.push({key: k, val: v});
-      });
-
-      for(var i = 0; i < kvs.length; i++){
-         insertKv(root, kvs[i].key, kvs[i].val);
-      }
-
-   }
+   //    return root;
+   // }
 
 
    //convert to C# dictionary entries.
    //var charMapTrie = renderRoot(charMap);
-   var charMapTrie = buildTrie(charMap)
+   //var charMapTrie = buildTrie(charMap)
+
+   function renderInsert(obj){
+      var inserts = [];
+      _.map( obj, (v,k) => {
+         if( v === '"') v = '""';
+         return inserts.push(`            Trie.Insert(trie, @"${k}", @"${v}");`);
+      });
+      return inserts;
+   }
+   function renderMdInsert(obj){
+      var inserts = [];
+      _.map( obj, (v,k) => {
+         _.map(v, (v2, k2)=>{
+            inserts.push(`            md.Add(@"${k}", @"${k2}", @"${v2}");`);
+         })
+      });
+      return inserts;
+   }
+
+   var charMapInserts = renderInsert(charMap);
+   var diatricMapInserts = renderInsert(diatricMap);
+
+   var langCharInserts = renderMdInsert(langCharMap);
+   var symbolInserts = renderMdInsert(symbolMap);
 
    var template = `
    // AUTO GENERATED FILE. DO NOT MODIFY.
    // SEE Builder/gulpfile.js import.speakingurl task.
+   using System.ComponentModel;
    using System.Collections.Generic;
    namespace Bogus
    {
-      public static partial class Transliterate
-      {
-         public static Trie CharMap = ${charMapTrie}
-   
+      [EditorBrowsable(EditorBrowsableState.Never)]
+      public static partial class TransliterateData
+      {   
+         public static Trie BuildCharMap(Trie trie)
+         {
+${charMapInserts.join('\r\n')}
+            return trie;
+         }
+
+         public static Trie BuildDiatricMap(Trie trie)
+         {
+${diatricMapInserts.join('\r\n')}
+            return trie;
+         }
+
+         public static MultiDictionary<string,string,string> BuildLangCharMap(MultiDictionary<string,string,string> md)
+         {
+${langCharInserts.join('\r\n')}
+            return md;
+         }
+
+         public static MultiDictionary<string,string,string> BuildSymbolMap(MultiDictionary<string,string,string> md)
+         {
+${symbolInserts.join('\r\n')}
+            return md;
+         }
       }
    }
    `
    
    
-   fs.writeFileSync('../Bogus/Transliterate.Generated.cs', template);
+   fs.writeFileSync('../Bogus/TransliterateData.Generated.cs', template);
 
 
 });

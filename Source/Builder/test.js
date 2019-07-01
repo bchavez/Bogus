@@ -6,3 +6,5 @@ var getSlug = require('../speakingurl')
 var val = getSlug('Foo & Bar ♥ Foo < Bar', {symbols: false});
 
 console.log(val);
+
+

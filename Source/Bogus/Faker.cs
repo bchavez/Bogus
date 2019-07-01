@@ -242,7 +242,6 @@ namespace Bogus
       /// <summary>
       /// Picks a random item of T or default(T).
       /// </summary>
-      /// <returns></returns>
       public T PickRandomItemOrDefault<T>(T item)
       {
          return this.PickRandom(new T[] { item, default });

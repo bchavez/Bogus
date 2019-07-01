@@ -394,6 +394,15 @@ namespace Bogus.Tests
       }
 
       [Fact]
+      public void can_pick_random_item_or_default()
+      {
+         var numbers = Enumerable.Range(1, 3).Select(i => i);
+         var faker = new Faker();
+         var n = faker.PickRandomOrDefault(numbers);
+         n.Should().BeOneOf(1, 2, 3, default);
+      }
+
+      [Fact]
       public void can_generate_forever()
       {
          var orderFaker = new Faker<Order>()

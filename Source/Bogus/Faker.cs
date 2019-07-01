@@ -240,6 +240,15 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Picks a random item of T or default(T).
+      /// </summary>
+      /// <returns></returns>
+      public T PickRandomItemOrDefault<T>(T item)
+      {
+         return this.PickRandom(new T[] { item, default });
+      }
+
+      /// <summary>
       /// Helper to pick random subset of elements out of the list.
       /// </summary>
       /// <param name="amountToPick">amount of elements to pick of the list.</param>

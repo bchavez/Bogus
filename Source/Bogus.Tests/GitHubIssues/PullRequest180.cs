@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class PullRequest180 : IDisposable
+   public class PullRequest180 : SeededTest, IDisposable
    {
       private CultureInfo current;
 

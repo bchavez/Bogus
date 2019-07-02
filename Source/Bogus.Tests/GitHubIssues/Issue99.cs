@@ -5,7 +5,7 @@ using Xunit;
 namespace Bogus.Tests.GitHubIssues
 {
    //https://github.com/bchavez/Bogus/issues/99
-   public class Issue99
+   public class Issue99 : SeededTest
    {
       [Fact]
       public void multi_threaded_locale_access_should_be_okay()

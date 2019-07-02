@@ -5,7 +5,7 @@ using static Bogus.DataSets.LoremPixelCategory;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class PullRequest113
+   public class PullRequest113 : SeededTest
    {
       [Fact]
       public void category_exists_in_image_url()

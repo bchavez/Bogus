@@ -5,7 +5,7 @@ using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class PullRequest197
+   public class PullRequest197 : SeededTest
    {
       public class Internet2 : Internet
       {

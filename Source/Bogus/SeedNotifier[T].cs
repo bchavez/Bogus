@@ -35,8 +35,8 @@ namespace Bogus
       private List<IHasRandomizer> registry = new List<IHasRandomizer>();
 
       /// <summary>
-      /// Causes <see cref="item"/> to be remembered and tracked so that the
-      /// <see cref="item"/> will be notified when <see cref="Notify"/> is called.
+      /// Causes <paramref name="item"/> to be remembered and tracked so that the
+      /// <paramref name="item"/> will be notified when <see cref="Notify"/> is called.
       /// </summary>
       public U Flow<U>(U item) where U : IHasRandomizer
       {

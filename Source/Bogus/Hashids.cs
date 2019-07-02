@@ -161,7 +161,7 @@ namespace Bogus
       /// <summary>
       /// Encodes the provided numbers into a string.
       /// </summary>
-      /// <param name="number">the numbers</param>
+      /// <param name="numbers">the numbers</param>
       /// <returns>the hash</returns>
       [Obsolete("Use 'Encode' instead. The method was renamed to better explain what it actually does.")]
       public virtual string Encrypt(params int[] numbers)
@@ -202,9 +202,6 @@ namespace Bogus
          return DecodeHex(hash);
       }
 
-      /// <summary>
-      /// 
-      /// </summary>
       private void SetupSeps()
       {
          // seps should contain only characters present in alphabet; 
@@ -235,9 +232,6 @@ namespace Bogus
          alphabet = ConsistentShuffle(alphabet, salt);
       }
 
-      /// <summary>
-      /// 
-      /// </summary>
       private void SetupGuards()
       {
          var guardCount = (int)Math.Ceiling(alphabet.Length / GUARD_DIV);
@@ -396,12 +390,6 @@ namespace Bogus
          return ret.ToArray();
       }
 
-      /// <summary>
-      /// 
-      /// </summary>
-      /// <param name="alphabet"></param>
-      /// <param name="salt"></param>
-      /// <returns></returns>
       private string ConsistentShuffle(string alphabet, string salt)
       {
          if( string.IsNullOrWhiteSpace(salt) )

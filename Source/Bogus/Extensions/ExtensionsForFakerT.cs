@@ -9,8 +9,8 @@ namespace Bogus.Extensions
    public static class ExtensionsForFakerT
    {
       /// <summary>
-      /// Generate multiple fake objects of T. The number of generated items is randomly chosen between <see cref="min"/> and <see cref="max"/> values.
-      /// The random number between <see cref="min"/> and <see cref="max"/> should be considered non-deterministic but technically depends on the parameters each time this method was called.
+      /// Generate multiple fake objects of T. The number of generated items is randomly chosen between <paramref name="min"/> and <paramref name="max"/> values.
+      /// The random number between <paramref name="min"/> and <paramref name="max"/> should be considered non-deterministic but technically depends on the parameters each time this method was called.
       /// </summary>
       /// <param name="faker">The <see cref="Faker{T}"/> to extend with this extension method.</param>
       /// <param name="min">Minimum number of T objects to create. Inclusive.</param>

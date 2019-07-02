@@ -83,14 +83,26 @@ Target.description "MAIN BUILD TASK"
 Target.create "dnx" (fun _ ->
     Trace.trace "DNX Build Task"
 
+
+    
+    let msbParams = { MSBuild.CliArguments.Create()
+                      with
+                        NoWarn = Some([
+                                       "CS1573"; //Disable XML doc warning
+                                       "CS1591"; //Disable XML doc warning
+                                      ]) 
+                    }
+
     let releaseConfig (opts : DotNet.BuildOptions) =
-        { opts with 
+        {opts with 
               Configuration = DotNet.BuildConfiguration.Release
+              MSBuildParams = msbParams
         }
     
     let debugConfig (opts : DotNet.BuildOptions) =
         { opts with 
                Configuration = DotNet.BuildConfiguration.Debug 
+               MSBuildParams = msbParams 
         }
 
     DotNet.build releaseConfig BogusProject.Folder
@@ -219,9 +231,8 @@ Target.create "citest" (fun _ ->
 Target.description "PROJECT SIGNING KEY SETUP TASK"
 Target.create "setup-snk"(fun _ ->
     Trace.trace "Decrypting Strong Name Key (SNK) file."
-    let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
-    Helpers.decryptFile Files.SnkFile decryptSecret
-
+    //let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
+    //Helpers.decryptFile Files.SnkFile decryptSecret
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Files.SnkFile
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 

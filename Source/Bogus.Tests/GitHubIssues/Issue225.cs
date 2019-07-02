@@ -1,4 +1,5 @@
 ﻿using Bogus.DataSets;
+using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
 
@@ -26,6 +27,12 @@ namespace Bogus.Tests.GitHubIssues
       {
          var i = new Internet();
          i.Email("Анна", "Фомина").Should().Be("Anna81@yahoo.com");
+      }
+
+      [Fact]
+      public void simple_translation()
+      {
+         "Анна Фомина".Transliterate().Should().Be("Anna Fomina");
       }
    }
 }

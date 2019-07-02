@@ -231,8 +231,8 @@ Target.create "citest" (fun _ ->
 Target.description "PROJECT SIGNING KEY SETUP TASK"
 Target.create "setup-snk"(fun _ ->
     Trace.trace "Decrypting Strong Name Key (SNK) file."
-    //let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
-    //Helpers.decryptFile Files.SnkFile decryptSecret
+    let decryptSecret = Environment.environVarOrFail "SNKFILE_SECRET"
+    Helpers.decryptFile Files.SnkFile decryptSecret
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Files.SnkFile
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 

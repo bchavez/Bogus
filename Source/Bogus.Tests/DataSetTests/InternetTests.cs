@@ -1,4 +1,4 @@
-using System.Linq;
+﻿using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
@@ -149,6 +149,16 @@ namespace Bogus.Tests.DataSetTests
          Enumerable.Range(1, 200).Select(
                i => internet.UserAgent())
             .Dump();
+      }
+
+      [Theory]
+      [InlineData("Анна", "Фомина", "Анна11", 1337)]
+      [InlineData("Анна", "Фомина", "Анна_Фомина13", 228)]
+      [InlineData("Анна", "Фомина", "Анна.Фомина", 302)]
+      public void can_get_username_with_unicode_characters(string first, string last, string expected, int seed)
+      {
+         internet.Random = new Randomizer(seed);
+         internet.UserNameUnicode(first, last).Should().Be(expected);
       }
    }
 }

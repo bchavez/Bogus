@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Globalization;
 using System.Text;
 
@@ -50,6 +50,16 @@ namespace Bogus.Extensions
          }
 
          return sb.ToString().Normalize(NormalizationForm.FormC);
+      }
+
+      /// <summary>
+      /// Transliterates Unicode characters to US-ASCII. For example, Russian cryllic "Анна Фомина" becomes "Anna Fomina".
+      /// </summary>
+      /// <param name="this">The @this string to act on.</param>
+      /// <param name="lang">The language character set to use.</param>
+      public static string Transliterate(this string @this, string lang = "en")
+      {
+         return Transliterater.Translate(@this, lang);
       }
    }
 }

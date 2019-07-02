@@ -1,7 +1,13 @@
-## v27.0.2
+## v28.0.1
 Release Date: TBA
 
+* BREAKING: Deterministic sequence values may have changed for fake email addresses derived from `Internet.Email()` or `Internet.UserName()` in locales other than `en`.
 * Issue 229: Adds `Finance.Iban(countryCode)` ISO3166 country code parameter. Allows generating IBAN codes for specific countries. The country code must be a supported otherwise an exception is thrown.  
+* Issue 225: Better support for transliteration of international Unicode characters to US-Latin/Roman ASCII character sets. `Internet.Email()` and `Internet.UserName()` are more respectful of specified locale using character transliteration.
+* Added `.Transliterate()` string extension method in `Bogus.Extensions` namespace.
+* Added `Internet.UserNameUnicode()` that preserves Unicode characters in user names.
+* Minor performance improvement to `Utils.Slugify` using compiled regex.
+
 
 ## v27.0.1
 Release Date: 2019-05-02

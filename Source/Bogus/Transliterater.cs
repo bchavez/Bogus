@@ -1,11 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
 namespace Bogus
 {
-   public static partial class Transliterate
+   /// <summary>
+   /// Best effort utility for transliterating Unicode characters to US-ASCII.
+   /// </summary>
+   public static partial class Transliterater
    {
+      /// <summary>
+      /// Main method for transliteration.
+      /// </summary>
+      /// <param name="input">The Unicode text to translate.</param>
+      /// <param name="lang">Optional. If a language specific transliterates are available it will be used.</param>
       public static string Translate(string input, string lang = "en")
       {
          //setup defaults.
@@ -25,39 +34,64 @@ namespace Bogus
          //Loop though each character in the input string.
          for( var i = 0; i < input.Length; i++)
          {
-            var used = 0;
-            var ch = TrieWalk(i, input, CharMap, ref used);
-
-            if( ch is null )
+            //Try direct langChar translation
+            var ch = input.Substring(i, 1);
+            if ( langChar.TryGetValue(ch, out var foundLangChar) )
             {
-               //couldn't find anything in the trie walk; so the character(s)
-               //are not transliterated or mapped to US-ASCII.
-               sb.Append(input[i]);
+               sb.Append(foundLangChar);
+               continue;
             }
-            else
+
+            //Try using Char Map
+            var used = 0;
+            var chCharMap = WalkTrie(i, input, CharMap, ref used);
+            if( chCharMap is object )
             {
                //After walking the trie, we found a match,
                //use what we found instead.
-               sb.Append(ch);
+               sb.Append(chCharMap);
                //then update the number of characters
                //we consumed in the input for this
                //match to take place
-               i += used;
+               i += used - 1;
+               continue;
             }
+
+            //Try Diatric Map
+            used = 0;
+            var chDiatric = WalkTrie(i, input, DiatricMap, ref used);
+            if( chDiatric is object )
+            {
+               sb.Append(chDiatric);
+               i += used - 1;
+               continue;
+            }
+
+            //Try symbol map
+            if( symbols.TryGetValue(ch, out var foundSymbol) )
+            {
+               sb.Append(foundSymbol);
+               continue;
+            }
+
+            //otherwise, there's no mapping translation from the 
+            //current character to US-ASCII
+            sb.Append(ch);
          }
 
          return sb.ToString();
       }
 
-      private static string TrieWalk(int i, string input, Trie trie, ref int used)
+      [EditorBrowsable(EditorBrowsableState.Never)]
+      public static string WalkTrie(int i, string input, Trie trie, ref int used)
       {
          if( i >= input.Length ) return trie.Value;
 
          var ch = input.Substring(i, 1);
          if( trie.Map.TryGetValue(ch, out var next) )
          {
-            used = i + 1;
-            return TrieWalk(i + 1, input, next, ref used);
+            used++;
+            return WalkTrie(i + 1, input, next, ref used);
          }
 
          if( trie.Value?.Length > 0 )
@@ -68,11 +102,30 @@ namespace Bogus
          return null;
       }
 
-      public static Trie CharMap = TransliterateData.BuildCharMap(new Trie());
-      public static Trie DiatricMap = TransliterateData.BuildDiatricMap(new Trie());
-      public static MultiDictionary<string, string, string> LangCharMap = TransliterateData.BuildLangCharMap(new MultiDictionary<string, string, string>());
-      public static MultiDictionary<string, string, string> SymbolMap = TransliterateData.BuildSymbolMap(new MultiDictionary<string, string, string>());
-      public static Dictionary<string, string> EmptyDictionary = new Dictionary<string, string>();
+      /// <summary>
+      /// Char map for transliteration.
+      /// </summary>
+      public static Trie CharMap = BuildCharMap(new Trie());
+      
+      /// <summary>
+      /// Diacritic map for transliteration.
+      /// </summary>
+      public static Trie DiatricMap = BuildDiatricMap(new Trie());
+      
+      /// <summary>
+      /// Language specific map for transliteration. 
+      /// </summary>
+      public static MultiDictionary<string, string, string> LangCharMap = BuildLangCharMap(new MultiDictionary<string, string, string>(StringComparer.Ordinal));
+
+      /// <summary>
+      /// Symbol map for transliteration.
+      /// </summary>
+      public static MultiDictionary<string, string, string> SymbolMap = BuildSymbolMap(new MultiDictionary<string, string, string>(StringComparer.Ordinal));
+
+      /// <summary>
+      /// Default empty dictionary to avoid allocations.
+      /// </summary>
+      public static readonly Dictionary<string, string> EmptyDictionary = new Dictionary<string, string>();
    }
 
    /// <summary>

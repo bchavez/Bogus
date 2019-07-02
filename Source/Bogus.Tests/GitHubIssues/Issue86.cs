@@ -23,13 +23,13 @@ namespace Bogus.Tests.GitHubIssues
       [Fact]
       public void should_remove_diacritic_marks_in_email()
       {
-         internet.Email("ßra'inÄÖÜí", "ÄÖÜíchavez").Should().Be("rainAOUi81@yahoo.com");
+         internet.Email("ßra'inÄÖÜí", "ÄÖÜíchavez").Should().Be("ssrainAeOeUei81@yahoo.com");
       }
 
       [Fact]
       public void should_remove_diacritic_marks_in_username()
       {
-         internet.UserName("ßri'ÄÖÜían", "chaÄÖÜíez").Should().Be("riAOUian.chaAOUiez");
+         internet.UserName("ßri'ÄÖÜían", "chaÄÖÜíez").Should().Be("ssriAeOeUeian.chaAeOeUeiez");
       }
    }
 }

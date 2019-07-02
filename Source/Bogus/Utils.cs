@@ -15,8 +15,10 @@ namespace Bogus
       public static string Slugify(string txt)
       {
          var str = txt.Replace(" ", "-").RemoveDiacritics();
-         return Regex.Replace(str, @"[^a-zA-Z0-9\.\-_]+", "");
+         return SlugifyRegex.Replace(str, "");
       }
+
+      public static Regex SlugifyRegex = new Regex(@"[^a-zA-Z0-9\.\-_]+", RegexOptions.Compiled);
 
       /// <summary>
       /// Takes string parts and joins them together with a separator.

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Bogus.Extensions;
 using Bogus.Vendor;
 
 namespace Bogus.DataSets
@@ -52,7 +53,7 @@ namespace Bogus.DataSets
       {
          provider = provider ?? GetRandomArrayItem("free_email");
 
-         return Utils.Slugify(UserName(firstName, lastName)) + uniqueSuffix + "@" + provider;
+         return UserName(firstName, lastName) + uniqueSuffix + "@" + provider;
       }
 
       /// <summary>
@@ -70,10 +71,26 @@ namespace Bogus.DataSets
       /// <summary>
       /// Generates user names.
       /// </summary>
-      /// <param name="firstName">Always used.</param>
-      /// <param name="lastName">Sometimes used depending on randomness.</param>
+      /// <param name="firstName">First name is always part of the returned user name.</param>
+      /// <param name="lastName">Last name may or may not be used.</param>
       /// <returns>A random user name.</returns>
       public string UserName(string firstName = null, string lastName = null)
+      {
+         firstName = firstName ?? Name.FirstName();
+         lastName = lastName ?? Name.LastName();
+
+         firstName = firstName.Transliterate(this.Locale);
+         lastName = lastName.Transliterate(this.Locale);
+
+         return Utils.Slugify(UserNameUnicode(firstName, lastName));
+      }
+
+      /// <summary>
+      /// Generates a user name preserving Unicode characters.
+      /// </summary>
+      /// <param name="firstName">First name is always part of the returned user name.</param>
+      /// <param name="lastName">Last name may or may not be used.</param>
+      public string UserNameUnicode(string firstName = null, string lastName = null)
       {
          firstName = firstName ?? Name.FirstName();
          lastName = lastName ?? Name.LastName();
@@ -82,22 +99,21 @@ namespace Bogus.DataSets
 
          string result;
 
-         if( val == 0 )
+         if (val == 0)
          {
             result = firstName + Random.Number(99);
          }
-         else if( val == 1 )
+         else if (val == 1)
          {
-            result = firstName + Random.ArrayElement(new[] {".", "_"}) + lastName;
+            result = firstName + Random.ArrayElement(new[] { ".", "_" }) + lastName;
          }
          else
          {
-            result = firstName + Random.ArrayElement(new[] {".", "_"}) + lastName + Random.Number(99);
+            result = firstName + Random.ArrayElement(new[] { ".", "_" }) + lastName + Random.Number(99);
          }
 
          result = result.Replace(" ", string.Empty);
-
-         return Utils.Slugify(result);
+         return result;
       }
 
       /// <summary>

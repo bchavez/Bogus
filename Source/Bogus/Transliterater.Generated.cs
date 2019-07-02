@@ -5,9 +5,10 @@
    using System.Collections.Generic;
    namespace Bogus
    {
-      [EditorBrowsable(EditorBrowsableState.Never)]
-      public static partial class TransliterateData
+      
+      public static partial class Transliterater
       {   
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public static Trie BuildCharMap(Trie trie)
          {
             Trie.Insert(trie, @"À", @"A");
@@ -778,6 +779,7 @@
             return trie;
          }
 
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public static Trie BuildDiatricMap(Trie trie)
          {
             Trie.Insert(trie, @"ာ", @"a");
@@ -836,6 +838,7 @@
             return trie;
          }
 
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public static MultiDictionary<string,string,string> BuildLangCharMap(MultiDictionary<string,string,string> md)
          {
             md.Add(@"az", @"ç", @"c");
@@ -958,6 +961,7 @@
             return md;
          }
 
+         [EditorBrowsable(EditorBrowsableState.Never)]
          public static MultiDictionary<string,string,string> BuildSymbolMap(MultiDictionary<string,string,string> md)
          {
             md.Add(@"ar", @"∆", @"delta");

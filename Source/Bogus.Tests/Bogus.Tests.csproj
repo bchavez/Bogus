@@ -1,10 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net471;netcoreapp2.0</TargetFrameworks>
     <LangVersion>7.3</LangVersion>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Appveyor.Testlogger" Version="2.0.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
@@ -16,15 +17,12 @@
     <PackageReference Include="XunitXml.TestLogger" Version="2.1.26" />
     <PackageReference Include="Z.ExtensionMethods.WithTwoNamespace" Version="2.0.13" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Bogus\Bogus.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Rantionary-3.0.17.rantpkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>

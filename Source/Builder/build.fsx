@@ -84,12 +84,14 @@ Target.create "dnx" (fun _ ->
     Trace.trace "DNX Build Task"
 
     let releaseConfig (opts : DotNet.BuildOptions) =
-        {opts with 
-              Configuration = DotNet.BuildConfiguration.Release }
+        { opts with 
+              Configuration = DotNet.BuildConfiguration.Release
+        }
     
     let debugConfig (opts : DotNet.BuildOptions) =
         { opts with 
-               Configuration = DotNet.BuildConfiguration.Debug }
+               Configuration = DotNet.BuildConfiguration.Debug 
+        }
 
     DotNet.build releaseConfig BogusProject.Folder
     DotNet.build debugConfig BogusProject.Folder
@@ -173,6 +175,9 @@ Target.create "Clean" (fun _ ->
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
 
+    Xml.pokeInnerText TestProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" ""
+    Xml.pokeInnerText TestProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "false"
+
     MakeBuildInfo BogusProject Folders (fun bip ->
          {bip with
             DateTime = System.DateTime.Parse("1/1/2015")
@@ -219,6 +224,9 @@ Target.create "setup-snk"(fun _ ->
 
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Files.SnkFile
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
+
+    Xml.pokeInnerText TestProject.ProjectFile "/Project/PropertyGroup/AssemblyOriginatorKeyFile" Files.SnkFile
+    Xml.pokeInnerText TestProject.ProjectFile "/Project/PropertyGroup/SignAssembly" "true"
 )
 
 open Fake.Core.TargetOperators

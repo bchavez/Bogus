@@ -223,8 +223,8 @@ Target.create "citest" (fun _ ->
     Trace.trace "CI TEST"
     RunTests()
     
-    Files.TestResultFile
-    |> Trace.publish( ImportData.Xunit )
+    //Files.TestResultFile
+    //|> Trace.publish( ImportData.Xunit )
     
 )
 

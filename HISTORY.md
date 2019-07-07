@@ -1,7 +1,7 @@
 ## v28.0.2
 Release Date: 2019-07-07
 
-* PR 235: Added `Bogus.DataSets.Vehicle.GbRegistrationPlate()` in `Bogus.Extensions.UnitedKingdom` extension namespace to generate GB registration plates.
+* PR 235: Added `Bogus.DataSets.Vehicle.GbRegistrationPlate()` in `Bogus.Extensions.UnitedKingdom` extension namespace to generate GB registration plates. Thanks @colinangusmackay.
 
 ## v28.0.1
 Release Date: 2019-07-02

@@ -8,11 +8,11 @@ using Xunit.Abstractions;
 
 namespace Bogus.Tests.ExtensionTests
 {
-   public class RegistrationPlateExtensionsForUnitedKingdomTests : SeededTest
+   public class RegistrationPlateExtensionsForGreatBritainTests : SeededTest
    {
       private readonly ITestOutputHelper testOutputHelper;
 
-       public RegistrationPlateExtensionsForUnitedKingdomTests(ITestOutputHelper testOutputHelper)
+       public RegistrationPlateExtensionsForGreatBritainTests(ITestOutputHelper testOutputHelper)
        {
            this.testOutputHelper = testOutputHelper;
        }
@@ -22,7 +22,7 @@ namespace Bogus.Tests.ExtensionTests
        {
            var vehicle = new Vehicle();
 
-           Action a = () => vehicle.UkRegistrationPlate(new DateTime(2001, 8, 31), new DateTime(2019, 7, 5));
+           Action a = () => vehicle.GbRegistrationPlate(new DateTime(2001, 8, 31), new DateTime(2019, 7, 5));
            a.ShouldThrow<ArgumentOutOfRangeException>()
               .WithMessage($"Can only accept registration dates between 2001-09-01 and 2051-02-28.{Environment.NewLine}Parameter name: dateFrom");
        }
@@ -31,7 +31,7 @@ namespace Bogus.Tests.ExtensionTests
        public void reject_registration_date_after_current_style()
        {
            var vehicle = new Vehicle();
-           Action a = () => vehicle.UkRegistrationPlate(new DateTime(2019, 7, 5), new DateTime(2051, 9, 1));
+           Action a = () => vehicle.GbRegistrationPlate(new DateTime(2019, 7, 5), new DateTime(2051, 9, 1));
            a.ShouldThrow<ArgumentOutOfRangeException>()
               .WithMessage($"Can only accept registration dates between 2001-09-01 and 2051-02-28.{Environment.NewLine}Parameter name: dateTo");
        }
@@ -40,7 +40,7 @@ namespace Bogus.Tests.ExtensionTests
        public void date_expressed_wrong_way_around_still_works()
        {
            var vehicle = new Vehicle();
-           var plate = vehicle.UkRegistrationPlate(new DateTime(2019, 8, 31), new DateTime(2019, 3, 1));
+           var plate = vehicle.GbRegistrationPlate(new DateTime(2019, 8, 31), new DateTime(2019, 3, 1));
            plate.Substring(2, 2).Should().Be("19");
        }
 
@@ -48,7 +48,7 @@ namespace Bogus.Tests.ExtensionTests
        public void early_part_of_year_is_has_age_holdover_from_previous_year()
        {
            var vehicle = new Vehicle();
-           var plate = vehicle.UkRegistrationPlate(new DateTime(2019, 1, 1), new DateTime(2019, 2, 28));
+           var plate = vehicle.GbRegistrationPlate(new DateTime(2019, 1, 1), new DateTime(2019, 2, 28));
            plate.Substring(2, 2).Should().Be("68");
        }
 
@@ -56,7 +56,7 @@ namespace Bogus.Tests.ExtensionTests
        public void mid_part_of_year_is_has_age_equivalent_to_two_digit_year()
        {
            var vehicle = new Vehicle();
-           var plate = vehicle.UkRegistrationPlate(new DateTime(2009, 3, 1), new DateTime(2009, 8, 31));
+           var plate = vehicle.GbRegistrationPlate(new DateTime(2009, 3, 1), new DateTime(2009, 8, 31));
            plate.Substring(2, 2).Should().Be("09");
        }
 
@@ -64,7 +64,7 @@ namespace Bogus.Tests.ExtensionTests
        public void end_part_of_year_is_has_age_equivalent_to_two_digit_year_offset_by_fifty()
        {
            var vehicle = new Vehicle();
-           var plate = vehicle.UkRegistrationPlate(new DateTime(2009, 9, 1), new DateTime(2009, 12, 31));
+           var plate = vehicle.GbRegistrationPlate(new DateTime(2009, 9, 1), new DateTime(2009, 12, 31));
            plate.Substring(2, 2).Should().Be("59");
        }
 
@@ -76,7 +76,7 @@ namespace Bogus.Tests.ExtensionTests
 
            var plates = Enumerable
                .Range(1,10)
-               .Select(_ => vehicle.UkRegistrationPlate(new DateTime(2001, 9, 1), new DateTime(2019, 7, 5)))
+               .Select(_ => vehicle.GbRegistrationPlate(new DateTime(2001, 9, 1), new DateTime(2019, 7, 5)))
                .ToArray();
 
            testOutputHelper.WriteLine(string.Join(Environment.NewLine, plates));
@@ -88,7 +88,7 @@ namespace Bogus.Tests.ExtensionTests
        {
           var vehicle = new Vehicle();
           vehicle.Random = new Randomizer(293);
-          var plate = vehicle.UkRegistrationPlate(new DateTime(2007, 3, 1), new DateTime(2007, 8, 31));
+          var plate = vehicle.GbRegistrationPlate(new DateTime(2007, 3, 1), new DateTime(2007, 8, 31));
           plate.Should().StartWith("TN07");
        }
 
@@ -109,7 +109,7 @@ namespace Bogus.Tests.ExtensionTests
        {
           var vehicle = new Vehicle();
           vehicle.Random = new Randomizer(14);
-          var plate = vehicle.UkRegistrationPlate(new DateTime(2019, month, 1), new DateTime(2019, month, DateTime.DaysInMonth(2019, month)));
+          var plate = vehicle.GbRegistrationPlate(new DateTime(2019, month, 1), new DateTime(2019, month, DateTime.DaysInMonth(2019, month)));
           plate.Should().StartWith(partialPlate);
        }
    }

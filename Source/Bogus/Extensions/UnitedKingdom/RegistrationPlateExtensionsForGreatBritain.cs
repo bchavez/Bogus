@@ -8,7 +8,7 @@ namespace Bogus.Extensions.UnitedKingdom
    /// <summary>
    /// API extensions specific for a geographical location.
    /// </summary>
-   public static class RegistrationPlateExtensionsForUnitedKingdom
+   public static class RegistrationPlateExtensionsForGreatBritain
    {
       private static readonly DateTime StartOfCurrentStyle = new DateTime(2001, 9, 1);
 
@@ -41,12 +41,12 @@ namespace Bogus.Extensions.UnitedKingdom
       };
 
       /// <summary>
-      /// Generate a UK Vehicle Registration Plate.
+      /// Generate a GB Vehicle Registration Plate.
       /// </summary>
       /// <param name="vehicle">Object to extend.</param>
       /// <param name="dateFrom">The start of the range of registration dates.</param>
       /// <param name="dateTo">The end of the range of registration dates.</param>
-      /// <returns>A string containing a UK registration plate.</returns>
+      /// <returns>A string containing a GB registration plate.</returns>
       /// <remarks>
       /// This is based on the information in the Wikipedia article on
       /// Vehicle registration plates of the United Kingdom.
@@ -54,7 +54,7 @@ namespace Bogus.Extensions.UnitedKingdom
       /// At present this only handles registration plates in the current
       /// scheme (September 2001 to February 2051).
       /// </remarks>
-      public static string UkRegistrationPlate(this Vehicle vehicle, DateTime dateFrom, DateTime dateTo)
+      public static string GbRegistrationPlate(this Vehicle vehicle, DateTime dateFrom, DateTime dateTo)
       {
          DateTime registrationDate = GenerateRegistrationDate(vehicle, dateFrom, dateTo);
          return GenerateCurrentStylePlates(vehicle, registrationDate);

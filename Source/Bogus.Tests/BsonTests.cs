@@ -33,6 +33,7 @@ namespace Bogus.Tests
       public void Dispose()
       {
          Database.ResetLocale("en");
+         Database.ResetLocale("it");
       }
 
       [Fact]

@@ -82,5 +82,14 @@ namespace Bogus.Tests.ExtensionTests
            testOutputHelper.WriteLine(string.Join(Environment.NewLine, plates));
            plates.Distinct().Count().Should().Be(plates.Length);
        }
+
+       [Fact]
+       public void edinburgh_mid2007_plates_have_exception_applied_to_them()
+       {
+          var vehicle = new Vehicle();
+          vehicle.Random = new Randomizer(293);
+          var plate = vehicle.UkRegistrationPlate(new DateTime(2007, 3, 1), new DateTime(2007, 8, 31));
+          plate.Should().StartWith("TN07");
+       }
    }
 }

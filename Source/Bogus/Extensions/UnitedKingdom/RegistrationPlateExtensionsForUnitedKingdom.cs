@@ -76,9 +76,20 @@ namespace Bogus.Extensions.UnitedKingdom
             year += 50;
          sb.Append($"{year:D2}");
 
+         ApplySN07Exception(sb);
+
          char[] sequence = vehicle.Random.ArrayElements(SequenceLetters, 3);
          sb.Append(sequence);
          return sb.ToString();
+      }
+
+      private static void ApplySN07Exception(StringBuilder sb)
+      {
+         // The DVLA don't permit plates starting SN07 (i.e. Registered in
+         // Edinburgh between 1/Mar/2007 and 31/Aug/2007) because it looks
+         // too much like the word "snot".
+
+         sb.Replace("SN07", "TN07");
       }
 
       private static char GetSecondaryLocation(Vehicle vehicle, char primaryLocation)

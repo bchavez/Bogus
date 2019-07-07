@@ -480,6 +480,7 @@ public void Using_FakerT_Inheritance()
 * **`using Bogus.Extensions.UnitedKingdom;`**
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
+	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 	* `Bogus.DataSets.Company.Ein()` - Employer Identification Number

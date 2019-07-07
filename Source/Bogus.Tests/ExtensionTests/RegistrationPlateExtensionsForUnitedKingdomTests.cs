@@ -91,5 +91,26 @@ namespace Bogus.Tests.ExtensionTests
           var plate = vehicle.UkRegistrationPlate(new DateTime(2007, 3, 1), new DateTime(2007, 8, 31));
           plate.Should().StartWith("TN07");
        }
+
+       [Theory]
+       [InlineData(1, "XE68")]
+       [InlineData(2, "XF68")]
+       [InlineData(3, "XA19")]
+       [InlineData(4, "XB19")]
+       [InlineData(5, "XC19")]
+       [InlineData(6, "XD19")]
+       [InlineData(7, "XE19")]
+       [InlineData(8, "XF19")]
+       [InlineData(9, "XA69")]
+       [InlineData(10, "XB69")]
+       [InlineData(11, "XC69")]
+       [InlineData(12, "XD69")]
+       public void export_plates_have_pseudo_location_marker_based_on_registration_date(int month, string partialPlate)
+       {
+          var vehicle = new Vehicle();
+          vehicle.Random = new Randomizer(14);
+          var plate = vehicle.UkRegistrationPlate(new DateTime(2019, month, 1), new DateTime(2019, month, DateTime.DaysInMonth(2019, month)));
+          plate.Should().StartWith(partialPlate);
+       }
    }
 }

@@ -37,7 +37,6 @@ namespace Bogus.Extensions.UnitedKingdom
          { 'S', "ABCDEFGHJKLMNOPRSTVWXY".ToCharArray() },   // Scotland
          { 'V', "ABCEFGHJKLMNOPRSTUVXY".ToCharArray() },    // Severn Valley
          { 'W', "ABDEFGHJKLMNOPRSTUVWXY".ToCharArray() },   // West of England
-         { 'X', "ABCDEF".ToCharArray() },                   // Personal Export
          { 'Y', "ABCDEFGHJKLMNOPRSTUVWXY".ToCharArray() },  // Yorkshire
       };
 
@@ -67,7 +66,7 @@ namespace Bogus.Extensions.UnitedKingdom
          char primaryLocation = vehicle.Random.ArrayElement(PrimaryLocations);
          sb.Append(primaryLocation);
 
-         char secondaryLocation = GetSecondaryLocation(vehicle, primaryLocation);
+         char secondaryLocation = GetSecondaryLocation(vehicle, primaryLocation, registrationDate);
          sb.Append(secondaryLocation);
          int year = registrationDate.Year - 2000;
          if (registrationDate.Month < 3)
@@ -92,8 +91,38 @@ namespace Bogus.Extensions.UnitedKingdom
          sb.Replace("SN07", "TN07");
       }
 
-      private static char GetSecondaryLocation(Vehicle vehicle, char primaryLocation)
+      private static char GetSecondaryLocation(Vehicle vehicle, char primaryLocation, DateTime registrationDate)
       {
+         if (primaryLocation == 'X')
+         {
+            // Export vehicles have their secondary location marker based on
+            // the registration date rather than a specific DVLA office.
+            switch (registrationDate.Month)
+            {
+               case 1:
+               case 7:
+                  return 'E';
+               case 2:
+               case 8:
+                  return 'F';
+               case 3: 
+               case 9:
+                  return 'A';
+               case 4:
+               case 10:
+                  return 'B';
+               case 5:
+               case 11:
+                  return 'C';
+               case 6:
+               case 12:
+                  return 'D';
+            }
+
+            throw new InvalidOperationException(
+               $"This code path should never be accessible. {nameof(primaryLocation)}={primaryLocation}; {nameof(registrationDate)}={registrationDate:O}");
+         }
+         
          char[] secondaryLocationChoices = SecondaryLocations[primaryLocation];
          char secondaryLocation = vehicle.Random.ArrayElement(secondaryLocationChoices);
          return secondaryLocation;

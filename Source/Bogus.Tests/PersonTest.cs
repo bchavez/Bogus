@@ -61,7 +61,7 @@ namespace Bogus.Tests
          result.Should().NotBeNullOrEmpty();
 
          string trim = result.Replace(@" ", "");
-         trim.Length.Should().Equals(15);
+         trim.Length.Should().Be(15);
       }
 
       [Fact]

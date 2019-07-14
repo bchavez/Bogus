@@ -6,6 +6,7 @@ using Bogus.Extensions.Brazil;
 using Bogus.Extensions.Canada;
 using Bogus.Extensions.Denmark;
 using Bogus.Extensions.Finland;
+using Bogus.Extensions.France;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
 using Xunit;
@@ -50,6 +51,17 @@ namespace Bogus.Tests
       {
          var p = new Person();
          p.Ssn().Should().Be("869-28-7971");
+      }
+
+      [Fact]
+      public void check_nss_on_person()
+      {
+         var p = new Person();
+         var result = p.Nss();
+         result.Should().NotBeNullOrEmpty();
+
+         string trim = result.Replace(@" ", "");
+         trim.Length.Should().Equals(15);
       }
 
       [Fact]

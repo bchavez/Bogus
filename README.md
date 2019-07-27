@@ -1117,7 +1117,7 @@ The minimum requirements to build **Bogus** from source code are as follows:
 * Download the source code.
 * Open command prompt and run `build.cmd`:
     * `build clean` - cleans sources and files.
-    * `build resotre` - restores all project references.
+    * `build restore` - restores all project references.
     * `build dnx` - the main dotnet build task.
     * `build zip` - creates a nice zip file with debug and release binaries.
     * `build nuget` - builds **NuGet** packages.

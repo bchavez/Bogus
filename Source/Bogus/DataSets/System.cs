@@ -12,8 +12,9 @@ namespace Bogus.DataSets
    public class System : DataSet
    {
       /// <summary>
-      /// Default constructor
+      /// Initializes a new instance of the <see cref="System"/> class.
       /// </summary>
+      /// <param name="locale">The locale that will be used to generate values.</param>
       public System(string locale = "en") : base(locale)
       {
          mimes = this.GetArray("mimeTypes");
@@ -29,12 +30,12 @@ namespace Bogus.DataSets
 
          exts = mimes
             .OfType<BObject>()
-            .SelectMany(o =>
+            .SelectMany(bObject =>
                {
-                  if( o.ContainsKey("extensions") )
+                  if( bObject.ContainsKey("extensions") )
                   {
-                     var e = o["extensions"] as BArray;
-                     return e.OfType<BValue>().Select(s => s.StringValue);
+                     var extensions = bObject["extensions"] as BArray;
+                     return extensions.OfType<BValue>().Select(s => s.StringValue);
                   }
                   return Enumerable.Empty<string>();
                })
@@ -46,15 +47,39 @@ namespace Bogus.DataSets
       }
 
       protected Lorem Lorem = null;
-      private Dictionary<string, BObject> lookup;
-      private BArray mimes;
-      private string[] exts;
-      private string[] types;
-      private string[] mimeKeys;
+      private readonly Dictionary<string, BObject> lookup;
+      private readonly BArray mimes;
+      private readonly string[] exts;
+      private readonly string[] types;
+      private readonly string[] mimeKeys;
+
+      private static readonly string[] commonFileTypes = 
+         { "video", "audio", "image", "text", "application" };
+
+      private static readonly string[] commonMimeTypes =
+         {
+            "application/pdf",
+            "audio/mpeg",
+            "audio/wav",
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "video/mp4",
+            "video/mpeg",
+            "text/html"
+         };
 
       /// <summary>
       /// Get a random file name.
       /// </summary>
+      /// <param name="ext">
+      /// The extension the file name will have.
+      /// If null is provided, a random extension will be picked.
+      /// </param>
+      /// <returns>
+      /// A random file name with the given <paramref name="ext"/>
+      /// or a random extension
+      /// </returns>
       public string FileName(string ext = null)
       {
          var filename = $"{this.Random.Words()}.{ext ?? FileExt()}";
@@ -70,6 +95,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random directory path (Unix).
       /// </summary>
+      /// <returns>
+      /// A random Unix directory path.
+      /// </returns>
       public string DirectoryPath()
       {
          return GetRandomArrayItem("directoryPaths");
@@ -78,11 +106,24 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random file path (Unix).
       /// </summary>
+      /// <returns>
+      /// A random Unix file path.
+      /// </returns>
       public string FilePath()
       {
          return $"{DirectoryPath()}/{FileName()}";
       }
 
+      /// <summary>
+      /// Generates a random file name with a common file extension.
+      /// Extension can be overwritten with <paramref name="ext"/>.
+      /// </summary>
+      /// <param name="ext">
+      /// The extensions to be used for a file name.
+      /// </param>
+      /// <returns>
+      /// A random file name with a common extension or <paramref name="ext"/>.
+      /// </returns>
       public string CommonFileName(string ext = null)
       {
          var filename = $"{this.Random.Words()}.{ext ?? CommonFileExt()}";
@@ -99,6 +140,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random mime type
       /// </summary>
+      /// <returns>
+      /// A random mime type.
+      /// </returns>
       public string MimeType()
       {
          return this.Random.ArrayElement(this.mimeKeys);
@@ -108,38 +152,33 @@ namespace Bogus.DataSets
       /// <summary>
       /// Returns a commonly used file type.
       /// </summary>
+      /// <returns>
+      /// A commonly used file type.
+      /// </returns>
       public string CommonFileType()
       {
-         var types = new[] {"video", "audio", "image", "text", "application"};
-         return this.Random.ArrayElement(types);
+         return this.Random.ArrayElement(commonFileTypes);
       }
 
 
       /// <summary>
       /// Returns a commonly used file extension.
       /// </summary>
+      /// <returns>
+      /// A commonly used file extension.
+      /// </returns>
       public string CommonFileExt()
       {
-         var types = new[]
-            {
-               "application/pdf",
-               "audio/mpeg",
-               "audio/wav",
-               "image/png",
-               "image/jpeg",
-               "image/gif",
-               "video/mp4",
-               "video/mpeg",
-               "text/html"
-            };
-
-         return FileExt(this.Random.ArrayElement(types));
+         return FileExt(this.Random.ArrayElement(commonMimeTypes));
       }
 
 
       /// <summary>
       /// Returns any file type available as mime-type.
       /// </summary>
+      /// <returns>
+      /// Any file type available as mime-type.
+      /// </returns>
       public string FileType()
       {
          return this.Random.ArrayElement(this.types);
@@ -149,6 +188,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Gets a random extension for the given mime type.
       /// </summary>
+      /// <returns>
+      /// A random extension for the given mime type.
+      /// </returns>
       public string FileExt(string mimeType = null)
       {
          BObject mime;
@@ -165,6 +207,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random semver version string.
       /// </summary>
+      /// <returns>
+      /// A random semver version string.
+      /// </returns>
       public string Semver()
       {
          return $"{this.Random.Number(9)}.{this.Random.Number(9)}.{this.Random.Number(9)}";
@@ -173,6 +218,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random `System.Version`.
       /// </summary>
+      /// <returns>
+      /// A random `System.Version`.
+      /// </returns>
       public Version Version()
       {
          return new Version(this.Random.Number(9), this.Random.Number(9), this.Random.Number(9), this.Random.Number(9));
@@ -182,9 +230,12 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random `Exception` with a fake stack trace.
       /// </summary>
+      /// <returns>
+      /// A random `Exception` with a fake stack trace.
+      /// </returns>
       public Exception Exception()
       {
-         Exception exe = null;
+         Exception exception = null;
          switch( this.Random.Number(11) )
          {
             case 0:
@@ -194,7 +245,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 1:
@@ -204,7 +255,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 2:
@@ -214,7 +265,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 3:
@@ -224,7 +275,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 4:
@@ -234,7 +285,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 5:
@@ -244,7 +295,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 6:
@@ -254,7 +305,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 7:
@@ -264,7 +315,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 8:
@@ -274,7 +325,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
             case 9:
@@ -284,7 +335,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
 
@@ -295,7 +346,7 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
 
@@ -306,25 +357,34 @@ namespace Bogus.DataSets
                }
                catch( Exception e )
                {
-                  exe = e;
+                  exception = e;
                }
                break;
          }
 
-         return exe;
+         return exception;
       }
 
       /// <summary>
       /// Get a random GCM registration ID.
       /// </summary>
+      /// <returns>
+      /// A random GCM registration ID.
+      /// </returns>
       public string AndroidId()
       {
-         return $"APA91{this.Random.String2(178, "0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_")}";
+         const string androidIdCharacters =
+            "0123456789abcefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_";
+
+         return $"APA91{this.Random.String2(178, androidIdCharacters)}";
       }
 
       /// <summary>
       /// Get a random Apple Push Token
       /// </summary>
+      /// <returns>
+      /// A random Apple Push Token
+      /// </returns>
       public string ApplePushToken()
       {
          return this.Random.String2(64, Chars.HexLowerCase);
@@ -333,6 +393,9 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random BlackBerry Device PIN
       /// </summary>
+      /// <returns>
+      /// A random BlackBerry Device PIN
+      /// </returns>
       public string BlackBerryPin()
       {
          return this.Random.Hash(8);

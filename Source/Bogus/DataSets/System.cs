@@ -53,21 +53,21 @@ namespace Bogus.DataSets
       private readonly string[] types;
       private readonly string[] mimeKeys;
 
-      private static readonly string[] fileTypes = 
+      private static readonly string[] commonFileTypes = 
          { "video", "audio", "image", "text", "application" };
 
-      private static readonly string[] fileExtensionTypes =
-      {
-         "application/pdf",
-         "audio/mpeg",
-         "audio/wav",
-         "image/png",
-         "image/jpeg",
-         "image/gif",
-         "video/mp4",
-         "video/mpeg",
-         "text/html"
-      };
+      private static readonly string[] commonMimeTypes =
+         {
+            "application/pdf",
+            "audio/mpeg",
+            "audio/wav",
+            "image/png",
+            "image/jpeg",
+            "image/gif",
+            "video/mp4",
+            "video/mpeg",
+            "text/html"
+         };
 
       /// <summary>
       /// Get a random file name.
@@ -157,7 +157,7 @@ namespace Bogus.DataSets
       /// </returns>
       public string CommonFileType()
       {
-         return this.Random.ArrayElement(fileTypes);
+         return this.Random.ArrayElement(commonFileTypes);
       }
 
 
@@ -169,7 +169,7 @@ namespace Bogus.DataSets
       /// </returns>
       public string CommonFileExt()
       {
-         return FileExt(this.Random.ArrayElement(fileExtensionTypes));
+         return FileExt(this.Random.ArrayElement(commonMimeTypes));
       }
 
 

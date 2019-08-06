@@ -28,9 +28,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a number of random lorem words
       /// </summary>
-      /// <param name="num">
-      /// The number of random lorem words to be gotten.
-      /// </param>
+      /// <param name="num">The number of random lorem words to be gotten.</param>
       public string[] Words(int num = 3)
       {
          return Enumerable.Range(1, num).Select(_ => Word()).ToArray();
@@ -53,12 +51,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random sentence of specific number of words. 
       /// </summary>
-      /// <param name="wordCount">
-      /// Get a sentence with wordCount words. Defaults between 3 and 10
-      /// </param>
-      /// <param name="range">
-      /// Add anywhere between 0 to 'range' additional words to wordCount. Default is 0.
-      /// </param>
+      /// <param name="wordCount">Get a sentence with wordCount words. Defaults between 3 and 10</param>
+      /// <param name="range">Add anywhere between 0 to 'range' additional words to wordCount. Default is 0.</param>
       public string Sentence(int? wordCount = null, int? range = 0)
       {
          wordCount = wordCount ?? this.Random.Number(3, 10);
@@ -99,12 +93,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a specified number of paragraphs.
       /// </summary>
-      /// <param name="count">
-      /// Number of paragraphs
-      /// </param>
-      /// <param name="separator">
-      /// The string to separate the paragraphs
-      /// </param>
+      /// <param name="count">Number of paragraphs.</param>
+      /// <param name="separator">The string to separate the paragraphs.</param>
       public string Paragraphs(int count = 3, string separator = "\n\n")
       {
          var paragraphs = Enumerable.Range(1, count)
@@ -139,12 +129,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get lines of lorem.
       /// </summary>
-      /// <param name="lineCount">
-      /// The amount of lines to be generated. Defaults between 1 and 5.
-      /// </param>
-      /// <param name="separator">
-      /// The string to separate the lines
-      /// </param>
+      /// <param name="lineCount">The amount of lines to be generated. Defaults between 1 and 5.</param>
+      /// <param name="separator">The string to separate the lines</param>
       public string Lines(int? lineCount = null, string separator = "\n")
       {
          lineCount = lineCount ?? this.Random.Number(1, 5);

@@ -55,13 +55,13 @@ namespace Bogus.DataSets
       /// <param name="range">Add anywhere between 0 to 'range' additional words to wordCount. Default is 0.</param>
       public string Sentence(int? wordCount = null, int? range = 0)
       {
-         wordCount = wordCount ?? this.Random.Number(3, 10);
+         var wc = wordCount ?? this.Random.Number(3, 10);
          if( range > 0 )
          {
-            wordCount += this.Random.Number(range.Value);
+            wc += this.Random.Number(range.Value);
          }
 
-         var sentence = string.Join(" ", Words(wordCount.Value));
+         var sentence = string.Join(" ", Words(wc));
          return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";
       }
 
@@ -72,8 +72,8 @@ namespace Bogus.DataSets
       /// <param name="separator">The string to separate the sentences</param>
       public string Sentences(int? sentenceCount = null, string separator = "\n")
       {
-         sentenceCount = sentenceCount ?? this.Random.Number(2, 6);
-         var sentences = Enumerable.Range(1, sentenceCount.Value)
+         var sc = sentenceCount ?? this.Random.Number(2, 6);
+         var sentences = Enumerable.Range(1, sc)
             .Select(_ => Sentence());
 
          return string.Join(separator, sentences);
@@ -133,9 +133,9 @@ namespace Bogus.DataSets
       /// <param name="separator">The string to separate the lines</param>
       public string Lines(int? lineCount = null, string separator = "\n")
       {
-         lineCount = lineCount ?? this.Random.Number(1, 5);
+         var lc = lineCount ?? this.Random.Number(1, 5);
 
-         return Sentences(lineCount.Value, separator);
+         return Sentences(lc, separator);
       }
 
       /// <summary>

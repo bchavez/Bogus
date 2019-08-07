@@ -12,7 +12,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Initializes a new instance of the <see cref="Lorem"/> class.
       /// </summary>
-      /// <param name="locale">The locale to be used to generate random values.</param>
+      /// <param name="locale">The locale used to generate random values.</param>
       public Lorem(string locale = "en") : base(locale)
       {
       }
@@ -26,9 +26,9 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a number of random lorem words
+      /// Get an array of random lorem words.
       /// </summary>
-      /// <param name="num">The number of random lorem words to be gotten.</param>
+      /// <param name="num">The number of random lorem words to return.</param>
       public string[] Words(int num = 3)
       {
          return Enumerable.Range(1, num).Select(_ => Word()).ToArray();
@@ -51,7 +51,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random sentence of specific number of words. 
       /// </summary>
-      /// <param name="wordCount">Get a sentence with wordCount words. Defaults between 3 and 10</param>
+      /// <param name="wordCount">Get a sentence with wordCount words. Defaults between 3 and 10.</param>
       /// <param name="range">Add anywhere between 0 to 'range' additional words to wordCount. Default is 0.</param>
       public string Sentence(int? wordCount = null, int? range = 0)
       {
@@ -68,8 +68,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get some sentences.
       /// </summary>
-      /// <param name="sentenceCount">The number of sentences</param>
-      /// <param name="separator">The string to separate the sentences</param>
+      /// <param name="sentenceCount">The number of sentences.</param>
+      /// <param name="separator">The string to separate sentences.</param>
       public string Sentences(int? sentenceCount = null, string separator = "\n")
       {
          var sc = sentenceCount ?? this.Random.Number(2, 6);
@@ -94,7 +94,7 @@ namespace Bogus.DataSets
       /// Get a specified number of paragraphs.
       /// </summary>
       /// <param name="count">Number of paragraphs.</param>
-      /// <param name="separator">The string to separate the paragraphs.</param>
+      /// <param name="separator">The string to separate paragraphs.</param>
       public string Paragraphs(int count = 3, string separator = "\n\n")
       {
          var paragraphs = Enumerable.Range(1, count)
@@ -106,13 +106,13 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random number of paragraphs between <paramref name="min"/> and <paramref name="max"/>.
       /// </summary>
-      /// <param name="min">Minimum number of paragraphs</param>
-      /// <param name="max">Maximum number of paragraphs</param>
-      /// <param name="separator">The string to separate the paragraphs</param>
+      /// <param name="min">Minimum number of paragraphs.</param>
+      /// <param name="max">Maximum number of paragraphs.</param>
+      /// <param name="separator">The string to separate the paragraphs.</param>
       public string Paragraphs(int min, int max, string separator = "\n\n")
       {
-         var number = this.Random.Number(min, max);
-         return Paragraphs(number, separator);
+         var count = this.Random.Number(min, max);
+         return Paragraphs(count, separator);
       }
 
       /// <summary>
@@ -129,8 +129,8 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get lines of lorem.
       /// </summary>
-      /// <param name="lineCount">The amount of lines to be generated. Defaults between 1 and 5.</param>
-      /// <param name="separator">The string to separate the lines</param>
+      /// <param name="lineCount">The amount of lines to generate. Defaults between 1 and 5.</param>
+      /// <param name="separator">The string to separate the lines.</param>
       public string Lines(int? lineCount = null, string separator = "\n")
       {
          var lc = lineCount ?? this.Random.Number(1, 5);
@@ -141,7 +141,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Slugify lorem words.
       /// </summary>
-      /// <param name="wordcount">The amount of words to be slugified</param>
+      /// <param name="wordcount">The amount of words to slugify.</param>
       public string Slug(int wordcount = 3)
       {
          var words = Words(wordcount);

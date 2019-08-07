@@ -1,7 +1,7 @@
 ## v28.0.3
 Release Date: TBA
 * PR 241: General code quality improvements in `DataSets.System`. Better XML docs and lower array allocations. Thanks bartdebever!
-* 
+* PR 245: XML doc improvements to `DataSets.Lorem`. Thanks bartdebever! 
 
 ## v28.0.2
 Release Date: 2019-07-07

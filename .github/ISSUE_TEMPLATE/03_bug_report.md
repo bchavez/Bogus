@@ -23,7 +23,7 @@ about: If something isn't working 🔧
 
 ### How do you reproduce the issue?
 
-### Do you have a unit test that can demonstrates the bug?
+### Do you have a unit test that can demonstrate the bug?
 
 ### Can you identify the location in Bogus' source code where the problem exists?
 

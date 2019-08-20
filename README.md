@@ -38,15 +38,15 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * **[.NET Engineering Blog: NuGet Package of the week #1. - "This week in .NET - December 8th 2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)**
 
 ##### Blog Posts
-* :us: [Jack Histon](https://twitter.com/jackhiston) - [How to Create Bogus Data in C#](http://jackhiston.com/2017/10/1/how-to-create-bogus-data-in-c/)
-* :us: [Christos Matskas](https://twitter.com/christosmatskas) - [Creating .NET fakes using Bogus](https://cmatskas.com/creating-net-fakes-using-bogus-2/)
-* :us: [Jason Roberts](https://twitter.com/robertsjason) - [Lifelike Test Data Generation with Bogus](http://dontcodetired.com/blog/post/Lifelike-Test-Data-Generation-with-Bogus)
-* :us: Mark Timmings - [Auto generating test data with Bogus](http://putridparrot.com/blog/auto-generating-test-data-with-bogus/)
-* :us: [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
-* :us: Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
-* :us: Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
-* :us: [Volkan Paksoy](https://twitter.com/volkan_paksoy) - [Generating Test Data with Bogus](https://volkanpaksoy.com/archive/2019/06/27/Generating-Test-Data-with-Bogus/)
-* :ru: [Генерация тестовых данных в C#](https://progtask.ru/random-data-c-sharp/)
+* [Jack Histon](https://twitter.com/jackhiston) - [How to Create Bogus Data in C#](http://jackhiston.com/2017/10/1/how-to-create-bogus-data-in-c/)
+* [Christos Matskas](https://twitter.com/christosmatskas) - [Creating .NET fakes using Bogus](https://cmatskas.com/creating-net-fakes-using-bogus-2/)
+* [Jason Roberts](https://twitter.com/robertsjason) - [Lifelike Test Data Generation with Bogus](http://dontcodetired.com/blog/post/Lifelike-Test-Data-Generation-with-Bogus)
+* Mark Timmings - [Auto generating test data with Bogus](http://putridparrot.com/blog/auto-generating-test-data-with-bogus/)
+* [.NET Core Generating Test Data](https://coderulez.wordpress.com/2017/05/10/net-core-generating-test-data/)
+* Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
+* Dominik Roszkowski - [Bogus fake data generator in .Net testing](http://dominikroszkowski.pl/2017/07/bogus-in-testing/)
+* [Volkan Paksoy](https://twitter.com/volkan_paksoy) - [Generating Test Data with Bogus](https://volkanpaksoy.com/archive/2019/06/27/Generating-Test-Data-with-Bogus/)
+* [Генерация тестовых данных в C#](https://progtask.ru/random-data-c-sharp/)
 
 ##### The Crypto Tip Jar!
 <a href="https://commerce.coinbase.com/checkout/2faa393a-6fc3-4365-993a-6cc110bc4d35"><img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/tipjar.png" /></a>

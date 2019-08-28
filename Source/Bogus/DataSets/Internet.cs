@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Bogus.Extensions;
 using Bogus.Vendor;
@@ -125,7 +127,6 @@ namespace Bogus.DataSets
          return DomainWord() + "." + DomainSuffix();
       }
 
-
       /// <summary>
       /// Generates a domain word used for domain names.
       /// </summary>
@@ -134,7 +135,7 @@ namespace Bogus.DataSets
       {
          var domain = Name.FirstName().ToLower();
 
-         return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""'])", string.Empty);
+         return Regex.Replace(domain, @"([\\ ~#&*{}/:<>?|\""'])", string.Empty);
       }
 
       /// <summary>

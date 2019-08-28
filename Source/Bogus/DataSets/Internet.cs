@@ -125,7 +125,6 @@ namespace Bogus.DataSets
          return DomainWord() + "." + DomainSuffix();
       }
 
-
       /// <summary>
       /// Generates a domain word used for domain names.
       /// </summary>
@@ -134,7 +133,7 @@ namespace Bogus.DataSets
       {
          var domain = Name.FirstName().ToLower();
 
-         return Regex.Replace(domain, @"([\\~#&*{}/:<>?|\""'])", string.Empty);
+         return Regex.Replace(domain, @"([\\ ~#&*{}/:<>?|\""'])", string.Empty);
       }
 
       /// <summary>

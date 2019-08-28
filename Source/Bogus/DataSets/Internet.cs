@@ -1,10 +1,8 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using Bogus.Extensions;
+﻿using Bogus.Extensions;
 using Bogus.Vendor;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Bogus.DataSets
 {

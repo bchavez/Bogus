@@ -1,5 +1,7 @@
 ## v28.0.3
-Release Date: TBA
+Release Date: 2019-08-28
+
+* Issue 249: Fixed `Internet.Url()` including spaces in domain names for `pt_BR` locale or any locale with compound first names that may contain spaces. Thanks RodrigoRodriguesX10!
 * PR 241: General code quality improvements in `DataSets.System`. Better XML docs and lower array allocations. Thanks bartdebever!
 * PR 245: XML doc improvements to `DataSets.Lorem`. Thanks bartdebever! 
 

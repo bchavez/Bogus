@@ -3,7 +3,7 @@ using static Bogus.Tests.GitHubIssues.Issue61.HashIdExtension;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class Issue61
+   public class Issue61 : SeededTest
    {
       public static class HashIdExtension
       {

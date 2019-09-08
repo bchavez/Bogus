@@ -205,10 +205,26 @@ namespace Bogus
       {
          var propName = PropertyName.For(property);
 
-         return RuleFor(propName, setter);
+         return RuleForInternal(propName, setter);
       }
 
-      protected virtual Faker<T> RuleFor<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
+      /// <summary>
+      /// Create a rule for a hidden property or field.
+      /// Used in advanced scenarios to create rules for hidden properties or fields.
+      /// </summary>
+      /// <param name="propertyOrFieldName">The property name or field name of the member to create a rule for.</param>
+      public virtual Faker<T> RuleFor<TProperty>(string propertyOrFieldName, Func<Faker, TProperty> setter)
+      {
+         EnsureMemberExists(propertyOrFieldName,
+            $"The property or field {propertyOrFieldName} was not found on {typeof(T)}. " +
+            $"Can't create a rule for {typeof(T)}.{propertyOrFieldName} when {propertyOrFieldName} " +
+            $"cannot be found. Try creating a custom IBinder for Faker<T> with the appropriate " +
+            $"System.Reflection.BindingFlags that allows deeper reflection into {typeof(T)}.");
+
+         return RuleForInternal(propertyOrFieldName, setter);
+      }
+
+      protected virtual Faker<T> RuleForInternal<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
       {
          Func<Faker, T, object> invoker = (f, t) => setter(f);
 
@@ -286,7 +302,7 @@ namespace Bogus
 
             if( propOrFieldType == type )
             {
-               RuleFor(propOrFieldName, setterForType);
+               RuleForInternal(propOrFieldName, setterForType);
             }
          }
 
@@ -326,28 +342,49 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Ensures a member exists provided by the IBinder.
+      /// </summary>
+      protected virtual void EnsureMemberExists(string propNameOrField, string exceptionMessage)
+      {
+         if (!this.TypeProperties.TryGetValue(propNameOrField, out MemberInfo mi))
+         {
+            throw new ArgumentException(exceptionMessage);
+         }
+      }
+
+      /// <summary>
+      /// Ignores a property or field when <seealso cref="StrictMode"/> is enabled.
+      /// Used in advanced scenarios to ignore hidden properties or fields.
+      /// </summary>
+      /// <param name="propertyOrFieldName">The property name or field name of the member to create a rule for.</param>
+      public virtual Faker<T> Ignore(string propertyOrFieldName)
+      {
+         EnsureMemberExists(propertyOrFieldName,
+            $"The property or field {propertyOrFieldName} was not found on {typeof(T)}. " +
+            $"Can't ignore member {typeof(T)}.{propertyOrFieldName} when {propertyOrFieldName} " +
+            $"cannot be found. Try creating a custom IBinder for Faker<T> with the appropriate " +
+            $"System.Reflection.BindingFlags that allows deeper reflection into {typeof(T)}.");
+
+         var rule = new PopulateAction<T>
+            {
+               Action = null,
+               RuleSet = currentRuleSet,
+               PropertyName = propertyOrFieldName
+            };
+
+         this.Actions.Add(currentRuleSet, propertyOrFieldName, rule);
+
+         return this;
+      }
+
+      /// <summary>
       /// Ignores a property or field when <seealso cref="StrictMode"/> is enabled.
       /// </summary>
       public virtual Faker<T> Ignore<TPropertyOrField>(Expression<Func<T, TPropertyOrField>> propertyOrField)
       {
          var propNameOrField = PropertyName.For(propertyOrField);
 
-         if( !this.TypeProperties.TryGetValue(propNameOrField, out MemberInfo mi) )
-         {
-            throw new ArgumentException(
-               $"The property or field {propNameOrField} was not found on {typeof(T)} during the binding discovery of T. Can't ignore something that doesn't exist.");
-         }
-
-         var rule = new PopulateAction<T>
-            {
-               Action = null,
-               RuleSet = currentRuleSet,
-               PropertyName = propNameOrField
-            };
-
-         this.Actions.Add(currentRuleSet, propNameOrField, rule);
-
-         return this;
+         return Ignore(propNameOrField);
       }
 
       /// <summary>

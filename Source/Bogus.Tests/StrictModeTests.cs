@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Bogus.Tests
 {
-   public class StrictModeTests
+   public class StrictModeTests : SeededTest
    {
       [Fact]
       public void should_throw_exception_on_incomplete_rules()

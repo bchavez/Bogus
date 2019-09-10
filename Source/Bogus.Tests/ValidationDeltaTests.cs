@@ -3,7 +3,7 @@ using Xunit;
 
 namespace Bogus.Tests
 {
-   public class ValidationDeltaTests
+   public class ValidationDeltaTests : SeededTest
    {
       [Fact]
       public void should_be_valid_and_not_throw_exception_on_complete_rules_with_ignore()

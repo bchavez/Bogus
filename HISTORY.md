@@ -2,8 +2,8 @@
 Release Date: 2019-09-10
 
 * Added `Faker<T>.RuleFor(string, (f, t) => )` overload.
-* Internal re-factoring internal `.RuleFor` overload logic. Simplified overload call chain.
-* Internal `Faker<T>.RuleForInternal` renamed to `Faker<T>.AddRule`
+* Internal re-factoring `.RuleFor` overload logic. Simplified overload call chain.
+* Internal `Faker<T>.RuleForInternal()` renamed to `Faker<T>.AddRule()`
 
 ## v28.1.1
 Release Date: 2019-09-09

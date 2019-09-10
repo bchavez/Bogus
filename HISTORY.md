@@ -1,3 +1,8 @@
+## v28.1.1
+Release Date: 2019-09-09
+
+* Issue 253, PR 254: New rule overload for `Faker<T>.RuleFor('string',...)`. Helps cases that require rules for protected or hidden members of `T`.
+
 ## v28.0.3
 Release Date: 2019-08-28
 

@@ -49,7 +49,7 @@ namespace Bogus.Tests.GitHubIssues
             var memberName = parts[0].Trim();
             var handlebarRule = parts[1].Trim();
 
-            this.RuleFor(memberName, f => f.Parse($"{handlebarRule}"));
+            this.RuleForInternal(memberName, f => f.Parse($"{handlebarRule}"));
          }
 
          return this;

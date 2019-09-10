@@ -176,18 +176,7 @@ namespace Bogus
       {
          var propName = PropertyName.For(property);
 
-         Func<Faker, T, object> invoker = (f, t) => setter(f, t);
-
-         var rule = new PopulateAction<T>
-            {
-               Action = invoker,
-               RuleSet = currentRuleSet,
-               PropertyName = propName
-            };
-
-         this.Actions.Add(currentRuleSet, propName, rule);
-
-         return this;
+         return AddRule(propName, (f, t) => setter(f, t));
       }
 
       /// <summary>
@@ -195,7 +184,19 @@ namespace Bogus
       /// </summary>
       public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)
       {
-         return RuleFor(property, f => value);
+         var propName = PropertyName.For(property);
+
+         return AddRule(propName, (f, t) => value);
+      }
+
+      /// <summary>
+      /// Creates a rule for a property.
+      /// </summary>
+      public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
+      {
+         var propName = PropertyName.For(property);
+
+         return AddRule(propName, (f, t) => valueFunction());
       }
 
       /// <summary>
@@ -205,7 +206,7 @@ namespace Bogus
       {
          var propName = PropertyName.For(property);
 
-         return RuleForInternal(propName, setter);
+         return AddRule(propName, (f, t) => setter(f));
       }
 
       /// <summary>
@@ -221,13 +222,27 @@ namespace Bogus
             $"cannot be found. Try creating a custom IBinder for Faker<T> with the appropriate " +
             $"System.Reflection.BindingFlags that allows deeper reflection into {typeof(T)}.");
 
-         return RuleForInternal(propertyOrFieldName, setter);
+         return AddRule(propertyOrFieldName, (f, t) => setter(f));
       }
 
-      protected virtual Faker<T> RuleForInternal<TProperty>(string propertyOrField, Func<Faker, TProperty> setter)
+      /// <summary>
+      /// Create a rule for a hidden property or field.
+      /// Used in advanced scenarios to create rules for hidden properties or fields.
+      /// </summary>
+      /// <param name="propertyOrFieldName">The property name or field name of the member to create a rule for.</param>
+      public virtual Faker<T> RuleFor<TProperty>(string propertyOrFieldName, Func<Faker, T, TProperty> setter)
       {
-         Func<Faker, T, object> invoker = (f, t) => setter(f);
+         EnsureMemberExists(propertyOrFieldName,
+            $"The property or field {propertyOrFieldName} was not found on {typeof(T)}. " +
+            $"Can't create a rule for {typeof(T)}.{propertyOrFieldName} when {propertyOrFieldName} " +
+            $"cannot be found. Try creating a custom IBinder for Faker<T> with the appropriate " +
+            $"System.Reflection.BindingFlags that allows deeper reflection into {typeof(T)}.");
+         
+         return AddRule(propertyOrFieldName, (f, t) => setter(f, t));
+      }
 
+      protected virtual Faker<T> AddRule(string propertyOrField, Func<Faker, T, object> invoker)
+      {
          var rule = new PopulateAction<T>
             {
                Action = invoker,
@@ -266,23 +281,6 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Creates a rule for a property.
-      /// </summary>
-      public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction)
-      {
-         return RuleFor(property, (f) => valueFunction());
-      }
-
-      /// <summary>
-      /// Not Implemented: This method only exists as a work around for Visual Studio IntelliSense. See: https://github.com/bchavez/Bogus/issues/54
-      /// </summary>
-      [Obsolete("This exists here only as a Visual Studio IntelliSense work around. See: https://github.com/bchavez/Bogus/issues/54", true)]
-      public void RuleFor<TProperty>(Expression<Func<T, TProperty>> property)
-      {
-         throw new NotImplementedException();
-      }
-
-      /// <summary>
       /// Creates one rule for all types of <typeparamref name="TType"/> on type <typeparamref name="T"/>.
       /// In other words, if you have <typeparamref name="T"/> with many fields or properties of
       /// type <seealso cref="Int32"/> this method allows you to specify a rule for all fields or
@@ -302,7 +300,7 @@ namespace Bogus
 
             if( propOrFieldType == type )
             {
-               RuleForInternal(propOrFieldName, setterForType);
+               RuleFor(propOrFieldName, setterForType);
             }
          }
 
@@ -773,6 +771,16 @@ namespace Bogus
       public static implicit operator T(Faker<T> faker)
       {
          return faker.Generate();
+      }
+
+
+      /// <summary>
+      /// Not Implemented: This method only exists as a work around for Visual Studio IntelliSense. See: https://github.com/bchavez/Bogus/issues/54
+      /// </summary>
+      [Obsolete("This exists here only as a Visual Studio IntelliSense work around. See: https://github.com/bchavez/Bogus/issues/54", true)]
+      public void RuleFor<TProperty>(Expression<Func<T, TProperty>> property)
+      {
+         throw new NotImplementedException();
       }
    }
 }

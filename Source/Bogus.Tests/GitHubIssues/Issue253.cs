@@ -56,5 +56,20 @@ namespace Bogus.Tests.GitHubIssues
 
          act.ShouldThrow<ArgumentException>();
       }
+
+      [Fact]
+      public void should_be_able_to_use_rulefor_with_typeT()
+      {
+         var orderFaker = new Faker<Order>()
+            .RuleFor(nameof(Order.OrderId), f => f.IndexVariable++)
+            .RuleFor(nameof(Order.Quantity), f => f.Random.Number(1, 3))
+            .RuleFor(nameof(Order.Item), (f, o) => o.OrderId + f.Commerce.Product());
+
+         var order = orderFaker.Generate();
+
+         order.OrderId.Should().Be(0);
+         order.Quantity.Should().Be(2);
+         order.Item.Should().Be("0Computer");
+      }
    }
 }

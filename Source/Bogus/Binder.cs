@@ -1,3 +1,4 @@
+using Bogus.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,7 +60,7 @@ namespace Bogus
       /// <returns>The full set of MemberInfos for injection.</returns>
       public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
       {
-         var group = t.GetMembers(BindingFlags)
+         var group = t.GetAllMembers(BindingFlags)
             .Where(m =>
                {
                   if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )

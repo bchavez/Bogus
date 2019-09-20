@@ -608,7 +608,6 @@ namespace Bogus
             return;
          }
          
-         // RCB: TypeProperties must contain the parent interface value here, or it's not going to work...
          if (!TypeProperties.TryGetValue(action.PropertyName, out var member)) return;
          if (member == null) return; // Member would be null if this was a .Rules()
                                      // The valueFactory is already invoked

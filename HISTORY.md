@@ -1,3 +1,8 @@
+## v28.3.1
+Release Date: 2019-09-20
+
+* Issue 255 / PR 256: Allows interfaces with `Faker<T>` using `Faker<IFoo>.CustomInstantiator(f => new Foo())`. Thanks Rowland!
+
 ## v28.2.1
 Release Date: 2019-09-10
 

@@ -15,7 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		Directory.Build.props = Directory.Build.props
 		..\HISTORY.md = ..\HISTORY.md
-		paket.dependencies = paket.dependencies
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject

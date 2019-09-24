@@ -934,7 +934,7 @@ As a best practice, to achieve maximum deterministic behavior and unit test robu
   // Don't do this:
   firstOrder.Item.Should().Be("Bike");
 
-  //Instead, do this:
+  // Instead, do this:
   firstOrder.Item.Should().NotBeNullOrWhiteSpace();
   ```
 

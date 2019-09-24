@@ -653,7 +653,7 @@ public void Create_an_SSN()
     code.Dump();
 
     var serial = new Randomizer().Replace("**-****");
-    code.Dump();
+    serial.Dump();
 }
 /* OUTPUT:
 "618-19-3064"
@@ -934,7 +934,7 @@ As a best practice, to achieve maximum deterministic behavior and unit test robu
   // Don't do this:
   firstOrder.Item.Should().Be("Bike");
 
-  //Instead, do this:
+  // Instead, do this:
   firstOrder.Item.Should().NotBeNullOrWhiteSpace();
   ```
 

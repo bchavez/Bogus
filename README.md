@@ -653,7 +653,7 @@ public void Create_an_SSN()
     code.Dump();
 
     var serial = new Randomizer().Replace("**-****");
-    code.Dump();
+    serial.Dump();
 }
 /* OUTPUT:
 "618-19-3064"

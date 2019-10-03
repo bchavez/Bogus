@@ -71,12 +71,6 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void can_get_a_urlpath_with_a_specific_domain()
-      {
-         internet.UrlWithPath(domain: "bitarmory.com").Should().Be("https://bitarmory.com/soft/deposit");
-      }
-
-      [Fact]
       public void can_get_an_email()
       {
          var email = internet.Email();
@@ -121,7 +115,19 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_url_with_path()
       {
-         internet.UrlWithPath().Should().Be("https://ambrose.net/soft/deposit");
+         internet.UrlWithPath().Should().Be("https://bernhard.net/movies--clothing/bedfordshire");
+      }
+
+      [Fact]
+      public void can_get_url_with_path_and_specific_domain()
+      {
+         internet.UrlWithPath(domain: "bitarmory.com").Should().Be("https://bitarmory.com/bluetooth");
+      }
+
+      [Fact]
+      public void can_get_url_with_path_and_extension()
+      {
+         internet.UrlWithPath(fileExtension: "ext").Should().Be("https://bernhard.net/movies--clothing/bedfordshire.ext");
       }
 
       [Fact]
@@ -149,6 +155,24 @@ namespace Bogus.Tests.DataSetTests
          Enumerable.Range(1, 200).Select(
                i => internet.UserAgent())
             .Dump();
+      }
+
+      [Fact]
+      public void can_get_path()
+      {
+         internet.Path().Should().Be("/soft/deposit");
+      }
+
+      [Fact]
+      public void can_get_path_with_extension()
+      {
+         internet.Path(".ext").Should().Be("/soft/deposit.ext");
+      }
+
+      [Fact]
+      public void can_get_path_with_extension_adds_period_if_needed()
+      {
+         internet.Path("ext").Should().Be("/soft/deposit.ext");
       }
 
       [Theory]

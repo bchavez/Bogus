@@ -299,15 +299,27 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="protocol">Protocol part of the URL, random if null</param>
       /// <param name="domain">Domain part of the URL, random if null</param>
+      /// <param name="fileExtension">File extension to append to path.</param>
       /// <returns>An URL with a random path.</returns>
-      public string UrlWithPath(string protocol = null, string domain = null)
+      public string UrlWithPath(string protocol = null, string domain = null, string fileExtension = null)
+      {
+         return $"{Url(protocol, domain)}{Path(fileExtension)}";
+      }
+
+      /// <summary>
+      /// Get a random path
+      /// </summary>
+      /// <param name="fileExtension">File extension to append to path.</param>
+      /// <returns>A path with leading slash and provided extension.</returns>
+      public string Path(string fileExtension = null)
       {
          var words = Random.WordsArray(1, 3)
             .Select(Utils.Slugify)
             .Select(s => s.ToLower())
             .ToArray();
 
-         return $"{Url(protocol, domain)}/{Utils.Slashify(words)}";
+         return
+            $"/{Utils.Slashify(words)}{(string.IsNullOrEmpty(fileExtension) ? fileExtension : "." + fileExtension.TrimStart('.'))}";
       }
 
       private string Url(string protocol, string domain)

@@ -1,3 +1,8 @@
+## v28.3.2
+Release Date: 2019-10-04
+
+* PR 259: Fixes `.GenerateForever(ruleset)` to use ruleset parameter when supplied as argument. Thanks @StanleyGoldman!
+
 ## v28.3.1
 Release Date: 2019-09-20
 

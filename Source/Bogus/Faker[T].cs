@@ -516,7 +516,7 @@ namespace Bogus
       {
          while( true )
          {
-            yield return this.Generate();
+            yield return this.Generate(ruleSets);
          }
       }
 

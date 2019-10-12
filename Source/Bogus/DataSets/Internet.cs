@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Text.RegularExpressions;
 using Bogus.Extensions;
 using Bogus.Vendor;
@@ -163,6 +164,28 @@ namespace Bogus.DataSets
          var bytes = Random.Bytes(16);
          return
             $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
+      }
+
+      /// <summary>
+      /// Gets a random IPv4 IPEndPoint.
+      /// </summary>
+      /// <returns>A random IPv4 IPEndPoint.</returns>
+      public IPEndPoint IpEndPoint()
+      {
+         return new IPEndPoint(
+            new IPAddress(Random.Bytes(4)),
+            Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort));
+      }
+
+      /// <summary>
+      /// Gets a random IPv6 IPEndPoint.
+      /// </summary>
+      /// <returns>A random IPv6 IPEndPoint.</returns>
+      public IPEndPoint Ipv6EndPoint()
+      {
+         return new IPEndPoint(
+            new IPAddress(Random.Bytes(16)),
+            Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort));
       }
 
       private UserAgentGenerator userAgentGenerator;

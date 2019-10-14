@@ -188,7 +188,7 @@ namespace Bogus.DataSets
       public IPEndPoint IpEndPoint()
       {
          var address = this.IpAddress();
-         var port = this.Random.Int( IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
+         var port = this.Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
          return new IPEndPoint(address, port);
       }
 
@@ -200,7 +200,7 @@ namespace Bogus.DataSets
       {
          var address = this.Ipv6Address();
          var port = this.Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
-         return new IPEndPoint(address,port);
+         return new IPEndPoint(address, port);
       }
 
       private UserAgentGenerator userAgentGenerator;

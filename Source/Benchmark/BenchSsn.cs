@@ -13,13 +13,15 @@ namespace Benchmark
       [GlobalSetup]
       public void Setup()
       {
-         r = new Randomizer();
+         r = new Randomizer(1337);
       }
 
       [Benchmark]
       public void SsnAlgo1()
       {
          var a = r.Int(1, 898);
+         if (a == 666) a++;
+
          var b = r.Int(1, 99);
          var c = r.Int(1, 9999);
 
@@ -30,6 +32,8 @@ namespace Benchmark
       public void SsnAlgo2()
       {
          var a = r.Int(1, 898);
+         if (a == 666) a++;
+
          var b = r.Int(1, 99);
          var c = r.Int(1, 9999);
 
@@ -39,17 +43,21 @@ namespace Benchmark
       [Benchmark]
       public void SsnAlgo3()
       {
-         // 898 = 0b1110000010
-
          var x = r.Int();
 
-         var a = x & 0xFFC00000 >> 22;
+         // right shift all bits except fir the first 10 bits = 2^10 = 1024.
+         var a = (x >> (32 - 10)) % 898;
+         if (a == 0 || a == 666) a++;
 
-         var b = x & 0x003F ;
+         // use the first 7 bits = 2^7 = 128 
+         var b = (x & 0x7F);
+         if (b == 0) b++;
 
-         var c = (x << 10 + 7 + 10);
+         // last 2^14 = 16384, for last 4 digits of SSN
+         var c = (x >> 7) & 0x3FFF;
+         if (c == 0) c++;
 
-
+         var result = $"{a:000}-{b:00}-{c:0000}";
       }
    }
 }

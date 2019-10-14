@@ -15,7 +15,7 @@ namespace Benchmark
       //   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")]
       public string Pool { get; set; } = "abcdefghijklmnopqrstuvwxyz";
 
-      [Setup]
+      [GlobalSetup]
       public void Setup()
       {
          this.r = new Randomizer();

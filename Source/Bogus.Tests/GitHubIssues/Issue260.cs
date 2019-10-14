@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -14,26 +15,27 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void generate_new_ssn()
+      public void fast_algo3_test()
       {
          var r = new Randomizer();
 
          var x = r.Int();
 
-         var a = (x << 10) & 0b1111_1111_10;
+         // right shift all bits except fir the first 10 bits = 2^10 = 1024.
+         var a = (x >> (32 - 10)) % 898;
+         if( a == 0 || a == 666 ) a++;
 
-         var b = (x << 10 + 7);
+         // use the first 7 bits = 2^7 = 128 
+         var b = (x & 0x7F);
+         if( b == 0 ) b++;
 
-         var c = (x << 10 + 7 + 10);
-
-         console.Dump(Convert.ToString(x, 2));
-         console.Dump(Convert.ToString(a, 2));
-         console.Dump(Convert.ToString(b, 2));
-         console.Dump(Convert.ToString(c, 2));
+         // last 2^14 = 16384, for last 4 digits of SSN
+         var c = (x >> 7) & 0x3FFF;
+         if( c == 0 ) c++;
 
          var result = $"{a:000}-{b:00}-{c:0000}";
 
-         console.Dump(result);
+         result.Should().Be("309-89-0111");
       }
    }
 }

@@ -147,12 +147,21 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Gets a random IP address.
+      /// Gets a random IP address string.
       /// </summary>
       /// <returns>A random IP address.</returns>
       public string Ip()
       {
          return $"{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
+      }
+
+      /// <summary>
+      /// Gets a random IPAddress type.
+      /// </summary>
+      public IPAddress IpAddress()
+      {
+         var address = new IPAddress(this.Random.Bytes(4));
+         return address;
       }
 
       /// <summary>
@@ -166,15 +175,21 @@ namespace Bogus.DataSets
             $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
       }
 
+      public IPAddress Ipv6Address()
+      {
+         var address = new IPAddress(this.Random.Bytes(16));
+         return address;
+      }
+
       /// <summary>
       /// Gets a random IPv4 IPEndPoint.
       /// </summary>
       /// <returns>A random IPv4 IPEndPoint.</returns>
       public IPEndPoint IpEndPoint()
       {
-         return new IPEndPoint(
-            new IPAddress(Random.Bytes(4)),
-            Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort));
+         var address = this.IpAddress();
+         var port = this.Random.Int( IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
+         return new IPEndPoint(address, port);
       }
 
       /// <summary>
@@ -183,9 +198,9 @@ namespace Bogus.DataSets
       /// <returns>A random IPv6 IPEndPoint.</returns>
       public IPEndPoint Ipv6EndPoint()
       {
-         return new IPEndPoint(
-            new IPAddress(Random.Bytes(16)),
-            Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort));
+         var address = this.Ipv6Address();
+         var port = this.Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
+         return new IPEndPoint(address,port);
       }
 
       private UserAgentGenerator userAgentGenerator;

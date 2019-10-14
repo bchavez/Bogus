@@ -1,3 +1,8 @@
+## v28.4.1
+Release Date: 2019-10-14
+
+* Issue 260: Improved social security number (SSN) generation that should pass basic validation by avoiding invalid SSN ranges. Note: Deterministic SSNs created in prior versions will change in this version.
+
 ## v28.3.2
 Release Date: 2019-10-04
 
@@ -224,7 +229,9 @@ Release Date: 2018-03-02
 * Bogus now throws exceptions for locales it doesn't recognize. Improves developer experience.
 * New extension method `.ToBogusLocale()` on `System.Globalization.CultureInfo` to help translate from **.NET** locale codes to **Bogus** locale codes.
 
-## v22.0.3 
+## v22.0.3
+Release Date: 2018-02-27
+ 
 * Generate more realistic Bitcoin addresses.
 * New extension method `Faker<T>.GenerateBetween(min, max)` that generates N objects between `min` and `max`. Located in `Bogus.Extensions`. N should be considered non-deterministic but technically depends on the parameters each time this extension method was called. 
 * Added `Lorem.Paragraphs(min, max)` overload.

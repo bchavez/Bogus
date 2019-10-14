@@ -49,7 +49,7 @@ namespace Bogus.Tests
       public void check_ssn_on_person()
       {
          var p = new Person();
-         p.Ssn().Should().Be("869-28-7971");
+         p.Ssn().Should().Be("771-62-9016");
       }
 
       [Fact]

@@ -6,7 +6,7 @@ namespace Benchmark
    {
       static void Main()
       {
-         BenchmarkRunner.Run<BenchGenerate>();
+         BenchmarkRunner.Run<BenchSsn>();
       }
    }
 }

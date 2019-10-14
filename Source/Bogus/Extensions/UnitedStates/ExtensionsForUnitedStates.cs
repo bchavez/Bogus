@@ -20,7 +20,17 @@ namespace Bogus.Extensions.UnitedStates
          }
 
          var randomizer = p.Random;
-         var ssn = randomizer.ReplaceNumbers("###-##-####");
+
+         //See Issue 260, SSN validity:
+         // https://secure.ssa.gov/apps10/poms.nsf/lnx/0110201035
+
+         var a = randomizer.Int(1, 898);
+         if (a == 666) a++;
+
+         var b = randomizer.Int(1, 99);
+         var c = randomizer.Int(1, 9999);
+
+         var ssn = $"{a:000}-{b:00}-{c:0000}";
 
          p.context[Key] = ssn;
 

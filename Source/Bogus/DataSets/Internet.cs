@@ -152,7 +152,7 @@ namespace Bogus.DataSets
       /// <returns>A random IP address.</returns>
       public string Ip()
       {
-         return $"{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
+         return $"{Random.Number(1, 255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
       }
 
       /// <summary>
@@ -160,7 +160,9 @@ namespace Bogus.DataSets
       /// </summary>
       public IPAddress IpAddress()
       {
-         var address = new IPAddress(this.Random.Bytes(4));
+         var bytes = this.Random.Bytes(4);
+         if( bytes[0] == 0 ) bytes[0]++;
+         var address = new IPAddress(bytes);
          return address;
       }
 
@@ -170,7 +172,7 @@ namespace Bogus.DataSets
       /// <returns>A random IPv6 address.</returns>
       public string Ipv6()
       {
-         var bytes = Random.Bytes(16);
+         var bytes = this.Random.Bytes(16);
          return
             $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
       }

@@ -1,8 +1,9 @@
 ## v28.4.1
 Release Date: 2019-10-14
 
-* Issue 260: Improved social security number (SSN) generation that should pass basic validation by avoiding invalid SSN ranges. Note: Deterministic SSNs created in prior versions will change in this version.
-* PR 261: Added `Internet.IpAddress`, `Internet.Ipv6Address`, `Internet.IpEndPoint`, and `Internet.Ipv6EndPoint`.
+* Issue 260: Improved social security number (SSN) generation that should pass basic validation by avoiding invalid SSN ranges. Note: Deterministic SSNs generated with `Person.Ssn()` will change.
+* PR 261: Added `Internet.IpAddress()`, `Internet.Ipv6Address()`, `Internet.IpEndPoint()`, and `Internet.Ipv6EndPoint()`.
+* Issue 252: `Internet.Ip()` now avoids generating IP addresses with a leading zero. For example, Bogus will not generate an IP address with a leading zero like 0.1.2.3. Note: Deterministic IPs generated with `Internet.Ip()` will change.
 
 ## v28.3.2
 Release Date: 2019-10-04

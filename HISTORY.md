@@ -2,6 +2,7 @@
 Release Date: 2019-10-14
 
 * Issue 260: Improved social security number (SSN) generation that should pass basic validation by avoiding invalid SSN ranges. Note: Deterministic SSNs created in prior versions will change in this version.
+* PR 261: Added `Internet.IpAddress`, `Internet.Ipv6Address`, `Internet.IpEndPoint`, and `Internet.Ipv6EndPoint`.
 
 ## v28.3.2
 Release Date: 2019-10-04

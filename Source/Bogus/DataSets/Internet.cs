@@ -148,39 +148,22 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Gets a random IP address string.
+      /// Gets a random IPv4 address string.
       /// </summary>
-      /// <returns>A random IP address.</returns>
+      /// <returns>A random IPv4 address.</returns>
       public string Ip()
       {
          return $"{Random.Number(1, 255)}.{Random.Number(255)}.{Random.Number(255)}.{Random.Number(255)}";
       }
 
       /// <summary>
-      /// Gets a random IPAddress type.
+      /// Gets a random IPv4 IPAddress type.
       /// </summary>
       public IPAddress IpAddress()
       {
          var bytes = this.Random.Bytes(4);
          if( bytes[0] == 0 ) bytes[0]++;
          var address = new IPAddress(bytes);
-         return address;
-      }
-
-      /// <summary>
-      /// Generates a random IPv6 address.
-      /// </summary>
-      /// <returns>A random IPv6 address.</returns>
-      public string Ipv6()
-      {
-         var bytes = this.Random.Bytes(16);
-         return
-            $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
-      }
-
-      public IPAddress Ipv6Address()
-      {
-         var address = new IPAddress(this.Random.Bytes(16));
          return address;
       }
 
@@ -193,6 +176,27 @@ namespace Bogus.DataSets
          var address = this.IpAddress();
          var port = this.Random.Int(IPEndPoint.MinPort + 1, IPEndPoint.MaxPort);
          return new IPEndPoint(address, port);
+      }
+
+      /// <summary>
+      /// Generates a random IPv6 address string.
+      /// </summary>
+      /// <returns>A random IPv6 address.</returns>
+      public string Ipv6()
+      {
+         var bytes = this.Random.Bytes(16);
+         return
+            $"{bytes[0]:x}{bytes[1]:x}:{bytes[2]:x}{bytes[3]:x}:{bytes[4]:x}{bytes[5]:x}:{bytes[6]:x}{bytes[7]:x}:{bytes[8]:x}{bytes[9]:x}:{bytes[10]:x}{bytes[11]:x}:{bytes[12]:x}{bytes[13]:x}:{bytes[14]:x}{bytes[15]:x}";
+      }
+
+      /// <summary>
+      /// Generate a random IPv6 IPAddress type.
+      /// </summary>
+      /// <returns></returns>
+      public IPAddress Ipv6Address()
+      {
+         var address = new IPAddress(this.Random.Bytes(16));
+         return address;
       }
 
       /// <summary>

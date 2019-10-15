@@ -336,6 +336,7 @@ public void Using_FakerT_Inheritance()
 * **`Images`**
 	* `DataUri` - Get a SVG data URI image with a specific width and height.
 	* `PicsumUrl` - Get an image from the https://picsum.photos service.
+	* `PlaceholderUrl` - Get an image from https://placeholder.com service.
 	* `LoremFlickrUrl` - Get an image from https://loremflickr.com service.
 	* `LoremPixelUrl` - Creates an image URL with http://lorempixel.com. Note: This service is slow. Consider using PicsumUrl() as a faster alternative.
     	* `Abstract` - Gets an abstract looking image.
@@ -356,21 +357,27 @@ public void Using_FakerT_Inheritance()
 	* `Email` - Generates an email address.
 	* `ExampleEmail` - Generates an example email with @example.com.
 	* `UserName` - Generates user names.
+	* `UserNameUnicode` - Generates a user name preserving Unicode characters.
 	* `DomainName` - Generates a random domain name.
 	* `DomainWord` - Generates a domain word used for domain names.
 	* `DomainSuffix` - Generates a domain name suffix like .com, .net, .org
-	* `Ip` - Gets a random IP address.
-	* `Ipv6` - Generates a random IPv6 address.
+	* `Ip` - Gets a random IPv4 address string.
+	* `IpAddress` - Gets a random IPv4 IPAddress type.
+	* `IpEndPoint` - Gets a random IPv4 IPEndPoint.
+	* `Ipv6` - Generates a random IPv6 address string.
+	* `Ipv6Address` - Generate a random IPv6 IPAddress type.
+	* `Ipv6EndPoint` - Gets a random IPv6 IPEndPoint.
 	* `UserAgent` - Generates a random user agent.
 	* `Mac` - Gets a random mac address.
 	* `Password` - Generates a random password.
 	* `Color` - Gets a random aesthetically pleasing color near the base RGB. See [here](http://stackoverflow.com/questions/43044/algorithm-to-randomly-generate-an-aesthetically-pleasing-color-palette).
 	* `Protocol` - Returns a random protocol. HTTP or HTTPS.
 	* `Url` - Generates a random URL.
-	* `UrlWithPath` - Get a random URL with random path.
+	* `UrlWithPath` - Get an absolute URL with random path.
+	* `UrlRootedPath` - Get a rooted URL path like: /foo/bar. Optionally with file extension.
 * **`Lorem`**
 	* `Word` - Get a random lorem word.
-	* `Words` - Get some lorem words
+	* `Words` - Get an array of random lorem words.
 	* `Letter` - Get a character letter.
 	* `Sentence` - Get a random sentence of specific number of words.
 	* `Sentences` - Get some sentences.
@@ -400,6 +407,7 @@ public void Using_FakerT_Inheritance()
 	* `FileName` - Get a random file name.
 	* `DirectoryPath` - Get a random directory path (Unix).
 	* `FilePath` - Get a random file path (Unix).
+	* `CommonFileName` - Generates a random file name with a common file extension.
 	* `MimeType` - Get a random mime type
 	* `CommonFileType` - Returns a commonly used file type.
 	* `CommonFileExt` - Returns a commonly used file extension.

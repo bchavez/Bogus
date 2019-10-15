@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -335,19 +336,33 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random URL with random path.
+      /// Get an absolute URL with random path.
       /// </summary>
       /// <param name="protocol">Protocol part of the URL, random if null</param>
       /// <param name="domain">Domain part of the URL, random if null</param>
+      /// <param name="fileExt">The file extension to use in the path, directory if null</param>
       /// <returns>An URL with a random path.</returns>
-      public string UrlWithPath(string protocol = null, string domain = null)
+      public string UrlWithPath(string protocol = null, string domain = null, string fileExt = null)
+      {
+         var path = UrlRootedPath(fileExt);
+         return $"{Url(protocol, domain)}{path}";
+      }
+
+      /// <summary>
+      /// Get a rooted URL path like: /foo/bar. Optionally with file extension.
+      /// </summary>
+      /// <param name="fileExt">Optional: The file extension to use. If <paramref name="fileExt"/> is null, then a rooted URL directory is returned.</param>
+      /// <returns>Returns a rooted URL path like: /foo/bar; optionally with a file extension.</returns>
+      public string UrlRootedPath(string fileExt = null)
       {
          var words = Random.WordsArray(1, 3)
             .Select(Utils.Slugify)
             .Select(s => s.ToLower())
             .ToArray();
 
-         return $"{Url(protocol, domain)}/{Utils.Slashify(words)}";
+         var path = $"/{Utils.Slashify(words)}";
+
+         return Path.ChangeExtension(path, fileExt);
       }
 
       private string Url(string protocol, string domain)

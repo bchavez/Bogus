@@ -122,6 +122,7 @@ namespace Bogus.Tests.DataSetTests
       public void can_get_url_with_path()
       {
          internet.UrlWithPath().Should().Be("https://ambrose.net/soft/deposit");
+         internet.UrlRootedPath();
       }
 
       [Fact]

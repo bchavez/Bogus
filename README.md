@@ -473,7 +473,7 @@ public void Using_FakerT_Inheritance()
 #### API Extension Methods
 * **`using Bogus.Extensions.Brazil;`**
 	* `Bogus.Person.Cpf()` - Cadastro de Pessoas Físicas
-	* `Bogus.DataSets.Company.Cnpj()` - Cadastro Nacional da Pessoa Jurídica
+	* `Bogus.Company.Cnpj()` - Cadastro Nacional da Pessoa Jurídica
 * **`using Bogus.Extensions.Canada;`**
 	* `Bogus.Person.Sin()` - Social Insurance Number for Canada
 * **`using Bogus.Extensions.Denmark;`**

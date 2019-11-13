@@ -918,7 +918,7 @@ Order MakeOrder(int seed){
 
 var orders = Enumerable.Range(1,5)
    .Select(MakeOrder)
-   .ToList();;
+   .ToList();
 
 orders.Dump();
 ````

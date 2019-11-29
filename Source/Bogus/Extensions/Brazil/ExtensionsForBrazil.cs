@@ -10,7 +10,6 @@ namespace Bogus.Extensions.Brazil
    {
       private static readonly int[] CpfWeights = {10, 9, 8, 7, 6, 5, 4, 3, 2};
       private static readonly int[] CnpjWeights = {2, 3, 4, 5, 6, 7, 8, 9, 2, 3, 4, 5, 6};
-
       /// <summary>
       /// Cadastro de Pessoas Físicas
       /// </summary>
@@ -56,7 +55,10 @@ namespace Bogus.Extensions.Brazil
 
          return final;
       }
-
+      /// <summary>
+      /// Cadastro de Pessoas Físicas sem pontuação
+      /// </summary>
+      public static ulong NumericCpf(this Person p) => ToNumeric(p.Cpf());
       /// <summary>
       /// Cadastro Nacional da Pessoa Jurídica
       /// </summary>
@@ -83,5 +85,13 @@ namespace Bogus.Extensions.Brazil
          var final = $"{all[0]}{all[1]}.{all[2]}{all[3]}{all[4]}.{all[5]}{all[6]}{all[7]}/{all[8]}{all[9]}{all[10]}{all[11]}-{all[12]}{all[13]}";
          return final;
       }
+      /// <summary>
+      /// Cadastro de Pessoas Físicas sem pontuação
+      /// </summary>
+      public static ulong NumericCnpj(this Company c) => ToNumeric(c.Cnpj());
+      /// <summary>
+      /// Converte CPF e CNPJ para um número (remove a formatação)
+      /// </summary>
+      private static ulong ToNumeric(string doc) => ulong.Parse(string.Join(string.Empty, doc.Split(new char[] { '.', '/', '-' }, System.StringSplitOptions.RemoveEmptyEntries)));
    }
 }

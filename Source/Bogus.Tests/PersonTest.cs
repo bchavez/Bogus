@@ -101,6 +101,30 @@ namespace Bogus.Tests
       }
 
       [Fact]
+      public void can_generate_numeric_cpf_for_brazil()
+      {
+         var obtained = Get(10, p => p.NumericCpf());
+
+         console.Dump(obtained);
+
+         var expect = new[]
+            {
+               (ulong)86928797118,
+               (ulong)59526934580,
+               (ulong)79830732916,
+               (ulong)88584412301,
+               (ulong)81854283529,
+               (ulong)96398934040,
+               (ulong)00647515709,
+               (ulong)62940003513,
+               (ulong)65867663116,
+               (ulong)79247813905
+            };
+
+         obtained.Should().Equal(expect);
+      }
+
+      [Fact]
       public void can_generate_cpr_number_for_denmark()
       {
          var p = new Person();
@@ -149,7 +173,7 @@ namespace Bogus.Tests
          );
          console.WriteLine(emails.DumpString());
       }
-      
+
       [Fact]
       public void person_has_full_name()
       {
@@ -185,9 +209,9 @@ namespace Bogus.Tests
 
          Date.SystemClock = () => DateTime.Now;
       }
-      
 
-      IEnumerable<string> Get(int times, Func<Person, string> a)
+
+      IEnumerable<T> Get<T>(int times, Func<Person, T> a)
       {
          return Enumerable.Range(0, times)
             .Select(i =>

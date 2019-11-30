@@ -1,3 +1,8 @@
+## v28.4.2
+Release Date: 2019-11-30
+
+* PR 269: Adds `includeFormatSymbols` parameter to include or exclude formatting characters for Brazil `Person.Cpf()` and `Company.Cnpj()` extension methods.
+
 ## v28.4.1
 Release Date: 2019-10-14
 

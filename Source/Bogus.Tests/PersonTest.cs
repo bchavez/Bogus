@@ -101,24 +101,48 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void can_generate_numeric_cpf_for_brazil()
+      public void can_generate_cpf_for_brazil_without_formatting()
       {
-         var obtained = Get(10, p => p.NumericCpf());
+         var obtained = Get(10, p => p.Cpf(includeFormatSymbols: false));
 
          console.Dump(obtained);
 
          var expect = new[]
             {
-               (ulong)86928797118,
-               (ulong)59526934580,
-               (ulong)79830732916,
-               (ulong)88584412301,
-               (ulong)81854283529,
-               (ulong)96398934040,
-               (ulong)00647515709,
-               (ulong)62940003513,
-               (ulong)65867663116,
-               (ulong)79247813905
+               "86928797118",
+               "59526934580",
+               "79830732916",
+               "88584412301",
+               "81854283529",
+               "96398934040",
+               "00647515709",
+               "62940003513",
+               "65867663116",
+               "79247813905"
+            };
+
+         obtained.Should().Equal(expect);
+      }
+
+      [Fact]
+      public void can_generate_numeric_cpf_for_brazil()
+      {
+         var obtained = Get(10, p => p.CpfNumeric());
+
+         console.Dump(obtained);
+
+         var expect = new ulong[]
+            {
+               86928797118,
+               59526934580,
+               79830732916,
+               88584412301,
+               81854283529,
+               96398934040,
+               00647515709,
+               62940003513,
+               65867663116,
+               79247813905
             };
 
          obtained.Should().Equal(expect);

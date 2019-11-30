@@ -14,7 +14,8 @@ namespace Bogus.Extensions.Brazil
       /// <summary>
       /// Cadastro de Pessoas Físicas
       /// </summary>
-      public static string Cpf(this Person p)
+      /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
+      public static string Cpf(this Person p, bool includeFormatSymbols = true)
       {
          const string Key = nameof(ExtensionsForBrazil) + "CPF";
          if( p.context.ContainsKey(Key) )
@@ -50,7 +51,15 @@ namespace Bogus.Extensions.Brazil
 
          var all = digits.Concat(new[] {check1, check2}).ToArray();
 
-         var final = $"{all[0]}{all[1]}{all[2]}.{all[3]}{all[4]}{all[5]}.{all[6]}{all[7]}{all[8]}-{all[9]}{all[10]}";
+         string final;
+         if( includeFormatSymbols )
+         {
+            final = $"{all[0]}{all[1]}{all[2]}.{all[3]}{all[4]}{all[5]}.{all[6]}{all[7]}{all[8]}-{all[9]}{all[10]}";
+         }
+         else
+         {
+            final = $"{all[0]}{all[1]}{all[2]}{all[3]}{all[4]}{all[5]}{all[6]}{all[7]}{all[8]}{all[9]}{all[10]}";
+         }
 
          p.context[Key] = final;
 
@@ -60,7 +69,8 @@ namespace Bogus.Extensions.Brazil
       /// <summary>
       /// Cadastro Nacional da Pessoa Jurídica
       /// </summary>
-      public static string Cnpj(this Company c)
+      /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
+      public static string Cnpj(this Company c, bool includeFormatSymbols = true)
       {
          var digits = c.Random.Digits(12);
          digits[8] = 0;
@@ -80,7 +90,17 @@ namespace Bogus.Extensions.Brazil
             secondDigit = 0;
 
          var all = digits.Concat(new[] {firstDigit, secondDigit}).ToArray();
-         var final = $"{all[0]}{all[1]}.{all[2]}{all[3]}{all[4]}.{all[5]}{all[6]}{all[7]}/{all[8]}{all[9]}{all[10]}{all[11]}-{all[12]}{all[13]}";
+
+         string final;
+         if ( includeFormatSymbols )
+         {
+            final = $"{all[0]}{all[1]}.{all[2]}{all[3]}{all[4]}.{all[5]}{all[6]}{all[7]}/{all[8]}{all[9]}{all[10]}{all[11]}-{all[12]}{all[13]}";
+         }
+         else
+         {
+            final = $"{all[0]}{all[1]}{all[2]}{all[3]}{all[4]}{all[5]}{all[6]}{all[7]}{all[8]}{all[9]}{all[10]}{all[11]}{all[12]}{all[13]}";
+         }
+
          return final;
       }
    }

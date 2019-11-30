@@ -54,6 +54,12 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_generate_cnpj_for_brazil_without_formatting()
+      {
+         company.Cnpj(includeFormatSymbols: false).Should().Be("61860606000191");
+      }
+
+      [Fact]
       public void can_generate_an_EIN()
       {
          company.Ein().Should().Be("61-8606064");

@@ -67,14 +67,6 @@ namespace Bogus.Extensions.Brazil
       }
 
       /// <summary>
-      /// Cadastro de Pessoas Físicas sem pontuação
-      /// </summary>
-      public static ulong CpfNumeric(this Person p)
-      {
-         return ulong.Parse(p.Cpf(includeFormatSymbols: false));
-      }
-
-      /// <summary>
       /// Cadastro Nacional da Pessoa Jurídica
       /// </summary>
       /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
@@ -110,14 +102,6 @@ namespace Bogus.Extensions.Brazil
          }
 
          return final;
-      }
-
-      /// <summary>
-      /// Cadastro de Pessoas Físicas sem pontuação
-      /// </summary>
-      public static ulong CnpjNumeric(this Company c)
-      {
-         return ulong.Parse(c.Cnpj(includeFormatSymbols: false));
       }
    }
 }

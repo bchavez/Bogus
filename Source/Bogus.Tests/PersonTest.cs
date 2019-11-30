@@ -10,6 +10,7 @@ using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using Z.ExtensionMethods.ObjectExtensions;
 
 namespace Bogus.Tests
 {
@@ -127,7 +128,7 @@ namespace Bogus.Tests
       [Fact]
       public void can_generate_numeric_cpf_for_brazil()
       {
-         var obtained = Get(10, p => p.CpfNumeric());
+         var obtained = Get(10, p => p.Cpf(includeFormatSymbols: false).ToULong());
 
          console.Dump(obtained);
 

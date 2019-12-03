@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Bogus.Bson;
 
@@ -6,8 +7,15 @@ namespace Bogus.DataSets
    /// <summary>
    /// Generates a random company name and phrases
    /// </summary>
-   public class Company : DataSet
+   public class Company : DataSet, IHasContext
    {
+
+      /// <summary>
+      ///context variable to store state from Bogus.Extensions so, they
+      ///keep returning the result on each company. 
+      /// </summary>
+      public Dictionary<string, object> Context { get; } = new Dictionary<string, object>();
+
       /// <summary>
       /// The source to pull names from.
       /// </summary>

@@ -20,7 +20,13 @@ namespace Bogus.Extensions.Brazil
          const string Key = nameof(ExtensionsForBrazil) + "CPF";
          if( p.context.ContainsKey(Key) )
          {
-            return p.context[Key] as string;
+            string contextValue = p.context[Key] as string;
+            
+            if (includeFormatSymbols)
+               return Format(contextValue, @"000\.000\.000\-00");
+
+            return Unformat(contextValue);
+
          }
 
          var digits = p.Random.Digits(9);
@@ -72,6 +78,19 @@ namespace Bogus.Extensions.Brazil
       /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
       public static string Cnpj(this Company c, bool includeFormatSymbols = true)
       {
+
+         const string Key = nameof(ExtensionsForBrazil) + "CNPJ";
+         if (c.Context.ContainsKey(Key))
+         {
+            string contextValue = c.Context[Key] as string;
+
+            if (includeFormatSymbols)
+               return Format(contextValue, @"00\.000\.000\/0000\-00");
+
+            return Unformat(contextValue);
+
+         }
+
          var digits = c.Random.Digits(12);
          digits[8] = 0;
          digits[9] = 0;
@@ -103,5 +122,9 @@ namespace Bogus.Extensions.Brazil
 
          return final;
       }
+
+      private static string Unformat(string text) => text.Replace(".", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty);
+      private static string Format(string text, string format) => ulong.TryParse(text, out ulong numeric) ? numeric.ToString(format) : text;
+
    }
 }

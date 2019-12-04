@@ -17,10 +17,13 @@ namespace Bogus.Extensions.Brazil
       /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
       public static string Cpf(this Person p, bool includeFormatSymbols = true)
       {
+         int[] finalDigits;
+
          const string Key = nameof(ExtensionsForBrazil) + "CPF";
          if( p.context.ContainsKey(Key) )
          {
-            return p.context[Key] as string;
+            finalDigits = p.context[Key] as int[];
+            return FormatCpf(finalDigits, includeFormatSymbols);
          }
 
          var digits = p.Random.Digits(9);
@@ -49,22 +52,25 @@ namespace Bogus.Extensions.Brazil
             check2 = 11 - sum2mod;
          }
 
-         var all = digits.Concat(new[] {check1, check2}).ToArray();
+         finalDigits = digits.Concat(new[] {check1, check2}).ToArray();
 
-         string final;
-         if( includeFormatSymbols )
+         p.context[Key] = finalDigits;
+
+         return FormatCpf(finalDigits, includeFormatSymbols);
+      }
+
+      public static string FormatCpf(int[] digits, bool includeFormatSymbols)
+      {
+         if (includeFormatSymbols)
          {
-            final = $"{all[0]}{all[1]}{all[2]}.{all[3]}{all[4]}{all[5]}.{all[6]}{all[7]}{all[8]}-{all[9]}{all[10]}";
+            return $"{digits[0]}{digits[1]}{digits[2]}.{digits[3]}{digits[4]}{digits[5]}.{digits[6]}{digits[7]}{digits[8]}-{digits[9]}{digits[10]}";
          }
          else
          {
-            final = $"{all[0]}{all[1]}{all[2]}{all[3]}{all[4]}{all[5]}{all[6]}{all[7]}{all[8]}{all[9]}{all[10]}";
+            return $"{digits[0]}{digits[1]}{digits[2]}{digits[3]}{digits[4]}{digits[5]}{digits[6]}{digits[7]}{digits[8]}{digits[9]}{digits[10]}";
          }
-
-         p.context[Key] = final;
-
-         return final;
       }
+
 
       /// <summary>
       /// Cadastro Nacional da Pessoa Jurídica

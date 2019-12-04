@@ -1,3 +1,8 @@
+## v28.4.3
+Release Date: 2019-12-03
+
+* Issue 271: Minor bug fix in Brazil `Person.Cpf()` extension method. Previously, only the first call to `Person.Cpf(includeFormatSymbols)` respected the `includeFormatSymbols` parameter due to the final result being saved in `Person` context. `Person.Cpf()` now respects the `includeFormatSymbols` parameter after subsequent repeat calls to `Cpf()` with the same `Person`. Thanks for testing @ArthNRick!
+
 ## v28.4.2
 Release Date: 2019-11-30
 

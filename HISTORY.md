@@ -1,3 +1,8 @@
+## v28.4.4
+Release Date: 2019-12-03
+
+* PR 272: Add extension method for generating Norwegian national identity numbers. `Person.Fødselsnummer()`. Thanks @mika-s!
+
 ## v28.4.3
 Release Date: 2019-12-03
 

@@ -35,6 +35,12 @@ namespace Bogus.Extensions.Norway
              rejected, and a new individual number has to be generated.
 
             https://www.skatteetaten.no/en/person/national-registry/birth-and-name-selection/children-born-in-norway/national-id-number/
+
+            https://nn.wikipedia.org/wiki/F%C3%B8dselsnummer
+
+            https://github.com/deegane/NINTool/blob/master/backend/src/main/java/com/nin/validation/NorwegianNinValidator.kt
+
+            https://github.com/magnuswatn/fodselsnummer/blob/master/fodselsnummer.py
          */
 
          var r = p.Random;

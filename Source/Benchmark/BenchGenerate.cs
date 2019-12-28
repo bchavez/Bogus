@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Exporters;
 using Bogus;
@@ -46,25 +44,25 @@ namespace Benchmark
       {
          var projects = FakerDefault.Generate(10_000).ToList();
       }
-      
+
 //      [Benchmark]
       public void Generate_CustomInstantiator()
       {
          var projects = FakerDefault.Generate(10_000).ToList();
       }
-      
+
       [Benchmark]
       public void Generate_WithRules()
       {
          var projects = FakerWithRules.Generate(10_000).ToList();
       }
-      
+
       //[Benchmark]
       public void Generate_WithRulesComplex()
       {
          var projects = FakerWithRulesComplex.Generate(10_000).ToList();
       }
-      
+
 //      [Benchmark]
       public void Constructor()
       {

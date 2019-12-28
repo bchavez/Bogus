@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Bogus.DataSets;
+﻿using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
 

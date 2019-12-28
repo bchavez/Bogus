@@ -5,7 +5,6 @@ using System.Text;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using Z.ExtensionMethods;
 
 namespace Bogus.Tests
 {

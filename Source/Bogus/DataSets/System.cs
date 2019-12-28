@@ -193,9 +193,8 @@ namespace Bogus.DataSets
       /// </returns>
       public string FileExt(string mimeType = null)
       {
-         BObject mime;
          if( mimeType != null &&
-             lookup.TryGetValue(mimeType, out mime) &&
+             lookup.TryGetValue(mimeType, out var mime) &&
              mime.ContainsKey("extensions") )
          {
             return this.Random.ArrayElement(mime["extensions"] as BArray);

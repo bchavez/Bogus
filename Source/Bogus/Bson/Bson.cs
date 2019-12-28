@@ -105,8 +105,7 @@ namespace Bogus.Bson
          int i = (int)reader.BaseStream.Position;
          while( reader.BaseStream.Position < i + length - 1 )
          {
-            string name;
-            BValue value = DecodeElement(out name);
+            BValue value = DecodeElement(out var name);
             obj.Add(name, value);
          }
 

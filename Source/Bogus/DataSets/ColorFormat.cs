@@ -14,7 +14,7 @@
       /// </summary>
       Rgb,
       /// <summary>
-      /// Delimited RGB: 77,14,104
+      /// Delimited R,G,B: 77,14,104
       /// </summary>
       Delimited
    }

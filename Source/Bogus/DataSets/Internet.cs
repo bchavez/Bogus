@@ -301,9 +301,13 @@ namespace Bogus.DataSets
             blue = red;
          }
 
+         var r = (byte)red;
+         var g = (byte)green;
+         var b = (byte)blue;
+
          if( format == ColorFormat.Hex )
          {
-            return $"#{(byte) red:x02}{(byte) green:x02}{(byte) blue:x02}";
+            return $"#{r:x02}{g:x02}{b:x02}";
          }
 
          if( format == ColorFormat.Delimited )
@@ -315,7 +319,7 @@ namespace Bogus.DataSets
 
          string DelimitedRgb()
          {
-            return $"{(byte)red},{(byte)green},{(byte)blue}";
+            return $"{r},{g},{b}";
          }
       }
 

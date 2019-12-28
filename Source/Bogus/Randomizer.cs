@@ -766,7 +766,7 @@ namespace Bogus
             {
                break;
             }
-            min += weights[i];
+            min = min + weights[i];
          }
 
          return item;

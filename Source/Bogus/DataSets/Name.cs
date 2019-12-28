@@ -135,8 +135,10 @@
             withSuffix = !withPrefix;
          }
 
-         return $"{(withPrefix.GetValueOrDefault() ? Prefix(gender) : "")} {firstName} {lastName} {(withSuffix.GetValueOrDefault() ? Suffix() : "")}"
-            .Trim();
+         var prefix = withPrefix.GetValueOrDefault() ? Prefix(gender) : "";
+         var suffix = withSuffix.GetValueOrDefault() ? Suffix() : "";
+
+         return $"{prefix} {firstName} {lastName} {suffix}".Trim();
       }
 
       /// <summary>

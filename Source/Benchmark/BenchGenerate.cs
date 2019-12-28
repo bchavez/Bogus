@@ -34,7 +34,7 @@ namespace Benchmark
          FakerWithRulesComplex = new Faker<Project>()
             .CustomInstantiator(f=> new Project())
             .RuleFor(p=>p.Id, f => f.IndexGlobal)
-            .RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex)
+            .RuleFor(p => p.Name, f => f.Person.Company.Name + f.UniqueIndex.ToString())
             .RuleFor(p => p.Description, f => f.Lorem.Paragraphs(3))
             .UseSeed(1337);
       }

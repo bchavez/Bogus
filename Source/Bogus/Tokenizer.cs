@@ -28,17 +28,19 @@ namespace Bogus
             .SelectMany(p =>
                {
                   return p.PropertyType.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                   .Where(mi => mi.GetGenericArguments().Length == 0)
-                   .Select(mi =>
-                   {
-                      var mm = new MustashMethod
-                      {
-                         Name = $"{DataSet.ResolveCategory(p.PropertyType)}.{mi.Name}".ToUpperInvariant(),
-                         Method = mi,
-                         OptionalArgs = mi.GetParameters().Where(pi => pi.IsOptional).Select(_ => Type.Missing).ToArray()
-                      };
-                      return mm;
-                   });
+                     .Where(mi => mi.GetGenericArguments().Length == 0)
+                     .Select(mi =>
+                        {
+                           var category = DataSet.ResolveCategory(p.PropertyType);
+                           var methodName = mi.Name;
+                           var mm = new MustashMethod
+                              {
+                                 Name = $"{category}.{methodName}".ToUpperInvariant(),
+                                 Method = mi,
+                                 OptionalArgs = mi.GetParameters().Where(pi => pi.IsOptional).Select(_ => Type.Missing).ToArray()
+                              };
+                           return mm;
+                        });
                })
             .ToLookup(mm => mm.Name);
       }

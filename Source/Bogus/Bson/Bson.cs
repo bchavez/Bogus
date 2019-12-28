@@ -140,17 +140,15 @@ namespace Bogus.Bson
 
       private string DecodeCString()
       {
-         using( var ms = new MemoryStream() )
+         using var ms = new MemoryStream();
+         while( true )
          {
-            while( true )
-            {
-               byte buf = reader.ReadByte();
-               if( buf == 0 )
-                  break;
-               ms.WriteByte(buf);
-            }
-            return Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Position);
+            byte buf = reader.ReadByte();
+            if( buf == 0 )
+               break;
+            ms.WriteByte(buf);
          }
+         return Encoding.UTF8.GetString(ms.ToArray(), 0, (int)ms.Position);
       }
 
 

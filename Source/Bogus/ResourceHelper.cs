@@ -27,13 +27,11 @@ namespace Bogus
       /// <returns>The resource in bytes.</returns>
       public static byte[] ReadResource(System.Reflection.Assembly assembly, string resourceName)
       {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
+         using var s = assembly.GetManifestResourceStream(resourceName);
+         using var ms = new MemoryStream();
+         s.CopyTo(ms);
 
-            return ms.ToArray();
-         }
+         return ms.ToArray();
       }
 
       /// <summary>
@@ -44,13 +42,11 @@ namespace Bogus
       /// <returns>The value of the resource as a <see cref="BValue"/> object.</returns>
       public static BValue ReadBValueResource(System.Reflection.Assembly assembly, string resourceName)
       {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
+         using var s = assembly.GetManifestResourceStream(resourceName);
+         using var ms = new MemoryStream();
+         s.CopyTo(ms);
 
-            return Bson.Bson.Load(ms.ToArray());
-         }
+         return Bson.Bson.Load(ms.ToArray());
       }
 
       /// <summary>
@@ -61,13 +57,11 @@ namespace Bogus
       /// <returns>The value of the resource as a <see cref="BObject"/> object.</returns>
       public static BObject ReadBObjectResource(System.Reflection.Assembly assembly, string resourceName)
       {
-         using( var s = assembly.GetManifestResourceStream(resourceName) )
-         using( var ms = new MemoryStream() )
-         {
-            s.CopyTo(ms);
+         using var s = assembly.GetManifestResourceStream(resourceName);
+         using var ms = new MemoryStream();
+         s.CopyTo(ms);
 
-            return Bson.Bson.Load(ms.ToArray());
-         }
+         return Bson.Bson.Load(ms.ToArray());
       }
    }
 }

@@ -23,28 +23,20 @@ namespace Bogus.Premium
          var data = Encoding.UTF8.GetBytes(licenseTo);
 
          var rsaParameters = new RSAParameters
-            {
-               Modulus = Convert.FromBase64String(modulusString),
-               Exponent = Convert.FromBase64String(exponentString)
-            };
-#if STANDARD
-         using( var rsa = RSA.Create() )
-#else
-         using( var rsa = new RSACryptoServiceProvider() )
-#endif
          {
-            var licenseData = Convert.FromBase64String(licenseKey);
-            rsa.ImportParameters(rsaParameters);
-
-            bool verified = false;
-
+            Modulus = Convert.FromBase64String(modulusString),
+            Exponent = Convert.FromBase64String(exponentString)
+         };
+         var licenseData = Convert.FromBase64String(licenseKey);
 #if STANDARD
-            verified = rsa.VerifyData(data, licenseData, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+         using var rsa = RSA.Create();
+         rsa.ImportParameters(rsaParameters);
+         return rsa.VerifyData(data, licenseData, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
 #else
-            verified = rsa.VerifyData(data, CryptoConfig.MapNameToOID("SHA256"), licenseData);
+         using var rsa = new RSACryptoServiceProvider();
+         rsa.ImportParameters(rsaParameters);
+         return rsa.VerifyData(data, CryptoConfig.MapNameToOID("SHA256"), licenseData);
 #endif
-            return verified;
-         }
       }
 
       private static void AssertKeyIsNotBanned(string licenseKey)

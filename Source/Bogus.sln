@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 16.0.29613.14
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bogus", "Bogus\Bogus.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bogus.Tests", "Bogus.Tests\Bogus.Tests.csproj", "{C738E347-08EF-47DA-B531-EE99739BD759}"

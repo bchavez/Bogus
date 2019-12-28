@@ -10,7 +10,7 @@ namespace Bogus.Extensions.Extras
       /// <param name="separator">The string value to separate the obfuscated credit card.</param>
       public static string CreditCardNumberObfuscated(this Finance f, string separator = "-")
       {
-         separator = separator ?? string.Empty;
+         separator ??= string.Empty;
 
          return f.Random.ReplaceNumbers($"****{separator}****{separator}****{separator}####");
       }

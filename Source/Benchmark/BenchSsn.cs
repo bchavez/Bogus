@@ -1,5 +1,4 @@
-﻿using System.Text;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Attributes.Exporters;
 using Bogus;
 
@@ -49,7 +48,7 @@ namespace Benchmark
          var a = (x >> (32 - 10)) % 898;
          if (a == 0 || a == 666) a++;
 
-         // use the first 7 bits = 2^7 = 128 
+         // use the first 7 bits = 2^7 = 128
          var b = (x & 0x7F);
          if (b == 0) b++;
 

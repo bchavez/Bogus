@@ -59,7 +59,7 @@
       {
          if( SupportsGenderLastNames )
          {
-            gender = gender ?? this.Random.Enum<Gender>();
+            gender ??= this.Random.Enum<Gender>();
 
             if( gender == Gender.Male )
             {
@@ -84,7 +84,7 @@
          // SupportsGenderLastNames is false because 'en' doesn't have
          // en: male_last_name and en: female_last_name JSON fields.
          if ( SupportsGenderFirstNames && SupportsGenderLastNames )
-           gender = gender ?? this.Random.Enum<Gender>();
+           gender ??= this.Random.Enum<Gender>();
 
          return $"{FirstName(gender)} {LastName(gender)}";
       }
@@ -94,7 +94,7 @@
       /// </summary>
       public string Prefix(Gender? gender = null)
       {
-         gender = gender ?? this.Random.Enum<Gender>();
+         gender ??= this.Random.Enum<Gender>();
          if( SupportsGenderPrefixes )
          {
             if( gender == Gender.Male )
@@ -123,7 +123,7 @@
       /// <param name="withSuffix">Add a suffix?</param>
       public string FindName(string firstName = "", string lastName = "", bool? withPrefix = null, bool? withSuffix = null, Gender? gender = null)
       {
-         gender = gender ?? this.Random.Enum<Gender>();
+         gender ??= this.Random.Enum<Gender>();
          if( string.IsNullOrWhiteSpace(firstName) )
             firstName = FirstName(gender);
          if( string.IsNullOrWhiteSpace(lastName) )
@@ -135,9 +135,10 @@
             withSuffix = !withPrefix;
          }
 
-         return string.Format("{0} {1} {2} {3}",
-               withPrefix.GetValueOrDefault() ? Prefix(gender) : "", firstName, lastName, withSuffix.GetValueOrDefault() ? Suffix() : "")
-            .Trim();
+         var prefix = withPrefix.GetValueOrDefault() ? Prefix(gender) : "";
+         var suffix = withSuffix.GetValueOrDefault() ? Suffix() : "";
+
+         return $"{prefix} {firstName} {lastName} {suffix}".Trim();
       }
 
       /// <summary>

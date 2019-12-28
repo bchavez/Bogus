@@ -440,7 +440,7 @@ namespace Bogus
       /// </summary>
       public string ArrayElement(Array array)
       {
-         array = array ?? new[] {"a", "b", "c"};
+         array ??= new[] {"a", "b", "c"};
 
          var r = Number(max: array.Length - 1);
 
@@ -643,7 +643,7 @@ namespace Bogus
       /// </summary>
       public string Word()
       {
-         this.wordFunctions = this.wordFunctions ?? new WordFunctions(this);
+         this.wordFunctions ??= new WordFunctions(this);
          var randomWordMethod = ListItem(this.wordFunctions.Functions);
          return randomWordMethod();
       }

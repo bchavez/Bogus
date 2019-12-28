@@ -35,11 +35,10 @@ namespace Bogus
                $"that define how 'Foo' is generated. " +
                "See this GitHub issue for more info: https://github.com/bchavez/Bogus/issues/115");
          }
-         
+
          MemberExpression memberExpression;
 
-         var unary = expression as UnaryExpression;
-         if( unary != null )
+         if( expression is UnaryExpression unary )
             //In this case the return type of the property was not object,
             //so .Net wrapped the expression inside of a unary Convert()
             //expression that casts it to type object. In this case, the

@@ -53,7 +53,7 @@ namespace Bogus.DataSets
       /// <returns>An email address</returns>
       public string Email(string firstName = null, string lastName = null, string provider = null, string uniqueSuffix = null)
       {
-         provider = provider ?? GetRandomArrayItem("free_email");
+         provider ??= GetRandomArrayItem("free_email");
 
          return UserName(firstName, lastName) + uniqueSuffix + "@" + provider;
       }
@@ -78,8 +78,8 @@ namespace Bogus.DataSets
       /// <returns>A random user name.</returns>
       public string UserName(string firstName = null, string lastName = null)
       {
-         firstName = firstName ?? Name.FirstName();
-         lastName = lastName ?? Name.LastName();
+         firstName ??= Name.FirstName();
+         lastName ??= Name.LastName();
 
          firstName = firstName.Transliterate(this.Locale);
          lastName = lastName.Transliterate(this.Locale);
@@ -94,8 +94,8 @@ namespace Bogus.DataSets
       /// <param name="lastName">Last name may or may not be used.</param>
       public string UserNameUnicode(string firstName = null, string lastName = null)
       {
-         firstName = firstName ?? Name.FirstName();
-         lastName = lastName ?? Name.LastName();
+         firstName ??= Name.FirstName();
+         lastName ??= Name.LastName();
 
          var val = Random.Number(2);
 
@@ -301,9 +301,13 @@ namespace Bogus.DataSets
             blue = red;
          }
 
+         var r = (byte)red;
+         var g = (byte)green;
+         var b = (byte)blue;
+
          if( format == ColorFormat.Hex )
          {
-            return string.Format("#{0:x02}{1:x02}{2:x02}", (byte)red, (byte)green, (byte)blue);
+            return $"#{r:x02}{g:x02}{b:x02}";
          }
 
          if( format == ColorFormat.Delimited )
@@ -315,7 +319,7 @@ namespace Bogus.DataSets
 
          string DelimitedRgb()
          {
-            return $"{(byte)red},{(byte)green},{(byte)blue}";
+            return $"{r},{g},{b}";
          }
       }
 

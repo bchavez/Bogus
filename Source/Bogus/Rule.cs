@@ -45,8 +45,7 @@ namespace Bogus
 
       public void Add(Key key, Key2 key2, Value value)
       {
-         Dictionary<Key2, Value> values;
-         if( !this.TryGetValue(key, out values) )
+         if( !this.TryGetValue(key, out var values) )
          {
             values = new Dictionary<Key2, Value>();
             this.Add(key, values);
@@ -63,8 +62,7 @@ namespace Bogus
 
       public void Add(Key key, Value value)
       {
-         HashSet<Value> values;
-         if( !this.TryGetValue(key, out values) )
+         if( !this.TryGetValue(key, out var values) )
          {
             values = new HashSet<Value>();
             this.Add(key, values);

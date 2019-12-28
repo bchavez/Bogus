@@ -28,9 +28,9 @@ namespace Bogus.Premium
                Exponent = Convert.FromBase64String(exponentString)
             };
 #if STANDARD
-         using( var rsa = System.Security.Cryptography.RSA.Create() )
+         using( var rsa = RSA.Create() )
 #else
-         using( var rsa = new System.Security.Cryptography.RSACryptoServiceProvider() )
+         using( var rsa = new RSACryptoServiceProvider() )
 #endif
          {
             var licenseData = Convert.FromBase64String(licenseKey);

@@ -135,8 +135,7 @@
             withSuffix = !withPrefix;
          }
 
-         return string.Format("{0} {1} {2} {3}",
-               withPrefix.GetValueOrDefault() ? Prefix(gender) : "", firstName, lastName, withSuffix.GetValueOrDefault() ? Suffix() : "")
+         return $"{(withPrefix.GetValueOrDefault() ? Prefix(gender) : "")} {firstName} {lastName} {(withSuffix.GetValueOrDefault() ? Suffix() : "")}"
             .Trim();
       }
 

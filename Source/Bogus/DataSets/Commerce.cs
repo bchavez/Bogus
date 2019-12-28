@@ -34,8 +34,7 @@ namespace Bogus.DataSets
          var cats = Categories(num);
          if( num > 1 )
          {
-            return string.Format("{0} & {1}", string.Join(", ", cats.Take(cats.Length - 1)),
-               cats.Last());
+            return $"{string.Join(", ", cats.Take(cats.Length - 1))} & {cats.Last()}";
          }
 
          return cats[0];

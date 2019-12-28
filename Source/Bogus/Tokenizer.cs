@@ -33,7 +33,7 @@ namespace Bogus
                    {
                       var mm = new MustashMethod
                       {
-                         Name = string.Format("{0}.{1}", DataSet.ResolveCategory(p.PropertyType), mi.Name).ToUpperInvariant(),
+                         Name = $"{DataSet.ResolveCategory(p.PropertyType)}.{mi.Name}".ToUpperInvariant(),
                          Method = mi,
                          OptionalArgs = mi.GetParameters().Where(pi => pi.IsOptional).Select(_ => Type.Missing).ToArray()
                       };

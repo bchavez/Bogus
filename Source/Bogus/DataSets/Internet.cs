@@ -303,7 +303,7 @@ namespace Bogus.DataSets
 
          if( format == ColorFormat.Hex )
          {
-            return string.Format("#{0:x02}{1:x02}{2:x02}", (byte)red, (byte)green, (byte)blue);
+            return $"#{(byte) red:x02}{(byte) green:x02}{(byte) blue:x02}";
          }
 
          if( format == ColorFormat.Delimited )

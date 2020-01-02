@@ -22,9 +22,9 @@ namespace Bogus.Tests.GitHubIssues
                      i.Dump();
                      return new[] {"John", "Mary", "Mike", "Tom"}[i % 4];
                   })
-               .RuleFor(x => x.Email, (y, x) => $"{x.Name}@xyz.com".Replace(" ", "").ToLower())
+               .RuleFor(x => x.Email, (User x) => $"{x.Name}@xyz.com".Replace(" ", "").ToLower())
                .RuleFor(x => x.Client, y => y.Random.Bool() ? clients.Generate(1).First() : null)
-               .RuleFor(x => x.UserName, (y, x) => x.Email)
+               .RuleFor(x => x.UserName, x => x.Email)
                .Generate(4)
          );
 

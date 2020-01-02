@@ -52,7 +52,7 @@ namespace Bogus.Tests
             //Use a method outside scope.
             .RuleFor(u => u.CartId, Guid.NewGuid)
             //Compound property with context, use the first/last name properties
-            .RuleFor(u => u.FullName, (f, u) => u.FirstName + " " + u.LastName)
+            .RuleFor(u => u.FullName, u => u.FirstName + " " + u.LastName)
             //And composability of a complex collection.
             .RuleFor(u => u.Orders, () => testOrders.Generate(3))
             //After all rules are applied finish with the following action

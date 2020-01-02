@@ -11,7 +11,7 @@ namespace Bogus.Tests
          var testOrders = new Faker<Examples.Order>()
             .StrictMode(true)
             .Ignore(o => o.Item)
-            .RuleFor(o => o.OrderId, f => 3343)
+            .RuleFor(o => o.OrderId, 3343)
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
          var result = testOrders.Validate();
          testOrders.AssertConfigurationIsValid();

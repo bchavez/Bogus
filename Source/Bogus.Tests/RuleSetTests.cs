@@ -28,14 +28,14 @@ namespace Bogus.Tests
                (set) =>
                   {
                      set.StrictMode(true);
-                     set.RuleFor(c => c.Id, f => orderIds++);
+                     set.RuleFor(c => c.Id, () => orderIds++);
                      set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                     set.RuleFor(c => c.GoodCustomer, f => true);
+                     set.RuleFor(c => c.GoodCustomer, true);
                   })
             .StrictMode(true)
-            .RuleFor(c => c.Id, f => orderIds++)
+            .RuleFor(c => c.Id, () => orderIds++)
             //.RuleFor(c => c.Description, f => f.Lorem.Sentence())
-            .RuleFor(c => c.GoodCustomer, f => false);
+            .RuleFor(c => c.GoodCustomer, false);
 
          var results = testCustomers.Generate(5, "Good");
 
@@ -53,14 +53,14 @@ namespace Bogus.Tests
                (set) =>
                   {
                      set.StrictMode(true);
-                     set.RuleFor(c => c.Id, f => orderIds++);
+                     set.RuleFor(c => c.Id, () => orderIds++);
                      set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                     set.RuleFor(c => c.GoodCustomer, f => true);
+                     set.RuleFor(c => c.GoodCustomer, true);
                   })
             .StrictMode(true)
-            .RuleFor(c => c.Id, f => orderIds++)
+            .RuleFor(c => c.Id, () => orderIds++)
             .RuleFor(c => c.Description, f => f.Lorem.Sentence())
-            .RuleFor(c => c.GoodCustomer, f => false);
+            .RuleFor(c => c.GoodCustomer, false);
 
          var results = testCustomers.Generate(5, "default,Good");
 
@@ -78,14 +78,14 @@ namespace Bogus.Tests
                (set) =>
                   {
                      set.StrictMode(true);
-                     set.RuleFor(c => c.Id, f => orderIds++);
+                     set.RuleFor(c => c.Id, () => orderIds++);
                      set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                     set.RuleFor(c => c.GoodCustomer, f => true);
+                     set.RuleFor(c => c.GoodCustomer, true);
                   })
             .StrictMode(true)
-            .RuleFor(c => c.Id, f => orderIds++)
+            .RuleFor(c => c.Id, () => orderIds++)
             .RuleFor(c => c.Description, f => f.Lorem.Sentence())
-            .RuleFor(c => c.GoodCustomer, f => false);
+            .RuleFor(c => c.GoodCustomer, false);
 
          var results = testCustomers.Generate(5);
 
@@ -103,13 +103,13 @@ namespace Bogus.Tests
                (set) =>
                   {
                      set.StrictMode(true);
-                     set.RuleFor(c => c.Id, f => orderIds++);
-                     set.RuleFor(c => c.GoodCustomer, f => true);
+                     set.RuleFor(c => c.Id, () => orderIds++);
+                     set.RuleFor(c => c.GoodCustomer, true);
                   })
             .StrictMode(true)
-            .RuleFor(c => c.Id, f => orderIds++)
+            .RuleFor(c => c.Id, () => orderIds++)
             .RuleFor(c => c.Description, f => f.Lorem.Sentence())
-            .RuleFor(c => c.GoodCustomer, f => false);
+            .RuleFor(c => c.GoodCustomer, false);
 
          Action act = () =>
             {
@@ -127,7 +127,7 @@ namespace Bogus.Tests
                (set) =>
                   {
                      set.RuleFor(c => c.Description, f => f.Lorem.Sentence());
-                     set.RuleFor(c => c.Description, f => "overridden");
+                     set.RuleFor(c => c.Description, "overridden");
                   });
 
          var results = testCustomers.Generate(5, "Good");

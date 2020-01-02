@@ -180,6 +180,16 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Creates a rule for a property and providing access to the instance being generated.
+      /// </summary>
+      public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<T, TProperty> setter)
+      {
+         var propName = PropertyName.For(property);
+
+         return AddRule(propName, (f, t) => setter(t));
+      }
+
+      /// <summary>
       /// Creates a rule for a property.
       /// </summary>
       public virtual Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, TProperty value)

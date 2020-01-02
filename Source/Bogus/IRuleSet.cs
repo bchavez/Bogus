@@ -24,6 +24,11 @@ namespace Bogus
       Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<Faker, TProperty> setter);
 
       /// <summary>
+      /// Creates a rule for a property and providing access to the instance being generated.
+      /// </summary>
+      Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<T, TProperty> setter);
+
+      /// <summary>
       /// Creates a rule for a property.
       /// </summary>
       Faker<T> RuleFor<TProperty>(Expression<Func<T, TProperty>> property, Func<TProperty> valueFunction);

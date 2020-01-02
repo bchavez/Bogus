@@ -44,7 +44,7 @@ namespace Bogus.Tests.GitHubIssues
 
          var barId = 0;
          var faker = new Faker<Bar>()
-            .RuleFor(b => b.Id, f => barId++)
+            .RuleFor(b => b.Id, () => barId++)
             .RuleFor(b => b.Email, f => f.Internet.Email())
             .RuleFor(b => b.Name, f => f.Name.FirstName())
             .RuleFor(b => b.LastName, f => f.Name.LastName());

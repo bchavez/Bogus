@@ -19,7 +19,7 @@ namespace Bogus.Tests.GitHubIssues
          var ids = 0;
 
          var test = new Faker<Issue45Object>()
-            .RuleFor(p => p.Id, f => ids++)
+            .RuleFor(p => p.Id, () => ids++)
             .RuleFor(p => p.Phones, f => f.Make(5, () => f.Phone.PhoneNumber()));
 
          test.Generate(1).First().Phones.Count.Should().Be(5);

@@ -44,7 +44,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          var faker = new Faker<TestObject>()
             .StrictMode(true)
-            .RuleFor(x => x.Id, x => Guid.NewGuid())
+            .RuleFor(x => x.Id, Guid.NewGuid)
             .RuleFor(x => x.Name, x => x.Person.FirstName);
 
          var updateFaker = faker.Clone()

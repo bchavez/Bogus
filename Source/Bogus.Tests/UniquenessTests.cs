@@ -79,7 +79,7 @@ namespace Bogus.Tests
          int indexer = 0;
          var faker = new Faker<User>()
             .RuleFor(u => u.FirstName, f => f.Name.FirstName())
-            .RuleFor(u => u.LastName, f => new[] {"A", "B", "C", "D"}[indexer % 4])
+            .RuleFor(u => u.LastName, () => new[] {"A", "B", "C", "D"}[indexer % 4])
             .FinishWith((f, u) => indexer++);
 
          var fakes = faker.Generate(10);
@@ -109,7 +109,7 @@ namespace Bogus.Tests
 
          var parentFaker = new Faker<Issue57Parent>()
             .RuleFor(u => u.Id, f => f.IndexGlobal)
-            .RuleFor(u => u.Child, f => childFaker.Generate());
+            .RuleFor(u => u.Child, () => childFaker.Generate());
 
          var ids = parentFaker.Generate(3).Select(o => new {o.Id, CId = o.Child.Id});
 
@@ -128,7 +128,7 @@ namespace Bogus.Tests
             .RuleFor(u => u.Id, f => f.IndexGlobal);
 
          var parentFaker = new Faker<Issue57Parent>()
-            .RuleFor(u => u.Child, f => childFaker.Generate())
+            .RuleFor(u => u.Child, () => childFaker.Generate())
             .RuleFor(u => u.Id, f => f.IndexGlobal);
 
          var ids = parentFaker.Generate(3).Select(o => new {o.Id, CId = o.Child.Id});
@@ -160,7 +160,7 @@ namespace Bogus.Tests
 
 
          var parentFaker = new Faker<Issue57Parent>()
-            .RuleFor(u => u.Child, f => childFaker.Generate())
+            .RuleFor(u => u.Child, () => childFaker.Generate())
             .RuleFor(u => u.Id, f => f.IndexVariable++);
 
          var ids = parentFaker.Generate(3).Select(o => new {o.Id, CId = o.Child.Id});

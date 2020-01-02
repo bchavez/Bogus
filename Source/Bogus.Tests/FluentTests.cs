@@ -24,7 +24,7 @@ namespace Bogus.Tests
             //Set a global policy by using Faker.DefaultStrictMode if you prefer.
             .StrictMode(true)
             //OrderId is deterministic
-            .RuleFor(o => o.OrderId, f => orderIds++)
+            .RuleFor(o => o.OrderId, () => orderIds++)
             //Pick some fruit from a basket
             .RuleFor(o => o.Item, f => f.PickRandom(fruit))
             //A random quantity from 1 to 10
@@ -50,11 +50,11 @@ namespace Bogus.Tests
             //Use an enum outside scope.
             .RuleFor(u => u.Gender, f => f.PickRandom<Gender>())
             //Use a method outside scope.
-            .RuleFor(u => u.CartId, f => Guid.NewGuid())
+            .RuleFor(u => u.CartId, Guid.NewGuid)
             //Compound property with context, use the first/last name properties
             .RuleFor(u => u.FullName, (f, u) => u.FirstName + " " + u.LastName)
             //And composability of a complex collection.
-            .RuleFor(u => u.Orders, f => testOrders.Generate(3))
+            .RuleFor(u => u.Orders, () => testOrders.Generate(3))
             //After all rules are applied finish with the following action
             .FinishWith((f, u) => { Console.WriteLine("User Created! Name={0}", u.FullName); });
 
@@ -162,7 +162,7 @@ namespace Bogus.Tests
          var faker = new Faker<Order>()
             .StrictMode(true)
             .Ignore(o => o.Item)
-            .RuleFor(o => o.OrderId, f => 3343)
+            .RuleFor(o => o.OrderId, 3343)
             .RuleFor(o => o.Quantity, f => f.Random.Number(3));
 
          var fake = faker.Generate();

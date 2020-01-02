@@ -31,23 +31,23 @@ namespace Bogus.Tests.GitHubIssues
 
          var faker = new Faker<TestObject>()
             .StrictMode(true)
-            .RuleFor(c => c.SomeOtherId, f => counter++)
-            .RuleFor(c => c.SomeId, f => Guid.NewGuid())
+            .RuleFor(c => c.SomeOtherId, () => counter++)
+            .RuleFor(c => c.SomeId, Guid.NewGuid)
             .RuleFor(c => c.SomeFutureDate, f => f.Date.Future())
             .RuleFor(c => c.SomePastDate, (f, b) => b.SomeFutureDate.AddHours(f.Random.Number(1, 24)))
             .RuleFor(c => c.SomeStatusInt, (f, b) => (int)b.SomeExplicitInt)
-            .RuleFor(c => c.SomeExplicitInt, f => 2)
+            .RuleFor(c => c.SomeExplicitInt, 2)
             .RuleFor(c => c.SomeBool3, f => f.Random.Bool())
             .RuleFor(c => c.SomeBool2, f => f.Random.Bool())
             .RuleFor(c => c.SomeBool1, f => f.Random.Bool())
             .RuleFor(c => c.SomeOtherInt, f => f.Random.Number(1, 5))
-            .RuleFor(c => c.SomeInt, f => 0)
-            .RuleFor(c => c.SomeOtherString, f => null)
-            .RuleFor(c => c.SomeOtherGuid, f => Guid.NewGuid())
-            .RuleFor(c => c.SomeString, f => null)
+            .RuleFor(c => c.SomeInt, 0)
+            .RuleFor(c => c.SomeOtherString, null as string)
+            .RuleFor(c => c.SomeOtherGuid, Guid.NewGuid)
+            .RuleFor(c => c.SomeString, null as string)
             .RuleFor(c => c.SomeComment, f => f.Lorem.Sentence())
-            .RuleFor(c => c.SomeGuid, f => null)
-            .RuleFor(c => c.SomeTimestamp, f => null);
+            .RuleFor(c => c.SomeGuid, null as Guid?)
+            .RuleFor(c => c.SomeTimestamp, null as DateTime?);
 
          faker.TypeProperties.Count.Should().Be(17);
 

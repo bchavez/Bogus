@@ -27,15 +27,15 @@ namespace Bogus.Tests.GitHubIssues
          var drinkFaker = new Faker<Drink>()
             .RuleSet(Cherry, set =>
                   {
-                     set.RuleFor(d => d.Name, f => "cherry coke");
+                     set.RuleFor(d => d.Name, "cherry coke");
                   })
             .RuleSet(Lemonade, set =>
                {
-                  set.RuleFor(d => d.Name, f => "strawberry lemonade");
+                  set.RuleFor(d => d.Name, "strawberry lemonade");
                })
             .RuleSet(SmallDrink, set =>
                {
-                  set.RuleFor(d => d.FluidOunce, f => 12);
+                  set.RuleFor(d => d.FluidOunce, 12);
                });
 
          var cherryDrink = drinkFaker.GenerateForever($"{Cherry}, {SmallDrink}").First();

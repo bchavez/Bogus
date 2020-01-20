@@ -1,4 +1,4 @@
-﻿var gulp = require("gulp");
+﻿const gulp = require("gulp");
 var jp = require('jsonpath');
 
 const $ = require("gulp-load-plugins")({DEBUG:false, lazy: true });
@@ -14,7 +14,7 @@ var l = require("lodash");
 
 var path = require("path");
 var fs = require("fs");
-var BSON = require("bson");
+const BSON = require("bson");
 
 var es = require("event-stream");
 
@@ -28,8 +28,7 @@ var localeFolders = gulp.src(
 var dataFolder = "../Bogus/data";
 var dataExtendFolder = "../Bogus/data_extend";
 
-gulp.task("import.locales.json", function () {
-
+function importLocalesJsonTask(){
    return localeFolders
       .pipe($.plumber())
       .pipe($.map(function (file) {
@@ -82,9 +81,9 @@ gulp.task("import.locales.json", function () {
       .pipe(print())
       .pipe(lec({ eolc: "CRLF" }))
       .pipe(gulp.dest(dataFolder));
-});
+}
 
-gulp.task("import.locales", gulp.series(["import.locales.json"]), function () {
+function importLocalesTask(){
    return gulp.src(`${dataFolder}/*.locale.json`)
       .pipe($.plumber())
       .pipe($.map(function (file) {
@@ -92,18 +91,19 @@ gulp.task("import.locales", gulp.series(["import.locales.json"]), function () {
 
          var destName = `${path.basename(file.relative, ".json")}.bson`;
 
-         var b = new BSON();
-         var data = b.serialize(json, { checkKeys: true });
+         var data = BSON.serialize(json, { checkKeys: true });
 
          var vinyl = new Vinyl({
             path: './' + destName,
-            contents: new Buffer(data)
+            contents: Buffer.from(data)
          });
          return vinyl;
       }))
       .pipe(print())
       .pipe(gulp.dest(dataFolder));
-});
+}
+
+
 
 function transformPostCodeByState(obj) {
    if (obj.address && obj.address.postcode_by_state)
@@ -164,31 +164,30 @@ function log2(msg) {
    logger(color.green(msg));
 }
 
-
-gulp.task("import.transliterate", () => {
+function importTransliterateTask(cb) {
 
    //strip out the module scoping of the library
    var src = fs.readFileSync('../speakingurl/lib/speakingurl.js', 'utf8');
    var lines = src.split('\n');
-   var moduleEnd = _.findIndex(lines, i => i.includes("typeof module") )
+   var moduleEnd = _.findIndex(lines, i => i.includes("typeof module"))
    var fixedSource = lines.splice(2, moduleEnd - 2).join('\n');
 
    //evaluate the whole module without function scoping
    //exposing intenral variables that we can dump.
    eval(fixedSource);
 
-   function renderInsert(obj){
+   function renderInsert(obj) {
       var inserts = [];
-      _.map( obj, (v,k) => {
-         if( v === '"') v = '""';
+      _.map(obj, (v, k) => {
+         if (v === '"') v = '""';
          return inserts.push(`            Trie.Insert(trie, @"${k}", @"${v}");`);
       });
       return inserts;
    }
-   function renderMdInsert(obj){
+   function renderMdInsert(obj) {
       var inserts = [];
-      _.map( obj, (v,k) => {
-         _.map(v, (v2, k2)=>{
+      _.map(obj, (v, k) => {
+         _.map(v, (v2, k2) => {
             inserts.push(`            md.Add(@"${k}", @"${k2}", @"${v2}");`);
          })
       });
@@ -202,48 +201,52 @@ gulp.task("import.transliterate", () => {
    var symbolInserts = renderMdInsert(symbolMap);
 
    var template = `
-   // AUTO GENERATED FILE. DO NOT MODIFY.
-   // SEE Builder/gulpfile.js import.speakingurl task.
-   using System.ComponentModel;
-   using System.Collections.Generic;
-   namespace Bogus
-   {
-      
-      public static partial class Transliterater
-      {   
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public static Trie BuildCharMap(Trie trie)
-         {
-${charMapInserts.join('\r\n')}
-            return trie;
-         }
-
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public static Trie BuildDiatricMap(Trie trie)
-         {
-${diatricMapInserts.join('\r\n')}
-            return trie;
-         }
-
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public static MultiDictionary<string,string,string> BuildLangCharMap(MultiDictionary<string,string,string> md)
-         {
-${langCharInserts.join('\r\n')}
-            return md;
-         }
-
-         [EditorBrowsable(EditorBrowsableState.Never)]
-         public static MultiDictionary<string,string,string> BuildSymbolMap(MultiDictionary<string,string,string> md)
-         {
-${symbolInserts.join('\r\n')}
-            return md;
+      // AUTO GENERATED FILE. DO NOT MODIFY.
+      // SEE Builder/gulpfile.js import.speakingurl task.
+      using System.ComponentModel;
+      using System.Collections.Generic;
+      namespace Bogus
+      {
+         
+         public static partial class Transliterater
+         {   
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static Trie BuildCharMap(Trie trie)
+            {
+   ${charMapInserts.join('\r\n')}
+               return trie;
+            }
+   
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static Trie BuildDiatricMap(Trie trie)
+            {
+   ${diatricMapInserts.join('\r\n')}
+               return trie;
+            }
+   
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static MultiDictionary<string,string,string> BuildLangCharMap(MultiDictionary<string,string,string> md)
+            {
+   ${langCharInserts.join('\r\n')}
+               return md;
+            }
+   
+            [EditorBrowsable(EditorBrowsableState.Never)]
+            public static MultiDictionary<string,string,string> BuildSymbolMap(MultiDictionary<string,string,string> md)
+            {
+   ${symbolInserts.join('\r\n')}
+               return md;
+            }
          }
       }
-   }
-   `
-   
-   
+      `
+
+
    fs.writeFileSync('../Bogus/Transliterater.Generated.cs', template);
 
+   return cb;
+}
 
-});
+
+exports.importLocales = gulp.series(importLocalesJsonTask, importLocalesTask)
+exports.importTransliterate = importTransliterateTask

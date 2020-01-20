@@ -9,10 +9,10 @@
   "author": "Brian Chavez",
   "license": "MIT",
   "devDependencies": {
-    "ansi-colors": "^4.1.1",
+    "ansi-colors": "4.1.1",
     "bson": "4.0.3",
     "event-stream": "4.0.1",
-    "fancy-log": "^1.3.3",
+    "fancy-log": "1.3.3",
     "gulp": "4.0.2",
     "gulp-line-ending-corrector": "1.0.3",
     "gulp-load-plugins": "2.0.2",
@@ -22,6 +22,6 @@
     "jsonpath": "1.0.2",
     "lodash": "4.17.15",
     "underscore": "1.9.2",
-    "vinyl": "^2.2.0"
+    "vinyl": "2.2.0"
   }
 }

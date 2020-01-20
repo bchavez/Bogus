@@ -1177,15 +1177,16 @@ Upon a successful build, the following folders will be created:
 #### Rebundling Locales
 If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
 
+* [**NodeJS**](https://nodejs.org/) `v12.14.1` or higher
+* **gulp** `v4` or higher
+
 1. `git submodule init`
-2. `git submodule update`
-3. Ensure, [NodeJS](https://nodejs.org/) and `gulp` are properly installed.
-4. `cd Source\Builder`
-5. `npm install` to install required dev dependencies.
-6. `gulp import.locales` to regenerate locales in `Source\Bogus\data`.
-7. In solution explorer add any new locales not already included as an
-`EmbeddedResource`.
-8. Finally, run `build.cmd`.
+1. `git submodule update`
+1. Ensure **NodeJS** and `gulp` are properly installed.
+1. `cd Source\Builder`
+1. `npm install` to install required dev dependencies.
+1. `gulp importLocales` to regenerate locales in `Source\Bogus\data`.
+1. Finally, run `build.cmd`.
 
 ### License
 * [MIT License](https://github.com/bchavez/Bogus/blob/master/LICENSE)

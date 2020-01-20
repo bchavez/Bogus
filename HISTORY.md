@@ -1,3 +1,8 @@
+## v28.5.1
+Release Date: 2020-TBA
+
+* Data parity with faker.js. Deterministic sequences using `Internet.Avatar()` may have changed.
+
 ## v28.4.4
 Release Date: 2019-12-10
 

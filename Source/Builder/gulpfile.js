@@ -1,6 +1,14 @@
 ﻿var gulp = require("gulp");
 var jp = require('jsonpath');
-var $ = require("gulp-load-plugins")({ lazy: true, rename: { 'gulp-cr-lf-replace': 'crlf' } });
+
+const $ = require("gulp-load-plugins")({DEBUG:false, lazy: true });
+const lec = require("gulp-line-ending-corrector");
+const print = require("gulp-print").default;
+
+const Vinyl = require('vinyl');
+const logger = require('fancy-log');
+const color = require('ansi-colors');
+
 var _ = require("underscore");
 var l = require("lodash");
 
@@ -65,18 +73,18 @@ gulp.task("import.locales.json", function () {
             bogusLocale = locale;
          }
 
-         var vinyl = new $.util.File({
+         var vinyl = new Vinyl({
             path: './' + destName,
-            contents: new Buffer(JSON.stringify(bogusLocale, null, 2))
+            contents: Buffer.from(JSON.stringify(bogusLocale, null, 2))
          });
          return vinyl;
       }))
-      .pipe($.print())
-      .pipe($.crlf({ changeCode: "CR+LF" }))
+      .pipe(print())
+      .pipe(lec({ eolc: "CRLF" }))
       .pipe(gulp.dest(dataFolder));
 });
 
-gulp.task("import.locales", ["import.locales.json"], function () {
+gulp.task("import.locales", gulp.series(["import.locales.json"]), function () {
    return gulp.src(`${dataFolder}/*.locale.json`)
       .pipe($.plumber())
       .pipe($.map(function (file) {
@@ -87,13 +95,13 @@ gulp.task("import.locales", ["import.locales.json"], function () {
          var b = new BSON();
          var data = b.serialize(json, { checkKeys: true });
 
-         var vinyl = new $.util.File({
+         var vinyl = new Vinyl({
             path: './' + destName,
             contents: new Buffer(data)
          });
          return vinyl;
       }))
-      .pipe($.print())
+      .pipe(print())
       .pipe(gulp.dest(dataFolder));
 });
 
@@ -150,10 +158,10 @@ function specializeLocale(locale, localeCode) {
 
 //Helper Methods
 function log(msg) {
-   $.util.log($.util.colors.bgCyan(msg));
+   logger(color.bgCyan(msg));
 };
 function log2(msg) {
-   $.util.log($.util.colors.green(msg));
+   logger(color.green(msg));
 }
 
 

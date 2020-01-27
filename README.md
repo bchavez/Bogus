@@ -1175,11 +1175,14 @@ Upon a successful build, the following folders will be created:
    If `FORCE_VERSION` environment variable is set with a semantic version number (eg: `x.y.z`), the build tasks will use the `FORCE_VERSION` to produce builds with the exact version number. Useful for testing out-of-band custom builds. However, it is not possible to reproduce exact binary equivalents of released **NuGet** packages because packages release on **NuGet** contain assemblies that are digitally signed with assembly signing enabled. The public does not have access to the signing key. 
 
 #### Rebundling Locales
-If you wish to re-bundle the latest **faker.js** locales, you'll need to first:
+Re-bundling the latest locale data from **faker.js** requires the following software installed:  
 
-* [**NodeJS**](https://nodejs.org/) `v12.14.1` or higher
-* **gulp** `v4` or higher
+* [**NodeJS**](https://nodejs.org/) `v12.14.1` or higher.
+* [**gulp**](https://gulpjs.com/) `v4` or higher.
 
+Steps to re-bundle locale data from **faker.js**:
+1. `git clone https://github.com/bchavez/Bogus.git`
+1. `cd Bogus` 
 1. `git submodule init`
 1. `git submodule update`
 1. Ensure **NodeJS** and `gulp` are properly installed.

@@ -2,6 +2,7 @@
 Release Date: 2020-TBA
 
 * Data parity with faker.js. Deterministic sequences using `Internet.Avatar()` may have changed.
+* Add support for .snupkg NuGet Symbol Server Packages via SourceLink.
 
 ## v28.4.4
 Release Date: 2019-12-10

@@ -587,7 +587,7 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Picks a random Enum of T. Works only with Enums.
+      /// Picks a random enum value in T:Enum.
       /// </summary>
       /// <typeparam name="T">Must be an Enum</typeparam>
       /// <param name="exclude">Exclude enum values from being returned</param>
@@ -614,6 +614,39 @@ namespace Bogus
 
          System.Enum.TryParse(val, out T picked);
          return picked;
+      }
+
+      /// <summary>
+      /// Picks a random subset of enum values in T:Enum.
+      /// </summary>
+      /// <typeparam name="T">The enum.</typeparam>
+      /// <param name="count">The number of enums to pick.</param>
+      /// <param name="exclude">Any enums that should be excluded before picking.</param>
+      public T[] EnumValues<T>(int? count = null, params T[] exclude) where T : Enum
+      {
+         T[] enums;
+         if( exclude.Length > 0)
+         {
+            enums = System.Enum.GetValues(typeof(T))
+               .OfType<T>()
+               .Except(exclude)
+               .ToArray();
+         }
+         else
+         {
+            enums = System.Enum.GetValues(typeof(T))
+               .OfType<T>()
+               .Except(exclude)
+               .ToArray();
+         }
+
+         if( count > enums.Length || count < 0 )
+         {
+            throw new ArgumentOutOfRangeException(nameof(count), count,
+            $"The {nameof(count)} parameter is {count} and the calculated set of enums has a length of {enums.Length}. It is impossible to pick {count} enums from a list of {enums.Length}.");
+         }
+
+         return this.ArrayElements(enums, count);
       }
 
       /// <summary>

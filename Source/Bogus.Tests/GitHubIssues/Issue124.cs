@@ -119,6 +119,31 @@ namespace Bogus.Tests.GitHubIssues
                );
       }
 
+      [Fact]
+      public void nullable_int_and_nullable_reference_type()
+      {
+         var faker = new Faker<Qux>()
+            .RuleFor(x => x.Id, f => f.Random.Int().OrNull(f))
+            .RuleFor(x => x.Obj, f => new object().OrNull(f))
+            .RuleFor(x => x.Str, f => f.Random.Word().OrNull(f));
+
+         var q = faker.Generate(3);
+
+         console.Dump(q);
+
+         q[0].Id.Should().NotBeNull();
+         q[0].Obj.Should().NotBeNull();
+         q[0].Str.Should().BeNull();
+
+         q[1].Id.Should().BeNull();
+         q[1].Obj.Should().NotBeNull();
+         q[1].Str.Should().BeNull();
+         
+         q[2].Id.Should().BeNull();
+         q[2].Obj.Should().NotBeNull();
+         q[2].Str.Should().NotBeNull();
+      }
+
       public class Foo
       {
          public Guid Id { get; set; }
@@ -129,6 +154,13 @@ namespace Bogus.Tests.GitHubIssues
       {
          public Guid Id { get; set; }
          public Person Person { get; set; }
+      }
+
+      public class Qux
+      {
+         public int? Id { get; set; }
+         public object Obj { get; set; }
+         public string Str { get; set; }
       }
    }
 

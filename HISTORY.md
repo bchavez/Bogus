@@ -1,9 +1,10 @@
-## v28.5.1
-Release Date: 2020-TBA
+## v29.0.1
+Release Date: 2020-02-10
 
 * Data parity with faker.js. Deterministic sequences using `Internet.Avatar()` may have changed.
 * Add support for .snupkg NuGet Symbol Server Packages via SourceLink.
 * Added Randomizer.Enums() that makes selecting a subset of enum values easier.
+* Modified `.OrNull(f)` extension method signatures for type-safe with nullable primitive types, structs, and reference types via `in` parameter to avoid ambiguous calls.
 
 ## v28.4.4
 Release Date: 2019-12-10

@@ -4,6 +4,7 @@ using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
 using Bogus.Extensions;
+using Z.ExtensionMethods.ObjectExtensions;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -124,6 +125,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          var faker = new Faker<Qux>()
             .RuleFor(x => x.Id, f => f.Random.Int().OrNull(f))
+            .RuleFor(x => x.Gud, f => f.Random.Guid().OrNull(f, .8f))
             .RuleFor(x => x.Obj, f => new object().OrNull(f))
             .RuleFor(x => x.Str, f => f.Random.Word().OrNull(f));
 
@@ -132,14 +134,17 @@ namespace Bogus.Tests.GitHubIssues
          console.Dump(q);
 
          q[0].Id.Should().NotBeNull();
+         q[0].Gud.Should().NotBeNull();
          q[0].Obj.Should().NotBeNull();
-         q[0].Str.Should().BeNull();
+         q[0].Str.Should().NotBeNull();
 
-         q[1].Id.Should().BeNull();
+         q[1].Id.Should().NotBeNull();
+         q[1].Gud.Should().NotBeNull();
          q[1].Obj.Should().NotBeNull();
          q[1].Str.Should().BeNull();
          
          q[2].Id.Should().BeNull();
+         q[2].Gud.Should().BeNull();
          q[2].Obj.Should().NotBeNull();
          q[2].Str.Should().NotBeNull();
       }
@@ -159,6 +164,7 @@ namespace Bogus.Tests.GitHubIssues
       public class Qux
       {
          public int? Id { get; set; }
+         public Guid? Gud { get; set; }
          public object Obj { get; set; }
          public string Str { get; set; }
       }

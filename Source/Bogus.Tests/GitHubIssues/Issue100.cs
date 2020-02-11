@@ -144,6 +144,37 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
+      public void sequence_generate_list_of_4_vs_generate_4_times_should_produce_same_content()
+      {
+         Randomizer.Seed = new Random(7331);
+
+         var orderFaker = new Faker<Examples.Order>()
+            .UseSeed(88)
+            .RuleFor(o => o.OrderId, f => f.IndexVariable++)
+            .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
+            .RuleFor(o => o.Item, f => f.Commerce.Product());
+
+         var batch = orderFaker.Generate(4).ToArray();
+         batch.Select(i => i.OrderId).Should().Equal(0, 1, 2, 3);
+         CheckSequence(batch);
+
+         var sequence = new Examples.Order[4];
+
+         //reset
+         Randomizer.Seed = new Random(7331);
+         orderFaker.UseSeed(88);
+         
+         sequence[0] = orderFaker.Generate();
+         sequence[1] = orderFaker.Generate();
+         sequence[2] = orderFaker.Generate();
+         sequence[3] = orderFaker.Generate();
+         
+         sequence.Select(i => i.OrderId).Should().Equal(4, 5, 6, 7);
+
+         CheckSequence(sequence);
+      }
+
+      [Fact]
       public void parallel_determinism()
       {
          var orderFaker = new Faker<Examples.Order>()

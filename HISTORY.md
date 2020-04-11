@@ -1,3 +1,8 @@
+## v29.0.2
+Release Date: 2020-04-11
+
+* Minor update to `ru` locale data. Two `ru` city names could appear as one. 
+
 ## v29.0.1
 Release Date: 2020-02-10
 

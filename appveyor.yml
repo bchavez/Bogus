@@ -51,8 +51,9 @@ deploy:
           appveyor_repo_tag: true
 
     - provider: NuGet
-      server: https://api.nuget.org/v3/index.json
-      symbol_server: https://api.nuget.org/v3/index.json
+      server:
+      symbol_server:
+      skip_symbols: false
       api_key:
           secure: 1nPS2ttf+N4+FUhd+GZycrL7YzSWQpZjnGOMCb5+pGJXSdx0IFvVF8xhTGna7B9t
       artifact: NuGet, Symbols

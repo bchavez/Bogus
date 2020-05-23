@@ -33,7 +33,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * [**Microsoft Docs: Modernize a WPF app tutorial - Aug. 2nd, 2019**](https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/modernize-wpf-tutorial-1#configure-nuget-packages-and-dependencies)
 * [**Microsoft Build 2018: Azure Tips and Tricks - May 8th, 2018**](https://www.youtube.com/watch?v=088e5IUqF6g&t=12m31s)
 * **[NuGet Must Haves: Top 10 Unit Testing Libraries in 2017](http://nugetmusthaves.com/article/top-unit-testing-libraries)**
-* **[.NET Rocks Podcast: #BetterKnowThatFramework - March 16th 2017](https://twitter.com/bchavez/status/842479138850070528)** & **[Sept. 13th, 2018](https://twitter.com/bchavez/status/1040479669743628290)**
+* **[.NET Rocks Podcast: #BetterKnowThatFramework - Mar. 16th 2017](https://twitter.com/bchavez/status/842479138850070528)**, **[Sep. 13th, 2018](https://twitter.com/bchavez/status/1040479669743628290)**, and **[May 7th, 2020](https://twitter.com/bchavez/status/1264047877245988864)**
 * **[.NET Engineering Blog: NuGet Package of the week #1. - "This week in .NET - December 8th 2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)**
 
 ##### Blog Posts

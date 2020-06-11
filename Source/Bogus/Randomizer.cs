@@ -46,7 +46,7 @@ namespace Bogus
       /// <summary>
       /// Get an int from 0 to max.
       /// </summary>
-      /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
+      /// <param name="max">Upper bound, inclusive.</param>
       public int Number(int max)
       {
          return Number(0, max);
@@ -75,46 +75,79 @@ namespace Bogus
       /// Get an int from min to max.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
-      /// <param name="max">Upper bound, inclusive. Only int.MaxValue is exclusive.</param>
+      /// <param name="max">Upper bound, inclusive</param>
       public int Number(int min = 0, int max = 1)
       {
          //lock any seed access, for thread safety.
          lock( Locker.Value )
          {
-            //Clamp max value, Issue #30.
-            max = max == int.MaxValue ? max : max + 1;
-            return localSeed.Next(min, max);
+            // Adjust the range as needed to make max inclusive. The Random.Next function uses exclusive upper bounds.
+
+            // If max can be extended by 1, just do that.
+            if( max < int.MaxValue ) return localSeed.Next(min, max + 1);
+
+            // If max is exactly int.MaxValue, then check if min can be used to push the range out by one the other way.
+            // If so, then we can simply add one to the result to put it back in the correct range.
+            if( min > int.MinValue ) return 1 + localSeed.Next(min - 1, max);
+
+            // If we hit this line, then min is int.MinValue and max is int.MaxValue, which mean the caller wants a
+            // number from a range spanning all possible values of int. The Random class only supports exclusive
+            // upper bounds, period, and the upper bound must be specified as an int, so the best we can get in a
+            // single call is a value in the range (int.MinValue, int.MaxValue - 1). Instead, what we do is get two
+            // samples, one in the range (int.MinValue, -1) and the other as unbiased as possible, and using the
+            // second one to decide, 50% of the time we invert all the bits in the sample, shifting its range to
+            // (0, int.MaxValue).
+            var result = localSeed.Next(int.MinValue, 0);
+
+            if( (localSeed.Next() & 0x10000000) == 0 )
+               result = ~result;
+
+            return result;
          }
       }
 
       /// <summary>
-      /// Returns a random even number.
+      /// Returns a random even number. If the range does not contain any even numbers, the first even number after the range is returned, or int.MinValue if min is int.MaxValue.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
       public int Even(int min = 0, int max = 1)
       {
-         var result = 0;
-         do //could do this better by just +1 or -1 if it's not an even/odd number
-         {
-            result = Number(min, max);
-         } while( result % 2 == 1 );
-         return result;
+         // Special case where the math below breaks.
+         if( min == int.MaxValue )
+            return int.MinValue;
+
+         // Adjust the range to ensure that we always get the same number of even values as odd values.
+         min = (min + 1) & ~1;
+         max = max | 1;
+
+         if( min > max )
+            return min;
+
+         // Strip off the 1 bit of a random number.
+         return Number(min, max) & ~1;
       }
 
       /// <summary>
-      /// Returns a random odd number.
+      /// Returns a random odd number. If the range does not contain any odd numbers, the first odd number after the range is returned.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
       public int Odd(int min = 0, int max = 1)
       {
-         int result = 0;
-         do //could do this better by just +1 or -1 if it's not an even/odd number
-         {
-            result = Number(min, max);
-         } while( result % 2 == 0 );
-         return result;
+         // Special case where the math below breaks.
+         if ( max == int.MinValue )
+            return int.MinValue | 1;
+
+         // Adjust the range to ensure that we always get the same number of even values as odd values.
+         min = min & ~1;
+         max = (max - 1) | 1;
+
+         if( min > max )
+            return min | 1;
+
+         // Ensure that the 1 bit is set in a random number.
+         return Number(min, max) | 1;
       }
 
 
@@ -145,7 +178,38 @@ namespace Bogus
       /// <param name="max">Maximum, default 1.0</param>
       public decimal Decimal(decimal min = 0.0m, decimal max = 1.0m)
       {
-         return Convert.ToDecimal(Double()) * (max - min) + min;
+         // Decimal: 128 bits wide
+         //   bit 0: sign bit
+         //   bit 1-10: not used
+         //   bit 11-15: scale (values 29, 30, 31 not used)
+         //   bit 16-31: not used
+         //   bit 32-127: mantissa (96 bits)
+
+         // Max value: 00000000 FFFFFFFF FFFFFFFF FFFFFFFF
+         //          = 79228162514264337593543950335
+
+         // Max value with max scaling: 001C0000  FFFFFFFF  FFFFFFFF  FFFFFFFF
+         //                           = 7.9228162514264337593543950335
+
+         // Step 1: Generate a value with uniform distribution between 0 and this value.
+         // This ensures the greatest level of precision in the distribution of bits;
+         // the resulting value, after it is adjusted into the caller's desired range,
+         // should not skip any possible values at the least significant end of the
+         // mantissa.
+
+         int[] bits = new int[4];
+
+         bits[0] = Number(int.MinValue, int.MaxValue);
+         bits[1] = Number(int.MinValue, int.MaxValue);
+         bits[2] = Number(int.MinValue, int.MaxValue);
+         bits[3] = 0x1C0000;
+
+         decimal result = new decimal(bits);
+
+         // Step 2: Scale the value and adjust it to the desired range. This may decrease
+         // the accuracy by adjusting the scale as necessary, but we get the best possible
+         // outcome by starting with the most precise scale.
+         return result * (max - min) / 7.9228162514264337593543950335m + min;
       }
 
       /// <summary>
@@ -155,7 +219,7 @@ namespace Bogus
       /// <param name="max">Maximum, default 1.0</param>
       public float Float(float min = 0.0f, float max = 1.0f)
       {
-         return Convert.ToSingle(Double()) * (max - min) + min;
+         return Convert.ToSingle(Double() * (max - min) + min);
       }
 
       /// <summary>

@@ -91,10 +91,16 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void exclusive_int_maxvalue_number()
+      public void can_include_int_maxvalue_number()
       {
-         var max = r.Number(int.MaxValue - 1, int.MaxValue);
-         max.Should().Be(int.MaxValue - 1);
+         var max = r.Number(int.MaxValue, int.MaxValue);
+         max.Should().Be(int.MaxValue);
+      }
+
+      [Fact]
+      public void can_handle_full_int_range()
+      {
+         r.Number(int.MinValue, int.MaxValue);
       }
 
       [Fact]
@@ -118,7 +124,7 @@ namespace Bogus.Tests
       [Fact]
       public void generate_decimal_with_min_and_max()
       {
-         r.Decimal(2.2m, 5.2m).Should().Be(4.0105668499183690m);
+         r.Decimal(2.2m, 5.2m).Should().Be(4.488022563614591414017291557m);
       }
 
       [Fact]
@@ -170,10 +176,12 @@ namespace Bogus.Tests
       [Fact]
       public void generate_int32_many()
       {
-         r.Int().Should().Be(1296054233);
-         r.Int().Should().Be(-1749342366);
-         r.Int().Should().Be(-76446690);
-         r.Int().Should().Be(108870444);
+         r.Int().Should().Be(425714706);
+         r.Int().Should().Be(1767736486);
+         r.Int().Should().Be(-1019306602);
+         r.Int().Should().Be(-1398145763);
+         r.Int().Should().Be(1857743500);
+         r.Int().Should().Be(-1033498152);
       }
 
       [Fact]

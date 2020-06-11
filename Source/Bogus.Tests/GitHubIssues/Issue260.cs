@@ -20,6 +20,9 @@ namespace Bogus.Tests.GitHubIssues
 
          var x = r.Int();
 
+         // the remainder of this test depends on x having a predictable value
+         x.Should().Be(425714706);
+
          // right shift all bits except fir the first 10 bits = 2^10 = 1024.
          var a = (x >> (32 - 10)) % 898;
          if( a == 0 || a == 666 ) a++;
@@ -30,11 +33,12 @@ namespace Bogus.Tests.GitHubIssues
 
          // last 2^14 = 16384, for last 4 digits of SSN
          var c = (x >> 7) & 0x3FFF;
+         if( c >= 10000 ) c -= 10000;
          if( c == 0 ) c++;
 
          var result = $"{a:000}-{b:00}-{c:0000}";
 
-         result.Should().Be("309-89-0111");
+         result.Should().Be("101-18-6328");
       }
    }
 }

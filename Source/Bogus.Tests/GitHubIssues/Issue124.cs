@@ -129,24 +129,34 @@ namespace Bogus.Tests.GitHubIssues
             .RuleFor(x => x.Obj, f => new object().OrNull(f))
             .RuleFor(x => x.Str, f => f.Random.Word().OrNull(f));
 
-         var q = faker.Generate(3);
+         var q = faker.Generate(5);
 
          console.Dump(q);
 
          q[0].Id.Should().NotBeNull();
          q[0].Gud.Should().NotBeNull();
-         q[0].Obj.Should().NotBeNull();
-         q[0].Str.Should().NotBeNull();
+         q[0].Obj.Should().BeNull();
+         q[0].Str.Should().BeNull();
 
-         q[1].Id.Should().NotBeNull();
+         q[1].Id.Should().BeNull();
          q[1].Gud.Should().NotBeNull();
-         q[1].Obj.Should().NotBeNull();
+         q[1].Obj.Should().BeNull();
          q[1].Str.Should().BeNull();
-         
+
          q[2].Id.Should().BeNull();
-         q[2].Gud.Should().BeNull();
+         q[2].Gud.Should().NotBeNull();
          q[2].Obj.Should().NotBeNull();
-         q[2].Str.Should().NotBeNull();
+         q[2].Str.Should().BeNull();
+
+         q[3].Id.Should().NotBeNull();
+         q[3].Gud.Should().NotBeNull();
+         q[3].Obj.Should().NotBeNull();
+         q[3].Str.Should().BeNull();
+
+         q[4].Id.Should().BeNull();
+         q[4].Gud.Should().NotBeNull();
+         q[4].Obj.Should().NotBeNull();
+         q[4].Str.Should().NotBeNull();
       }
 
       public class Foo

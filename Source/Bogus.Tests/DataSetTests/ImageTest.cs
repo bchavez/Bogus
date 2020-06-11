@@ -98,15 +98,15 @@ namespace Bogus.Tests.DataSetTests
       {
          var img = image.LoremFlickrUrl(640, 480, "dog");
 
-         img.Should().Be("https://loremflickr.com/640/480/dog/any?lock=1296054234");
+         img.Should().Be("https://loremflickr.com/640/480/dog/any?lock=1721768941");
          
          img = image.LoremFlickrUrl(100, 100, "cat");
 
-         img.Should().Be("https://loremflickr.com/100/100/cat/any?lock=235660067");
+         img.Should().Be("https://loremflickr.com/100/100/cat/any?lock=199070641");
 
          img = image.LoremFlickrUrl(100, 100, "cat,bird");
 
-         img.Should().Be("https://loremflickr.com/100/100/cat,bird/any?lock=1749342364");
+         img.Should().Be("https://loremflickr.com/100/100/cat,bird/any?lock=1035518479");
 
          img = image.LoremFlickrUrl(100, 100, "cat,bird", lockId: -1, grascale: true);
 

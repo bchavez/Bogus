@@ -94,15 +94,15 @@ namespace Bogus
             // number from a range spanning all possible values of int. The Random class only supports exclusive
             // upper bounds, period, and the upper bound must be specified as an int, so the best we can get in a
             // single call is a value in the range (int.MinValue, int.MaxValue - 1). Instead, what we do is get two
-            // samples, one in the range (int.MinValue, -1) and the other as unbiased as possible, and using the
-            // second one to decide, 50% of the time we invert all the bits in the sample, shifting its range to
-            // (0, int.MaxValue).
-            var result = localSeed.Next(int.MinValue, 0);
+            // samples, each of which has just under 31 bits of entropy, and use 16 bits from each to assemble a
+            // single 16-bit number.
+            int sample1 = localSeed.Next();
+            int sample2 = localSeed.Next();
 
-            if( (localSeed.Next() & 0x10000000) == 0 )
-               result = ~result;
+            int topHalf = (sample1 >> 8) & 0xFFFF;
+            int bottomHalf = (sample2 >> 8) & 0xFFFF;
 
-            return result;
+            return unchecked((topHalf << 16) | bottomHalf);
          }
       }
 

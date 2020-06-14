@@ -124,7 +124,7 @@ namespace Bogus.Tests
       [Fact]
       public void generate_decimal_with_min_and_max()
       {
-         r.Decimal(2.2m, 5.2m).Should().Be(4.488022563614591414017291557m);
+         r.Decimal(2.2m, 5.2m).Should().Be(3.8697355489728032005903907232m);
       }
 
       [Fact]
@@ -176,12 +176,12 @@ namespace Bogus.Tests
       [Fact]
       public void generate_int32_many()
       {
-         r.Int().Should().Be(425714706);
-         r.Int().Should().Be(1767736486);
-         r.Int().Should().Be(-1019306602);
-         r.Int().Should().Be(-1398145763);
-         r.Int().Should().Be(1857743500);
-         r.Int().Should().Be(-1033498152);
+         r.Int().Should().Be(1077349347);
+         r.Int().Should().Be(1155054345);
+         r.Int().Should().Be(-1904480771);
+         r.Int().Should().Be(2101046113);
+         r.Int().Should().Be(1223601157);
+         r.Int().Should().Be(-594397672);
       }
 
       [Fact]

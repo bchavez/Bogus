@@ -21,7 +21,7 @@ namespace Bogus.Tests.GitHubIssues
          var x = r.Int();
 
          // the remainder of this test depends on x having a predictable value
-         x.Should().Be(425714706);
+         x.Should().Be(1077349347);
 
          // right shift all bits except fir the first 10 bits = 2^10 = 1024.
          var a = (x >> (32 - 10)) % 898;
@@ -38,7 +38,7 @@ namespace Bogus.Tests.GitHubIssues
 
          var result = $"{a:000}-{b:00}-{c:0000}";
 
-         result.Should().Be("101-18-6328");
+         result.Should().Be("256-99-1799");
       }
    }
 }

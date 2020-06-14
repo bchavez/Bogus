@@ -1,17 +1,26 @@
 ### Running Benchmarks
 
-When running benchmarks, please make sure you compile this project in `Release` mode.
+**Requirements:**
+* **.NET 3.1 SDK** or later.
+* **[`R` project for Statistical Computing](https://www.r-project.org/) version 3.3.3 (2017-03-06)** or later.
+  * Ensure `rscript.exe` is in your path as [instructed here](https://benchmarkdotnet.org/articles/configs/exporters.html#plots) so that plots can be generated.
 
-Once compiled go to `\bin\Release\` and execute from the command line:
-```
-$> Benchmark.exe
+You must compile this `Benchmark` project in `Release` mode.
+
+```csharp
+dotnet build -c Release
 ```
 
-Your benchmark results will be in `\bin\Release\BenchmarkDotNet.Artifacts`.
+After compiling in `Release` mode, execute the following command from the command line:
+```
+$> dotnet benchmark bin\Release\netstandard2.0\Benchmark.dll
+```
+
+Pick your benchmark to run. Your benchmark results will be in `\BenchmarkDotNet.Artifacts`.
+
+### Other Notes
 
 **DO NOT** attempt to run these benchmarks through **Visual Studio**'s debugger or **F5** runner.
-
-Also, make sure you've installed [**`R`**](https://www.r-project.org/) and that `rscript.exe` is in your path as [instructed here](http://benchmarkdotnet.org/Configs/Exporters.htm#plots) so that plots can be generated.
 
 More on benchmarking:
 http://benchmarkdotnet.org/index.htm

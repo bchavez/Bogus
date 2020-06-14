@@ -107,15 +107,18 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random even number. If the range does not contain any even numbers, the first even number after the range is returned, or int.MinValue if min is int.MaxValue.
+      /// Returns a random even number. If the range does not contain any even numbers, an <see cref="ArgumentException" /> is thrown.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
+      /// <exception cref="ArgumentException">Thrown if it is impossible to select an odd number satisfying the specified range.</exception>
       public int Even(int min = 0, int max = 1)
       {
-         // Special case where the math below breaks.
-         if( min == int.MaxValue )
-            return int.MinValue;
+         // Ensure that we have a valid range.
+         if( min > max )
+            throw new ArgumentException(nameof(max), "The specified range is invalid (min > max).");
+         if( ((min & 1) == 1) && (max - 1 < min) )
+            throw new ArgumentException(nameof(max), "The specified range does not contain any even numbers.");
 
          // Adjust the range to ensure that we always get the same number of even values as odd values.
          min = (min + 1) & ~1;
@@ -129,12 +132,19 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Returns a random odd number. If the range does not contain any odd numbers, the first odd number after the range is returned.
+      /// Returns a random odd number. If the range does not contain any odd numbers, an <see cref="ArgumentException" /> is thrown.
       /// </summary>
       /// <param name="min">Lower bound, inclusive</param>
       /// <param name="max">Upper bound, inclusive</param>
+      /// <exception cref="ArgumentException">Thrown if it is impossible to select an odd number satisfying the specified range.</exception>
       public int Odd(int min = 0, int max = 1)
       {
+         // Ensure that we have a valid range.
+         if( min > max )
+            throw new ArgumentException(nameof(max), "The specified range is invalid (min > max).");
+         if( ((max & 1) == 0) && (min + 1 > max) )
+            throw new ArgumentException(nameof(max), "The specified range does not contain any even numbers.");
+
          // Special case where the math below breaks.
          if ( max == int.MinValue )
             return int.MinValue | 1;

@@ -104,6 +104,96 @@ namespace Bogus.Tests
       }
 
       [Fact]
+      public void detects_invalid_Even_range()
+      {
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Even(min: 1, max: 0);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Even(min: int.MaxValue, max: int.MinValue);
+            });
+      }
+
+      [Fact]
+      public void detects_empty_Even_range()
+      {
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Even(min: 1, max: 1);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Even(min: int.MaxValue, max: int.MaxValue);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Even(min: int.MinValue + 1, max: int.MinValue + 1);
+            });
+      }
+
+      [Fact]
+      public void can_handle_extreme_Even_range()
+      {
+         r.Even(min: int.MinValue, max: int.MinValue).Should().Be(int.MinValue);
+         r.Even(min: int.MaxValue & ~1, max: int.MaxValue & ~1).Should().Be(int.MaxValue & ~1);
+      }
+
+      [Fact]
+      public void detects_invalid_Odd_range()
+      {
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Odd(min: 1, max: 0);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Odd(min: int.MaxValue, max: int.MinValue);
+            });
+      }
+
+      [Fact]
+      public void detects_empty_Odd_range()
+      {
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Odd(min: 0, max: 0);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Odd(min: int.MaxValue - 1, max: int.MaxValue - 1);
+            });
+
+         Assert.Throws<ArgumentException>(
+            () =>
+            {
+               r.Odd(min: int.MinValue, max: int.MinValue);
+            });
+      }
+
+      [Fact]
+      public void can_handle_extreme_Odd_range()
+      {
+         r.Odd(min: int.MinValue | 1, max: int.MinValue | 1).Should().Be(int.MinValue | 1);
+         r.Odd(min: int.MaxValue, max: int.MaxValue).Should().Be(int.MaxValue);
+      }
+
+      [Fact]
       public void random_bool()
       {
          r.Bool().Should().BeFalse();

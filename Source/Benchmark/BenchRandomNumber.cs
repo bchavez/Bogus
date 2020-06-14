@@ -35,6 +35,12 @@ namespace Benchmark
       {
          return n.NumberJDG(int.MinValue, int.MaxValue);
       }
+
+      [Benchmark]
+      public int JDGMethod2()
+      {
+         return n.NumberJDG2(int.MinValue, int.MaxValue);
+      }
    }
 
    public class NumberTests 
@@ -102,6 +108,23 @@ namespace Benchmark
                result = ~result;
 
             return result;
+         }
+      }
+
+      public int NumberJDG2(int min = 0, int max = 1)
+      {
+         lock( Locker.Value )
+         {
+            if (max < int.MaxValue) return localSeed.Next(min, max + 1);
+            if (min > int.MinValue) return 1 + localSeed.Next(min - 1, max);
+
+            int sample1 = localSeed.Next();
+            int sample2 = localSeed.Next();
+
+            int topHalf = (sample1 >> 8) & 0xFFFF;
+            int bottomHalf = (sample2 >> 8) & 0xFFFF;
+
+            return (topHalf << 16) | bottomHalf;
          }
       }
    }

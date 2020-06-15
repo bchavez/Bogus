@@ -60,8 +60,8 @@ namespace Bogus
       /// <param name="maxDigit">maximum digit, inclusive</param>
       public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
       {
-         if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException(nameof(maxDigit), "max digit can't be lager than 9 or smaller than 0");
-         if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException(nameof(minDigit), "min digit can't be lager than 9 or smaller than 0");
+         if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException("max digit can't be lager than 9 or smaller than 0", nameof(maxDigit));
+         if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException("min digit can't be lager than 9 or smaller than 0", nameof(minDigit));
 
          var digits = new int[count];
          for( var i = 0; i < count; i++ )
@@ -116,9 +116,9 @@ namespace Bogus
       {
          // Ensure that we have a valid range.
          if( min > max )
-            throw new ArgumentException(nameof(max), "The specified range is invalid (min > max).");
+            throw new ArgumentException("The specified range is invalid (min > max).", nameof(max));
          if( ((min & 1) == 1) && (max - 1 < min) )
-            throw new ArgumentException(nameof(max), "The specified range does not contain any even numbers.");
+            throw new ArgumentException("The specified range does not contain any even numbers.", nameof(max));
 
          // Adjust the range to ensure that we always get the same number of even values as odd values.
          // For example,
@@ -144,9 +144,9 @@ namespace Bogus
       {
          // Ensure that we have a valid range.
          if( min > max )
-            throw new ArgumentException(nameof(max), "The specified range is invalid (min > max).");
+            throw new ArgumentException("The specified range is invalid (min > max).", nameof(max));
          if( ((max & 1) == 0) && (min + 1 > max) )
-            throw new ArgumentException(nameof(max), "The specified range does not contain any even numbers.");
+            throw new ArgumentException("The specified range does not contain any even numbers.", nameof(max));
 
          // Special case where the math below breaks.
          if ( max == int.MinValue )

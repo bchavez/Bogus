@@ -121,13 +121,16 @@ namespace Bogus
             throw new ArgumentException(nameof(max), "The specified range does not contain any even numbers.");
 
          // Adjust the range to ensure that we always get the same number of even values as odd values.
+         // For example,
+         //   if the input is min = 1, max = 3, the new range should be min = 2, max = 3.
+         //   if the input is min = 2, max = 3, the range should remain min = 2, max = 3.
          min = (min + 1) & ~1;
          max = max | 1;
 
          if( min > max )
             return min;
 
-         // Strip off the 1 bit of a random number.
+         // Strip off the last bit of a random number to make the number even.
          return Number(min, max) & ~1;
       }
 
@@ -150,13 +153,16 @@ namespace Bogus
             return int.MinValue | 1;
 
          // Adjust the range to ensure that we always get the same number of even values as odd values.
+         // For example,
+         //   if the input is min = 2, max = 4, the new range should be min = 2, max = 3.
+         //   if the input is min = 2, max = 3, the range should remain min = 2, max = 3.
          min = min & ~1;
          max = (max - 1) | 1;
 
          if( min > max )
             return min | 1;
 
-         // Ensure that the 1 bit is set in a random number.
+         // Ensure that the last bit is set in a random number to make the number odd.
          return Number(min, max) | 1;
       }
 

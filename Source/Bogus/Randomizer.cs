@@ -207,14 +207,13 @@ namespace Bogus
          // should not skip any possible values at the least significant end of the
          // mantissa.
 
-         int[] bits = new int[4];
+         int lowBits = Number(int.MinValue, int.MaxValue);
+         int middleBits = Number(int.MinValue, int.MaxValue);
+         int highBits = Number(int.MinValue, int.MaxValue);
 
-         bits[0] = Number(int.MinValue, int.MaxValue);
-         bits[1] = Number(int.MinValue, int.MaxValue);
-         bits[2] = Number(int.MinValue, int.MaxValue);
-         bits[3] = 0x1C0000;
+         const int Scale = 28;
 
-         decimal result = new decimal(bits);
+         decimal result = new decimal(lowBits, middleBits, highBits, isNegative: false, Scale);
 
          // Step 2: Scale the value and adjust it to the desired range. This may decrease
          // the accuracy by adjusting the scale as necessary, but we get the best possible

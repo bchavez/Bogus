@@ -106,39 +106,29 @@ namespace Bogus.Tests
       [Fact]
       public void detects_invalid_Even_range()
       {
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Even(min: 1, max: 0);
-            });
+         Action act1 = () => r.Even(min: 1, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where( ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '1' is greater than the maximum value '0'."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Even(min: int.MaxValue, max: int.MinValue);
-            });
+         Action act2 = () => r.Even(min: int.MaxValue, max: int.MinValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where( ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '2147483647' is greater than the maximum value '-2147483648'."));
       }
 
       [Fact]
       public void detects_empty_Even_range()
       {
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Even(min: 1, max: 1);
-            });
+         Action act1 = () => r.Even(min: 1, max: 1);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Even(min: int.MaxValue, max: int.MaxValue);
-            });
+         Action act2 = () => r.Even(min: int.MaxValue, max: int.MaxValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Even(min: int.MinValue + 1, max: int.MinValue + 1);
-            });
+         Action act3 = () => r.Even(min: int.MinValue + 1, max: int.MinValue + 1);
+         act3.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
       }
 
       [Fact]
@@ -151,39 +141,29 @@ namespace Bogus.Tests
       [Fact]
       public void detects_invalid_Odd_range()
       {
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Odd(min: 1, max: 0);
-            });
+         Action act1 = () => r.Odd(min: 1, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '1' is greater than the maximum value '0'."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Odd(min: int.MaxValue, max: int.MinValue);
-            });
+         Action act2 = () => r.Odd(min: int.MaxValue, max: int.MinValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '2147483647' is greater than the maximum value '-2147483648'."));
       }
 
       [Fact]
       public void detects_empty_Odd_range()
       {
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Odd(min: 0, max: 0);
-            });
+         Action act1 = () => r.Odd(min: 0, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Odd(min: int.MaxValue - 1, max: int.MaxValue - 1);
-            });
+         Action act2 = () => r.Odd(min: int.MaxValue - 1, max: int.MaxValue - 1);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
 
-         Assert.Throws<ArgumentException>(
-            () =>
-            {
-               r.Odd(min: int.MinValue, max: int.MinValue);
-            });
+         Action act3 = () => r.Odd(min: int.MinValue, max: int.MinValue);
+         act3.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
       }
 
       [Fact]

@@ -116,7 +116,7 @@ namespace Bogus
       {
          // Ensure that we have a valid range.
          if( min > max )
-            throw new ArgumentException("The specified range is invalid (min > max).", nameof(max));
+            throw new ArgumentException($"The min/max range is invalid. The minimum value '{min}' is greater than the maximum value '{max}'.", nameof(max));
          if( ((min & 1) == 1) && (max - 1 < min) )
             throw new ArgumentException("The specified range does not contain any even numbers.", nameof(max));
 
@@ -144,9 +144,9 @@ namespace Bogus
       {
          // Ensure that we have a valid range.
          if( min > max )
-            throw new ArgumentException("The specified range is invalid (min > max).", nameof(max));
+            throw new ArgumentException($"The min/max range is invalid. The minimum value '{min}' is greater than the maximum value '{max}'.", nameof(max));
          if( ((max & 1) == 0) && (min + 1 > max) )
-            throw new ArgumentException("The specified range does not contain any even numbers.", nameof(max));
+            throw new ArgumentException("The specified range does not contain any odd numbers.", nameof(max));
 
          // Special case where the math below breaks.
          if ( max == int.MinValue )

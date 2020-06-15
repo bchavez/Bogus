@@ -8,7 +8,7 @@ namespace Benchmark
 {
    [SimpleJob(RuntimeMoniker.NetCoreApp31), SimpleJob(RuntimeMoniker.Net471)]
    [MarkdownExporter, MemoryDiagnoser, RPlotExporter]
-   public class BenchRandomNumber
+   public class PR300_BenchRandomNumber
    {
       private NumberTests n;
 

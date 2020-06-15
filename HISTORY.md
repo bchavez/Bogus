@@ -1,3 +1,13 @@
+## v30.0.1-beta-1
+Release Date: 2020-06-14
+* PR 300: `Random.Number()` now inclusive of `max: int.MaxValue`.
+* PR 300: `Random.Even()` better random distribution and range checking.
+* PR 300: `Random.Odd()` better random distribution and range checking.  
+* PR 300: `Random.Int()` bug fixed where `.Int()` may not return `int.MaxValue`.
+* PR 300: `Random.Decimal()` with greater decimal precision.
+* Deterministic values may have changed.
+* Big thank you to @logiclrd for PR 300!
+
 ## v29.0.2
 Release Date: 2020-04-11
 

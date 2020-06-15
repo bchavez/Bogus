@@ -91,10 +91,86 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void exclusive_int_maxvalue_number()
+      public void can_include_int_maxvalue_number()
       {
-         var max = r.Number(int.MaxValue - 1, int.MaxValue);
-         max.Should().Be(int.MaxValue - 1);
+         var max = r.Number(int.MaxValue, int.MaxValue);
+         max.Should().Be(int.MaxValue);
+      }
+
+      [Fact]
+      public void can_handle_full_int_range()
+      {
+         r.Number(int.MinValue, int.MaxValue);
+      }
+
+      [Fact]
+      public void detects_invalid_Even_range()
+      {
+         Action act1 = () => r.Even(min: 1, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where( ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '1' is greater than the maximum value '0'."));
+
+         Action act2 = () => r.Even(min: int.MaxValue, max: int.MinValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where( ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '2147483647' is greater than the maximum value '-2147483648'."));
+      }
+
+      [Fact]
+      public void detects_empty_Even_range()
+      {
+         Action act1 = () => r.Even(min: 1, max: 1);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
+
+         Action act2 = () => r.Even(min: int.MaxValue, max: int.MaxValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
+
+         Action act3 = () => r.Even(min: int.MinValue + 1, max: int.MinValue + 1);
+         act3.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any even numbers."));
+      }
+
+      [Fact]
+      public void can_handle_extreme_Even_range()
+      {
+         r.Even(min: int.MinValue, max: int.MinValue).Should().Be(int.MinValue);
+         r.Even(min: int.MaxValue & ~1, max: int.MaxValue & ~1).Should().Be(int.MaxValue & ~1);
+      }
+
+      [Fact]
+      public void detects_invalid_Odd_range()
+      {
+         Action act1 = () => r.Odd(min: 1, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '1' is greater than the maximum value '0'."));
+
+         Action act2 = () => r.Odd(min: int.MaxValue, max: int.MinValue);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The min/max range is invalid. The minimum value '2147483647' is greater than the maximum value '-2147483648'."));
+      }
+
+      [Fact]
+      public void detects_empty_Odd_range()
+      {
+         Action act1 = () => r.Odd(min: 0, max: 0);
+         act1.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
+
+         Action act2 = () => r.Odd(min: int.MaxValue - 1, max: int.MaxValue - 1);
+         act2.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
+
+         Action act3 = () => r.Odd(min: int.MinValue, max: int.MinValue);
+         act3.ShouldThrow<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The specified range does not contain any odd numbers."));
+      }
+
+      [Fact]
+      public void can_handle_extreme_Odd_range()
+      {
+         r.Odd(min: int.MinValue | 1, max: int.MinValue | 1).Should().Be(int.MinValue | 1);
+         r.Odd(min: int.MaxValue, max: int.MaxValue).Should().Be(int.MaxValue);
       }
 
       [Fact]
@@ -118,7 +194,7 @@ namespace Bogus.Tests
       [Fact]
       public void generate_decimal_with_min_and_max()
       {
-         r.Decimal(2.2m, 5.2m).Should().Be(4.0105668499183690m);
+         r.Decimal(2.2m, 5.2m).Should().Be(3.8697355489728032005903907232m);
       }
 
       [Fact]
@@ -170,10 +246,12 @@ namespace Bogus.Tests
       [Fact]
       public void generate_int32_many()
       {
-         r.Int().Should().Be(1296054233);
-         r.Int().Should().Be(-1749342366);
-         r.Int().Should().Be(-76446690);
-         r.Int().Should().Be(108870444);
+         r.Int().Should().Be(1077349347);
+         r.Int().Should().Be(1155054345);
+         r.Int().Should().Be(-1904480771);
+         r.Int().Should().Be(2101046113);
+         r.Int().Should().Be(1223601157);
+         r.Int().Should().Be(-594397672);
       }
 
       [Fact]

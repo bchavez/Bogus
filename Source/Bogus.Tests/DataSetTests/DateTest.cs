@@ -181,6 +181,33 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_random_time_between_two_dates_optional()
+      {
+         var now = DateTime.Now;
+
+         //not specified
+         date.Between()
+            .Should()
+            .BeOnOrAfter(DateTime.MinValue)
+            .And
+            .BeOnOrBefore(DateTime.MaxValue);
+
+         //only specify start
+         date.Between(start: DateTime.Now)
+            .Should()
+            .BeOnOrAfter(now)
+            .And
+            .BeOnOrBefore(DateTime.MaxValue);
+
+         //only specify end
+         date.Between(end: DateTime.Now)
+            .Should()
+            .BeOnOrAfter(DateTime.MinValue)
+            .And
+            .BeOnOrBefore(now);
+      }
+
+      [Fact]
       public void can_get_random_time_between_two_dateOffsets()
       {
          var start = DateTimeOffset.Parse("6/15/2000 4:17:41 PM", CultureInfo.InvariantCulture);
@@ -198,6 +225,33 @@ namespace Bogus.Tests.DataSetTests
             .BeOnOrAfter(start)
             .And
             .BeOnOrBefore(end);
+      }
+
+      [Fact]
+      public void can_get_random_time_between_two_dateOffsets_optional()
+      {
+         var now = DateTimeOffset.UtcNow;
+
+         //not specified
+         date.BetweenOffset()
+            .Should()
+            .BeOnOrAfter(DateTimeOffset.MinValue)
+            .And
+            .BeOnOrBefore(DateTimeOffset.MaxValue);
+
+         //only specify start
+         date.BetweenOffset(start: DateTime.Now)
+            .Should()
+            .BeOnOrAfter(now)
+            .And
+            .BeOnOrBefore(DateTimeOffset.MaxValue);
+
+         //only specify end
+         date.BetweenOffset(end: DateTime.Now)
+            .Should()
+            .BeOnOrAfter(DateTimeOffset.MinValue)
+            .And
+            .BeOnOrBefore(now);
       }
 
       [Fact]

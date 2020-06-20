@@ -140,35 +140,42 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random <see cref="DateTime"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
-      /// <param name="start">Start time - The returned <seealso cref="DateTimeKind"/> is used from this parameter.</param>
-      /// <param name="end">End time</param>
-      public DateTime Between(DateTime start, DateTime end)
+      /// <param name="start">Start time - The returned <seealso cref="DateTimeKind"/> is used from this parameter. Default is <see cref="DateTime.MinValue"/>.</param>
+      /// <param name="end">End time. Default is <see cref="DateTime.MaxValue"/>.</param>
+      public DateTime Between(DateTime? start = null, DateTime? end = null)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         var startTicks = start.GetValueOrDefault(DateTime.MinValue).Ticks;
+         var endTicks = end.GetValueOrDefault(DateTime.MaxValue).Ticks;
+
+         var minTicks = Math.Min(startTicks, endTicks);
+         var maxTicks = Math.Max(startTicks, endTicks);
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTime(minTicks, start.Kind) + partTimeSpan;
+         return new DateTime(minTicks, start.GetValueOrDefault().Kind) + partTimeSpan;
       }
 
       /// <summary>
       /// Get a random <see cref="DateTimeOffset"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
-      /// <param name="start">Start time - The returned <seealso cref="DateTimeOffset"/> offset value is used from this parameter</param>
-      /// <param name="end">End time</param>
-      public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
+      /// <param name="start">Start time - The returned <seealso cref="DateTimeOffset"/> offset value is used from this parameter. Default is <see cref="DateTimeOffset.MinValue"/>.</param>
+      /// <param name="end">End time. Default is <see cref="DateTimeOffset.MaxValue"/>.</param>
+      public DateTimeOffset BetweenOffset(DateTimeOffset? start = null, DateTimeOffset? end = null)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         var startTicks = start.GetValueOrDefault(DateTimeOffset.MinValue).Ticks;
+         var endTicks = end.GetValueOrDefault(DateTimeOffset.MaxValue).Ticks;
+         var offset = start.GetValueOrDefault().Offset;
+
+         var minTicks = Math.Min(startTicks, endTicks);
+         var maxTicks = Math.Max(startTicks, endTicks);
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTimeOffset(minTicks, start.Offset) + partTimeSpan;
+         return new DateTimeOffset(minTicks, offset) + partTimeSpan;
       }
 
       /// <summary>
@@ -224,12 +231,12 @@ namespace Bogus.DataSets
       public string Month(bool abbreviation = false, bool useContext = false)
       {
          var type = "wide";
-         if( abbreviation )
+         if (abbreviation)
             type = "abbr";
 
-         if( useContext &&
+         if (useContext &&
              (type == "wide" && hasMonthWideContext) ||
-             (type == "abbr" && hasMonthAbbrContext) )
+             (type == "abbr" && hasMonthAbbrContext))
          {
             type += "_context";
          }
@@ -243,12 +250,12 @@ namespace Bogus.DataSets
       public string Weekday(bool abbreviation = false, bool useContext = false)
       {
          var type = "wide";
-         if( abbreviation )
+         if (abbreviation)
             type = "abbr";
 
-         if( useContext &&
+         if (useContext &&
              (type == "wide" && hasWeekdayWideContext) ||
-             (type == "abbr" && hasWeekdayAbbrContext) )
+             (type == "abbr" && hasWeekdayAbbrContext))
          {
             type += "_context";
          }

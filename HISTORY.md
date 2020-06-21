@@ -1,5 +1,26 @@
+## v30.0.1-beta-2
+Release Date: TBA
+
+* Added `Finance.Litecoin()`.
+* Added `Commerce.ProductDescription()`.
+* Add PlaceIMG image service. `Image.PlaceImgUrl()`.
+* Data parity with faker.js. Deterministic sequences may have changed.
+* New `en_NG` Nigerian locale.
+* `en` updated.
+* `nl_BE` updated.
+* `de` updated.
+* `ru` updated.
+* `zh_CN` updated.
+* `zh_TW` updated.
+* `ar` updated. 
+* `cz` updated.
+* `es_MX` updated.
+* `sk` updated.
+* `it` updated.
+
 ## v30.0.1-beta-1
 Release Date: 2020-06-14
+
 * PR 300: `Random.Number()` now inclusive of `max: int.MaxValue`.
 * PR 300: `Random.Even()` better random distribution and range checking.
 * PR 300: `Random.Odd()` better random distribution and range checking.  

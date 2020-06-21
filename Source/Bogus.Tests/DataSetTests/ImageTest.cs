@@ -120,5 +120,28 @@ namespace Bogus.Tests.DataSetTests
 
          img.Should().Be("https://loremflickr.com/g/100/100/cat,bird/all?lock=227");
       }
+
+
+      [Fact]
+      public void can_use_placeimg_url()
+      {
+         var img = image.PlaceImgUrl(640, 480, PlaceImgCategory.Animals);
+         img.Should().Be("https://placeimg.com/640/480/animals");
+
+         img = image.PlaceImgUrl();
+         img.Should().Be("https://placeimg.com/640/480/any");
+
+         img = image.PlaceImgUrl(777, 222, filter: PlaceImgFilter.Grayscale);
+         img.Should().Be("https://placeimg.com/777/222/any/grayscale");
+
+         img = image.PlaceImgUrl(777, 222, PlaceImgCategory.Architecture, PlaceImgFilter.Sepia);
+         img.Should().Be("https://placeimg.com/777/222/arch/sepia");
+
+         img = image.PlaceImgUrl(777, 333, PlaceImgCategory.Architecture);
+         img.Should().Be("https://placeimg.com/777/333/arch");
+
+         img = image.PlaceImgUrl(777, 444, PlaceImgCategory.Tech);
+         img.Should().Be("https://placeimg.com/777/444/tech");
+      }
    }
 }

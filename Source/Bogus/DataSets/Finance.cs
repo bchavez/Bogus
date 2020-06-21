@@ -312,6 +312,26 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Generate a random Litecoin address.
+      /// </summary>
+      public string LitecoinAddress()
+      {
+         var addressLength = this.Random.Number(26, 33);
+         var lastBits = new string(this.Random.ArrayElements(BtcCharset, addressLength));
+         var prefix = this.Random.Number(0, 2);
+         
+         if( prefix == 0 )
+         {
+            return $"L{lastBits}";
+         }
+         if( prefix == 1 )
+         {
+            return $"M{lastBits}";
+         }
+         return $"3{lastBits}";
+      }
+
+      /// <summary>
       /// Generates an ABA routing number with valid check digit.
       /// </summary>
       public string RoutingNumber()

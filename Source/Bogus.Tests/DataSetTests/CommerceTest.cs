@@ -44,6 +44,12 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_a_product_description()
+      {
+         commerce.ProductDescription().Should().Be("Carbonite web goalkeeper gloves are ergonomically designed to give easy fit");
+      }
+
+      [Fact]
       public void can_get_categories()
       {
          commerce.Categories(3).ShouldBeEquivalentTo(

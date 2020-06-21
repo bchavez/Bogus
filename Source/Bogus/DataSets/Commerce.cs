@@ -122,6 +122,15 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Random product description.
+      /// </summary>
+      /// <returns>A random product description.</returns>
+      public string ProductDescription()
+      {
+         return GetRandomArrayItem("product_description");
+      }
+
+      /// <summary>
       /// EAN-8 checksum weights.
       /// </summary>
       protected static int[] Ean8Weights = {3, 1, 3, 1, 3, 1, 3};

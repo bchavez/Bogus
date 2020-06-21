@@ -32,6 +32,42 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Get an image from the https://placeimg.com service.
+      /// </summary>
+      /// <param name="width">Width of the image.</param>
+      /// <param name="height">Height of the image.</param>
+      /// <param name="category">Category of the image. See <seealso cref="PlaceImgCategory"/> for string categories.</param>
+      /// <param name="filter">The filter to apply to the image. See <seealso cref="PlaceImgFilter"/>.</param>
+      /// <returns></returns>
+      public string PlaceImgUrl(
+         int width = 640, int height = 480,
+         string category = PlaceImgCategory.Any,
+         PlaceImgFilter? filter = null)
+      {
+         //https://placeimg.com/640/480/nature/grayscale
+         //https://placeimg.com/640/480/nature
+         //https://placeimg.com/640/480/any/sepia
+         //https://placeimg.com/640/480/any
+
+         const string Url = "https://placeimg.com";
+
+         var sb = new StringBuilder(Url);
+         sb.Append($"/{width}/{height}/{category}");
+
+         if (filter is PlaceImgFilter.Grayscale)
+         {
+            sb.Append("/grayscale");
+         }
+         else if ( filter is PlaceImgFilter.Sepia )
+         {
+            sb.Append("/sepia");
+         }
+
+         return sb.ToString();
+
+      }
+
+      /// <summary>
       /// Get an image from the https://picsum.photos service.
       /// </summary>
       /// <param name="width">Width of the image.</param>
@@ -48,7 +84,6 @@ namespace Bogus.DataSets
          if (grayscale)
          {
             sb.Append("/g");
-
          }
 
          sb.Append($"/{width}/{height}");

@@ -49,6 +49,12 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_generate_a_random_litecoin_address()
+      {
+         finance.LitecoinAddress().Should().Be("L7PE5D8HxpXjM3igcWbTeyKns2YdAfL");
+      }
+
+      [Fact]
       public void can_generate_aba_routing_number()
       {
          finance.RoutingNumber().Should().Be("618606061");

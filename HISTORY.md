@@ -1,5 +1,5 @@
 ## v30.0.1-beta-2
-Release Date: TBA
+Release Date: 2020-06-20
 
 * Added `Finance.Litecoin()`.
 * Added `Commerce.ProductDescription()`.

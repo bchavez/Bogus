@@ -1,3 +1,8 @@
+## v30.0.1-beta-3
+Release Date: 2020-06-29
+
+* Issue 307: Fixed `Internet.UserAgent()` sometimes generating invalid user agent strings that could not be parsed by `System.Net.Http.HttpRequestMessage.Headers`.
+
 ## v30.0.1-beta-2
 Release Date: 2020-06-20
 

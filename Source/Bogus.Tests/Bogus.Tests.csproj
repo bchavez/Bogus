@@ -20,6 +20,9 @@
     <ProjectReference Include="..\Bogus\Bogus.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Rantionary-3.0.17.rantpkg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

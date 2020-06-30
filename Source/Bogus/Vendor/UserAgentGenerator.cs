@@ -173,34 +173,36 @@ namespace Bogus.Vendor
          {
             var safari = VersionString("safari");
             var os_ver = (arch == "mac")
-               ? "(Macintosh; " + RandomProc("mac") + " Mac OS X " + VersionString("osx", "_") + ") "
+               ? "(Macintosh; " + RandomProc("mac") + " Mac OS X " + VersionString("osx", "_") + ")"
                : (arch == "win")
                   ? "(Windows; U; Windows NT " + VersionString("nt") + ")"
-                  : "(X11; Linux " + RandomProc(arch);
+                  : "(X11; Linux " + RandomProc(arch) + ")";
 
             return "Mozilla/5.0 " + os_ver + " AppleWebKit/" + safari + " (KHTML, like Gecko) Chrome/" + VersionString("chrome") + " Safari/" + safari;
          }
          if( browser == "opera" )
          {
-            var presto_ver = " Presto/" + VersionString("presto") + " Version/" + VersionString("presto2") + ")";
             var os_ver = (arch == "win")
-               ? "(Windows NT " + VersionString("nt") + "; U; " + RandomLanguage() + presto_ver
+               ? "(Windows NT " + VersionString("nt") + "; U; " + RandomLanguage() +")"
                : (arch == "lin")
-                  ? "(X11; Linux " + RandomProc(arch) + "; U; " + RandomLanguage() + presto_ver
-                  : "(Macintosh; Intel Mac OS X " + VersionString("osx") + " U; " + RandomLanguage() + " Presto/" +
-                    VersionString("presto") + " Version/" + VersionString("presto2") + ")";
+                  ? "(X11; Linux " + RandomProc(arch) + "; U; " + RandomLanguage()+ ")"
+                  : "(Macintosh; Intel Mac OS X " + VersionString("osx") + " U; " + RandomLanguage() + ")";
 
-            return "Opera/" + this.Random.Number(9, 14) + "." + this.Random.Number(0, 99) + " " + os_ver;
+            var majorVersion = this.Random.Number(9, 14) + "." + this.Random.Number(0, 99);
+
+            var presto_ver = "Presto/" + VersionString("presto") + " Version/" + VersionString("presto2");
+
+            return "Opera/" + majorVersion + " " + os_ver + " " + presto_ver;
          }
          if( browser == "safari" )
          {
             var safari = VersionString("safari");
             var ver = this.Random.Number(4, 7) + "." + this.Random.Number(0, 1) + "." + this.Random.Number(0, 10);
             var os_ver = (arch == "mac")
-               ? "(Macintosh; " + RandomProc("mac") + " Mac OS X " + VersionString("osx", "_") + " rv:" + this.Random.Number(2, 6) + ".0; " + RandomLanguage() + ") "
+               ? "(Macintosh; " + RandomProc("mac") + " Mac OS X " + VersionString("osx", "_") + " rv:" + this.Random.Number(2, 6) + ".0; " + RandomLanguage() + ")"
                : "(Windows; U; Windows NT " + VersionString("nt") + ")";
 
-            return "Mozilla/5.0 " + os_ver + "AppleWebKit/" + safari + " (KHTML, like Gecko) Version/" + ver + " Safari/" + safari;
+            return "Mozilla/5.0 " + os_ver + " AppleWebKit/" + safari + " (KHTML, like Gecko) Version/" + ver + " Safari/" + safari;
          }
          if( browser == "iexplorer" )
          {

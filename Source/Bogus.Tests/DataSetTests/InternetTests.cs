@@ -1,15 +1,22 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 using Z.ExtensionMethods;
 
 namespace Bogus.Tests.DataSetTests
 {
    public class InternetTests : SeededTest
    {
-      public InternetTests()
+      private readonly ITestOutputHelper console;
+
+      public InternetTests(ITestOutputHelper console)
       {
+         this.console = console;
          internet = new Internet();
       }
 
@@ -149,13 +156,19 @@ namespace Bogus.Tests.DataSetTests
          email.Should().Be("cowboy.Beatty30@yahoo.com");
       }
 
-
       [Fact]
       public void can_pick_random_browser()
       {
-         Enumerable.Range(1, 200).Select(
-               i => internet.UserAgent())
-            .Dump();
+         var userAgents = Enumerable.Range(1, 1_000)
+            .Select(i => internet.UserAgent())
+            .ToArray();
+
+         var req = new System.Net.Http.HttpRequestMessage();
+         foreach( var userAgent in userAgents )
+         {
+            Action act = () => req.Headers.Add("User-Agent", userAgent);
+            act.ShouldNotThrow();
+         }
       }
 
       [Theory]

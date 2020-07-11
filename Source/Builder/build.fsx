@@ -8,20 +8,20 @@
 
 #r "paket:
 
-nuget Fake.Core                    = 5.8.4
-nuget Fake.Core.Target             = 5.13.5
-nuget Fake.Core.Xml                = 5.13.5
-nuget Fake.Runtime                 = 5.13.5
-nuget Fake.DotNet.NuGet            = 5.13.5
-nuget Fake.DotNet.Cli              = 5.13.5
-nuget Fake.DotNet.AssemblyInfoFile = 5.13.5
-nuget Fake.DotNet.MSBuild          = 5.13.5
-nuget Fake.JavaScript.Npm          = 5.13.5
-nuget Fake.IO.FileSystem           = 5.13.5
-nuget Fake.IO.Zip                  = 5.13.5
-nuget Fake.Tools.Git               = 5.13.5
-nuget Fake.DotNet.Testing.xUnit2   = 5.13.5
-nuget Fake.BuildServer.AppVeyor    = 5.13.5
+nuget Fake.Core                    
+nuget Fake.Core.Target             
+nuget Fake.Core.Xml                
+nuget Fake.Runtime                 
+nuget Fake.DotNet.NuGet            
+nuget Fake.DotNet.Cli              
+nuget Fake.DotNet.AssemblyInfoFile 
+nuget Fake.DotNet.MSBuild          
+nuget Fake.JavaScript.Npm          
+nuget Fake.IO.FileSystem           
+nuget Fake.IO.Zip                  
+nuget Fake.Tools.Git               
+nuget Fake.DotNet.Testing.xUnit2   
+nuget Fake.BuildServer.AppVeyor    
 
 nuget SharpCompress = 0.22.0
 nuget FSharp.Data = 2.4.6

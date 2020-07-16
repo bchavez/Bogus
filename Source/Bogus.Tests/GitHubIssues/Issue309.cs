@@ -28,9 +28,19 @@ namespace Bogus.Tests.GitHubIssues
             .RuleFor(u => u.Name, f => f.Name.FirstName())
             .RuleForList(u => u.Hobbies, f => hobbyFaker.Generate(3));
 
-         var user = userFaker.Generate(1);
+         var user = userFaker.Generate();
          user.Should().NotBeNull();
+
+         var expected = new[]
+            {
+               new Hobby {Id = 0, Text = "Soft"},
+               new Hobby {Id = 1, Text = "deposit"},
+               new Hobby {Id = 2, Text = "Checking Account"}
+            };
+
          console.Dump(user);
+         user.Hobbies.Should().HaveCount(3);
+         user.Hobbies.ShouldAllBeEquivalentTo(expected, opt => opt.WithStrictOrdering());
       }
 
       public class Hobby

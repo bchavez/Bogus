@@ -22,4 +22,7 @@ about: If you need help using Bogus 🏥
 
 ### Do you have sample code to show what you're trying to do?
 
-_(Please be complete. Include any class models necessary to run your code.)_
+_(Please be complete. Provide all code necessary to run your example in LINQPad.)_
+_(The more complete code examples are, the more accurate answers will be.)_
+_(https://www.linqpad.net)_
+ 

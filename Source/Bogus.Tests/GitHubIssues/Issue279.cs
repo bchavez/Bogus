@@ -122,7 +122,7 @@ namespace Bogus.Tests.GitHubIssues
          //defined order.
          Action generate = () => barFaker.Generate();
 
-         generate.ShouldThrow<NullReferenceException>();
+         generate.Should().Throw<NullReferenceException>();
       }
 
       [Fact]

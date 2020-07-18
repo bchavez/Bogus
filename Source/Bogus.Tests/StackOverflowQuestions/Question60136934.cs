@@ -57,7 +57,7 @@ namespace Bogus.Tests.StackOverflowQuestions
       public void pick_invalid_number_of_enums(int count)
       {
          Action act = () => r.EnumValues<Foo>(count);
-         act.ShouldThrow<ArgumentOutOfRangeException>();
+         act.Should().Throw<ArgumentOutOfRangeException>();
       }
    }
 }

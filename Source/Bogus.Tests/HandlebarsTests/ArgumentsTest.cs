@@ -126,7 +126,7 @@ namespace Bogus.Tests.HandlebarsTests
          var faker = new Faker();
          //easy to miss the closing ) with }} handle bars.
          Action a = () => faker.Parse("{{randomizer.number(100 }}");
-         a.ShouldThrow<ArgumentException>();
+         a.Should().Throw<ArgumentException>();
       }
 
       [Fact]

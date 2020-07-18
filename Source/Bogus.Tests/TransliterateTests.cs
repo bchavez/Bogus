@@ -42,7 +42,7 @@ namespace Bogus.Tests
       public void transliterate_with_unknown_langauge_doesnt_throw()
       {
          Action a = () => Transliterater.Translate("fefefe", "gggg");
-         a.ShouldNotThrow();
+         a.Should().NotThrow();
       }
 
       [Fact]

@@ -17,7 +17,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action gen = () => orderFaker.Generate();
 
-         gen.ShouldThrow<ValidationException>();
+         gen.Should().Throw<ValidationException>();
 
          Faker.DefaultStrictMode = false;
       }
@@ -33,7 +33,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action gen = () => orderFaker.Generate();
 
-         gen.ShouldThrow<ValidationException>();
+         gen.Should().Throw<ValidationException>();
       }
 
 
@@ -48,7 +48,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action gen = () => orderFaker.Generate();
 
-         gen.ShouldNotThrow<ValidationException>();
+         gen.Should().NotThrow<ValidationException>();
 
          Faker.DefaultStrictMode = false;
       }

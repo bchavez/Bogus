@@ -116,7 +116,7 @@ namespace Bogus.Tests
                var goodCustomers = testCustomers.Generate(5, "Good");
                goodCustomers.Dump();
             };
-         act.ShouldThrow<ValidationException>();
+         act.Should().Throw<ValidationException>();
       }
 
       [Fact]

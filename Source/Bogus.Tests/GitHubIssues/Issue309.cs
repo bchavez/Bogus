@@ -40,7 +40,7 @@ namespace Bogus.Tests.GitHubIssues
 
          console.Dump(user);
          user.Hobbies.Should().HaveCount(3);
-         user.Hobbies.ShouldAllBeEquivalentTo(expected, opt => opt.WithStrictOrdering());
+         user.Hobbies.Should().BeEquivalentTo(expected, opt => opt.WithStrictOrdering());
       }
 
       public class Hobby

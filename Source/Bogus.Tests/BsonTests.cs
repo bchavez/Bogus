@@ -59,7 +59,7 @@ namespace Bogus.Tests
 
          Action error = () => extra.JunkFood().Should().Be("Pizza");
 
-         error.ShouldThrow<NullReferenceException>();
+         error.Should().Throw<NullReferenceException>();
       }
 
 

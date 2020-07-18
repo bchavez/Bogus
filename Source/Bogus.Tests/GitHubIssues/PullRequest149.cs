@@ -11,7 +11,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          Action a = () => new Faker("ar");
 
-         a.ShouldNotThrow();
+         a.Should().NotThrow();
       }
    }
 }

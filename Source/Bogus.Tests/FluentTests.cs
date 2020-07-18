@@ -199,7 +199,7 @@ namespace Bogus.Tests
                   .RuleForType(typeof(int), f => f.Random.Word());
             };
 
-         action.ShouldThrow<ArgumentException>();
+         action.Should().Throw<ArgumentException>();
       }
 
       [Fact]

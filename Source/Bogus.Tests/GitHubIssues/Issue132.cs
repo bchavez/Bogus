@@ -13,7 +13,7 @@ namespace Bogus.Tests.GitHubIssues
       public void should_throw_exception_on_invalid_locale_dataset()
       {
          Action a = () => new Lorem("wtf_locale");
-         a.ShouldThrow<BogusException>();
+         a.Should().Throw<BogusException>();
       }
 
       [Fact]
@@ -21,7 +21,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          Action a = () => new Faker<Models.Order>("yo yo yo");
 
-         a.ShouldThrow<BogusException>();
+         a.Should().Throw<BogusException>();
       }
 
       [Fact]
@@ -29,7 +29,7 @@ namespace Bogus.Tests.GitHubIssues
       {
          Action a = () => new Faker("fe fi fo fum");
 
-         a.ShouldThrow<BogusException>();
+         a.Should().Throw<BogusException>();
       }
 
       [Fact]
@@ -42,7 +42,7 @@ namespace Bogus.Tests.GitHubIssues
          //test exists here because we're using AssemblyDescription attribute
          //and in case that changes, we need to be aware of it.
 
-         a.ShouldThrow<BogusException>()
+         a.Should().Throw<BogusException>()
             .And.Message
             .Should().Contain("https://github.com/bchavez/Bogus");
 

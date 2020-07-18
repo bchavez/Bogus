@@ -14,7 +14,7 @@ namespace Bogus.Tests
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
 
          testOrders.Invoking(faker => faker.Generate())
-            .ShouldThrow<ValidationException>();
+            .Should().Throw<ValidationException>();
       }
 
       [Fact]
@@ -27,7 +27,7 @@ namespace Bogus.Tests
             .RuleFor(o => o.OrderId, f => f.Random.Number());
 
          testOrders.Invoking(faker => faker.Generate())
-            .ShouldNotThrow<ValidationException>();
+            .Should().NotThrow<ValidationException>();
       }
 
       [Fact]
@@ -43,7 +43,7 @@ namespace Bogus.Tests
             .StrictMode(true);
 
          Action act = () => faker.AssertConfigurationIsValid();
-         act.ShouldThrow<ValidationException>();
+         act.Should().Throw<ValidationException>();
 
          var faker2 = new Faker<Examples.Order>()
             .StrictMode(true)
@@ -55,7 +55,7 @@ namespace Bogus.Tests
                });
 
          Action act2 = () => faker2.AssertConfigurationIsValid();
-         act2.ShouldThrow<ValidationException>();
+         act2.Should().Throw<ValidationException>();
       }
 
       [Fact]
@@ -76,7 +76,7 @@ namespace Bogus.Tests
                });
 
          Action act = () => faker.AssertConfigurationIsValid();
-         act.ShouldThrow<ValidationException>();
+         act.Should().Throw<ValidationException>();
 
          var faker2 = new Faker<Examples.Order>()
             .RuleSet(myset, set =>
@@ -91,7 +91,7 @@ namespace Bogus.Tests
                });
 
          Action act2 = () => faker2.AssertConfigurationIsValid();
-         act2.ShouldThrow<ValidationException>();
+         act2.Should().Throw<ValidationException>();
       }
    }
 }

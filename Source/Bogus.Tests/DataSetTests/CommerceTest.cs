@@ -52,8 +52,7 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_categories()
       {
-         commerce.Categories(3).ShouldBeEquivalentTo(
-            new[] {"Kids", "Music", "Jewelery"});
+         commerce.Categories(3).Should().BeEquivalentTo(new[] {"Kids", "Music", "Jewelery"}, opt => opt.WithStrictOrdering());
       }
 
       [Fact]

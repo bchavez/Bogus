@@ -25,7 +25,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action generate = () => fooFaker.Generate();
 
-         generate.ShouldThrow<ArgumentException>();
+         generate.Should().Throw<ArgumentException>();
       }
 
       [Fact]

@@ -230,7 +230,7 @@ namespace Bogus.Tests
          p1.Gender.Should().Be(p2.Gender);
          p1.Website.Should().Be(p2.Website);
 
-         p1.ShouldBeEquivalentTo(p2);
+         p1.Should().BeEquivalentTo(p2);
 
          Date.SystemClock = () => DateTime.Now;
       }

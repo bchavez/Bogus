@@ -28,7 +28,7 @@ namespace Bogus.Tests.GitHubIssues
          Action fakerMaker = () => new Faker<Customer>()
             .RuleFor(o => o.Order.Item, f => f.Random.Int(1, 1000).ToString());
 
-         fakerMaker.ShouldThrow<ArgumentException>();
+         fakerMaker.Should().Throw<ArgumentException>();
 
       }
 

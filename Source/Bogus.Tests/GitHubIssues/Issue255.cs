@@ -53,7 +53,7 @@ namespace Bogus.Tests.GitHubIssues
             .RuleFor(e => e.City, f => f.Address.City());
 
          Action act = () => childFaker.AssertConfigurationIsValid();
-         act.ShouldThrow<ValidationException>();
+         act.Should().Throw<ValidationException>();
       }
 
       [Fact]
@@ -65,7 +65,7 @@ namespace Bogus.Tests.GitHubIssues
             .RuleFor(e => e.Name, f => f.Address.City());
 
          Action act = () => childFaker.AssertConfigurationIsValid();
-         act.ShouldThrow<ValidationException>();
+         act.Should().Throw<ValidationException>();
       }
 
       public class ChildWithNormalInterface : IChild

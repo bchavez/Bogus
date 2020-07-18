@@ -167,7 +167,7 @@ namespace Bogus.Tests.DataSetTests
          foreach( var userAgent in userAgents )
          {
             Action act = () => req.Headers.Add("User-Agent", userAgent);
-            act.ShouldNotThrow();
+            act.Should().NotThrow();
          }
       }
 

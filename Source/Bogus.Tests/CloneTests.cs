@@ -20,7 +20,7 @@ namespace Bogus.Tests
 
          var rootOrder = orderFaker.Generate();
 
-         clonedOrder.ShouldBeEquivalentTo(rootOrder);
+         clonedOrder.Should().BeEquivalentTo(rootOrder);
       }
 
       [Fact]

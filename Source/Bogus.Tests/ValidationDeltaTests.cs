@@ -15,7 +15,7 @@ namespace Bogus.Tests
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
          var result = testOrders.Validate();
          testOrders.AssertConfigurationIsValid();
-         result.ShouldBeEquivalentTo(true);
+         result.Should().BeTrue();
       }
 
       [Fact]
@@ -26,7 +26,7 @@ namespace Bogus.Tests
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
          var result = testOrders.Validate();
          Assert.Throws<ValidationException>(() => testOrders.AssertConfigurationIsValid());
-         result.ShouldBeEquivalentTo(false);
+         result.Should().BeFalse();
       }
 
       [Fact]
@@ -49,7 +49,7 @@ namespace Bogus.Tests
             ;
          var result = testOrders.Validate();
          testOrders.AssertConfigurationIsValid();
-         result.ShouldBeEquivalentTo(true);
+         result.Should().BeTrue();
       }
 
       [Fact]
@@ -60,7 +60,7 @@ namespace Bogus.Tests
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5));
          var result = testOrders.Validate();
          testOrders.AssertConfigurationIsValid();
-         result.ShouldBeEquivalentTo(true);
+         result.Should().BeTrue();
       }
 
       [Fact]
@@ -74,7 +74,7 @@ namespace Bogus.Tests
             ;
          var result = testOrders.Validate();
          testOrders.AssertConfigurationIsValid();
-         result.ShouldBeEquivalentTo(true);
+         result.Should().BeTrue();
       }
    }
 }

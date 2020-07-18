@@ -85,14 +85,14 @@ namespace Bogus.Tests.DataSetTests
       public void iban_throws_key_not_found_on_invalid_iso3166()
       {
          Action a = () => finance.Iban(countryCode: "zz");
-         a.ShouldThrow<KeyNotFoundException>();
+         a.Should().Throw<KeyNotFoundException>();
       }
 
       [Fact]
       public void iban_thows_on_invalid_iso3166_length()
       {
          Action a = () => finance.Iban(countryCode: "fff");
-         a.ShouldThrow<ArgumentOutOfRangeException>();
+         a.Should().Throw<ArgumentOutOfRangeException>();
       }
 
       [Fact]

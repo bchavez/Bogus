@@ -16,11 +16,11 @@ namespace Bogus.Tests.GitHubIssues
 
          Action bounds1 = () => { f.PickRandom(items, 25).ToList(); };
 
-         bounds1.ShouldThrow<ArgumentOutOfRangeException>();
+         bounds1.Should().Throw<ArgumentOutOfRangeException>();
 
          Action bounds2 = () => { f.PickRandom(items, -1).ToList(); };
 
-         bounds2.ShouldThrow<ArgumentOutOfRangeException>();
+         bounds2.Should().Throw<ArgumentOutOfRangeException>();
 
          var picked = f.PickRandom(items, 4).ToArray();
          picked.Dump();

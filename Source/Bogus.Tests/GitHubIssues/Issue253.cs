@@ -34,7 +34,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action act  = () => orderFaker.RuleFor("fffff", f => f.Random.Number());
 
-         act.ShouldThrow<ArgumentException>();
+         act.Should().Throw<ArgumentException>();
       }
 
       [Fact]
@@ -54,7 +54,7 @@ namespace Bogus.Tests.GitHubIssues
 
          Action act = () => orderFaker.RuleFor("hhhhh", f => f.Random.Number());
 
-         act.ShouldThrow<ArgumentException>();
+         act.Should().Throw<ArgumentException>();
       }
 
       [Fact]

@@ -23,7 +23,7 @@ namespace Bogus.Tests.ExtensionTests
            var vehicle = new Vehicle();
 
            Action a = () => vehicle.GbRegistrationPlate(new DateTime(2001, 8, 31), new DateTime(2019, 7, 5));
-           a.ShouldThrow<ArgumentOutOfRangeException>()
+           a.Should().Throw<ArgumentOutOfRangeException>()
               .Where(ex => ex.Message.StartsWith("Can only accept registration dates between 2001-09-01 and 2051-02-28."))
               .Where(ex => ex.ParamName == "dateFrom");
        }
@@ -33,7 +33,7 @@ namespace Bogus.Tests.ExtensionTests
        {
            var vehicle = new Vehicle();
            Action a = () => vehicle.GbRegistrationPlate(new DateTime(2019, 7, 5), new DateTime(2051, 9, 1));
-           a.ShouldThrow<ArgumentOutOfRangeException>()
+           a.Should().Throw<ArgumentOutOfRangeException>()
               .Where( ex => ex.Message.StartsWith("Can only accept registration dates between 2001-09-01 and 2051-02-28."))
               .Where( ex => ex.ParamName == "dateTo" );
        }

@@ -7,7 +7,7 @@ namespace Bogus.Extensions.Extras
    /// Shamelessly copied (and modified) from here: 
    /// https://stackoverflow.com/questions/21249670/implementing-luhn-algorithm-using-c-sharp
    /// </summary>
-   internal static class CheckDigitExtension
+   public static class CheckDigitExtension
    {
       static readonly int[] Results = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
 

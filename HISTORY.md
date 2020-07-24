@@ -1,3 +1,8 @@
+## v30.0.1-beta-4
+Release Date: 2020-07-23
+
+* Change credit card `CheckDigitExtension` methods to public
+
 ## v30.0.1-beta-3
 Release Date: 2020-06-29
 

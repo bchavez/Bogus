@@ -78,6 +78,7 @@ let Files = Setup.Files(ProjectName, Folders)
 let BogusProject = NugetProject("Bogus", "Bogus Fake Data Generator for .NET", Folders)
 let TestProject = TestProject("Bogus.Tests", Folders)
 
+let EnableSigning = true
 
 Target.description "MAIN BUILD TASK"
 Target.create "dnx" (fun _ ->
@@ -161,9 +162,11 @@ Target.create "BuildInfo" (fun _ ->
     
     Trace.trace "Writing Assembly Build Info"
 
-    MakeBuildInfo BogusProject Folders (fun bip -> 
-        { bip with
-            ExtraAttrs = MakeAttributes(BuildContext.IsTaggedBuild) } )
+    let includeSnk = EnableSigning && BuildContext.IsTaggedBuild
+
+    let customAttributes = MakeAttributes(includeSnk)
+
+    MakeBuildInfo BogusProject Folders (fun bip -> { bip with ExtraAttrs = customAttributes } )
 
     Xml.pokeInnerText BogusProject.ProjectFile "/Project/PropertyGroup/Version" BuildContext.FullVersion
 

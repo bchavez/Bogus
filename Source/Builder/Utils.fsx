@@ -311,7 +311,8 @@ module Helpers =
 
     let FindNuGetTool (cmdFileName : string) (nugetPackageName : string) (version : string option) =
          let probePath = if version.IsSome then version.Value else String.Empty
-         Tools.findToolInSubPath cmdFileName (Folders.NuGetPackagePath @@ nugetPackageName @@ probePath)
+         let fullPath = (Folders.NuGetPackagePath @@ nugetPackageName @@ probePath)
+         ProcessUtils.tryFindFile [fullPath] cmdFileName
     
     let shellExec cmdPath args workingDir = 
         CreateProcess.fromRawCommandLine cmdPath args
@@ -335,13 +336,15 @@ module Helpers =
             | None -> failwithf "'%s' can't find" name
 
     let encryptFile file secret =
-        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
-        let args = sprintf "-encrypt %s -secret %s" file secret
-        shellExecSecret secureFile args "."
+        let tool = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
+        match tool with
+        | Some exe -> let args = sprintf "-encrypt %s -secret %s" file secret
+                      shellExecSecret exe args "."
+        | _ -> failwith "could not find secure-file.exe"
 
     let decryptFile file secret =
-        let secureFile = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
-        let args = sprintf "-decrypt %s.enc -secret %s" file secret
-        shellExecSecret secureFile args "."
-  
-    
+        let tool = FindNuGetTool "secure-file.exe" "secure-file" (Some "1.0.31")
+        match tool with
+        | Some exe -> let args = sprintf "-decrypt %s.enc -secret %s" file secret
+                      shellExecSecret exe args "."
+        | _ -> failwith "could not find secure-file.exe";

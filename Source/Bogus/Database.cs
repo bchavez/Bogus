@@ -41,6 +41,8 @@ namespace Bogus
       /// </summary>
       public static bool LocaleResourceExists(string locale)
       {
+         if( Data.Value.ContainsKey(locale) ) return true;
+
          var asm = typeof(Database).GetAssembly();
 
          var resourceName = GetLocaleResourceName(locale);

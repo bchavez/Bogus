@@ -37,7 +37,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * **[.NET Engineering Blog: NuGet Package of the week #1. - "This week in .NET - December 8th 2015"](https://blogs.msdn.microsoft.com/dotnet/2015/12/08/the-week-in-net-12082015/)**
 
 ##### Blog Posts
-* [Nick Chapsas](https://twitter.com/nickchapsas) - [Generating realistic fake data in .NET using Bogus [video]](https://www.youtube.com/watch?v=T9pwE1GAr_U)
+* [Nick Chapsas](https://twitter.com/nickchapsas) - [Generating realistic fake data in .NET using Bogus [YouTube]](https://www.youtube.com/watch?v=T9pwE1GAr_U)
 * [Jack Histon](https://twitter.com/jackhiston) - [How to Create Bogus Data in C#](http://jackhiston.com/2017/10/1/how-to-create-bogus-data-in-c/)
 * [Christos Matskas](https://twitter.com/christosmatskas) - [Creating .NET fakes using Bogus](https://cmatskas.com/creating-net-fakes-using-bogus-2/)
 * [Jason Roberts](https://twitter.com/robertsjason) - [Lifelike Test Data Generation with Bogus](http://dontcodetired.com/blog/post/Lifelike-Test-Data-Generation-with-Bogus)

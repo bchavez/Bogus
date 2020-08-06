@@ -1,3 +1,9 @@
+## v30.0.2
+Release Date: 2020-08-05
+
+* Deterministic sequences may have changed.
+* Promoted v30.0.1-beta-4 to v30.0.1 release.
+
 ## v30.0.1-beta-4
 Release Date: 2020-07-23
 

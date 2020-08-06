@@ -312,7 +312,7 @@ module Helpers =
     let FindNuGetTool (cmdFileName : string) (nugetPackageName : string) (version : string option) =
          let probePath = if version.IsSome then version.Value else String.Empty
          let fullPath = (Folders.NuGetPackagePath @@ nugetPackageName @@ probePath)
-         ProcessUtils.tryFindFile [fullPath] cmdFileName
+         ProcessUtils.tryFindLocalTool "NA" cmdFileName [fullPath] 
     
     let shellExec cmdPath args workingDir = 
         CreateProcess.fromRawCommandLine cmdPath args

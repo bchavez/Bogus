@@ -3,17 +3,29 @@ name: 🚀 Feature request
 about: If you have a feature request 💡
 ---
 
-**Context**
+### Please describe why you are requesting a feature
 
-What are you trying to do and how would you want to do it differently? Is it something you currently you cannot do? Is this related to an issue/problem?
 
-**Alternatives**
+### Please provide a code example of what you are trying to achieve
 
-Can you achieve the same result doing it in an alternative way? Is the alternative considerable?
+_(Please be complete. Include all code necessary to run your example in LINQPad.)_
+_(The more complete code examples are, the more accurate answers will be.)_
+_(https://www.linqpad.net)_
 
-**Has the feature been requested before?**
 
-Please provide a link to the issue.
+### Please answer any or all of the questions below
+
+* Is the feature something that currently cannot be done?
+
+
+* What alternatives have you considered?
+
+
+* Is this feature request any issues or current problems?
+
+
+* Has the feature been requested in the past?
+
 
 **If the feature request is approved, would you be willing to submit a PR?**
 

@@ -194,6 +194,14 @@ namespace Bogus
       /// <param name="max">Maximum, default 1.0</param>
       public decimal Decimal(decimal min = 0.0m, decimal max = 1.0m)
       {
+         if (min > max)
+         {
+            decimal tmp = min;
+
+            min = max;
+            max = tmp;
+         }
+
          // Decimal: 128 bits wide
          //   bit 0: sign bit
          //   bit 1-10: not used
@@ -221,10 +229,50 @@ namespace Bogus
 
          decimal result = new decimal(lowBits, middleBits, highBits, isNegative: false, Scale);
 
-         // Step 2: Scale the value and adjust it to the desired range. This may decrease
+         // Step 2: Figure out how much of the scale we can keep without causing an overflow.
+         // Note that the range can actually exceed decimal.MaxValue, e.g. if max is itself
+         // decimal.MaxValue and min is negative. So, we work with half the range, using this
+         // scale factor that is as close to 0.5 as possible without causing the result of
+         // decimal.MaxValue * ScaleFactor to round up. If it rounds up, then the result of
+         // decimal.MaxValue * ScaleFactor - decimal.MinValue * ScaleFactor will still be
+         // larger than decimal.MaxValue.
+         const decimal OneHalfScaleFactor = 0.4999999999999999999999999999m;
+
+         decimal halfRange = max * OneHalfScaleFactor - min * OneHalfScaleFactor;
+
+         // Two reasons we're forced to use a scaled multiplier:
+         //
+         // 1. The range (max - min) is itself too large to store in decimal.MaxValue.
+         // 2. The result of result * (max - min) is too large to store in decimal.MaxValue.
+         //
+         // Check condition 1:
+         bool useScaledMultiplier = (halfRange >= decimal.MaxValue * OneHalfScaleFactor);
+
+         decimal multiplier = halfRange;
+         decimal divisor = 3.9614081257132168796771975168m;
+
+         // Check condition 2:
+         if (result >= 1.0m)
+         {
+            decimal maximumMultiplier = decimal.MaxValue / result;
+
+            while (multiplier >= maximumMultiplier)
+            {
+               // Drop one digit of precision and try again.
+               multiplier *= 0.1m;
+               divisor *= 10m;
+
+               useScaledMultiplier = true;
+            }
+         }
+
+         // Step 3: Scale the value and adjust it to the desired range. This may decrease
          // the accuracy by adjusting the scale as necessary, but we get the best possible
          // outcome by starting with the most precise scale.
-         return result * (max - min) / 7.9228162514264337593543950335m + min;
+         if (useScaledMultiplier)
+            return result * multiplier / divisor + min;
+         else
+            return result * (max - min) / 7.9228162514264337593543950335m + min;
       }
 
       /// <summary>

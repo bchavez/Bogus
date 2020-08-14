@@ -489,6 +489,7 @@ public void Using_FakerT_Inheritance()
 	* `Bogus.Person.Nif()` - Número de Identificação Fiscal (NIF)
 	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)
 * **`using Bogus.Extensions.UnitedKingdom;`**
+	* `Bogus.DataSets.Address.CountryOfUnitedKingdom()` - Country of the United Kingdom
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
 	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate

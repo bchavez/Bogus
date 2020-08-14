@@ -1,3 +1,4 @@
+using Bogus.Bson;
 using Bogus.DataSets;
 
 namespace Bogus.Extensions.UnitedKingdom
@@ -57,6 +58,15 @@ namespace Bogus.Extensions.UnitedKingdom
             return finance.Random.ReplaceNumbers($"{prefix} ## ## ## {suffix}");
          }
          return finance.Random.ReplaceNumbers($"{prefix}######{suffix}");
+      }
+
+      /// <summary>
+      /// Country of the United Kingdom
+      /// </summary>
+      public static string CountryOfUnitedKingdom(this Address address)
+      {
+         var countries = Database.Get(nameof(address), "uk_country", "en_GB") as BArray;
+         return address.Random.ArrayElement(countries);
       }
    }
 }

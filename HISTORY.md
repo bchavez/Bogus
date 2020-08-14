@@ -1,3 +1,8 @@
+## v30.0.3
+Release Date: 2020-08-13
+
+* Added `f.Address.CountryOfUnitedKingdom()` extension method in `Bogus.Extensions.UnitedKingdom`.
+
 ## v30.0.2
 Release Date: 2020-08-05
 

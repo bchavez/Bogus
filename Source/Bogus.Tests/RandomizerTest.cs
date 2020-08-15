@@ -194,7 +194,7 @@ namespace Bogus.Tests
       [Fact]
       public void generate_decimal_with_min_and_max()
       {
-         r.Decimal(2.2m, 5.2m).Should().Be(3.8697355489728032005903907232m);
+         r.Decimal(2.2m, 5.2m).Should().Be(4.0105668499183690m);
       }
 
       [Fact]

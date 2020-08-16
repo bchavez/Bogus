@@ -7,7 +7,7 @@ using Xunit.Sdk;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class Issue319 : SeededTest
+   public class Issue319_2 : SeededTest
    {
       class TestDataProvider : DataAttribute
       {
@@ -23,7 +23,7 @@ namespace Bogus.Tests.GitHubIssues
 
       ITestOutputHelper _output;
 
-      public Issue319(ITestOutputHelper output)
+      public Issue319_2(ITestOutputHelper output)
          => _output = output;
 
       [Theory, TestDataProvider]

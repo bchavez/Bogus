@@ -1,10 +1,15 @@
+## v30.0.4
+Release Date: 2020-08-15
+
+* Issue 319: The `Random.Decimal()` implementation reverted to previous v29 implementation. Avoids arithmetic `OverflowException` when calling `Random.Decimal(0, decimal.MaxValue)`. The v30 implementation moved to `Bogus.Extensions` namespace as `Random.Decimal2()` which can generate more decimal precision.
+
 ## v30.0.3
-Release Date: 2020-08-13
+Release Date: 2020-08-13, UNPUBLISHED FROM NUGET
 
 * Added `f.Address.CountryOfUnitedKingdom()` extension method in `Bogus.Extensions.UnitedKingdom`.
 
 ## v30.0.2
-Release Date: 2020-08-05
+Release Date: 2020-08-05, UNPUBLISHED FROM NUGET
 
 * Deterministic sequences may have changed.
 * Promoted v30.0.1-beta-4 to v30.0.2 release.

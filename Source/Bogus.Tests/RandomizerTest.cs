@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
@@ -209,7 +210,7 @@ namespace Bogus.Tests
          {
             try
             {
-               r.GenerateRandomMaximumPrecisionDecimal().Should().BeInRange(SmallestMaxPrecision, LargestMaxPrecision);
+               ExtensionsForRandomizer.GenerateRandomMaximumPrecisionDecimal(r).Should().BeInRange(SmallestMaxPrecision, LargestMaxPrecision);
             }
             catch
             {
@@ -240,9 +241,9 @@ namespace Bogus.Tests
          const decimal SmallestMaxPrecision = -7.9228162514264337593543950335m;
          const decimal LargestMaxPrecision = 7.9228162514264337593543950335m;
 
-         r.ScaleMaximumPrecisionDecimalToRange(SmallestMaxPrecision, min, max).Should().Be(min);
-         r.ScaleMaximumPrecisionDecimalToRange(LargestMaxPrecision, min, max).Should().Be(max);
-         r.ScaleMaximumPrecisionDecimalToRange(0m, min, max).Should().Be(middle);
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(SmallestMaxPrecision, min, max).Should().Be(min);
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(LargestMaxPrecision, min, max).Should().Be(max);
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(0m, min, max).Should().Be(middle);
       }
 
       [Fact]

@@ -66,38 +66,35 @@ namespace EFCoreSeedDb
    /// </summary>
    public static class FakeData
    {
-      public static Faker<Blog> BlogFaker;
-      public static Faker<Post> PostFaker;
-
       public static List<Blog> Blogs = new List<Blog>();
       public static List<Post> Posts = new List<Post>();
 
       public static void Init(int count)
       {
          var postId = 1;
-         PostFaker = new Faker<Post>()
+         var postFaker = new Faker<Post>()
             .RuleFor(p => p.PostId, _ => postId++)
             .RuleFor(p => p.Title, f => f.Hacker.Phrase())
             .RuleFor(p => p.Content, f => f.Lorem.Sentence());
 
          var blogId = 1;
-         BlogFaker = new Faker<Blog>()
+         var blogFaker = new Faker<Blog>()
             .RuleFor(b => b.BlogId, _ => blogId++)
             .RuleFor(b => b.Url, f => f.Internet.Url())
             .RuleFor(b => b.Posts, (f, b) =>
                {
-                  var posts = PostFaker.GenerateBetween(3, 5);
-                  FakeData.Posts.AddRange(posts);
+                  postFaker.RuleFor(p => p.BlogId, _ => b.BlogId);
 
-                  foreach( var post in posts )
-                  {
-                     post.BlogId = b.BlogId;
-                  }
+                  var posts = postFaker.GenerateBetween(3, 5);
+
+                  FakeData.Posts.AddRange(posts);
 
                   return null; // Blog.Posts is a getter only. The return value has no impact.
                });
 
-         Blogs = BlogFaker.Generate(count);
+         var blogs = blogFaker.Generate(count);
+
+         FakeData.Blogs.AddRange(blogs);
       }
    }
 

@@ -206,12 +206,9 @@ for more info.
 
 ### Without Fluent Syntax
 
-You can use **Bogus** without a fluent setup. The examples below highlight three alternative ways to use **Bogus** without a fluent syntax setup.
-1. Using the `Faker` facade.
-2. Using **DataSets** directly.
-3. Using `Faker<T>` **inheritance**.
+You can use **Bogus** without a fluent setup. The examples below highlight three alternative ways to use **Bogus** without a fluent syntax setup, and all of them produce the same `Order` result:
 
-All three alternative styles of using **Bogus** produce the same `Order` result as demonstrated below:
+1. Using the `Faker` facade.
 ```csharp
 public void Using_The_Faker_Facade()
 {
@@ -224,6 +221,10 @@ public void Using_The_Faker_Facade()
         };
     o.Dump()
 }
+```
+
+2. Using **DataSets** directly.
+```csharp
 public void Using_DataSets_Directly()
 {
     var random = new Bogus.Randomizer();
@@ -236,6 +237,10 @@ public void Using_DataSets_Directly()
         };
     o.Dump();
 }
+```
+
+3. Using `Faker<T>` **inheritance**.
+```csharp
 public void Using_FakerT_Inheritance()
 {
    public class OrderFaker : Faker<Order> {
@@ -245,10 +250,12 @@ public void Using_FakerT_Inheritance()
          RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
       }
    }
-   var orderFaker = new OrderFaker();
-   var o = orderFaker.Generate();
-   o.Dump();
 }
+
+var orderFaker = new OrderFaker();
+var o = orderFaker.Generate();
+o.Dump();
+
 /* OUTPUT:
 {
   "OrderId": 61,

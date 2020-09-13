@@ -207,54 +207,67 @@ for more info.
 ### Without Fluent Syntax
 
 You can use **Bogus** without a fluent setup. The examples below highlight three alternative ways to use **Bogus** without a fluent syntax setup.
-1. Using the `Faker` facade.
-2. Using **DataSets** directly.
-3. Using `Faker<T>` **inheritance**.
 
-All three alternative styles of using **Bogus** produce the same `Order` result as demonstrated below:
+* Using the `Faker` facade.
+* Using **DataSets** directly.
+* Using `Faker<T>` **inheritance**.
+
+#### Using the `Faker` facade:
 ```csharp
 public void Using_The_Faker_Facade()
 {
-    var faker = new Faker("en");
-    var o = new Order()
-        {
-            OrderId = faker.Random.Number(1, 100),
-            Item = faker.Lorem.Sentence(),
-            Quantity = faker.Random.Number(1, 10)
-        };
-    o.Dump()
+   var faker = new Faker("en");
+   var o = new Order()
+       {
+           OrderId = faker.Random.Number(1, 100),
+           Item = faker.Lorem.Sentence(),
+           Quantity = faker.Random.Number(1, 10)
+       };
+   o.Dump()
 }
+```
+
+#### Using **DataSets** directly:
+```csharp
 public void Using_DataSets_Directly()
 {
-    var random = new Bogus.Randomizer();
-    var lorem = new Bogus.DataSets.Lorem("en");
-    var o = new Order()
-        {
-            OrderId = random.Number(1, 100),
-            Item = lorem.Sentence(),
-            Quantity = random.Number(1, 10)
-        };
-    o.Dump();
+   var random = new Bogus.Randomizer();
+   var lorem = new Bogus.DataSets.Lorem("en");
+   var o = new Order()
+       {
+           OrderId = random.Number(1, 100),
+           Item = lorem.Sentence(),
+           Quantity = random.Number(1, 10)
+       };
+   o.Dump();
 }
+```
+
+#### Using `Faker<T>` inheritance:
+```csharp
+public class OrderFaker : Faker<Order> {
+   public OrderFaker() {
+      RuleFor(o => o.OrderId, f => f.Random.Number(1, 100));
+      RuleFor(o => o.Item, f => f.Lorem.Sentence());
+      RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
+   }
+}
+
 public void Using_FakerT_Inheritance()
 {
-   public class OrderFaker : Faker<Order> {
-      public OrderFaker() {
-         RuleFor(o => o.OrderId, f => f.Random.Number(1, 100));
-         RuleFor(o => o.Item, f => f.Lorem.Sentence());
-         RuleFor(o => o.Quantity, f => f.Random.Number(1, 10));
-      }
-   }
    var orderFaker = new OrderFaker();
    var o = orderFaker.Generate();
    o.Dump();
 }
-/* OUTPUT:
+```
+
+In the examples above, all three alternative styles of using **Bogus** produce the same `Order` result:
+```
 {
   "OrderId": 61,
   "Item": "vel est ipsa",
   "Quantity": 7
-} */
+}
 ```
 
 ### Bogus API Support

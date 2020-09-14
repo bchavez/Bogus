@@ -1,5 +1,10 @@
-## v31.0.1
+## v31.0.2
 Release Date: 2020-09-13
+
+* Ensures Bogus Premium datasets load with new `DataSet.Get(category, path)` overload.
+
+## v31.0.1
+Release Date: 2020-09-13, UNPUBLISHED FROM NUGET
 
 * Locale data parity with faker-js@91dc8a3.
 * Added `Music` dataset with `.Genre()` method.

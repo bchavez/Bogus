@@ -16,6 +16,12 @@ namespace Bogus.Premium
          return base.Get(path);
       }
 
+      protected internal override BValue Get(string category, string path)
+      {
+         CheckLicense();
+         return base.Get(category, path);
+      }
+
       protected internal override bool HasKey(string path, bool includeFallback = true)
       {
          CheckLicense();

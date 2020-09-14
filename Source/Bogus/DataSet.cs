@@ -121,6 +121,11 @@ namespace Bogus
          return (BArray)Get(path);
       }
 
+      protected internal virtual BArray GetArray(string category, string path)
+      {
+         return (BArray)Get(category, path);
+      }
+
       /// <summary>
       /// Returns a BSON object given a JSON path into the data set. Only simple "." dotted JSON paths are supported.
       /// </summary>
@@ -140,7 +145,12 @@ namespace Bogus
       /// <returns>A random item from the BSON array.</returns>
       protected internal virtual string GetRandomArrayItem(string path, int? min = null, int? max = null)
       {
-         var arr = GetArray(path);
+         return this.GetRandomArrayItem(this.Category, path, min, max);
+      }
+
+      protected internal virtual string GetRandomArrayItem(string category, string path, int? min = null, int? max = null)
+      {
+         var arr = GetArray(category, path);
          if (!arr.HasValues)
          {
             return string.Empty;

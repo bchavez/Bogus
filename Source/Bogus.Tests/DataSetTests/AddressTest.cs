@@ -62,13 +62,13 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_a_random_country_code()
       {
-         address.CountryCode().Should().Be("MQ");
+         address.CountryCode().Should().Be("MR");
       }
 
       [Fact]
       public void can_get_a_random_country_code_alpha3()
       {
-         address.CountryCode(Iso3166Format.Alpha3).Should().Be("MNP");
+         address.CountryCode(Iso3166Format.Alpha3).Should().Be("CMR");
       }
 
       [Fact]

@@ -22,13 +22,13 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_a_manufacture()
       {
-         vehicle.Manufacturer().Should().Be("Aston Martin");
+         vehicle.Manufacturer().Should().Be("Maserati");
       }
 
       [Fact]
       public void can_get_a_model()
       {
-         vehicle.Model().Should().Be("Roadster");
+         vehicle.Model().Should().Be("Prius");
       }
 
       [Fact]

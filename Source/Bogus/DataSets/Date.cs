@@ -255,5 +255,13 @@ namespace Bogus.DataSets
 
          return GetRandomArrayItem("weekday." + type);
       }
+
+      /// <summary>
+      /// Get a timezone string. Eg: America/Los_Angeles
+      /// </summary>
+      public string TimeZoneString()
+      {
+         return GetRandomArrayItem("address", "time_zone");
+      }
    }
 }

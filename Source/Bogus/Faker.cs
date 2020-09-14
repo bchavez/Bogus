@@ -40,6 +40,8 @@ namespace Bogus
          this.Rant = this.Notifier.Flow(new Rant());
          this.Vehicle = this.Notifier.Flow(new Vehicle());
 
+         this.Music = this.Notifier.Flow(new Music());
+
          this.Hashids = new Hashids();
       }
 
@@ -190,6 +192,12 @@ namespace Bogus
       /// </summary>
       [RegisterMustasheMethods]
       public Vehicle Vehicle { get; set; }
+
+      /// <summary>
+      /// Generates data related to music.
+      /// </summary>
+      [RegisterMustasheMethods]
+      public Music Music { get; set; }
 
       /// <summary>
       /// Helper method to pick a random element.

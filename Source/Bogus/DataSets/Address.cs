@@ -154,7 +154,7 @@ namespace Bogus.DataSets
 
          if( format == Iso3166Format.Alpha3 )
          {
-            return GetRandomArrayItem("country_code3");
+            return GetRandomArrayItem("country_code_alpha_3");
          }
 
          throw new ArgumentException("Invalid country code", nameof(format));

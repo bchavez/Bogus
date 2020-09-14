@@ -346,5 +346,11 @@ namespace Bogus.Tests.DataSetTests
          d.PastOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
          d.RecentOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
       }
+
+      [Fact]
+      public void can_get_timezone_string()
+      {
+         date.TimeZoneString().Should().Be("Asia/Yerevan");
+      }
    }
 }

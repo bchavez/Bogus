@@ -606,7 +606,7 @@
         "Intelligent",
         "Söt",
         "Otrolig",
-        "Fatastisk",
+        "Fantastisk",
         "Praktisk",
         "Slimmad",
         "Grym"
@@ -617,8 +617,8 @@
         "Trä",
         "Betong",
         "Plast",
-        "Bomul",
-        "Grnit",
+        "Bomull",
+        "Granit",
         "Gummi",
         "Latex"
       ],
@@ -627,11 +627,11 @@
         "Bil",
         "Dator",
         "Handskar",
-        "Pants",
-        "Shirt",
-        "Table",
-        "Shoes",
-        "Hat"
+        "Byxor",
+        "Skjorta",
+        "Bord",
+        "Skor",
+        "Hatt"
       ]
     }
   },

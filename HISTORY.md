@@ -1,3 +1,25 @@
+## v31.0.1
+Release Date: 2020-09-13
+
+* Locale data parity with faker-js@91dc8a3.
+* Added `Music` dataset with `.Genre()` method.
+* Added `Date.TimeZoneString()`.
+* Added new Finnish `fi` locale.
+* Added new Hrvatski `hr` locale.
+* `cz` locales updated.
+* `en` locales updated.
+* `en_IE` locales updated.
+* `en_IND` locales updated.
+* `fa` locales updated.
+* `fr` locales updated.
+* `ja` locales updated.
+* `pl` locales updated.
+* `pt_BR` locales updated.
+* `ru` locales updated.
+* `sv` locales updated.
+* `vi` locales updated.
+* `zh_CN` locales updated.
+
 ## v30.0.4
 Release Date: 2020-08-15
 

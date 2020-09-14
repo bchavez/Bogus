@@ -221,7 +221,6 @@ namespace Bogus.Tests
                count++;
                var code = kv.Key;
                var title = kv.Value["title"].StringValue;
-               title = title.Replace("Ελληνικά", "Greek");
 
                return new {code, title};
             }).ToArray();

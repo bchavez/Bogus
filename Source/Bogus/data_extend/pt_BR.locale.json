@@ -1,0 +1,8 @@
+{
+   "address": {
+      "city": [
+         "#{Name.first_name}",
+         "#{Name.last_name}"
+      ]
+   }
+}

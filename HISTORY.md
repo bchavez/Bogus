@@ -1,7 +1,7 @@
 ## v31.0.3
 Release Date: 2020-10-03
 
-* Fixed `pt_BR` locale where `Address.City()` threw `ArgumentOutOfRangeException`.
+* Issue 328, 327: Fixed `pt_BR` locale where `Address.City()` threw `ArgumentOutOfRangeException`.
 
 ## v31.0.2
 Release Date: 2020-09-13

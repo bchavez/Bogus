@@ -150,7 +150,14 @@ User Created! Id=0
 } */
 ```
 
-#### [**Click here for F# and VB.NET examples!**](#f-and-vbnet-examples)
+#### More Examples!
+| Language  | Description | 
+|:---------:| ----------- |
+| **C#**    | [**Full working example of 'The Great C# Example'**](https://github.com/bchavez/Bogus/tree/master/Examples/GettingStarted) |
+| **C#**    | [**Using Bogus and EF Core to a seed database**](https://github.com/bchavez/Bogus/tree/master/Examples/EFCoreSeedDb) |
+| **F#**    | [**Using Bogus with F#**](#the-fabulous-f-examples) |
+| **VB.NET** | [**Using Bogus with VB.NET**](#the-very-basic-vbnet-example) |
+
 
 ### Locales
 

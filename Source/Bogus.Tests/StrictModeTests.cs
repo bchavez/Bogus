@@ -22,6 +22,7 @@ namespace Bogus.Tests
       {
          var testOrders = new Faker<Examples.Order>()
             .StrictMode(true)
+            .Ignore(o => o.LotNumber)
             .RuleFor(o => o.Quantity, f => f.Random.Number(2, 5))
             .RuleFor(o => o.Item, f => f.Lorem.Sentence())
             .RuleFor(o => o.OrderId, f => f.Random.Number());

@@ -4,7 +4,7 @@ Release Date: 2020-10-03
 * Issue 328, 327: Fixed `pt_BR` locale where `Address.City()` threw `ArgumentOutOfRangeException`.
 
 ## v31.0.2
-Release Date: 2020-09-13
+Release Date: 2020-09-13, UNPUBLISHED FROM NUGET
 
 * Ensures Bogus Premium datasets load with new `DataSet.Get(category, path)` overload.
 

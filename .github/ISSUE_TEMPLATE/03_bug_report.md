@@ -19,6 +19,8 @@ about: If something isn't working 🔧
 
 ### What is the actual behavior?
 
+### Please provide a stack trace.
+
 ### Any possible solutions?
 
 ### How do you reproduce the issue?
@@ -29,4 +31,4 @@ about: If something isn't working 🔧
 
 ### If the bug is confirmed, would you be willing to submit a PR?
 
-Yes / No _(Help can be provided if you need assistance submitting a PR)_
+Yes or No?

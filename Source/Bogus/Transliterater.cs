@@ -45,7 +45,7 @@ namespace Bogus
             //Try using Char Map
             var used = 0;
             var chCharMap = WalkTrie(i, input, CharMap, ref used);
-            if( chCharMap is object )
+            if( chCharMap is not null )
             {
                //After walking the trie, we found a match,
                //use what we found instead.
@@ -60,7 +60,7 @@ namespace Bogus
             //Try Diatric Map
             used = 0;
             var chDiatric = WalkTrie(i, input, DiatricMap, ref used);
-            if( chDiatric is object )
+            if( chDiatric is not null )
             {
                sb.Append(chDiatric);
                i += used - 1;

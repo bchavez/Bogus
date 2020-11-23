@@ -255,7 +255,7 @@ namespace Bogus
       /// <para/> Use only when atleast one apply: <br/>
       /// -  <typeparamref name="T"/> is record / struct or <typeparamref name="T"/> does not have any logic in constructor excpect setting properties or public fields <br/>
       /// -  If you need features that can't be used with <seealso cref="UseConstructor(Func{Faker, T})"/>
-      /// <para/> Consider using <seealso cref="UseConstructor(Func{Faker, T})"/> or <seealso cref="UseHiddenConstructor(Func{Faker, T})"/>
+      /// <para/> Consider using <seealso cref="UseConstructor(Func{Faker, T})"/>/>
       /// </summary>      
       /// <returns></returns>
       public virtual Faker<T> SkipConstructor()

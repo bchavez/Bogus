@@ -1,4 +1,5 @@
 using System;
+using Bogus.Tests.Models;
 using FluentAssertions;
 using Xunit;
 
@@ -93,6 +94,16 @@ namespace Bogus.Tests
 
          Action act2 = () => faker2.AssertConfigurationIsValid();
          act2.Should().Throw<ValidationException>();
+      }
+
+      [Fact]
+      public void StrictMode_True_NoRules()
+      {
+         Assert.Throws<ValidationException>(() => 
+         {          
+            new Faker<Order>()
+               .StrictMode(true).Generate(1);
+         });
       }
    }
 }

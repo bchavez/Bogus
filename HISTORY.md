@@ -1,3 +1,11 @@
+## v32.0.1
+Release Date: 2020-11-28
+
+* Issue 336: Fixed `Internet.Avatar()` 403 Forbidden URLs. AWS S3 bucket hosting uifaces.com avatars was disabled. Avatars are now decentrally hosted on IPFS globally and retrieved from Cloudflare's IPFS gateway.
+* To help host, pin root CID: Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye
+* Browse: https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/
+* Details: https://github.com/bchavez/Bogus/issues/336
+
 ## v31.0.3
 Release Date: 2020-10-03
 

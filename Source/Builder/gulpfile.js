@@ -46,6 +46,8 @@ function importLocalesJsonTask(){
          // Transform Step: Postcode By State
          transformPostCodeByState(locale);
 
+         removeAvatarUri(locale);
+
          ensureAllArraysAreStrings(locale);
 
          specializeLocale(locale, localeCode);
@@ -104,7 +106,13 @@ function importLocalesTask(){
       .pipe(gulp.dest(dataFolder));
 }
 
-
+function removeAvatarUri(obj){
+   if(obj.internet && obj.internet.avatar_uri)
+   {
+      log("Removing internet.avatar_uri");
+      delete obj.internet.avatar_uri;
+   }
+}
 
 function transformPostCodeByState(obj) {
    if (obj.address && obj.address.postcode_by_state)

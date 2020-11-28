@@ -34,7 +34,8 @@ namespace Bogus.DataSets
       /// <returns>A string containing a URL avatar from twitter accounts.</returns>
       public string Avatar()
       {
-         return GetRandomArrayItem("avatar_uri");
+         var n = this.Random.Number(0, 1249);
+         return $"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/{n}.jpg";
       }
 
       /// <summary>

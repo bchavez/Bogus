@@ -49,6 +49,9 @@ module BuildContext =
     let IsTaggedBuild =
         Fake.BuildServer.AppVeyor.Environment.RepoTag
 
+    let InAppVeyor =
+        Environment.environVarAsBoolOrDefault "APPVEYOR" false
+
 
 open System
 open System.IO

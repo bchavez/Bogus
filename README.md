@@ -1187,7 +1187,7 @@ The minimum requirements to build **Bogus** from source code are as follows:
     * `build nuget` - builds **NuGet** packages.
     * `build test` - runs all unit tests. 
     
-Upon a successful build, the following folders will be created:
+The following folders will be created depending on the build task executed:
  * `\__compile` - binary output folder for the compiler.
  * `\__package` - output folder for zip and **NuGet** packages.
  * `\__test` - test results folder.

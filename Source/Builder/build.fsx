@@ -24,7 +24,7 @@ nuget Fake.DotNet.Testing.xUnit2
 nuget Fake.BuildServer.AppVeyor    
 
 nuget SharpCompress = 0.22.0
-nuget FSharp.Data = 2.4.6
+nuget FSharp.Data
 
 nuget secure-file                  = 1.0.31
 
@@ -203,10 +203,18 @@ Target.create "Clean" (fun _ ->
 
 open Fake.DotNet.Testing
 
-let RunTests() =
+let RunTests(isManualTest : bool) =
    let config (opts: DotNet.TestOptions) =
+      let logArg = if isManualTest then
+                       let path = sprintf "xunit;LogFilePath=%s" Files.TestResultFile
+                       Some path
+                    else
+                       None
+      
       {opts with  
-            NoBuild = true }
+            NoBuild = true
+            Logger = logArg }
+    
    DotNet.test config TestProject.Folder
 
 open Fake.BuildServer
@@ -218,13 +226,13 @@ Target.create "ci" (fun _ ->
 Target.description "PROJECT TEST TASK"
 Target.create "test" (fun _ ->
     Trace.trace "TEST"
-    RunTests()
+    RunTests(true)
 )
 
 Target.description "CI TEST TASK"
 Target.create "citest" (fun _ ->
     Trace.trace "CI TEST"
-    RunTests()
+    RunTests(false)
     
     //Files.TestResultFile
     //|> Trace.publish( ImportData.Xunit )

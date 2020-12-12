@@ -1,3 +1,8 @@
+## v32.0.2
+Release Date: 2020-12-12
+
+* Issue 342: Use realistic `pt_BR` city names.
+
 ## v32.0.1
 Release Date: 2020-11-28
 

@@ -1,5 +1,4 @@
 using System;
-using Bogus.Tests.Models;
 using FluentAssertions;
 using Xunit;
 
@@ -97,13 +96,20 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void StrictMode_True_NoRules()
+      public void strictmode_with_no_rules_should_throw()
       {
-         Assert.Throws<ValidationException>(() => 
-         {          
-            new Faker<Order>()
-               .StrictMode(true).Generate(1);
-         });
+         var faker = new Faker<Examples.Order>()
+            .StrictMode(true);
+
+         Action act = () => faker.Generate(1);
+
+         act.Should().ThrowExactly<ValidationException>()
+            .WithMessage("*Missing Rules*")
+            .WithMessage("*Validation was called to ensure all properties*")
+            .WithMessage($"*{nameof(Examples.Order.OrderId)}*")
+            .WithMessage($"*{nameof(Examples.Order.Item)}*")
+            .WithMessage($"*{nameof(Examples.Order.Quantity)}*")
+            .WithMessage($"*{nameof(Examples.Order.LotNumber)}*");
       }
    }
 }

@@ -744,7 +744,7 @@ namespace Bogus
             {
                foreach( var propOrFieldOfT in userSet )
                {
-                  if( populateActions.TryGetValue(propOrFieldOfT, out var populateAction) )
+                  if( populateActions is not null && populateActions.TryGetValue(propOrFieldOfT, out var populateAction) )
                   {
                      // Very much a .Rules() action
                      if( populateAction.ProhibitInStrictMode )

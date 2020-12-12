@@ -94,5 +94,22 @@ namespace Bogus.Tests
          Action act2 = () => faker2.AssertConfigurationIsValid();
          act2.Should().Throw<ValidationException>();
       }
+
+      [Fact]
+      public void strictmode_with_no_rules_should_throw()
+      {
+         var faker = new Faker<Examples.Order>()
+            .StrictMode(true);
+
+         Action act = () => faker.Generate(1);
+
+         act.Should().ThrowExactly<ValidationException>()
+            .WithMessage("*Missing Rules*")
+            .WithMessage("*Validation was called to ensure all properties*")
+            .WithMessage($"*{nameof(Examples.Order.OrderId)}*")
+            .WithMessage($"*{nameof(Examples.Order.Item)}*")
+            .WithMessage($"*{nameof(Examples.Order.Quantity)}*")
+            .WithMessage($"*{nameof(Examples.Order.LotNumber)}*");
+      }
    }
 }

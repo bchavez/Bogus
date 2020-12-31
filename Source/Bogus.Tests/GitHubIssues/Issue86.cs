@@ -1,4 +1,4 @@
-using Bogus.DataSets;
+Ôªøusing Bogus.DataSets;
 using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
@@ -17,19 +17,19 @@ namespace Bogus.Tests.GitHubIssues
       [Fact]
       public void should_remove_diacritic_marks()
       {
-         "hello ƒ÷‹Ì world".RemoveDiacritics().Should().Be("hello AOUi world");
+         "hello √Ñ√ñ√ú√≠ world".RemoveDiacritics().Should().Be("hello AOUi world");
       }
 
       [Fact]
       public void should_remove_diacritic_marks_in_email()
       {
-         internet.Email("ﬂra'inƒ÷‹Ì", "ƒ÷‹Ìchavez").Should().Be("ssrainAeOeUei81@yahoo.com");
+         internet.Email("√üra'in√Ñ√ñ√ú√≠", "√Ñ√ñ√ú√≠chavez").Should().Be("ssrainAeOeUei81@yahoo.com");
       }
 
       [Fact]
       public void should_remove_diacritic_marks_in_username()
       {
-         internet.UserName("ﬂri'ƒ÷‹Ìan", "chaƒ÷‹Ìez").Should().Be("ssriAeOeUeian.chaAeOeUeiez");
+         internet.UserName("√üri'√Ñ√ñ√ú√≠an", "cha√Ñ√ñ√ú√≠ez").Should().Be("ssriAeOeUeian.chaAeOeUeiez");
       }
    }
 }

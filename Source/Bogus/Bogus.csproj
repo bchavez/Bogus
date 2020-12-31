@@ -26,6 +26,10 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+  <PropertyGroup>
+    <!-- SonarQube needs this -->
+    <ProjectGuid>{C0F3B6C9-3664-43F4-B5A9-F536D85DE88C}</ProjectGuid>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(CI)' == 'true'">
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>

@@ -170,13 +170,21 @@ Note: in the MAJOR release example, the PowerShell multiline syntax ` (backtick)
 
 1. Go to https://www.nuget.org/ .
 
-2. Log in to your account.
+2. Log in or create your account.
 
-3. From the dropdown in the right top corner choose **API Keys**.
+3. From the dropdown in the right top corner (with your account name on it) choose **API Keys**.
 
-4. Create a new token for your project or Manage an old one.
+4. Create a new token by clicking the "+ Create" button.
 
-5. Now you have to set the token as a **secret** in Github in order to make it work.
+5. Set the **Key name** to "NUGET TOKEN" so it's compatible with your workflow.
+
+6. On **Package Owner** choose your username from the dropdown.
+
+7. To select which packages to associate with a key, use a glob pattern, select individual packages, or both.
+
+8. Set your package name in the **Glob Pattern** field.
+
+9. Now you have to set the token as a **secret** in Github in order to make it work.
 
 ## Creating encrypted secrets for a repository
 

@@ -1,0 +1,41 @@
+name: CodeQL Analysis
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  analyze:
+    name: codeql-analysis
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        language: ['csharp', 'javascript']
+
+    steps:
+      - name: Checkout repository
+        id: checkout_repo
+        uses: actions/checkout@v2
+
+      - name: Install .NET dependencies
+        id: install_dotnet_dependencies
+        shell: powershell
+        run: dotnet tool restore
+
+      - name: Initialize CodeQL
+        id: init_codeql
+        uses: github/codeql-action/init@v1
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
+
+      - name: Build project
+        id: build_project
+        shell: powershell
+        run: dotnet fake run Source\Builder\build.fsx target ci
+
+      - name: Perform CodeQL Analysis
+        id: analyze_codeql
+        uses: github/codeql-action/analyze@v1

@@ -199,7 +199,16 @@ Note: in the MAJOR release example, the PowerShell multiline syntax ` (backtick)
 
 ## 5. Set up Dependabot
 
-Dependabot is a GitHub native security tool that goes through the dependencies of your project and creates PRs with updates.
+Dependabot is a GitHub native security tool that goes through the dependencies in your project and creates alerts, and PRs with updates when a new and/or non-vulnerable version is found.
+
+- for PRs with version updates, this pipeline comes pre-configured for all current dependency sources in your project, so at "Insights" tab -> "Dependency graph" -> "Dependabot", you should be able to see all tracked sources of dependencies, when they have been checked last and view a full log of the last check
+
+![Dependabot_tab](/Docs/CI-CD_DOCUMENTATION/Dependabot_tab.png)
+
+![Dependabot_log_page](/Docs/CI-CD_DOCUMENTATION/Dependabot_log_page.png)
+
+#### Set up security alerts and updates
+##### - GitHub, through Dependabot, also natively offers a security check for vulnerable dependencies
 
 1. Go to "Settings" tab of your repo
 
@@ -207,8 +216,12 @@ Dependabot is a GitHub native security tool that goes through the dependencies o
 
 3. Click "Enable" for both "Dependabot alerts" and "Dependabot security updates"
 
-Note: **Under the "Security" tab -> "Dependabot alerts", you can see alerts for vulnerabilities in your project, created by outdated dependencies. By clicking on an alert, you would be able to see a detailed explanation of the vulnerability.**
+- By enabling "Dependabot alerts", you would be notified for any vulnerable dependencies in your project. At "Security" tab -> "Dependabot alerts", you can manage all alerts. By clicking on an alert, you would be able to see a detailed explanation of the vulnerability and a viable solution.
 
-Note: **Under the "Insights" tab -> "Dependency graph" -> "Dependencies" you can see all dependencies of your project and next to it, at the "Dependabot" tab, you can see what ecosystems the Dependabot is looking at, and when it made the last check for updates**
+![Dependabot_alerts_page](/Docs/CI-CD_DOCUMENTATION/Dependabot_alerts_page.png)
 
+![Dependabot_alert_page](/Docs/CI-CD_DOCUMENTATION/Dependabot_alert_page.png)
 
+- By enabling "Dependabot security updates", you authorize Dependabot to create PRs specifically for **security updates**
+
+![Dependabot_PRs](/Docs/CI-CD_DOCUMENTATION/Dependabot_PRs.png)

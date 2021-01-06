@@ -1,6 +1,6 @@
 name: Bogus CI/CD Pipeline
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   ci:
@@ -14,12 +14,19 @@ jobs:
         with:
           fetch-depth: 50
 
+      - name: Clean .NET cache
+        id: clean_dotnet_cache
+        shell: powershell
+        run: |
+          dotnet clean ./Source/Bogus.sln --configuration Release 
+          dotnet nuget locals all --clear
+
       - name: Install .NET dependencies
         id: install_dotnet_dependencies
         shell: powershell
         run: dotnet tool restore
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Activate TestSpace tool
         id: testspace_tool
         uses: testspace-com/setup-testspace@v1
@@ -35,7 +42,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: false
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Cache SonarCloud packages
         id: cache_sonar_packages
         uses: actions/cache@v1
@@ -44,7 +51,7 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Cache SonarCloud scanner
         id: cache_sonar_scanner
         uses: actions/cache@v1
@@ -53,7 +60,7 @@ jobs:
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
 
-      - if: github.repository_owner == github.actor && steps.cache_sonar_scanner.outputs.cache-hit != 'true'
+      - if: github.event_name == 'push' && steps.cache_sonar_scanner.outputs.cache-hit != 'true'
         name: Install SonarCloud scanner
         id: install_sonar_scanner
         shell: powershell
@@ -61,7 +68,7 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Lowercase string generator
         id: lowercase_string_gen
         shell: powershell
@@ -69,7 +76,7 @@ jobs:
           $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
           echo "::set-output name=owner_name::$LOWERCASE_OWNER"
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Initialize SonarCloud scanner
         id: init_sonar_scanner
         env:
@@ -98,7 +105,7 @@ jobs:
         shell: powershell
         run: dotnet fake run Source\Builder\build.fsx target test
 
-      - if: github.repository_owner == github.actor && always()
+      - if: github.event_name == 'push' && always()
         name: Push result to Testspace server
         id: push_to_testspace
         shell: powershell
@@ -113,7 +120,7 @@ jobs:
           name: TestResults
           path: __test/
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name == 'push'
         name: Send SonarCloud results
         id: send_sonar_results
         env:

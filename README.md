@@ -46,6 +46,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * Steve Leigh - [Seedy Fake Users](http://stevesspace.com/2017/01/seedy-fake-users/)
 * [Volkan Paksoy](https://twitter.com/volkan_paksoy) - [Generating Test Data with Bogus](https://volkanpaksoy.com/archive/2019/06/27/Generating-Test-Data-with-Bogus/)
 * Alican Demirtas - [Bogus on F#](https://www.compositional-it.com/news-blog/bogus-on-f/)
+* [Khalid Abuhakmeh](https://twitter.com/buhakmeh) - [Seed Entity Framework Core With Bogus](https://khalidabuhakmeh.com/seed-entity-framework-core-with-bogus)
 
 ##### The Crypto Tip Jar!
 <a href="https://commerce.coinbase.com/checkout/2faa393a-6fc3-4365-993a-6cc110bc4d35"><img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/tipjar.png" /></a>

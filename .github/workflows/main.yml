@@ -18,9 +18,13 @@ jobs:
         with:
           fetch-depth: 50
 
-      - name: Set up JDK 11
+      - if: github.event_name != 'pull_request'
+        name: Install latest Java LTS
+        id: install_latest_java_lts
         uses: actions/setup-java@v1
         with:
+        # Java 11 is the current long-term support version of JSE
+        # and is the officially suggested version by SonarCloud for GitHub Actions
          java-version: 1.11
       
       - name: Clean .NET cache

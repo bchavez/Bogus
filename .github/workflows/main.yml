@@ -18,7 +18,9 @@ jobs:
         with:
           fetch-depth: 50
 
-      - name: Set up JDK 11
+      - if: github.event_name != 'pull_request'
+        name: Set up JDK 11
+        id: setup_java_latest
         uses: actions/setup-java@v1
         with:
          java-version: 1.11

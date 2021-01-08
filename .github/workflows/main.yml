@@ -23,6 +23,7 @@ jobs:
         id: install_latest_java_lts
         uses: actions/setup-java@v1
         with:
+        # Java 11 is the current long-term support version of JSE
          java-version: 1.11
       
       - name: Clean .NET cache

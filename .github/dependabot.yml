@@ -1,13 +1,43 @@
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    # location of `package-lock.json`
-    directory: "/Source/Builder/"
-    schedule:
-      interval: "daily"
-
   - package-ecosystem: "github-actions"
     # default location of `.github/workflows`
     directory: "/"
     schedule:
       interval: "weekly"
+
+  - package-ecosystem: "npm"
+    # location of `package-lock.json`
+    directory: "/Source/Builder"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    # location of package manifests
+    directory: "/Source/Bogus"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    # location of package manifests
+    directory: "/Source/Benchmark"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    # location of package manifests
+    directory: "/Source/Bogus.Tests"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    # location of package manifests
+    directory: "/Examples/GettingStarted"
+    schedule:
+      interval: "daily"
+
+  - package-ecosystem: "nuget"
+    # location of package manifests
+    directory: "/Examples/EFCoreSeedDb"
+    schedule:
+      interval: "daily"

@@ -1,6 +1,10 @@
 name: Bogus CI/CD Pipeline
 
-on: [push, pull_request]
+# There's is specific logic connected to the trigger events by exclusion: 
+# (github.event_name != 'pull_request')
+# When adding new events, make sure they conform to the logic
+# or if needed, make appropriate changes to keep the logic consistent
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   ci:
@@ -14,7 +18,24 @@ jobs:
         with:
           fetch-depth: 50
 
-      - if: github.repository_owner == github.actor
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+         java-version: 1.11
+      
+      - name: Clean .NET cache
+        id: clean_dotnet_cache
+        shell: powershell
+        run: |
+          dotnet clean ./Source/Bogus.sln --configuration Release 
+          dotnet nuget locals all --clear
+
+      - name: Install .NET dependencies
+        id: install_dotnet_dependencies
+        shell: powershell
+        run: dotnet tool restore
+
+      - if: github.event_name != 'pull_request'
         name: Activate TestSpace tool
         id: testspace_tool
         uses: testspace-com/setup-testspace@v1
@@ -22,6 +43,7 @@ jobs:
           domain: ${{ github.repository_owner }}
           token: ${{ secrets.TESTSPACE_TOKEN }}
 
+      # (github.event_name == 'push') is used for steps specifically involved in the Release Sequence
       - if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         name: Bump release version and create release tag
         id: tag_generator
@@ -30,25 +52,25 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: false
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name != 'pull_request'
         name: Cache SonarCloud packages
         id: cache_sonar_packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name != 'pull_request'
         name: Cache SonarCloud scanner
         id: cache_sonar_scanner
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: .\.sonar\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
 
-      - if: github.repository_owner == github.actor && steps.cache_sonar_scanner.outputs.cache-hit != 'true'
+      - if: github.event_name != 'pull_request' && steps.cache_sonar_scanner.outputs.cache-hit != 'true'
         name: Install SonarCloud scanner
         id: install_sonar_scanner
         shell: powershell
@@ -56,7 +78,7 @@ jobs:
           New-Item -Path .\.sonar\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name != 'pull_request'
         name: Lowercase string generator
         id: lowercase_string_gen
         shell: powershell
@@ -64,7 +86,7 @@ jobs:
           $LOWERCASE_OWNER = "${{ github.repository_owner }}".ToLower()
           echo "::set-output name=owner_name::$LOWERCASE_OWNER"
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name != 'pull_request'
         name: Initialize SonarCloud scanner
         id: init_sonar_scanner
         env:
@@ -72,17 +94,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: .\.sonar\scanner\dotnet-sonarscanner begin /k:"${{ github.repository_owner }}_${{ github.event.repository.name }}" /o:"${{ steps.lowercase_string_gen.outputs.owner_name }}" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-
-      - name: Install .NET dependencies
-        id: install_dotnet_dependencies
-        shell: powershell
-        run: dotnet tool restore
-
-      - name: Initialize CodeQL
-        id: init_codeql
-        uses: github/codeql-action/init@v1
-        with:
-          queries: security-extended, security-and-quality
 
       - name: Build project
         id: build_project
@@ -104,7 +115,7 @@ jobs:
         shell: powershell
         run: dotnet fake run Source\Builder\build.fsx target test
 
-      - if: github.repository_owner == github.actor && always()
+      - if: github.event_name != 'pull_request' && always()
         name: Push result to Testspace server
         id: push_to_testspace
         shell: powershell
@@ -119,7 +130,7 @@ jobs:
           name: TestResults
           path: __test/
 
-      - if: github.repository_owner == github.actor
+      - if: github.event_name != 'pull_request'
         name: Send SonarCloud results
         id: send_sonar_results
         env:
@@ -128,13 +139,9 @@ jobs:
         shell: powershell
         run: .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
 
-      - name: Perform CodeQL Analysis
-        id: analyze_codeql
-        uses: github/codeql-action/analyze@v1
-
   cd:
+    # "This job will execute when the workflow is triggered on a 'push event', the target branch is 'master' and the commit is intended to be a release."
     if: github.event_name == 'push' && github.ref == 'refs/heads/master' && needs.ci.outputs.new_version != ''
-    # "This job will execute when the workflow is triggered on a 'push event', the target branch is 'master' and the commit is intended to be a release." #
     needs: ci
     runs-on: windows-latest
     env:

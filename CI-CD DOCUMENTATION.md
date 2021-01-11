@@ -297,3 +297,7 @@ Result: v1.2.3 -> **v2.0.0**
 <br>
 <br>
 Note: in the MAJOR release example, the PowerShell multiline syntax ` (backtick) is used. After writing a backtick, a press of the Enter key should open a new line.
+
+#
+
+Built with ❤ by [Pipeline Foundation](http://pipeline.foundation)

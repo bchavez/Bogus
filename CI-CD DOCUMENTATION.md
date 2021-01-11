@@ -87,13 +87,15 @@ SonarCloud is a cloud-based code quality and security service.
 
 17. No further steps are required for this setup.
 
-18. Run your workflow one time to deliver the code to SonarCloud.
+18. Run manually your workflow one time to deliver the code to SonarCloud.
+
+19. In order to set a "Quality gate" follow the next steps.
 
 19. After the run go to the Project page.
 
 20. Click on the button "Set new code definition" and select  "Previous version".
 
-21. Run your code again and there you have a fully scanned code.
+21. Manually run the workflow and there you have set a Quality gate.
 
 <br>
 

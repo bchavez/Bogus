@@ -26,7 +26,7 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="format">
       /// If a format is provided it will fill the format with letters and numbers.
-      /// Example "#### ??" can become "QYTE 78".
+      /// Example "???? ##" can become "QYTE 78".
       /// </param>
       /// <returns>A random zipcode.</returns>
       public string ZipCode(string format = null)

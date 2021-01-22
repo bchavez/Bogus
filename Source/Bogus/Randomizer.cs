@@ -41,6 +41,15 @@ namespace Bogus
          this.localSeed = new Random(localSeed);
       }
 
+      /// <summary>
+      /// Constructor that uses <see cref="rand"/> parameter as a Random.
+      /// Completely ignores the global static <see cref="Seed"/>.
+      /// </summary>
+      public Randomizer(Random rand)
+      {
+         this.localSeed = rand;
+      }
+
       private readonly Random localSeed;
 
       /// <summary>

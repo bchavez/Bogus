@@ -1,0 +1,42 @@
+name: Bogus CI/CD Pipeline
+
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  ci:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        id: checkout_repo
+        uses: actions/checkout@v2
+
+      - name: Clean .NET cache
+        id: clean_dotnet_cache
+        shell: powershell
+        run: |
+          dotnet clean ./Source/Bogus.sln --configuration Release
+          dotnet nuget locals all --clear
+
+      - name: Install .NET dependencies
+        id: install_dotnet_dependencies
+        shell: powershell
+        run: dotnet tool restore
+
+      - name: Build project
+        id: build_project
+        shell: powershell
+        run: dotnet fake run Source\Builder\build.fsx target ci
+
+      - name: Run unit tests
+        id: run_project_tests
+        shell: powershell
+        run: dotnet fake run Source\Builder\build.fsx target test
+
+      - name: Upload unit tests' results artifact
+        id: up_test_results_artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: TestResults
+          path: __test/
+
+# Built with ❤ by [Pipeline Foundation](https://pipeline.foundation)          

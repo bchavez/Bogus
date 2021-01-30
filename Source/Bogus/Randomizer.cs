@@ -471,6 +471,9 @@ namespace Bogus
       /// </summary>
       public T ArrayElement<T>(T[] array)
       {
+         if (array.Length <= 0)
+            throw new ArgumentException("The array is empty. There are no items to select.", nameof(array));
+
          var r = Number(max: array.Length - 1);
          return array[r];
       }
@@ -524,6 +527,9 @@ namespace Bogus
       /// </summary>
       public T ListItem<T>(IList<T> list)
       {
+         if (list.Count <= 0)
+            throw new ArgumentException("The list is empty. There are no items to select.", nameof(list));
+
          var r = Number(max: list.Count - 1);
          return list[r];
       }
@@ -558,6 +564,9 @@ namespace Bogus
       /// </summary>
       public T CollectionItem<T>(ICollection<T> collection)
       {
+         if( collection.Count <= 0 )
+            throw new ArgumentException("The collection is empty. There are no items to select.", nameof(collection));
+
          var r = Number(max: collection.Count - 1);
          return collection.Skip(r).First();
       }

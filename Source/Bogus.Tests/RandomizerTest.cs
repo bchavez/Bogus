@@ -429,7 +429,7 @@ namespace Bogus.Tests
       {
          var x = new List<int>() as ICollection<int>;
          Action act = () => r.CollectionItem(x);
-         act.Should().Throw<InvalidOperationException>();
+         act.Should().Throw<ArgumentException>();
       }
 
       [Fact]
@@ -542,6 +542,24 @@ namespace Bogus.Tests
       {
          r.Utf16String().Should().Be("𦊕𡰴ဩਢۥ侀ゞᜡﷴ𠸮𝒾ⶱﹱຂⱪ𝒟𝚪𝒩𝝵ೡཧΐ뢫ⱜੳ𣽇𐨖ਆ𐀼ฏളﾺ𐏈𦵻𐠸𝕋ꡨ𝔇ずరᢔﬣ𐨟𝔚ઐష");
          r.Utf16String().Should().Be("னమወ𡂑ப𐠁ஞ𦂰ઐ𢂍ᬒ𒀓𨴽𝜅𧊆𦑆ආ𝜂ଭ𐀪ಋΊ౦౨ㆳꠁⶺ𝛈𡓎𡯸ᜑ𐁁𝜹લ𩠺ଐ𦕲ﬔჁⶂム𝐾𣭄ງヾ༤𝒪ᙵͼ၅𦛃𩕾ﷸ𝜦ⱶ");
+      }
+
+      [Fact]
+      public void empty_collection_throws_better_exception_message_rather_than_index_out_of_bounds()
+      {
+         var x = new int[] { };
+
+         Action arrayAction = () => r.ArrayElement(x);
+         arrayAction.Should().Throw<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The array is empty. There are no items to select."));
+
+         Action listAction = () => r.ListItem(x);
+         listAction.Should().Throw<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The list is empty. There are no items to select."));
+
+         Action collectionAction = () => r.CollectionItem(x);
+         collectionAction.Should().Throw<ArgumentException>()
+            .Where(ex => ex.Message.StartsWith("The collection is empty. There are no items to select."));
       }
    }
 }

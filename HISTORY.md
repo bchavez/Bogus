@@ -1,3 +1,10 @@
+## v32.0.3
+Release Date: TBA
+
+* Minor improvements to XML docs.
+* Better exception messages around empty collections and empty arrays.
+* PR 339: Fix null reference exception when calling StrictMode(true) on Faker<T> with no rules.
+
 ## v32.0.2
 Release Date: 2020-12-12
 

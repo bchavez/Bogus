@@ -1,9 +1,10 @@
-## v32.0.3
-Release Date: TBA
+## v32.1.1
+Release Date: 2021-01-31
 
 * Minor improvements to XML docs.
 * Better exception messages around empty collections and empty arrays.
 * PR 339: Fix null reference exception when calling StrictMode(true) on Faker<T> with no rules.
+* PR 352: Fix first name generation for locales that don't support gender names.
 
 ## v32.0.2
 Release Date: 2020-12-12

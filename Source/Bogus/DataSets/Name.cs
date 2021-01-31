@@ -38,7 +38,7 @@
       /// <param name="gender">For locale's that support Gender naming.</param>
       public string FirstName(Gender? gender = null)
       {
-         if( gender is null && HasFirstNameList )
+         if ((gender is null && HasFirstNameList) || !SupportsGenderFirstNames)
             return GetRandomArrayItem("first_name");
 
          if( gender is null )

@@ -159,5 +159,19 @@ namespace Bogus.Tests.DataSetTests
          n = new Name("it");
          n.Suffix().Should().BeNullOrEmpty();
       }
+
+      [Fact]
+      public void locales_that_dont_support_gender_first_names_should_return_generic()
+      {
+
+         var n = new Name("ge") { Random = new Randomizer(31337) };
+         n.FirstName(Name.Gender.Female).Should().Be("ხირხელა");
+
+         n = new Name("ge") { Random = new Randomizer(31337) };
+         n.FirstName(Name.Gender.Male).Should().Be("ხირხელა");
+
+         n = new Name("ge") { Random = new Randomizer(31337) };
+         n.FirstName().Should().Be("ხირხელა");
+      }
    }
 }

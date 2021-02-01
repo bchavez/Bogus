@@ -2,7 +2,7 @@
 
 The pipeline:
 
-- contains the Build and Test processes of your project
+- contains the Build and Test processes of the project
 - uploads the results of the Test process as a pipeline artifact 
 - executes on push commit, when a PR is created or merged and can also be executed manually
 

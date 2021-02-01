@@ -8,7 +8,7 @@ Project Description
 Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). **Bogus** is a simple and sane fake data generator for **.NET** languages like **C#**, **F#** and **VB.NET**. **Bogus** is fundamentally a **C#** port of [`faker.js`](https://github.com/marak/Faker.js/)
 and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentValidation)'s syntax sugar.
 
-**Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile: If you find **Bogus** useful consider supporting the project by purchasing a [**Bogus Premium**](#bogus-premium-extensions) license that gives you extra **Bogus** superpowers! :dizzy: :muscle: 
+**Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile: If you find **Bogus** useful consider supporting the project by purchasing a [**Bogus Premium**](#bogus-premium-extensions) license that gives you extra **Bogus** superpowers! :dizzy: :muscle: You can also [sponsor the project here](https://github.com/sponsors/bchavez)! :moneybag: :dollar:
 
 
 ### Download & Install

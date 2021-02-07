@@ -1784,6 +1784,37 @@
       "Zepeda",
       "Zúñiga"
     ],
+    "male_first_name": [
+      "Josep",
+      "Ángel",
+      "Daniel",
+      "Manuel",
+      "Pedro",
+      "Salvador",
+      "Rubén",
+      "Iván",
+      "Miguel",
+      "Jorge",
+      "Sergi",
+      "Josep",
+      "Ricardo",
+      "Carles",
+      "Jordi",
+      "Manuel"
+    ],
+    "female_first_name": [
+      "Marta",
+      "Andrea",
+      "Ana",
+      "Anni",
+      "Laura",
+      "Maica",
+      "Laura",
+      "Lorena",
+      "Matilde",
+      "Jennifer",
+      "Roser"
+    ],
     "prefix": [
       "Sr.",
       "Sra.",

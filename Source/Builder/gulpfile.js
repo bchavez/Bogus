@@ -23,7 +23,6 @@ var localeFolders = gulp.src(
       "../fakerjs/lib/locales/*",
       "!../fakerjs/lib/locales/ar", // 2018.09.23 - Exclude this locale, has problems upstream.
                                     // https://github.com/Marak/faker.js/pull/505/files#r219737439
-      "!../fakerjs/lib/locales/hr"  // 2020.09.13 - Problems upstream: https://github.com/Marak/faker.js/pull/1001
    ]);
 
 var dataFolder = "../Bogus/data";

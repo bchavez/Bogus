@@ -158,6 +158,15 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Generates a random port number.
+      /// </summary>
+      /// <returns>A random port number</returns>
+      public int Port()
+      {
+         return this.Random.Number(min: IPEndPoint.MinPort + 1, max: IPEndPoint.MaxPort);
+      }
+
+      /// <summary>
       /// Gets a random IPv4 IPAddress type.
       /// </summary>
       public IPAddress IpAddress()

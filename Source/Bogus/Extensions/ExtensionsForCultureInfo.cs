@@ -13,7 +13,6 @@ namespace Bogus.Extensions
             {"cs", "cz"},
             {"en-IN", "en_IND"},
             {"ka", "ge"},
-            {"ne", "nep"},
             {"id", "id_ID"},
             {"nb", "nb_NO"},
             {"nn", "nb_NO"}
@@ -31,7 +30,6 @@ Looks like the following need to be remapped for Bogus
 cs -> cz
 en-IN -> en_IND
 ka -> ge
-ne -> nep
 id -> id_ID
 
 nb,nn -> nb_NO

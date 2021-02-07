@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
@@ -179,6 +180,15 @@ namespace Bogus.Tests.DataSetTests
       {
          internet.Random = new Randomizer(seed);
          internet.UserNameUnicode(first, last).Should().Be(expected);
+      }
+
+      [Fact]
+      public void can_generate_random_port_number()
+      {
+         internet.Port().Should()
+            .BeGreaterOrEqualTo(IPEndPoint.MinPort + 1)
+            .And
+            .BeLessOrEqualTo(IPEndPoint.MaxPort);
       }
    }
 }

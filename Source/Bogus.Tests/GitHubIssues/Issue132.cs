@@ -99,15 +99,15 @@ namespace Bogus.Tests.GitHubIssues
       }
 
       [Fact]
-      public void nep_locale()
+      public void ne_locale()
       {
          CultureInfo.GetCultureInfo("ne-NP")
             .ToBogusLocale()
-            .Should().Be("nep");
+            .Should().Be("ne");
 
          CultureInfo.GetCultureInfo("ne")
             .ToBogusLocale()
-            .Should().Be("nep");
+            .Should().Be("ne");
       }
 
       [Fact]

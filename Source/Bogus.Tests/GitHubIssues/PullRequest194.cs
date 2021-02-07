@@ -31,7 +31,7 @@ namespace Bogus.Tests.GitHubIssues
                   "en Zonen"
                });
 
-         f.Name.FirstName().Should().Be("Fons");
+         f.Name.FirstName().Should().Be("Bram");
       }
    }
 }

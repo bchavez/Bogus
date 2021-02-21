@@ -1,9 +1,11 @@
 using System;
+using System.ComponentModel;
 using System.Linq.Expressions;
 
 namespace Bogus
 {
-   internal static class PropertyName
+   [EditorBrowsable(EditorBrowsableState.Never)]
+   public static class PropertyName
    {
       public static string For<T, TProp>(Expression<Func<T, TProp>> expression)
       {

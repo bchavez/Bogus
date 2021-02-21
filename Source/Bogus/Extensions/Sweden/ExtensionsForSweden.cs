@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Bogus.DataSets;
+using static Bogus.DataSets.Name;
 
 namespace Bogus.Extensions.Sweden
 {
@@ -10,7 +11,7 @@ namespace Bogus.Extensions.Sweden
    public static class ExtensionsForSweden
    {
       /// <summary>
-      /// Swedish national identity number (personummer)
+      /// Swedish national identity number (personnummer)
       /// </summary>
       public static string Personnummer(this Person person)
       {
@@ -23,7 +24,7 @@ namespace Bogus.Extensions.Sweden
          /*
 
              YYYYMMDDBBGC
-             |   | | | | |--> (C)Checksum
+             |   | | | ||---> (C)Checksum
              |   | | | | 
              |   | | | |----> (G)Gender
              |   | | |------> (B)Birthplace
@@ -43,23 +44,24 @@ namespace Bogus.Extensions.Sweden
       }
 
 
-      private static string GenerateIndividualNumber(Randomizer r, Name.Gender gender, DateTime dateOfBirth)
+      private static string GenerateIndividualNumber(Randomizer r, Gender gender, DateTime dateOfBirth)
       {
          var genderNumber = GetGenderNumber(r, gender);
          var p = dateOfBirth.ToString("yyyyMMddff") + genderNumber;
-         var ctr = Luhn(p.Substring(2));
-         return p + ctr;
+         var checksum = GetLuhn(p.Substring(2));
+         return p + checksum;
       }
 
-      private static int GetGenderNumber(Randomizer r, Name.Gender gender)
-         => gender switch
-         {
-            Name.Gender.Male => r.Even(1, 9),
-            Name.Gender.Female => r.Odd(1, 9),
-            _ => throw new ArgumentOutOfRangeException(nameof(gender), gender, null)
-         };
+      private static int GetGenderNumber(Randomizer r, Gender gender)
+      {
+         if( gender is Gender.Male )
+            return r.Even(1, 9);
+         if( gender is Gender.Female )
+            return r.Odd(1, 9);
+         throw new ArgumentOutOfRangeException(nameof(gender), gender, "Gender not handled.");
+      }
 
-      private static int Luhn(string value)
+      private static int GetLuhn(string value)
       {
          // Luhn algorithm doubles every other number in the value.
          // To get the correct checksum digit we aught to append a 0 on the sequence.

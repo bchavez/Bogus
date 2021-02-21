@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bogus.Tests.ExtensionTests
 {
-   public class SwedishExtensionTest
+   public class SwedishExtensionTest : SeededTest
    {
       [Fact]
       public void can_create_valid_swedish_personnummer()

@@ -8,7 +8,7 @@ namespace Bogus.Extensions.UnitedKingdom
    /// <summary>
    /// API extensions specific for a geographical location.
    /// </summary>
-   public static class RegistrationPlateExtensionsForGreatBritain
+   public static class ExtensionsForGreatBritainRegistrationPlate
    {
       private static readonly DateTime StartOfCurrentStyle = new DateTime(2001, 9, 1);
 
@@ -41,7 +41,7 @@ namespace Bogus.Extensions.UnitedKingdom
       };
 
       /// <summary>
-      /// Generate a GB Vehicle Registration Plate.
+      /// GB Vehicle Registration Plate
       /// </summary>
       /// <param name="vehicle">Object to extend.</param>
       /// <param name="dateFrom">The start of the range of registration dates.</param>

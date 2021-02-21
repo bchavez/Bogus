@@ -511,11 +511,13 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 * **`using Bogus.Extensions.Portugal;`**
 	* `Bogus.Person.Nif()` - Número de Identificação Fiscal (NIF)
 	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)
+* **`using Bogus.Extensions.Sweden;`**
+	* `Bogus.Person.Personnummer()` - Swedish national identity number
 * **`using Bogus.Extensions.UnitedKingdom;`**
-	* `Bogus.DataSets.Address.CountryOfUnitedKingdom()` - Country of the United Kingdom
+	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
-	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate
+	* `Bogus.DataSets.Address.CountryOfUnitedKingdom()` - Country of the United Kingdom
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 	* `Bogus.DataSets.Company.Ein()` - Employer Identification Number

@@ -11,7 +11,7 @@ namespace Bogus.Extensions.Sweden
    public static class ExtensionsForSweden
    {
       /// <summary>
-      /// Swedish national identity number (personnummer)
+      /// Swedish national identity number
       /// </summary>
       public static string Personnummer(this Person person)
       {

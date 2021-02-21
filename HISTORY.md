@@ -1,3 +1,8 @@
+## v33.0.2
+Release Date: 2021-02-21
+
+* PR 359: Add `Bogus.Person.Personnummer()` Swedish national identity number
+
 ## v33.0.1
 Release Date: 2021-02-07
 

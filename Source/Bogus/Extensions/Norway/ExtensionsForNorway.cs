@@ -8,7 +8,7 @@ namespace Bogus.Extensions.Norway
    public static class ExtensionsForNorway
    {
       /// <summary>
-      /// Norwegian national identity number (fødselsnummer)
+      /// Norwegian national identity number
       /// </summary>
       public static string Fødselsnummer(this Person p)
       {

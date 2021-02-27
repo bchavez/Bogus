@@ -155,6 +155,7 @@ User Created! Id=0
 |:---------:| ----------- |
 | **C#**    | [**Full working example of 'The Great C# Example'**](https://github.com/bchavez/Bogus/tree/master/Examples/GettingStarted) |
 | **C#**    | [**Using Bogus and EF Core to a seed database**](https://github.com/bchavez/Bogus/tree/master/Examples/EFCoreSeedDb) |
+| **C#**    | [**Extending Bogus with custom APIs and data**](https://github.com/bchavez/Bogus/tree/master/Examples/ExtendingBogus) |
 | **F#**    | [**Using Bogus with F#**](#the-fabulous-f-examples) |
 | **VB.NET** | [**Using Bogus with VB.NET**](#the-very-basic-vbnet-example) |
 

@@ -385,7 +385,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `DomainWord` - Generates a domain word used for domain names.
 	* `DomainSuffix` - Generates a domain name suffix like .com, .net, .org
 	* `Ip` - Gets a random IPv4 address string.
-  * `Port` - Generates a random port number.
+	* `Port` - Generates a random port number.
 	* `IpAddress` - Gets a random IPv4 IPAddress type.
 	* `IpEndPoint` - Gets a random IPv4 IPEndPoint.
 	* `Ipv6` - Generates a random IPv6 address string.

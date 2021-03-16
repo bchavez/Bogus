@@ -44,11 +44,7 @@ namespace Bogus.DataSets
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -62,11 +58,7 @@ namespace Bogus.DataSets
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>
@@ -112,11 +104,7 @@ namespace Bogus.DataSets
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return minDate + partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -130,11 +118,7 @@ namespace Bogus.DataSets
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return minDate + partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>
@@ -144,14 +128,22 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTime Between(DateTime start, DateTime end)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         var startTicks = start.ToUniversalTime().Ticks;
+         var endTicks = end.ToUniversalTime().Ticks;
+
+         var minTicks = Math.Min(startTicks, endTicks);
+         var maxTicks = Math.Max(startTicks, endTicks);
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTime(minTicks, start.Kind) + partTimeSpan;
+         var value = new DateTime(minTicks, DateTimeKind.Utc) + partTimeSpan;
+
+         if (start.Kind != DateTimeKind.Utc)
+            value = value.ToLocalTime();
+
+         return value;
       }
 
       /// <summary>
@@ -161,14 +153,19 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         var startTicks = start.ToUniversalTime().Ticks;
+         var endTicks = end.ToUniversalTime().Ticks;
+
+         var minTicks = Math.Min(startTicks, endTicks);
+         var maxTicks = Math.Max(startTicks, endTicks);
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTimeOffset(minTicks, start.Offset) + partTimeSpan;
+         var dateTime = new DateTime(minTicks, DateTimeKind.Unspecified) + partTimeSpan;
+
+         return new DateTimeOffset(dateTime + start.Offset, start.Offset);
       }
 
       /// <summary>
@@ -182,11 +179,7 @@ namespace Bogus.DataSets
 
          var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -200,11 +193,7 @@ namespace Bogus.DataSets
 
          var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>

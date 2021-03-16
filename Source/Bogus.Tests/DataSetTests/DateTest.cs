@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
@@ -351,6 +352,87 @@ namespace Bogus.Tests.DataSetTests
       public void can_get_timezone_string()
       {
          date.TimeZoneString().Should().Be("Asia/Yerevan");
+      }
+
+      public class FactWhenDaylightSavingsSupported : FactAttribute
+      {
+         public FactWhenDaylightSavingsSupported()
+         {
+            if (!TimeZoneInfo.Local.SupportsDaylightSavingTime)
+            {
+               Skip = "Test is only meaningful when Daylight Savings is supported by the local timezone.";
+            }
+         }
+      }
+
+      [FactWhenDaylightSavingsSupported]
+      public void will_not_generate_values_that_do_not_exist_due_to_daylight_savings()
+      {
+         // Arrange
+         var faker = new Faker();
+
+         faker.Random = new Randomizer(localSeed: 5);
+
+         var dstRules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+         var now = DateTime.Now;
+
+         var effectiveRule = dstRules.Single(rule => (rule.DateStart <= now) && (rule.DateEnd >= now));
+
+         var transitionStartTime = CalculateTransitionDateTime(now, effectiveRule.DaylightTransitionStart);
+
+         // When converting back, .NET picks the end of the transition window instead of the start.
+         var transitionEndTime = transitionStartTime.ToUniversalTime().ToLocalTime();
+
+         // Act
+         var value = faker.Date.Between(transitionStartTime.AddHours(-1), transitionEndTime.AddHours(+2));
+
+         // Assert
+         transitionEndTime.Should().NotBe(transitionStartTime);
+
+         if ((value >= transitionStartTime) && (value < transitionStartTime.AddHours(1)))
+            value.Should().NotBeBefore(transitionEndTime);
+      }
+
+      private DateTime CalculateTransitionDateTime(DateTime now, TimeZoneInfo.TransitionTime transition)
+      {
+         // Based on code found at: https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.transitiontime.isfixeddaterule
+
+         if (transition.IsFixedDateRule)
+         {
+            return new DateTime(
+               now.Year,
+               transition.Month,
+               transition.Day,
+               transition.TimeOfDay.Hour,
+               transition.TimeOfDay.Minute,
+               transition.TimeOfDay.Second,
+               transition.TimeOfDay.Millisecond);
+         }
+
+         var calendar = CultureInfo.CurrentCulture.Calendar;
+
+         var startOfWeek = transition.Week * 7 - 6;
+
+         var firstDayOfWeek = (int)calendar.GetDayOfWeek(new DateTime(now.Year, transition.Month, 1));
+         var changeDayOfWeek = (int)transition.DayOfWeek;
+
+         int transitionDay =
+            firstDayOfWeek <= changeDayOfWeek
+            ? startOfWeek + changeDayOfWeek - firstDayOfWeek
+            : startOfWeek + changeDayOfWeek - firstDayOfWeek + 7;
+
+         if (transitionDay > calendar.GetDaysInMonth(now.Year, transition.Month))
+            transitionDay -= 7;
+
+         return new DateTime(
+            now.Year,
+            transition.Month,
+            transitionDay,
+            transition.TimeOfDay.Hour,
+            transition.TimeOfDay.Minute,
+            transition.TimeOfDay.Second,
+            transition.TimeOfDay.Millisecond);
       }
    }
 }

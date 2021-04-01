@@ -460,6 +460,90 @@ namespace Bogus.Tests.DataSetTests
          }
       }
 
+      [FactWhenDaylightSavingsSupported]
+      public void works_when_range_is_exactly_daylight_savings_transition_window()
+      {
+         // Arrange
+         var faker = new Faker();
+
+         faker.Random = new Randomizer(localSeed: 5);
+
+         var dstRules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+         var now = DateTime.Now;
+
+         var effectiveRule = dstRules.Single(rule => (rule.DateStart <= now) && (rule.DateEnd >= now));
+
+         var transitionStartTime = CalculateTransitionDateTime(now, effectiveRule.DaylightTransitionStart);
+         var transitionEndTime = transitionStartTime + effectiveRule.DaylightDelta;
+
+         // Act & Assert
+         for (int i = 0; i < 10000; i++)
+         {
+            var sample = faker.Date.Between(transitionStartTime, transitionEndTime);
+
+            sample.Should().BeOneOf(transitionStartTime, transitionEndTime);
+         }
+      }
+
+      [FactWhenDaylightSavingsSupported]
+      public void works_when_range_start_is_exactly_daylight_savings_transition_window_start()
+      {
+         // Arrange
+         var faker = new Faker();
+
+         faker.Random = new Randomizer(localSeed: 5);
+
+         var dstRules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+         var now = DateTime.Now;
+
+         var effectiveRule = dstRules.Single(rule => (rule.DateStart <= now) && (rule.DateEnd >= now));
+
+         var transitionStartTime = CalculateTransitionDateTime(now, effectiveRule.DaylightTransitionStart);
+         var transitionEndTime = transitionStartTime + effectiveRule.DaylightDelta;
+
+         var windowStart = transitionStartTime;
+         var windowEnd = transitionEndTime.AddMinutes(-5);
+
+         // Act & Assert
+         for (int i = 0; i < 10000; i++)
+         {
+            var sample = faker.Date.Between(windowStart, windowEnd);
+
+            sample.Should().Be(windowStart);
+         }
+      }
+
+      [FactWhenDaylightSavingsSupported]
+      public void works_when_range_end_is_exactly_daylight_savings_transition_window_end()
+      {
+         // Arrange
+         var faker = new Faker();
+
+         faker.Random = new Randomizer(localSeed: 5);
+
+         var dstRules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+         var now = DateTime.Now;
+
+         var effectiveRule = dstRules.Single(rule => (rule.DateStart <= now) && (rule.DateEnd >= now));
+
+         var transitionStartTime = CalculateTransitionDateTime(now, effectiveRule.DaylightTransitionStart);
+         var transitionEndTime = transitionStartTime + effectiveRule.DaylightDelta;
+
+         var windowStart = transitionStartTime.AddMinutes(5);
+         var windowEnd = transitionEndTime;
+
+         // Act & Assert
+         for (int i = 0; i < 10000; i++)
+         {
+            var sample = faker.Date.Between(windowStart, windowEnd);
+
+            sample.Should().Be(windowEnd);
+         }
+      }
+
       private DateTime CalculateTransitionDateTime(DateTime now, TimeZoneInfo.TransitionTime transition)
       {
          // Based on code found at: https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.transitiontime.isfixeddaterule

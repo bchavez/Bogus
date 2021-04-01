@@ -144,7 +144,16 @@ namespace Bogus.DataSets
          var value = new DateTime(minTicks, DateTimeKind.Utc) + partTimeSpan;
 
          if (start.Kind != DateTimeKind.Utc)
+         {
             value = value.ToLocalTime();
+
+            // Right around daylight savings time transition, there can be two different local DateTime values
+            // that are actually exactly the same DateTime. The ToLocalTime conversion might pick the wrong
+            // one in edge cases; it will pick the later one, and if the caller's window includes the earlier
+            // one, we should return that instead to follow the principle of least surprise.
+            if (value > end)
+               value = end;
+         }
 
          return value;
       }
@@ -178,12 +187,20 @@ namespace Bogus.DataSets
 #if !NETSTANDARD1_3
          var window = GetForwardDSTTransitionWindow(start);
 
-         if ((start > window.Start) && (start <= window.End))
-            start = new DateTime(window.End.Ticks, start.Kind);
+         if ((start >= window.Start) && (start <= window.End))
+         {
+            if ((start == window.Start) && (end >= window.Start) && (end <= window.End))
+               end = start;
+            else
+               start = new DateTime(window.End.Ticks, start.Kind);
+
+            if (start == end)
+               return;
+         }
 
          window = GetForwardDSTTransitionWindow(end);
 
-         if ((end >= window.Start) && (end < window.End))
+         if ((end >= window.Start) && (end <= window.End))
             end = new DateTime(window.Start.Ticks, end.Kind);
 
          if (start > end)

@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Bogus.DataSets
 {
@@ -128,6 +129,8 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTime Between(DateTime start, DateTime end)
       {
+         ComputeRealRange(ref start, ref end);
+
          var startTicks = start.ToUniversalTime().Ticks;
          var endTicks = end.ToUniversalTime().Ticks;
 
@@ -147,25 +150,154 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
+      /// Takes a date/time range, as indicated by <paramref name="start"/> and <paramref name="end"/>,
+      /// and ensures that the range indicators are in the correct order and both reference actual
+      /// <see cref="DateTime"/> values. This takes into account the fact that when Daylight Savings Time
+      /// comes into effect, there is a 1-hour interval in the local calendar which does not exist, and
+      /// <see cref="DateTime"/> values in this change are not meaningful.
+      /// 
+      /// This function only worries about the start and end times. Impossible <see cref="DateTime"/>
+      /// values within the range are excluded automatically by means of the <see cref="DateTime.ToLocalTime"/>
+      /// function.
+      /// 
+      /// This function does not check Daylight Savings Time transitions when running under .NET Standard 1.3,
+      /// as this API does not expose Daylight Savings Time information.
+      /// </summary>
+      /// <param name="start">A ref <see cref="DateTime"/> to be adjusted forward out of an impossible date/time range if necessary.</param>
+      /// <param name="end">A ref <see cref="DateTime"/> to be adjusted backward out of an impossible date/time range if necessary.</param>
+      private void ComputeRealRange(ref DateTime start, ref DateTime end)
+      {
+         if (start > end)
+         {
+            var tmp = start;
+
+            start = end;
+            end = tmp;
+         }
+
+#if !NETSTANDARD1_3
+         var window = GetForwardDSTTransitionWindow(start);
+
+         if ((start > window.Start) && (start <= window.End))
+            start = new DateTime(window.End.Ticks, start.Kind);
+
+         window = GetForwardDSTTransitionWindow(end);
+
+         if ((end >= window.Start) && (end < window.End))
+            end = new DateTime(window.Start.Ticks, end.Kind);
+
+         if (start > end)
+            throw new Exception("DateTime range does not contain any real DateTime values due to daylight savings transitions");
+#endif
+      }
+
+#if !NETSTANDARD1_3
+      struct DateTimeRange
+      {
+         public DateTime Start;
+         public DateTime End;
+      }
+
+      /// <summary>
+      /// Finds the window of time that doesn't exist in the local timezone due to Daylight Savings Time coming into
+      /// effect. In timezones that do not have Daylight Savings Time transitions, this function returns <see cref="null"/>.
+      /// </summary>
+      /// <param name="dateTime">
+      /// A reference <see cref="DateTime"/> value for determining the DST transition window accurately. Daylight Savings Time
+      /// rules can change over time, and the <see cref="TimeZoneInfo"/> API exposes information about which Daylight Savings
+      /// Time rules are in effect for which date ranges.
+      /// </param>
+      /// <returns>
+      /// A <see cref="DateTimeRange"/> that indicates the start &amp; end of the interval of date/time values that do not
+      /// exist in the local calendar in the interval indicated by the supplied <paramref name="dateTime"/>, or <see cref="null"/>
+      /// if no such range exists.
+      /// </returns>
+      private DateTimeRange GetForwardDSTTransitionWindow(DateTime dateTime)
+      {
+         // Based on code found at: https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.transitiontime.isfixeddaterule
+         var rule = FindEffectiveTimeZoneAdjustmentRule(dateTime);
+
+         if (rule == null)
+            return default(DateTimeRange);
+
+         var transition = rule.DaylightTransitionStart;
+
+         DateTime startTime;
+
+         if (transition.IsFixedDateRule)
+         {
+            startTime = new DateTime(
+               dateTime.Year,
+               transition.Month,
+               transition.Day,
+               transition.TimeOfDay.Hour,
+               transition.TimeOfDay.Minute,
+               transition.TimeOfDay.Second,
+               transition.TimeOfDay.Millisecond);
+         }
+         else
+         {
+            var calendar = CultureInfo.CurrentCulture.Calendar;
+
+            var startOfWeek = transition.Week * 7 - 6;
+
+            var firstDayOfWeek = (int)calendar.GetDayOfWeek(new DateTime(dateTime.Year, transition.Month, 1));
+            var changeDayOfWeek = (int)transition.DayOfWeek;
+
+            int transitionDay =
+               firstDayOfWeek <= changeDayOfWeek
+               ? startOfWeek + changeDayOfWeek - firstDayOfWeek
+               : startOfWeek + changeDayOfWeek - firstDayOfWeek + 7;
+
+            if (transitionDay > calendar.GetDaysInMonth(dateTime.Year, transition.Month))
+               transitionDay -= 7;
+
+            startTime = new DateTime(
+               dateTime.Year,
+               transition.Month,
+               transitionDay,
+               transition.TimeOfDay.Hour,
+               transition.TimeOfDay.Minute,
+               transition.TimeOfDay.Second,
+               transition.TimeOfDay.Millisecond);
+         }
+
+         return
+            new DateTimeRange()
+            {
+               Start = startTime,
+               End = startTime + rule.DaylightDelta,
+            };
+      }
+
+      /// <summary>
+      /// Identifies the timezone adjustment rule in effect in the local timezone at the specified
+      /// <paramref name="dateTime"/>. If no adjustment rule is in effect, returns <see cref="null"/>.
+      /// </summary>
+      /// <param name="dateTime">The <see cref="DateTime"/> value for which to find an adjustment rule.</param>
+      private TimeZoneInfo.AdjustmentRule FindEffectiveTimeZoneAdjustmentRule(DateTime dateTime)
+      {
+         foreach (var rule in TimeZoneInfo.Local.GetAdjustmentRules())
+            if ((dateTime >= rule.DateStart) && (dateTime <= rule.DateEnd))
+               return rule;
+
+         return default;
+      }
+#endif
+
+      /// <summary>
       /// Get a random <see cref="DateTimeOffset"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
       /// <param name="start">Start time - The returned <seealso cref="DateTimeOffset"/> offset value is used from this parameter</param>
       /// <param name="end">End time</param>
       public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
       {
-         var startTicks = start.ToUniversalTime().Ticks;
-         var endTicks = end.ToUniversalTime().Ticks;
+         var startTime = new DateTime(start.DateTime.Ticks, DateTimeKind.Utc);
+         var endTime = new DateTime(end.DateTime.Ticks, DateTimeKind.Utc);
 
-         var minTicks = Math.Min(startTicks, endTicks);
-         var maxTicks = Math.Max(startTicks, endTicks);
+         var sample = Between(startTime, endTime);
 
-         var totalTimeSpanTicks = maxTicks - minTicks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         var dateTime = new DateTime(minTicks, DateTimeKind.Unspecified) + partTimeSpan;
-
-         return new DateTimeOffset(dateTime + start.Offset, start.Offset);
+         return new DateTimeOffset(new DateTime(sample.Ticks, DateTimeKind.Unspecified), start.Offset);
       }
 
       /// <summary>

@@ -26,19 +26,14 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( this.valueType )
+            return this.valueType switch
             {
-               case BValueType.Int32:
-                  return _int32;
-               case BValueType.Int64:
-                  return _int64;
-               case BValueType.Double:
-                  return _double;
-               case BValueType.None:
-                  return float.NaN;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to double");
+               BValueType.Int32 => _int32,
+               BValueType.Int64 => _int64,
+               BValueType.Double => _double,
+               BValueType.None => float.NaN,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to double"),
+            };
          }
       }
 
@@ -46,17 +41,13 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( this.valueType )
+            return this.valueType switch
             {
-               case BValueType.Int32:
-                  return _int32;
-               case BValueType.Int64:
-                  return (Int32)_int64;
-               case BValueType.Double:
-                  return (Int32)_double;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to Int32");
+               BValueType.Int32 => _int32,
+               BValueType.Int64 => (Int32)_int64,
+               BValueType.Double => (Int32)_double,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to Int32"),
+            };
          }
       }
 
@@ -64,17 +55,13 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( this.valueType )
+            return this.valueType switch
             {
-               case BValueType.Int32:
-                  return _int32;
-               case BValueType.Int64:
-                  return _int64;
-               case BValueType.Double:
-                  return (Int64)_double;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to Int64");
+               BValueType.Int32 => _int32,
+               BValueType.Int64 => _int64,
+               BValueType.Double => (Int64)_double,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to Int64"),
+            };
          }
       }
 
@@ -82,13 +69,11 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( valueType )
+            return valueType switch
             {
-               case BValueType.Binary:
-                  return _binary;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to binary");
+               BValueType.Binary => _binary,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to binary"),
+            };
          }
       }
 
@@ -96,13 +81,11 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( valueType )
+            return valueType switch
             {
-               case BValueType.UTCDateTime:
-                  return _dateTime;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to DateTime");
+               BValueType.UTCDateTime => _dateTime,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to DateTime"),
+            };
          }
       }
 
@@ -110,21 +93,15 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( valueType )
+            return valueType switch
             {
-               case BValueType.Int32:
-                  return Convert.ToString(_int32);
-               case BValueType.Int64:
-                  return Convert.ToString(_int64);
-               case BValueType.Double:
-                  return Convert.ToString(_double);
-               case BValueType.String:
-                  return _string != null ? _string.TrimEnd((char)0) : null;
-               case BValueType.Binary:
-                  return Encoding.UTF8.GetString(_binary).TrimEnd((char)0);
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to string");
+               BValueType.Int32 => Convert.ToString(_int32),
+               BValueType.Int64 => Convert.ToString(_int64),
+               BValueType.Double => Convert.ToString(_double),
+               BValueType.String => _string != null ? _string.TrimEnd((char)0) : null,
+               BValueType.Binary => Encoding.UTF8.GetString(_binary).TrimEnd((char)0),
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to string"),
+            };
          }
       }
 
@@ -132,13 +109,11 @@ namespace Bogus.Bson
       {
          get
          {
-            switch( valueType )
+            return valueType switch
             {
-               case BValueType.Boolean:
-                  return _bool;
-            }
-
-            throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to bool");
+               BValueType.Boolean => _bool,
+               _ => throw new Exception($"Original type is {this.valueType}. Cannot convert from {this.valueType} to bool"),
+            };
          }
       }
 

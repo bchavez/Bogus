@@ -97,30 +97,17 @@ namespace Bogus.Extensions.UnitedKingdom
          {
             // Export vehicles have their secondary location marker based on
             // the registration date rather than a specific DVLA office.
-            switch (registrationDate.Month)
+            return registrationDate.Month switch
             {
-               case 1:
-               case 7:
-                  return 'E';
-               case 2:
-               case 8:
-                  return 'F';
-               case 3: 
-               case 9:
-                  return 'A';
-               case 4:
-               case 10:
-                  return 'B';
-               case 5:
-               case 11:
-                  return 'C';
-               case 6:
-               case 12:
-                  return 'D';
-            }
-
-            throw new InvalidOperationException(
-               $"This code path should never be accessible. {nameof(primaryLocation)}={primaryLocation}; {nameof(registrationDate)}={registrationDate:O}");
+               1 or 7 => 'E',
+               2 or 8 => 'F',
+               3 or 9 => 'A',
+               4 or 10 => 'B',
+               5 or 11 => 'C',
+               6 or 12 => 'D',
+               _ => throw new InvalidOperationException(
+                  $"This code path should never be accessible. {nameof(primaryLocation)}={primaryLocation}; {nameof(registrationDate)}={registrationDate:O}"),
+            };
          }
          
          char[] secondaryLocationChoices = SecondaryLocations[primaryLocation];

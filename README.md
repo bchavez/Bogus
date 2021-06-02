@@ -334,8 +334,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Recent` - Get a random `DateTime` within the last few days.
 	* `RecentOffset` - Get a random `DateTimeOffset` within the last few days.
 	* `Timespan` - Get a random `TimeSpan`.
-	* `Month` - Get a random month
-	* `Weekday` - Get a random weekday
+	* `Month` - Get a random month.
+	* `Weekday` - Get a random weekday.
 * **`Finance`**
 	* `Account` - Get an account number. Default length is 8 digits.
 	* `AccountName` - Get an account name. Like "savings", "checking", "Home Loan" etc..
@@ -343,7 +343,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `TransactionType` - Get a transaction type: "deposit", "withdrawal", "payment", or "invoice".
 	* `Currency` - Get a random currency.
 	* `CreditCardNumber` - Generate a random credit card number with valid Luhn checksum.
-	* `CreditCardCvv` - Generate a credit card CVV
+	* `CreditCardCvv` - Generate a credit card CVV.
 	* `BitcoinAddress` - Generates a random Bitcoin address.
 	* `EthereumAddress` - Generate a random Ethereum address.
 	* `RoutingNumber` - Generates an ABA routing number with valid check digit.
@@ -432,7 +432,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `DirectoryPath` - Get a random directory path (Unix).
 	* `FilePath` - Get a random file path (Unix).
 	* `CommonFileName` - Generates a random file name with a common file extension.
-	* `MimeType` - Get a random mime type
+	* `MimeType` - Get a random mime type.
 	* `CommonFileType` - Returns a commonly used file type.
 	* `CommonFileExt` - Returns a commonly used file extension.
 	* `FileType` - Returns any file type available as mime-type.
@@ -441,8 +441,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Version` - Get a random `Version`.
 	* `Exception` - Get a random `Exception` with a fake stack trace.
 	* `AndroidId` - Get a random GCM registration ID.
-	* `ApplePushToken` - Get a random Apple Push Token
-	* `BlackBerryPin` - Get a random BlackBerry Device PIN
+	* `ApplePushToken` - Get a random Apple Push Token.
+	* `BlackBerryPin` - Get a random BlackBerry Device PIN.
 * **`Vehicle`**
 	* `Vin` - Generate a vehicle identification number (VIN).
 	* `Manufacturer` - Get a vehicle manufacture name. IE: Toyota, Ford, Porsche.

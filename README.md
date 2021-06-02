@@ -232,7 +232,7 @@ public void Using_The_Faker_Facade()
            Item = faker.Lorem.Sentence(),
            Quantity = faker.Random.Number(1, 10)
        };
-   o.Dump()
+   o.Dump();
 }
 ```
 

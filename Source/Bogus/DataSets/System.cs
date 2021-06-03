@@ -138,7 +138,7 @@ namespace Bogus.DataSets
 
 
       /// <summary>
-      /// Get a random mime type
+      /// Get a random mime type.
       /// </summary>
       /// <returns>
       /// A random mime type.
@@ -379,10 +379,10 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random Apple Push Token
+      /// Get a random Apple Push Token.
       /// </summary>
       /// <returns>
-      /// A random Apple Push Token
+      /// A random Apple Push Token.
       /// </returns>
       public string ApplePushToken()
       {
@@ -390,10 +390,10 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random BlackBerry Device PIN
+      /// Get a random BlackBerry Device PIN.
       /// </summary>
       /// <returns>
-      /// A random BlackBerry Device PIN
+      /// A random BlackBerry Device PIN.
       /// </returns>
       public string BlackBerryPin()
       {

@@ -219,7 +219,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random month
+      /// Get a random month.
       /// </summary>
       public string Month(bool abbreviation = false, bool useContext = false)
       {
@@ -238,7 +238,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Get a random weekday
+      /// Get a random weekday.
       /// </summary>
       public string Weekday(bool abbreviation = false, bool useContext = false)
       {

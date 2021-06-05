@@ -275,7 +275,7 @@ namespace Bogus.DataSets
       }
 
       /// <summary>
-      /// Generate a credit card CVV
+      /// Generate a credit card CVV.
       /// </summary>
       public string CreditCardCvv()
       {

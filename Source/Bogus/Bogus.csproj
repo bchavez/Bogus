@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use Bogus to create UIs with fake data or seed databases. Get started by using Faker class or a DataSet directly.</Description>
     <PackageReleaseNotes>
@@ -8,11 +8,6 @@
     <TargetFrameworks>net40;netstandard1.3;netstandard2.0</TargetFrameworks>
     <CodeAnalysisRuleSet>Bogus.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyName>Bogus</AssemblyName>
-    <PackageId>Bogus</PackageId>
     <PackageTags>faker;fake;bogus;poco;data;generator;database;seed;values;test-data;test;data;tdd;testing;.net;EF</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>

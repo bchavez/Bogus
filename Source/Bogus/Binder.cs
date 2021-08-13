@@ -61,6 +61,7 @@ namespace Bogus
       public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
       {
          var group = t.GetAllMembers(BindingFlags)
+            .Select(m => GetPropertyOnBaseType(m, t))
             .Where(m =>
                {
                   if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
@@ -93,6 +94,19 @@ namespace Bogus
          //reflection; the second one was the inherited
          //ClassA.Value.
          return group.ToDictionary(k => k.Key, g => g.First());
+      }
+
+      private static MemberInfo GetPropertyOnBaseType(MemberInfo member, Type reflectedType)
+      {
+         if (member is PropertyInfo)
+         {
+            if (member.DeclaringType.Equals(reflectedType))
+               return member;
+
+            return member.DeclaringType.GetProperty(member.Name);
+         }
+
+         return member;
       }
    }
 }

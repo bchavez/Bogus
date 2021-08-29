@@ -49,6 +49,7 @@ namespace Bogus
       {
          BindingFlags = bindingFlags;
       }
+      
 
       /// <summary>
       /// Given T, the method will return a Dictionary[string,MemberInfo] where
@@ -60,8 +61,10 @@ namespace Bogus
       /// <returns>The full set of MemberInfos for injection.</returns>
       public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
       {
-         var group = t.GetAllMembers(BindingFlags)
-            .Select(m => GetPropertyOnBaseType(m, t))
+         var allReflectedMembers = t.GetAllMembers(this.BindingFlags)
+                                    .Select(m => UseBaseTypeDeclaredPropertyInfo(t, m));
+
+         var settableMembers = allReflectedMembers
             .Where(m =>
                {
                   if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
@@ -69,19 +72,23 @@ namespace Bogus
                      //no compiler generated stuff
                      return false;
                   }
+
                   if( m is PropertyInfo pi )
                   {
                      return pi.CanWrite;
                   }
+
                   if( m is FieldInfo fi )
                   {
                      //No private fields.
                      //GitHub Issue #13
                      return !fi.IsPrivate;
                   }
+
                   return false;
-               })
-            .GroupBy(mi => mi.Name);
+               });
+
+         var settableMembersByName = settableMembers.GroupBy(mi => mi.Name);
 
          //Issue #70 we could get back multiple keys
          //when reflecting over a type. Consider:
@@ -93,20 +100,22 @@ namespace Bogus
          //reflected MemberInfo that was returned from
          //reflection; the second one was the inherited
          //ClassA.Value.
-         return group.ToDictionary(k => k.Key, g => g.First());
+         return settableMembersByName.ToDictionary(k => k.Key, g => g.First());
       }
 
-      private static MemberInfo GetPropertyOnBaseType(MemberInfo member, Type reflectedType)
+      //Issue #389 - Use Declaring Base Type PropertyInfo instead of a DerivedA's 
+      //PropertyInfo because DerivedA's PropertyInfo could say property is not
+      //write-able.
+      protected virtual MemberInfo UseBaseTypeDeclaredPropertyInfo(Type t, MemberInfo m)
       {
-         if (member is PropertyInfo)
+         if( m is PropertyInfo {CanWrite: false} && m.DeclaringType is not null && m.DeclaringType != t )
          {
-            if (member.DeclaringType.Equals(reflectedType))
-               return member;
-
-            return member.DeclaringType.GetProperty(member.Name);
+            var newPropInfo = m.DeclaringType.GetProperty(m.Name, this.BindingFlags);
+            if( newPropInfo is not null )
+               return newPropInfo;
          }
 
-         return member;
+         return m;
       }
    }
 }

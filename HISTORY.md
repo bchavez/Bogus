@@ -1,3 +1,8 @@
+## v33.1.1
+Release Date: 2021-08-29
+
+* PR 390: Default Binder changed to allow use of private property setters in base classes. Thanks @thomaslevesque!
+
 ## v33.0.2
 Release Date: 2021-02-21
 

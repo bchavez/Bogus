@@ -5,7 +5,7 @@ namespace Bogus.DataSets
    /// <summary>
    /// Methods for generating dates
    /// </summary>
-   public class Date : DataSet
+   public partial class Date : DataSet
    {
       private bool hasMonthWideContext;
       private bool hasMonthAbbrContext;

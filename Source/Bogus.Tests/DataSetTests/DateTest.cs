@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Bogus.Tests.DataSetTests
 {
-   public class DateTest : SeededTest
+   public partial class DateTest : SeededTest
    {
       public DateTest()
       {

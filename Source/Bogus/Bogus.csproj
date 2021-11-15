@@ -5,7 +5,7 @@
     </PackageReleaseNotes>
     <Version>0.0.0-localbuild</Version>
     <Authors>Brian Chavez</Authors>
-    <TargetFrameworks>net40;netstandard1.3;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net40;netstandard1.3;netstandard2.0;net6.0</TargetFrameworks>
     <CodeAnalysisRuleSet>Bogus.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <AssemblyOriginatorKeyFile>

@@ -1,8 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
-MinimumVisualStudioVersion = 16.0.29613.14
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 17.0.31903.59
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bogus", "Bogus\Bogus.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bogus.Tests", "Bogus.Tests\Bogus.Tests.csproj", "{C738E347-08EF-47DA-B531-EE99739BD759}"
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Builder", "Builder\Builder.fsproj", "{2E878DDF-5585-48F2-85E0-748579278C9A}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Builder", "Builder\Builder.fsproj", "{2E878DDF-5585-48F2-85E0-748579278C9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benchmark.csproj", "{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}"
 EndProject
@@ -37,9 +37,7 @@ Global
 		{C738E347-08EF-47DA-B531-EE99739BD759}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C738E347-08EF-47DA-B531-EE99739BD759}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E878DDF-5585-48F2-85E0-748579278C9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2E878DDF-5585-48F2-85E0-748579278C9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E878DDF-5585-48F2-85E0-748579278C9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2E878DDF-5585-48F2-85E0-748579278C9A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}.Release|Any CPU.ActiveCfg = Release|Any CPU

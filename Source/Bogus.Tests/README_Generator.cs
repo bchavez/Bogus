@@ -102,7 +102,7 @@ namespace Bogus.Tests
             if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
             var methods = datasets[g.Key];
 
-            var distinctMethods = g.DistinctBy(u => u.Method);
+            var distinctMethods = MoreEnumerable.DistinctBy(g, u => u.Method);
 
             output.WriteLine("* **`" + g.Key + "`**");
             foreach( var m in distinctMethods )
@@ -184,10 +184,10 @@ namespace Bogus.Tests
          foreach (var g in all)
          {
             //if (!datasets.ContainsKey(g.Key)) return; //check if it's accessible
-            var distinctMethods = g
+            var sortedMethods = g
                .OrderBy(x => x.Method)
-               .ThenBy(x => x.Summary.Length)
-               .DistinctBy(u => u.Method);
+               .ThenBy(x => x.Summary.Length);
+            var distinctMethods = MoreEnumerable.DistinctBy(sortedMethods, u => u.Method);
             //we need to do this ordering so we select the most
             //succinct description for any method overloads.
 

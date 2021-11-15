@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net471;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net471;netcoreapp2.1;netcoreapp3.1;net6.0</TargetFrameworks>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>

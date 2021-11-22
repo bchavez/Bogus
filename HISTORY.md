@@ -1,3 +1,9 @@
+## v34.0.1
+Release Date: 2021-11-ZZ
+
+* PR 399: Add support for .NET 6 DateOnly and TimeOnly random genrations in Faker.Date.
+* C# 10 and VS 2022 build tooling.
+
 ## v33.1.1
 Release Date: 2021-08-29
 

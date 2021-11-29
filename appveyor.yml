@@ -55,7 +55,7 @@ deploy:
       symbol_server:
       skip_symbols: false
       api_key:
-          secure: DdNdP6r6fcT8xlxY9pwQ3mB4b14HzJKVJqInjrrEgxisLm8pJuZsv6adBlKOOiBd
+          secure: kFZHO4Qm7fIMq8rUhCxZ7vQDUqBdcjsflV89N0B/hm9c2Jk/uiCDfwtT9fm5juk2
       artifact: NuGet, Symbols
       on:
           branch: master

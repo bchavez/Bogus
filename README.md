@@ -1,11 +1,11 @@
-[![Downloads](https://img.shields.io/nuget/dt/Bogus.svg)](https://www.nuget.org/packages/Bogus/) [![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20and%20Sane%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Chat](https://img.shields.io/badge/chat-discussions-green)](https://github.com/bchavez/Bogus/discussions) <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
+[![Downloads](https://img.shields.io/nuget/dt/Bogus.svg)](https://www.nuget.org/packages/Bogus/) [![Build status](https://ci.appveyor.com/api/projects/status/dxa14myphnlbplc6/branch/master?svg=true)](https://ci.appveyor.com/project/bchavez/bogus)  [![Twitter](https://img.shields.io/twitter/url/https/github.com/bchavez/Bogus.svg?style=social)](https://twitter.com/intent/tweet?text=Simple%20Fake%20Data%20Generator%20for%20.NET:&amp;amp;url=https%3A%2F%2Fgithub.com%2Fbchavez%2FBogus) [![Chat](https://img.shields.io/badge/chat-discussions-green)](https://github.com/bchavez/Bogus/discussions) <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png" align='right' />
 
 Bogus for .NET: C#, F#, and VB.NET
 ======================
 
 Project Description
 -------------------
-Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). **Bogus** is a simple and sane fake data generator for **.NET** languages like **C#**, **F#** and **VB.NET**. **Bogus** is fundamentally a **C#** port of [`faker.js`](https://github.com/marak/Faker.js/)
+Hello. I'm your host **[Brian Chavez](https://github.com/bchavez)** ([twitter](https://twitter.com/bchavez)). **Bogus** is a simple fake data generator for **.NET** languages like **C#**, **F#** and **VB.NET**. **Bogus** is fundamentally a **C#** port of [`faker.js`](https://github.com/faker-js/faker.js/)
 and inspired by [`FluentValidation`](https://github.com/JeremySkinner/FluentValidation)'s syntax sugar.
 
 **Bogus** will help you load databases, UI and apps with fake data for your testing needs. If you like **Bogus** star :star: the repository and show your friends! :smile: If you find **Bogus** useful consider supporting the project by purchasing a [**Bogus Premium**](#bogus-premium-extensions) license that gives you extra **Bogus** superpowers! :dizzy: :muscle: You can also [sponsor the project here](https://github.com/sponsors/bchavez)! :moneybag: :dollar:
@@ -206,7 +206,7 @@ public void With_Korean_Locale()
 |`fr_CA         `|French (Canada)           ||`zu_ZA         `|Zulu (South Africa)       |
 
 
-***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/Marak/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/Marak/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to the `en:lorem` data set.
+***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/faker-js/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/faker-js/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to the `en:lorem` data set.
 
 If you'd like to help contribute new locales or update existing ones please see our
 [Creating Locales](https://github.com/bchavez/Bogus/wiki/Creating-Locales) wiki page
@@ -1225,10 +1225,7 @@ Steps to re-bundle locale data from **faker.js**:
 
 Contributors
 ---------
-Created by [Brian Chavez](http://bchavez.bitarmory.com).
-
-[faker.js](https://github.com/marak/Faker.js/) made possible by Matthew Bergman & Marak Squires.
-
+Created by [Brian Chavez](https://bchavez.bitarmory.com).
 
 A big thanks to GitHub and all contributors:
 

@@ -1,3 +1,7 @@
+## vNext
+Release Date: TBD
+* PR 406, 415: Improve XML documentation.
+
 ## v34.0.1
 Release Date: 2021-11-22
 

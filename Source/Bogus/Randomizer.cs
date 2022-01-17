@@ -208,10 +208,10 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Generate a random byte between MinValue and MaxValue.
+      /// Generate a random byte between 0 and 255.
       /// </summary>
-      /// <param name="min">Min value, default byte.MinValue</param>
-      /// <param name="max">Max value, default byte.MaxValue</param>
+      /// <param name="min">Min value, default byte.MinValue 0</param>
+      /// <param name="max">Max value, default byte.MaxValue 255</param>
       public byte Byte(byte min = byte.MinValue, byte max = byte.MaxValue)
       {
          return Convert.ToByte(Number(min, max));
@@ -232,10 +232,10 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Generate a random sbyte between MinValue and MaxValue.
+      /// Generate a random sbyte between -128 and 127.
       /// </summary>
-      /// <param name="min">Min value, default sbyte.MinValue</param>
-      /// <param name="max">Max value, default sbyte.MaxValue</param>
+      /// <param name="min">Min value, default sbyte.MinValue -128</param>
+      /// <param name="max">Max value, default sbyte.MaxValue 127</param>
       public sbyte SByte(sbyte min = sbyte.MinValue, sbyte max = sbyte.MaxValue)
       {
          return Convert.ToSByte(Number(min, max));
@@ -285,8 +285,8 @@ namespace Bogus
       /// <summary>
       /// Generate a random short between MinValue and MaxValue.
       /// </summary>
-      /// <param name="min">Min value, default short.MinValue</param>
-      /// <param name="max">Max value, default short.MaxValue</param>
+      /// <param name="min">Min value, default short.MinValue -32768</param>
+      /// <param name="max">Max value, default short.MaxValue 32767</param>
       public short Short(short min = short.MinValue, short max = short.MaxValue)
       {
          return Convert.ToInt16(Double() * (max - min) + min);
@@ -295,8 +295,8 @@ namespace Bogus
       /// <summary>
       /// Generate a random ushort between MinValue and MaxValue.
       /// </summary>
-      /// <param name="min">Min value, default ushort.MinValue</param>
-      /// <param name="max">Max value, default ushort.MaxValue</param>
+      /// <param name="min">Min value, default ushort.MinValue 0</param>
+      /// <param name="max">Max value, default ushort.MaxValue 65535</param>
       public ushort UShort(ushort min = ushort.MinValue, ushort max = ushort.MaxValue)
       {
          return Convert.ToUInt16(Double() * (max - min) + min);

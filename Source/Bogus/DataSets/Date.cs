@@ -129,7 +129,7 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTime Between(DateTime start, DateTime end)
       {
-         ComputeRealRange(ref start, ref end);
+         ComputeRealRange(ref start, ref end, start.Kind, out var preferRangeBoundary);
 
          var startTicks = start.ToUniversalTime().Ticks;
          var endTicks = end.ToUniversalTime().Ticks;
@@ -139,6 +139,13 @@ namespace Bogus.DataSets
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
+         // Right around daylight savings time transition, there can be two different local DateTime values
+         // that are actually exactly the same DateTime. The ToLocalTime conversion might pick the wrong
+         // one in edge cases; it will pick the later one, and if the caller's window includes the earlier
+         // one, we should return that instead to follow the principle of least surprise.
+         if (totalTimeSpanTicks == 0)
+            return preferRangeBoundary;
+
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
          var value = new DateTime(minTicks, DateTimeKind.Utc) + partTimeSpan;
@@ -147,10 +154,6 @@ namespace Bogus.DataSets
          {
             value = value.ToLocalTime();
 
-            // Right around daylight savings time transition, there can be two different local DateTime values
-            // that are actually exactly the same DateTime. The ToLocalTime conversion might pick the wrong
-            // one in edge cases; it will pick the later one, and if the caller's window includes the earlier
-            // one, we should return that instead to follow the principle of least surprise.
             if (value > end)
                value = end;
          }
@@ -174,8 +177,12 @@ namespace Bogus.DataSets
       /// </summary>
       /// <param name="start">A ref <see cref="DateTime"/> to be adjusted forward out of an impossible date/time range if necessary.</param>
       /// <param name="end">A ref <see cref="DateTime"/> to be adjusted backward out of an impossible date/time range if necessary.</param>
-      private void ComputeRealRange(ref DateTime start, ref DateTime end)
+      /// <param name="kind">A <see cref="DateTimeKind"/> indicating how the supplied <see cref="DateTime"/> values should be interpreted with respect to DST change windows.</param>
+      /// <param name="preferRangeBoundary">An out <see cref="DateTime"/> that indicates which value should be used if the supplied range is empty due to being entirely contained within a DST transition range.</param>
+      private void ComputeRealRange(ref DateTime start, ref DateTime end, DateTimeKind kind, out DateTime preferRangeBoundary)
       {
+         preferRangeBoundary = end;
+
          if (start > end)
          {
             var tmp = start;
@@ -185,26 +192,36 @@ namespace Bogus.DataSets
          }
 
 #if !NETSTANDARD1_3
-         var window = GetForwardDSTTransitionWindow(start);
-
-         if ((start >= window.Start) && (start <= window.End))
+         if (kind == DateTimeKind.Local)
          {
-            if ((start == window.Start) && (end >= window.Start) && (end <= window.End))
-               end = start;
-            else
-               start = new DateTime(window.End.Ticks, start.Kind);
+            var window = GetForwardDSTTransitionWindow(start);
 
-            if (start == end)
-               return;
+            var startLocal = start.ToLocalTime();
+            var endLocal = end.ToLocalTime();
+
+            if ((startLocal >= window.Start) && (startLocal <= window.End))
+            {
+               start = new DateTime(window.Start.Ticks, start.Kind);
+
+               if (start == end)
+                  return;
+            }
+
+            window = GetForwardDSTTransitionWindow(end);
+
+            if ((end >= window.Start) && (end < window.End))
+            {
+               end = new DateTime(window.End.Ticks, end.Kind);
+
+               // We had to bump the end, meaning that the end was not already a valid
+               // DateTime value (within the DST transition range), so prefer the start
+               // instead.
+               preferRangeBoundary = start;
+            }
+
+            if (start > end)
+               throw new Exception("DateTime range does not contain any real DateTime values due to daylight savings transitions");
          }
-
-         window = GetForwardDSTTransitionWindow(end);
-
-         if ((end >= window.Start) && (end <= window.End))
-            end = new DateTime(window.Start.Ticks, end.Kind);
-
-         if (start > end)
-            throw new Exception("DateTime range does not contain any real DateTime values due to daylight savings transitions");
 #endif
       }
 
@@ -309,12 +326,24 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
       {
-         var startTime = new DateTime(start.DateTime.Ticks, DateTimeKind.Utc);
-         var endTime = new DateTime(end.DateTime.Ticks, DateTimeKind.Utc);
+         var startTime = start.ToUniversalTime().DateTime;
+         var endTime = end.ToUniversalTime().DateTime;
 
-         var sample = Between(startTime, endTime);
+         if (startTime > endTime)
+            return end;
+         else
+         {
+            ComputeRealRange(ref startTime, ref endTime, start.DateTime.Kind, out var preferRangeBoundary);
 
-         return new DateTimeOffset(new DateTime(sample.Ticks, DateTimeKind.Unspecified), start.Offset);
+            var sample = Between(startTime, endTime) + start.Offset;
+
+            // In practice, we will only ever get samples that are exactly equal to the end time
+            // if the range is empty due to being contained within a DST transition window.
+            if (sample == end)
+               sample = preferRangeBoundary;
+
+            return new DateTimeOffset(new DateTime(sample.Ticks, DateTimeKind.Unspecified), start.Offset);
+         }
       }
 
       /// <summary>

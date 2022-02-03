@@ -4,14 +4,19 @@ using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests.DataSetTests
 {
    public partial class DateTest : SeededTest
    {
-      public DateTest()
+      private readonly ITestOutputHelper _testOutput;
+
+      public DateTest(ITestOutputHelper testOutput)
       {
          date = new Date();
+
+         _testOutput = testOutput;
       }
 
       private readonly Date date;
@@ -544,6 +549,35 @@ namespace Bogus.Tests.DataSetTests
          }
       }
 
+      [FactWhenDaylightSavingsSupported]
+      public void works_when_start_time_is_invalid_due_to_DST_change_window()
+      {
+         // Arrange
+         var faker = new Faker();
+
+         faker.Random = new Randomizer(localSeed: 5);
+
+         var dstRules = TimeZoneInfo.Local.GetAdjustmentRules();
+
+         var now = DateTime.Now;
+
+         var effectiveRule = dstRules.Single(rule => (rule.DateStart <= now) && (rule.DateEnd >= now));
+
+         var transitionStartTime = CalculateTransitionDateTime(now, effectiveRule.DaylightTransitionStart);
+         var transitionEndTime = transitionStartTime + effectiveRule.DaylightDelta;
+
+         var date1 = new DateTimeOffset(transitionEndTime.AddMinutes(-1), TimeZoneInfo.Local.BaseUtcOffset);
+         var date2 = new DateTimeOffset(transitionEndTime, TimeZoneInfo.Local.BaseUtcOffset + effectiveRule.DaylightDelta);
+
+         // Act
+         var sample = faker.Date.BetweenOffset(date1, date2);
+
+         // Assert
+         _testOutput.WriteLine("BetweenOffset result: {0}", sample);
+
+         sample.Should().Be(transitionEndTime);
+      }
+
       private DateTime CalculateTransitionDateTime(DateTime now, TimeZoneInfo.TransitionTime transition)
       {
          // Based on code found at: https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.transitiontime.isfixeddaterule
@@ -557,7 +591,8 @@ namespace Bogus.Tests.DataSetTests
                transition.TimeOfDay.Hour,
                transition.TimeOfDay.Minute,
                transition.TimeOfDay.Second,
-               transition.TimeOfDay.Millisecond);
+               transition.TimeOfDay.Millisecond,
+               DateTimeKind.Local);
          }
 
          var calendar = CultureInfo.CurrentCulture.Calendar;
@@ -582,7 +617,8 @@ namespace Bogus.Tests.DataSetTests
             transition.TimeOfDay.Hour,
             transition.TimeOfDay.Minute,
             transition.TimeOfDay.Second,
-            transition.TimeOfDay.Millisecond);
+            transition.TimeOfDay.Millisecond,
+            DateTimeKind.Local);
       }
    }
 }

@@ -29,7 +29,7 @@ namespace Bogus
       /// </summary>
       public Randomizer()
       {
-         this.localSeed = Seed;
+         this.localSeed = new RandomWrapper(Seed);
       }
 
       /// <summary>
@@ -38,10 +38,19 @@ namespace Bogus
       /// </summary>
       public Randomizer(int localSeed)
       {
-         this.localSeed = new Random(localSeed);
+         this.localSeed = new RandomWrapper(new Random(localSeed));
       }
 
-      private readonly Random localSeed;
+      /// <summary>
+      /// Constructor that uses <see cref="random"/> parameter interface as an abstraction for Random.
+      /// Completely ignores the global static <see cref="Seed"/>.
+      /// </summary>
+      public Randomizer(IRandom random)
+      {
+         this.localSeed = random;
+      }
+
+      private readonly IRandom localSeed;
 
       /// <summary>
       /// Get an int from 0 to max.

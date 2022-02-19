@@ -561,5 +561,26 @@ namespace Bogus.Tests
          collectionAction.Should().Throw<ArgumentException>()
             .Where(ex => ex.Message.StartsWith("The collection is empty. There are no items to select."));
       }
+
+      private class PseudoRandomNumberGenerator : IRandom
+      {
+         public int Next() => (int)(DateTime.Now.Ticks & 0xFFFFFFFFL);
+         public int Next(int minValue, int maxValue) => Next() % (maxValue - minValue) + minValue;
+         public void NextBytes(byte[] buffer) => throw new NotImplementedException();
+         public double NextDouble() => throw new NotImplementedException();
+      }
+
+      [Fact]
+      public void custom_random_interface()
+      {
+         var nameAlg = new DataSets.Name();
+         nameAlg.Random = new Randomizer(new PseudoRandomNumberGenerator());
+
+         string firstName = string.Empty;
+         var exception = Record.Exception(() => firstName = nameAlg.FirstName());
+
+         Assert.Null(exception);
+         Assert.False(string.IsNullOrEmpty(firstName));
+      }
    }
 }

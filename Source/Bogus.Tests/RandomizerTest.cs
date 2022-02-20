@@ -562,7 +562,7 @@ namespace Bogus.Tests
             .Where(ex => ex.Message.StartsWith("The collection is empty. There are no items to select."));
       }
 
-      private class PseudoRandomNumberGenerator : IRandom
+      private class CustomRandom : IRandom
       {
          public int Next() => (int)(DateTime.Now.Ticks & 0x7FFFFFFFL);
          public int Next(int minValue, int maxValue) => Next() % (maxValue - minValue) + minValue;
@@ -574,7 +574,7 @@ namespace Bogus.Tests
       public void custom_random_interface()
       {
          var nameAlg = new DataSets.Name();
-         nameAlg.Random = new Randomizer(new PseudoRandomNumberGenerator());
+         nameAlg.Random = new Randomizer(new CustomRandom());
 
          string firstName = string.Empty;
          var exception = Record.Exception(() => firstName = nameAlg.FirstName());

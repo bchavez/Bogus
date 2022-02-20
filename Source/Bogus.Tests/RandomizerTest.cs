@@ -564,7 +564,7 @@ namespace Bogus.Tests
 
       private class PseudoRandomNumberGenerator : IRandom
       {
-         public int Next() => (int)(DateTime.Now.Ticks & 0xFFFFFFFFL);
+         public int Next() => (int)(DateTime.Now.Ticks & 0x7FFFFFFFL);
          public int Next(int minValue, int maxValue) => Next() % (maxValue - minValue) + minValue;
          public void NextBytes(byte[] buffer) => throw new NotImplementedException();
          public double NextDouble() => throw new NotImplementedException();

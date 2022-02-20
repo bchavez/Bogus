@@ -29,7 +29,7 @@ namespace Bogus
       /// </summary>
       public Randomizer()
       {
-         this.localSeed = new RandomWrapper(Seed);
+         this.localSeed = new DefaultRandom(Seed);
       }
 
       /// <summary>
@@ -38,7 +38,7 @@ namespace Bogus
       /// </summary>
       public Randomizer(int localSeed)
       {
-         this.localSeed = new RandomWrapper(new Random(localSeed));
+         this.localSeed = new DefaultRandom(new Random(localSeed));
       }
 
       /// <summary>

@@ -3,13 +3,13 @@
 namespace Bogus
 {
    /// <summary>
-   /// A wrapper around System.Random that supports the IRandom interface.
+   /// A wrapper around <see cref="Random"/> that supports the <see cref="IRandom"/> interface.
    /// </summary>
-   internal class RandomWrapper : IRandom
+   internal class DefaultRandom : IRandom
    {
       private readonly Random random;
 
-      public RandomWrapper(Random random)
+      public DefaultRandom(Random random)
       {
          this.random = random ?? throw new ArgumentNullException(nameof(random));
       }

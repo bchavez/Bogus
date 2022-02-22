@@ -41,7 +41,10 @@ namespace Bogus
          this.localSeed = new Random(localSeed);
       }
 
-      private readonly Random localSeed;
+      /// <summary>
+      /// The pseudo-random number generator that is used for all random number generation in this instance.
+      /// </summary>
+      protected Random localSeed;
 
       /// <summary>
       /// Get an int from 0 to max.

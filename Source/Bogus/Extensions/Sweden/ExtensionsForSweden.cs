@@ -43,11 +43,46 @@ public static class ExtensionsForSweden
       return individualNumber;
    }
 
+   /// <summary>
+   /// Swedish coordination number
+   /// </summary>
+   /// <remarks>
+   /// Coordination numbers enable Swedish public authorities and other organisations with a public function 
+   /// to identify people who are not currently – and have never been – registered at an address in Sweden.
+   /// </remarks>
+   public static string Samordningsnummer(this Person person)
+   {
+      const string key = nameof(ExtensionsForSweden) + nameof(Samordningsnummer);
+      if( person.context.ContainsKey(key) )
+      {
+         return person.context[key] as string;
+      }
 
-   private static string GenerateIndividualNumber(Randomizer r, Gender gender, DateTime dateOfBirth)
+      /*
+
+          YYYYMMXXBBGC
+          |   | | | ||---> (C)Checksum
+          |   | | | | 
+          |   | | | |----> (G)Gender
+          |   | | |------> (B)Birthplace
+          |   | |--------> (X)Day+60
+          |   |----------> (M)Month
+          |--------------> (Y)Year
+      
+         info: https://skatteverket.se/privat/folkbokforing/samordningsnummer.4.5c281c7015abecc2e201130b.html
+      */
+      var r = person.Random;
+      var individualNumber = GenerateIndividualNumber(r, person.Gender, person.DateOfBirth, 60);
+
+      person.context[key] = individualNumber;
+      return individualNumber;
+   }
+
+   private static string GenerateIndividualNumber(Randomizer r, Gender gender, DateTime dateOfBirth, int dayOffset = 0)
    {
       var genderNumber = GetGenderNumber(r, gender);
-      var p = dateOfBirth.ToString("yyyyMMddff") + genderNumber;
+      var offsetDay = dateOfBirth.Day + dayOffset;
+      var p = dateOfBirth.ToString("yyyyMM") + offsetDay.ToString("00") + dateOfBirth.ToString("ff") + genderNumber;
       var checksum = GetLuhn(p.Substring(2));
       return p + checksum;
    }

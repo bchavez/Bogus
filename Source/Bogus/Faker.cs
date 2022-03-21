@@ -251,7 +251,7 @@ namespace Bogus
       /// Helper to pick random subset of elements out of the list.
       /// </summary>
       /// <param name="amountToPick">amount of elements to pick of the list.</param>
-      /// <example cref="ArgumentException">if amountToPick is lower than zero.</example>
+      /// <exception cref="ArgumentException">if amountToPick is lower than zero.</exception>
       public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int amountToPick)
       {
          if( amountToPick < 0 )

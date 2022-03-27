@@ -1,6 +1,7 @@
-## vNext
-Release Date: TBD
-* PR 406, 415: Improve XML documentation.
+## v34.0.2
+Release Date: 2022-03-27
+* PR 406, 415: Improve XML documentation. Thanks @danielwagn3r, @DanteDeRuwe
+* PR 413: Change access modifier of `Randomizer.localSeed` to protected. Thanks @davermaltby  
 
 ## v34.0.1
 Release Date: 2021-11-22

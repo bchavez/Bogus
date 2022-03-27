@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xunit;
+using FluentAssertions;
 
 namespace Bogus.Tests.GitHubIssues
 {
@@ -12,21 +13,27 @@ namespace Bogus.Tests.GitHubIssues
          var customRandomizer = new CustomRandomizer();
 
          for (int i = 0; i < 10; i++)
-            Assert.Equal(CustomRandom.randomInts[i % CustomRandom.randomInts.Count], customRandomizer.Number(int.MaxValue));
+         {          
+            var index = i % CustomRandom.Data.Count;
+            var knownValue = CustomRandom.Data[index];
 
+            customRandomizer.Number(int.MaxValue).Should().Be(knownValue);
+         }
       }
 
       private class CustomRandom : Random
       {
-         public static readonly List<int> randomInts = new List<int> { 4, 3, 9, 2001, 42, 7, 13 };
-         private int randomIntIndex = 0;
+         public static readonly List<int> Data = new List<int> { 4, 3, 9, 2001, 42, 7, 13 };
+         private int index = 0;
 
          public override int Next()
          {
-            if (randomIntIndex >= randomInts.Count)
-               randomIntIndex = 0;
+            if (index >= Data.Count)
+            {
+               index = 0;
+            }
 
-            return randomInts[randomIntIndex++];
+            return Data[index++];
          }
 
          public override int Next(int minValue, int maxValue) => Next() % (maxValue - minValue) + minValue;

@@ -7,16 +7,28 @@ namespace Bogus.DataSets;
 /// </summary>
 public class Vehicle : DataSet
 {
+   private const string StrictUpperCase = "ABCDEFGHJKLMNPRSTUVWXYZ";
+   private const string StrictAlphaNumericUpperCase = Chars.Numbers + StrictUpperCase;
+
    /// <summary>
    /// Generate a vehicle identification number (VIN).
    /// </summary>
-   public string Vin()
+   /// <param name="strict">Limits the acceptable characters to alpha numeric uppercase except I, O and Q.</param>
+   public string Vin(bool strict = false)
    {
       var sb = new StringBuilder();
 
-      sb.Append(this.Random.String2(10, Chars.AlphaNumericUpperCase));
-      sb.Append(this.Random.String2(1, Chars.UpperCase));
-      sb.Append(this.Random.String2(1, Chars.AlphaNumericUpperCase));
+      var allowedUpperCase = Chars.UpperCase;
+      var allowedAlphaNumericChars = Chars.AlphaNumericUpperCase;
+      if (strict)
+      {
+         allowedUpperCase = StrictUpperCase;
+         allowedAlphaNumericChars = StrictAlphaNumericUpperCase;
+      }
+
+      sb.Append(this.Random.String2(10, allowedAlphaNumericChars));
+      sb.Append(this.Random.String2(1, allowedUpperCase));
+      sb.Append(this.Random.String2(1, allowedAlphaNumericChars));
       sb.Append(this.Random.Number(min: 10000, max: 99999));
 
       return sb.ToString();

@@ -27,6 +27,12 @@ public class VehicleTest : SeededTest
    }
 
    [Fact]
+   public void can_get_a_strict_vin_number()
+   {
+      vehicle.Vin(true).Should().Be("K3TM1L1NF9Y575714");
+   }
+
+   [Fact]
    public void can_get_a_manufacture()
    {
       vehicle.Manufacturer().Should().Be("Maserati");

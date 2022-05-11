@@ -30,6 +30,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
     * [**Microsoft Teams Sample Connector**](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp) [[code]](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp/blob/8805bb1acb136949905e4644c4e714dd7b70a61a/TeamsToDoAppConnector/Utils/TaskHelper.cs)
 
 ##### Featured In
+* [**Microsoft Docs: Deploy Orleans to Azure App Service - May 5th, 2022**](https://docs.microsoft.com/en-us/dotnet/orleans/deployment/deploy-to-azure-app-service)
 * [**Microsoft Docs: Modernize a WPF app tutorial - Aug. 2nd, 2019**](https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/modernize-wpf-tutorial-1#configure-nuget-packages-and-dependencies)
 * [**Microsoft Build 2018: Azure Tips and Tricks - May 8th, 2018**](https://www.youtube.com/watch?v=088e5IUqF6g&t=12m31s)
 * **[NuGet Must Haves: Top 10 Unit Testing Libraries in 2017](http://nugetmusthaves.com/article/top-unit-testing-libraries)**

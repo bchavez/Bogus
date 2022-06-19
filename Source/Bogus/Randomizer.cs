@@ -180,13 +180,16 @@ namespace Bogus
          //lock any seed access, for thread safety.
          lock( Locker.Value )
          {
+            var unscaled = localSeed.NextDouble();
+
             if( min == 0.0d && max == 1.0d )
             {
                //use default implementation
-               return localSeed.NextDouble();
+               return unscaled;
             }
 
-            return localSeed.NextDouble() * (max - min) + min;
+            //otherwise, scale the value
+            return (max * unscaled) + (min * (1.0d - unscaled));
          }
       }
 
@@ -197,7 +200,16 @@ namespace Bogus
       /// <param name="max">Maximum, default 1.0</param>
       public decimal Decimal(decimal min = 0.0m, decimal max = 1.0m)
       {
-         return Convert.ToDecimal(Double()) * (max - min) + min;
+         var unscaled = Convert.ToDecimal(Double());
+
+         if (min == 0.0m && max == 1.0m)
+         {
+            //use default implementation
+            return unscaled;
+         }
+
+         //otherwise, scale the value
+         return (max * unscaled) + (min * (1.0m - unscaled));
       }
 
       /// <summary>
@@ -207,7 +219,16 @@ namespace Bogus
       /// <param name="max">Maximum, default 1.0</param>
       public float Float(float min = 0.0f, float max = 1.0f)
       {
-         return Convert.ToSingle(Double() * (max - min) + min);
+         var unscaled = Double();
+
+         if (min == 0.0f && max == 1.0f)
+         {
+            //use default implementation
+            return Convert.ToSingle(unscaled);
+         }
+
+         //otherwise, scale the value
+         return Convert.ToSingle((max * unscaled) + (min * (1.0f - unscaled)));
       }
 
       /// <summary>

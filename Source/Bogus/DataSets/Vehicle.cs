@@ -17,7 +17,7 @@ public class Vehicle : DataSet
       sb.Append(this.Random.String2(10, Chars.AlphaNumericUpperCase));
       sb.Append(this.Random.String2(1, Chars.UpperCase));
       sb.Append(this.Random.String2(1, Chars.AlphaNumericUpperCase));
-      sb.Append(this.Random.Number(min: 10000, max: 100000));
+      sb.Append(this.Random.Number(min: 10000, max: 99999));
 
       return sb.ToString();
    }
@@ -52,5 +52,5 @@ public class Vehicle : DataSet
    public string Fuel()
    {
       return GetRandomArrayItem("fuel");
-   } 
+   }
 }

@@ -21,9 +21,6 @@ _(https://www.linqpad.net)_
 * What alternatives have you considered?
 
 
-* Is this feature request any issues or current problems?
-
-
 * Has the feature been requested in the past?
 
 

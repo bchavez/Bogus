@@ -374,6 +374,12 @@ namespace Bogus.Tests
       {
          r.String2(5).Should().Be("pcvqa");
       }
+      
+      [Fact]
+      public void generate_numbers_only_pool()
+      {
+         r.NumberOnlyString(5).Should().NotContainAny("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+      }
 
       [Fact]
       public void generate_string2_pool_custom()

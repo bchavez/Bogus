@@ -381,6 +381,16 @@ namespace Bogus
       }
 
       /// <summary>
+      /// Get a string of numbers with a specific length, The returned string may contain repeating numbers
+      /// </summary>
+      /// <param name="length">The length of the string to return.</param>
+      public string NumberOnlyString(int length)
+      {
+         const string chars = "0123456789";
+         return String2(length, chars);
+      }
+
+      /// <summary>
       /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
       /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
       /// </summary>

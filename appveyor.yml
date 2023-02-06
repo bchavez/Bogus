@@ -2,8 +2,8 @@ version: '{build}'
 image: Visual Studio 2022
 
 environment:
-  FAKE_DETAILED_ERRORS: true
-  SNKFILE_SECRET: #SecretDatabase.kdbx / OpenSource / Bogus.snk.enc
+  NUKE_TELEMETRY_OPTOUT: 1
+  SNKFILE_SECRET: # OpenSource / Bogus.snk.enc
     secure: Bce2VwNFEBM1oWspgNlpTXSH290GZmc5DCuxjnAX72nBWNbR0S2tq/odIdfv2+t3bA9xzFHEwqvjGVEWgg5ZdfWUYj+PSBr+con0PiUGng0=
 
 skip_commits:
@@ -20,9 +20,7 @@ init:
 
 build_script: build.cmd ci
 
-test_script:
-  - build.cmd citest
-
+test: off
 
 artifacts:
   - path: __package\*.nupkg

@@ -1,15 +1,14 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>A simple and sane data generator for populating objects that supports different locales. A delightful port of the famed faker.js and inspired by FluentValidation. Use Bogus to create UIs with fake data or seed databases. Get started by using Faker class or a DataSet directly.</Description>
-    <PackageReleaseNotes>
-    </PackageReleaseNotes>
+    <NukeProjectTitle>Bogus Fake Data Generator for .NET</NukeProjectTitle>
+    <PackageReleaseNotes></PackageReleaseNotes>
     <Version>0.0.0-localbuild</Version>
     <Authors>Brian Chavez</Authors>
     <TargetFrameworks>net40;netstandard1.3;netstandard2.0;net6.0</TargetFrameworks>
     <CodeAnalysisRuleSet>Bogus.ruleset</CodeAnalysisRuleSet>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile></AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>
     <AssemblyName>Bogus</AssemblyName>
     <PackageId>Bogus</PackageId>
@@ -20,6 +19,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoWarn>1591,1573</NoWarn>
     <!--Source Link Settings-->
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>false</EmbedUntrackedSources>
@@ -41,6 +41,7 @@
   <ItemGroup>
     <PackageReference Include="Roslynator.Analyzers" Version="1.9.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net40' ">
     <Reference Include="System" />

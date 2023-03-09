@@ -4,6 +4,7 @@ using Bogus.Extensions.Italy;
 using Bogus.Extensions.Portugal;
 using FluentAssertions;
 using System;
+using Bogus.Extensions.Romanian;
 using Xunit;
 
 namespace Bogus.Tests.ExtensionTests;
@@ -281,4 +282,25 @@ namespace Bogus.Tests.ExtensionTests;
        //Assert
        nipcNumber.Should().MatchRegex(regex).And.HaveLength(9).And.Match(p => p.Substring(0, 1) == "5" || p.Substring(0, 1) == "6" || p.Substring(0, 1) == "8" || p.Substring(0, 1) == "9");
     }
+
+   [Fact]
+   public void cnp_generator_for_person()
+   {
+      //Arrange
+      var f = new Faker("ro");
+      var person = f.Person;
+      person.DateOfBirth = new DateTime(1986, 8, 12);
+      person.Gender = Name.Gender.Male;
+
+      //Act
+      var cnpNumber = person.Cnp();
+
+      //Assert
+      cnpNumber.Should()
+         .HaveLength(13)
+         .And.StartWith("1")
+         .And.Match(p => p.Substring(1, 2) == person.DateOfBirth.ToString("yy"))
+         .And.Match(p => p.Substring(3, 2) == person.DateOfBirth.ToString("MM"))
+         .And.Match(p => p.Substring(5, 2) == person.DateOfBirth.ToString("dd"));
+   }
 }

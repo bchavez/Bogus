@@ -172,8 +172,8 @@ namespace Bogus.DataSets
       /// values within the range are excluded automatically by means of the <see cref="DateTime.ToLocalTime"/>
       /// function.
       /// 
-      /// This function does not check Daylight Savings Time transitions when running under .NET Standard 1.3,
-      /// as this API does not expose Daylight Savings Time information.
+      /// The version of this function built targeting .NET Standard 1.3 does not check Daylight Savings Time
+      /// transitions, as this API does not expose Daylight Savings Time information.
       /// </summary>
       /// <param name="start">A ref <see cref="DateTime"/> to be adjusted forward out of an impossible date/time range if necessary.</param>
       /// <param name="end">A ref <see cref="DateTime"/> to be adjusted backward out of an impossible date/time range if necessary.</param>

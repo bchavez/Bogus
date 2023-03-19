@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -393,10 +394,13 @@ namespace Bogus.Tests.DataSetTests
          var value = faker.Date.Between(transitionStartTime.AddHours(-1), transitionEndTime.AddHours(+2));
 
          // Assert
-         transitionEndTime.Should().NotBe(transitionStartTime);
+         using (new AssertionScope())
+         {
+            transitionEndTime.Should().NotBe(transitionStartTime);
 
-         if ((value >= transitionStartTime) && (value < transitionStartTime.AddHours(1)))
-            value.Should().NotBeBefore(transitionEndTime);
+            if ((value >= transitionStartTime) && (value < transitionStartTime.AddHours(1)))
+               value.Should().NotBeBefore(transitionEndTime);
+         }
       }
 
       [FactWhenDaylightSavingsSupported]
@@ -420,19 +424,22 @@ namespace Bogus.Tests.DataSetTests
          var windowEnd = transitionEndTime.AddMinutes(30);
 
          // Act & Assert
-         bool haveSampleThatIsNotWindowEnd = false;
-
-         for (int i = 0; i < 10000; i++)
+         using (new AssertionScope())
          {
-            var sample = faker.Date.Between(windowStart, windowEnd);
+            bool haveSampleThatIsNotWindowEnd = false;
 
-            sample.Should().BeOnOrAfter(transitionEndTime);
-            sample.Should().BeOnOrBefore(windowEnd);
+            for (int i = 0; i < 10000; i++)
+            {
+               var sample = faker.Date.Between(windowStart, windowEnd);
 
-            haveSampleThatIsNotWindowEnd = (sample < windowEnd);
+               sample.Should().BeOnOrAfter(transitionEndTime);
+               sample.Should().BeOnOrBefore(windowEnd);
+
+               haveSampleThatIsNotWindowEnd = (sample < windowEnd);
+            }
+
+            haveSampleThatIsNotWindowEnd.Should().BeTrue(because: $"the effective range should include values other than {nameof(windowEnd)}");
          }
-
-         haveSampleThatIsNotWindowEnd.Should().BeTrue(because: $"the effective range should include values other than {nameof(windowEnd)}");
       }
 
       [FactWhenDaylightSavingsSupported]
@@ -456,12 +463,15 @@ namespace Bogus.Tests.DataSetTests
          var windowEnd = transitionStartTime + TimeSpan.FromTicks((transitionEndTime - transitionStartTime).Ticks / 2);
 
          // Act & Assert
-         for (int i = 0; i < 10000; i++)
+         using (new AssertionScope())
          {
-            var sample = faker.Date.Between(windowStart, windowEnd);
+            for (int i = 0; i < 10000; i++)
+            {
+               var sample = faker.Date.Between(windowStart, windowEnd);
 
-            sample.Should().BeOnOrAfter(windowStart);
-            sample.Should().BeOnOrBefore(transitionStartTime);
+               sample.Should().BeOnOrAfter(windowStart);
+               sample.Should().BeOnOrBefore(transitionStartTime);
+            }
          }
       }
 
@@ -483,11 +493,14 @@ namespace Bogus.Tests.DataSetTests
          var transitionEndTime = transitionStartTime + effectiveRule.DaylightDelta;
 
          // Act & Assert
-         for (int i = 0; i < 10000; i++)
+         using (new AssertionScope())
          {
-            var sample = faker.Date.Between(transitionStartTime, transitionEndTime);
+            for (int i = 0; i < 10000; i++)
+            {
+               var sample = faker.Date.Between(transitionStartTime, transitionEndTime);
 
-            sample.Should().BeOneOf(transitionStartTime, transitionEndTime);
+               sample.Should().BeOneOf(transitionStartTime, transitionEndTime);
+            }
          }
       }
 
@@ -512,11 +525,14 @@ namespace Bogus.Tests.DataSetTests
          var windowEnd = transitionEndTime.AddMinutes(-5);
 
          // Act & Assert
-         for (int i = 0; i < 10000; i++)
+         using (new AssertionScope())
          {
-            var sample = faker.Date.Between(windowStart, windowEnd);
+            for (int i = 0; i < 10000; i++)
+            {
+               var sample = faker.Date.Between(windowStart, windowEnd);
 
-            sample.Should().Be(windowStart);
+               sample.Should().Be(windowStart);
+            }
          }
       }
 
@@ -541,11 +557,14 @@ namespace Bogus.Tests.DataSetTests
          var windowEnd = transitionEndTime;
 
          // Act & Assert
-         for (int i = 0; i < 10000; i++)
+         using (new AssertionScope())
          {
-            var sample = faker.Date.Between(windowStart, windowEnd);
+            for (int i = 0; i < 10000; i++)
+            {
+               var sample = faker.Date.Between(windowStart, windowEnd);
 
-            sample.Should().Be(windowEnd);
+               sample.Should().Be(windowEnd);
+            }
          }
       }
 

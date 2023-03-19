@@ -432,7 +432,7 @@ namespace Bogus.Tests.DataSetTests
             haveSampleThatIsNotWindowEnd = (sample < windowEnd);
          }
 
-         haveSampleThatIsNotWindowEnd.Should().BeTrue(because: "the effective range should include values other than windowEnd");
+         haveSampleThatIsNotWindowEnd.Should().BeTrue(because: $"the effective range should include values other than {nameof(windowEnd)}");
       }
 
       [FactWhenDaylightSavingsSupported]

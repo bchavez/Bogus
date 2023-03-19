@@ -353,9 +353,11 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? SystemClock();
+         var systemClock = SystemClock();
 
-         var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
+         var maxDate = refDate ?? systemClock;
+
+         var minDate = days == 0 ? systemClock.Date : maxDate.AddDays(-days);
 
          return Between(minDate, maxDate);
       }
@@ -367,9 +369,11 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? SystemClock();
+         var systemClock = SystemClock();
 
-         var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
+         var maxDate = refDate ?? systemClock;
+
+         var minDate = days == 0 ? systemClock.Date : maxDate.AddDays(-days);
 
          return BetweenOffset(minDate, maxDate);
       }

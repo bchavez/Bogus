@@ -64,24 +64,24 @@ namespace Bogus.Tests.GitHubIssues
       [Fact]
       public void nb_NO_locale()
       {
-         CultureInfo.GetCultureInfo("nn-NO")
-            .ToBogusLocale()
+         var nnNO = CultureInfo.GetCultureInfo("nn-NO");
+         nnNO.ToBogusLocale()
+             .Should().Be("nb_NO");
+
+         var nbNO = CultureInfo.GetCultureInfo("nb-NO");
+         nbNO.ToBogusLocale()
             .Should().Be("nb_NO");
 
-         CultureInfo.GetCultureInfo("nb-NO")
-            .ToBogusLocale()
+         var no = CultureInfo.GetCultureInfo("no");
+         no.ToBogusLocale()
             .Should().Be("nb_NO");
 
-         CultureInfo.GetCultureInfo("no")
-            .ToBogusLocale()
+         var nb = CultureInfo.GetCultureInfo("nb");
+         nb.ToBogusLocale()
             .Should().Be("nb_NO");
 
-         CultureInfo.GetCultureInfo("nb")
-            .ToBogusLocale()
-            .Should().Be("nb_NO");
-
-         CultureInfo.GetCultureInfo("nn")
-            .ToBogusLocale()
+         var nn = CultureInfo.GetCultureInfo("nn");
+         nn.ToBogusLocale()
             .Should().Be("nb_NO");
       }
 

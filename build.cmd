@@ -1,8 +1,8 @@
 @echo off
 cls
 
-SET BUILDER=Source\Builder
+SET BUILD_ROOT=.
 
 dotnet tool restore
 
-dotnet fake run %BUILDER%\build.fsx target %1
+dotnet nuke %1 --root "%BUILD_ROOT%"

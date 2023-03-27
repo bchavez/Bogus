@@ -15,7 +15,8 @@ namespace Bogus.Extensions
             {"ka", "ge"},
             {"id", "id_ID"},
             {"nb", "nb_NO"},
-            {"nn", "nb_NO"}
+            {"nn", "nb_NO"},
+            {"no", "nb_NO"}
          };
 
       /// <summary>

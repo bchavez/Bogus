@@ -1176,21 +1176,21 @@ Building From Source
 The following section is only useful for people looking to contribute to **Bogus** or make custom modifications to **Bogus**. This section includes information about building **Bogus** from source code and is not required to operate or run **Bogus** in **.NET** applications.
 
 The minimum requirements to build **Bogus** from source code are as follows:
-* **Windows 7** or later.
-* [**Git for Windows**](https://git-scm.com/downloads) `v2.33.0` or later.
+* **Windows 11** or later.
+* [**Git for Windows**](https://git-scm.com/downloads) `v2.39.2` or later.
 * [**.NET Framework**](https://dotnet.microsoft.com/download/dotnet-framework) `v4.7.1`.
-* [**.NET Core SDK**](https://dotnet.microsoft.com/download/dotnet/6.0) `SDK v6.0.100` or later.
+* [**.NET SDK**](https://dotnet.microsoft.com/download/dotnet/7.0) `SDK v7.0.202` or later.
 * Optional: IDE with C# 10 support.
     * Visual Studio 2022 or later.
 
 #### Build Instructions
 * Download the source code.
 * Open command prompt and run `build.cmd`:
-    * `build clean` - cleans sources and files.
     * `build restore` - restores all project references.
-    * `build dnx` - the main dotnet build task.
+    * `build compile` - the main dotnet build task.
+    * `build clean` - cleans sources and files.
     * `build zip` - creates a nice zip file with debug and release binaries.
-    * `build nuget` - builds **NuGet** packages.
+    * `build pack` - builds **NuGet** packages.
     * `build test` - runs all unit tests. 
     
 The following folders will be created depending on the build task executed:

@@ -1179,7 +1179,9 @@ The minimum requirements to build **Bogus** from source code are as follows:
 * **Windows 11** or later.
 * [**Git for Windows**](https://git-scm.com/downloads) `v2.39.2` or later.
 * [**.NET Framework**](https://dotnet.microsoft.com/download/dotnet-framework) `v4.7.1`.
-* [**.NET SDK**](https://dotnet.microsoft.com/download/dotnet/7.0) `SDK v7.0.202` or later.
+* **.NET SDK**
+    * LTS [`SDK v7.0.202`](https://dotnet.microsoft.com/download/dotnet/7.0)
+    * STS [`SDK v6.0.407`](https://dotnet.microsoft.com/download/dotnet/6.0)
 * Optional: IDE with C# 10 support.
     * Visual Studio 2022 or later.
 

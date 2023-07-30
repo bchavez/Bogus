@@ -13,7 +13,7 @@ namespace Bogus.Extensions.Chile
       /// </summary>
       /// <param name="dotFormat">Use the thousands separator for the Chilean RUT (11.111.111-1)</param>
       /// <returns>A string representation for a valid Chilean RUT (Rol Unico Tributario)</returns>
-      public static string Rut(this Person person, bool dotFormat = true)
+      public static string Rut(this Person person, bool dotFormat = false)
       {
          return GenerateChileanId(dotFormat);
       }

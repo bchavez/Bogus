@@ -1,4 +1,5 @@
-﻿using Bogus.DataSets;
+﻿using System;
+using Bogus.DataSets;
 
 namespace Bogus.Extensions.Chile
 {
@@ -57,7 +58,7 @@ namespace Bogus.Extensions.Chile
       private static string Digito(int rut)
       {
          if (rut < 1000000 || rut > 99999999)
-               throw new ArgumentOutOfRangeException("The provided integer is outside of the range between 1000000 and 99999999");
+               throw new ArgumentOutOfRangeException($"The provided integer is outside of the range between 1000000 and 99999999");
 
          int suma = 0;
          int multiplicador = 1;

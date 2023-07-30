@@ -9,14 +9,26 @@ namespace Bogus.Tests.ExtensionTests
    public class ChileanRutExtensionTest
    {
 
-      [Theory]
-      [InlineData(true)] //Testing random rut using the dotFormat (11.111.111-1)
-      [InlineData(false)] //Testing random rut not using the dotFormat (11111111-1)
-      public void ChileanRutExtensionForBogusShouldBeValid(bool dotFormat)
+      [Fact]
+      public void ChileanRutExtension_Should_BeValid_When_UsingDotFormat()
       {
          // Arrange
          var faker = new Faker<Person>()
-            .RuleFor(p => p.Rut, f => f.Person.Rut(dotFormat));
+            .RuleFor(p => p.Rut, f => f.Person.Rut(true));
+
+         // Act
+         var person = faker.Generate();
+
+         // Assert
+         InternalValidationRutHelper.IsRutValid(person.Rut).Should().Be(true);
+      }
+
+      [Fact]
+      public void ChileanRutExtension_Should_BeValid_When_NotUsingDotFormat()
+      {
+         // Arrange
+         var faker = new Faker<Person>()
+            .RuleFor(p => p.Rut, f => f.Person.Rut(false));
 
          // Act
          var person = faker.Generate();

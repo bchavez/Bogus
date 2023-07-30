@@ -15,7 +15,7 @@ namespace Bogus.Extensions.Chile
       /// <returns>A string representation for a valid Chilean RUT (Rol Unico Tributario)</returns>
       public static string Rut(this Person person, bool dotFormat = true)
       {
-         GenerateChileanId(dotFormat);
+         return GenerateChileanId(dotFormat);
       }
 
       /// <summary>
@@ -26,7 +26,7 @@ namespace Bogus.Extensions.Chile
 
       public static string Rut(this Company company, bool dotFormat = true)
       {
-         GenerateChileanId(dotFormat);
+         return GenerateChileanId(dotFormat);
       }
 
       /// <summary>

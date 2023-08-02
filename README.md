@@ -511,6 +511,10 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.DataSets.Finance.CodiceFiscale()` - Codice Fiscale
 * **`using Bogus.Extensions.Norway;`**
 	* `Bogus.Person.Fodselsnummer()` - Norwegian national identity number
+* **`using Bogus.Extensions.Poland;`**
+	* `Bogus.Person.Pesel()` - Number of Powszechny Elektroniczny System Ewidencji Ludności (PESEL)
+	* `Bogus.DataSets.Company.Nip()` - Numer identyfikacji podatkowej (NIP)
+	* `Bogus.DataSets.Company.Regon()` - Number of Rejestr Gospodarki Narodowej (REGON)
 * **`using Bogus.Extensions.Portugal;`**
 	* `Bogus.Person.Nif()` - Número de Identificação Fiscal (NIF)
 	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)

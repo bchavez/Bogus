@@ -30,6 +30,7 @@ namespace Bogus
       public Randomizer()
       {
          this.localSeed = Seed;
+         this.localLocker = Locker;
       }
 
       /// <summary>
@@ -39,12 +40,15 @@ namespace Bogus
       public Randomizer(int localSeed)
       {
          this.localSeed = new Random(localSeed);
+         this.localLocker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
       }
 
       /// <summary>
       /// The pseudo-random number generator that is used for all random number generation in this instance.
       /// </summary>
       protected Random localSeed;
+      
+      internal Lazy<object> localLocker;
 
       /// <summary>
       /// Get an int from 0 to max.
@@ -82,7 +86,7 @@ namespace Bogus
       public int Number(int min = 0, int max = 1)
       {
          //lock any seed access, for thread safety.
-         lock( Locker.Value )
+         lock( localLocker.Value )
          {
             // Adjust the range as needed to make max inclusive. The Random.Next function uses exclusive upper bounds.
 
@@ -178,7 +182,7 @@ namespace Bogus
       public double Double(double min = 0.0d, double max = 1.0d)
       {
          //lock any seed access, for thread safety.
-         lock( Locker.Value )
+         lock( localLocker.Value )
          {
             if( min == 0.0d && max == 1.0d )
             {
@@ -227,7 +231,7 @@ namespace Bogus
       public byte[] Bytes(int count)
       {
          var arr = new byte[count];
-         lock( Locker.Value )
+         lock( localLocker.Value )
          {
             localSeed.NextBytes(arr);
          }
@@ -720,7 +724,7 @@ namespace Bogus
          {
             int j;
             //lock any seed access, for thread safety.
-            lock( Locker.Value )
+            lock( localLocker.Value )
             {
                j = this.localSeed.Next(i, buffer.Count);
             }

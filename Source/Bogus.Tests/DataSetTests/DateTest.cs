@@ -351,7 +351,7 @@ namespace Bogus.Tests.DataSetTests
       public void use_dataset_reference_date_if_set()
       {
          var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
-         var d = new Date(referenceDate);
+         var d = new Date(referenceDate: () => referenceDate);
 
          d.Recent(0).Should()
             .BeOnOrBefore(referenceDate)
@@ -365,7 +365,7 @@ namespace Bogus.Tests.DataSetTests
          var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
          var now = DateTime.Now;
 
-         var d = new Date(referenceDate);
+         var d = new Date(referenceDate: () => referenceDate);
 
          d.Recent(0, now).Should()
             .BeOnOrBefore(now)

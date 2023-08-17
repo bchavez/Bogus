@@ -38,7 +38,7 @@ namespace Bogus.Tests.LocaleTests
       [Fact]
       public void date_tests()
       {
-         var d = new Date("pt_PT");
+         var d = new Date(locale: "pt_PT");
 
          d.Month().Should().Be("Agosto");
          d.Month(abbreviation: true).Should().Be("Fev");

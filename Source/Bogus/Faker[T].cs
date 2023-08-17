@@ -60,6 +60,7 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    protected internal bool? IsValid;
    protected internal string currentRuleSet = Default;
    protected internal int? localSeed; // if null, the global Randomizer.Seed is used.
+   protected internal DateTime? localDateTimeRef;
 #pragma warning restore 1591
 
    Faker IFakerTInternal.FakerHub => this.FakerHub;
@@ -111,6 +112,11 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
          clone.UseSeed(localSeed.Value);
       }
 
+      if( localDateTimeRef.HasValue )
+      {
+         clone.UseDateTimeReference(localDateTimeRef.Value);
+      }
+
       return clone;
    }
 
@@ -156,6 +162,19 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    {
       this.localSeed = seed;
       this.FakerHub.Random = new Randomizer(seed);
+      return this;
+   }
+
+   /// <summary>
+   /// Sets a local time reference for all Date time calculations used by
+   /// this Faker[T] instance; unless refDate parameters are specified 
+   /// with the corresponding Date.Methods().
+   /// </summary>
+   /// <param name="refDate">The anchored DateTime reference to use.</param>
+   public virtual Faker<T> UseDateTimeReference(DateTime? refDate)
+   {
+      this.localDateTimeRef = refDate;
+      this.FakerHub.DateTimeReference = refDate;
       return this;
    }
 

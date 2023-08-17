@@ -8,7 +8,7 @@ namespace Bogus.Tests.DataSetTests;
 
 public partial class DateTest
 {
-#if NET6_0
+#if NET6_0_OR_GREATER
    [Fact]
    public void can_get_dateonly_in_past()
    {

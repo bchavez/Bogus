@@ -7,7 +7,7 @@ namespace Bogus.DataSets
 {
    public partial class Date
    {
-#if NET6_0
+#if NET6_0_OR_GREATER
       /// <summary>
       /// Get a random <see cref="DateOnly"/> between <paramref name="start"/> and <paramref name="end"/>.
       /// </summary>
@@ -31,7 +31,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
       public DateOnly PastDateOnly(int yearsToGoBack = 1, DateOnly? refDate = null)
       {
-         var start = refDate ?? DateOnly.FromDateTime(SystemClock());
+         var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
          var maxBehind = start.AddYears(-yearsToGoBack);
 
          return BetweenDateOnly(maxBehind, start);
@@ -44,7 +44,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
       public DateOnly SoonDateOnly(int days = 1, DateOnly? refDate = null)
       {
-         var start = refDate ?? DateOnly.FromDateTime(SystemClock());
+         var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
          var maxForward = start.AddDays(days);
 
          return BetweenDateOnly(start, maxForward);
@@ -57,7 +57,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
       public DateOnly FutureDateOnly(int yearsToGoForward = 1, DateOnly? refDate = null)
       {
-         var start = refDate ?? DateOnly.FromDateTime(SystemClock());
+         var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
          var maxForward = start.AddYears(yearsToGoForward);
 
          return BetweenDateOnly(start, maxForward);
@@ -70,7 +70,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
       public DateOnly RecentDateOnly(int days = 1, DateOnly? refDate = null)
       {
-         var start = refDate ?? DateOnly.FromDateTime(SystemClock());
+         var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
          var maxBehind = start.AddDays(-days);
 
          return BetweenDateOnly(maxBehind, start);
@@ -98,7 +98,7 @@ namespace Bogus.DataSets
       /// <param name="refTime">The time to start calculations. Default is time from <see cref="DateTime.Now"/>.</param>
       public TimeOnly SoonTimeOnly(int mins = 60, TimeOnly? refTime = null)
       {
-         var start = refTime ?? TimeOnly.FromDateTime(SystemClock());
+         var start = refTime ?? TimeOnly.FromDateTime(GetTimeReference());
          var maxForward = start.AddMinutes(mins);
 
          return BetweenTimeOnly(start, maxForward);
@@ -111,7 +111,7 @@ namespace Bogus.DataSets
       /// <param name="refTime">The Time to start calculations. Default is time from <see cref="DateTime.Now"/>.</param>
       public TimeOnly RecentTimeOnly(int mins = 60, TimeOnly? refTime = null)
       {
-         var start = refTime ?? TimeOnly.FromDateTime(SystemClock());
+         var start = refTime ?? TimeOnly.FromDateTime(GetTimeReference());
          var maxBehind = start.AddMinutes(-mins);
 
          return BetweenTimeOnly(maxBehind, start);

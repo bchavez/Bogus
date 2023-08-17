@@ -348,6 +348,33 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void use_dataset_localclock_date_if_set()
+      {
+         var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
+         var d = new Date() { LocalSystemClock = () => refDate };
+
+
+         d.Recent(0).Should()
+            .BeOnOrBefore(refDate)
+            .And
+            .BeOnOrAfter(refDate.Date);
+      }
+
+      [Fact]
+      public void use_now_param_over_localclock_date()
+      {
+         var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
+         var now = DateTime.Now;
+
+         var d = new Date { LocalSystemClock = () => refDate };
+
+         d.Recent(0, now).Should()
+            .BeOnOrBefore(now)
+            .And
+            .BeOnOrAfter(now.Date);
+      }
+
+      [Fact]
       public void can_get_timezone_string()
       {
          date.TimeZoneString().Should().Be("Asia/Yerevan");

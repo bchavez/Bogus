@@ -40,12 +40,12 @@ namespace Bogus
          public string Bs;
       }
 
-      protected Name DsName { get; set; }
-      protected Internet DsInternet { get; set; }
-      protected Date DsDate { get; set; }
-      protected PhoneNumbers DsPhoneNumbers { get; set; }
-      protected Address DsAddress { get; set; }
-      protected Company DsCompany { get; set; }
+      protected internal Name DsName { get; set; }
+      protected internal Internet DsInternet { get; set; }
+      protected internal Date DsDate { get; set; }
+      protected internal PhoneNumbers DsPhoneNumbers { get; set; }
+      protected internal Address DsAddress { get; set; }
+      protected internal Company DsCompany { get; set; }
 
       /// <summary>
       /// Creates a new Person object.
@@ -55,20 +55,28 @@ namespace Bogus
       /// the Randomizer.Seed global static is ignored and a locally isolated derived seed is used to derive randomness.
       /// However, if the <paramref name="seed"/> parameter is null, then the Randomizer.Seed global static is used to derive randomness.
       /// </param>
-      public Person(string locale = "en", int? seed = null)
+      public Person(string locale = "en", int? seed = null, DateTime? refDate = null)
       {
          this.GetDataSources(locale);
          if( seed.HasValue )
          {
             this.Random = new Randomizer(seed.Value);
          }
+         if( refDate.HasValue )
+         {
+            this.DsDate.LocalSystemClock = () => refDate.Value;
+         }
          this.Populate();
       }
 
-      internal Person(Randomizer randomizer, string locale = "en")
+      internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en")
       {
          this.GetDataSources(locale);
          this.Random = randomizer;
+         if( refDate.HasValue )
+         {
+            this.DsDate.LocalSystemClock = () => refDate.Value;
+         }
          this.Populate();
       }
 
@@ -94,7 +102,7 @@ namespace Bogus
          this.Website = this.DsInternet.DomainName();
          this.Avatar = this.DsInternet.Avatar();
 
-         this.DateOfBirth = this.DsDate.Past(50, Date.SystemClock().AddYears(-20));
+         this.DateOfBirth = this.DsDate.Past(50, this.DsDate.GetTimeReference().AddYears(-20));
 
          this.Phone = this.DsPhoneNumbers.PhoneNumber();
 

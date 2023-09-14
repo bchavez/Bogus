@@ -27,7 +27,14 @@ namespace Bogus.DataSets
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      public Date(string locale = "en", Func<DateTime?> referenceDate = null) : base(locale)
+      public Date(string locale = "en") : this(null, locale)
+      {
+      }
+
+      /// <summary>
+      /// Create a Date dataset with reference date set
+      /// </summary>
+      public Date(Func<DateTime?> referenceDate, string locale = "en") : base(locale)
       {
          _referenceDate = referenceDate;
 

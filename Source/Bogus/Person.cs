@@ -94,7 +94,7 @@ namespace Bogus
          this.Website = this.DsInternet.DomainName();
          this.Avatar = this.DsInternet.Avatar();
 
-         this.DateOfBirth = this.DsDate.Past(50, Date.SystemClock().AddYears(-20));
+         this.DateOfBirth = this.DsDate.Past(50, DsDate.Now().AddYears(-20));
 
          this.Phone = this.DsPhoneNumbers.PhoneNumber();
 

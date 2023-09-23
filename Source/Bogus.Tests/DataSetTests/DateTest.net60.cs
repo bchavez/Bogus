@@ -62,6 +62,16 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_dateonly_changed_reference_date()
+      {
+         var referenceDate = DateTime.Parse("1/1/1990", CultureInfo.InvariantCulture);
+         var d = new Date(() => referenceDate);
+
+         var recentDateOnly = d.RecentDateOnly(0);
+         recentDateOnly.Should().Be(DateOnly.FromDateTime(referenceDate.Date));
+      }
+
+      [Fact]
       public void can_get_random_dateonly_between_two_dates()
       {
          var start = DateOnly.Parse("8/8/2020", CultureInfo.InvariantCulture);
@@ -133,6 +143,16 @@ namespace Bogus.Tests.DataSetTests
 
          var timeRecent = date.RecentTimeOnly(5, now);
          timeRecent.IsBetween(maxBehind, now).Should().BeTrue();
+      }
+
+      [Fact]
+      public void can_get_timeonly_changed_reference_date()
+      {
+         var referenceDate = new DateTime(1990, 1, 1, 12, 30, 06);
+         var d = new Date(() => referenceDate);
+
+         var recentTimeOnly = d.RecentTimeOnly(0);
+         recentTimeOnly.Should().Be(TimeOnly.FromDateTime(referenceDate));
       }
 #endif
    }

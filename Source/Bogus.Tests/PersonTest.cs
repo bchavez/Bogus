@@ -235,6 +235,18 @@ namespace Bogus.Tests
          Date.SystemClock = () => DateTime.Now;
       }
 
+      [Fact]
+      public void generate_birthday_with_relative_date()
+      {
+         var referenceDate = new DateTime(2019, 3, 21, 1, 1, 1);
+         var p1 = new Person(referenceDate: referenceDate, seed: 1337);
+         var p2 = new Person(seed: 1337);
+
+         var diff = (int)(p2.DateOfBirth - p1.DateOfBirth).TotalSeconds;
+         var expected = (int)(Date.SystemClock() - referenceDate).TotalSeconds;
+         diff.Should().Be(expected);
+      }
+
 
       IEnumerable<T> Get<T>(int times, Func<Person, T> a)
       {

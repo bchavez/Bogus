@@ -101,7 +101,7 @@ namespace Bogus
       /// <summary>
       /// A contextually relevant fields of a person.
       /// </summary>
-      public Person Person => person ??= new Person(this.Random, this.Locale);
+      public Person Person => person ??= new Person(() => ReferenceDate, this.Random, this.Locale);
 
       /// <summary>
       /// Creates hacker gibberish.

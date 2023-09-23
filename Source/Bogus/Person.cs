@@ -55,9 +55,9 @@ namespace Bogus
       /// the Randomizer.Seed global static is ignored and a locally isolated derived seed is used to derive randomness.
       /// However, if the <paramref name="seed"/> parameter is null, then the Randomizer.Seed global static is used to derive randomness.
       /// </param>
-      public Person(string locale = "en", int? seed = null)
+      public Person(string locale = "en", int? seed = null, DateTime? referenceDate = null)
       {
-         this.GetDataSources(locale);
+         this.GetDataSources(() => referenceDate, locale);
          if( seed.HasValue )
          {
             this.Random = new Randomizer(seed.Value);
@@ -65,18 +65,22 @@ namespace Bogus
          this.Populate();
       }
 
-      internal Person(Randomizer randomizer, string locale = "en")
+      internal Person(Randomizer randomizer, string locale = "en") : this(null, randomizer, locale)
       {
-         this.GetDataSources(locale);
+      }
+
+      internal Person(Func<DateTime?> referenceDate, Randomizer randomizer, string locale = "en")
+      {
+         this.GetDataSources(referenceDate, locale);
          this.Random = randomizer;
          this.Populate();
       }
 
-      private void GetDataSources(string locale)
+      private void GetDataSources(Func<DateTime?> referenceDate, string locale)
       {
          this.DsName = this.Notifier.Flow(new Name(locale));
          this.DsInternet = this.Notifier.Flow(new Internet(locale));
-         this.DsDate = this.Notifier.Flow(new Date {Locale = locale});
+         this.DsDate = this.Notifier.Flow(new Date(referenceDate, locale));
          this.DsPhoneNumbers = this.Notifier.Flow(new PhoneNumbers(locale));
          this.DsAddress = this.Notifier.Flow(new Address(locale));
          this.DsCompany = this.Notifier.Flow(new Company(locale));

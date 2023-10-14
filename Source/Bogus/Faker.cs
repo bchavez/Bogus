@@ -25,7 +25,7 @@ namespace Bogus
 
          this.Address = this.Notifier.Flow(new Address(locale));
          this.Company = this.Notifier.Flow(new Company(locale));
-         this.Date = this.Notifier.Flow(new Date(() => ReferenceDate, locale));
+         this.Date = this.Notifier.Flow(new Date(locale));
          this.Finance = this.Notifier.Flow(new Finance {Locale = locale});
          this.Hacker = this.Notifier.Flow(new Hacker(locale));
          this.Image = this.Notifier.Flow(new Images(locale));
@@ -101,7 +101,7 @@ namespace Bogus
       /// <summary>
       /// A contextually relevant fields of a person.
       /// </summary>
-      public Person Person => person ??= new Person(this.Random, this.Locale);
+      public Person Person => person ??= new Person(this.Random, this.Locale, this.DateTimeReference);
 
       private DateTime? localDateTimeRef;
 
@@ -355,11 +355,6 @@ namespace Bogus
       /// </summary>
       /// <value>The locale.</value>
       public string Locale { get; set; }
-
-      /// <summary>
-      /// Optional reference date for date generation
-      /// </summary>
-      public DateTime? ReferenceDate { get; set; }
 
       /// <summary>
       /// Triggers a new generation context

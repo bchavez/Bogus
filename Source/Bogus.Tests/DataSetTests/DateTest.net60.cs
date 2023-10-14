@@ -95,16 +95,6 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void can_get_dateonly_changed_reference_date()
-      {
-         var referenceDate = DateTime.Parse("1/1/1990", CultureInfo.InvariantCulture);
-         var d = new Date(() => referenceDate);
-
-         var recentDateOnly = d.RecentDateOnly(0);
-         recentDateOnly.Should().Be(DateOnly.FromDateTime(referenceDate.Date));
-      }
-
-      [Fact]
       public void can_get_random_dateonly_between_two_dates()
       {
          var start = DateOnly.Parse("8/8/2020", CultureInfo.InvariantCulture);

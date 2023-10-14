@@ -436,32 +436,6 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void use_dataset_reference_date_if_set()
-      {
-         var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
-         var d = new Date(() => referenceDate);
-
-         d.Recent(0).Should()
-            .BeOnOrBefore(referenceDate)
-            .And
-            .BeOnOrAfter(referenceDate.Date);
-      }
-
-      [Fact]
-      public void ignore_dataset_reference_date()
-      {
-         var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
-         var now = DateTime.Now;
-
-         var d = new Date(() => referenceDate);
-
-         d.Recent(0, now).Should()
-            .BeOnOrBefore(now)
-            .And
-            .BeOnOrAfter(now.Date);
-      }
-
-      [Fact]
       public void can_get_timezone_string()
       {
          date.TimeZoneString().Should().Be("Asia/Yerevan");

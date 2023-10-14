@@ -28,6 +28,7 @@ namespace Bogus.Tests
          public string FirstName { get; set; }
          public string Email { get; set; }
          public string LastName { get; set; }
+         public DateTime BirthDay { get; set; }
       }
 
       [Fact]
@@ -51,6 +52,16 @@ namespace Bogus.Tests
       {
          var p = new Person();
          p.Ssn().Should().Be("771-62-9016");
+      }
+
+      [Fact]
+      public void pass_reference_date_to_person()
+      {
+         var now = DateTime.Parse("6/7/2020 4:17:41 PM");
+         var faker = new Faker<User>()
+            .UseDateTimeReference(now);
+
+         faker.FakerHub.Person.DsDate.GetTimeReference().Should().Be(now);
       }
 
       [Fact]

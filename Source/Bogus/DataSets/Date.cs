@@ -7,8 +7,6 @@ namespace Bogus.DataSets
    /// </summary>
    public partial class Date : DataSet
    {
-      private readonly Func<DateTime?> _referenceDate;
-
       private bool hasMonthWideContext;
       private bool hasMonthAbbrContext;
       private bool hasWeekdayWideContext;

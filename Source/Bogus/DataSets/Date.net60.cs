@@ -41,7 +41,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateOnly"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
-      /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is from <see cref="GetTimeReference()"/>.</param>
       public DateOnly SoonDateOnly(int days = 1, DateOnly? refDate = null)
       {
          var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
@@ -54,7 +54,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateOnly"/> in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
       /// </summary>
       /// <param name="yearsToGoForward">Years to go forward from <paramref name="refDate"/>. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is from <see cref="GetTimeReference()"/>.</param>
       public DateOnly FutureDateOnly(int yearsToGoForward = 1, DateOnly? refDate = null)
       {
          var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
@@ -67,7 +67,7 @@ namespace Bogus.DataSets
       /// Get a random <see cref="DateOnly"/> within the last few days.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      /// <param name="refDate">The date to start calculations. Default is from <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is from <see cref="GetTimeReference()"/>.</param>
       public DateOnly RecentDateOnly(int days = 1, DateOnly? refDate = null)
       {
          var start = refDate ?? DateOnly.FromDateTime(GetTimeReference());
@@ -95,7 +95,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="TimeOnly"/> that will happen soon.
       /// </summary>
       /// <param name="mins">Minutes no more than <paramref name="mins"/> ahead.</param>
-      /// <param name="refTime">The time to start calculations. Default is time from <see cref="DateTime.Now"/>.</param>
+      /// <param name="refTime">The time to start calculations. Default is time from <see cref="GetTimeReference()"/>.</param>
       public TimeOnly SoonTimeOnly(int mins = 60, TimeOnly? refTime = null)
       {
          var start = refTime ?? TimeOnly.FromDateTime(GetTimeReference());
@@ -108,7 +108,7 @@ namespace Bogus.DataSets
       /// Get a random <see cref="TimeOnly"/> within the last few Minutes.
       /// </summary>
       /// <param name="mins">Minutes <paramref name="mins"/> of the day to go back.</param>
-      /// <param name="refTime">The Time to start calculations. Default is time from <see cref="DateTime.Now"/>.</param>
+      /// <param name="refTime">The Time to start calculations. Default is time from <see cref="GetTimeReference()"/>.</param>
       public TimeOnly RecentTimeOnly(int mins = 60, TimeOnly? refTime = null)
       {
          var start = refTime ?? TimeOnly.FromDateTime(GetTimeReference());

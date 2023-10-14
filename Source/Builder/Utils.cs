@@ -85,7 +85,7 @@ partial class Build
              AssemblyInfo.FileVersion(version),
              AssemblyInfo.InformationalVersion(infoVersion),
              AssemblyInfo.Trademark("MIT License"),
-             AssemblyInfo.Metadata("BuildTime", $"{bti.BuildTimeUtc:u}")
+             //AssemblyInfo.Metadata("BuildTime", $"{bti.BuildTimeUtc:u}")
              //AssemblyInfo.Metadata("CommitHash", )
           };
       attrs.AddRange(bti.ExtraAttributes);

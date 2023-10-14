@@ -42,7 +42,7 @@ namespace Bogus.DataSets
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      public Date(string locale = "en")
+      public Date(string locale = "en") : base(locale)
       {
          this.hasMonthWideContext = HasKey("month.wide_context", false);
          this.hasMonthAbbrContext = HasKey("month.abbr_context", false);

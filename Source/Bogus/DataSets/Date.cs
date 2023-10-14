@@ -37,6 +37,8 @@ namespace Bogus.DataSets
 
       protected internal DateTime GetTimeReference() => LocalSystemClock?.Invoke() ?? SystemClock();
 
+      protected internal DateTimeOffset GetTimeReferenceOffset() => new DateTimeOffset(GetTimeReference());
+
       /// <summary>
       /// Create a Date dataset
       /// </summary>
@@ -52,7 +54,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTime"/> in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
       /// </summary>
       /// <param name="yearsToGoBack">Years to go back from <paramref name="refDate"/>. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReference()"/>.</param>
       public DateTime Past(int yearsToGoBack = 1, DateTime? refDate = null)
       {
          var maxDate = refDate ?? GetTimeReference();
@@ -70,10 +72,10 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTimeOffset"/> in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
       /// </summary>
       /// <param name="yearsToGoBack">Years to go back from <paramref name="refDate"/>. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReferenceOffset()"/>.</param>
       public DateTimeOffset PastOffset(int yearsToGoBack = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? GetTimeReference();
+         var maxDate = refDate ?? GetTimeReferenceOffset();
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
@@ -98,7 +100,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTime"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReference()"/>.</param>
       public DateTime Soon(int days = 1, DateTime? refDate = null)
       {
          var dt = refDate ?? GetTimeReference();
@@ -109,10 +111,10 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTimeOffset"/> that will happen soon.
       /// </summary>
       /// <param name="days">A date no more than <paramref name="days"/> ahead.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReferenceOffset()"/>.</param>
       public DateTimeOffset SoonOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var dt = refDate ?? GetTimeReference();
+         var dt = refDate ?? GetTimeReferenceOffset();
          return BetweenOffset(dt, dt.AddDays(days));
       }
 
@@ -120,7 +122,7 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTime"/> in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
       /// </summary>
       /// <param name="yearsToGoForward">Years to go forward from <paramref name="refDate"/>. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReference()"/>.</param>
       public DateTime Future(int yearsToGoForward = 1, DateTime? refDate = null)
       {
          var minDate = refDate ?? GetTimeReference();
@@ -138,10 +140,10 @@ namespace Bogus.DataSets
       /// Get a <see cref="DateTimeOffset"/> in the future between <paramref name="refDate"/> and <paramref name="yearsToGoForward"/>.
       /// </summary>
       /// <param name="yearsToGoForward">Years to go forward from <paramref name="refDate"/>. Default is 1 year.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReferenceOffset"/>.</param>
       public DateTimeOffset FutureOffset(int yearsToGoForward = 1, DateTimeOffset? refDate = null)
       {
-         var minDate = refDate ?? GetTimeReference();
+         var minDate = refDate ?? GetTimeReferenceOffset();
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
@@ -190,7 +192,7 @@ namespace Bogus.DataSets
       /// Get a random <see cref="DateTime"/> within the last few days.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReference()"/>.</param>
       public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
          var maxDate = refDate ?? GetTimeReference();
@@ -208,10 +210,10 @@ namespace Bogus.DataSets
       /// Get a random <see cref="DateTimeOffset"/> within the last few days.
       /// </summary>
       /// <param name="days">Number of days to go back.</param>
-      /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
+      /// <param name="refDate">The date to start calculations. Default is <see cref="GetTimeReferenceOffset()"/>.</param>
       public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? GetTimeReference();
+         var maxDate = refDate ?? GetTimeReferenceOffset();
 
          var minDate = days == 0 ? maxDate.Date : maxDate.AddDays(-days);
 

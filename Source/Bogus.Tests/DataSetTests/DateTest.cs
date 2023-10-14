@@ -3,6 +3,7 @@ using System.Globalization;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
+using Z.ExtensionMethods.ObjectExtensions;
 
 namespace Bogus.Tests.DataSetTests
 {
@@ -74,8 +75,8 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_dateOffset_in_future_with_set_clock()
       {
-         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
-         date.LocalSystemClock = () => refDate;
+         var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate.DateTime;
          date.FutureOffset().Should()
             .BeOnOrBefore(refDate.AddYears(1))
             .And
@@ -136,8 +137,8 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_dateOffset_in_past_with_set_clock()
       {
-         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
-         date.LocalSystemClock = () => refDate;
+         var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate.DateTime;
          date.PastOffset().Should()
             .BeOnOrBefore(refDate)
             .And
@@ -218,8 +219,8 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_dateOffset_recently_with_set_clock()
       {
-         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
-         date.LocalSystemClock = () => refDate;
+         var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate.DateTime;
          date.RecentOffset().Should()
             .BeOnOrBefore(refDate)
             .And
@@ -294,8 +295,8 @@ namespace Bogus.Tests.DataSetTests
       [Fact]
       public void can_get_dateOffset_soon_with_set_clock()
       {
-         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
-         date.LocalSystemClock = () => refDate;
+         var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate.DateTime;
          date.SoonOffset().Should()
             .BeOnOrAfter(refDate)
             .And

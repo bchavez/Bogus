@@ -86,7 +86,7 @@ namespace Bogus
       {
          this.DsName = this.Notifier.Flow(new Name(locale));
          this.DsInternet = this.Notifier.Flow(new Internet(locale));
-         this.DsDate = this.Notifier.Flow(new Date(locale));
+         this.DsDate = this.Notifier.Flow(new Date { Locale = locale });
          this.DsPhoneNumbers = this.Notifier.Flow(new PhoneNumbers(locale));
          this.DsAddress = this.Notifier.Flow(new Address(locale));
          this.DsCompany = this.Notifier.Flow(new Company(locale));

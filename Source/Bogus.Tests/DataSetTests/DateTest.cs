@@ -51,6 +51,17 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_date_in_future_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.Future().Should()
+            .BeOnOrBefore(refDate.AddYears(1))
+            .And
+            .BeOnOrAfter(refDate);
+      }
+
+      [Fact]
       public void can_get_dateOffset_in_future()
       {
          var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
@@ -58,6 +69,17 @@ namespace Bogus.Tests.DataSetTests
             .BeOnOrBefore(starting.AddYears(1))
             .And
             .BeOnOrAfter(starting);
+      }
+
+      [Fact]
+      public void can_get_dateOffset_in_future_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.FutureOffset().Should()
+            .BeOnOrBefore(refDate.AddYears(1))
+            .And
+            .BeOnOrAfter(refDate);
       }
 
       [Fact]
@@ -91,6 +113,17 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_date_in_past_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.Past().Should()
+            .BeOnOrBefore(refDate)
+            .And
+            .BeOnOrAfter(refDate.AddYears(-1));
+      }
+
+      [Fact]
       public void can_get_dateOffset_in_past()
       {
          var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
@@ -98,6 +131,17 @@ namespace Bogus.Tests.DataSetTests
             .BeOnOrBefore(starting)
             .And
             .BeOnOrAfter(starting.AddYears(-1));
+      }
+
+      [Fact]
+      public void can_get_dateOffset_in_past_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.PastOffset().Should()
+            .BeOnOrBefore(refDate)
+            .And
+            .BeOnOrAfter(refDate.AddYears(-1));
       }
 
       [Fact]
@@ -150,6 +194,17 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_date_recently_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.Recent().Should()
+            .BeOnOrBefore(refDate)
+            .And
+            .BeOnOrAfter(refDate.AddDays(-1));
+      }
+
+      [Fact]
       public void can_get_dateOffset_recently_within_the_year()
       {
          var start = DateTimeOffset.Now;
@@ -158,6 +213,17 @@ namespace Bogus.Tests.DataSetTests
             .BeOnOrBefore(start)
             .And
             .BeOnOrAfter(start.AddDays(-1));
+      }
+
+      [Fact]
+      public void can_get_dateOffset_recently_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.RecentOffset().Should()
+            .BeOnOrBefore(refDate)
+            .And
+            .BeOnOrAfter(refDate.AddDays(-1));
       }
 
       [Fact]
@@ -208,10 +274,32 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
+      public void can_get_date_soon_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.Soon().Should()
+            .BeOnOrAfter(refDate)
+            .And
+            .BeBefore(refDate.AddDays(1));
+      }
+
+      [Fact]
       public void get_a_dateOffsets_that_will_happen_soon()
       {
          var now = DateTimeOffset.Now;
          date.SoonOffset(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
+      }
+
+      [Fact]
+      public void can_get_dateOffset_soon_with_set_clock()
+      {
+         var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+         date.LocalSystemClock = () => refDate;
+         date.SoonOffset().Should()
+            .BeOnOrAfter(refDate)
+            .And
+            .BeBefore(refDate.AddDays(1));
       }
 
       [Fact]

@@ -60,6 +60,7 @@ namespace Bogus
       protected internal bool? IsValid;
       protected internal string currentRuleSet = Default;
       protected internal int? localSeed; // if null, the global Randomizer.Seed is used.
+      protected internal DateTime? dateTimeReference;
 #pragma warning restore 1591
 
       Faker IFakerTInternal.FakerHub => this.FakerHub;
@@ -111,6 +112,11 @@ namespace Bogus
             clone.UseSeed(localSeed.Value);
          }
 
+         if (dateTimeReference.HasValue)
+         {
+            clone.UseDateTimeReference(dateTimeReference.Value);
+         }
+
          return clone;
       }
 
@@ -156,6 +162,19 @@ namespace Bogus
       {
          this.localSeed = seed;
          this.FakerHub.Random = new Randomizer(seed);
+         return this;
+      }
+
+      /// <summary>
+      /// Sets a local time reference for all Date time calculations used by
+      /// this Faker[T] instance; unless <paramref name="refDate"/> parameters are specified 
+      /// with the corresponding Date.Methods().
+      /// </summary>
+      /// <param name="refDate">The anchored DateTime reference to use.</param>
+      public virtual Faker<T> UseDateTimeReference(DateTime? refDate)
+      {
+         this.dateTimeReference = refDate;
+         this.FakerHub.DateTimeReference = refDate;
          return this;
       }
 

@@ -236,17 +236,18 @@ namespace Bogus.Tests
       }
 
       [Fact]
-      public void generate_birthday_with_relative_date()
+      public void can_use_refdate_for_person()
       {
-         var referenceDate = new DateTime(2019, 3, 21, 1, 1, 1);
-         var p1 = new Person(referenceDate: referenceDate, seed: 1337);
-         var p2 = new Person(seed: 1337);
+         Date.SystemClock = () => DateTime.Now;
 
-         var diff = (int)(p2.DateOfBirth - p1.DateOfBirth).TotalSeconds;
-         var expected = (int)(Date.SystemClock() - referenceDate).TotalSeconds;
-         diff.Should().Be(expected);
+         var refDate = new DateTime(2019, 3, 21, 1, 1, 1);
+         var p1 = new Person(seed: 1337, refDate: refDate);
+         var p2 = new Person(seed: 1337, refDate: refDate);
+         var q = new Person(seed: 7331, refDate: refDate);
+
+         q.DateOfBirth.Should().NotBe(p1.DateOfBirth);
+         p1.DateOfBirth.Should().Be(p2.DateOfBirth);
       }
-
 
       IEnumerable<T> Get<T>(int times, Func<Person, T> a)
       {

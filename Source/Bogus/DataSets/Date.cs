@@ -22,33 +22,33 @@ namespace Bogus.DataSets
       /// Setting this static value will effect and apply to all Faker[T], Faker,
       /// and new Date() datasets instances.
       /// </summary>
+      [Obsolete("Consider using new Faker[T].UseDateTimeReference(refDate), " +
+         "new Faker(){ DateTimeReference = refDate }" +
+         "or new Date {LocalSystemClock = () => refDate};" +
+         "all these options are scoped per object instance. Setting this global static system clock is considered bad practice now and may be removed in the future.")]
       public static Func<DateTime> SystemClock = () => DateTime.Now;
+
+      /// <summary>
+      /// Sets the system clock time Bogus uses for date calculations.
+      /// This value is normally <seealso cref="DateTime.Now"/>. If deterministic times are desired,
+      /// set the <seealso cref="LocalSystemClock"/> to a single instance in time.
+      /// Setting this value will only effect and only apply to this single Date instance.
+      /// </summary>
+      /// <example>() => new DateTime(2018, 4, 23)</example>
+      public Func<DateTime> LocalSystemClock;
+
+      protected internal DateTime GetTimeReference() => LocalSystemClock?.Invoke() ?? SystemClock();
 
       /// <summary>
       /// Create a Date dataset
       /// </summary>
-      public Date(string locale = "en") : this(null, locale)
+      public Date(string locale = "en")
       {
-      }
-
-      /// <summary>
-      /// Create a Date dataset with reference date set
-      /// </summary>
-      public Date(Func<DateTime?> referenceDate, string locale = "en") : base(locale)
-      {
-         _referenceDate = referenceDate;
-
          this.hasMonthWideContext = HasKey("month.wide_context", false);
          this.hasMonthAbbrContext = HasKey("month.abbr_context", false);
          this.hasWeekdayWideContext = HasKey("weekday.wide_context", false);
          this.hasWeekdayAbbrContext = HasKey("weekday.abbr_context", false);
       }
-
-      /// <summary>
-      /// Get a <see cref="DateTime"/> of the reference time.
-      /// </summary>
-      /// <returns></returns>
-      public DateTime Now() => _referenceDate?.Invoke() ?? SystemClock();
 
       /// <summary>
       /// Get a <see cref="DateTime"/> in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
@@ -57,7 +57,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Past(int yearsToGoBack = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? Now();
+         var maxDate = refDate ?? GetTimeReference();
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
@@ -75,7 +75,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset PastOffset(int yearsToGoBack = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? Now();
+         var maxDate = refDate ?? GetTimeReference();
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
@@ -103,7 +103,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTime Soon(int days = 1, DateTime? refDate = null)
       {
-         var dt = refDate ?? Now();
+         var dt = refDate ?? GetTimeReference();
          return Between(dt, dt.AddDays(days));
       }
 
@@ -114,7 +114,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset SoonOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var dt = refDate ?? Now();
+         var dt = refDate ?? GetTimeReference();
          return BetweenOffset(dt, dt.AddDays(days));
       }
 
@@ -125,7 +125,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Future(int yearsToGoForward = 1, DateTime? refDate = null)
       {
-         var minDate = refDate ?? Now();
+         var minDate = refDate ?? GetTimeReference();
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
@@ -143,7 +143,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset FutureOffset(int yearsToGoForward = 1, DateTimeOffset? refDate = null)
       {
-         var minDate = refDate ?? Now();
+         var minDate = refDate ?? GetTimeReference();
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
@@ -195,7 +195,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? Now();
+         var maxDate = refDate ?? GetTimeReference();
 
          var minDate = days == 0 ? maxDate.Date : maxDate.AddDays(-days);
 
@@ -213,7 +213,7 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? Now();
+         var maxDate = refDate ?? GetTimeReference();
 
          var minDate = days == 0 ? maxDate.Date : maxDate.AddDays(-days);
 

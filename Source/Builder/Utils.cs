@@ -72,7 +72,7 @@ partial class Build
       var path = Folders.Source / project.Name / "Properties" / "AssemblyInfo.cs";
       var fullVersion = bti.FullVersion;
       var version = BuildContext.GetVersionWithoutPreReleeaseName(fullVersion);
-      var infoVersion = $"{fullVersion} built on {buildTimeUtc} UTC";
+      var infoVersion = $"{fullVersion} built on {buildTimeUtc:u}";
       var copyright = $"Brian Chavez © {buildTimeUtc.Year}";
       var title = project.GetProperty("NukeProjectTitle");
       var attrs = new List<AssemblyInfo.Attribute>
@@ -85,6 +85,7 @@ partial class Build
              AssemblyInfo.FileVersion(version),
              AssemblyInfo.InformationalVersion(infoVersion),
              AssemblyInfo.Trademark("MIT License"),
+             //AssemblyInfo.Metadata("BuildTime", $"{bti.BuildTimeUtc:u}")
              //AssemblyInfo.Metadata("CommitHash", )
           };
       attrs.AddRange(bti.ExtraAttributes);

@@ -63,8 +63,7 @@ namespace Bogus
          {
             this.Random = new Randomizer(seed.Value);
          }
-
-         if (refDate.HasValue)
+         if( refDate.HasValue )
          {
             this.DsDate.LocalSystemClock = () => refDate.Value;
          }
@@ -75,7 +74,7 @@ namespace Bogus
       {
          this.GetDataSources(locale);
          this.Random = randomizer;
-         if (refDate.HasValue)
+         if ( refDate.HasValue )
          {
             this.DsDate.LocalSystemClock = () => refDate.Value;
          }
@@ -104,7 +103,7 @@ namespace Bogus
          this.Website = this.DsInternet.DomainName();
          this.Avatar = this.DsInternet.Avatar();
 
-         this.DateOfBirth = this.DsDate.Past(50, DsDate.GetTimeReference().AddYears(-20));
+         this.DateOfBirth = this.DsDate.Past(50, this.DsDate.GetTimeReference().AddYears(-20));
 
          this.Phone = this.DsPhoneNumbers.PhoneNumber();
 

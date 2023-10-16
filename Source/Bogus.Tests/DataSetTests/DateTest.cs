@@ -437,24 +437,25 @@ namespace Bogus.Tests.DataSetTests
       }
 
       [Fact]
-      public void use_dataset_reference_date_if_set()
+      public void use_dataset_localclock_date_if_set()
       {
-         var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
-         var d = new Date(() => referenceDate);
+         var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
+         var d = new Date() { LocalSystemClock = () => refDate };
+
 
          d.Recent(0).Should()
-            .BeOnOrBefore(referenceDate)
+            .BeOnOrBefore(refDate)
             .And
-            .BeOnOrAfter(referenceDate.Date);
+            .BeOnOrAfter(refDate.Date);
       }
 
       [Fact]
-      public void ignore_dataset_reference_date()
+      public void use_now_param_over_localclock_date()
       {
-         var referenceDate = new DateTime(2009, 12, 30, 12, 30, 0);
+         var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
          var now = DateTime.Now;
 
-         var d = new Date(() => referenceDate);
+         var d = new Date { LocalSystemClock = () => refDate };
 
          d.Recent(0, now).Should()
             .BeOnOrBefore(now)

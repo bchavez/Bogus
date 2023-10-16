@@ -40,6 +40,7 @@ namespace Bogus.Tests
       {
          var rootFaker = new Faker<Order>()
             .UseSeed(88)
+            .UseDateTimeReference(new DateTime(2022, 2, 2))
             .RuleFor(o => o.OrderId, f => f.IndexVariable++)
             .RuleFor(o => o.Quantity, f => f.Random.Number(1, 3))
             .RuleFor(o => o.Item, f => f.Commerce.Product())

@@ -107,7 +107,7 @@ namespace Bogus
 
       /// <summary>
       /// The fixed point in time DateTime reference used for date and time calculations
-      /// with this Faker instance and the underlying .Date dataset. If this is null,
+      /// with this Faker instance and the underlying .Date dataset. If this property is set to null,
       /// then the .Date dataset's static system clock is usually used.
       /// 
       /// Typically this property is set when Faker[T].UseDateTimeReference() is called,
@@ -123,7 +123,7 @@ namespace Bogus
          set
          {
             localDateTimeRef = value;
-            if (localDateTimeRef.HasValue)
+            if( localDateTimeRef.HasValue )
             {
                this.Date.LocalSystemClock = () => localDateTimeRef.Value;
             }
@@ -133,6 +133,7 @@ namespace Bogus
             }
          }
       }
+      
       /// <summary>
       /// Creates hacker gibberish.
       /// </summary>

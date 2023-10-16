@@ -50,6 +50,8 @@ namespace Bogus.DataSets
          this.hasWeekdayAbbrContext = HasKey("weekday.abbr_context", false);
       }
 
+      protected internal DateTime GetTimeReference() => LocalSystemClock?.Invoke() ?? SystemClock();
+
       /// <summary>
       /// Get a <see cref="DateTime"/> in the past between <paramref name="refDate"/> and <paramref name="yearsToGoBack"/>.
       /// </summary>

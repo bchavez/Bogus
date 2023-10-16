@@ -1,5 +1,10 @@
+## v34.0.3 (UNRELEASED @ master)
+Release Date: UNRELEASED
+* PR 500: Allows locally set time references for Date calculations instead of global statics. See Faker[T].UseDateTimeReference() and Date.LocalSystemClock.
+
 ## v34.0.2
 Release Date: 2022-03-27
+
 * PR 406, 415: Improve XML documentation. Thanks @danielwagn3r, @DanteDeRuwe
 * PR 413: Change access modifier of `Randomizer.localSeed` to protected. Thanks @davermaltby  
 

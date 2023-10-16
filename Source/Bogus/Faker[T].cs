@@ -166,8 +166,8 @@ namespace Bogus
       }
 
       /// <summary>
-      /// Sets a local time reference for all Date time calculations used by
-      /// this Faker[T] instance; unless refDate parameters are specified 
+      /// Sets a local time reference for all DateTime calculations used by
+      /// this <see cref="Faker{T}"/> instance; unless <paramref name="refDate"/> parameters are specified 
       /// with the corresponding Date.Methods().
       /// </summary>
       /// <param name="refDate">The anchored DateTime reference to use.</param>

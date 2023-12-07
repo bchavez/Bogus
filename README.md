@@ -21,6 +21,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 
 ##### Projects That Use Bogus
 
+* [**Bitwarden Passwordless Server**](https://github.com/bitwarden/passwordless-server) [[code]](https://github.com/bitwarden/passwordless-server/blob/147e0ffa6e687634edcda7ac89518eab56936835/tests/Api.IntegrationTests/Helpers/User/UserHelpers.cs#L12-L22)
 * [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
 * [**FluentValidation**](https://github.com/FluentValidation/FluentValidation) [[code]](https://github.com/FluentValidation/FluentValidation/search?q=Bogus)
 * [**Microsoft Windows-XAML / Template10**](https://github.com/Windows-XAML/Template10) [[code]](https://github.com/Windows-XAML/Template10/blob/beed5e58a4f8ab381cff6f063d2a91db5b4fc3bc/Basics/PrismSample/Services/DataService.cs#L1)

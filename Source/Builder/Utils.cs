@@ -22,6 +22,7 @@ using Nuke.Common.Utilities.Collections;
 using Z.ExtensionMethods.ObjectExtensions;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Ionic.Zip;
 
 public static class BuildContext
 {
@@ -149,6 +150,13 @@ public static class ExtensionsForNuke
 
       var newSettings = toolSettings.AddProperty("NoWarn", arg);
       return newSettings;
+   }
+
+   public static void UnZipWithPasswordTo(this AbsolutePath archiveFile, AbsolutePath destination, string password)
+   {
+      using var zip = ZipFile.Read(archiveFile);
+      zip.Password = password;
+      zip.ExtractAll(destination);
    }
 }
 

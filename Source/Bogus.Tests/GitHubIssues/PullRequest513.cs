@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Bogus.Tests.GitHubIssues
 {
-   public class Issue503 : SeededTest
+   public class PullRequest513 : SeededTest
    {
       [Fact]
       public void sv_has_gendered_names()

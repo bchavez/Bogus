@@ -384,47 +384,8 @@
     ]
   },
   "name": {
-    "first_name_women": [
-      "Astrid",
-      "Anna",
-      "Alice",
-      "Amanda",
-      "Ann",
-      "Agneta",
-      "Anette",
-      "Anneli",
-      "Alexandra",
-      "Agnes",
-      "Anne",
-      "Alva",
-      "Alma",
-      "Angelica",
-      "Ann-Marie",
-      "Maria",
-      "Margareta",
-      "Elisabeth",
-      "Eva",
-      "Birgitta",
-      "Kristina",
-      "Karin",
-      "Elisabet",
-      "Marie",
-      "Lotta",
-      "Ronja",
-      "Veronica"
-    ],
-    "first_name_men": [
-      "Erik",
-      "Lars",
-      "Karl",
-      "Anders",
-      "Per",
-      "Johan",
-      "Nils",
-      "Lennart",
-      "Emil",
-      "Hans"
-    ],
+    "first_name_women": [],
+    "first_name_men": [],
     "last_name": [
       "Johansson",
       "Andersson",
@@ -625,14 +586,14 @@
       ]
     },
     "name": [
-      "#{first_name_women} #{last_name}",
-      "#{first_name_men} #{last_name}",
-      "#{first_name_women} #{last_name}",
-      "#{first_name_men} #{last_name}",
-      "#{first_name_women} #{last_name}",
-      "#{first_name_men} #{last_name}",
-      "#{prefix} #{first_name_men} #{last_name}",
-      "#{prefix} #{first_name_women} #{last_name}"
+      "#{female_first_name} #{last_name}",
+      "#{male_first_name} #{last_name}",
+      "#{female_first_name} #{last_name}",
+      "#{male_first_name} #{last_name}",
+      "#{female_first_name} #{last_name}",
+      "#{male_first_name} #{last_name}",
+      "#{prefix} #{male_first_name} #{last_name}",
+      "#{prefix} #{female_first_name} #{last_name}"
     ],
     "female_first_name": [
       "Anna",

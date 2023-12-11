@@ -229,13 +229,17 @@ namespace Bogus.DataSets
       /// <summary>
       /// Get a random `Exception` with a fake stack trace.
       /// </summary>
+      /// <param name="forcedCase">
+      /// For testing purposes only. Pass a specific case number to generate a corresponding exception.
+      /// </param>
       /// <returns>
       /// A random `Exception` with a fake stack trace.
       /// </returns>
-      public Exception Exception()
+      public Exception Exception(int? forcedCase = null)
       {
          Exception exception = null;
-         switch( this.Random.Number(11) )
+         int caseNumber = forcedCase ?? this.Random.Number(11);
+         switch ( caseNumber )
          {
             case 0:
                try

@@ -42,7 +42,7 @@ deploy:
       prerelease: $(IsPreRelease)
       artifact: Zip, NuGet, Symbols
       auth_token:
-          secure: cyivrWQwrZNAb6UCNXlIQlGfVSnKIC6TatUOIP95CQgMeKGnmBSqBgAFv2TsRZhR
+          secure: 2XX+rKvAK7FXcKIKYHE4vDjOmM4hrzNy8lvS84IwU605AekfBB9XtSr82shJwhHlYMD+01g7gM/P8e9ko83ovFpAr3C2KvoaJRB7RqyUOquKK8RkcXGc8rQyylcRRrA6
       on:
           branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/ 

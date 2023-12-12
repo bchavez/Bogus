@@ -1,5 +1,5 @@
 ## v35.0.1
-Release Date: 2023-12-13
+Release Date: 2023-12-11
 * PR 513: Update Swedish `sv` locale; first/last names. Thanks @EBD232!
 
 ## v34.0.2

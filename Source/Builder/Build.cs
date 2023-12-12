@@ -141,7 +141,7 @@ partial class Build : NukeBuild
              var dir = project.Directory;
              var binAndObjs = dir.GlobDirectories("**/bin", "**/obj");
              foreach (var d in binAndObjs) {
-                DeleteDirectory(d);
+                d.DeleteDirectory();
              }
           }
 

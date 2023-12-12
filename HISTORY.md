@@ -10,7 +10,7 @@ Release Date: 2022-03-27
 ## v34.0.1
 Release Date: 2021-11-22
 
-* PR 399: Add support for .NET 6 DateOnly and TimeOnly random genrations in Faker.Date. Thanks @prasadtelkikar!
+* PR 399: Add support for .NET 6 DateOnly and TimeOnly random generations in Faker.Date. Thanks @prasadtelkikar!
 * Moved Faker[T] extensions .OrNull() and .GenerateBetween() into main Bogus namespace.
 * C# 10 and VS 2022 build tooling.
 

@@ -64,13 +64,6 @@ partial class Build : NukeBuild
    }
 
 
-   [PackageExecutable(
-    packageId: "secure-file",
-    packageExecutable: "secure-file.exe",
-    Framework = null)]
-   readonly Tool SecureFile;
-
-
    [Solution(GenerateProjects = true)]
    readonly Solution Solution;
    Project BogusProject;

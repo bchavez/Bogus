@@ -1183,8 +1183,8 @@ The minimum requirements to build **Bogus** from source code are as follows:
 * **.NET SDK**
     * LTS [`SDK v8.0.100`](https://dotnet.microsoft.com/download/dotnet/8.0)
     * LTS [`SDK v6.0.417`](https://dotnet.microsoft.com/download/dotnet/6.0)
-* Optional: IDE with C# 10 support.
-    * Visual Studio 2022 or later.
+* Optional:
+    * Visual Studio 2022 or later - IDE with C# 10 support.
 
 #### Build Instructions
 * Download the source code.
@@ -1208,7 +1208,8 @@ The following folders will be created depending on the build task executed:
 #### Rebundling Locales
 Re-bundling the latest locale data from **faker.js** requires the following software installed:  
 
-* [**NodeJS**](https://nodejs.org/) `v12.18.1` or higher.
+* [**Volta 1.1.1**](https://volta.sh) or later:
+   * Installs [**NodeJS**](https://nodejs.org/) `v12.18.1` or higher.
 * [**gulp**](https://gulpjs.com/) `v4` or higher.
 
 Steps to re-bundle locale data from **faker.js**:

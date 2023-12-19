@@ -16,7 +16,7 @@ namespace Bogus.Tests.DataSetTests
          var maxBehind = now.AddYears(-1);
 
          var somePastDate = date.PastDateOnly(refDate: now);
-         somePastDate.Should().BeInRange(maxBehind, now);
+         somePastDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
       }
 
       [Fact]
@@ -27,7 +27,7 @@ namespace Bogus.Tests.DataSetTests
 
          var somePastDate = date.PastDateOnly(5, now);
 
-         somePastDate.Should().BeInRange(maxBehind, now);
+         somePastDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
       }
 
       [Fact]
@@ -38,7 +38,7 @@ namespace Bogus.Tests.DataSetTests
 
          var someDateSoon = date.SoonDateOnly(3, now);
 
-         someDateSoon.Should().BeInRange(now, maxDate);
+         someDateSoon.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
       }
 
       [Fact]
@@ -48,7 +48,7 @@ namespace Bogus.Tests.DataSetTests
          var maxDate = now.AddYears(1);
 
          var someFutureDate = date.FutureDateOnly(refDate: now);
-         someFutureDate.Should().BeInRange(now, maxDate);
+         someFutureDate.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
       }
 
       [Fact]
@@ -58,7 +58,7 @@ namespace Bogus.Tests.DataSetTests
          var maxDate = now.AddYears(5);
 
          var someFutureDate = date.FutureDateOnly(5, now);
-         someFutureDate.Should().BeInRange(now, maxDate);
+         someFutureDate.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
       }
 
       [Fact]
@@ -69,11 +69,11 @@ namespace Bogus.Tests.DataSetTests
 
          var someDate = date.BetweenDateOnly(start, end);
 
-         someDate.Should().BeInRange(start, end);
+         someDate.Should().BeOnOrAfter(start).And.BeOnOrBefore(end);
 
          //and reverse...
          var otherDate = date.BetweenDateOnly(end, start);
-         otherDate.Should().BeInRange(start, end);
+         otherDate.Should().BeOnOrAfter(start).And.BeOnOrBefore(end);
       }
 
       [Fact]
@@ -84,7 +84,7 @@ namespace Bogus.Tests.DataSetTests
 
          var someRecentDate = date.RecentDateOnly(refDate: now);
 
-         someRecentDate.Should().BeInRange(maxBehind, now);
+         someRecentDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
       }
 
       [Fact]

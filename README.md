@@ -21,10 +21,11 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 
 ##### Projects That Use Bogus
 
+* [**Bitwarden Passwordless Server**](https://github.com/bitwarden/passwordless-server) [[code]](https://github.com/bitwarden/passwordless-server/blob/147e0ffa6e687634edcda7ac89518eab56936835/tests/Api.IntegrationTests/Helpers/User/UserHelpers.cs#L12-L22)
 * [**Elasticsearch .NET Client (NEST)**](https://github.com/elastic/elasticsearch-net) [[code]](https://github.com/elastic/elasticsearch-net/tree/82c938893b2ff4ddca03a8e977ad14a16da712ba/src/Tests/Framework/MockData)
 * [**FluentValidation**](https://github.com/FluentValidation/FluentValidation) [[code]](https://github.com/FluentValidation/FluentValidation/search?q=Bogus)
 * [**Microsoft Windows-XAML / Template10**](https://github.com/Windows-XAML/Template10) [[code]](https://github.com/Windows-XAML/Template10/blob/beed5e58a4f8ab381cff6f063d2a91db5b4fc3bc/Basics/PrismSample/Services/DataService.cs#L1)
-* [**Microsoft Learning / Developing Microsoft Azure Solutions**](https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions) [[code]](https://github.com/MicrosoftLearning/20532-DevelopingMicrosoftAzureSolutions/blob/4bb595f6b908798f8b3d49773455699102650806/Allfiles/Mod03/Labfiles/Starter/Contoso.Events.Data/ContextInitializer.cs)
+* [**Microsoft Learning / Cloud-Native Applications Using Microsoft Azure Cosmos DB**](https://github.com/MicrosoftLearning/dp-420-cosmos-db-dev) [[code]](https://github.com/MicrosoftLearning/dp-420-cosmos-db-dev/blob/fdbb3811c20a601fdfda8ea04c9c7de89b8afb19/instructions/08-sdk-bulk.md)
 * **Microsoft Office Developer**
     * [**Office 365 Development Training Content**](https://github.com/OfficeDev/TrainingContent) [[code]](https://github.com/OfficeDev/TrainingContent/blob/0b2579517f0271f9a64f613b2046ab2821a73956/Teams/03%20Authentication/LabFiles/Starter/officedev-talent-management/DataModel/PositionCandidateData.cs)
     * [**Microsoft Teams Sample Connector**](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp) [[code]](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp/blob/8805bb1acb136949905e4644c4e714dd7b70a61a/TeamsToDoAppConnector/Utils/TaskHelper.cs)
@@ -1180,10 +1181,10 @@ The minimum requirements to build **Bogus** from source code are as follows:
 * [**Git for Windows**](https://git-scm.com/downloads) `v2.39.2` or later.
 * [**.NET Framework**](https://dotnet.microsoft.com/download/dotnet-framework) `v4.7.1`.
 * **.NET SDK**
-    * LTS [`SDK v7.0.202`](https://dotnet.microsoft.com/download/dotnet/7.0)
-    * STS [`SDK v6.0.407`](https://dotnet.microsoft.com/download/dotnet/6.0)
-* Optional: IDE with C# 10 support.
-    * Visual Studio 2022 or later.
+    * LTS [`SDK v8.0.100`](https://dotnet.microsoft.com/download/dotnet/8.0)
+    * LTS [`SDK v6.0.417`](https://dotnet.microsoft.com/download/dotnet/6.0)
+* Optional:
+    * Visual Studio 2022 or later - IDE with C# 10 support.
 
 #### Build Instructions
 * Download the source code.
@@ -1207,7 +1208,8 @@ The following folders will be created depending on the build task executed:
 #### Rebundling Locales
 Re-bundling the latest locale data from **faker.js** requires the following software installed:  
 
-* [**NodeJS**](https://nodejs.org/) `v12.18.1` or higher.
+* [**Volta 1.1.1**](https://volta.sh) or later:
+   * Installs [**NodeJS**](https://nodejs.org/) `v12.18.1` or higher.
 * [**gulp**](https://gulpjs.com/) `v4` or higher.
 
 Steps to re-bundle locale data from **faker.js**:

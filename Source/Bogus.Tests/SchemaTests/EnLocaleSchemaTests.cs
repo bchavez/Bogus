@@ -17,6 +17,15 @@ using static VerifyXunit.Verifier;
 
 namespace Bogus.Tests.SchemaTests;
 
+public static class ModuleInit
+{
+   [ModuleInitializer]
+   public static void Init()
+   {
+      VerifierSettings.SortJsonObjects();
+   }
+}
+
 
 [UsesVerify]
 public class EnLocaleSchemaTests

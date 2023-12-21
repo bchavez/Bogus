@@ -1,0 +1,59 @@
+﻿{
+  address: {
+    building_number: [Array String; 1],
+    city: [Array String; 1],
+    city_name: [Array String; 78],
+    country: [Array String; 239],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 1],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 6],
+    street_title: [Array String; 235]
+  },
+  commerce: {
+    color: [Array String; 18],
+    department: [Array String; 18],
+    product_name: {
+      adjective: [Array String; 10],
+      material: [Array String; 7],
+      product: [Array String; 8]
+    }
+  },
+  company: {
+    name: [Array String; 8],
+    prefix: [Array String; 3],
+    suffix: [Array String; 2]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 6],
+    free_email: [Array String; 5]
+  },
+  name: {
+    female_first_name: [Array String; 73],
+    female_last_name: [Array String; 10],
+    male_first_name: [Array String; 35],
+    male_last_name: [Array String; 10],
+    name: [Array String; 6]
+  },
+  phone_number: {
+    formats: [Array String; 1]
+  },
+  separator:  və ,
+  title: Azerbaijani
+}

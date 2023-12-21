@@ -1,0 +1,31 @@
+﻿{
+  address: {
+    city: [Array String; 1],
+    city_prefix: [Array String; 14],
+    default_country: [Array String; 4],
+    postcode: [Array String; 2],
+    state: [Array String; 9]
+  },
+  cell_phone: {
+    formats: [Array String; 18]
+  },
+  company: {
+    suffix: [Array String; 3]
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  name: {
+    female_first_name: [Array String; 291],
+    first_name: [Array String; 550],
+    last_name: [Array String; 241],
+    male_first_name: [Array String; 251],
+    name: [Array String; 2]
+  },
+  phone_number: {
+    area_code: [Array String; 38],
+    exchange_code: [Array String; 283],
+    formats: [Array String; 12]
+  },
+  title: English (South Africa)
+}

@@ -1,6 +1,7 @@
 ﻿#if NET6_0_OR_GREATER
 using Argon;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;
+using Z.ExtensionMethods;
 using static VerifyXunit.Verifier;
 
 namespace Bogus.Tests.SchemaTests;
@@ -24,20 +26,37 @@ public static class ModuleInit
 
 
 [UsesVerify]
-public class EnLocaleSchemaTests
+public class LocaleSchemaTests
 {
-   [Fact]
-   public Task ensure_wellknown_en_locale_schema()
-   {
-      var localeJson = File.ReadAllText("../../../../Bogus/data/en.locale.json");
+    const string DataFolder = "../../../../Bogus/data/";
 
-      var enLocale = JToken.Parse(localeJson);
+   [Theory]
+   [MemberData(nameof(GetLocaleCodes))]
+   public Task ensure_wellknown_locale_schema(string localeCode)
+   {
+      var localeFile = Path.Combine(DataFolder, $"{localeCode}.locale.json");
+
+      var localeJsonRaw = File.ReadAllText(localeFile);
+
+      var locale = JToken.Parse(localeJsonRaw);
 
       var settings = new VerifySettings();
-      
+
       settings.AddExtraSettings(jss => jss.ContractResolver = new InterceptedContractResolver(jss.ContractResolver));
 
-      return Verify(enLocale, settings);
+      return Verify(locale, settings)
+         .UseDirectory("../../Bogus/data/")
+         .UseFileName($"{localeCode}.locale.schema");
+   }
+
+   public static IEnumerable<object[]> GetLocaleCodes()
+   {
+      var localeCodes = Directory.GetFiles(DataFolder, "*.locale.json")
+                                     .Select(file => Path.GetFileNameWithoutExtension(file).GetBefore("."));
+      foreach(var localeCode in localeCodes )
+      {
+         yield return new[] { localeCode };
+      }
    }
 }
 

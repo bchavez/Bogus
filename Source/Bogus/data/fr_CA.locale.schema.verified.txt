@@ -1,0 +1,16 @@
+﻿{
+  address: {
+    default_country: [Array String; 1],
+    postcode: [Array String; 18],
+    state: [Array String; 13],
+    state_abbr: [Array String; 13]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 3]
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  title: French (Canada)
+}

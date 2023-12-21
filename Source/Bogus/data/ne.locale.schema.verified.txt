@@ -1,0 +1,23 @@
+﻿{
+  address: {
+    city: [Array String; 16],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    state: [Array String; 53]
+  },
+  company: {
+    suffix: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 4]
+  },
+  name: {
+    first_name: [Array String; 55],
+    last_name: [Array String; 39]
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  title: Nepalese
+}

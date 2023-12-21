@@ -1,0 +1,35 @@
+﻿{
+  address: {
+    building_number: [Array String; 6],
+    city: [Array String; 81],
+    country: [Array String; 236],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    state: [Array String; 81],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_root: [Array String; 41]
+  },
+  cell_phone: {
+    formats: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 10]
+  },
+  lorem: {
+    words: [Array String; 216]
+  },
+  name: {
+    female_first_name: [Array String; 414],
+    first_name: [Array String; 731],
+    last_name: [Array String; 198],
+    male_first_name: [Array String; 752],
+    name: [Array String; 6],
+    prefix: [Array String; 4]
+  },
+  phone_number: {
+    area_code: [Array String; 97],
+    formats: [Array String; 2]
+  },
+  title: Turkish
+}

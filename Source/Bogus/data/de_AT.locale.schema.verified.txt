@@ -1,0 +1,39 @@
+﻿{
+  address: {
+    building_number: [Array String; 6],
+    city: [Array String; 1],
+    city_name: [Array String; 119],
+    country: [Array String; 237],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 3],
+    state: [Array String; 9],
+    state_abbr: [Array String; 9],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_root: [Array String; 198]
+  },
+  cell_phone: {
+    formats: [Array String; 4]
+  },
+  company: {
+    legal_form: [Array String; 7],
+    name: [Array String; 3],
+    suffix: [Array String; 7]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 3]
+  },
+  name: {
+    first_name: [Array String; 1155],
+    last_name: [Array String; 1688],
+    name: [Array String; 6],
+    nobility_title_prefix: [Array String; 4],
+    prefix: [Array String; 2]
+  },
+  phone_number: {
+    formats: [Array String; 8]
+  },
+  title: German (Austria)
+}

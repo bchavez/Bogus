@@ -1,0 +1,24 @@
+﻿{
+  address: {
+    building_number: [Array String; 5],
+    city: [Array String; 1],
+    city_prefix: [Array String; 21],
+    city_suffix: [Array String; 19],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    state: [Array String; 34],
+    state_abbr: [Array String; 34],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_suffix: [Array String; 8]
+  },
+  name: {
+    first_name: [Array String; 134],
+    last_name: [Array String; 100],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  title: Chinese
+}

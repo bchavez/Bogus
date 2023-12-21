@@ -1,0 +1,27 @@
+﻿{
+  address: {
+    city: [Array String; 4],
+    city_prefix: [Array String; 7],
+    city_suffix: [Array String; 4],
+    postcode: [Array String; 1],
+    state: [Array String; 47],
+    state_abbr: [Array String; 47],
+    street_name: [Array String; 2]
+  },
+  cell_phone: {
+    formats: [Array String; 3]
+  },
+  lorem: {
+    supplemental: [Array String; 506],
+    words: [Array String; 509]
+  },
+  name: {
+    first_name: [Array String; 21],
+    last_name: [Array String; 20],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: Japanese
+}

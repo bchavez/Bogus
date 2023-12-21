@@ -1,0 +1,10 @@
+﻿{
+  name: {
+    female_first_name: [Array String; 50],
+    first_name: [Array String; 100],
+    last_name: [Array String; 50],
+    male_first_name: [Array String; 50],
+    name: [Array String; 4]
+  },
+  title: Finnish
+}

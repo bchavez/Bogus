@@ -1,0 +1,18 @@
+﻿{
+  address: {
+    county: [Array String; 70],
+    default_country: [Array String; 4],
+    postcode: [Array String; 2],
+    uk_country: [Array String; 4]
+  },
+  cell_phone: {
+    formats: [Array String; 6]
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  phone_number: {
+    formats: [Array String; 15]
+  },
+  title: English (Great Britain)
+}

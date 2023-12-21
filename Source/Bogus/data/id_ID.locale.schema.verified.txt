@@ -1,0 +1,48 @@
+﻿{
+  address: {
+    building_number: [Array String; 2],
+    city: [Array String; 1],
+    city_name: [Array String; 227],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    state: [Array String; 34],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_prefix: [Array String; 8]
+  },
+  company: {
+    name: [Array String; 3],
+    prefix: [Array String; 5],
+    suffix: [Array String; 2]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 20],
+    free_email: [Array String; 4]
+  },
+  name: {
+    female_first_name: [Array String; 222],
+    female_last_name: [Array String; 69],
+    male_first_name: [Array String; 494],
+    male_last_name: [Array String; 106],
+    name: [Array String; 7],
+    suffix: [Array String; 20]
+  },
+  phone_number: {
+    formats: [Array String; 38]
+  },
+  title: Indonesia
+}

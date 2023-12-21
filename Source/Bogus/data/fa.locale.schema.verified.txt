@@ -1,0 +1,230 @@
+﻿{
+  address: {
+    building_number: [Array String; 2],
+    city: [Array String; 1],
+    city_name: [Array String; 50],
+    city_prefix: [Array String; 6],
+    city_suffix: [Array String; 7],
+    country: [Array String; 232],
+    country_code: [Array String; 250],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 31],
+    street_address: [Array String; 2],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 4],
+    street_suffix: [Array String; 32]
+  },
+  cell_phone: {
+    formats: [Array String; 17]
+  },
+  commerce: {
+    color: [Array String; 20],
+    department: [Array String; 22],
+    product_name: {
+      adjective: [Array String; 14],
+      material: [Array String; 10],
+      product: [Array String; 24]
+    }
+  },
+  company: {
+    adjective: [Array String; 69],
+    bs_adjective: [Array String; 37],
+    bs_noun: [Array String; 35],
+    bs_verb: [Array String; 27],
+    descriptor: [Array String; 44],
+    name: [Array String; 3],
+    noun: [Array String; 34],
+    suffix: [Array String; 4]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  finance: {
+    account_type: [Array String; 6],
+    credit_card: {
+      mastercard: [Array String; 2],
+      visa: [Array String; 2]
+    },
+    currency: [
+      {
+        code: AED,
+        name: درهم امارات,
+        symbol: 
+      },
+      {
+        code: AFN,
+        name: افغانی,
+        symbol: ؋
+      },
+      {
+        code: ARS,
+        name: پزو آرژانتین,
+        symbol: $
+      },
+      {
+        code: AUD,
+        name: دلار استرالیا,
+        symbol: $
+      },
+      {
+        code: AZN,
+        name: مانات آذربایجان,
+        symbol: ман
+      },
+      {
+        code: CAD,
+        name: دلار کانادا,
+        symbol: $
+      },
+      {
+        code: CHF,
+        name: فرانک سوئیس,
+        symbol: CHF
+      },
+      {
+        code: CZK,
+        name: کرون چک,
+        symbol: Kč
+      },
+      {
+        code: EEK,
+        name: کرون,
+        symbol: 
+      },
+      {
+        code: IQD,
+        name: دینار عراق,
+        symbol: 
+      },
+      {
+        code: IRR,
+        name: ریال ایران,
+        symbol: ﷼
+      },
+      {
+        code: ISK,
+        name: کرون ایسلند,
+        symbol: kr
+      },
+      {
+        code: JOD,
+        name: دینار اردن,
+        symbol: 
+      },
+      {
+        code: JPY,
+        name: ین,
+        symbol: ¥
+      },
+      {
+        code: KWD,
+        name: دینار کویت,
+        symbol: 
+      },
+      {
+        code: LYD,
+        name: دینار لیبی,
+        symbol: 
+      },
+      {
+        code: MAD,
+        name: درهم مراکش,
+        symbol: 
+      },
+      {
+        code: NPR,
+        name: روپی نپال,
+        symbol: ₨
+      },
+      {
+        code: OMR,
+        name: ریال عمان,
+        symbol: ﷼
+      },
+      {
+        code: PHP,
+        name: پزو فیلیپین,
+        symbol: Php
+      },
+      {
+        code: PKR,
+        name: روپی پاکستان,
+        symbol: ₨
+      },
+      {
+        code: QAR,
+        name: ریال قطر,
+        symbol: ﷼
+      },
+      {
+        code: RUB,
+        name: روبل روسیه,
+        symbol: руб
+      },
+      {
+        code: SAR,
+        name: ریال عربستان,
+        symbol: ﷼
+      },
+      {
+        code: SDG,
+        name: پوند سودان,
+        symbol: 
+      },
+      {
+        code: SEK,
+        name: کرون سوئد,
+        symbol: kr
+      },
+      {
+        code: SGD,
+        name: دلار سنگاپور,
+        symbol: $
+      }
+    ],
+    transaction_type: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    example_email: [Array String; 3],
+    free_email: [Array String; 3]
+  },
+  lorem: {
+    words: [Array String; 101]
+  },
+  name: {
+    female_first_name: [Array String; 67],
+    first_name: [Array String; 720],
+    last_name: [Array String; 144],
+    male_first_name: [Array String; 73],
+    prefix: [Array String; 3],
+    title: {
+      descriptor: [Array String; 19],
+      job: [Array String; 34],
+      level: [Array String; 36]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 14]
+  },
+  title: Farsi,
+  vehicle: {
+    fuel: [Array String; 4],
+    manufacturer: [Array String; 28],
+    model: [Array String; 35],
+    type: [Array String; 8]
+  }
+}

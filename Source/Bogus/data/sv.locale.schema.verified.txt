@@ -1,0 +1,69 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_prefix: [Array String; 25],
+    city_suffix: [Array String; 19],
+    common_street_suffix: [Array String; 2],
+    country: [Array String; 205],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 23],
+    street_address: [Array String; 1],
+    street_name: [Array String; 4],
+    street_prefix: [Array String; 6],
+    street_root: [Array String; 28],
+    street_suffix: [Array String; 5]
+  },
+  cell_phone: {
+    common_cell_prefix: [Array String; 3],
+    formats: [Array String; 1]
+  },
+  commerce: {
+    color: [Array String; 15],
+    department: [Array String; 17],
+    product_name: {
+      adjective: [Array String; 10],
+      material: [Array String; 9],
+      product: [Array String; 9]
+    }
+  },
+  company: {
+    name: [Array String; 3],
+    suffix: [Array String; 7]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  name: {
+    female_first_name: [Array String; 100],
+    last_name: [Array String; 100],
+    male_first_name: [Array String; 100],
+    name: [Array String; 8],
+    prefix: [Array String; 3],
+    title: {
+      descriptor: [Array String; 22],
+      job: [Array String; 25],
+      level: [Array String; 37]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 2]
+  },
+  team: {
+    name: [Array String; 1],
+    suffix: [Array String; 13]
+  },
+  title: Swedish
+}

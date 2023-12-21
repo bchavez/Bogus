@@ -1,0 +1,34 @@
+﻿{
+  address: {
+    city: [Array String; 1],
+    city_name: [Array String; 28],
+    city_suffix: [Array String; 3],
+    postcode: [Array String; 1],
+    state: [Array String; 17],
+    state_abbr: [Array String; 17],
+    street_name: [Array String; 1],
+    street_root: [Array String; 28],
+    street_suffix: [Array String; 3]
+  },
+  company: {
+    name: [Array String; 2],
+    prefix: [Array String; 2],
+    suffix: [Array String; 6]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 4]
+  },
+  lorem: {
+    words: [Array String; 128]
+  },
+  name: {
+    first_name: [Array String; 21],
+    last_name: [Array String; 20],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  title: Korean
+}

@@ -1,0 +1,24 @@
+﻿{
+  address: {
+    country_code: [Array String; 10],
+    default_country: [Array String; 1],
+    postcode: [Array String; 9]
+  },
+  company: {
+    name: [Array String; 3],
+    suffix: [Array String; 8]
+  },
+  internet: {
+    domain_suffix: [Array String; 9]
+  },
+  name: {
+    first_name: [Array String; 336],
+    last_name: [Array String; 209],
+    name: [Array String; 6],
+    prefix: [Array String; 3]
+  },
+  phone_number: {
+    formats: [Array String; 9]
+  },
+  title: German (Switzerland)
+}

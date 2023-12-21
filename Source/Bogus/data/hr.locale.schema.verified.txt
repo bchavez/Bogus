@@ -1,0 +1,54 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 128],
+    country: [Array String; 246],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    street: [Array String; 375],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    time_zone: [Array String; 127]
+  },
+  cell_phone: {
+    formats: [Array String; 6]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 3]
+  },
+  name: {
+    female_first_name: [Array String; 238],
+    first_name: [Array String; 409],
+    last_name: [Array String; 11617],
+    male_first_name: [Array String; 171],
+    name: [Array String; 6],
+    prefix: [Array String; 5],
+    suffix: [Array String; 2],
+    title: {
+      descriptor: [Array String; 10],
+      job: [Array String; 23],
+      level: [Array String; 22]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 6]
+  },
+  title: Hrvatski
+}

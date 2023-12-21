@@ -1,21 +1,17 @@
-﻿#if NET8_0_OR_GREATER
-
+﻿#if NET6_0_OR_GREATER
 using Argon;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using VerifyTests;
 using VerifyXunit;
 using Xunit;
-using Z.ExtensionMethods;
 using static VerifyXunit.Verifier;
 
 namespace Bogus.Tests.SchemaTests;
+
 
 public static class ModuleInit
 {
@@ -79,5 +75,4 @@ public class InterceptedContractResolver : IContractResolver
       return contract;
    }
 }
-
 #endif

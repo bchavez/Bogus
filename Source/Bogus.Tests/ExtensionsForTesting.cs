@@ -2,23 +2,22 @@ using System;
 using Newtonsoft.Json;
 using Xunit.Abstractions;
 
-namespace Bogus.Tests
+namespace Bogus.Tests;
+
+public static class ExtensionsForTesting
 {
-   public static class ExtensionsForTesting
+   public static void Dump(this object obj)
    {
-      public static void Dump(this object obj)
-      {
-         Console.WriteLine(obj.DumpString());
-      }
+      Console.WriteLine(obj.DumpString());
+   }
 
-      public static string DumpString(this object obj)
-      {
-         return JsonConvert.SerializeObject(obj, Formatting.Indented);
-      }
+   public static string DumpString(this object obj)
+   {
+      return JsonConvert.SerializeObject(obj, Formatting.Indented);
+   }
 
-      public static void Dump(this ITestOutputHelper console, object obj)
-      {
-         console.WriteLine(obj.DumpString());
-      }
+   public static void Dump(this ITestOutputHelper console, object obj)
+   {
+      console.WriteLine(obj.DumpString());
    }
 }

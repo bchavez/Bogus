@@ -1,0 +1,78 @@
+﻿{
+  address: {
+    building_number: [Array String; 1],
+    city: [Array String; 1],
+    city_name: [Array String; 47],
+    country: [Array String; 210],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 1],
+    state: [Array String; 86],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 6],
+    street_title: [Array String; 100]
+  },
+  commerce: {
+    color: [Array String; 31],
+    department: [Array String; 24],
+    product_name: {
+      adjective: [Array String; 12],
+      material: [Array String; 11],
+      product: [Array String; 20]
+    }
+  },
+  company: {
+    name: [Array String; 8],
+    prefix: [Array String; 8],
+    suffix: [Array String; 5]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  hacker: {
+    abbreviation: [Array String; 30],
+    adjective: [Array String; 17],
+    ingverb: [Array String; 19],
+    noun: [Array String; 27],
+    phrase: [Array String; 8],
+    verb: [Array String; 22]
+  },
+  internet: {
+    domain_suffix: [Array String; 6],
+    free_email: [Array String; 6]
+  },
+  lorem: {
+    words: [Array String; 189]
+  },
+  name: {
+    female_first_name: [Array String; 56],
+    female_last_name: [Array String; 250],
+    female_middle_name: [Array String; 51],
+    male_first_name: [Array String; 52],
+    male_last_name: [Array String; 250],
+    male_middle_name: [Array String; 52],
+    name: [Array String; 8],
+    title: {
+      descriptor: [Array String; 10],
+      job: [Array String; 16],
+      level: [Array String; 8]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 1]
+  },
+  separator:  и ,
+  title: Russian
+}

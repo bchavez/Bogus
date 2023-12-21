@@ -1,0 +1,74 @@
+﻿{
+  address: {
+    building_number: [Array String; 2],
+    city: [Array String; 1],
+    city_name: [Array String; 76],
+    country: [Array String; 176],
+    default_country: [Array String; 1],
+    postcode: [Array String; 2],
+    secondary_address: [Array String; 2],
+    state: [Array String; 28],
+    street_address: [Array String; 2],
+    street_name: [Array String; 1],
+    street_suffix: [Array String; 6],
+    street_title: [Array String; 347]
+  },
+  cell_phone: {
+    formats: [Array String; 3]
+  },
+  commerce: {
+    color: [Array String; 23],
+    department: [Array String; 21],
+    product_name: {
+      adjective: [Array String; 12],
+      material: [Array String; 7],
+      product: [Array String; 21]
+    }
+  },
+  company: {
+    name: [Array String; 5],
+    prefix: [Array String; 6],
+    suffix: [Array String; 4]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 8]
+  },
+  lorem: {
+    supplemental: [Array String; 840],
+    words: [Array String; 184]
+  },
+  name: {
+    female_first_name: [Array String; 105],
+    female_last_name: [Array String; 209],
+    male_first_name: [Array String; 91],
+    male_last_name: [Array String; 209],
+    name: [Array String; 11],
+    prefix: [Array String; 3],
+    suffix: [Array String; 2],
+    title: {
+      descriptor: [Array String; 12],
+      job: [Array String; 22],
+      level: [Array String; 30]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  separator:  un ,
+  title: Latvian
+}

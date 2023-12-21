@@ -1,0 +1,69 @@
+﻿{
+  address: {
+    building_number: [Array String; 9],
+    city: [Array String; 2],
+    city_prefix: [Array String; 2501],
+    city_suffix: [Array String; 47],
+    country: [Array String; 254],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 4],
+    state: [Array String; 12],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 17]
+  },
+  commerce: {
+    color: [Array String; 36],
+    department: [Array String; 22],
+    product_name: {
+      adjective: [Array String; 20],
+      material: [Array String; 13],
+      product: [Array String; 31]
+    }
+  },
+  company: {
+    suffix: [Array String; 15]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  hacker: {
+    adjective: [Array String; 22],
+    noun: [Array String; 26],
+    phrase: [Array String; 8],
+    verb: [Array String; 20]
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 3]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    female_first_name: [Array String; 514],
+    first_name: [Array String; 50],
+    last_name: [Array String; 50],
+    male_first_name: [Array String; 587],
+    name: [Array String; 6],
+    prefix: [Array String; 5],
+    suffix: [Array String; 7],
+    tussenvoegsel: [Array String; 7]
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: Dutch
+}

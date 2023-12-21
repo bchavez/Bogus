@@ -1,0 +1,17 @@
+﻿{
+  address: {
+    city: [Array String; 1],
+    city_name: [Array String; 173],
+    country_code: [Array String; 1],
+    default_country: [Array String; 1],
+    postcode: [Array String; 9],
+    state: [Array String; 26]
+  },
+  internet: {
+    domain_suffix: [Array String; 6]
+  },
+  phone_number: {
+    formats: [Array String; 15]
+  },
+  title: French (Switzerland)
+}

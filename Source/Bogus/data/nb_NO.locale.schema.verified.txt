@@ -1,0 +1,38 @@
+﻿{
+  address: {
+    building_number: [Array String; 2],
+    city: [Array String; 1],
+    city_root: [Array String; 17],
+    city_suffix: [Array String; 28],
+    common_street_suffix: [Array String; 6],
+    default_country: [Array String; 1],
+    postcode: [Array String; 4],
+    secondary_address: [Array String; 3],
+    state: [Array String; 1],
+    street_address: [Array String; 1],
+    street_name: [Array String; 4],
+    street_prefix: [Array String; 6],
+    street_root: [Array String; 33],
+    street_suffix: [Array String; 46]
+  },
+  company: {
+    name: [Array String; 3],
+    suffix: [Array String; 6]
+  },
+  internet: {
+    domain_suffix: [Array String; 4]
+  },
+  name: {
+    female_first_name: [Array String; 50],
+    first_name: [Array String; 100],
+    last_name: [Array String; 100],
+    male_first_name: [Array String; 50],
+    name: [Array String; 6],
+    prefix: [Array String; 2],
+    suffix: [Array String; 7]
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: Norwegian
+}

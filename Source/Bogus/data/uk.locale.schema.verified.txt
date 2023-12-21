@@ -1,0 +1,48 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 2],
+    city_name: [Array String; 57],
+    city_prefix: [Array String; 4],
+    city_suffix: [Array String; 1],
+    country: [Array String; 193],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 1],
+    state: [Array String; 27],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_prefix: [Array String; 8],
+    street_suffix: [Array String; 1],
+    street_title: [Array String; 13]
+  },
+  company: {
+    name: [Array String; 8],
+    prefix: [Array String; 8],
+    suffix: [Array String; 5]
+  },
+  internet: {
+    domain_suffix: [Array String; 60],
+    free_email: [Array String; 7]
+  },
+  name: {
+    female_first_name: [Array String; 193],
+    female_last_name: [Array String; 230],
+    female_middle_name: [Array String; 116],
+    male_first_name: [Array String; 195],
+    male_last_name: [Array String; 239],
+    male_middle_name: [Array String; 116],
+    name: [Array String; 8],
+    prefix: [Array String; 2],
+    suffix: [Array String; 18],
+    title: {
+      descriptor: [Array String; 10],
+      job: [Array String; 16],
+      level: [Array String; 6]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 14]
+  },
+  title: Ukrainian
+}

@@ -1,0 +1,88 @@
+﻿{
+  address: {
+    county: [Array String; 78],
+    default_country: [Array String; 1]
+  },
+  app: {
+    author: [Array String; 2],
+    name: [Array String; 32],
+    version: [Array String; 5]
+  },
+  business: {
+    credit_card_expiry_dates: [Array String; 4],
+    credit_card_numbers: [Array String; 4],
+    credit_card_types: [Array String; 4]
+  },
+  cell_phone: {
+    formats: [Array String; 4]
+  },
+  commerce: {
+    color: [Array String; 17],
+    department: [Array String; 22],
+    product_name: {
+      adjective: [Array String; 10],
+      material: [Array String; 5],
+      product: [Array String; 22]
+    }
+  },
+  company: {
+    adjective: [Array String; 62],
+    bs_adjective: [Array String; 52],
+    bs_noun: [Array String; 36],
+    bs_verb: [Array String; 28],
+    descriptor: [Array String; 27],
+    name: [Array String; 3],
+    noun: [Array String; 39],
+    suffix: [Array String; 4]
+  },
+  credit_card: {
+    american_express: [Array String; 2],
+    discover: [Array String; 6],
+    maestro: [Array String; 3],
+    mastercard: [Array String; 2],
+    visa: [Array String; 2]
+  },
+  finance: {
+    account_type: [Array String; 3],
+    currency: [
+      {
+        code: EUR,
+        name: Ευρώ,
+        symbol: €
+      }
+    ],
+    transaction_type: [Array String; 4]
+  },
+  hacker: {
+    abbreviation: [Array String; 29],
+    adjective: [Array String; 9],
+    noun: [Array String; 20],
+    verb: [Array String; 14]
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    first_name: [Array String; 36],
+    last_name: [Array String; 200],
+    name: [Array String; 6],
+    prefix: [Array String; 4],
+    title: {
+      descriptor: [Array String; 6],
+      job: [Array String; 19],
+      level: [Array String; 30]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 52]
+  },
+  separator:  & ,
+  team: {
+    creature: [Array String; 64],
+    name: [Array String; 1]
+  },
+  title: Greek
+}

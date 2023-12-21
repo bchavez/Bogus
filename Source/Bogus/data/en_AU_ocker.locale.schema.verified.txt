@@ -1,0 +1,30 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_prefix: [Array String; 12],
+    default_country: [Array String; 1],
+    postcode: [Array String; 7],
+    region: [Array String; 7],
+    state: [Array String; 8],
+    state_abbr: [Array String; 8],
+    street_name: [Array String; 1],
+    street_root: [Array String; 4],
+    street_suffix: [Array String; 37]
+  },
+  company: {
+    suffix: [Array String; 6]
+  },
+  internet: {
+    domain_suffix: [Array String; 6]
+  },
+  name: {
+    first_name: [Array String; 104],
+    last_name: [Array String; 24],
+    ocker_first_name: [Array String; 6]
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: English (Australia Ocker)
+}

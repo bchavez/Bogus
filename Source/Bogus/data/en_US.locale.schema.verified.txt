@@ -1,0 +1,13 @@
+﻿{
+  address: {
+    default_country: [Array String; 3]
+  },
+  internet: {
+    domain_suffix: [Array String; 7]
+  },
+  phone_number: {
+    area_code: [Array String; 283],
+    exchange_code: [Array String; 283]
+  },
+  title: English (United States)
+}

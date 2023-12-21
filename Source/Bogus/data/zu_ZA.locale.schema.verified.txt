@@ -1,0 +1,19 @@
+﻿{
+  address: {
+    default_country: [Array String; 1],
+    postcode: [Array String; 2]
+  },
+  cell_phone: {
+    formats: [Array String; 6]
+  },
+  company: {
+    suffix: [Array String; 3]
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  phone_number: {
+    formats: [Array String; 9]
+  },
+  title: Zulu (South Africa)
+}

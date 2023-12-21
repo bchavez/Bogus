@@ -1,0 +1,35 @@
+﻿{
+  address: {
+    building_number: [Array String; 4],
+    city: [Array String; 1],
+    city_name: [Array String; 604],
+    city_prefix: [Array String; 1],
+    city_suffix: [Array String; 1],
+    default_country: [Array String; 1],
+    direction: [Array String; 8],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 6],
+    state: [Array String; 22],
+    street_address: [Array String; 2],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 6],
+    street_suffix: [Array String; 26]
+  },
+  lorem: {
+    supplemental: [Array String; 121],
+    words: [Array String; 117]
+  },
+  name: {
+    female_first_name: [Array String; 17],
+    first_name: [Array String; 34],
+    gender: [Array String; 2],
+    last_name: [Array String; 25],
+    male_first_name: [Array String; 17],
+    name: [Array String; 10],
+    prefix: [Array String; 2],
+    title: {
+      job: [Array String; 7]
+    }
+  },
+  title: Arabic
+}

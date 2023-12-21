@@ -1,0 +1,6 @@
+﻿{
+  lorem: {
+    words: [Array String; 103]
+  },
+  title: English (Bork)
+}

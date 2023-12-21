@@ -1,0 +1,60 @@
+﻿{
+  address: {
+    building_number: [Array String; 4],
+    city: [Array String; 1],
+    city_name: [Array String; 100],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 22],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 9],
+    street_suffix: [Array String; 66]
+  },
+  company: {
+    adjective: [Array String; 100],
+    bs_adjective: [Array String; 65],
+    bs_noun: [Array String; 44],
+    bs_verb: [Array String; 60],
+    descriptor: [Array String; 101],
+    name: [Array String; 2],
+    noun: [Array String; 104],
+    suffix: [Array String; 8]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 7],
+    free_email: [Array String; 3]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    female_first_name: [Array String; 451],
+    last_name: [Array String; 150],
+    male_first_name: [Array String; 496],
+    name: [Array String; 3],
+    prefix: [Array String; 5],
+    title: {
+      job: [Array String; 18]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 14]
+  },
+  title: French
+}

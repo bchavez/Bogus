@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Bogus.Tests
 {
@@ -195,6 +198,52 @@ namespace Bogus.Tests
       public void generate_decimal_with_min_and_max()
       {
          r.Decimal(2.2m, 5.2m).Should().Be(4.0105668499183690m);
+      }
+
+      [Fact]
+      public void generate_maximum_range_decimal()
+      {
+         const decimal SmallestMaxPrecision = -7.9228162514264337593543950335m;
+         const decimal LargestMaxPrecision = 7.9228162514264337593543950335m;
+
+         for (int iteration = 0; iteration < 1000; iteration++)
+         {
+            try
+            {
+               ExtensionsForRandomizer.GenerateRandomMaximumPrecisionDecimal(r).Should().BeInRange(SmallestMaxPrecision, LargestMaxPrecision);
+            }
+            catch
+            {
+               console.WriteLine("Test failed on iteration {0}", iteration);
+               throw;
+            }
+         }
+      }
+
+      class DecimalScaleDataProvider : DataAttribute
+      {
+         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
+         {
+            yield return new object[] { 0m, 1m, 0.5m };
+            yield return new object[] { -100m, 100m, 0m };
+            yield return new object[] { decimal.MinValue, decimal.MaxValue, 0m };
+            yield return new object[] { 0m, decimal.MaxValue, decimal.MaxValue * 0.5m - 1m };
+            yield return new object[] { decimal.MinValue, 0m, decimal.MinValue * 0.5m + 1m };
+            yield return new object[] { 0m, 0m, 0m };
+            yield return new object[] { decimal.MinValue, decimal.MinValue, decimal.MinValue };
+            yield return new object[] { decimal.MaxValue, decimal.MaxValue, decimal.MaxValue };
+         }
+      }
+
+      [Theory, DecimalScaleDataProvider]
+      public void scale_decimal_with_min_and_max(decimal min, decimal max, decimal middle)
+      {
+         const decimal SmallestMaxPrecision = -7.9228162514264337593543950335m;
+         const decimal LargestMaxPrecision = 7.9228162514264337593543950335m;
+
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(SmallestMaxPrecision, min, max).Should().Be(min);
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(LargestMaxPrecision, min, max).Should().Be(max);
+         ExtensionsForRandomizer.ScaleMaximumPrecisionDecimalToRange(0m, min, max).Should().Be(middle);
       }
 
       [Fact]

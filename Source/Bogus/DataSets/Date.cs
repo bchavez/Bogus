@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 namespace Bogus.DataSets
 {
@@ -44,11 +45,7 @@ namespace Bogus.DataSets
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -62,11 +59,7 @@ namespace Bogus.DataSets
 
          var minDate = maxDate.AddYears(-yearsToGoBack);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>
@@ -112,11 +105,7 @@ namespace Bogus.DataSets
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return minDate + partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -130,11 +119,7 @@ namespace Bogus.DataSets
 
          var maxDate = minDate.AddYears(yearsToGoForward);
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
-
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return minDate + partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>
@@ -144,15 +129,195 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTime Between(DateTime start, DateTime end)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         ComputeRealRange(ref start, ref end, start.Kind, out var preferRangeBoundary);
+
+         var startTicks = start.ToUniversalTime().Ticks;
+         var endTicks = end.ToUniversalTime().Ticks;
+
+         var minTicks = Math.Min(startTicks, endTicks);
+         var maxTicks = Math.Max(startTicks, endTicks);
 
          var totalTimeSpanTicks = maxTicks - minTicks;
 
+         // Right around daylight savings time transition, there can be two different local DateTime values
+         // that are actually exactly the same DateTime. The ToLocalTime conversion might pick the wrong
+         // one in edge cases; it will pick the later one, and if the caller's window includes the earlier
+         // one, we should return that instead to follow the principle of least surprise.
+         if (totalTimeSpanTicks == 0)
+            return preferRangeBoundary;
+
          var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
 
-         return new DateTime(minTicks, start.Kind) + partTimeSpan;
+         var value = new DateTime(minTicks, DateTimeKind.Utc) + partTimeSpan;
+
+         if (start.Kind != DateTimeKind.Utc)
+         {
+            value = value.ToLocalTime();
+
+            if (value > end)
+               value = end;
+         }
+
+         return value;
       }
+
+      /// <summary>
+      /// Takes a date/time range, as indicated by <paramref name="start"/> and <paramref name="end"/>,
+      /// and ensures that the range indicators are in the correct order and both reference actual
+      /// <see cref="DateTime"/> values. This takes into account the fact that when Daylight Savings Time
+      /// comes into effect, there is a 1-hour interval in the local calendar which does not exist, and
+      /// <see cref="DateTime"/> values in this change are not meaningful.
+      /// 
+      /// This function only worries about the start and end times. Impossible <see cref="DateTime"/>
+      /// values within the range are excluded automatically by means of the <see cref="DateTime.ToLocalTime"/>
+      /// function.
+      /// 
+      /// The version of this function built targeting .NET Standard 1.3 does not check Daylight Savings Time
+      /// transitions, as this API does not expose Daylight Savings Time information.
+      /// </summary>
+      /// <param name="start">A ref <see cref="DateTime"/> to be adjusted forward out of an impossible date/time range if necessary.</param>
+      /// <param name="end">A ref <see cref="DateTime"/> to be adjusted backward out of an impossible date/time range if necessary.</param>
+      /// <param name="kind">A <see cref="DateTimeKind"/> indicating how the supplied <see cref="DateTime"/> values should be interpreted with respect to DST change windows.</param>
+      /// <param name="preferRangeBoundary">An out <see cref="DateTime"/> that indicates which value should be used if the supplied range is empty due to being entirely contained within a DST transition range.</param>
+      private void ComputeRealRange(ref DateTime start, ref DateTime end, DateTimeKind kind, out DateTime preferRangeBoundary)
+      {
+         preferRangeBoundary = end;
+
+         if (start > end)
+         {
+            var tmp = start;
+
+            start = end;
+            end = tmp;
+         }
+
+#if !NETSTANDARD1_3
+         if (kind == DateTimeKind.Local)
+         {
+            var window = GetForwardDSTTransitionWindow(start);
+
+            var startLocal = start.ToLocalTime();
+            var endLocal = end.ToLocalTime();
+
+            if ((startLocal >= window.Start) && (startLocal <= window.End))
+            {
+               start = new DateTime(window.Start.Ticks, start.Kind);
+
+               if (start == end)
+                  return;
+            }
+
+            window = GetForwardDSTTransitionWindow(end);
+
+            if ((end >= window.Start) && (end < window.End))
+            {
+               end = new DateTime(window.End.Ticks, end.Kind);
+
+               // We had to bump the end, meaning that the end was not already a valid
+               // DateTime value (within the DST transition range), so prefer the start
+               // instead.
+               preferRangeBoundary = start;
+            }
+
+            if (start > end)
+               throw new Exception("DateTime range does not contain any real DateTime values due to daylight savings transitions");
+         }
+#endif
+      }
+
+#if !NETSTANDARD1_3
+      struct DateTimeRange
+      {
+         public DateTime Start;
+         public DateTime End;
+      }
+
+      /// <summary>
+      /// Finds the window of time that doesn't exist in the local timezone due to Daylight Savings Time coming into
+      /// effect. In timezones that do not have Daylight Savings Time transitions, this function returns <see cref="null"/>.
+      /// </summary>
+      /// <param name="dateTime">
+      /// A reference <see cref="DateTime"/> value for determining the DST transition window accurately. Daylight Savings Time
+      /// rules can change over time, and the <see cref="TimeZoneInfo"/> API exposes information about which Daylight Savings
+      /// Time rules are in effect for which date ranges.
+      /// </param>
+      /// <returns>
+      /// A <see cref="DateTimeRange"/> that indicates the start &amp; end of the interval of date/time values that do not
+      /// exist in the local calendar in the interval indicated by the supplied <paramref name="dateTime"/>, or <see cref="null"/>
+      /// if no such range exists.
+      /// </returns>
+      private DateTimeRange GetForwardDSTTransitionWindow(DateTime dateTime)
+      {
+         // Based on code found at: https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.transitiontime.isfixeddaterule
+         var rule = FindEffectiveTimeZoneAdjustmentRule(dateTime);
+
+         if (rule == null)
+            return default(DateTimeRange);
+
+         var transition = rule.DaylightTransitionStart;
+
+         DateTime startTime;
+
+         if (transition.IsFixedDateRule)
+         {
+            startTime = new DateTime(
+               dateTime.Year,
+               transition.Month,
+               transition.Day,
+               transition.TimeOfDay.Hour,
+               transition.TimeOfDay.Minute,
+               transition.TimeOfDay.Second,
+               transition.TimeOfDay.Millisecond);
+         }
+         else
+         {
+            var calendar = CultureInfo.CurrentCulture.Calendar;
+
+            var startOfWeek = transition.Week * 7 - 6;
+
+            var firstDayOfWeek = (int)calendar.GetDayOfWeek(new DateTime(dateTime.Year, transition.Month, 1));
+            var changeDayOfWeek = (int)transition.DayOfWeek;
+
+            int transitionDay =
+               firstDayOfWeek <= changeDayOfWeek
+               ? startOfWeek + changeDayOfWeek - firstDayOfWeek
+               : startOfWeek + changeDayOfWeek - firstDayOfWeek + 7;
+
+            if (transitionDay > calendar.GetDaysInMonth(dateTime.Year, transition.Month))
+               transitionDay -= 7;
+
+            startTime = new DateTime(
+               dateTime.Year,
+               transition.Month,
+               transitionDay,
+               transition.TimeOfDay.Hour,
+               transition.TimeOfDay.Minute,
+               transition.TimeOfDay.Second,
+               transition.TimeOfDay.Millisecond);
+         }
+
+         return
+            new DateTimeRange()
+            {
+               Start = startTime,
+               End = startTime + rule.DaylightDelta,
+            };
+      }
+
+      /// <summary>
+      /// Identifies the timezone adjustment rule in effect in the local timezone at the specified
+      /// <paramref name="dateTime"/>. If no adjustment rule is in effect, returns <see cref="null"/>.
+      /// </summary>
+      /// <param name="dateTime">The <see cref="DateTime"/> value for which to find an adjustment rule.</param>
+      private TimeZoneInfo.AdjustmentRule FindEffectiveTimeZoneAdjustmentRule(DateTime dateTime)
+      {
+         foreach (var rule in TimeZoneInfo.Local.GetAdjustmentRules())
+            if ((dateTime >= rule.DateStart) && (dateTime <= rule.DateEnd))
+               return rule;
+
+         return default;
+      }
+#endif
 
       /// <summary>
       /// Get a random <see cref="DateTimeOffset"/> between <paramref name="start"/> and <paramref name="end"/>.
@@ -161,14 +326,24 @@ namespace Bogus.DataSets
       /// <param name="end">End time</param>
       public DateTimeOffset BetweenOffset(DateTimeOffset start, DateTimeOffset end)
       {
-         var minTicks = Math.Min(start.Ticks, end.Ticks);
-         var maxTicks = Math.Max(start.Ticks, end.Ticks);
+         var startTime = start.ToUniversalTime().DateTime;
+         var endTime = end.ToUniversalTime().DateTime;
 
-         var totalTimeSpanTicks = maxTicks - minTicks;
+         if (startTime > endTime)
+            return end;
+         else
+         {
+            ComputeRealRange(ref startTime, ref endTime, start.DateTime.Kind, out var preferRangeBoundary);
 
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
+            var sample = Between(startTime, endTime) + start.Offset;
 
-         return new DateTimeOffset(minTicks, start.Offset) + partTimeSpan;
+            // In practice, we will only ever get samples that are exactly equal to the end time
+            // if the range is empty due to being contained within a DST transition window.
+            if (sample == end)
+               sample = preferRangeBoundary;
+
+            return new DateTimeOffset(new DateTime(sample.Ticks, DateTimeKind.Unspecified), start.Offset);
+         }
       }
 
       /// <summary>
@@ -178,15 +353,13 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTime.Now"/>.</param>
       public DateTime Recent(int days = 1, DateTime? refDate = null)
       {
-         var maxDate = refDate ?? SystemClock();
+         var systemClock = SystemClock();
 
-         var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
+         var maxDate = refDate ?? systemClock;
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
+         var minDate = days == 0 ? systemClock.Date : maxDate.AddDays(-days);
 
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return Between(minDate, maxDate);
       }
 
       /// <summary>
@@ -196,15 +369,13 @@ namespace Bogus.DataSets
       /// <param name="refDate">The date to start calculations. Default is <see cref="DateTimeOffset.Now"/>.</param>
       public DateTimeOffset RecentOffset(int days = 1, DateTimeOffset? refDate = null)
       {
-         var maxDate = refDate ?? SystemClock();
+         var systemClock = SystemClock();
 
-         var minDate = days == 0 ? SystemClock().Date : maxDate.AddDays(-days);
+         var maxDate = refDate ?? systemClock;
 
-         var totalTimeSpanTicks = (maxDate - minDate).Ticks;
+         var minDate = days == 0 ? systemClock.Date : maxDate.AddDays(-days);
 
-         var partTimeSpan = RandomTimeSpanFromTicks(totalTimeSpanTicks);
-
-         return maxDate - partTimeSpan;
+         return BetweenOffset(minDate, maxDate);
       }
 
       /// <summary>

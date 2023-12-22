@@ -1,0 +1,124 @@
+name: 🐞 Bug Report
+description: "Report something that doesn't look right 🔧"
+labels: [""]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Version Information
+
+  - type: input
+    id: version-bogus
+    attributes:
+      label: Bogus NuGet Package
+      description: What version of Bogus are you using?
+      placeholder: ex. v35.0.1
+    validations:
+      required: true
+
+  - type: input
+    id: version-dotnet
+    attributes:
+      label: .NET Version
+      description: What version of .NET are using?
+      placeholder: ex. Full Framework 4.7.1 or .NET 8?
+    validations:
+      required: true
+
+  - type: input
+    id: version-visualstudio
+    attributes:
+      label: Visual Studio Version
+      description: What version of Visual Studio are using?
+      placeholder: ex. 17.8?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: operating-system
+    attributes:
+      label: What operating system are you using?
+      multiple: false
+      options:
+        - Windows
+        - Linux
+        - MacOS
+        - Other
+    validations:
+        required: true
+
+  - type: markdown
+    attributes:
+      value: |
+        ## Bug Report
+
+  - type: input
+    id: bogus-locale
+    attributes:
+      label: What locale are you using with Bogus?
+      description: 
+      placeholder: ex. en_GB
+    validations:
+      required: true
+
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: Problem Description
+      description: Please share a clear and concise description of the problem.
+      placeholder: 
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-linqpad-repro-steps
+    attributes:
+      label: LINQPad Example or Reproduction Steps
+      description: |
+        Please provide a LINQPad example of the problem or provide reproduction steps. LINQPad can be downloaded here: https://www.linqpad.net/.
+      placeholder: "LINQPad can be downloaded here: https://www.linqpad.net/"
+    validations:
+      required: true
+
+  - type: textarea
+    id: bogus-expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: Provide a description of the expected behavior.
+      placeholder: Expected Behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: bogus-actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: |
+        Provide a description of the actual behavior observed. Please include any error messages, exception stacktraces, logs, and/or screenshots.
+      placeholder: Actual Behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: known-workarounds
+    attributes:
+      label: Known Workarounds
+      description: |
+        Please provide a description of any known workarounds.
+      placeholder: Known Workarounds
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: can-send-pr
+    attributes:
+      label: Could you help with a pull-request?
+      description: If the bug is confirmed, would you be willing to submit a pull-request?
+      options:
+        - "No"
+        - "Yes"
+    validations:
+      required: true
+
+

@@ -1,6 +1,8 @@
-﻿using System.Linq;
-using Bogus.Bson;
+﻿using Bogus.Bson;
 using FluentAssertions;
+using System;
+using System.IO;
+using System.Linq;
 using Xunit;
 using Z.ExtensionMethods;
 using Z.ExtensionMethods.ObjectExtensions;
@@ -62,6 +64,106 @@ namespace Bogus.Tests.DataSetTests
 
          numbers.TrueForAll(x => x.ToInt32() >= 0 && x.ToInt32() <= 9)
             .Should().BeTrue();
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateArgumentException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(0);
+
+         Assert.IsType<ArgumentException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateBadImageFormatException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(2);
+
+         Assert.IsType<BadImageFormatException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateIndexOutOfRangeException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(3);
+
+         Assert.IsType<IndexOutOfRangeException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateArithmeticException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(4);
+
+         Assert.IsType<ArithmeticException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateOutOfMemoryException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(5);
+
+         Assert.IsType<OutOfMemoryException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateFormatException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(6);
+
+         Assert.IsType<FormatException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateEndOfStreamException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(8);
+
+         Assert.IsType<EndOfStreamException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateFileNotFoundException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(9);
+
+         Assert.IsType<FileNotFoundException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateNotImplementedException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(10);
+
+         Assert.IsType<NotImplementedException>(exception);
+      }
+
+      [Fact]
+      public void Exception_ShouldGenerateUnauthorizedAccessException()
+      {
+         var system = new Bogus.DataSets.System();
+
+         var exception = system.Exception(11);
+
+         Assert.IsType<UnauthorizedAccessException>(exception);
       }
 
       [Fact]

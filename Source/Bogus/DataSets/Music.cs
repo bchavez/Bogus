@@ -1,13 +1,12 @@
-﻿namespace Bogus.DataSets
+﻿namespace Bogus.DataSets;
+
+public class Music : DataSet
 {
-   public class Music : DataSet
+   /// <summary>
+   /// Get a music genre
+   /// </summary>
+   public string Genre()
    {
-      /// <summary>
-      /// Get a music genre
-      /// </summary>
-      public string Genre()
-      {
-         return GetRandomArrayItem("genre");
-      }
+      return GetRandomArrayItem("genre");
    }
 }

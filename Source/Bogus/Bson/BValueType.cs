@@ -1,18 +1,17 @@
 #pragma warning disable 1591
 
-namespace Bogus.Bson
+namespace Bogus.Bson;
+
+public enum BValueType
 {
-   public enum BValueType
-   {
-      Double,
-      String,
-      Array,
-      Binary,
-      Boolean,
-      UTCDateTime,
-      None,
-      Int32,
-      Int64,
-      Object
-   }
+   Double,
+   String,
+   Array,
+   Binary,
+   Boolean,
+   UTCDateTime,
+   None,
+   Int32,
+   Int64,
+   Object
 }

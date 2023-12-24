@@ -2,15 +2,14 @@
 using FluentAssertions;
 using Xunit;
 
-namespace Bogus.Tests.GitHubIssues
+namespace Bogus.Tests.GitHubIssues;
+
+public class Issue355 : SeededTest
 {
-   public class Issue355 : SeededTest
+   [Fact]
+   public void pt_BR_has_gendered_names()
    {
-      [Fact]
-      public void pt_BR_has_gendered_names()
-      {
-         var n = new Name("pt_BR");
-         n.SupportsGenderFirstNames.Should().BeTrue();
-      }
+      var n = new Name("pt_BR");
+      n.SupportsGenderFirstNames.Should().BeTrue();
    }
 }

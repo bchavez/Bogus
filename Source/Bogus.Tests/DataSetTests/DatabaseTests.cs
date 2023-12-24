@@ -1,39 +1,38 @@
 ﻿using FluentAssertions;
 using Xunit;
 
-namespace Bogus.Tests.DataSetTests
+namespace Bogus.Tests.DataSetTests;
+
+public class DatabaseTests : SeededTest
 {
-   public class DatabaseTests : SeededTest
+   public DatabaseTests()
    {
-      public DatabaseTests()
-      {
-         database = new DataSets.Database();
-      }
+      database = new DataSets.Database();
+   }
 
-      private readonly DataSets.Database database;
+   private readonly DataSets.Database database;
 
-      [Fact]
-      public void can_generate_a_column_name()
-      {
-         database.Column().Should().Be("password");
-      }
+   [Fact]
+   public void can_generate_a_column_name()
+   {
+      database.Column().Should().Be("password");
+   }
 
-      [Fact]
-      public void can_generate_a_type()
-      {
-         database.Type().Should().Be("real");
-      }
+   [Fact]
+   public void can_generate_a_type()
+   {
+      database.Type().Should().Be("real");
+   }
 
-      [Fact]
-      public void can_generate_collation()
-      {
-         database.Collation().Should().Be("ascii_general_ci");
-      }
+   [Fact]
+   public void can_generate_collation()
+   {
+      database.Collation().Should().Be("ascii_general_ci");
+   }
 
-      [Fact]
-      public void can_generate_engine()
-      {
-         database.Engine().Should().Be("CSV");
-      }
+   [Fact]
+   public void can_generate_engine()
+   {
+      database.Engine().Should().Be("CSV");
    }
 }

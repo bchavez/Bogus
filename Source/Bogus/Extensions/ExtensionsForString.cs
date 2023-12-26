@@ -53,7 +53,7 @@ public static class ExtensionsForString
    }
 
    /// <summary>
-   /// Transliterates Unicode characters to US-ASCII. For example, Russian cryllic "Анна Фомина" becomes "Anna Fomina".
+   /// Transliterates Unicode characters to US-ASCII. For example, Russian cyrillic "Анна Фомина" becomes "Anna Fomina".
    /// </summary>
    /// <param name="this">The @this string to act on.</param>
    /// <param name="lang">The language character set to use.</param>

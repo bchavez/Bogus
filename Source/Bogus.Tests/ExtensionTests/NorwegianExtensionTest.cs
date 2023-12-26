@@ -88,7 +88,7 @@ public class NorwegianExtensionTest : SeededTest
       var f = new Faker("nb_NO");
       var person = f.Person;
 
-      string fødselsnummer = person.Fødselsnummer();
+      string fødselsnummer = person.Fodselsnummer();
 
       IsLegalFødselsnummer(fødselsnummer, person);
    }

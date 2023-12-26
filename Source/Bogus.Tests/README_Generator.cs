@@ -233,10 +233,10 @@ public class README_Generator
          var c1 = col1[i];
          var c2 = i == col2.Length ? null : col2[i];
 
-         var c2code = c2 is null ? string.Empty : $"`{c2.code,-14}`";
+         var c2code = c2 is null ? string.Empty : $"{'`'+c2.code+'`',-14}";
          var c2title = c2 is null ? string.Empty : $"{c2.title,-26}";
 
-         var str = $"|`{c1.code,-14}`|{c1.title,-26}||{c2code}|{c2title}|";
+         var str = $"|{'`'+c1.code+'`',-14}|{c1.title,-26}||{c2code}|{c2title}|";
          locales.Add(str);
       }
 

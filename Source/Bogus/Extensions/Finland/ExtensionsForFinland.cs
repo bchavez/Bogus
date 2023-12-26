@@ -8,7 +8,7 @@ public static class ExtensionsForFinland
    /// <summary>
    /// Finnish Henkilötunnus
    /// </summary>
-   public static string Henkilötunnus(this Person p)
+   public static string Henkilotunnus(this Person p)
    {
       const string Key = nameof(ExtensionsForFinland) + "Henkilötunnus";
       if( p.context.ContainsKey(Key) )

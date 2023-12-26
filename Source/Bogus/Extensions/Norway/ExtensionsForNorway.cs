@@ -8,9 +8,9 @@ namespace Bogus.Extensions.Norway;
 public static class ExtensionsForNorway
 {
    /// <summary>
-   /// Norwegian national identity number
+   /// Fødselsnummer - Norwegian national identity number
    /// </summary>
-   public static string Fødselsnummer(this Person p)
+   public static string Fodselsnummer(this Person p)
    {
       const string Key = nameof(ExtensionsForNorway) + "Fødselsnummer";
       if (p.context.ContainsKey(Key))

@@ -168,7 +168,7 @@ public class PersonTest : SeededTest
    public void can_generate_henkilötunnus_for_finland()
    {
       var p = new Person();
-      var obtained = p.Henkilötunnus();
+      var obtained = p.Henkilotunnus();
 
       var a = obtained.Split('-')[0];
       var b = obtained.Split('-')[1];

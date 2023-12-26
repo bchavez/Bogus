@@ -505,12 +505,12 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 * **`using Bogus.Extensions.Denmark;`**
 	* `Bogus.Person.Cpr()` - Danish Personal Identification number
 * **`using Bogus.Extensions.Finland;`**
-	* `Bogus.Person.Henkilötunnus()` - Finnish Henkilötunnus
+	* `Bogus.Person.Henkilotunnus()` - Finnish Henkilötunnus
 * **`using Bogus.Extensions.Italy;`**
 	* `Bogus.Person.CodiceFiscale()` - Codice Fiscale
 	* `Bogus.DataSets.Finance.CodiceFiscale()` - Codice Fiscale
 * **`using Bogus.Extensions.Norway;`**
-	* `Bogus.Person.Fødselsnummer()` - Norwegian national identity number
+	* `Bogus.Person.Fodselsnummer()` - Norwegian national identity number
 * **`using Bogus.Extensions.Portugal;`**
 	* `Bogus.Person.Nif()` - Número de Identificação Fiscal (NIF)
 	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)

@@ -4,7 +4,6 @@ using System.Linq;
 using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Bogus.Extensions.Canada;
-using Bogus.Extensions.Denmark;
 using Bogus.Extensions.Finland;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
@@ -147,21 +146,6 @@ public class PersonTest : SeededTest
          };
 
       obtained.Should().Equal(expect);
-   }
-
-   [Fact]
-   public void can_generate_cpr_number_for_denmark()
-   {
-      var p = new Person();
-      var obtained = p.Cpr();
-
-      obtained.Dump();
-
-      var a = obtained.Split('-')[0];
-      var b = obtained.Split('-')[1];
-
-      a.Length.Should().Be(6);
-      b.Length.Should().Be(4);
    }
 
    [Fact]

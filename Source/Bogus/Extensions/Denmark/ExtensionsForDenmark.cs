@@ -15,7 +15,7 @@ public static class ExtensionsForDenmark
    /// <param name="validChecksum">
    ///   Indicates whether the generated CPR number should have a valid checksum or not.
    /// </param>
-   public static string Cpr(this Person p, bool validChecksum = true)
+   public static string Cpr(this Person p, bool validChecksum = true, bool includeDash = true)
    {
       const string Key = nameof(ExtensionsForDenmark) + "CPR";
       if (p.context.ContainsKey(Key))
@@ -64,7 +64,14 @@ public static class ExtensionsForDenmark
          individualNumber = GenerateIndividualFourDigitNumber(r, p.Gender, p.DateOfBirth.Year);
       }
 
-      var final = $"{birthDate}-{individualNumber}{checksum}";
+      string final;
+      if( includeDash ) {
+         final = $"{birthDate}-{individualNumber}{checksum}";
+      }
+      else
+      {
+         final = $"{birthDate}{individualNumber}{checksum}";
+      }
 
       p.context[Key] = final;
       return final;

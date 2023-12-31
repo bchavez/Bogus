@@ -29,6 +29,13 @@ public class DanishExtensionTest : SeededTest
       ShouldBeCorrectGenderCode(_faker.Person.Gender, obtained);
    }
 
+   [Fact]
+   public void excludes_dash_cpr_number()
+   {
+      var result = _faker.Person.Cpr(includeDash: false);
+      result.Should().NotContain("-");
+   }
+
    [Theory]
    [InlineData("080165-0058", Name.Gender.Female)]
    [InlineData("080165-0066", Name.Gender.Female)]

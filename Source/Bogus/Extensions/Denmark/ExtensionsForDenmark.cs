@@ -82,34 +82,30 @@ public static class ExtensionsForDenmark
       int from;
       int to;
 
-      if (1858 <= year && year <= 1899)
+      switch( year )
       {
-         from = 5000;
-         to = 8999;
-      }
-      else if (1900 <= year && year <= 1936)
-      {
-         from = 0;
-         to = 3999;
-      }
-      else if (1937 <= year && year <= 1999)
-      {
-         from = 0;
-         to = 4999;
-      }
-      else if (2000 <= year && year <= 2036)
-      {
-         from = 4000;
-         to = 9999;
-      }
-      else if (2037 <= year && year <= 2057)
-      {
-         from = 5000;
-         to = 9999;
-      }
-      else
-      {
-         throw new ArgumentOutOfRangeException(nameof(year), $"{nameof(year)} must be between 1854 and 2039.");
+         case >= 1858 and <= 1899:
+            from = 5000;
+            to = 8999;
+            break;
+         case >= 1900 and <= 1936:
+            from = 0;
+            to = 3999;
+            break;
+         case >= 1937 and <= 1999:
+            from = 0;
+            to = 4999;
+            break;
+         case >= 2000 and <= 2036:
+            from = 4000;
+            to = 9999;
+            break;
+         case >= 2037 and <= 2057:
+            from = 5000;
+            to = 9999;
+            break;
+         default:
+            throw new ArgumentOutOfRangeException(nameof(year), $"{nameof(year)} must be between 1858 and 2057.");
       }
 
       int individualNumber = gender == DataSets.Name.Gender.Female ? r.Even(from, to) : r.Odd(from, to);
@@ -122,34 +118,30 @@ public static class ExtensionsForDenmark
       int from;
       int to;
 
-      if (1858 <= year && year <= 1899)
+      switch( year )
       {
-         from = 500;
-         to = 899;
-      }
-      else if (1900 <= year && year <= 1936)
-      {
-         from = 0;
-         to = 399;
-      }
-      else if (1937 <= year && year <= 1999)
-      {
-         from = 0;
-         to = 499;
-      }
-      else if (2000 <= year && year <= 2036)
-      {
-         from = 400;
-         to = 999;
-      }
-      else if (2037 <= year && year <= 2057)
-      {
-         from = 500;
-         to = 999;
-      }
-      else
-      {
-         throw new ArgumentOutOfRangeException(nameof(year), $"{nameof(year)} must be between 1854 and 2039.");
+         case >= 1858 and <= 1899:
+            from = 500;
+            to = 899;
+            break;
+         case >= 1900 and <= 1936:
+            from = 0;
+            to = 399;
+            break;
+         case >= 1937 and <= 1999:
+            from = 0;
+            to = 499;
+            break;
+         case >= 2000 and <= 2036:
+            from = 400;
+            to = 999;
+            break;
+         case >= 2037 and <= 2057:
+            from = 500;
+            to = 999;
+            break;
+         default:
+            throw new ArgumentOutOfRangeException(nameof(year), $"{nameof(year)} must be between 1858 and 2057.");
       }
 
       int individualNumber = r.Int(from, to);

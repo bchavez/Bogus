@@ -1,0 +1,43 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 4],
+    city_prefix: [Array String; 5],
+    city_suffix: [Array String; 12],
+    country: [Array String; 241],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 110],
+    state_abbr: [Array String; 110],
+    street_address: [Array String; 2],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 7]
+  },
+  company: {
+    adjective: [Array String; 70],
+    bs_adjective: [Array String; 46],
+    bs_noun: [Array String; 26],
+    bs_verb: [Array String; 28],
+    descriptor: [Array String; 57],
+    name: [Array String; 3],
+    noun: [Array String; 89],
+    suffix: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 6]
+  },
+  name: {
+    female_first_name: [Array String; 617],
+    first_name: [Array String; 1700],
+    last_name: [Array String; 635],
+    male_first_name: [Array String; 1083],
+    name: [Array String; 6],
+    prefix: [Array String; 4]
+  },
+  phone_number: {
+    formats: [Array String; 11]
+  },
+  title: Italian
+}

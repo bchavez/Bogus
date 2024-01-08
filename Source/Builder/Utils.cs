@@ -22,6 +22,7 @@ using Nuke.Common.Utilities.Collections;
 using Z.ExtensionMethods.ObjectExtensions;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using Ionic.Zip;
 
 public static class BuildContext
 {
@@ -72,7 +73,7 @@ partial class Build
       var path = Folders.Source / project.Name / "Properties" / "AssemblyInfo.cs";
       var fullVersion = bti.FullVersion;
       var version = BuildContext.GetVersionWithoutPreReleeaseName(fullVersion);
-      var infoVersion = $"{fullVersion} built on {buildTimeUtc} UTC";
+      var infoVersion = $"{fullVersion} built on {buildTimeUtc:u}";
       var copyright = $"Brian Chavez © {buildTimeUtc.Year}";
       var title = project.GetProperty("NukeProjectTitle");
       var attrs = new List<AssemblyInfo.Attribute>
@@ -85,6 +86,7 @@ partial class Build
              AssemblyInfo.FileVersion(version),
              AssemblyInfo.InformationalVersion(infoVersion),
              AssemblyInfo.Trademark("MIT License"),
+             //AssemblyInfo.Metadata("BuildTime", $"{bti.BuildTimeUtc:u}")
              //AssemblyInfo.Metadata("CommitHash", )
           };
       attrs.AddRange(bti.ExtraAttributes);
@@ -148,6 +150,13 @@ public static class ExtensionsForNuke
 
       var newSettings = toolSettings.AddProperty("NoWarn", arg);
       return newSettings;
+   }
+
+   public static void UnZipWithPasswordTo(this AbsolutePath archiveFile, AbsolutePath destination, string password)
+   {
+      using var zip = ZipFile.Read(archiveFile);
+      zip.Password = password;
+      zip.ExtractAll(destination);
    }
 }
 

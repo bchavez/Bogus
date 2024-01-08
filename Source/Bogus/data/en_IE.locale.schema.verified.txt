@@ -1,0 +1,16 @@
+﻿{
+  address: {
+    county: [Array String; 26],
+    default_country: [Array String; 1]
+  },
+  cell_phone: {
+    formats: [Array String; 6]
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  phone_number: {
+    formats: [Array String; 49]
+  },
+  title: English (Ireland)
+}

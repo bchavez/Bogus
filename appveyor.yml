@@ -3,8 +3,8 @@ image: Visual Studio 2022
 
 environment:
   NUKE_TELEMETRY_OPTOUT: 1
-  SNKFILE_SECRET: # OpenSource / Bogus.snk.enc
-    secure: Bce2VwNFEBM1oWspgNlpTXSH290GZmc5DCuxjnAX72nBWNbR0S2tq/odIdfv2+t3bA9xzFHEwqvjGVEWgg5ZdfWUYj+PSBr+con0PiUGng0=
+  BogusSnkZipPassword: # OpenSource / Bogus.snk.enc.zip
+    secure: OqTnyfgOL1S7+NYqo4f5Mc72RsozR4CwAQ6K/YwqPBlG2LOPSoRHm9JxIHHYTecR5B3IiEe0xEyjulbBjNwQuMMSCPX+nr6oH/KfBTx9rf4=
 
 skip_commits:
   message: /(//skip\W*ci)|(read\W*me)/
@@ -42,7 +42,7 @@ deploy:
       prerelease: $(IsPreRelease)
       artifact: Zip, NuGet, Symbols
       auth_token:
-          secure: cyivrWQwrZNAb6UCNXlIQlGfVSnKIC6TatUOIP95CQgMeKGnmBSqBgAFv2TsRZhR
+          secure: 2XX+rKvAK7FXcKIKYHE4vDjOmM4hrzNy8lvS84IwU605AekfBB9XtSr82shJwhHlYMD+01g7gM/P8e9ko83ovFpAr3C2KvoaJRB7RqyUOquKK8RkcXGc8rQyylcRRrA6
       on:
           branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/ 
@@ -53,7 +53,7 @@ deploy:
       symbol_server:
       skip_symbols: false
       api_key:
-          secure: kFZHO4Qm7fIMq8rUhCxZ7vQDUqBdcjsflV89N0B/hm9c2Jk/uiCDfwtT9fm5juk2
+          secure: qrQj9+U7NioCkMEJubm65X/FgT6lA4tvms8C04/B3rOV4f7mCiCMqhJl5B9Gaeo5
       artifact: NuGet, Symbols
       on:
           branch: master

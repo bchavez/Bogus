@@ -1,3 +1,15 @@
+## v35.3.0
+Release Date: 2024-01-01
+* PR 496: Improves Denmark CPR number generator with checksum validation. Thanks @MunroRaymaker and @NielsPilgaard!
+
+## v35.2.0
+Release Date: 2023-12-26
+* Issue 497: PR 522 - Better Xamarin AOT compatibility. Renames/removes diacritics from API method names Finland: Henkilötunnus -> Henkilotunnus; Norway: Fødselsnummer -> Fodselsnummer.
+
+## v35.0.1
+Release Date: 2023-12-11
+* PR 513: Update Swedish `sv` locale; first/last names. Thanks @EBD232!
+
 ## v34.0.2
 Release Date: 2022-03-27
 * PR 406, 415: Improve XML documentation. Thanks @danielwagn3r, @DanteDeRuwe
@@ -6,7 +18,7 @@ Release Date: 2022-03-27
 ## v34.0.1
 Release Date: 2021-11-22
 
-* PR 399: Add support for .NET 6 DateOnly and TimeOnly random genrations in Faker.Date. Thanks @prasadtelkikar!
+* PR 399: Add support for .NET 6 DateOnly and TimeOnly random generations in Faker.Date. Thanks @prasadtelkikar!
 * Moved Faker[T] extensions .OrNull() and .GenerateBetween() into main Bogus namespace.
 * C# 10 and VS 2022 build tooling.
 

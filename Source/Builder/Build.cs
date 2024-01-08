@@ -46,7 +46,7 @@ partial class Build : NukeBuild
       public static AbsolutePath History = RootDirectory / "HISTORY.md";
       public static AbsolutePath SolutionFile = Folders.Source / $"{ProjectName}.sln";
       public static AbsolutePath SnkFile = Folders.Source / $"{ProjectName}.snk";
-      public static AbsolutePath SnkEncFile = Folders.Source / $"{ProjectName}.snk.enc";
+      public static AbsolutePath SnkEncZipFile = Folders.Source / $"{ProjectName}.snk.enc.zip";
       public static AbsolutePath SnkFilePublic = Folders.Source / $"{ProjectName}.snk.pub";
    }
 
@@ -62,13 +62,6 @@ partial class Build : NukeBuild
       this.BogusProject = this.Solution.Bogus;
       this.TestProject = this.Solution.Bogus_Tests;
    }
-
-
-   [PackageExecutable(
-    packageId: "secure-file",
-    packageExecutable: "secure-file.exe",
-    Framework = null)]
-   readonly Tool SecureFile;
 
 
    [Solution(GenerateProjects = true)]
@@ -128,8 +121,7 @@ partial class Build : NukeBuild
    .Executes(() => {
 
       var zipPath = Folders.Package / this.BogusProject.ZipFile();
-      CompressZip(Folders.CompileOutput, zipPath);
-
+      Folders.CompileOutput.ZipTo(zipPath);
    });
 
 
@@ -139,9 +131,9 @@ partial class Build : NukeBuild
        {
           //Debugger.Launch();
 
-          EnsureCleanDirectory(Folders.Test);
-          EnsureCleanDirectory(Folders.CompileOutput);
-          EnsureCleanDirectory(Folders.Package);
+          Folders.Test.CreateOrCleanDirectory();
+          Folders.CompileOutput.CreateOrCleanDirectory();
+          Folders.Package.CreateOrCleanDirectory();
           
           var projects = this.Solution.AllProjects.Where(p => !p.Name.Contains("Builder"));
           foreach (var project in projects)
@@ -149,7 +141,7 @@ partial class Build : NukeBuild
              var dir = project.Directory;
              var binAndObjs = dir.GlobDirectories("**/bin", "**/obj");
              foreach (var d in binAndObjs) {
-                DeleteDirectory(d);
+                d.DeleteDirectory();
              }
           }
 
@@ -237,6 +229,8 @@ partial class Build : NukeBuild
 
     });
 
+   [Parameter, Secret]
+   readonly string BogusSnkZipPassword;
 
    Target SetupSnk => _ => _
     .DependentFor(BuildInfo)
@@ -247,15 +241,11 @@ partial class Build : NukeBuild
     {
        Log.Information("Decrypting String Name Key (SNK) file.");
 
-       var secret = GetVariable<string>("SNKFILE_SECRET");
-       Assert.NotNullOrWhiteSpace(secret);
+       Assert.NotNullOrWhiteSpace(BogusSnkZipPassword);
 
-       Assert.FileExists(Files.SnkEncFile);
+       Assert.FileExists(Files.SnkEncZipFile);
 
-       SecureFile(
-          arguments: $"-decrypt {Files.SnkEncFile} -secret {secret}",
-          workingDirectory: Folders.Source,
-          outputFilter: l => l.Replace(secret, "****"));
+       Files.SnkEncZipFile.UnZipWithPasswordTo(Folders.Source, BogusSnkZipPassword);
 
        Assert.FileExists(Files.SnkFile);
 

@@ -1,0 +1,59 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 100],
+    country: [Array String; 234],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 5],
+    state: [Array String; 27],
+    state_abbr: [Array String; 27],
+    street_suffix: [Array String; 6]
+  },
+  commerce: {
+    color: [Array String; 45],
+    department: [Array String; 22],
+    product_name: {
+      adjective: [Array String; 16],
+      material: [Array String; 11],
+      product: [Array String; 24]
+    }
+  },
+  company: {
+    name: [Array String; 3],
+    suffix: [Array String; 5]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12],
+      wide_context: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7],
+      wide_context: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 7],
+    free_email: [Array String; 5]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    female_first_name: [Array String; 80],
+    first_name: [Array String; 169],
+    last_name: [Array String; 22],
+    male_first_name: [Array String; 88],
+    prefix: [Array String; 5],
+    suffix: [Array String; 3]
+  },
+  phone_number: {
+    formats: [Array String; 3]
+  },
+  title: Portuguese (Brazil)
+}

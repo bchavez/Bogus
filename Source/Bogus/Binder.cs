@@ -5,117 +5,116 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using Bogus.Platform;
 
-namespace Bogus
+namespace Bogus;
+
+/// <summary>
+/// A binder is used in Faker[T] for extracting MemberInfo from T
+/// that are candidates for property/field faking.
+/// </summary>
+public interface IBinder
 {
    /// <summary>
-   /// A binder is used in Faker[T] for extracting MemberInfo from T
-   /// that are candidates for property/field faking.
+   /// Given T, the method must return a Dictionary[string,MemberInfo] where
+   /// string is the field/property name and MemberInfo is the reflected
+   /// member info of the field/property that will be used for invoking
+   /// and setting values. The returned Dictionary must encompass the full
+   /// set of viable properties/fields that can be faked on T.
    /// </summary>
-   public interface IBinder
+   /// <returns>The full set of MemberInfos for injection.</returns>
+   Dictionary<string, MemberInfo> GetMembers(Type t);
+}
+
+/// <summary>
+/// The default binder used in Faker[T] for extracting MemberInfo from T
+/// that are candidates for property/field faking.
+/// </summary>
+public class Binder : IBinder
+{
+   /// <summary>
+   /// The binding flags to use when reflecting over T.
+   /// </summary>
+   protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+
+   /// <summary>
+   /// Construct a binder with default binding flags. Public/internal properties and public/internal fields.
+   /// </summary>
+   public Binder()
    {
-      /// <summary>
-      /// Given T, the method must return a Dictionary[string,MemberInfo] where
-      /// string is the field/property name and MemberInfo is the reflected
-      /// member info of the field/property that will be used for invoking
-      /// and setting values. The returned Dictionary must encompass the full
-      /// set of viable properties/fields that can be faked on T.
-      /// </summary>
-      /// <returns>The full set of MemberInfos for injection.</returns>
-      Dictionary<string, MemberInfo> GetMembers(Type t);
    }
 
    /// <summary>
-   /// The default binder used in Faker[T] for extracting MemberInfo from T
-   /// that are candidates for property/field faking.
+   /// Construct a binder with custom binding flags.
    /// </summary>
-   public class Binder : IBinder
+   public Binder(BindingFlags bindingFlags)
    {
-      /// <summary>
-      /// The binding flags to use when reflecting over T.
-      /// </summary>
-      protected internal BindingFlags BindingFlags = BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+      BindingFlags = bindingFlags;
+   }
+   
 
-      /// <summary>
-      /// Construct a binder with default binding flags. Public/internal properties and public/internal fields.
-      /// </summary>
-      public Binder()
-      {
-      }
+   /// <summary>
+   /// Given T, the method will return a Dictionary[string,MemberInfo] where
+   /// string is the field/property name and MemberInfo is the reflected
+   /// member info of the field/property that will be used for invocation 
+   /// and setting values. The returned Dictionary must encompass the full
+   /// set of viable properties/fields that can be faked on T.
+   /// </summary>
+   /// <returns>The full set of MemberInfos for injection.</returns>
+   public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
+   {
+      var allReflectedMembers = t.GetAllMembers(this.BindingFlags)
+                                 .Select(m => UseBaseTypeDeclaredPropertyInfo(t, m));
 
-      /// <summary>
-      /// Construct a binder with custom binding flags.
-      /// </summary>
-      public Binder(BindingFlags bindingFlags)
-      {
-         BindingFlags = bindingFlags;
-      }
-      
-
-      /// <summary>
-      /// Given T, the method will return a Dictionary[string,MemberInfo] where
-      /// string is the field/property name and MemberInfo is the reflected
-      /// member info of the field/property that will be used for invocation 
-      /// and setting values. The returned Dictionary must encompass the full
-      /// set of viable properties/fields that can be faked on T.
-      /// </summary>
-      /// <returns>The full set of MemberInfos for injection.</returns>
-      public virtual Dictionary<string, MemberInfo> GetMembers(Type t)
-      {
-         var allReflectedMembers = t.GetAllMembers(this.BindingFlags)
-                                    .Select(m => UseBaseTypeDeclaredPropertyInfo(t, m));
-
-         var settableMembers = allReflectedMembers
-            .Where(m =>
+      var settableMembers = allReflectedMembers
+         .Where(m =>
+            {
+               if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
                {
-                  if( m.GetCustomAttributes(typeof(CompilerGeneratedAttribute), true).Any() )
-                  {
-                     //no compiler generated stuff
-                     return false;
-                  }
-
-                  if( m is PropertyInfo pi )
-                  {
-                     return pi.CanWrite;
-                  }
-
-                  if( m is FieldInfo fi )
-                  {
-                     //No private fields.
-                     //GitHub Issue #13
-                     return !fi.IsPrivate;
-                  }
-
+                  //no compiler generated stuff
                   return false;
-               });
+               }
 
-         var settableMembersByName = settableMembers.GroupBy(mi => mi.Name);
+               if( m is PropertyInfo pi )
+               {
+                  return pi.CanWrite;
+               }
 
-         //Issue #70 we could get back multiple keys
-         //when reflecting over a type. Consider:
-         //
-         //   ClassA { public int Value {get;set} }
-         //   DerivedA : ClassA { public new int Value {get;set;} }
-         //
-         //So, when reflecting over DerivedA, grab the first
-         //reflected MemberInfo that was returned from
-         //reflection; the second one was the inherited
-         //ClassA.Value.
-         return settableMembersByName.ToDictionary(k => k.Key, g => g.First());
-      }
+               if( m is FieldInfo fi )
+               {
+                  //No private fields.
+                  //GitHub Issue #13
+                  return !fi.IsPrivate;
+               }
 
-      //Issue #389 - Use Declaring Base Type PropertyInfo instead of a DerivedA's 
-      //PropertyInfo because DerivedA's PropertyInfo could say property is not
-      //write-able.
-      protected virtual MemberInfo UseBaseTypeDeclaredPropertyInfo(Type t, MemberInfo m)
+               return false;
+            });
+
+      var settableMembersByName = settableMembers.GroupBy(mi => mi.Name);
+
+      //Issue #70 we could get back multiple keys
+      //when reflecting over a type. Consider:
+      //
+      //   ClassA { public int Value {get;set} }
+      //   DerivedA : ClassA { public new int Value {get;set;} }
+      //
+      //So, when reflecting over DerivedA, grab the first
+      //reflected MemberInfo that was returned from
+      //reflection; the second one was the inherited
+      //ClassA.Value.
+      return settableMembersByName.ToDictionary(k => k.Key, g => g.First());
+   }
+
+   //Issue #389 - Use Declaring Base Type PropertyInfo instead of a DerivedA's 
+   //PropertyInfo because DerivedA's PropertyInfo could say property is not
+   //write-able.
+   protected virtual MemberInfo UseBaseTypeDeclaredPropertyInfo(Type t, MemberInfo m)
+   {
+      if( m is PropertyInfo {CanWrite: false} && m.DeclaringType is not null && m.DeclaringType != t )
       {
-         if( m is PropertyInfo {CanWrite: false} && m.DeclaringType is not null && m.DeclaringType != t )
-         {
-            var newPropInfo = m.DeclaringType.GetProperty(m.Name, this.BindingFlags);
-            if( newPropInfo is not null )
-               return newPropInfo;
-         }
-
-         return m;
+         var newPropInfo = m.DeclaringType.GetProperty(m.Name, this.BindingFlags);
+         if( newPropInfo is not null )
+            return newPropInfo;
       }
+
+      return m;
    }
 }

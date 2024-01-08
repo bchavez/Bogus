@@ -1,0 +1,51 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 79],
+    city_prefix: [Array String; 7],
+    city_suffix: [Array String; 19],
+    country: [Array String; 382],
+    default_country: [Array String; 1],
+    postcode: [Array String; 3],
+    secondary_address: [Array String; 2],
+    street: [Array String; 1160],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    time_zone: [Array String; 143]
+  },
+  company: {
+    adjective: [Array String; 100],
+    bs_noun: [Array String; 109],
+    bs_verb: [Array String; 60],
+    descriptor: [Array String; 101],
+    name: [Array String; 3],
+    noun: [Array String; 104],
+    suffix: [Array String; 3]
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 3]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    female_first_name: [Array String; 200],
+    female_last_name: [Array String; 251],
+    male_first_name: [Array String; 192],
+    male_last_name: [Array String; 257],
+    name: [Array String; 10],
+    prefix: [Array String; 4],
+    suffix: [Array String; 1],
+    title: {
+      descriptor: [Array String; 22],
+      job: [Array String; 25],
+      level: [Array String; 37]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: Slovakian
+}

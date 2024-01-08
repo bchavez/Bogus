@@ -1,0 +1,23 @@
+﻿{
+  address: {
+    default_country: [Array String; 4],
+    postcode: [Array String; 1],
+    state: [Array String; 36],
+    state_abbr: [Array String; 36]
+  },
+  company: {
+    suffix: [Array String; 7]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 3]
+  },
+  name: {
+    first_name: [Array String; 762],
+    last_name: [Array String; 89]
+  },
+  phone_number: {
+    formats: [Array String; 12]
+  },
+  title: English (India)
+}

@@ -1,0 +1,42 @@
+name: 🚀 Feature request
+description: If you have a feature request 💡
+labels: [""]
+body:
+  - type: textarea
+    id: feature-why
+    attributes:
+      label: Description
+      description: Please describe why you are requesting this feature.
+      placeholder: 
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-code-example
+    attributes:
+      label: LINQPad Code Example
+      description: |
+        Please provide a LINQPad example of what you are trying to achieve. LINQPad can be downloaded here: https://www.linqpad.net/.
+      placeholder: "LINQPad can be downloaded here: https://www.linqpad.net/"
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-alternatives
+    attributes:
+      label: What alternatives have you considered?
+      description: Are there any workarounds or alternatives?
+      placeholder: 
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature-can-send-pr
+    attributes:
+      label: Could you help with a pull-request?
+      description: If the bug is confirmed, would you be willing to submit a pull-request?
+      options:
+        - "No"
+        - "Yes"
+    validations:
+      required: true

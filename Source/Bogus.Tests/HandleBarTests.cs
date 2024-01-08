@@ -2,25 +2,24 @@
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Bogus.Tests
+namespace Bogus.Tests;
+
+public class HandleBarTests : SeededTest
 {
-   public class HandleBarTests : SeededTest
+   private readonly ITestOutputHelper console;
+
+   public HandleBarTests(ITestOutputHelper console)
    {
-      private readonly ITestOutputHelper console;
+      this.console = console;
+   }
 
-      public HandleBarTests(ITestOutputHelper console)
-      {
-         this.console = console;
-      }
+   [Fact]
+   public void parse_test()
+   {
+      var f = new Faker();
+      var s = Tokenizer.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}", f.Name);
 
-      [Fact]
-      public void parse_test()
-      {
-         var f = new Faker();
-         var s = Tokenizer.Parse("{{name.lastName}}, {{name.firstName}} {{name.suffix}}", f.Name);
-
-         console.Dump(s);
-         s.Should().Be("Mitchell, Bernhard DDS");
-      }
+      console.Dump(s);
+      s.Should().Be("Mitchell, Bernhard DDS");
    }
 }

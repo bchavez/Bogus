@@ -1,0 +1,51 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 908],
+    country: [Array String; 198],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 16],
+    state_abbr: [Array String; 16],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 2]
+  },
+  cell_phone: {
+    formats: [Array String; 12]
+  },
+  company: {
+    adjetive: [Array String; 100],
+    bs_adjective: [Array String; 65],
+    bs_noun: [Array String; 44],
+    bs_verb: [Array String; 60],
+    descriptor: [Array String; 101],
+    name: [Array String; 3],
+    noun: [Array String; 104],
+    suffix: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 3]
+  },
+  lorem: {
+    words: [Array String; 249]
+  },
+  name: {
+    first_name: [Array String; 408],
+    last_name: [Array String; 712],
+    name: [Array String; 6],
+    prefix: [Array String; 2],
+    title: {
+      descriptor: [Array String; 22],
+      job: [Array String; 25],
+      level: [Array String; 37]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 49]
+  },
+  title: Polish
+}

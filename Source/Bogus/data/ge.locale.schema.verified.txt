@@ -1,0 +1,45 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 6],
+    city_name: [Array String; 88],
+    city_prefix: [Array String; 4],
+    city_suffix: [Array String; 4],
+    country: [Array String; 313],
+    default_country: [Array String; 1],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_suffix: [Array String; 6],
+    street_title: [Array String; 416]
+  },
+  cell_phone: {
+    formats: [Array String; 9]
+  },
+  company: {
+    name: [Array String; 5],
+    prefix: [Array String; 4],
+    suffix: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 6],
+    free_email: [Array String; 3]
+  },
+  name: {
+    first_name: [Array String; 499],
+    last_name: [Array String; 169],
+    name: [Array String; 6],
+    prefix: [Array String; 4],
+    title: {
+      descriptor: [Array String; 6],
+      job: [Array String; 37],
+      level: [Array String; 25]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 20]
+  },
+  separator:  და ,
+  title: Georgian
+}

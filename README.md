@@ -521,6 +521,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
 	* `Bogus.DataSets.Address.CountryOfUnitedKingdom()` - Country of the United Kingdom
+  * `Bogus.Person.NHSNumber()` - UK National Health Service Number
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 	* `Bogus.DataSets.Company.Ein()` - Employer Identification Number

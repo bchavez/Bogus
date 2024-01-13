@@ -1,3 +1,7 @@
+## v35.3.2
+Release Date: 2024-01-13
+* PR 466: Added `f.Person.Cnp()` extension method in `Bogus.Extensions.Romania`. Generates Romanian Personal Identification number (CNP). Thanks totpero!
+
 ## v35.3.1
 Release Date: 2024-01-12
 * PR 510: Added `f.Finance.VatNumber()` extension method in `Bogus.Extensions.UnitedKingdom`. Generates a UK compatible VAT registration number. Thanks p1971!

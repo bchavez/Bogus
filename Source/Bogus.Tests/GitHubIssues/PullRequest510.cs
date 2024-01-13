@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace Bogus.Tests.GitHubIssues;
 
-public class PullRequest510
+public class PullRequest510 : SeededTest
 {
    private readonly ITestOutputHelper console;
 

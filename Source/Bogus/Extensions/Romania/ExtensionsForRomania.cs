@@ -2,35 +2,38 @@
 using System;
 using Bogus.DataSets;
 
-namespace Bogus.Extensions.Romanian;
+namespace Bogus.Extensions.Romania;
 
 /// <summary>
 ///  API extensions specific for a geographical location.
 /// </summary>
-public static class ExtensionsForRomanian
+public static class ExtensionsForRomania
 {
    /// <summary>
-   ///  https://ro.wikipedia.org/wiki/Cod_numeric_personal_(Rom%C3%A2nia)
-   ///'|S| |AA| |LL| |ZZ| |JJ| |ZZZ| |C|
-   ///'|_| |__| |__| |__| |__| |___| |_|
-   ///'  :     :      :      :     :       :    --> Cifra de control
-   ///'  :     :      :      :     :       --> Numarul de ordine atribuit persoanei
-   ///'  :     :      :      :     --> Codul judetului
-   ///'  :     :      :      --> Ziua nasterii
-   ///'  :     :      --> Luna nasterii
-   ///'  :     --> Anul nasterii
-   ///'  --> Cifra sexului (M/F) pentru:
-   ///'        1/2 - cetateni romani nascuti intre 1 ian 1900 si 31 dec 1999
-   ///'        3/4 - cetateni romani nascuti intre 1 ian 1800 si 31 dec 1899
-   ///'        5/6 - cetateni romani nascuti intre 1 ian 2000 si 31 dec 2099
-   ///'        7/8 - rezidenti
-   ///'       Persoanele de cetatenie straina se identifica cu cifra "9"
+   /// Romanian Personal Identification number (CNP)
    /// </summary>
    /// <param name="p"></param>
    /// <returns></returns>
+   /// <remarks>
+   ///  https://ro.wikipedia.org/wiki/Cod_numeric_personal_(Rom%C3%A2nia)
+   ///  '|S| |AA| |LL| |ZZ| |JJ| |ZZZ| |C|
+   ///  '|_| |__| |__| |__| |__| |___| |_|
+   ///  '  :     :      :      :     :       :    --> Cifra de control
+   ///  '  :     :      :      :     :       --> Numarul de ordine atribuit persoanei
+   ///  '  :     :      :      :     --> Codul judetului
+   ///  '  :     :      :      --> Ziua nasterii
+   ///  '  :     :      --> Luna nasterii
+   ///  '  :     --> Anul nasterii
+   ///  '  --> Cifra sexului (M/F) pentru:
+   ///  '        1/2 - cetateni romani nascuti intre 1 ian 1900 si 31 dec 1999
+   ///  '        3/4 - cetateni romani nascuti intre 1 ian 1800 si 31 dec 1899
+   ///  '        5/6 - cetateni romani nascuti intre 1 ian 2000 si 31 dec 2099
+   ///  '        7/8 - rezidenti
+   ///  '       Persoanele de cetatenie straina se identifica cu cifra "9"
+   /// </remarks>
    public static string Cnp(this Person p)
    {
-      const string Key = nameof(ExtensionsForRomanian) + "CNP";
+      const string Key = nameof(ExtensionsForRomania) + "CNP";
 
       if (p.context.ContainsKey(Key))
       {

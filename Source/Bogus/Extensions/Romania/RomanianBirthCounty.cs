@@ -1,4 +1,4 @@
-﻿namespace Bogus.Extensions.Romanian;
+﻿namespace Bogus.Extensions.Romania;
 
 public enum RomanianBirthCounty
 {

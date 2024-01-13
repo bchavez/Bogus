@@ -1,3 +1,7 @@
+## v35.3.1
+Release Date: 2024-01-12
+* PR 510: Added `f.Finance.VatNumber()` extension method in `Bogus.Extensions.UnitedKingdom`. Generates a UK compatible VAT registration number. Thanks p1971!
+
 ## v35.3.0
 Release Date: 2024-01-01
 * PR 496: Improves Denmark CPR number generator with checksum validation. Thanks @MunroRaymaker and @NielsPilgaard!

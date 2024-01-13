@@ -520,6 +520,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code
 	* `Bogus.DataSets.Finance.Nino()` - National Insurance Number
+	* `Bogus.DataSets.Finance.VatNumber()` - Generates a UK compatible VAT registration number
 	* `Bogus.DataSets.Address.CountryOfUnitedKingdom()` - Country of the United Kingdom
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number

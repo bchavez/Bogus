@@ -522,6 +522,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.Person.Cnp()` - Romanian Personal Identification number (CNP)
 * **`using Bogus.Extensions.Sweden;`**
 	* `Bogus.Person.Personnummer()` - Swedish national identity number
+	* `Bogus.Person.Samordningsnummer()` - Swedish coordination number
 * **`using Bogus.Extensions.UnitedKingdom;`**
 	* `Bogus.DataSets.Vehicle.GbRegistrationPlate()` - GB Vehicle Registration Plate
 	* `Bogus.DataSets.Finance.SortCode()` - Banking Sort Code

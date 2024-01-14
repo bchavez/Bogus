@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using Bogus.DataSets;
 using Bogus.Extensions.Sweden;
@@ -20,16 +21,54 @@ public class SwedishExtensionTest : SeededTest
    }
 
    [Fact]
-   public void when_person_is_male_second_last_number_is_even()
+   public void can_create_valid_swedish_samordningsnummer()
+   {
+      var f = new Faker("sv");
+      var person = f.Person;
+
+      var samordningsnummer = person.Samordningsnummer();
+
+      CheckLuhn(samordningsnummer.Substring(2)).Should().BeTrue();
+   }
+
+   [Fact]
+   public void personnummer_should_contain_valid_date_of_birth()
+   {
+      var f = new Faker("sv");
+      var person = f.Person;
+
+      var personnummer = person.Personnummer();
+      var (year, month, day) = ExtractDateParts(personnummer);
+      var dateOfBirth = new DateTime(year, month, day);
+
+      dateOfBirth.Date.Should().Be(person.DateOfBirth.Date);
+   }
+
+   [Fact]
+   public void samordningsnummer_should_contain_offset_date_of_birth()
+   {
+      var f = new Faker("sv");
+      var person = f.Person;
+
+      var samordningsnummer = person.Samordningsnummer();
+      var (year, month, day) = ExtractDateParts(samordningsnummer);
+      var dateOfBirth = new DateTime(year, month, day - 60);
+
+      dateOfBirth.Date.Should().Be(person.DateOfBirth.Date);
+   }
+
+   [Theory]
+   [InlineData(false)]
+   [InlineData(true)]
+   public void when_person_is_male_second_last_number_is_even(bool isSamordningsnummer)
    {
       var f = new Faker("sv");
       var person = f.Person;
       person.Gender = Name.Gender.Male;
 
-      var personnummer = person.Personnummer();
+      var identificationNumber = isSamordningsnummer ? person.Samordningsnummer() : person.Personnummer();
 
-      var secondLast = int.Parse(personnummer.Substring(personnummer.Length - 2, 1));
-
+      var secondLast = int.Parse(identificationNumber.Substring(identificationNumber.Length - 2, 1));
 
       secondLast.Should()
          .Match(x => x % 2 == 0)
@@ -37,16 +76,18 @@ public class SwedishExtensionTest : SeededTest
          .And.BeGreaterThan(0);
    }
 
-   [Fact]
-   public void when_person_is_female_second_last_number_is_odd()
+   [Theory]
+   [InlineData(false)]
+   [InlineData(true)]
+   public void when_person_is_female_second_last_number_is_odd(bool isSamordningsnummer)
    {
       var f = new Faker("sv");
       var person = f.Person;
       person.Gender = Name.Gender.Female;
 
-      var personnummer = person.Personnummer();
+      var identificationNumber = isSamordningsnummer ? person.Samordningsnummer() : person.Personnummer();
 
-      var secondLast = int.Parse(personnummer.Substring(personnummer.Length - 2, 1));
+      var secondLast = int.Parse(identificationNumber.Substring(identificationNumber.Length - 2, 1));
 
       secondLast.Should()
          .Match(x => x % 2 == 1)
@@ -64,5 +105,10 @@ public class SwedishExtensionTest : SeededTest
                : ((thisNum *= 2) > 9 ? thisNum - 9 : thisNum)
          )
          .Sum() % 10 == 0;
+   }
+
+   private static (int year, int month, int day) ExtractDateParts(string date)
+   {
+      return (int.Parse(date.Substring(0, 4)), int.Parse(date.Substring(4, 2)), int.Parse(date.Substring(6, 2)));
    }
 }

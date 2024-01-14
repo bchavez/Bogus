@@ -5,6 +5,7 @@ Release Date: unreleased
 * Added `f.Company.Nip()` - Numer identyfikacji podatkowej (NIP)
 * Added `f.Company.Regon()` - Number of Rejestr Gospodarki Narodowej (REGON)
 * PR 427: Fix incorrect generation for Finnish social security number. Thanks @roeyskoe!
+* PR 431: Fix VIN can be longer than 17 character length
 
 ## v35.3.2
 Release Date: 2024-01-13

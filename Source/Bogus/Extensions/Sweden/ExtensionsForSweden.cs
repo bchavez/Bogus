@@ -47,7 +47,7 @@ public static class ExtensionsForSweden
    /// Swedish coordination number
    /// </summary>
    /// <remarks>
-   /// Coordination numbers enable Swedish public authorities and other organisations with a public function 
+   /// Coordination numbers enable Swedish public authorities and other organizations with a public function 
    /// to identify people who are not currently – and have never been – registered at an address in Sweden.
    /// </remarks>
    public static string Samordningsnummer(this Person person)

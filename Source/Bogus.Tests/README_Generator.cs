@@ -37,7 +37,7 @@ public class README_Generator
    public void get_available_methods()
    {
       var (_, buildDir) = GetWorkingFolders();
-      var bogusXml = Path.Combine(buildDir, "Bogus.XML");
+      var bogusXml = Path.Combine(buildDir, "Bogus.xml");
       var xml = XDocument.Load(bogusXml);
 
       var nav = xml.CreateNavigator();
@@ -118,7 +118,7 @@ public class README_Generator
    public void get_randomizer_methods()
    {
       var (_, buildDir) = GetWorkingFolders();
-      var bogusXml = Path.Combine(buildDir, "Bogus.XML");
+      var bogusXml = Path.Combine(buildDir, "Bogus.xml");
       var xml = XDocument.Load(bogusXml);
 
       var nav = xml.CreateNavigator();
@@ -244,7 +244,7 @@ public class README_Generator
       //make sure # of embedded locales matches the number of imported on disk.
       //var workingDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
       var (projectDir, _) = GetWorkingFolders();
-      var dataDir = projectDir.PathCombine(@"..\Bogus\data");
+      var dataDir = projectDir.PathCombine(@"../Bogus/data");
       count.Should().Be(Directory.GetFiles(dataDir, "*.locale.json").Length);
 
       output.WriteLine(string.Join("\n", locales));
@@ -254,7 +254,7 @@ public class README_Generator
    public void get_extension_namespaces()
    {
       var (_, buildDir) = GetWorkingFolders();
-      var bogusXml = Path.Combine(buildDir, "Bogus.XML");
+      var bogusXml = Path.Combine(buildDir, "Bogus.xml");
       var x = XElement.Load(bogusXml);
       var json = JsonConvert.DeserializeObject<JObject>(JsonConvert.SerializeXNode(x));
 

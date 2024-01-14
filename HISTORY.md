@@ -1,3 +1,10 @@
+## v35.3.3
+Release Date: unreleased
+* PR 488: Added `Bogus.Extensions.Poland` extension methods below. Thanks Mik1mak!
+* Added `f.Person.Pesel()` - Number of Powszechny Elektroniczny System Ewidencji Ludności (PESEL)
+* Added `f.Company.Nip()` - Numer identyfikacji podatkowej (NIP)
+* Added `f.Company.Regon()` - Number of Rejestr Gospodarki Narodowej (REGON)
+
 ## v35.3.2
 Release Date: 2024-01-13
 * PR 466: Added `f.Person.Cnp()` extension method in `Bogus.Extensions.Romania`. Generates Romanian Personal Identification number (CNP). Thanks totpero!

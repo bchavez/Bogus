@@ -1,11 +1,12 @@
-## v35.3.3
-Release Date: unreleased
+## v35.4.0
+Release Date: 2024-01-14
 * PR 488: Added `Bogus.Extensions.Poland` extension methods below. Thanks Mik1mak!
 * Added `f.Person.Pesel()` - Number of Powszechny Elektroniczny System Ewidencji Ludności (PESEL)
 * Added `f.Company.Nip()` - Numer identyfikacji podatkowej (NIP)
 * Added `f.Company.Regon()` - Number of Rejestr Gospodarki Narodowej (REGON)
 * PR 427: Fix incorrect generation for Finnish social security number. Thanks @roeyskoe!
-* PR 431: Fix VIN can be longer than 17 character length
+* PR 431: Fix VIN can be longer than 17 character length. Thanks skwasjer!
+* PR 421: Add strict VIN charset without I, O, and Q according to NHTSA standard. Thanks skwasjer!
 
 ## v35.3.2
 Release Date: 2024-01-13

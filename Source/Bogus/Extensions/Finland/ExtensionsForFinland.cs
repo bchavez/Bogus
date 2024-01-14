@@ -34,7 +34,7 @@ public static class ExtensionsForFinland
       // gives the remainder as 30, and since A=10, B=11, etc. ending up with Y=30.
       // Note that letters G, I, O, and Q are skipped.
 
-      var controlCharTable = "0123456789ABCDEFHJKLMNPRSTUVWXY";
+      const string controlCharTable = "0123456789ABCDEFHJKLMNPRSTUVWXY";
       var r = p.Random;
 
       var year = p.DateOfBirth.Year;

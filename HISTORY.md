@@ -7,6 +7,7 @@ Release Date: 2024-01-14
 * PR 427: Fix incorrect generation for Finnish social security number. Thanks @roeyskoe!
 * PR 431: Fix VIN can be longer than 17 character length. Thanks skwasjer!
 * PR 421: Add strict VIN charset without I, O, and Q according to NHTSA standard. Thanks skwasjer!
+* PR 414: Added `f.Person.Samordningsnummer()` extension method in `Bogus.Extensions.Sweden`. Swedish coordination number. Thanks aschan!
 
 ## v35.3.2
 Release Date: 2024-01-13

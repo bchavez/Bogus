@@ -20,6 +20,13 @@ public class VehicleTest : SeededTest
    }
 
    [Fact]
+   public void cannot_return_vin_bigger_than_17_chars()
+   {
+      vehicle.Random = new Randomizer(43576);
+      vehicle.Vin().Should().HaveLength(17).And.Be("XTVJ5JFU2YBV99999");
+   }
+
+   [Fact]
    public void can_get_a_manufacture()
    {
       vehicle.Manufacturer().Should().Be("Maserati");

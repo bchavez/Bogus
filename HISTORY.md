@@ -4,6 +4,7 @@ Release Date: unreleased
 * Added `f.Person.Pesel()` - Number of Powszechny Elektroniczny System Ewidencji Ludności (PESEL)
 * Added `f.Company.Nip()` - Numer identyfikacji podatkowej (NIP)
 * Added `f.Company.Regon()` - Number of Rejestr Gospodarki Narodowej (REGON)
+* PR 427: Fix incorrect generation for Finnish social security number. Thanks @roeyskoe!
 
 ## v35.3.2
 Release Date: 2024-01-13

@@ -146,7 +146,7 @@ public static class ExtensionsForNuke
    {
       var nowarnstring = string.Join(",", noWarn);
 
-      var arg = IsWin ? $"\\\"{nowarnstring}\\\"" : $"'\"{nowarnstring}\"'";
+      var arg = $"\\\"{nowarnstring}\\\"";
 
       var newSettings = toolSettings.AddProperty("NoWarn", arg);
       return newSettings;

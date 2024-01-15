@@ -42,6 +42,8 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
 
       this.Music = this.Notifier.Flow(new Music());
 
+      this.Events = this.Notifier.Flow(new Events());
+
       this.Hashids = new Hashids();
    }
 
@@ -92,7 +94,8 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
          this.System,
          this.Commerce,
          this.Database,
-         this.Random);
+         this.Random,
+         this.Events);
    }
 
 
@@ -198,6 +201,12 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    /// </summary>
    [RegisterMustasheMethods]
    public Music Music { get; set; }
+
+   /// <summary>
+   /// Generates data related to history events.
+   /// </summary>
+   [RegisterMustasheMethods]
+   public Events Events { get; set; }
 
    /// <summary>
    /// Helper method to pick a random element.

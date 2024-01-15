@@ -1,1414 +1,1447 @@
 {
-   "rant": {
-      "review": [
-         "this $product is papery.",
-         "this $product is hyper.",
-         "this $product is light-hearted.",
-         "this $product is whole-grain.",
-         "this $product is slurpee.",
-         "this $product is perplexed.",
-         "this $product is dominant.",
-         "this $product is ghetto.",
-         "this $product is revolting.",
-         "this $product is gracious.",
-         "this $product is complimentary.",
-         "this $product is snowy.",
-         "this $product is ratty.",
-         "this $product is amiable.",
-         "this $product is smooth.",
-         "this $product is tasty.",
-         "this $product is standard.",
-         "this $product is mellow.",
-         "this $product is awesome.",
-         "this $product is nifty.",
-         "this $product is top-notch.",
-         "this $product is honest.",
-         "this $product is brown.",
-         "this $product is vertical.",
-         "this $product is flirty.",
-         "I tried to electrocute it but got sweetmeat all over it.",
-         "I tried to shatter it but got potato all over it.",
-         "I tried to behead it but got truffle all over it.",
-         "I tried to impale it but got fudge all over it.",
-         "I tried to grab it but got bonbon all over it.",
-         "I tried to cremate it but got Turkish Delight all over it.",
-         "I tried to pinch it but got peanut all over it.",
-         "I tried to nail it but got strawberry all over it.",
-         "I tried to hang it but got jelly bean all over it.",
-         "I tried to annihilate it but got bonbon all over it.",
-         "I tried to vomit it but got bonbon all over it.",
-         "I tried to nab it but got biscuit all over it.",
-         "I tried to attack it but got meatball all over it.",
-         "I tried to kidnap it but got apricot all over it.",
-         "I tried to decapitate it but got coconut all over it.",
-         "I tried to pepper it but got prune all over it.",
-         "I tried to shred it but got watermelon all over it.",
-         "I tried to manhandle it but got bun all over it.",
-         "I tried to slay it but got truffle all over it.",
-         "I tried to maul it but got onion all over it.",
-         "I tried to strangle it but got hazelnut all over it.",
-         "I tried to belly-flop it but got Turkish Delight all over it.",
-         "I tried to maim it but got nectarine all over it.",
-         "I tried to scratch it but got cheeseburger all over it.",
-         "I tried to nab it but got salad all over it.",
-         "i use it profusely when i'm in my garage.",
-         "i use it on Mondays when i'm in my fort.",
-         "i use it from now on when i'm in my safehouse.",
-         "i use it every Tuesday when i'm in my store.",
-         "i use it every Tuesday when i'm in my pub.",
-         "i use it barely when i'm in my store.",
-         "i use it once a week when i'm in my firetruck.",
-         "i use it hardly when i'm in my prison.",
-         "i use it never when i'm in my nightclub.",
-         "i use it never again when i'm in my station.",
-         "i use it daily when i'm in my outhouse.",
-         "i use it until further notice when i'm in my nightclub.",
-         "i use it daily when i'm in my courthouse.",
-         "i use it every Tuesday when i'm in my homeless shelter.",
-         "i use it for 10 weeks when i'm in my jail.",
-         "i use it this time when i'm in my port-a-potty.",
-         "i use it usually when i'm in my alley.",
-         "i use it once in a while when i'm in my ring.",
-         "i use it occasionally when i'm in my outhouse.",
-         "i use it for 10 weeks when i'm in my sauna.",
-         "i use it centenially when i'm in my greenhouse.",
-         "i use it never when i'm in my hotel.",
-         "i use it until further notice when i'm in my station.",
-         "i use it biweekly when i'm in my greenhouse.",
-         "My beagle loves to play with it.",
-         "My demon loves to play with it.",
-         "My scarab beetle loves to play with it.",
-         "My tiger loves to play with it.",
-         "My tyrannosaurus rex loves to play with it.",
-         "My peacock loves to play with it.",
-         "My chicken loves to play with it.",
-         "My baboon loves to play with it.",
-         "My terrier loves to play with it.",
-         "My hummingbird loves to play with it.",
-         "My raven loves to play with it.",
-         "My penguin loves to play with it.",
-         "My macaroni penguin loves to play with it.",
-         "My dog loves to play with it.",
-         "My velociraptor loves to play with it.",
-         "My porcupine loves to play with it.",
-         "My ant loves to play with it.",
-         "My jaguar loves to play with it.",
-         "My locust loves to play with it.",
-         "My Shih-Tzu loves to play with it.",
-         "My vulture loves to play with it.",
-         "My gentoo penguin loves to play with it.",
-         "My goldfinch loves to play with it.",
-         "My bass loves to play with it.",
-         "The box this comes in is 5 yard by 6 centimeter and weights 18 gram!!",
-         "The box this comes in is 5 inch by 6 mile and weights 15 ton!!",
-         "The box this comes in is 4 yard by 5 kilometer and weights 11 pound!",
-         "The box this comes in is 5 kilometer by 6 yard and weights 18 gram.",
-         "The box this comes in is 5 yard by 6 centimeter and weights 12 kilogram.",
-         "The box this comes in is 3 yard by 6 light-year and weights 15 gram!!!",
-         "The box this comes in is 5 kilometer by 5 inch and weights 13 kilogram!!!",
-         "The box this comes in is 4 mile by 5 yard and weights 18 pound!!",
-         "The box this comes in is 4 yard by 5 inch and weights 12 pound!",
-         "The box this comes in is 3 light-year by 5 meter and weights 10 ounce!",
-         "The box this comes in is 3 inch by 6 centimeter and weights 15 ounce!",
-         "The box this comes in is 4 meter by 5 foot and weights 18 kilogram.",
-         "The box this comes in is 5 foot by 6 inch and weights 17 pound!!!",
-         "The box this comes in is 4 mile by 5 inch and weights 19 megaton!",
-         "The box this comes in is 4 kilometer by 5 mile and weights 17 gram.",
-         "The box this comes in is 3 kilometer by 5 inch and weights 13 ton.",
-         "The box this comes in is 3 kilometer by 5 foot and weights 16 megaton!!!",
-         "The box this comes in is 4 light-year by 5 inch and weights 11 megaton!!",
-         "The box this comes in is 5 light-year by 6 foot and weights 17 megaton!!!",
-         "The box this comes in is 3 meter by 6 yard and weights 12 pound.",
-         "The box this comes in is 3 yard by 6 yard and weights 19 pound!!!",
-         "The box this comes in is 3 meter by 5 foot and weights 11 kilogram.",
-         "The box this comes in is 3 yard by 6 light-year and weights 11 megaton!!",
-         "The box this comes in is 5 kilometer by 6 meter and weights 20 ounce!",
-         "The box this comes in is 3 centimeter by 5 kilometer and weights 13 ounce!!",
-         "This $product works excessively well. It speedily improves my baseball by a lot.",
-         "This $product works really well. It wildly improves my baseball by a lot.",
-         "This $product works certainly well. It accidentally improves my baseball by a lot.",
-         "This $product works quite well. It professionally improves my soccer by a lot.",
-         "This $product works so well. It delightedly improves my football by a lot.",
-         "This $product works considerably well. It secretly improves my basketball by a lot.",
-         "This $product works outstandingly well. It grudgingly improves my baseball by a lot.",
-         "This $product works extremely well. It wetly improves my tennis by a lot.",
-         "This $product works considerably well. It mildly improves my basketball by a lot.",
-         "This $product works so well. It hungrily improves my basketball by a lot.",
-         "This $product works so well. It imperfectly improves my baseball by a lot.",
-         "This $product works very well. It persistently improves my soccer by a lot.",
-         "This $product works outstandingly well. It beautifully improves my basketball by a lot.",
-         "This $product works quite well. It pointedly improves my golf by a lot.",
-         "This $product works certainly well. It perfectly improves my tennis by a lot.",
-         "This $product works too well. It nonchalantly improves my baseball by a lot.",
-         "This $product works too well. It buoyantly improves my football by a lot.",
-         "This $product works quite well. It romantically improves my golf by a lot.",
-         "This $product works very well. It harmonically improves my tennis by a lot.",
-         "This $product works certainly well. It excitedly improves my football by a lot.",
-         "This $product works certainly well. It energetically improves my golf by a lot.",
-         "This $product works very well. It romantically improves my football by a lot.",
-         "This $product works really well. It sympathetically improves my baseball by a lot.",
-         "This $product works considerably well. It recklessly improves my basketball by a lot.",
-         "This $product works excessively well. It mortally improves my golf by a lot.",
-         "I saw one of these in Sao Tome and Principe and I bought one.",
-         "I saw one of these in French Southern and Antarctic Lands and I bought one.",
-         "I saw one of these in Barbados and I bought one.",
-         "I saw one of these in Grenada and I bought one.",
-         "I saw one of these in Spratly Islands and I bought one.",
-         "I saw one of these in The Gambia and I bought one.",
-         "I saw one of these in Canada and I bought one.",
-         "I saw one of these in South Korea and I bought one.",
-         "I saw one of these in Cote d'Ivoire and I bought one.",
-         "I saw one of these in Comoros and I bought one.",
-         "I saw one of these in Finland and I bought one.",
-         "I saw one of these in Bhutan and I bought one.",
-         "I saw one of these in Nauru and I bought one.",
-         "I saw one of these in Libya and I bought one.",
-         "I saw one of these in Vanuatu and I bought one.",
-         "I saw one of these in Macau and I bought one.",
-         "I saw one of these in Saint Pierre and Miquelon and I bought one.",
-         "I saw one of these in Moldova and I bought one.",
-         "I saw one of these in Kazakhstan and I bought one.",
-         "I saw one of these in New Zealand and I bought one.",
-         "I saw one of these in Juan de Nova Island and I bought one.",
-         "I saw one of these in Tanzania and I bought one.",
-         "I saw one of these in Algeria and I bought one.",
-         "I saw one of these in Haiti and I bought one.",
-         "I saw one of these in Saint Lucia and I bought one.",
-         "one of my hobbies is sailing. and when i'm sailing this works great.",
-         "one of my hobbies is mushroom cultivation. and when i'm cultivating mushrooms this works great.",
-         "one of my hobbies is theater. and when i'm acting this works great.",
-         "one of my hobbies is baking. and when i'm baking this works great.",
-         "one of my hobbies is programming. and when i'm programming this works great.",
-         "one of my hobbies is hiking. and when i'm hiking this works great.",
-         "one of my hobbies is spearfishing. and when i'm spearfishing this works great.",
-         "one of my hobbies is gaming. and when i'm gaming this works great.",
-         "one of my hobbies is skydiving. and when i'm skydiving this works great.",
-         "one of my hobbies is toy collecting. and when i'm collecting toys this works great.",
-         "one of my hobbies is antique-shopping. and when i'm antique-shopping this works great.",
-         "one of my hobbies is drawing. and when i'm drawing this works great.",
-         "one of my hobbies is cooking. and when i'm cooking this works great.",
-         "one of my hobbies is piano. and when i'm playing piano this works great.",
-         "one of my hobbies is scuba diving. and when i'm scuba diving this works great.",
-         "one of my hobbies is guitar. and when i'm playing guitar this works great.",
-         "one of my hobbies is web-browsing. and when i'm browsing the web this works great.",
-         "one of my hobbies is poetry. and when i'm writing poems this works great.",
-         "one of my hobbies is skateboarding. and when i'm skateboarding this works great.",
-         "It only works when I'm Chad.",
-         "It only works when I'm Niger.",
-         "It only works when I'm Norway.",
-         "It only works when I'm Cook Islands.",
-         "It only works when I'm Singapore.",
-         "It only works when I'm Rwanda.",
-         "It only works when I'm Heard Island and McDonald Islands.",
-         "It only works when I'm Guernsey.",
-         "It only works when I'm Mauritania.",
-         "It only works when I'm Malaysia.",
-         "It only works when I'm Bolivia.",
-         "It only works when I'm Nepal.",
-         "It only works when I'm Kuwait.",
-         "It only works when I'm Samoa.",
-         "It only works when I'm Niue.",
-         "It only works when I'm Martinique.",
-         "It only works when I'm Finland.",
-         "It only works when I'm Juan de Nova Island.",
-         "It only works when I'm New Caledonia.",
-         "It only works when I'm South Korea.",
-         "It only works when I'm Argentina.",
-         "It only works when I'm Azerbaijan.",
-         "It only works when I'm Wake Island.",
-         "It only works when I'm Bahrain.",
-         "My neighbor Ardeth has one of these. She works as a gasman and she says it looks fuzzy.",
-         "My neighbor Georgine has one of these. She works as a fireman and she says it looks colorful.",
-         "My neighbor Albertina has one of these. She works as a gardener and she says it looks humongous.",
-         "My neighbor Fannie has one of these. She works as a teacher and she says it looks spiky.",
-         "My neighbor Victoria has one of these. She works as a professor and she says it looks menthol.",
-         "My neighbor Germaine has one of these. She works as a salesman and she says it looks red.",
-         "My neighbor Lular has one of these. She works as a cake decorator and she says it looks ragged.",
-         "My neighbor Forest has one of these. She works as a gardener and she says it looks nude.",
-         "My neighbor Montserrat has one of these. She works as a circus performer and she says it looks shriveled.",
-         "My neighbor Honora has one of these. She works as a reporter and she says it looks enormous.",
-         "My neighbor Elisha has one of these. She works as a fortune teller and she says it looks floppy.",
-         "My neighbor Karly has one of these. She works as a gambler and she says it looks tall.",
-         "My neighbor Julisa has one of these. She works as a bartender and she says it looks crooked.",
-         "My neighbor Krista has one of these. She works as a salesman and she says it looks soapy.",
-         "My neighbor Lonnie has one of these. She works as a hobbit and she says it looks microscopic.",
-         "My neighbor Lori has one of these. She works as a taxidermist and she says it looks whopping.",
-         "My neighbor Isabela has one of these. She works as a taxidermist and she says it looks monochromatic.",
-         "My neighbor Frona has one of these. She works as a gambler and she says it looks bearded.",
-         "My neighbor Zoa has one of these. She works as a scribe and she says it looks wide.",
-         "My neighbor Georgie has one of these. She works as a busboy and she says it looks brown.",
-         "My neighbor Alida has one of these. She works as a gambler and she says it looks spotless.",
-         "My neighbor Eller has one of these. She works as a butler and she says it looks smoky.",
-         "My neighbor Allean has one of these. She works as a sky diver and she says it looks weedy.",
-         "My neighbor Betha has one of these. She works as a teacher and she says it looks wide.",
-         "My neighbor Aldona has one of these. She works as a butler and she says it looks humongous.",
-         "My co-worker Linnie has one of these. He says it looks wide.",
-         "My co-worker Alek has one of these. He says it looks white.",
-         "My co-worker Archer has one of these. He says it looks crooked.",
-         "My co-worker Aurthur has one of these. He says it looks white.",
-         "My co-worker Nile has one of these. He says it looks crooked.",
-         "My co-worker Skylar has one of these. He says it looks sweaty.",
-         "My co-worker Fate has one of these. He says it looks tall.",
-         "My co-worker Matthew has one of these. He says it looks gigantic.",
-         "My co-worker Luka has one of these. He says it looks purple.",
-         "My co-worker Reed has one of these. He says it looks microscopic.",
-         "My co-worker Kazuo has one of these. He says it looks transparent.",
-         "My co-worker Bryton has one of these. He says it looks ragged.",
-         "My co-worker Mitchell has one of these. He says it looks dry.",
-         "My co-worker Erick has one of these. He says it looks fluffy.",
-         "My co-worker Atha has one of these. He says it looks narrow.",
-         "My co-worker Cato has one of these. He says it looks sopping.",
-         "My co-worker Merwin has one of these. He says it looks bubbly.",
-         "My co-worker Tyron has one of these. He says it looks stout.",
-         "My co-worker Rey has one of these. He says it looks uneven.",
-         "My co-worker Houston has one of these. He says it looks invisible.",
-         "My co-worker Knute has one of these. He says it looks smoky.",
-         "My co-worker Namon has one of these. He says it looks funny-looking.",
-         "My co-worker Delton has one of these. He says it looks slender.",
-         "My co-worker Ali has one of these. He says it looks towering.",
-         "My co-worker Mohamed has one of these. He says it looks brown.",
-         "heard about this on Kansas City jazz radio, decided to give it a try.",
-         "heard about this on wonky radio, decided to give it a try.",
-         "heard about this on new jersey hip hop radio, decided to give it a try.",
-         "heard about this on ndombolo radio, decided to give it a try.",
-         "heard about this on hip-hop music radio, decided to give it a try.",
-         "heard about this on mbube radio, decided to give it a try.",
-         "heard about this on powerviolence radio, decided to give it a try.",
-         "heard about this on alternative dance radio, decided to give it a try.",
-         "heard about this on bouyon radio, decided to give it a try.",
-         "heard about this on dance-rock radio, decided to give it a try.",
-         "heard about this on melodic death metal radio, decided to give it a try.",
-         "heard about this on instrumental country radio, decided to give it a try.",
-         "heard about this on gypsy jazz radio, decided to give it a try.",
-         "heard about this on timba radio, decided to give it a try.",
-         "heard about this on brazilian radio, decided to give it a try.",
-         "heard about this on original pilipino music radio, decided to give it a try.",
-         "heard about this on smooth jazz radio, decided to give it a try.",
-         "heard about this on songo radio, decided to give it a try.",
-         "heard about this on rebetiko radio, decided to give it a try.",
-         "heard about this on chicha radio, decided to give it a try.",
-         "heard about this on compas radio, decided to give it a try.",
-         "heard about this on folktronica radio, decided to give it a try.",
-         "heard about this on balearic beat radio, decided to give it a try.",
-         "heard about this on jump-up radio, decided to give it a try.",
-         "talk about sadness!",
-         "talk about pleasure.",
-         "talk about bliss!!",
-         "talk about sadness!!",
-         "talk about remorse!!!",
-         "talk about contempt!",
-         "talk about shame.",
-         "talk about hatred!!!",
-         "talk about irritation.",
-         "talk about hatred.",
-         "talk about lust!!",
-         "talk about interest!!",
-         "talk about sadness.",
-         "talk about contentment!!!",
-         "talk about anticipation!",
-         "talk about optimism!!!",
-         "talk about contempt!!!",
-         "talk about fury.",
-         "talk about surprise!!!",
-         "talk about pleasure!",
-         "talk about boredom!!!",
-         "This $product, does exactly what it's suppose to do.",
-         "SoCal cockroaches are unwelcome, crafty, and tenacious. This $product keeps them away.",
-         "works okay.",
-         "I saw this on TV and wanted to give it a try.",
-         "This is a really good $product."
-      ]
-   },
-   "finance": {
-      "iban_formats": [
-         {
-            "country": "AL",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "ALkk bbbs sssx cccc cccc cccc cccc"
-         },
-         {
-            "country": "AD",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "c",
-                  "count": 12
-               }
-            ],
-            "format": "ADkk bbbb ssss cccc cccc cccc"
-         },
-         {
-            "country": "AT",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "n",
-                  "count": 11
-               }
-            ],
-            "format": "ATkk bbbb bccc cccc cccc"
-         },
-         {
-            "country": "AZ",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 20
-               }
-            ],
-            "format": "AZkk bbbb cccc cccc cccc cccc cccc"
-         },
-         {
-            "country": "BH",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 14
-               }
-            ],
-            "format": "BHkk bbbb cccc cccc cccc cc"
-         },
-         {
-            "country": "BE",
-            "total": 16,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 9
-               }
-            ],
-            "format": "BEkk bbbc cccc ccxx"
-         },
-         {
-            "country": "BA",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "BAkk bbbs sscc cccc ccxx"
-         },
-         {
-            "country": "BR",
-            "total": 29,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 13
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "a",
-                  "count": 1
-               },
-               {
-                  "type": "c",
-                  "count": 1
-               }
-            ],
-            "format": "BRkk bbbb bbbb ssss sccc cccc ccct n"
-         },
-         {
-            "country": "BG",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "c",
-                  "count": 8
-               }
-            ],
-            "format": "BGkk bbbb ssss ddcc cccc cc"
-         },
-         {
-            "country": "CR",
-            "total": 21,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 14
-               }
-            ],
-            "format": "CRkk bbbc cccc cccc cccc c"
-         },
-         {
-            "country": "HR",
-            "total": 21,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 7
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "HRkk bbbb bbbc cccc cccc c"
-         },
-         {
-            "country": "CY",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "CYkk bbbs ssss cccc cccc cccc cccc"
-         },
-         {
-            "country": "CZ",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "CZkk bbbb ssss sscc cccc cccc"
-         },
-         {
-            "country": "DK",
-            "total": 18,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "DKkk bbbb cccc cccc cc"
-         },
-         {
-            "country": "DO",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 20
-               }
-            ],
-            "format": "DOkk bbbb cccc cccc cccc cccc cccc"
-         },
-         {
-            "country": "TL",
-            "total": 23,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "TLkk bbbc cccc cccc cccc cxx"
-         },
-         {
-            "country": "EE",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 12
-               }
-            ],
-            "format": "EEkk bbss cccc cccc cccx"
-         },
-         {
-            "country": "FO",
-            "total": 18,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "FOkk bbbb cccc cccc cx"
-         },
-         {
-            "country": "FI",
-            "total": 18,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 8
-               }
-            ],
-            "format": "FIkk bbbb bbcc cccc cx"
-         },
-         {
-            "country": "FR",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "c",
-                  "count": 11
-               },
-               {
-                  "type": "n",
-                  "count": 2
-               }
-            ],
-            "format": "FRkk bbbb bggg ggcc cccc cccc cxx"
-         },
-         {
-            "country": "GE",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 2
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "GEkk bbcc cccc cccc cccc cc"
-         },
-         {
-            "country": "DE",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "DEkk bbbb bbbb cccc cccc cc"
-         },
-         {
-            "country": "GI",
-            "total": 23,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 15
-               }
-            ],
-            "format": "GIkk bbbb cccc cccc cccc ccc"
-         },
-         {
-            "country": "GR",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 7
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "GRkk bbbs sssc cccc cccc cccc ccc"
-         },
-         {
-            "country": "GL",
-            "total": 18,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "GLkk bbbb cccc cccc cc"
-         },
-         {
-            "country": "GT",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "GTkk bbbb mmtt cccc cccc cccc cccc"
-         },
-         {
-            "country": "HU",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "HUkk bbbs sssk cccc cccc cccc cccx"
-         },
-         {
-            "country": "IS",
-            "total": 26,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "ISkk bbbb sscc cccc iiii iiii ii"
-         },
-         {
-            "country": "IE",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 8
-               }
-            ],
-            "format": "IEkk aaaa bbbb bbcc cccc cc"
-         },
-         {
-            "country": "IL",
-            "total": 23,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 13
-               }
-            ],
-            "format": "ILkk bbbn nncc cccc cccc ccc"
-         },
-         {
-            "country": "IT",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 1
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "c",
-                  "count": 12
-               }
-            ],
-            "format": "ITkk xaaa aabb bbbc cccc cccc ccc"
-         },
-         {
-            "country": "JO",
-            "total": 30,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 18
-               }
-            ],
-            "format": "JOkk bbbb nnnn cccc cccc cccc cccc cc"
-         },
-         {
-            "country": "KZ",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "c",
-                  "count": 13
-               }
-            ],
-            "format": "KZkk bbbc cccc cccc cccc"
-         },
-         {
-            "country": "XK",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 12
-               }
-            ],
-            "format": "XKkk bbbb cccc cccc cccc"
-         },
-         {
-            "country": "KW",
-            "total": 30,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 22
-               }
-            ],
-            "format": "KWkk bbbb cccc cccc cccc cccc cccc cc"
-         },
-         {
-            "country": "LV",
-            "total": 21,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 13
-               }
-            ],
-            "format": "LVkk bbbb cccc cccc cccc c"
-         },
-         {
-            "country": "LB",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 20
-               }
-            ],
-            "format": "LBkk bbbb cccc cccc cccc cccc cccc"
-         },
-         {
-            "country": "LI",
-            "total": 21,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "c",
-                  "count": 12
-               }
-            ],
-            "format": "LIkk bbbb bccc cccc cccc c"
-         },
-         {
-            "country": "LT",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "n",
-                  "count": 11
-               }
-            ],
-            "format": "LTkk bbbb bccc cccc cccc"
-         },
-         {
-            "country": "LU",
-            "total": 20,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "c",
-                  "count": 13
-               }
-            ],
-            "format": "LUkk bbbc cccc cccc cccc"
-         },
-         {
-            "country": "MK",
-            "total": 19,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "c",
-                  "count": 10
-               },
-               {
-                  "type": "n",
-                  "count": 2
-               }
-            ],
-            "format": "MKkk bbbc cccc cccc cxx"
-         },
-         {
-            "country": "MT",
-            "total": 31,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "c",
-                  "count": 18
-               }
-            ],
-            "format": "MTkk bbbb ssss sccc cccc cccc cccc ccc"
-         },
-         {
-            "country": "MR",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "n",
-                  "count": 13
-               }
-            ],
-            "format": "MRkk bbbb bsss sscc cccc cccc cxx"
-         },
-         {
-            "country": "MU",
-            "total": 30,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 15
-               },
-               {
-                  "type": "a",
-                  "count": 3
-               }
-            ],
-            "format": "MUkk bbbb bbss cccc cccc cccc 000d dd"
-         },
-         {
-            "country": "MC",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "c",
-                  "count": 11
-               },
-               {
-                  "type": "n",
-                  "count": 2
-               }
-            ],
-            "format": "MCkk bbbb bsss sscc cccc cccc cxx"
-         },
-         {
-            "country": "MD",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 2
-               },
-               {
-                  "type": "c",
-                  "count": 18
-               }
-            ],
-            "format": "MDkk bbcc cccc cccc cccc cccc"
-         },
-         {
-            "country": "ME",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 15
-               }
-            ],
-            "format": "MEkk bbbc cccc cccc cccc xx"
-         },
-         {
-            "country": "NL",
-            "total": 18,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "NLkk bbbb cccc cccc cc"
-         },
-         {
-            "country": "NO",
-            "total": 15,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 7
-               }
-            ],
-            "format": "NOkk bbbb cccc ccx"
-         },
-         {
-            "country": "PK",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "PKkk bbbb cccc cccc cccc cccc"
-         },
-         {
-            "country": "PS",
-            "total": 29,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 9
-               },
-               {
-                  "type": "n",
-                  "count": 12
-               }
-            ],
-            "format": "PSkk bbbb xxxx xxxx xccc cccc cccc c"
-         },
-         {
-            "country": "PL",
-            "total": 28,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "PLkk bbbs sssx cccc cccc cccc cccc"
-         },
-         {
-            "country": "PT",
-            "total": 25,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 8
-               },
-               {
-                  "type": "n",
-                  "count": 13
-               }
-            ],
-            "format": "PTkk bbbb ssss cccc cccc cccx x"
-         },
-         {
-            "country": "QA",
-            "total": 29,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 21
-               }
-            ],
-            "format": "QAkk bbbb cccc cccc cccc cccc cccc c"
-         },
-         {
-            "country": "RO",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "ROkk bbbb cccc cccc cccc cccc"
-         },
-         {
-            "country": "SM",
-            "total": 27,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 1
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "c",
-                  "count": 12
-               }
-            ],
-            "format": "SMkk xaaa aabb bbbc cccc cccc ccc"
-         },
-         {
-            "country": "SA",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 2
-               },
-               {
-                  "type": "c",
-                  "count": 18
-               }
-            ],
-            "format": "SAkk bbcc cccc cccc cccc cccc"
-         },
-         {
-            "country": "RS",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 15
-               }
-            ],
-            "format": "RSkk bbbc cccc cccc cccc xx"
-         },
-         {
-            "country": "SK",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "SKkk bbbb ssss sscc cccc cccc"
-         },
-         {
-            "country": "SI",
-            "total": 19,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "SIkk bbss sccc cccc cxx"
-         },
-         {
-            "country": "ES",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 10
-               },
-               {
-                  "type": "n",
-                  "count": 10
-               }
-            ],
-            "format": "ESkk bbbb gggg xxcc cccc cccc"
-         },
-         {
-            "country": "SE",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 17
-               }
-            ],
-            "format": "SEkk bbbc cccc cccc cccc cccc"
-         },
-         {
-            "country": "CH",
-            "total": 21,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "c",
-                  "count": 12
-               }
-            ],
-            "format": "CHkk bbbb bccc cccc cccc c"
-         },
-         {
-            "country": "TN",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "n",
-                  "count": 15
-               }
-            ],
-            "format": "TNkk bbss sccc cccc cccc cccc"
-         },
-         {
-            "country": "TR",
-            "total": 26,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 5
-               },
-               {
-                  "type": "c",
-                  "count": 1
-               },
-               {
-                  "type": "c",
-                  "count": 16
-               }
-            ],
-            "format": "TRkk bbbb bxcc cccc cccc cccc cc"
-         },
-         {
-            "country": "AE",
-            "total": 23,
-            "bban": [
-               {
-                  "type": "n",
-                  "count": 3
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "AEkk bbbc cccc cccc cccc ccc"
-         },
-         {
-            "country": "GB",
-            "total": 22,
-            "bban": [
-               {
-                  "type": "a",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 6
-               },
-               {
-                  "type": "n",
-                  "count": 8
-               }
-            ],
-            "format": "GBkk bbbb ssss sscc cccc cc"
-         },
-         {
-            "country": "VG",
-            "total": 24,
-            "bban": [
-               {
-                  "type": "c",
-                  "count": 4
-               },
-               {
-                  "type": "n",
-                  "count": 16
-               }
-            ],
-            "format": "VGkk bbbb cccc cccc cccc cccc"
-         }
-      ]
-   }
+    "rant": {
+        "review": [
+            "this $product is papery.",
+            "this $product is hyper.",
+            "this $product is light-hearted.",
+            "this $product is whole-grain.",
+            "this $product is slurpee.",
+            "this $product is perplexed.",
+            "this $product is dominant.",
+            "this $product is ghetto.",
+            "this $product is revolting.",
+            "this $product is gracious.",
+            "this $product is complimentary.",
+            "this $product is snowy.",
+            "this $product is ratty.",
+            "this $product is amiable.",
+            "this $product is smooth.",
+            "this $product is tasty.",
+            "this $product is standard.",
+            "this $product is mellow.",
+            "this $product is awesome.",
+            "this $product is nifty.",
+            "this $product is top-notch.",
+            "this $product is honest.",
+            "this $product is brown.",
+            "this $product is vertical.",
+            "this $product is flirty.",
+            "I tried to electrocute it but got sweetmeat all over it.",
+            "I tried to shatter it but got potato all over it.",
+            "I tried to behead it but got truffle all over it.",
+            "I tried to impale it but got fudge all over it.",
+            "I tried to grab it but got bonbon all over it.",
+            "I tried to cremate it but got Turkish Delight all over it.",
+            "I tried to pinch it but got peanut all over it.",
+            "I tried to nail it but got strawberry all over it.",
+            "I tried to hang it but got jelly bean all over it.",
+            "I tried to annihilate it but got bonbon all over it.",
+            "I tried to vomit it but got bonbon all over it.",
+            "I tried to nab it but got biscuit all over it.",
+            "I tried to attack it but got meatball all over it.",
+            "I tried to kidnap it but got apricot all over it.",
+            "I tried to decapitate it but got coconut all over it.",
+            "I tried to pepper it but got prune all over it.",
+            "I tried to shred it but got watermelon all over it.",
+            "I tried to manhandle it but got bun all over it.",
+            "I tried to slay it but got truffle all over it.",
+            "I tried to maul it but got onion all over it.",
+            "I tried to strangle it but got hazelnut all over it.",
+            "I tried to belly-flop it but got Turkish Delight all over it.",
+            "I tried to maim it but got nectarine all over it.",
+            "I tried to scratch it but got cheeseburger all over it.",
+            "I tried to nab it but got salad all over it.",
+            "i use it profusely when i'm in my garage.",
+            "i use it on Mondays when i'm in my fort.",
+            "i use it from now on when i'm in my safehouse.",
+            "i use it every Tuesday when i'm in my store.",
+            "i use it every Tuesday when i'm in my pub.",
+            "i use it barely when i'm in my store.",
+            "i use it once a week when i'm in my firetruck.",
+            "i use it hardly when i'm in my prison.",
+            "i use it never when i'm in my nightclub.",
+            "i use it never again when i'm in my station.",
+            "i use it daily when i'm in my outhouse.",
+            "i use it until further notice when i'm in my nightclub.",
+            "i use it daily when i'm in my courthouse.",
+            "i use it every Tuesday when i'm in my homeless shelter.",
+            "i use it for 10 weeks when i'm in my jail.",
+            "i use it this time when i'm in my port-a-potty.",
+            "i use it usually when i'm in my alley.",
+            "i use it once in a while when i'm in my ring.",
+            "i use it occasionally when i'm in my outhouse.",
+            "i use it for 10 weeks when i'm in my sauna.",
+            "i use it centenially when i'm in my greenhouse.",
+            "i use it never when i'm in my hotel.",
+            "i use it until further notice when i'm in my station.",
+            "i use it biweekly when i'm in my greenhouse.",
+            "My beagle loves to play with it.",
+            "My demon loves to play with it.",
+            "My scarab beetle loves to play with it.",
+            "My tiger loves to play with it.",
+            "My tyrannosaurus rex loves to play with it.",
+            "My peacock loves to play with it.",
+            "My chicken loves to play with it.",
+            "My baboon loves to play with it.",
+            "My terrier loves to play with it.",
+            "My hummingbird loves to play with it.",
+            "My raven loves to play with it.",
+            "My penguin loves to play with it.",
+            "My macaroni penguin loves to play with it.",
+            "My dog loves to play with it.",
+            "My velociraptor loves to play with it.",
+            "My porcupine loves to play with it.",
+            "My ant loves to play with it.",
+            "My jaguar loves to play with it.",
+            "My locust loves to play with it.",
+            "My Shih-Tzu loves to play with it.",
+            "My vulture loves to play with it.",
+            "My gentoo penguin loves to play with it.",
+            "My goldfinch loves to play with it.",
+            "My bass loves to play with it.",
+            "The box this comes in is 5 yard by 6 centimeter and weights 18 gram!!",
+            "The box this comes in is 5 inch by 6 mile and weights 15 ton!!",
+            "The box this comes in is 4 yard by 5 kilometer and weights 11 pound!",
+            "The box this comes in is 5 kilometer by 6 yard and weights 18 gram.",
+            "The box this comes in is 5 yard by 6 centimeter and weights 12 kilogram.",
+            "The box this comes in is 3 yard by 6 light-year and weights 15 gram!!!",
+            "The box this comes in is 5 kilometer by 5 inch and weights 13 kilogram!!!",
+            "The box this comes in is 4 mile by 5 yard and weights 18 pound!!",
+            "The box this comes in is 4 yard by 5 inch and weights 12 pound!",
+            "The box this comes in is 3 light-year by 5 meter and weights 10 ounce!",
+            "The box this comes in is 3 inch by 6 centimeter and weights 15 ounce!",
+            "The box this comes in is 4 meter by 5 foot and weights 18 kilogram.",
+            "The box this comes in is 5 foot by 6 inch and weights 17 pound!!!",
+            "The box this comes in is 4 mile by 5 inch and weights 19 megaton!",
+            "The box this comes in is 4 kilometer by 5 mile and weights 17 gram.",
+            "The box this comes in is 3 kilometer by 5 inch and weights 13 ton.",
+            "The box this comes in is 3 kilometer by 5 foot and weights 16 megaton!!!",
+            "The box this comes in is 4 light-year by 5 inch and weights 11 megaton!!",
+            "The box this comes in is 5 light-year by 6 foot and weights 17 megaton!!!",
+            "The box this comes in is 3 meter by 6 yard and weights 12 pound.",
+            "The box this comes in is 3 yard by 6 yard and weights 19 pound!!!",
+            "The box this comes in is 3 meter by 5 foot and weights 11 kilogram.",
+            "The box this comes in is 3 yard by 6 light-year and weights 11 megaton!!",
+            "The box this comes in is 5 kilometer by 6 meter and weights 20 ounce!",
+            "The box this comes in is 3 centimeter by 5 kilometer and weights 13 ounce!!",
+            "This $product works excessively well. It speedily improves my baseball by a lot.",
+            "This $product works really well. It wildly improves my baseball by a lot.",
+            "This $product works certainly well. It accidentally improves my baseball by a lot.",
+            "This $product works quite well. It professionally improves my soccer by a lot.",
+            "This $product works so well. It delightedly improves my football by a lot.",
+            "This $product works considerably well. It secretly improves my basketball by a lot.",
+            "This $product works outstandingly well. It grudgingly improves my baseball by a lot.",
+            "This $product works extremely well. It wetly improves my tennis by a lot.",
+            "This $product works considerably well. It mildly improves my basketball by a lot.",
+            "This $product works so well. It hungrily improves my basketball by a lot.",
+            "This $product works so well. It imperfectly improves my baseball by a lot.",
+            "This $product works very well. It persistently improves my soccer by a lot.",
+            "This $product works outstandingly well. It beautifully improves my basketball by a lot.",
+            "This $product works quite well. It pointedly improves my golf by a lot.",
+            "This $product works certainly well. It perfectly improves my tennis by a lot.",
+            "This $product works too well. It nonchalantly improves my baseball by a lot.",
+            "This $product works too well. It buoyantly improves my football by a lot.",
+            "This $product works quite well. It romantically improves my golf by a lot.",
+            "This $product works very well. It harmonically improves my tennis by a lot.",
+            "This $product works certainly well. It excitedly improves my football by a lot.",
+            "This $product works certainly well. It energetically improves my golf by a lot.",
+            "This $product works very well. It romantically improves my football by a lot.",
+            "This $product works really well. It sympathetically improves my baseball by a lot.",
+            "This $product works considerably well. It recklessly improves my basketball by a lot.",
+            "This $product works excessively well. It mortally improves my golf by a lot.",
+            "I saw one of these in Sao Tome and Principe and I bought one.",
+            "I saw one of these in French Southern and Antarctic Lands and I bought one.",
+            "I saw one of these in Barbados and I bought one.",
+            "I saw one of these in Grenada and I bought one.",
+            "I saw one of these in Spratly Islands and I bought one.",
+            "I saw one of these in The Gambia and I bought one.",
+            "I saw one of these in Canada and I bought one.",
+            "I saw one of these in South Korea and I bought one.",
+            "I saw one of these in Cote d'Ivoire and I bought one.",
+            "I saw one of these in Comoros and I bought one.",
+            "I saw one of these in Finland and I bought one.",
+            "I saw one of these in Bhutan and I bought one.",
+            "I saw one of these in Nauru and I bought one.",
+            "I saw one of these in Libya and I bought one.",
+            "I saw one of these in Vanuatu and I bought one.",
+            "I saw one of these in Macau and I bought one.",
+            "I saw one of these in Saint Pierre and Miquelon and I bought one.",
+            "I saw one of these in Moldova and I bought one.",
+            "I saw one of these in Kazakhstan and I bought one.",
+            "I saw one of these in New Zealand and I bought one.",
+            "I saw one of these in Juan de Nova Island and I bought one.",
+            "I saw one of these in Tanzania and I bought one.",
+            "I saw one of these in Algeria and I bought one.",
+            "I saw one of these in Haiti and I bought one.",
+            "I saw one of these in Saint Lucia and I bought one.",
+            "one of my hobbies is sailing. and when i'm sailing this works great.",
+            "one of my hobbies is mushroom cultivation. and when i'm cultivating mushrooms this works great.",
+            "one of my hobbies is theater. and when i'm acting this works great.",
+            "one of my hobbies is baking. and when i'm baking this works great.",
+            "one of my hobbies is programming. and when i'm programming this works great.",
+            "one of my hobbies is hiking. and when i'm hiking this works great.",
+            "one of my hobbies is spearfishing. and when i'm spearfishing this works great.",
+            "one of my hobbies is gaming. and when i'm gaming this works great.",
+            "one of my hobbies is skydiving. and when i'm skydiving this works great.",
+            "one of my hobbies is toy collecting. and when i'm collecting toys this works great.",
+            "one of my hobbies is antique-shopping. and when i'm antique-shopping this works great.",
+            "one of my hobbies is drawing. and when i'm drawing this works great.",
+            "one of my hobbies is cooking. and when i'm cooking this works great.",
+            "one of my hobbies is piano. and when i'm playing piano this works great.",
+            "one of my hobbies is scuba diving. and when i'm scuba diving this works great.",
+            "one of my hobbies is guitar. and when i'm playing guitar this works great.",
+            "one of my hobbies is web-browsing. and when i'm browsing the web this works great.",
+            "one of my hobbies is poetry. and when i'm writing poems this works great.",
+            "one of my hobbies is skateboarding. and when i'm skateboarding this works great.",
+            "It only works when I'm Chad.",
+            "It only works when I'm Niger.",
+            "It only works when I'm Norway.",
+            "It only works when I'm Cook Islands.",
+            "It only works when I'm Singapore.",
+            "It only works when I'm Rwanda.",
+            "It only works when I'm Heard Island and McDonald Islands.",
+            "It only works when I'm Guernsey.",
+            "It only works when I'm Mauritania.",
+            "It only works when I'm Malaysia.",
+            "It only works when I'm Bolivia.",
+            "It only works when I'm Nepal.",
+            "It only works when I'm Kuwait.",
+            "It only works when I'm Samoa.",
+            "It only works when I'm Niue.",
+            "It only works when I'm Martinique.",
+            "It only works when I'm Finland.",
+            "It only works when I'm Juan de Nova Island.",
+            "It only works when I'm New Caledonia.",
+            "It only works when I'm South Korea.",
+            "It only works when I'm Argentina.",
+            "It only works when I'm Azerbaijan.",
+            "It only works when I'm Wake Island.",
+            "It only works when I'm Bahrain.",
+            "My neighbor Ardeth has one of these. She works as a gasman and she says it looks fuzzy.",
+            "My neighbor Georgine has one of these. She works as a fireman and she says it looks colorful.",
+            "My neighbor Albertina has one of these. She works as a gardener and she says it looks humongous.",
+            "My neighbor Fannie has one of these. She works as a teacher and she says it looks spiky.",
+            "My neighbor Victoria has one of these. She works as a professor and she says it looks menthol.",
+            "My neighbor Germaine has one of these. She works as a salesman and she says it looks red.",
+            "My neighbor Lular has one of these. She works as a cake decorator and she says it looks ragged.",
+            "My neighbor Forest has one of these. She works as a gardener and she says it looks nude.",
+            "My neighbor Montserrat has one of these. She works as a circus performer and she says it looks shriveled.",
+            "My neighbor Honora has one of these. She works as a reporter and she says it looks enormous.",
+            "My neighbor Elisha has one of these. She works as a fortune teller and she says it looks floppy.",
+            "My neighbor Karly has one of these. She works as a gambler and she says it looks tall.",
+            "My neighbor Julisa has one of these. She works as a bartender and she says it looks crooked.",
+            "My neighbor Krista has one of these. She works as a salesman and she says it looks soapy.",
+            "My neighbor Lonnie has one of these. She works as a hobbit and she says it looks microscopic.",
+            "My neighbor Lori has one of these. She works as a taxidermist and she says it looks whopping.",
+            "My neighbor Isabela has one of these. She works as a taxidermist and she says it looks monochromatic.",
+            "My neighbor Frona has one of these. She works as a gambler and she says it looks bearded.",
+            "My neighbor Zoa has one of these. She works as a scribe and she says it looks wide.",
+            "My neighbor Georgie has one of these. She works as a busboy and she says it looks brown.",
+            "My neighbor Alida has one of these. She works as a gambler and she says it looks spotless.",
+            "My neighbor Eller has one of these. She works as a butler and she says it looks smoky.",
+            "My neighbor Allean has one of these. She works as a sky diver and she says it looks weedy.",
+            "My neighbor Betha has one of these. She works as a teacher and she says it looks wide.",
+            "My neighbor Aldona has one of these. She works as a butler and she says it looks humongous.",
+            "My co-worker Linnie has one of these. He says it looks wide.",
+            "My co-worker Alek has one of these. He says it looks white.",
+            "My co-worker Archer has one of these. He says it looks crooked.",
+            "My co-worker Aurthur has one of these. He says it looks white.",
+            "My co-worker Nile has one of these. He says it looks crooked.",
+            "My co-worker Skylar has one of these. He says it looks sweaty.",
+            "My co-worker Fate has one of these. He says it looks tall.",
+            "My co-worker Matthew has one of these. He says it looks gigantic.",
+            "My co-worker Luka has one of these. He says it looks purple.",
+            "My co-worker Reed has one of these. He says it looks microscopic.",
+            "My co-worker Kazuo has one of these. He says it looks transparent.",
+            "My co-worker Bryton has one of these. He says it looks ragged.",
+            "My co-worker Mitchell has one of these. He says it looks dry.",
+            "My co-worker Erick has one of these. He says it looks fluffy.",
+            "My co-worker Atha has one of these. He says it looks narrow.",
+            "My co-worker Cato has one of these. He says it looks sopping.",
+            "My co-worker Merwin has one of these. He says it looks bubbly.",
+            "My co-worker Tyron has one of these. He says it looks stout.",
+            "My co-worker Rey has one of these. He says it looks uneven.",
+            "My co-worker Houston has one of these. He says it looks invisible.",
+            "My co-worker Knute has one of these. He says it looks smoky.",
+            "My co-worker Namon has one of these. He says it looks funny-looking.",
+            "My co-worker Delton has one of these. He says it looks slender.",
+            "My co-worker Ali has one of these. He says it looks towering.",
+            "My co-worker Mohamed has one of these. He says it looks brown.",
+            "heard about this on Kansas City jazz radio, decided to give it a try.",
+            "heard about this on wonky radio, decided to give it a try.",
+            "heard about this on new jersey hip hop radio, decided to give it a try.",
+            "heard about this on ndombolo radio, decided to give it a try.",
+            "heard about this on hip-hop music radio, decided to give it a try.",
+            "heard about this on mbube radio, decided to give it a try.",
+            "heard about this on powerviolence radio, decided to give it a try.",
+            "heard about this on alternative dance radio, decided to give it a try.",
+            "heard about this on bouyon radio, decided to give it a try.",
+            "heard about this on dance-rock radio, decided to give it a try.",
+            "heard about this on melodic death metal radio, decided to give it a try.",
+            "heard about this on instrumental country radio, decided to give it a try.",
+            "heard about this on gypsy jazz radio, decided to give it a try.",
+            "heard about this on timba radio, decided to give it a try.",
+            "heard about this on brazilian radio, decided to give it a try.",
+            "heard about this on original pilipino music radio, decided to give it a try.",
+            "heard about this on smooth jazz radio, decided to give it a try.",
+            "heard about this on songo radio, decided to give it a try.",
+            "heard about this on rebetiko radio, decided to give it a try.",
+            "heard about this on chicha radio, decided to give it a try.",
+            "heard about this on compas radio, decided to give it a try.",
+            "heard about this on folktronica radio, decided to give it a try.",
+            "heard about this on balearic beat radio, decided to give it a try.",
+            "heard about this on jump-up radio, decided to give it a try.",
+            "talk about sadness!",
+            "talk about pleasure.",
+            "talk about bliss!!",
+            "talk about sadness!!",
+            "talk about remorse!!!",
+            "talk about contempt!",
+            "talk about shame.",
+            "talk about hatred!!!",
+            "talk about irritation.",
+            "talk about hatred.",
+            "talk about lust!!",
+            "talk about interest!!",
+            "talk about sadness.",
+            "talk about contentment!!!",
+            "talk about anticipation!",
+            "talk about optimism!!!",
+            "talk about contempt!!!",
+            "talk about fury.",
+            "talk about surprise!!!",
+            "talk about pleasure!",
+            "talk about boredom!!!",
+            "This $product, does exactly what it's suppose to do.",
+            "SoCal cockroaches are unwelcome, crafty, and tenacious. This $product keeps them away.",
+            "works okay.",
+            "I saw this on TV and wanted to give it a try.",
+            "This is a really good $product."
+        ]
+    },
+    "events": {
+       
+  "history": [
+    "Wright brothers make the first powered flight",
+    "World War I begins",
+    "Treaty of Versailles ends World War I",
+    "Wall Street Crash triggers the Great Depression",
+    "World War II begins",
+    "Atomic bombs dropped on Hiroshima and Nagasaki",
+    "India gains independence from British rule",
+    "Korean War begins",
+    "Brown v. Board of Education ends racial segregation in US schools",
+    "Yuri Gagarin becomes the first human in space",
+    "Martin Luther King Jr.'s 'I Have a Dream' speech",
+    "Apollo 11 Moon Landing",
+    "Intel releases the first microprocessor",
+    "Roe v. Wade legalizes abortion in the US",
+    "Berlin Wall falls",
+    "USSR dissolves",
+    "Nelson Mandela becomes South Africa's first black president",
+    "Hong Kong returns to Chinese rule",
+    "September 11 attacks in the US",
+    "Global financial crisis",
+    "Deepwater Horizon oil spill",
+    "Arab Spring uprisings",
+    "Edward Snowden leaks NSA documents",
+    "Paris Agreement on climate change",
+    "Brexit referendum",
+    "COVID-19 pandemic begins",
+    "Black Lives Matter protests",
+    "SpaceX Crew-2 mission launches",
+    "TBD"
+  ]},
+    "finance": {
+        "iban_formats": [
+            {
+                "country": "AL",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "ALkk bbbs sssx cccc cccc cccc cccc"
+            },
+            {
+                "country": "AD",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "c",
+                        "count": 12
+                    }
+                ],
+                "format": "ADkk bbbb ssss cccc cccc cccc"
+            },
+            {
+                "country": "AT",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "n",
+                        "count": 11
+                    }
+                ],
+                "format": "ATkk bbbb bccc cccc cccc"
+            },
+            {
+                "country": "AZ",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 20
+                    }
+                ],
+                "format": "AZkk bbbb cccc cccc cccc cccc cccc"
+            },
+            {
+                "country": "BH",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 14
+                    }
+                ],
+                "format": "BHkk bbbb cccc cccc cccc cc"
+            },
+            {
+                "country": "BE",
+                "total": 16,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 9
+                    }
+                ],
+                "format": "BEkk bbbc cccc ccxx"
+            },
+            {
+                "country": "BA",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "BAkk bbbs sscc cccc ccxx"
+            },
+            {
+                "country": "BR",
+                "total": 29,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 13
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "a",
+                        "count": 1
+                    },
+                    {
+                        "type": "c",
+                        "count": 1
+                    }
+                ],
+                "format": "BRkk bbbb bbbb ssss sccc cccc ccct n"
+            },
+            {
+                "country": "BG",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "c",
+                        "count": 8
+                    }
+                ],
+                "format": "BGkk bbbb ssss ddcc cccc cc"
+            },
+            {
+                "country": "CR",
+                "total": 21,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 14
+                    }
+                ],
+                "format": "CRkk bbbc cccc cccc cccc c"
+            },
+            {
+                "country": "HR",
+                "total": 21,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 7
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "HRkk bbbb bbbc cccc cccc c"
+            },
+            {
+                "country": "CY",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "CYkk bbbs ssss cccc cccc cccc cccc"
+            },
+            {
+                "country": "CZ",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "CZkk bbbb ssss sscc cccc cccc"
+            },
+            {
+                "country": "DK",
+                "total": 18,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "DKkk bbbb cccc cccc cc"
+            },
+            {
+                "country": "DO",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 20
+                    }
+                ],
+                "format": "DOkk bbbb cccc cccc cccc cccc cccc"
+            },
+            {
+                "country": "TL",
+                "total": 23,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "TLkk bbbc cccc cccc cccc cxx"
+            },
+            {
+                "country": "EE",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 12
+                    }
+                ],
+                "format": "EEkk bbss cccc cccc cccx"
+            },
+            {
+                "country": "FO",
+                "total": 18,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "FOkk bbbb cccc cccc cx"
+            },
+            {
+                "country": "FI",
+                "total": 18,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 8
+                    }
+                ],
+                "format": "FIkk bbbb bbcc cccc cx"
+            },
+            {
+                "country": "FR",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "c",
+                        "count": 11
+                    },
+                    {
+                        "type": "n",
+                        "count": 2
+                    }
+                ],
+                "format": "FRkk bbbb bggg ggcc cccc cccc cxx"
+            },
+            {
+                "country": "GE",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 2
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "GEkk bbcc cccc cccc cccc cc"
+            },
+            {
+                "country": "DE",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "DEkk bbbb bbbb cccc cccc cc"
+            },
+            {
+                "country": "GI",
+                "total": 23,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 15
+                    }
+                ],
+                "format": "GIkk bbbb cccc cccc cccc ccc"
+            },
+            {
+                "country": "GR",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 7
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "GRkk bbbs sssc cccc cccc cccc ccc"
+            },
+            {
+                "country": "GL",
+                "total": 18,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "GLkk bbbb cccc cccc cc"
+            },
+            {
+                "country": "GT",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "GTkk bbbb mmtt cccc cccc cccc cccc"
+            },
+            {
+                "country": "HU",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "HUkk bbbs sssk cccc cccc cccc cccx"
+            },
+            {
+                "country": "IS",
+                "total": 26,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "ISkk bbbb sscc cccc iiii iiii ii"
+            },
+            {
+                "country": "IE",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 8
+                    }
+                ],
+                "format": "IEkk aaaa bbbb bbcc cccc cc"
+            },
+            {
+                "country": "IL",
+                "total": 23,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 13
+                    }
+                ],
+                "format": "ILkk bbbn nncc cccc cccc ccc"
+            },
+            {
+                "country": "IT",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 1
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "c",
+                        "count": 12
+                    }
+                ],
+                "format": "ITkk xaaa aabb bbbc cccc cccc ccc"
+            },
+            {
+                "country": "JO",
+                "total": 30,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 18
+                    }
+                ],
+                "format": "JOkk bbbb nnnn cccc cccc cccc cccc cc"
+            },
+            {
+                "country": "KZ",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "c",
+                        "count": 13
+                    }
+                ],
+                "format": "KZkk bbbc cccc cccc cccc"
+            },
+            {
+                "country": "XK",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 12
+                    }
+                ],
+                "format": "XKkk bbbb cccc cccc cccc"
+            },
+            {
+                "country": "KW",
+                "total": 30,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 22
+                    }
+                ],
+                "format": "KWkk bbbb cccc cccc cccc cccc cccc cc"
+            },
+            {
+                "country": "LV",
+                "total": 21,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 13
+                    }
+                ],
+                "format": "LVkk bbbb cccc cccc cccc c"
+            },
+            {
+                "country": "LB",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 20
+                    }
+                ],
+                "format": "LBkk bbbb cccc cccc cccc cccc cccc"
+            },
+            {
+                "country": "LI",
+                "total": 21,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "c",
+                        "count": 12
+                    }
+                ],
+                "format": "LIkk bbbb bccc cccc cccc c"
+            },
+            {
+                "country": "LT",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "n",
+                        "count": 11
+                    }
+                ],
+                "format": "LTkk bbbb bccc cccc cccc"
+            },
+            {
+                "country": "LU",
+                "total": 20,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "c",
+                        "count": 13
+                    }
+                ],
+                "format": "LUkk bbbc cccc cccc cccc"
+            },
+            {
+                "country": "MK",
+                "total": 19,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "c",
+                        "count": 10
+                    },
+                    {
+                        "type": "n",
+                        "count": 2
+                    }
+                ],
+                "format": "MKkk bbbc cccc cccc cxx"
+            },
+            {
+                "country": "MT",
+                "total": 31,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "c",
+                        "count": 18
+                    }
+                ],
+                "format": "MTkk bbbb ssss sccc cccc cccc cccc ccc"
+            },
+            {
+                "country": "MR",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "n",
+                        "count": 13
+                    }
+                ],
+                "format": "MRkk bbbb bsss sscc cccc cccc cxx"
+            },
+            {
+                "country": "MU",
+                "total": 30,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 15
+                    },
+                    {
+                        "type": "a",
+                        "count": 3
+                    }
+                ],
+                "format": "MUkk bbbb bbss cccc cccc cccc 000d dd"
+            },
+            {
+                "country": "MC",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "c",
+                        "count": 11
+                    },
+                    {
+                        "type": "n",
+                        "count": 2
+                    }
+                ],
+                "format": "MCkk bbbb bsss sscc cccc cccc cxx"
+            },
+            {
+                "country": "MD",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 2
+                    },
+                    {
+                        "type": "c",
+                        "count": 18
+                    }
+                ],
+                "format": "MDkk bbcc cccc cccc cccc cccc"
+            },
+            {
+                "country": "ME",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 15
+                    }
+                ],
+                "format": "MEkk bbbc cccc cccc cccc xx"
+            },
+            {
+                "country": "NL",
+                "total": 18,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "NLkk bbbb cccc cccc cc"
+            },
+            {
+                "country": "NO",
+                "total": 15,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 7
+                    }
+                ],
+                "format": "NOkk bbbb cccc ccx"
+            },
+            {
+                "country": "PK",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "PKkk bbbb cccc cccc cccc cccc"
+            },
+            {
+                "country": "PS",
+                "total": 29,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 9
+                    },
+                    {
+                        "type": "n",
+                        "count": 12
+                    }
+                ],
+                "format": "PSkk bbbb xxxx xxxx xccc cccc cccc c"
+            },
+            {
+                "country": "PL",
+                "total": 28,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "PLkk bbbs sssx cccc cccc cccc cccc"
+            },
+            {
+                "country": "PT",
+                "total": 25,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 8
+                    },
+                    {
+                        "type": "n",
+                        "count": 13
+                    }
+                ],
+                "format": "PTkk bbbb ssss cccc cccc cccx x"
+            },
+            {
+                "country": "QA",
+                "total": 29,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 21
+                    }
+                ],
+                "format": "QAkk bbbb cccc cccc cccc cccc cccc c"
+            },
+            {
+                "country": "RO",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "ROkk bbbb cccc cccc cccc cccc"
+            },
+            {
+                "country": "SM",
+                "total": 27,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 1
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "c",
+                        "count": 12
+                    }
+                ],
+                "format": "SMkk xaaa aabb bbbc cccc cccc ccc"
+            },
+            {
+                "country": "SA",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 2
+                    },
+                    {
+                        "type": "c",
+                        "count": 18
+                    }
+                ],
+                "format": "SAkk bbcc cccc cccc cccc cccc"
+            },
+            {
+                "country": "RS",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 15
+                    }
+                ],
+                "format": "RSkk bbbc cccc cccc cccc xx"
+            },
+            {
+                "country": "SK",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "SKkk bbbb ssss sscc cccc cccc"
+            },
+            {
+                "country": "SI",
+                "total": 19,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "SIkk bbss sccc cccc cxx"
+            },
+            {
+                "country": "ES",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 10
+                    },
+                    {
+                        "type": "n",
+                        "count": 10
+                    }
+                ],
+                "format": "ESkk bbbb gggg xxcc cccc cccc"
+            },
+            {
+                "country": "SE",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 17
+                    }
+                ],
+                "format": "SEkk bbbc cccc cccc cccc cccc"
+            },
+            {
+                "country": "CH",
+                "total": 21,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "c",
+                        "count": 12
+                    }
+                ],
+                "format": "CHkk bbbb bccc cccc cccc c"
+            },
+            {
+                "country": "TN",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "n",
+                        "count": 15
+                    }
+                ],
+                "format": "TNkk bbss sccc cccc cccc cccc"
+            },
+            {
+                "country": "TR",
+                "total": 26,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 5
+                    },
+                    {
+                        "type": "c",
+                        "count": 1
+                    },
+                    {
+                        "type": "c",
+                        "count": 16
+                    }
+                ],
+                "format": "TRkk bbbb bxcc cccc cccc cccc cc"
+            },
+            {
+                "country": "AE",
+                "total": 23,
+                "bban": [
+                    {
+                        "type": "n",
+                        "count": 3
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "AEkk bbbc cccc cccc cccc ccc"
+            },
+            {
+                "country": "GB",
+                "total": 22,
+                "bban": [
+                    {
+                        "type": "a",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 6
+                    },
+                    {
+                        "type": "n",
+                        "count": 8
+                    }
+                ],
+                "format": "GBkk bbbb ssss sscc cccc cc"
+            },
+            {
+                "country": "VG",
+                "total": 24,
+                "bban": [
+                    {
+                        "type": "c",
+                        "count": 4
+                    },
+                    {
+                        "type": "n",
+                        "count": 16
+                    }
+                ],
+                "format": "VGkk bbbb cccc cccc cccc cccc"
+            }
+        ]
+    }
 }

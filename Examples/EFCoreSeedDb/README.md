@@ -4,8 +4,8 @@
 ## EF Core Seed Database Example with Bogus
 
 #### Requirements
-* **.NET Core 3.1** or later
-* **EF Core 3.1** or later 
+* **.NET 8.0*** or later
+* **EF Core 8** or later 
 
 #### Description
 

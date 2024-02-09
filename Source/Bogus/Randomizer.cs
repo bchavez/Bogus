@@ -173,8 +173,8 @@ public class Randomizer
    /// <summary>
    /// Get a random double, between 0.0 and 1.0.
    /// </summary>
-   /// <param name="min">Minimum, default 0.0</param>
-   /// <param name="max">Maximum, default 1.0</param>
+   /// <param name="min">Minimum, inclusive. Default 0.0</param>
+   /// <param name="max">Maximum, exclusive. Default 1.0</param>
    public double Double(double min = 0.0d, double max = 1.0d)
    {
       //lock any seed access, for thread safety.
@@ -193,8 +193,8 @@ public class Randomizer
    /// <summary>
    /// Get a random decimal, between 0.0 and 1.0.
    /// </summary>
-   /// <param name="min">Minimum, default 0.0</param>
-   /// <param name="max">Maximum, default 1.0</param>
+   /// <param name="min">Minimum, inclusive. Default 0.0</param>
+   /// <param name="max">Maximum, exclusive. Default 1.0</param>
    public decimal Decimal(decimal min = 0.0m, decimal max = 1.0m)
    {
       return Convert.ToDecimal(Double()) * (max - min) + min;
@@ -203,8 +203,8 @@ public class Randomizer
    /// <summary>
    /// Get a random float, between 0.0 and 1.0.
    /// </summary>
-   /// <param name="min">Minimum, default 0.0</param>
-   /// <param name="max">Maximum, default 1.0</param>
+   /// <param name="min">Minimum, inclusive. Default 0.0</param>
+   /// <param name="max">Maximum, inclusive. Default 1.0</param>
    public float Float(float min = 0.0f, float max = 1.0f)
    {
       return Convert.ToSingle(Double() * (max - min) + min);
@@ -213,8 +213,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random byte between 0 and 255.
    /// </summary>
-   /// <param name="min">Min value, default byte.MinValue 0</param>
-   /// <param name="max">Max value, default byte.MaxValue 255</param>
+   /// <param name="min">Min value, inclusive. Default byte.MinValue 0</param>
+   /// <param name="max">Max value, inclusive. Default byte.MaxValue 255</param>
    public byte Byte(byte min = byte.MinValue, byte max = byte.MaxValue)
    {
       return Convert.ToByte(Number(min, max));
@@ -237,8 +237,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random sbyte between -128 and 127.
    /// </summary>
-   /// <param name="min">Min value, default sbyte.MinValue -128</param>
-   /// <param name="max">Max value, default sbyte.MaxValue 127</param>
+   /// <param name="min">Min value, inclusive. Default sbyte.MinValue -128</param>
+   /// <param name="max">Max value, inclusive. Default sbyte.MaxValue 127</param>
    public sbyte SByte(sbyte min = sbyte.MinValue, sbyte max = sbyte.MaxValue)
    {
       return Convert.ToSByte(Number(min, max));
@@ -247,8 +247,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random int between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default int.MinValue</param>
-   /// <param name="max">Max value, default int.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default int.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default int.MaxValue</param>
    public int Int(int min = int.MinValue, int max = int.MaxValue)
    {
       return this.Number(min, max);
@@ -257,8 +257,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random uint between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default uint.MinValue</param>
-   /// <param name="max">Max value, default uint.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default uint.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default uint.MaxValue</param>
    public uint UInt(uint min = uint.MinValue, uint max = uint.MaxValue)
    {
       return Convert.ToUInt32(Double() * (max - min) + min);
@@ -267,8 +267,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random ulong between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default ulong.MinValue</param>
-   /// <param name="max">Max value, default ulong.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default ulong.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default ulong.MaxValue</param>
    public ulong ULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
    {
       return Convert.ToUInt64(Double() * (max - min) + min);
@@ -277,8 +277,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random long between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default long.MinValue</param>
-   /// <param name="max">Max value, default long.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default long.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default long.MaxValue</param>
    public long Long(long min = long.MinValue, long max = long.MaxValue)
    {
       var range = (decimal)max - min; //use more bits?
@@ -288,8 +288,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random short between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default short.MinValue -32768</param>
-   /// <param name="max">Max value, default short.MaxValue 32767</param>
+   /// <param name="min">Min value, inclusive. Default short.MinValue -32768</param>
+   /// <param name="max">Max value, inclusive. Default short.MaxValue 32767</param>
    public short Short(short min = short.MinValue, short max = short.MaxValue)
    {
       return Convert.ToInt16(Double() * (max - min) + min);
@@ -298,8 +298,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random ushort between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default ushort.MinValue 0</param>
-   /// <param name="max">Max value, default ushort.MaxValue 65535</param>
+   /// <param name="min">Min value, inclusive. Default ushort.MinValue 0</param>
+   /// <param name="max">Max value, inclusive. Default ushort.MaxValue 65535</param>
    public ushort UShort(ushort min = ushort.MinValue, ushort max = ushort.MaxValue)
    {
       return Convert.ToUInt16(Double() * (max - min) + min);
@@ -308,8 +308,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random char between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default char.MinValue</param>
-   /// <param name="max">Max value, default char.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default char.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default char.MaxValue</param>
    public char Char(char min = char.MinValue, char max = char.MaxValue)
    {
       return Convert.ToChar(Number(min, max));
@@ -318,8 +318,8 @@ public class Randomizer
    /// <summary>
    /// Generate a random chars between MinValue and MaxValue.
    /// </summary>
-   /// <param name="min">Min value, default char.MinValue</param>
-   /// <param name="max">Max value, default char.MaxValue</param>
+   /// <param name="min">Min value, inclusive. Default char.MinValue</param>
+   /// <param name="max">Max value, inclusive. Default char.MaxValue</param>
    /// <param name="count">The length of chars to return</param>
    public char[] Chars(char min = char.MinValue, char max = char.MaxValue, int count = 5)
    {
@@ -336,8 +336,8 @@ public class Randomizer
    /// Use <seealso cref="Utf16String"/> for technically valid Unicode.
    /// </summary>
    /// <param name="length">The exact length of the result string. If null, a random length is chosen between 40 and 80.</param>
-   /// <param name="minChar">Min character value, default char.MinValue</param>
-   /// <param name="maxChar">Max character value, default char.MaxValue</param>
+   /// <param name="minChar">Min character value, inclusive. Default char.MinValue</param>
+   /// <param name="maxChar">Max character value, inclusive. Default char.MaxValue</param>
    public string String(int? length = null, char minChar = char.MinValue, char maxChar = char.MaxValue)
    {
       var l = length ?? this.Number(40, 80);
@@ -353,8 +353,8 @@ public class Randomizer
    /// </summary>
    /// <param name="minLength">Lower-bound string length. Inclusive.</param>
    /// <param name="maxLength">Upper-bound string length. Inclusive.</param>
-   /// <param name="minChar">Min character value, default char.MinValue</param>
-   /// <param name="maxChar">Max character value, default char.MaxValue</param>
+   /// <param name="minChar">Min character value, inclusive. Default char.MinValue</param>
+   /// <param name="maxChar">Max character value, inclusive. Default char.MaxValue</param>
    public string String(int minLength, int maxLength, char minChar = char.MinValue, char maxChar = char.MaxValue)
    {
       var length = this.Number(minLength, maxLength);
@@ -384,8 +384,8 @@ public class Randomizer
    /// Get a string of characters with a specific length drawing characters from <paramref name="chars"/>.
    /// The returned string may contain repeating characters from the <paramref name="chars"/> string.
    /// </summary>
-   /// <param name="minLength">The minimum length of the string to return.</param>
-   /// <param name="maxLength">The maximum length of the string to return.</param>
+   /// <param name="minLength">The minimum length of the string to return, inclusive.</param>
+   /// <param name="maxLength">The maximum length of the string to return, inclusive.</param>
    /// <param name="chars">The pool of characters to draw from. The returned string may contain repeat characters from the pool.</param>
    public string String2(int minLength, int maxLength, string chars = "abcdefghijklmnopqrstuvwxyz")
    {
@@ -397,8 +397,8 @@ public class Randomizer
    /// Get a string of valid UTF16 Unicode characters.
    /// This method returns a string where each character IsLetterOrDigit() is true.
    /// </summary>
-   /// <param name="minLength">The minimum length of the string to return.</param>
-   /// <param name="maxLength">The maximum length of the string to return.</param>
+   /// <param name="minLength">The minimum length of the string to return, inclusive.</param>
+   /// <param name="maxLength">The maximum length of the string to return, inclusive.</param>
    /// <param name="excludeSurrogates">Excludes surrogate pairs from the returned string.</param>
    public string Utf16String(int minLength = 40, int maxLength = 80, bool excludeSurrogates = false)
    {
@@ -759,8 +759,8 @@ public class Randomizer
    /// <summary>
    /// Get a range of words in an array (English).
    /// </summary>
-   /// <param name="min">Minimum word count.</param>
-   /// <param name="max">Maximum word count.</param>
+   /// <param name="min">Minimum word count, inclusive.</param>
+   /// <param name="max">Maximum word count, inclusive.</param>
    public string[] WordsArray(int min, int max)
    {
       var count = Number(min, max);

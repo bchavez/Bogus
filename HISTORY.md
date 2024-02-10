@@ -1,3 +1,7 @@
+## vNext
+Release Date: Unreleased
+* PR 529: XML Docs: Add inclusive / exclusive number ranges documentation for Randomizer. Thanks @Mitchman215!
+
 ## v35.4.0
 Release Date: 2024-01-14
 * PR 488: Added `Bogus.Extensions.Poland` extension methods below. Thanks Mik1mak!

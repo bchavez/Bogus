@@ -60,7 +60,7 @@ public class SwedishExtensionTest : SeededTest
    [Theory]
    [InlineData(false)]
    [InlineData(true)]
-   public void when_person_is_male_second_last_number_is_even(bool isSamordningsnummer)
+   public void when_person_is_male_second_last_number_is_odd(bool isSamordningsnummer)
    {
       var f = new Faker("sv");
       var person = f.Person;
@@ -71,7 +71,7 @@ public class SwedishExtensionTest : SeededTest
       var secondLast = int.Parse(identificationNumber.Substring(identificationNumber.Length - 2, 1));
 
       secondLast.Should()
-         .Match(x => x % 2 == 0)
+         .Match(x => x % 2 == 1)
          .And.BeLessThan(10)
          .And.BeGreaterThan(0);
    }
@@ -79,7 +79,7 @@ public class SwedishExtensionTest : SeededTest
    [Theory]
    [InlineData(false)]
    [InlineData(true)]
-   public void when_person_is_female_second_last_number_is_odd(bool isSamordningsnummer)
+   public void when_person_is_female_second_last_number_is_even(bool isSamordningsnummer)
    {
       var f = new Faker("sv");
       var person = f.Person;
@@ -90,7 +90,7 @@ public class SwedishExtensionTest : SeededTest
       var secondLast = int.Parse(identificationNumber.Substring(identificationNumber.Length - 2, 1));
 
       secondLast.Should()
-         .Match(x => x % 2 == 1)
+         .Match(x => x % 2 == 0)
          .And.BeLessThan(10)
          .And.BeGreaterThan(0);
    }

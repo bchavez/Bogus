@@ -1,6 +1,7 @@
-## vNext
-Release Date: Unreleased
+## v35.4.1
+Release Date: 2024-03-02
 * PR 529: XML Docs: Add inclusive / exclusive number ranges documentation for Randomizer. Thanks @Mitchman215!
+* PR 535: Fix gender-digit for Swedish Personnummer. Thanks @LarsBergqvist!
 
 ## v35.4.0
 Release Date: 2024-01-14

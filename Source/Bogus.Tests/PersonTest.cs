@@ -53,6 +53,16 @@ public class PersonTest : SeededTest
    }
 
    [Fact]
+   public void pass_reference_date_to_person()
+   {
+      var now = DateTime.Parse("6/7/2020 4:17:41 PM");
+      var faker = new Faker<User>()
+         .UseDateTimeReference(now);
+
+      faker.FakerHub.Person.DsDate.GetTimeReference().Should().Be(now);
+   }
+
+   [Fact]
    public void can_generate_valid_sin()
    {
       var obtained = Get(10, p => p.Sin());
@@ -217,6 +227,21 @@ public class PersonTest : SeededTest
       p1.Should().BeEquivalentTo(p2);
 
       Date.SystemClock = () => DateTime.Now;
+   }
+
+
+   [Fact]
+   public void can_use_refdate_for_person()
+   {
+      Date.SystemClock = () => DateTime.Now;
+
+      var refDate = new DateTime(2019, 3, 21, 1, 1, 1);
+      var p1 = new Person(seed: 1337, refDate: refDate);
+      var p2 = new Person(seed: 1337, refDate: refDate);
+      var q = new Person(seed: 7331, refDate: refDate);
+
+      q.DateOfBirth.Should().NotBe(p1.DateOfBirth);
+      p1.DateOfBirth.Should().Be(p2.DateOfBirth);
    }
 
 

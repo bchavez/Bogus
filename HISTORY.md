@@ -1,6 +1,6 @@
 ## vNext
 Release Date: Unreleased
-* PR 500: Allows locally set time references for Date calculations instead of global statics. See Faker[T].UseDateTimeReference() and Date.LocalSystemClock.
+* PR 500: Allows locally set time references for Date calculations instead of global statics. See Faker[T].UseDateTimeReference(), Faker.DateTimeReference, and DataSets.Date.LocalSystemClock. Thanks @garcipat!
 
 ## v35.4.1
 Release Date: 2024-03-02

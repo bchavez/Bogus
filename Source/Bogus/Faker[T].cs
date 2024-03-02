@@ -166,7 +166,7 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    }
 
    /// <summary>
-   /// Sets a local time reference for all Date time calculations used by
+   /// Sets a local time reference for all DateTime calculations used by
    /// this Faker[T] instance; unless refDate parameters are specified 
    /// with the corresponding Date.Methods().
    /// </summary>

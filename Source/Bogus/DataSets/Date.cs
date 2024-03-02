@@ -30,6 +30,7 @@ public partial class Date : DataSet
    /// IE: () => new DateTime(2018, 4, 23);
    /// Setting this value will only effect and only apply to this single Date instance.
    /// </summary>
+   /// <example>() => new DateTime(2018, 4, 23)</example>
    public Func<DateTime> LocalSystemClock = null;
 
    /// <summary>

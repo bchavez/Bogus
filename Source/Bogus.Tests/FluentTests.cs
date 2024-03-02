@@ -5,11 +5,19 @@ using Bogus.DataSets;
 using Bogus.Extensions;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests;
 
 public class Examples : SeededTest
 {
+   private readonly ITestOutputHelper console;
+
+   public Examples(ITestOutputHelper console)
+   {
+      this.console = console;
+   }
+
    [Fact]
    public void TestAPIDesign()
    {
@@ -416,5 +424,36 @@ public class Examples : SeededTest
          count++;
          if( count > 99 ) break;
       }
+   }
+
+   public class Order2
+   {
+      public DateTime SoonValue;
+      public DateTime RecentValue;
+   }
+
+   [Fact]
+   public void can_set_local_time_anchor()
+   {
+      var faker = new Faker
+         {
+            Random = new Randomizer(1338),
+            Date =
+               {
+                  LocalSystemClock = () => DateTime.Parse("1/1/1980")
+               }
+         };
+
+      console.Dump(faker.Date.Soon());
+      console.Dump(faker.Date.Recent());
+
+      var fakerT = new Faker<Order2>()
+         .UseSeed(1338)
+         .UseDateTimeReference(DateTime.Parse("1/1/1980"))
+         .RuleFor(o => o.SoonValue, f => f.Date.Soon())
+         .RuleFor(o => o.RecentValue, f => f.Date.Recent());
+
+      console.Dump(fakerT.Generate());
+
    }
 }

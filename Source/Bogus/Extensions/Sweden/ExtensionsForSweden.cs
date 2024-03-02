@@ -48,7 +48,7 @@ public static class ExtensionsForSweden
    /// </summary>
    /// <remarks>
    /// Coordination numbers enable Swedish public authorities and other organizations with a public function 
-   /// to identify people who are not currently – and have never been – registered at an address in Sweden.
+   /// to identify people who are not currently â€“ and have never been â€“ registered at an address in Sweden.
    /// </remarks>
    public static string Samordningsnummer(this Person person)
    {
@@ -90,9 +90,9 @@ public static class ExtensionsForSweden
    private static int GetGenderNumber(Randomizer r, Gender gender)
    {
       if( gender is Gender.Male )
-         return r.Even(1, 9);
-      if( gender is Gender.Female )
          return r.Odd(1, 9);
+      if( gender is Gender.Female )
+         return r.Even(1, 9);
       throw new ArgumentOutOfRangeException(nameof(gender), gender, "Gender not handled.");
    }
 

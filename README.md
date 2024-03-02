@@ -1033,12 +1033,12 @@ As a general rule of thumb,
 **Bogus** can generate deterministic dates and times. However, generating deterministic dates and times requires the following:
 
 1. Setting up a [seed value](#determinism).
-1. Setting up a local source of time for your Faker object instance.
+1. Setting up a time reference for your Faker object instance.
 
 The following code shows how to setup deterministic dates and times:
 
 ```csharp
-// Faker[T]: Set a local seed and a fixed time clock
+// Faker[T]: Set a local seed and a time reference
 var fakerT = new Faker<Order>()
                  .UseSeed(1338)
                  .UseDateTimeReference(DateTime.Parse("1/1/1980"))
@@ -1048,19 +1048,16 @@ fakerT.Generate().Dump();
 //  { "SoonValue":   "1980-01-01T17:33:05",
 //    "RecentValue": "1979-12-31T14:07:31" }
 
-// Faker: Set a local seed and a fixed time clock
+// Faker: Set a local seed and a time reference
 var faker = new Faker
    {
-      Random = new Randomizer(1338), 
-      Date =
-         {
-            LocalSystemClock = () => DateTime.Parse("1/1/1980")
-         }
+      Random = new Randomizer(1338),
+      DateTimeReference = DateTime.Parse("1/1/1980")
    };
 faker.Date.Soon();   // "1980-01-01T17:33:05"
 faker.Date.Recent(); // "1979-12-31T14:07:31"
 ```
-With the `Bogus.DataSets.Date.LocalSystemClock` or `.UseDateTimeReference` set and a [seed](#determinism), dates and times should be deterministic across multiple runs of a program.
+With a time reference set and a [seed](#determinism), dates and times should be deterministic across multiple runs of a program.
 
 
 F# and VB.NET Examples

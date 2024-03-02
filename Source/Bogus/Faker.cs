@@ -111,7 +111,7 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    /// with this Faker instance and the underlying .Date dataset. If this property is set to null,
    /// then the .Date dataset's static system clock is usually used.
    /// 
-   /// Typically this property is set when Faker[T].UseDateTimeReference() is called,
+   /// Typically, this property is set when Faker[T].UseDateTimeReference() is called,
    /// or is set manually when creating an instance of new Faker { DateTimeReference = new DateTime(year, month, day) }.
    /// When this property is set, all date/time calculations from .Date will begin calculations from this fixed point in time for this Faker instance.
    /// </summary>

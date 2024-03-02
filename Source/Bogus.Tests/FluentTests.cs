@@ -438,10 +438,7 @@ public class Examples : SeededTest
       var faker = new Faker
          {
             Random = new Randomizer(1338),
-            Date =
-               {
-                  LocalSystemClock = () => DateTime.Parse("1/1/1980")
-               }
+            DateTimeReference = DateTime.Parse("1/1/1980")
          };
 
       console.Dump(faker.Date.Soon());

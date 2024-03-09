@@ -51,6 +51,17 @@ public partial class DateTest : SeededTest
    }
 
    [Fact]
+   public void can_get_date_in_future_with_set_clock()
+   {
+      var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate;
+      date.Future().Should()
+         .BeOnOrBefore(refDate.AddYears(1))
+         .And
+         .BeOnOrAfter(refDate);
+   }
+
+   [Fact]
    public void can_get_dateOffset_in_future()
    {
       var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
@@ -58,6 +69,16 @@ public partial class DateTest : SeededTest
          .BeOnOrBefore(starting.AddYears(1))
          .And
          .BeOnOrAfter(starting);
+   }
+   [Fact]
+   public void can_get_dateOffset_in_future_with_set_clock()
+   {
+      var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate.DateTime;
+      date.FutureOffset().Should()
+         .BeOnOrBefore(refDate.AddYears(1))
+         .And
+         .BeOnOrAfter(refDate);
    }
 
    [Fact]
@@ -91,6 +112,17 @@ public partial class DateTest : SeededTest
    }
 
    [Fact]
+   public void can_get_date_in_past_with_set_clock()
+   {
+      var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate;
+      date.Past().Should()
+         .BeOnOrBefore(refDate)
+         .And
+         .BeOnOrAfter(refDate.AddYears(-1));
+   }
+
+   [Fact]
    public void can_get_dateOffset_in_past()
    {
       var starting = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
@@ -98,6 +130,17 @@ public partial class DateTest : SeededTest
          .BeOnOrBefore(starting)
          .And
          .BeOnOrAfter(starting.AddYears(-1));
+   }
+
+   [Fact]
+   public void can_get_dateOffset_in_past_with_set_clock()
+   {
+      var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate.DateTime;
+      date.PastOffset().Should()
+         .BeOnOrBefore(refDate)
+         .And
+         .BeOnOrAfter(refDate.AddYears(-1));
    }
 
    [Fact]
@@ -150,6 +193,17 @@ public partial class DateTest : SeededTest
    }
 
    [Fact]
+   public void can_get_date_recently_with_set_clock()
+   {
+      var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate;
+      date.Recent().Should()
+         .BeOnOrBefore(refDate)
+         .And
+         .BeOnOrAfter(refDate.AddDays(-1));
+   }
+
+   [Fact]
    public void can_get_dateOffset_recently_within_the_year()
    {
       var start = DateTimeOffset.Now;
@@ -158,6 +212,17 @@ public partial class DateTest : SeededTest
          .BeOnOrBefore(start)
          .And
          .BeOnOrAfter(start.AddDays(-1));
+   }
+
+   [Fact]
+   public void can_get_dateOffset_recently_with_set_clock()
+   {
+      var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate.DateTime;
+      date.RecentOffset().Should()
+         .BeOnOrBefore(refDate)
+         .And
+         .BeOnOrAfter(refDate.AddDays(-1));
    }
 
    [Fact]
@@ -208,10 +273,32 @@ public partial class DateTest : SeededTest
    }
 
    [Fact]
+   public void can_get_date_soon_with_set_clock()
+   {
+      var refDate = DateTime.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate;
+      date.Soon().Should()
+         .BeOnOrAfter(refDate)
+         .And
+         .BeBefore(refDate.AddDays(1));
+   }
+
+   [Fact]
    public void get_a_dateOffsets_that_will_happen_soon()
    {
       var now = DateTimeOffset.Now;
       date.SoonOffset(3).Should().BeAfter(now).And.BeBefore(now.AddDays(3));
+   }
+
+   [Fact]
+   public void can_get_dateOffset_soon_with_set_clock()
+   {
+      var refDate = DateTimeOffset.Parse("6/7/2015 4:17:41 PM");
+      date.LocalSystemClock = () => refDate.DateTime;
+      date.SoonOffset().Should()
+         .BeOnOrAfter(refDate)
+         .And
+         .BeBefore(refDate.AddDays(1));
    }
 
    [Fact]
@@ -345,6 +432,33 @@ public partial class DateTest : SeededTest
       d.FutureOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
       d.PastOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
       d.RecentOffset().Offset.Should().Be(DateTimeOffset.Now.Offset);
+   }
+
+   [Fact]
+   public void use_dataset_localclock_date_if_set()
+   {
+      var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
+      var d = new Date() { LocalSystemClock = () => refDate };
+
+
+      d.Recent(0).Should()
+         .BeOnOrBefore(refDate)
+         .And
+         .BeOnOrAfter(refDate.Date);
+   }
+
+   [Fact]
+   public void use_now_param_over_localclock_date()
+   {
+      var refDate = new DateTime(2009, 12, 30, 12, 30, 0);
+      var now = DateTime.Now;
+
+      var d = new Date { LocalSystemClock = () => refDate };
+
+      d.Recent(0, now).Should()
+         .BeOnOrBefore(now)
+         .And
+         .BeOnOrAfter(now.Date);
    }
 
    [Fact]

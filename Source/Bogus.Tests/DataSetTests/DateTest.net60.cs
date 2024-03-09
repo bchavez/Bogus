@@ -8,7 +8,7 @@ namespace Bogus.Tests.DataSetTests;
 
 public partial class DateTest
 {
-#if NET6_0
+#if NET6_0_OR_GREATER
    [Fact]
    public void can_get_dateonly_in_past()
    {
@@ -16,6 +16,17 @@ public partial class DateTest
       var maxBehind = now.AddYears(-1);
 
       var somePastDate = date.PastDateOnly(refDate: now);
+      somePastDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
+   }
+
+   [Fact]
+   public void can_get_dateonly_in_past_with_set_clock()
+   {
+      var now = DateOnly.Parse("7/7/1972", CultureInfo.InvariantCulture);
+      var maxBehind = now.AddYears(-1);
+      date.LocalSystemClock = () => now.ToDateTime(new(0));
+
+      var somePastDate = date.PastDateOnly();
       somePastDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
    }
 
@@ -42,12 +53,34 @@ public partial class DateTest
    }
 
    [Fact]
+   public void can_get_dateonly_that_will_happen_soon_with_set_clock()
+   {
+      var now = DateOnly.Parse("7/7/1972", CultureInfo.InvariantCulture);
+      var maxDate = now.AddDays(3);
+      date.LocalSystemClock = () => now.ToDateTime(new(0));
+
+      var someDateSoon = date.SoonDateOnly(3);
+      someDateSoon.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
+   }
+
+   [Fact]
    public void can_get_dateonly_in_future()
    {
       var now = DateOnly.Parse("1/1/1990", CultureInfo.InvariantCulture);
       var maxDate = now.AddYears(1);
 
       var someFutureDate = date.FutureDateOnly(refDate: now);
+      someFutureDate.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
+   }
+
+   [Fact]
+   public void can_get_dateonly_in_future_with_set_clock()
+   {
+      var now = DateOnly.Parse("1/1/1990", CultureInfo.InvariantCulture);
+      var maxDate = now.AddYears(1);
+      date.LocalSystemClock = () => now.ToDateTime(new(0));
+
+      var someFutureDate = date.FutureDateOnly();
       someFutureDate.Should().BeOnOrAfter(now).And.BeOnOrBefore(maxDate);
    }
 
@@ -83,6 +116,18 @@ public partial class DateTest
       var maxBehind = now.AddDays(-1);
 
       var someRecentDate = date.RecentDateOnly(refDate: now);
+
+      someRecentDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
+   }
+
+   [Fact]
+   public void can_get_dateonly_recently_within_the_year_with_set_clock()
+   {
+      var now = DateOnly.Parse("7/7/1972", CultureInfo.InvariantCulture);
+      var maxBehind = now.AddDays(-1);
+      date.LocalSystemClock = () => now.ToDateTime(new(0));
+
+      var someRecentDate = date.RecentDateOnly();
 
       someRecentDate.Should().BeOnOrAfter(maxBehind).And.BeOnOrBefore(now);
    }
@@ -126,12 +171,35 @@ public partial class DateTest
    }
 
    [Fact]
+   public void can_get_a_timeonly_that_will_happen_soon_with_set_clock()
+   {
+      var now = TimeOnly.Parse("1:00 PM", CultureInfo.InvariantCulture);
+      var maxTime = now.AddMinutes(5);
+      date.LocalSystemClock = () => new DateOnly(1972, 7, 7).ToDateTime(now);
+
+      var timeSoon = date.SoonTimeOnly(5);
+
+      timeSoon.IsBetween(now, maxTime).Should().BeTrue();
+   }
+
+   [Fact]
    public void can_get_a_timeonly_that_happened_recently()
    {
       var now = TimeOnly.Parse("2:00 PM", CultureInfo.InvariantCulture);
       var maxBehind = now.AddMinutes(-5);
 
       var timeRecent = date.RecentTimeOnly(5, now);
+      timeRecent.IsBetween(maxBehind, now).Should().BeTrue();
+   }
+
+   [Fact]
+   public void can_get_a_timeonly_that_happened_recently_with_set_clock()
+   {
+      var now = TimeOnly.Parse("2:00 PM", CultureInfo.InvariantCulture);
+      var maxBehind = now.AddMinutes(-5);
+      date.LocalSystemClock = () => new DateOnly(1972, 7, 7).ToDateTime(now);
+
+      var timeRecent = date.RecentTimeOnly(5);
       timeRecent.IsBetween(maxBehind, now).Should().BeTrue();
    }
 #endif

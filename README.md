@@ -32,6 +32,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 
 ##### Featured In
 * [**Microsoft 'On .NET Live': Next-level EF Core Data Seeding with Bogus - Apr. 15th, 2024**](https://www.youtube.com/watch?v=KoEOsfrRUqk&t=170s)
+* [**Adventures in .NET: Building Bogus with Brian Chavez - Jan 5th, 2024**](https://www.youtube.com/watch?v=C1WwGKUY9K4)
 * [**Microsoft Docs: Deploy Orleans to Azure App Service - May 5th, 2022**](https://docs.microsoft.com/en-us/dotnet/orleans/deployment/deploy-to-azure-app-service)
 * [**Microsoft Docs: Modernize a WPF app tutorial - Aug. 2nd, 2019**](https://docs.microsoft.com/en-us/windows/apps/desktop/modernize/modernize-wpf-tutorial-1#configure-nuget-packages-and-dependencies)
 * [**Microsoft Build 2018: Azure Tips and Tricks - May 8th, 2018**](https://www.youtube.com/watch?v=088e5IUqF6g&t=12m31s)

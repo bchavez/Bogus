@@ -1091,6 +1091,10 @@
       {
         bban: [
           {
+            count: 1,
+            type: n
+          },
+          {
             count: 3,
             type: n
           },
@@ -1100,8 +1104,8 @@
           }
         ],
         country: CR,
-        format: CRkk bbbc cccc cccc cccc c,
-        total: 21
+        format: CRkk xbbb cccc cccc cccc cc,
+        total: 22
       },
       {
         bban: [

@@ -466,7 +466,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `SByte` - Generate a random sbyte between -128 and 127.
 	* `Int` - Generate a random int between MinValue and MaxValue.
 	* `UInt` - Generate a random uint between MinValue and MaxValue.
-	* `ULong` - Generate a random ulong between -128 and 127.
+	* `ULong` - Generate a random ulong between MinValue and MaxValue.
 	* `Long` - Generate a random long between MinValue and MaxValue.
 	* `Short` - Generate a random short between MinValue and MaxValue.
 	* `UShort` - Generate a random ushort between MinValue and MaxValue.

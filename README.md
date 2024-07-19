@@ -485,6 +485,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `WeightedRandom<T>` - Returns a selection of T[] based on a weighted distribution of probability.
 
 #### API Extension Methods
+* **`using Bogus.Extensions.Belgium;`**
+	* `Bogus.Person.NationalNumber()` - Rijksregisternummer / Numéro Nationale
 * **`using Bogus.Extensions.Brazil;`**
 	* `Bogus.Person.Cpf()` - Cadastro de Pessoas Físicas
 	* `Bogus.DataSets.Company.Cnpj()` - Cadastro Nacional da Pessoa Jurídica

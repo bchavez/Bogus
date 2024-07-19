@@ -1,10 +1,8 @@
 using System.IO;
-using System.Net;
 using Bogus.DataSets;
 using FluentAssertions;
 using Xunit;
 using Xunit.Abstractions;
-using static Bogus.DataSets.LoremPixelCategory;
 
 namespace Bogus.Tests.DataSetTests;
 
@@ -19,25 +17,6 @@ public class ImageTest : SeededTest
    }
 
    private readonly Images image;
-
-   [Fact(Skip = "Explicit")]
-   public void DownloadAllTest()
-   {
-      var wc = new WebClient();
-      wc.DownloadFile(image.LoremPixelUrl(Abstract), "abstract.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Animals), "animals.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Business), "business.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Cats), "cats.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(City), "city.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Food), "food.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Nightlife), "nightlife.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Fashion), "fashion.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(People), "people.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Nature), "nature.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Sports), "sports.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Technics), "technics.jpg");
-      wc.DownloadFile(image.LoremPixelUrl(Transport), "transport.jpg");
-   }
 
    [Fact]
    public void svg_data_url()
@@ -70,7 +49,7 @@ public class ImageTest : SeededTest
    [Fact]
    public void url_generated_should_have_https()
    {
-      image.LoremPixelUrl(Sports, https: true).Should().StartWith("https://");
+      image.PicsumUrl().Should().StartWith("https://");
    }
 
    [Fact]

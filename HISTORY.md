@@ -1,3 +1,9 @@
+## v35.6.0
+Release Date: 2024-04-27
+* PR 556: Remove obsolete/non-working LoremPixel image service. `Images.LoremPixelUrl()` is removed. Thanks @marijnz0r!
+* PR 557: Added `Bogus.Extensions.Belgium` extension methods below. Thanks @vyruz1986!
+* Added `f.Person.NationalNumber()` - Rijksregisternummer / Numéro Nationale
+
 ## v35.5.1
 Release Date: 2024-04-27
 * PR 538: Fixes Invalid Costa Rica IBAN format. Thanks @dangerman!

@@ -1,4 +1,5 @@
-﻿using Bogus.DataSets;
+﻿using System;
+using Bogus.DataSets;
 using Bogus.Extensions.Belgium;
 using FluentAssertions;
 using Xunit;
@@ -43,12 +44,25 @@ public class BelgianExtensionTests : SeededTest
       result.Should().ContainAll("-", ".");
    }
 
+   [Theory]
+   [InlineData("850103725", "07")]
+   public void checksum_is_zero_padded(string givenNationalNumber, string expectedChecksum)
+   {
+      var year = int.Parse(givenNationalNumber[..2]);
+      var month = int.Parse(givenNationalNumber.Substring(2, 2));
+      var day = int.Parse(givenNationalNumber.Substring(4, 2));
+      var dateOfBirth = new DateTime(year,month,day);
+
+      var checkNumber = ExtensionsForBelgium.CalculateCheckNumber(givenNationalNumber,dateOfBirth);
+
+      checkNumber.Should().Be(expectedChecksum);
+   }
 
    private void ShouldHaveCorrectChecksum(string candidate)
    {
-      var baseNumber = long.Parse(candidate.Substring(0, 9));
-      var checkNumber = candidate.Substring(9);
-      var birthYear = int.Parse(candidate.Substring(0, 2));
+      var baseNumber = long.Parse(candidate[..9]);
+      var checkNumber = candidate[9..];
+      var birthYear = int.Parse(candidate[..2]);
 
       if (birthYear == 00)
          baseNumber += 2000000000L;

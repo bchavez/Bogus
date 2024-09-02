@@ -1,3 +1,7 @@
+## v35.6.1
+Release Date: 2024-09-02
+* PR 560: Ensure Belgian National Numbers has padded checksum. Thanks @vyruz1986!
+
 ## v35.6.0
 Release Date: 2024-04-27
 * PR 556: Remove obsolete/non-working LoremPixel image service. `Images.LoremPixelUrl()` is removed. Thanks @marijnz0r!

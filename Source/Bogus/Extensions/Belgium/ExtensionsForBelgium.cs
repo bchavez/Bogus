@@ -1,4 +1,6 @@
-﻿namespace Bogus.Extensions.Belgium;
+﻿using System;
+
+namespace Bogus.Extensions.Belgium;
 
 /// <summary>
 /// API extensions specific for a geographical location.
@@ -31,18 +33,25 @@ public static class ExtensionsForBelgium
          : p.Random.Even(2, 998);
 
       var baseNumber = $"{p.DateOfBirth:yyMMdd}{sequence:000}";
-      var baseNumberLong = ulong.Parse(baseNumber);
 
-      var bornAfter2000 = p.DateOfBirth.Year >= 2000;
-      var checkNumber = bornAfter2000
-         ? 97 - (int)((baseNumberLong + 2000000000L) % 97)
-         : 97 - (int)(baseNumberLong % 97);
+      var checkNumber = CalculateCheckNumber(baseNumber, p.DateOfBirth);
 
       var nationalNumber = $"{baseNumber}{checkNumber}";
 
       return includeFormatSymbols
          ? FormatNationalNumber(nationalNumber)
          : nationalNumber;
+   }
+
+   internal static string CalculateCheckNumber(string baseNumber, DateTime dateOfBirth)
+   {
+      var baseNumberLong = ulong.Parse(baseNumber);
+      var bornAfter2000 = dateOfBirth.Year >= 2000;
+      var checkNumber = bornAfter2000
+         ? 97 - (int)((baseNumberLong + 2000000000L) % 97)
+         : 97 - (int)(baseNumberLong % 97);
+
+      return checkNumber.ToString("D2");
    }
 
    private static string FormatNationalNumber(string nationalNumber)

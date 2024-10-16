@@ -365,20 +365,6 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `PicsumUrl` - Get an image from the https://picsum.photos service.
 	* `PlaceholderUrl` - Get an image from https://placeholder.com service.
 	* `LoremFlickrUrl` - Get an image from https://loremflickr.com service.
-	* `LoremPixelUrl` - Creates an image URL with http://lorempixel.com. Note: This service is slow. Consider using PicsumUrl() as a faster alternative.
-    	* `Abstract` - Gets an abstract looking image.
-    	* `Animals` - Gets an image of an animal.
-    	* `Business` - Gets a business looking image.
-    	* `Cats` - Gets a picture of a cat.
-    	* `City` - Gets a city looking image.
-    	* `Food` - Gets an image of food.
-    	* `Nightlife` - Gets an image with city looking nightlife.
-    	* `Fashion` - Gets an image in the fashion category.
-    	* `People` - Gets an image of humans.
-    	* `Nature` - Gets an image of nature.
-    	* `Sports` - Gets an image related to sports.
-    	* `Technics` - Get a technology related image.
-    	* `Transport` - Get a transportation related image.
 * **`Internet`**
 	* `Avatar` - Generates a legit Internet URL avatar from twitter accounts.
 	* `Email` - Generates an email address.
@@ -499,6 +485,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `WeightedRandom<T>` - Returns a selection of T[] based on a weighted distribution of probability.
 
 #### API Extension Methods
+* **`using Bogus.Extensions.Belgium;`**
+	* `Bogus.Person.NationalNumber()` - Rijksregisternummer / Numéro Nationale
 * **`using Bogus.Extensions.Brazil;`**
 	* `Bogus.Person.Cpf()` - Cadastro de Pessoas Físicas
 	* `Bogus.DataSets.Company.Cnpj()` - Cadastro Nacional da Pessoa Jurídica

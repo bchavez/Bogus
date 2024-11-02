@@ -522,6 +522,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 * **`using Bogus.Extensions.UnitedStates;`**
 	* `Bogus.Person.Ssn()` - Social Security Number
 	* `Bogus.DataSets.Company.Ein()` - Employer Identification Number
+* **`using Bogus.Extensions.Vietnam;`**
+  * `Bogus.Person.Cccd()` - Vietnamese Citizen Identity Card Number (Căn Cước Công Dân - CCCD)
 * **`using Bogus.Distributions.Gaussian;`**
     * `Randomizer.GaussianInt()` - Generate an `int` based on a specific normal distribution.
     * `Randomizer.GaussianFloat()` - Generate a `float` based on a specific normal distribution.

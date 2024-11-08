@@ -12,10 +12,13 @@ public class VietnameseExtensionTest : SeededTest
 
    public static TheoryData<int, Name.Gender, string> ValidVietnameseCitizenIdTestCases => new()
    {
-      { 1990, Name.Gender.Male, "Hà Nội" },
-      { 1999, Name.Gender.Female, "An Giang" },
-      { 2000, Name.Gender.Male, "TP. Hồ Chí Minh" },
-      { 2001, Name.Gender.Female, "Bà Rịa-Vũng Tàu" }
+      { 1999, Name.Gender.Male, "Hà Nội" },
+      { 2000, Name.Gender.Female, "An Giang" },
+      { 2001, Name.Gender.Male, "TP. Hồ Chí Minh" },
+      { 2099, Name.Gender.Female, "Bà Rịa-Vũng Tàu" },
+      { 2100, Name.Gender.Female, "Thanh Hoá" },
+      { 2101, Name.Gender.Female, "Thừa Thiên-Huế" },
+      { 2199, Name.Gender.Female, "Khánh Hoà" }
    };
    
    public static TheoryData<int, Name.Gender, string> InvalidVietnameseCitizenIdTestCases => new()
@@ -34,6 +37,7 @@ public class VietnameseExtensionTest : SeededTest
       // Arrange
       var faker = new Faker("vi");
       var person = faker.Person;
+      var x = faker.Person.DateOfBirth;
       
       // Act
       var obtained = person.Cccd();

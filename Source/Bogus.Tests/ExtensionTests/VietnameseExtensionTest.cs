@@ -1,4 +1,5 @@
 using System;
+using Bogus.Bson;
 using Bogus.DataSets;
 using Bogus.Extensions.Vietnam;
 using FluentAssertions;
@@ -10,22 +11,39 @@ public class VietnameseExtensionTest : SeededTest
 {
    #region Setup test cases
 
-   public static TheoryData<int, Name.Gender, string> ValidVietnameseCitizenIdTestCases => new()
+   public static TheoryData<int, Name.Gender, string> ValidVietnameseCitizenIdTestCases()
    {
-      { 1999, Name.Gender.Male, "Hà Nội" },
-      { 2000, Name.Gender.Female, "An Giang" },
-      { 2001, Name.Gender.Male, "TP. Hồ Chí Minh" },
-      { 2099, Name.Gender.Female, "Bà Rịa-Vũng Tàu" },
-      { 2100, Name.Gender.Female, "Thanh Hoá" },
-      { 2101, Name.Gender.Female, "Thừa Thiên-Huế" },
-      { 2199, Name.Gender.Female, "Khánh Hoà" }
-   };
+      return new TheoryData<int, Name.Gender, string>
+      {
+         { 1999, Name.Gender.Male, "Hà Nội" },
+         { 2000, Name.Gender.Female, "An Giang" },
+         { 2001, Name.Gender.Male, "TP. Hồ Chí Minh" },
+         { 2099, Name.Gender.Female, "Bà Rịa-Vũng Tàu" },
+         { 2100, Name.Gender.Female, "Thanh Hoá" },
+         { 2101, Name.Gender.Female, "Thừa Thiên-Huế" },
+         { 2199, Name.Gender.Female, "Khánh Hoà" }
+      };
+   }
    
-   public static TheoryData<int, Name.Gender, string> InvalidVietnameseCitizenIdTestCases => new()
+   public static TheoryData<int, Name.Gender, string> ValidVietnameseCityNameTestCases()
    {
-      { 1899, Name.Gender.Male, "Hà Nội" }, // invalid birth year
-      { 2000, Name.Gender.Male, "London" }, // invalid city
-   };
+      var theoryData = new TheoryData<int, Name.Gender, string>();
+      var vietnameseCities = (BArray)Database.Get("address", "city_root", "vi");
+      foreach (BValue city in vietnameseCities)
+      {
+         theoryData.Add(2000, Name.Gender.Male, city.StringValue);
+      }
+      return theoryData;
+   }
+
+   public static TheoryData<int, Name.Gender, string> InvalidVietnameseCitizenIdTestCases()
+   {
+      return new TheoryData<int, Name.Gender, string>
+      {
+         { 1899, Name.Gender.Male, "Hà Nội" }, // invalid birth year
+         { 2000, Name.Gender.Male, "London" }, // invalid city
+      };
+   }
 
    #endregion
    
@@ -51,6 +69,7 @@ public class VietnameseExtensionTest : SeededTest
    
    [Theory]
    [MemberData(nameof(ValidVietnameseCitizenIdTestCases))]
+   [MemberData(nameof(ValidVietnameseCityNameTestCases))]
    public void can_generate_vietnamese_citizen_id_with_valid_info(int birthYear, Name.Gender gender, string city)
    {
       // Arrange

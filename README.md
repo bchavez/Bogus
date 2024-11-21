@@ -31,6 +31,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
     * [**Microsoft Teams Sample Connector**](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp) [[code]](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp/blob/8805bb1acb136949905e4644c4e714dd7b70a61a/TeamsToDoAppConnector/Utils/TaskHelper.cs)
 
 ##### Featured In
+* [**Amazon AWS .NET Open Source Fund Recipient - Oct. 1st, 2024**](#sponsors)
 * [**Microsoft 'On .NET Live': Next-level EF Core Data Seeding with Bogus - Apr. 15th, 2024**](https://www.youtube.com/watch?v=KoEOsfrRUqk&t=170s)
 * [**Adventures in .NET: Building Bogus with Brian Chavez - Jan 5th, 2024**](https://www.youtube.com/watch?v=C1WwGKUY9K4)
 * [**Microsoft Docs: Deploy Orleans to Azure App Service - May 5th, 2022**](https://docs.microsoft.com/en-us/dotnet/orleans/deployment/deploy-to-azure-app-service)
@@ -1229,6 +1230,14 @@ Steps to re-bundle locale data from **faker.js**:
 * [MIT License](https://github.com/bchavez/Bogus/blob/master/LICENSE)
 
 
+Sponsors
+---------
+A speical thank you to the companies that have sponsored and helped with the development of **Bogus** in big ways.
+
+| Date |   | Company |
+|------|---|-------|
+| **2024 - October** | <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/aws.svg" width="100" /> | [**Amazon AWS .NET FOSS Fund**](https://github.com/aws/dotnet-foss?tab=readme-ov-file#funding-recipients)
+| **2022 - June** | <img src="https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/github.svg" width="100" /> | [**GitHub**](https://github.blog/open-source/maintainers/thank-you-to-our-maintainers) |
 
 
 Contributors

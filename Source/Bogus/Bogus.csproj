@@ -16,6 +16,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
     <PackageLicenseExpression>MIT AND BSD-3-Clause</PackageLicenseExpression>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

@@ -9,7 +9,7 @@ namespace Bogus.Extensions.Italy;
 /// <summary>
 /// This class implements the principal routines of the Italian fiscal code,
 /// used to unambiguously identify individuals residing in Italy.
-/// <see cref="https://en.wikipedia.org/wiki/Italian_fiscal_code_card"/>
+/// See: https://en.wikipedia.org/wiki/Italian_fiscal_code_card
 /// </summary>
 internal static class CodiceFiscaleGenerator
 {

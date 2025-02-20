@@ -15,7 +15,7 @@
     <PackageTags>faker;fake;bogus;poco;data;generator;database;seed;values;test-data;test;data;tdd;testing;.net;EF</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT AND BSD-3-Clause</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

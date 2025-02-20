@@ -1,3 +1,7 @@
+## v35.6.2
+Release Date: 2025-02-20
+* PR 584: Pack LICENSE file with NuGet package. Also, use ProjectIcon.
+
 ## v35.6.1
 Release Date: 2024-09-02
 * PR 560: Ensure Belgian National Numbers has padded checksum. Thanks @vyruz1986!

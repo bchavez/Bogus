@@ -1,6 +1,7 @@
 ## v35.6.2
 Release Date: 2025-02-20
 * PR 584: Pack LICENSE file with NuGet package. Also, use ProjectIcon.
+* Issue 581: Fix `Randomizer.ULong()` arithmetic overflow.
 
 ## v35.6.1
 Release Date: 2024-09-02

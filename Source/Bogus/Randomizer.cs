@@ -271,7 +271,7 @@ public class Randomizer
    /// <param name="max">Max value, inclusive. Default ulong.MaxValue</param>
    public ulong ULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
    {
-      return Convert.ToUInt64(Double() * (max - min) + min);
+      return Convert.ToUInt64(Double() * (max - min)) + min;
    }
 
    /// <summary>

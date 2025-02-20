@@ -18,7 +18,11 @@ init:
               Set-AppveyorBuildVariable -Name "IsPreRelease" -Value False
             }
 
-build_script: build.cmd ci
+build_script:
+- pwsh: |
+    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
+    ./dotnet-install.ps1 -JSonFile global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
+- build.cmd ci
 
 test: off
 

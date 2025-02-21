@@ -44,9 +44,7 @@ public static class ExtensionsForUnitedKingdom
       }
 
       //check for invalid prefixes
-      if (prefix == "GB" || prefix == "BG" || prefix == "NK" ||
-          prefix == "KN" || prefix == "TN" || prefix == "NT" ||
-          prefix == "ZZ")
+      if (prefix is "GB" or "BG" or "NK" or "KN" or "TN" or "NT" or "ZZ")
       {
          //if the prefix is any of the invalid prefixes,
          //Remap an invalid prefix to a well known valid one.

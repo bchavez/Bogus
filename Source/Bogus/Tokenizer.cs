@@ -147,7 +147,7 @@ public class Tokenizer
       {
          throw new ArgumentOutOfRangeException($"One of the arguments for {mm.Name} is out of supported range. Argument list: {string.Join(",", parameters)}", ex);
       }
-      catch (Exception ex) when (ex is InvalidCastException || ex is FormatException)
+      catch (Exception ex) when (ex is InvalidCastException or FormatException)
       {
          throw new ArgumentException($"One of the arguments for {mm.Name} cannot be converted to target type. Argument list: {string.Join(",", parameters)}", ex);
       }

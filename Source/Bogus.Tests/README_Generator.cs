@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -11,7 +7,6 @@ using FluentAssertions;
 using MoreLinq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Xunit;
 using Xunit.Abstractions;
 using Z.ExtensionMethods;
 

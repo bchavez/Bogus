@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Bogus.DataSets;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.DataSetTests;
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus.Distributions.Gaussian;
+﻿namespace Bogus.Distributions.Gaussian;
 
 
 public static class ExtensionsForRandomizer

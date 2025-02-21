@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using FluentAssertions;
-using Xunit;
+﻿using FluentAssertions;
 using static Bogus.Tests.GitHubIssues.PullRequest259.DrinkRuleSets;
 
 namespace Bogus.Tests.GitHubIssues;

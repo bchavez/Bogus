@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xunit;
-
-namespace Bogus.Tests;
+﻿namespace Bogus.Tests;
 
 /// <summary>
 /// Tests deriving from <see cref="SeededTest"/> ensures

@@ -1,6 +1,4 @@
 ﻿using FluentAssertions;
-using System;
-using Xunit;
 
 namespace Bogus.Tests;
 

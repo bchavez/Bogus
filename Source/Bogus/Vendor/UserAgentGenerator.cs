@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-
 namespace Bogus.Vendor;
 
 internal class UserAgentGenerator

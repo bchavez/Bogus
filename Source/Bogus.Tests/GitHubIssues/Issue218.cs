@@ -1,7 +1,5 @@
-﻿using System;
-using Bogus.Tests.Models;
+﻿using Bogus.Tests.Models;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.GitHubIssues;
 

@@ -1,8 +1,6 @@
-using System;
 using System.Globalization;
 using Bogus.DataSets;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.DataSetTests;
 

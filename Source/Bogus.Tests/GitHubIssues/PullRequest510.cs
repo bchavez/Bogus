@@ -2,8 +2,6 @@
 using Bogus.Extensions.UnitedKingdom;
 
 using FluentAssertions;
-
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Bogus.Tests.GitHubIssues;

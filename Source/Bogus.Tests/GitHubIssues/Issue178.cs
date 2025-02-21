@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using Bogus.Extensions;
-using FluentAssertions;
-using Xunit;
+﻿using FluentAssertions;
 
 namespace Bogus.Tests.GitHubIssues;
 

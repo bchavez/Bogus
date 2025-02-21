@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus.DataSets;
+﻿namespace Bogus.DataSets;
 
 /// <summary>
 /// Methods for generating an address.

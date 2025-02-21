@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Bogus.DataSets;
+﻿namespace Bogus.DataSets;
 
 /// <summary>
 /// Generates random user content.

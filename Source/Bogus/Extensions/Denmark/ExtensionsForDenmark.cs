@@ -1,5 +1,4 @@
 ﻿using static Bogus.DataSets.Name;
-using System;
 
 namespace Bogus.Extensions.Denmark;
 

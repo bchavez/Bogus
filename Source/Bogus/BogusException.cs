@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus;
+﻿namespace Bogus;
 
 /// <summary>
 /// General exception for Bogus.

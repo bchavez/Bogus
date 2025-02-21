@@ -1,13 +1,6 @@
 ﻿using Bogus.DataSets;
 using Bogus.Extensions.Poland;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 using static Bogus.Extensions.Poland.ExtensionsForPoland;
 
 namespace Bogus.Tests.ExtensionTests;

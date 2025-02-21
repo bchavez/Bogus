@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace Bogus.DataSets;
+﻿namespace Bogus.DataSets;
 
 /// <summary>
 /// Generates plain old boring text.

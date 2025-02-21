@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
+﻿using System.Net;
 using Bogus.DataSets;
 using FluentAssertions;
-using Xunit;
 using Xunit.Abstractions;
 using Z.ExtensionMethods;
 

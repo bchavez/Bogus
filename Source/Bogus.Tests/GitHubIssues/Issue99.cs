@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using Bogus.DataSets;
-using Xunit;
+﻿using Bogus.DataSets;
 
 namespace Bogus.Tests.GitHubIssues;
 

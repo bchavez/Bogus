@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Bogus.DataSets;
+﻿using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Bogus.Extensions.Canada;
 using Bogus.Extensions.Finland;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
-using Xunit;
 using Xunit.Abstractions;
 using Z.ExtensionMethods.ObjectExtensions;
 

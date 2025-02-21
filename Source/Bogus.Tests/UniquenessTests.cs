@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using FluentAssertions;
-using Xunit;
+﻿using FluentAssertions;
 using Z.ExtensionMethods;
 using Z.ExtensionMethods.ObjectExtensions;
 

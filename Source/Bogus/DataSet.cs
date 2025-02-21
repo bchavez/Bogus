@@ -1,6 +1,5 @@
 using Bogus.Bson;
 using Bogus.Platform;
-using System;
 using System.Text.RegularExpressions;
 
 namespace Bogus;

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 using FluentAssertions;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Bogus.Tests.GitHubIssues;

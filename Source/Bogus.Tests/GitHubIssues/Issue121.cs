@@ -1,6 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using Xunit;
+﻿using FluentAssertions;
 using Xunit.Abstractions;
 
 namespace Bogus.Tests.GitHubIssues;

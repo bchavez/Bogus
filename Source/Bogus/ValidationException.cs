@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus;
+﻿namespace Bogus;
 
 /// <summary>
 /// Represents a validation exception.

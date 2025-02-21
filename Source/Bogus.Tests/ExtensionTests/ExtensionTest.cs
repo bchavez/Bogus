@@ -3,9 +3,7 @@ using Bogus.Extensions.UnitedKingdom;
 using Bogus.Extensions.Italy;
 using Bogus.Extensions.Portugal;
 using FluentAssertions;
-using System;
 using Bogus.Extensions.Romania;
-using Xunit;
 
 namespace Bogus.Tests.ExtensionTests;
 

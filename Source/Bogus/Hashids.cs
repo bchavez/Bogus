@@ -362,7 +362,7 @@ public class Hashids : IHashids
       var hashBreakdown = guardsRegex.Replace(hash, " ");
       var hashArray = hashBreakdown.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
 
-      if( hashArray.Length == 3 || hashArray.Length == 2 )
+      if( hashArray.Length is 3 or 2 )
          i = 1;
 
       hashBreakdown = hashArray[i];

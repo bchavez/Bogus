@@ -25,7 +25,7 @@ public class Issue260 : SeededTest
 
       // right shift all bits except fir the first 10 bits = 2^10 = 1024.
       var a = (x >> (32 - 10)) % 898;
-      if( a == 0 || a == 666 ) a++;
+      if( a is 0 or 666 ) a++;
 
       // use the first 7 bits = 2^7 = 128 
       var b = (x & 0x7F);

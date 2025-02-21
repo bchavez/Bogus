@@ -63,8 +63,8 @@ public class Randomizer
    /// <param name="maxDigit">maximum digit, inclusive</param>
    public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
    {
-      if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException("max digit can't be lager than 9 or smaller than 0", nameof(maxDigit));
-      if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException("min digit can't be lager than 9 or smaller than 0", nameof(minDigit));
+      if( maxDigit is > 9 or < 0 ) throw new ArgumentException("max digit can't be lager than 9 or smaller than 0", nameof(maxDigit));
+      if( minDigit is > 9 or < 0 ) throw new ArgumentException("min digit can't be lager than 9 or smaller than 0", nameof(minDigit));
 
       var digits = new int[count];
       for( var i = 0; i < count; i++ )

@@ -35,7 +35,7 @@ namespace Benchmark
          var b = r.Int(1, 99);
          var c = r.Int(1, 9999);
 
-         var result = string.Format("{0:000}-{1:00}-{2:0000}", a, b, c);
+         var result = $"{a:000}-{b:00}-{c:0000}";
       }
 
       [Benchmark]

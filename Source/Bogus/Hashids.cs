@@ -123,7 +123,7 @@ public class Hashids : IHashids
       var numbers = this.DecodeLong(hash);
 
       foreach( var number in numbers )
-         ret.Append(string.Format("{0:X}", number).Substring(1));
+         ret.Append($"{number:X}".Substring(1));
 
       return ret.ToString();
    }

@@ -16,7 +16,7 @@
     <PackageIcon>bogus.128.png</PackageIcon>
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

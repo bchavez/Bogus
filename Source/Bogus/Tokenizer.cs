@@ -12,7 +12,7 @@ public class MustashMethod
    public object[] OptionalArgs { get; set; }
 }
 
-public class Tokenizer
+public static class Tokenizer
 {
    public static ILookup<string, MustashMethod> MustashMethods;
 

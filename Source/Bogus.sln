@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\.config\dotnet-tools.json = ..\.config\dotnet-tools.json
 		..\HISTORY.md = ..\HISTORY.md
 		..\README.md = ..\README.md
+		..\global.json = ..\global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benchmark.csproj", "{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}"

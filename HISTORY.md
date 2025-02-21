@@ -1,6 +1,10 @@
 ## v35.6.2
 Release Date: 2025-02-20
 * PR 584: Pack LICENSE file with NuGet package. Also, use ProjectIcon.
+* Issue 581: Fix `Randomizer.ULong()` arithmetic overflow. Thanks @reuterma24!
+* PR 586: Use .NET 9 SDK build tooling. Thanks @SimonCropp!
+* PR 587: Fix CS1584 incorrect use of cref in XML doc comment. Thanks @SimonCropp!
+* PR 589: Unlock ability to use any .NET SDK build tooling on AppVeyor. Thanks @SimonCropp!
 
 ## v35.6.1
 Release Date: 2024-09-02

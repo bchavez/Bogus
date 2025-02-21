@@ -375,8 +375,7 @@ public class Internet : DataSet
    {
       var words = Random.WordsArray(1, 3)
          .Select(Utils.Slugify)
-         .Select(s => s.ToLower())
-         .ToArray();
+         .Select(s => s.ToLower());
 
       var path = $"/{Utils.Slashify(words)}";
 

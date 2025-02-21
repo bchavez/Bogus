@@ -111,7 +111,7 @@ public static class ExtensionMethodsForProject
    }
    public static AbsolutePath ZipFile(this Project p)
    {
-      var result = $"{p.Name}.zip";
+      var result = Build.Folders.Package / $"{p.Name}.zip";
       return result;
    }
 }

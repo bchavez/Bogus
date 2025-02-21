@@ -121,7 +121,7 @@ partial class Build : NukeBuild
    .DependsOn(Compile)
    .Executes(() => {
 
-      var zipPath = Folders.Package / this.BogusProject.ZipFile();
+      var zipPath = this.BogusProject.ZipFile();
       Folders.CompileOutput.ZipTo(zipPath);
    });
 

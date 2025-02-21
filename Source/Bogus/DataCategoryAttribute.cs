@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus;
+﻿namespace Bogus;
 
 /// <summary>
 /// DataCategory is used when resolving the final category name inside the locale.

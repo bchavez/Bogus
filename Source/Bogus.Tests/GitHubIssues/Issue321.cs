@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-using Bogus.Extensions;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace Bogus.Tests.GitHubIssues;
 

@@ -1,5 +1,4 @@
-﻿using Xunit;
-using Bogus.Extensions.UnitedKingdom;
+﻿using Bogus.Extensions.UnitedKingdom;
 using FluentAssertions;
 
 namespace Bogus.Tests.GitHubIssues;

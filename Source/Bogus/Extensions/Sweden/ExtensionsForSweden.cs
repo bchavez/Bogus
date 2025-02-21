@@ -1,6 +1,3 @@
-using System;
-using System.Linq;
-using Bogus.DataSets;
 using static Bogus.DataSets.Name;
 
 namespace Bogus.Extensions.Sweden;

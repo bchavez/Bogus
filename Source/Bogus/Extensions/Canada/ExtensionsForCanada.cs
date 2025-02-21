@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Bogus.Extensions.Canada;
+﻿namespace Bogus.Extensions.Canada;
 
 /// <summary>
 /// API extensions specific for a geographical location.

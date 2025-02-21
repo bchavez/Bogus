@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Bogus;
+﻿namespace Bogus;
 
 /// <summary>
 /// Describes a Hashids provider

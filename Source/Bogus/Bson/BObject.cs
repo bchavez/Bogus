@@ -1,7 +1,6 @@
 #pragma warning disable 1591
 
 using System.Collections;
-using System.Collections.Generic;
 
 namespace Bogus.Bson;
 

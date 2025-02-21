@@ -1,4 +1,3 @@
-using System.IO;
 using Bogus.Bson;
 
 namespace Bogus;

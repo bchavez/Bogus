@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Bogus;
+﻿namespace Bogus;
 
 /// <summary>
 /// Extensions for <see cref="Faker{T}"/>.

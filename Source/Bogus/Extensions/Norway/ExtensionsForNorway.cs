@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Bogus.Extensions.Norway;
+﻿namespace Bogus.Extensions.Norway;
 
 /// <summary>
 /// API extensions specific for a geographical location.

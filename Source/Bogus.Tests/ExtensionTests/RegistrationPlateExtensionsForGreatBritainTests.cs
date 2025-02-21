@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
 using Bogus.DataSets;
 using Bogus.Extensions.UnitedKingdom;
 using FluentAssertions;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Bogus.Tests.ExtensionTests;

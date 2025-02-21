@@ -1,31 +1,16 @@
 using System;
 using System.Linq;
-using System.Reflection;
 using Nuke.Common;
-using Nuke.Common.CI;
-using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
-using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
-using Nuke.Common.Utilities.Collections;
 using Serilog;
 using Fake.DotNet;
 using System.Collections.Generic;
 
 using System.IO;
-using Nuke.Common.CI.AppVeyor;
-using Nuke.Common.Utilities;
 using Nuke.Common.Git;
-
-using System.Diagnostics;
-using Z.ExtensionMethods;
-
-using static Nuke.Common.EnvironmentInfo;
 using static Nuke.Common.IO.FileSystemTasks;
-using static Nuke.Common.IO.PathConstruction;
-using static Nuke.Common.IO.CompressionTasks;
-
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 partial class Build : NukeBuild

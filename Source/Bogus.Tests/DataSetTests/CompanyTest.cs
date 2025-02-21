@@ -2,7 +2,6 @@ using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Bogus.Extensions.UnitedStates;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.DataSetTests;
 

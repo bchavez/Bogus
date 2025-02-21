@@ -1,8 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.Threading;
+﻿using System.Globalization;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.GitHubIssues;
 

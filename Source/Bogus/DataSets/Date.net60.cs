@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Bogus.DataSets;
+﻿namespace Bogus.DataSets;
 
 public partial class Date
 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.CodeDom;
-using System.Reflection;
+﻿using System.Reflection;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.GitHubIssues;
 

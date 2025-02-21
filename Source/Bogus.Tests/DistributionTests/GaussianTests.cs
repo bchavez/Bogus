@@ -1,7 +1,5 @@
-﻿using System;
-using Bogus.Distributions.Gaussian;
+﻿using Bogus.Distributions.Gaussian;
 using FluentAssertions;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Bogus.Tests.DistributionTests;

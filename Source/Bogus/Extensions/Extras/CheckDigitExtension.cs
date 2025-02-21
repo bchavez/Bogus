@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Bogus.Extensions.Extras;
+﻿namespace Bogus.Extensions.Extras;
 
 /// <summary>
 /// Shamelessly copied (and modified) from here: 

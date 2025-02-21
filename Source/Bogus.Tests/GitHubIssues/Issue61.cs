@@ -1,5 +1,4 @@
-﻿using Xunit;
-using static Bogus.Tests.GitHubIssues.Issue61.HashIdExtension;
+﻿using static Bogus.Tests.GitHubIssues.Issue61.HashIdExtension;
 
 namespace Bogus.Tests.GitHubIssues;
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
-
-namespace Bogus.Tests.GitHubIssues;
+﻿namespace Bogus.Tests.GitHubIssues;
 
 public class Issue55 : SeededTest
 {

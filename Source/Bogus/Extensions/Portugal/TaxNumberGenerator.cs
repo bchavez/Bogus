@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Bogus.Extensions.Portugal;
+﻿namespace Bogus.Extensions.Portugal;
 
 internal static class TaxNumberGenerator
 {

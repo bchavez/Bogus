@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using FluentAssertions;
-using Xunit;
+﻿using FluentAssertions;
 using Xunit.Abstractions;
-using Bogus.Extensions;
-using Z.ExtensionMethods.ObjectExtensions;
 
 namespace Bogus.Tests.GitHubIssues;
 

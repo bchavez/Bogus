@@ -1,7 +1,6 @@
 ﻿using Bogus.DataSets;
 using Bogus.Extensions.Norway;
 using FluentAssertions;
-using Xunit;
 
 namespace Bogus.Tests.ExtensionTests;
 

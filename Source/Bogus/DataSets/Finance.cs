@@ -462,8 +462,7 @@ public class Finance : DataSet
       {
          var matches = Regex.Matches(iban, ".{1,4}");
          var array = matches.OfType<Match>()
-            .Select(m => m.Value)
-            .ToArray();
+            .Select(m => m.Value);
          return string.Join(" ", array);
       }
       return iban;

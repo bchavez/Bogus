@@ -47,7 +47,7 @@ public static class ExtensionsForCanada
       if( last == 10 )
          last = 0;
 
-      var digits = numbers.Concat(new[] {last}).ToArray();
+      var digits = numbers.Concat(new[] {last});
 
       var comp = digits
          .Zip(Mask, (n, c) =>

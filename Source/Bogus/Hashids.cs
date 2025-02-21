@@ -205,10 +205,10 @@ public class Hashids : IHashids
    private void SetupSeps()
    {
       // seps should contain only characters present in alphabet; 
-      seps = new String(seps.Intersect(alphabet.ToArray()).ToArray());
+      seps = new String(seps.Intersect(alphabet).ToArray());
 
       // alphabet should not contain seps.
-      alphabet = new String(alphabet.Except(seps.ToArray()).ToArray());
+      alphabet = new String(alphabet.Except(seps).ToArray());
 
       seps = ConsistentShuffle(seps, salt);
 

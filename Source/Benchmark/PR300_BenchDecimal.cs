@@ -45,9 +45,9 @@ namespace Benchmark
 
    public class CustomRandomizer : Randomizer
    {
-      internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
-      
-      private readonly Random localSeed = new Random();
+      internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+
+      private readonly Random localSeed = new();
 
       public int NumberJDG(int min = 0, int max = 1)
       {

@@ -125,7 +125,7 @@ public static partial class Transliterater
    /// <summary>
    /// Default empty dictionary to avoid allocations.
    /// </summary>
-   public static readonly Dictionary<string, string> EmptyDictionary = new Dictionary<string, string>();
+   public static readonly Dictionary<string, string> EmptyDictionary = new();
 }
 
 /// <summary>
@@ -136,7 +136,7 @@ public static partial class Transliterater
 [EditorBrowsable(EditorBrowsableState.Never)]
 public class Trie
 {
-   public Dictionary<string, Trie> Map = new Dictionary<string, Trie>();
+   public Dictionary<string, Trie> Map = new();
    public string Value;
 
    /// <summary>

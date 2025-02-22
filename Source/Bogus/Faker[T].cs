@@ -48,15 +48,14 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    protected internal Faker FakerHub;
    protected internal IBinder binder;
 
-   protected internal readonly MultiDictionary<string, string, PopulateAction<T>> Actions =
-      new MultiDictionary<string, string, PopulateAction<T>>(StringComparer.OrdinalIgnoreCase);
+   protected internal readonly MultiDictionary<string, string, PopulateAction<T>> Actions = new(StringComparer.OrdinalIgnoreCase);
 
-   protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new Dictionary<string, FinalizeAction<T>>(StringComparer.OrdinalIgnoreCase);
-   protected internal Dictionary<string, Func<Faker, T>> CreateActions = new Dictionary<string, Func<Faker, T>>(StringComparer.OrdinalIgnoreCase);
+   protected internal readonly Dictionary<string, FinalizeAction<T>> FinalizeActions = new(StringComparer.OrdinalIgnoreCase);
+   protected internal Dictionary<string, Func<Faker, T>> CreateActions = new(StringComparer.OrdinalIgnoreCase);
    protected internal readonly Dictionary<string, MemberInfo> TypeProperties;
-   protected internal readonly Dictionary<string, Action<T, object>> SetterCache = new Dictionary<string, Action<T, object>>(StringComparer.OrdinalIgnoreCase);
+   protected internal readonly Dictionary<string, Action<T, object>> SetterCache = new(StringComparer.OrdinalIgnoreCase);
    
-   protected internal Dictionary<string, bool> StrictModes = new Dictionary<string, bool>();
+   protected internal Dictionary<string, bool> StrictModes = new();
    protected internal bool? IsValid;
    protected internal string currentRuleSet = Default;
    protected internal int? localSeed; // if null, the global Randomizer.Seed is used.
@@ -613,7 +612,7 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
       }
    }
 
-   private readonly object _setterCreateLock = new object();
+   private readonly object _setterCreateLock = new();
    private void PopulateProperty(T instance, PopulateAction<T> action)
    {
       var valueFactory = action.Action;

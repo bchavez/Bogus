@@ -99,8 +99,7 @@ public class README_Generator
 
       foreach( var g in all )
       {
-         if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
-         var methods = datasets[g.Key];
+         if( !datasets.TryGetValue(g.Key, out var methods) ) return; //check if it's accessible
 
          var distinctMethods = MoreEnumerable.DistinctBy(g, u => u.Method);
 

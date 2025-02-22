@@ -15,9 +15,9 @@ public static class ExtensionsForCanada
    public static string Sin(this Person p)
    {
       const string Key = nameof(ExtensionsForCanada) + "SIN";
-      if( p.context.ContainsKey(Key) )
+      if( p.context.TryGetValue(Key, out var value) )
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       //bit verbose, but works. :)

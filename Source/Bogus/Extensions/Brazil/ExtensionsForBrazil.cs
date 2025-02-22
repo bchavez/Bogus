@@ -20,9 +20,9 @@ public static class ExtensionsForBrazil
       int[] finalDigits;
 
       const string Key = nameof(ExtensionsForBrazil) + "CPF";
-      if( p.context.ContainsKey(Key) )
+      if( p.context.TryGetValue(Key, out var value) )
       {
-         finalDigits = p.context[Key] as int[];
+         finalDigits = value as int[];
          return FormatCpf(finalDigits, includeFormatSymbols);
       }
 

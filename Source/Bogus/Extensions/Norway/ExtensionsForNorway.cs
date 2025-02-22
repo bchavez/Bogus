@@ -13,9 +13,9 @@ public static class ExtensionsForNorway
    public static string Fodselsnummer(this Person p)
    {
       const string Key = nameof(ExtensionsForNorway) + "Fødselsnummer";
-      if (p.context.ContainsKey(Key))
+      if (p.context.TryGetValue(Key, out var value))
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       /*

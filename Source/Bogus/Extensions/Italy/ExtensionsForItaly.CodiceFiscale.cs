@@ -16,7 +16,7 @@ internal static class CodiceFiscaleGenerator
    /// <summary>
    /// Map used by the algorithm for even characters
    /// </summary>
-   private static readonly Dictionary<char, int> evenMap = new Dictionary<char, int>
+   private static readonly Dictionary<char, int> evenMap = new()
    {
       { '0', 0 },
       { '1', 1 },
@@ -64,7 +64,7 @@ internal static class CodiceFiscaleGenerator
    /// <summary>
    /// Map used by the algorithm for odd characters
    /// </summary>
-   private static readonly Dictionary<char, int> oddMap = new Dictionary<char, int>
+   private static readonly Dictionary<char, int> oddMap = new()
    {
       { '0', 1 },
       { '1', 0 },

@@ -161,7 +161,7 @@ public class Issue279 : SeededTest
 
    public class ReorderFaker<T> : Faker<T> where T : class
    {
-      private Dictionary<string, OrderedDictionary> reorderActions = new Dictionary<string, OrderedDictionary>();
+      private Dictionary<string, OrderedDictionary> reorderActions = new();
 
       private MultiDictionary<string, string, PopulateAction<T>> initialRules;
 

@@ -30,7 +30,7 @@ public class Name : DataSet
    /// <summary>
    /// Switches locale
    /// </summary>
-   public Name this[string switchLocale] => new Name(switchLocale);
+   public Name this[string switchLocale] => new(switchLocale);
 
    /// <summary>
    /// Get a first name. Getting a gender specific name is only supported on locales that support it.

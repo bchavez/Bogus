@@ -17,9 +17,9 @@ public class Randomizer
    /// <summary>
    /// Set the random number generator manually with a seed to get reproducible results.
    /// </summary>
-   public static Random Seed = new Random();
+   public static Random Seed = new();
 
-   internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+   internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
    /// <summary>
    /// Constructor that uses the global static `<see cref="Seed"/>.
@@ -879,7 +879,7 @@ public class WordFunctions
    /// of <see cref="Func{TResult}"/> strings used as a selection list
    /// of word functions that generate English words or phrases.
    /// </summary>
-   public List<Func<string>> Functions { get; } = new List<Func<string>>();
+   public List<Func<string>> Functions { get; } = [];
 
    private Commerce Commerce { get; }
    private Company Company { get; }

@@ -43,7 +43,7 @@ public class DataSet : ILocaleAware, IHasRandomizer
    /// <summary>
    /// See <see cref="SeedNotifier"/>.
    /// </summary>
-   protected SeedNotifier Notifier = new SeedNotifier();
+   protected SeedNotifier Notifier = new();
 
    private Randomizer randomizer;
 
@@ -189,7 +189,7 @@ public class DataSet : ILocaleAware, IHasRandomizer
       return Random.Replace(tokenResult);
    }
 
-   private static readonly Regex parseTokensRegex = new Regex("\\#{(.*?)\\}", RegexOptions.Compiled);
+   private static readonly Regex parseTokensRegex = new("\\#{(.*?)\\}", RegexOptions.Compiled);
 
    /// <summary>
    /// Recursive parse the tokens in the string.

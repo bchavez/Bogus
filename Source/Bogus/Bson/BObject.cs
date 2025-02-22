@@ -7,7 +7,7 @@ namespace Bogus.Bson;
 
 public class BObject : BValue, IEnumerable
 {
-   private Dictionary<string, BValue> map = new Dictionary<string, BValue>();
+   private Dictionary<string, BValue> map = new();
 
    public BObject() : base(BValueType.Object)
    {

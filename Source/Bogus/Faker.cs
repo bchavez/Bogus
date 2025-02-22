@@ -45,12 +45,12 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
       this.Hashids = new Hashids();
    }
 
-   Dictionary<string, object> IHasContext.Context { get; } = new Dictionary<string, object>();
+   Dictionary<string, object> IHasContext.Context { get; } = new();
 
    /// <summary>
    /// See <see cref="SeedNotifier"/>
    /// </summary>
-   protected SeedNotifier Notifier = new SeedNotifier();
+   protected SeedNotifier Notifier = new();
 
    SeedNotifier IHasRandomizer.GetNotifier()
    {

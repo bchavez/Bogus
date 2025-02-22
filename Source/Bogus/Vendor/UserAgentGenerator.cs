@@ -100,7 +100,7 @@ internal class UserAgentGenerator
          0.01574236955f
       };
 
-   private static readonly MultiDictionary<string, string, float> BrowserOSUsage = new MultiDictionary<string, string, float>(StringComparer.Ordinal)
+   private static readonly MultiDictionary<string, string, float> BrowserOSUsage = new(StringComparer.Ordinal)
       {
          {"chrome", "win", 0.89f},
          {"chrome", "mac", 0.09f},
@@ -129,7 +129,7 @@ internal class UserAgentGenerator
       return this.Random.WeightedRandom(osNames, weights);
    }
 
-   private static readonly MultiDictionary<string, string, float> Proc = new MultiDictionary<string, string, float>(StringComparer.Ordinal)
+   private static readonly MultiDictionary<string, string, float> Proc = new(StringComparer.Ordinal)
       {
          {"lin", "i686", 0.50f},
          {"lin", "x86_64", 0.50f},

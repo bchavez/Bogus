@@ -18,9 +18,9 @@ public static class ExtensionsForDenmark
    public static string Cpr(this Person p, bool validChecksum = true, bool includeDash = true)
    {
       const string Key = nameof(ExtensionsForDenmark) + "CPR";
-      if (p.context.ContainsKey(Key))
+      if (p.context.TryGetValue(Key, out var value))
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       /*

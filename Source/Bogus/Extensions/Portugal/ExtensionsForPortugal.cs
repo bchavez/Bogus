@@ -18,9 +18,9 @@ public static class ExtensionsForPortugal
    public static string Nif(this Person p)
    {
       const string Key = nameof(ExtensionsForPortugal) + "NIF";
-      if (p.context.ContainsKey(Key))
+      if (p.context.TryGetValue(Key, out var value))
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       var id = new[] {p.Random.ArrayElement(TaxNumberGenerator.NifIdentify)};

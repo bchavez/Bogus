@@ -16,9 +16,9 @@ public static class ExtensionsForSweden
    public static string Personnummer(this Person person)
    {
       const string key = nameof(ExtensionsForSweden) + nameof(Personnummer);
-      if (person.context.ContainsKey(key))
+      if (person.context.TryGetValue(key, out var value))
       {
-         return person.context[key] as string;
+         return value as string;
       }
 
       /*
@@ -53,9 +53,9 @@ public static class ExtensionsForSweden
    public static string Samordningsnummer(this Person person)
    {
       const string key = nameof(ExtensionsForSweden) + nameof(Samordningsnummer);
-      if( person.context.ContainsKey(key) )
+      if( person.context.TryGetValue(key, out var value) )
       {
-         return person.context[key] as string;
+         return value as string;
       }
 
       /*

@@ -20,9 +20,9 @@ public static class ExtensionsForPoland
       // https://en.wikipedia.org/wiki/PESEL
 
       const string Key = nameof(ExtensionsForPoland) + nameof(Pesel);
-      if (person.context.ContainsKey(Key))
+      if (person.context.TryGetValue(Key, out var value))
       {
-         return person.context[Key] as string;
+         return value as string;
       }
 
       return new StringBuilder()

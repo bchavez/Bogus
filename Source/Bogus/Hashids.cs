@@ -26,8 +26,8 @@ public class Hashids : IHashids
 
    private Regex guardsRegex;
    private Regex sepsRegex;
-   private static Regex hexValidator = new Regex("^[0-9a-fA-F]+$", RegexOptions.Compiled);
-   private static Regex hexSplitter = new Regex(@"[\w\W]{1,12}", RegexOptions.Compiled);
+   private static Regex hexValidator = new("^[0-9a-fA-F]+$", RegexOptions.Compiled);
+   private static Regex hexSplitter = new(@"[\w\W]{1,12}", RegexOptions.Compiled);
 
    /// <summary>
    /// Instantiates a new Hashids with the default setup.

@@ -7,7 +7,7 @@ namespace Bogus.Bson;
 
 public class BArray : BValue, IEnumerable
 {
-   private readonly List<BValue> items = new List<BValue>();
+   private readonly List<BValue> items = [];
 
    public BArray() : base(BValueType.Array)
    {

@@ -8,16 +8,16 @@ namespace Bogus.Extensions;
 /// </summary>
 public static class ExtensionsForCultureInfo
 {
-   public static Dictionary<string, string> Lookup = new Dictionary<string, string>
-      {
-         {"cs", "cz"},
-         {"en-IN", "en_IND"},
-         {"ka", "ge"},
-         {"id", "id_ID"},
-         {"nb", "nb_NO"},
-         {"nn", "nb_NO"},
-         {"no", "nb_NO"},
-      };
+   public static Dictionary<string, string> Lookup = new()
+   {
+      {"cs", "cz"},
+      {"en-IN", "en_IND"},
+      {"ka", "ge"},
+      {"id", "id_ID"},
+      {"nb", "nb_NO"},
+      {"nn", "nb_NO"},
+      {"no", "nb_NO"},
+   };
 
    /// <summary>
    /// Helper extension that maps .NET <seealso cref="CultureInfo"/> to Bogus locale codes like 'en_US`.

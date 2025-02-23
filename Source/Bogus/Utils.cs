@@ -18,7 +18,7 @@ public static class Utils
       return SlugifyRegex.Replace(str, "");
    }
 
-   public static Regex SlugifyRegex = new Regex(@"[^a-zA-Z0-9\.\-_]+", RegexOptions.Compiled);
+   public static Regex SlugifyRegex = new(@"[^a-zA-Z0-9\.\-_]+", RegexOptions.Compiled);
 
    /// <summary>
    /// Takes string parts and joins them together with a separator.

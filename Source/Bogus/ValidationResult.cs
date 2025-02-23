@@ -15,10 +15,10 @@ public class ValidationResult
    /// <summary>
    /// A complete list of missing rules
    /// </summary>
-   internal List<string> MissingRules { get; } = new List<string>();
+   internal List<string> MissingRules { get; } = [];
 
    /// <summary>
    /// Extra validation messages to display
    /// </summary>
-   internal List<string> ExtraMessages { get; } = new List<string>();
+   internal List<string> ExtraMessages { get; } = [];
 }

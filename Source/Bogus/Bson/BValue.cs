@@ -162,17 +162,17 @@ public class BValue
    public virtual bool Contains(BValue v) { return false; }
    public virtual bool ContainsKey(string key) { return false; }
 
-   public static implicit operator BValue(double v) => new BValue(v);
+   public static implicit operator BValue(double v) => new(v);
 
-   public static implicit operator BValue(Int32 v) => new BValue(v);
+   public static implicit operator BValue(Int32 v) => new(v);
 
-   public static implicit operator BValue(Int64 v) => new BValue(v);
+   public static implicit operator BValue(Int64 v) => new(v);
 
-   public static implicit operator BValue(byte[] v) => new BValue(v);
+   public static implicit operator BValue(byte[] v) => new(v);
 
-   public static implicit operator BValue(DateTime v) => new BValue(v);
+   public static implicit operator BValue(DateTime v) => new(v);
 
-   public static implicit operator BValue(string v) => new BValue(v);
+   public static implicit operator BValue(string v) => new(v);
 
    public static implicit operator double(BValue v) => v.DoubleValue;
 

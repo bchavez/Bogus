@@ -100,8 +100,8 @@ public class Hashids : IHashids
       if( !hexValidator.IsMatch(hex) )
          return string.Empty;
 
-      var numbers = new List<long>();
       var matches = hexSplitter.Matches(hex);
+      var numbers = new List<long>(matches.Count);
 
       foreach( Match match in matches )
       {

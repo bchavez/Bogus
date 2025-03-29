@@ -137,4 +137,121 @@ public class ArgumentsTest : SeededTest
       faker.Parse("{{date.timespan(00:00:25)}}")
          .Should().Be("00:00:15.0880571");
    }
+
+
+   [Fact]
+   public void can_parse_vehicle()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_vehicle_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      result.Should().Be("Maserati");
+   }
+
+   [Fact]
+   public void can_parse_music()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_music_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      result.Should().Be("Hip Hop");
+   }
+
+   [Fact]
+   public void can_parse_person()
+   {
+      var faker = new Faker();
+      var firstname = faker.Parse("{{person.getfirstname}}");
+      var lastname = faker.Parse("{{person.getlastname}}");
+      var fullname = faker.Parse("{{person.getfullname}}");
+
+      Assert.Multiple(() =>
+      {
+         Assert.NotNull(firstname);
+         Assert.NotNull(lastname);
+         Assert.NotNull(fullname);
+         Assert.True($"{firstname} {lastname}" == fullname);
+      });
+   }
+   private class TestClass
+   {
+      public string Name { get; set; }
+   }
+
+   [Fact]
+   public void can_parse_person_in_rulefor()
+   {
+      var faker = new Faker<TestClass>();
+      faker.RuleFor(o => o.Name, (f, o) =>
+      {
+         return f.Parse("{{person.getfirstname}} {{person.getlastname}}");
+      });
+
+      var fakes = faker.Generate(10);
+
+      fakes.Should().OnlyHaveUniqueItems(o => o.Name);
+   }
+
+   [Fact]
+   public void can_parse_all_person_values()
+   {
+      var faker = new Faker();
+
+      var firstname = faker.Parse("{{person.GetFirstName}}");
+      var lastname = faker.Parse("{{person.GetLastName}}");
+      var fullname = faker.Parse("{{person.GetFullName}}");
+      var gender = faker.Parse("{{person.GetGender}}");
+      var username = faker.Parse("{{person.GetUserName}}");
+      var avatar = faker.Parse("{{person.GetAvatar}}");
+      var email = faker.Parse("{{person.GetEmail}}");
+      var dateofbirth = faker.Parse("{{person.GetDateOfBirth}}");
+      var geolat = faker.Parse("{{person.GetAddressGeoLat}}");
+      var geolng = faker.Parse("{{person.GetAddressGeoLng}}");
+      var street = faker.Parse("{{person.GetAddressStreet}}");
+      var suit = faker.Parse("{{person.GetAddressSuite}}");
+      var city = faker.Parse("{{person.GetAddressCity}}");
+      var state = faker.Parse("{{person.GetAddressState}}");
+      var zipcode = faker.Parse("{{person.GetAddressZipCode}}");
+      var phone = faker.Parse("{{person.GetPhone}}");
+      var website = faker.Parse("{{person.GetWebsite}}");
+      var companyname = faker.Parse("{{person.GetCompanyName}}");
+      var companycatchphrase = faker.Parse("{{person.GetCompanyCatchPhrase}}");
+      var companybs = faker.Parse("{{person.GetCompanyBs}}");
+
+
+      firstname.Should().Be("Doris");
+      lastname.Should().Be("Schultz");
+      fullname.Should().Be("Doris Schultz");
+      gender.Should().Be("Female");
+      username.Should().Be("Doris.Schultz");
+      avatar.Should().Be("https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
+      email.Should().Be("Doris69@yahoo.com");
+      //dateofbirth.Should().Be(""); Not sure the best way to test DOB.
+      geolat.Should().Be("-38.4622");
+      geolng.Should().Be("-0.6396");
+      street.Should().Be("31681 Little Flats");
+      suit.Should().Be("Suite 926");
+      city.Should().Be("Port Simone");
+      state.Should().Be("Rhode Island");
+      zipcode.Should().Be("42504-1131");
+      phone.Should().Be("1-607-290-8836 x5069");
+      website.Should().Be("javier.biz");
+      companyname.Should().Be("MacGyver and Sons");
+      companycatchphrase.Should().Be("Programmable multi-tasking implementation");
+      companybs.Should().Be("e-enable enterprise mindshare");
+   }
 }

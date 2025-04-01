@@ -176,181 +176,121 @@ public class Person : IHasRandomizer, IHasContext
 
    public string GetGender()
    {
-      if (this.Gender == default)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Gender.ToString();
    }
 
    public string GetFirstName()
    {
-      if (this.FirstName == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.FirstName;
    }
 
    public string GetLastName()
    {
-      if (this.LastName == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.LastName;
    }
 
    public string GetFullName()
    {
-      if (this.FullName == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.FullName;
    }
 
    public string GetUserName()
    {
-      if (this.UserName == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.UserName;
    }
 
    public string GetAvatar()
    {
-      if (this.Avatar == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Avatar;
    }
 
    public string GetEmail()
    {
-      if (this.Email == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Email;
    }
 
    public DateTime GetDateOfBirth()
    {
-      if (this.DateOfBirth == default(DateTime))
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.DateOfBirth;
    }
 
    public double GetAddressGeoLat()
    {
-      if (this.Address == null || this.Address.Geo == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.Geo.Lat;
    }
 
    public double GetAddressGeoLng()
    {
-      if (this.Address == null || this.Address.Geo == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.Geo.Lng;
    }
 
    public string GetAddressStreet()
    {
-      if (this.Address == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.Street;
    }
 
    public string GetAddressSuite()
    {
-      if (this.Address == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.Suite;
    }
 
    public string GetAddressCity()
    {
-      if (this.Address == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.City;
    }
 
    public string GetAddressState()
    {
-      if (this.Address == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.State;
    }
 
    public string GetAddressZipCode()
    {
-      if (this.Address == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Address.ZipCode;
    }
 
    public string GetPhone()
    {
-      if (this.Phone == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Phone;
    }
 
    public string GetWebsite()
    {
-      if (this.Website == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Website;
    }
 
    public string GetCompanyName()
    {
-      if (this.Company == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Company.Name;
    }
 
    public string GetCompanyCatchPhrase()
    {
-      if (this.Company == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Company.CatchPhrase;
    }
 
    public string GetCompanyBs()
    {
-      if (this.Company == null)
-      {
-         EnsurePopulated();
-      }
+      EnsurePopulated();
       return this.Company.Bs;
    }
 }

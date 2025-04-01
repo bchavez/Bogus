@@ -17,6 +17,17 @@ public class Person : IHasRandomizer, IHasContext
 
    Dictionary<string, object> IHasContext.Context => this.context;
 
+   private bool isPopulated = false;
+
+   private void EnsurePopulated()
+   {
+      if (!isPopulated)
+      {
+         Populate();
+         isPopulated = true;
+      }
+   }
+
    public class CardAddress
    {
       public class CardGeo
@@ -69,7 +80,7 @@ public class Person : IHasRandomizer, IHasContext
       this.Populate();
    }
 
-   internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en")
+   internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en", bool skipPopulate = false)
    {
       this.GetDataSources(locale);
       this.Random = randomizer;
@@ -77,7 +88,10 @@ public class Person : IHasRandomizer, IHasContext
       {
          this.DsDate.LocalSystemClock = () => refDate.Value;
       }
-      this.Populate();
+      if (!skipPopulate)
+      {
+         this.Populate();
+      }
    }
 
    private void GetDataSources(string locale)
@@ -159,4 +173,124 @@ public class Person : IHasRandomizer, IHasContext
    public string Phone;
    public string Website;
    public CardCompany Company;
+
+   public string GetGender()
+   {
+      EnsurePopulated();
+      return this.Gender.ToString();
+   }
+
+   public string GetFirstName()
+   {
+      EnsurePopulated();
+      return this.FirstName;
+   }
+
+   public string GetLastName()
+   {
+      EnsurePopulated();
+      return this.LastName;
+   }
+
+   public string GetFullName()
+   {
+      EnsurePopulated();
+      return this.FullName;
+   }
+
+   public string GetUserName()
+   {
+      EnsurePopulated();
+      return this.UserName;
+   }
+
+   public string GetAvatar()
+   {
+      EnsurePopulated();
+      return this.Avatar;
+   }
+
+   public string GetEmail()
+   {
+      EnsurePopulated();
+      return this.Email;
+   }
+
+   public DateTime GetDateOfBirth()
+   {
+      EnsurePopulated();
+      return this.DateOfBirth;
+   }
+
+   public double GetAddressGeoLat()
+   {
+      EnsurePopulated();
+      return this.Address.Geo.Lat;
+   }
+
+   public double GetAddressGeoLng()
+   {
+      EnsurePopulated();
+      return this.Address.Geo.Lng;
+   }
+
+   public string GetAddressStreet()
+   {
+      EnsurePopulated();
+      return this.Address.Street;
+   }
+
+   public string GetAddressSuite()
+   {
+      EnsurePopulated();
+      return this.Address.Suite;
+   }
+
+   public string GetAddressCity()
+   {
+      EnsurePopulated();
+      return this.Address.City;
+   }
+
+   public string GetAddressState()
+   {
+      EnsurePopulated();
+      return this.Address.State;
+   }
+
+   public string GetAddressZipCode()
+   {
+      EnsurePopulated();
+      return this.Address.ZipCode;
+   }
+
+   public string GetPhone()
+   {
+      EnsurePopulated();
+      return this.Phone;
+   }
+
+   public string GetWebsite()
+   {
+      EnsurePopulated();
+      return this.Website;
+   }
+
+   public string GetCompanyName()
+   {
+      EnsurePopulated();
+      return this.Company.Name;
+   }
+
+   public string GetCompanyCatchPhrase()
+   {
+      EnsurePopulated();
+      return this.Company.CatchPhrase;
+   }
+
+   public string GetCompanyBs()
+   {
+      EnsurePopulated();
+      return this.Company.Bs;
+   }
 }

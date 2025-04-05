@@ -48,7 +48,7 @@ public class Hashids : IHashids
          throw new ArgumentNullException("alphabet");
 
       this.salt = salt;
-      this.alphabet = string.Join(string.Empty, alphabet.Distinct());
+      this.alphabet = string.Concat(alphabet.Distinct());
       this.seps = seps;
       this.minHashLength = minHashLength;
 

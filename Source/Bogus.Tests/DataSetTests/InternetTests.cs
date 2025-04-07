@@ -105,7 +105,7 @@ public class InternetTests : SeededTest
    {
       var avatar = internet.Avatar();
 
-      avatar.Should().Be("https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/754.jpg");
+      avatar.Should().Be("https://ipfs.io/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/754.jpg");
    }
 
    [Fact]

@@ -25,8 +25,8 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
 
       this.Address = this.Notifier.Flow(new Address(locale));
       this.Company = this.Notifier.Flow(new Company(locale));
-      this.Date = this.Notifier.Flow(new Date (locale));
-      this.Finance = this.Notifier.Flow(new Finance {Locale = locale});
+      this.Date = this.Notifier.Flow(new Date(locale));
+      this.Finance = this.Notifier.Flow(new Finance { Locale = locale });
       this.Hacker = this.Notifier.Flow(new Hacker(locale));
       this.Image = this.Notifier.Flow(new Images(locale));
       this.Internet = this.Notifier.Flow(new Internet(locale));
@@ -124,7 +124,7 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
       set
       {
          localDateTimeRef = value;
-         if( localDateTimeRef.HasValue )
+         if (localDateTimeRef.HasValue)
          {
             this.Date.LocalSystemClock = () => localDateTimeRef.Value;
          }
@@ -282,20 +282,62 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    /// <summary>
    /// Helper to pick random subset of elements out of the list.
    /// </summary>
+   /// <param name="items">The collection from which to pick random items</param>
    /// <param name="amountToPick">amount of elements to pick of the list.</param>
    /// <exception cref="ArgumentException">if amountToPick is lower than zero.</exception>
    public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int amountToPick)
    {
-      if( amountToPick < 0 )
+      if (amountToPick < 0)
       {
          throw new ArgumentOutOfRangeException($"{nameof(amountToPick)} needs to be a positive integer.");
       }
       var size = items.Count();
-      if( amountToPick > size )
+      if (amountToPick > size)
       {
          throw new ArgumentOutOfRangeException($"{nameof(amountToPick)} is greater than the number of items.");
       }
       return this.Random.Shuffle(items).Take(amountToPick);
+   }
+
+   /// <summary>
+   /// Helper to pick random subset of elements out of the list.
+   /// </summary>
+   /// <param name="items">The collection from which to pick random items</param>
+   /// <param name="minimumAmountToPick">The minimum amount of elements to pick of the list.</param>
+   /// <param name="maximumAmountToPick">The maximum amount of elements to pick of the list.</param>
+   /// <exception cref="ArgumentOutOfRangeException" >if maximumAmountToPick is lower than zero.</exception>
+   public IEnumerable<T> PickRandom<T>(IEnumerable<T> items, int minimumAmountToPick, int maximumAmountToPick)
+      => PickRandom(items, minimumAmountToPick, maximumAmountToPick, false);
+
+   /// <summary>
+   /// Helper to pick random subset of elements out of the list.
+   /// </summary>
+   /// <param name="items">The collection from which to pick random items</param>
+   /// <param name="minimumAmountToPick">The minimum amount of elements to pick of the list.</param>
+   /// <param name="maximumAmountToPick">The maximum amount of elements to pick of the list.</param>
+   /// <param name="returnNullOnZeroItems">When true, NULL will be returned when the amount of items that will be picked is Zero. When false, an empty collection will be returned when the amount of items that will be picked is Zero. </param>
+   /// <exception cref="ArgumentOutOfRangeException" >if maximumAmountToPick is lower than zero.</exception>
+   public IEnumerable<T>? PickRandom<T>(IEnumerable<T> items, int minimumAmountToPick, int maximumAmountToPick, bool returnNullOnZeroItems)
+   {
+      if (maximumAmountToPick < 0)
+      {
+         throw new ArgumentOutOfRangeException(nameof(maximumAmountToPick), $"{nameof(maximumAmountToPick)} needs to be a positive integer.");
+      }
+      var size = items.Count();
+      if (minimumAmountToPick > size)
+      {
+         throw new ArgumentOutOfRangeException(nameof(minimumAmountToPick), $"{nameof(minimumAmountToPick)} is greater than the number of items.");
+      }
+
+      var pickAmount = Random.Number(minimumAmountToPick, Math.Min(size, maximumAmountToPick));
+      if (pickAmount == 0)
+      {
+         return returnNullOnZeroItems ? null : Enumerable.Empty<T>();
+      }
+      else
+      {
+         return Random.Shuffle(items).Take(pickAmount);
+      }
    }
 
    /// <summary>

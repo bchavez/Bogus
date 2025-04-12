@@ -1,4 +1,4 @@
-#pragma warning disable 1591
+//#pragma warning disable 1591
 
 using System;
 using System.Collections.Generic;
@@ -11,152 +11,178 @@ namespace Bogus;
 /// </summary>
 public class Person : IHasRandomizer, IHasContext
 {
-   //context variable to store state from Bogus.Extensions so, they
-   //keep returning the result on each person.
+   /// <summary>
+   /// Context variable to store state from Bogus.Extensions so, they
+   /// keep returning the result on each person.
+   /// </summary>
    internal Dictionary<string, object> context = new();
 
-   Dictionary<string, object> IHasContext.Context => this.context;
+   private Randomizer randomizer;
+
+   /// <summary>
+   ///    Creates a new Person object.
+   /// </summary>
+   /// <param name="locale">The locale to use. Defaults to 'en'.</param>
+   /// <param name="seed">
+   ///    The seed used to generate person data. When a <paramref name="seed" /> is specified,
+   ///    the Randomizer.Seed global static is ignored and a locally isolated derived seed is used to derive randomness.
+   ///    However, if the <paramref name="seed" /> parameter is null, then the Randomizer.Seed global static is used to derive
+   ///    randomness.
+   /// </param>
+   public Person(string locale = "en", int? seed = null, DateTime? refDate = null)
+   {
+      InitializeDataSources(locale);
+      ConfigureRandomization(seed);
+      ConfigureReferenceDate(refDate);
+      Populate();
+   }
+
+   /// <summary>
+   /// .
+   /// </summary>
+   /// <param name="randomizer"></param>
+   /// <param name="refDate"></param>
+   /// <param name="locale"></param>
+   internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en")
+   {
+      InitializeDataSources(locale);
+      Random = randomizer;
+      ConfigureReferenceDate(refDate);
+      Populate();
+   }
+
+   Dictionary<string, object> IHasContext.Context => context;
+
+   public string Avatar { get; set; }
+   public string Email { get; set; }
+   public string FirstName { get; set; }
+   public string FullName { get; set; }
+   public string LastName { get; set; }
+   public string Phone { get; set; }
+   public string UserName { get; set; }
+   public string Website { get; set; }
+   public DateTime DateOfBirth { get; set; }
+   public Name.Gender Gender { get; set; }
+   public CardAddress Address { get; set; }
+   public CardCompany Company { get; set; }
+
+   protected internal Address DsAddress { get; set; }
+   protected internal Company DsCompany { get; set; }
+   protected internal Date DsDate { get; set; }
+   protected internal Internet DsInternet { get; set; }
+   protected internal Name DsName { get; set; }
+   protected internal PhoneNumbers DsPhoneNumbers { get; set; }
+
+   protected SeedNotifier Notifier { get; } = new();
+
+   public Randomizer Random
+   {
+      get => randomizer ?? (Random = new Randomizer());
+      set
+      {
+         randomizer = value;
+         Notifier.Notify(value);
+      }
+   }
+
+   SeedNotifier IHasRandomizer.GetNotifier() => Notifier;
+
+   /// <summary>
+   /// Generates the Person data.
+   /// </summary>
+   protected internal virtual void Populate()
+   {
+      // Generate consistent person data
+      Gender = Random.Enum<DataSets.Name.Gender>();
+      FirstName = DsName.FirstName(Gender);
+      LastName = DsName.LastName(Gender);
+      FullName = $"{FirstName} {LastName}";
+
+      UserName = DsInternet.UserName(FirstName, LastName);
+      Email = DsInternet.Email(FirstName, LastName);
+      Website = DsInternet.DomainName();
+      Avatar = DsInternet.Avatar();
+
+      DateOfBirth = DsDate.Past(50, DsDate.GetTimeReference().AddYears(-20));
+      Phone = DsPhoneNumbers.PhoneNumber();
+
+      InitializeAddress();
+      InitializeCompany();
+   }
+
+   private void InitializeDataSources(string locale)
+   {
+      DsName = Notifier.Flow(new DataSets.Name(locale));
+      DsInternet = Notifier.Flow(new DataSets.Internet(locale));
+      DsDate = Notifier.Flow(new DataSets.Date { Locale = locale });
+      DsPhoneNumbers = Notifier.Flow(new DataSets.PhoneNumbers(locale));
+      DsAddress = Notifier.Flow(new DataSets.Address(locale));
+      DsCompany = Notifier.Flow(new DataSets.Company(locale));
+   }
+
+   private void ConfigureRandomization(int? seed)
+   {
+      if (seed.HasValue)
+      {
+         Random = new Randomizer(seed.Value);
+      }
+   }
+
+   private void ConfigureReferenceDate(DateTime? refDate)
+   {
+      if (refDate.HasValue)
+      {
+         DsDate.LocalSystemClock = () => refDate.Value;
+      }
+   }
+
+   private void InitializeAddress()
+   {
+      Address = new CardAddress
+      {
+         Street = DsAddress.StreetAddress(),
+         Suite = DsAddress.SecondaryAddress(),
+         City = DsAddress.City(),
+         State = DsAddress.State(),
+         ZipCode = DsAddress.ZipCode(),
+         Geo = new CardAddress.CardGeo
+         {
+            Lat = DsAddress.Latitude(),
+            Lng = DsAddress.Longitude()
+         }
+      };
+   }
+
+   private void InitializeCompany()
+   {
+      Company = new CardCompany
+      {
+         Name = DsCompany.CompanyName(),
+         CatchPhrase = DsCompany.CatchPhrase(),
+         Bs = DsCompany.Bs()
+      };
+   }
 
    public class CardAddress
    {
+      public string City { get; set; }
+      public string State { get; set; }
+      public string Street { get; set; }
+      public string Suite { get; set; }
+      public string ZipCode { get; set; }
+      public CardGeo Geo { get; set; }
+
       public class CardGeo
       {
-         public double Lat;
-         public double Lng;
+         public double Lat { get; set; }
+         public double Lng { get; set; }
       }
-
-      public string Street;
-      public string Suite;
-      public string City;
-      public string State;
-      public string ZipCode;
-      public CardGeo Geo;
    }
 
    public class CardCompany
    {
-      public string Name;
-      public string CatchPhrase;
-      public string Bs;
+      public string Bs { get; set; }
+      public string CatchPhrase { get; set; }
+      public string Name { get; set; }
    }
-
-   protected internal Name DsName { get; set; }
-   protected internal Internet DsInternet { get; set; }
-   protected internal Date DsDate { get; set; }
-   protected internal PhoneNumbers DsPhoneNumbers { get; set; }
-   protected internal Address DsAddress { get; set; }
-   protected internal Company DsCompany { get; set; }
-
-   /// <summary>
-   /// Creates a new Person object.
-   /// </summary>
-   /// <param name="locale">The locale to use. Defaults to 'en'.</param>
-   /// <param name="seed">The seed used to generate person data. When a <paramref name="seed"/> is specified,
-   /// the Randomizer.Seed global static is ignored and a locally isolated derived seed is used to derive randomness.
-   /// However, if the <paramref name="seed"/> parameter is null, then the Randomizer.Seed global static is used to derive randomness.
-   /// </param>
-   public Person(string locale = "en", int? seed = null, DateTime? refDate = null)
-   {
-      this.GetDataSources(locale);
-      if( seed.HasValue )
-      {
-         this.Random = new Randomizer(seed.Value);
-      }
-      if( refDate.HasValue )
-      {
-         this.DsDate.LocalSystemClock = () => refDate.Value;
-      }
-      this.Populate();
-   }
-
-   internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en")
-   {
-      this.GetDataSources(locale);
-      this.Random = randomizer;
-      if( refDate.HasValue )
-      {
-         this.DsDate.LocalSystemClock = () => refDate.Value;
-      }
-      this.Populate();
-   }
-
-   private void GetDataSources(string locale)
-   {
-      this.DsName = this.Notifier.Flow(new Name(locale));
-      this.DsInternet = this.Notifier.Flow(new Internet(locale));
-      this.DsDate = this.Notifier.Flow(new Date {Locale = locale});
-      this.DsPhoneNumbers = this.Notifier.Flow(new PhoneNumbers(locale));
-      this.DsAddress = this.Notifier.Flow(new Address(locale));
-      this.DsCompany = this.Notifier.Flow(new Company(locale));
-   }
-
-   protected internal virtual void Populate()
-   {
-      this.Gender = this.Random.Enum<Name.Gender>();
-      this.FirstName = this.DsName.FirstName(this.Gender);
-      this.LastName = this.DsName.LastName(this.Gender);
-      this.FullName = $"{this.FirstName} {this.LastName}";
-
-      this.UserName = this.DsInternet.UserName(this.FirstName, this.LastName);
-      this.Email = this.DsInternet.Email(this.FirstName, this.LastName);
-      this.Website = this.DsInternet.DomainName();
-      this.Avatar = this.DsInternet.Avatar();
-
-      this.DateOfBirth = this.DsDate.Past(50, this.DsDate.GetTimeReference().AddYears(-20));
-
-      this.Phone = this.DsPhoneNumbers.PhoneNumber();
-
-      this.Address = new CardAddress
-         {
-            Street = this.DsAddress.StreetAddress(),
-            Suite = this.DsAddress.SecondaryAddress(),
-            City = this.DsAddress.City(),
-            State = this.DsAddress.State(),
-            ZipCode = this.DsAddress.ZipCode(),
-            Geo = new CardAddress.CardGeo
-               {
-                  Lat = this.DsAddress.Latitude(),
-                  Lng = this.DsAddress.Longitude()
-               }
-         };
-
-      this.Company = new CardCompany
-         {
-            Name = this.DsCompany.CompanyName(),
-            CatchPhrase = this.DsCompany.CatchPhrase(),
-            Bs = this.DsCompany.Bs()
-         };
-   }
-
-   protected SeedNotifier Notifier = new();
-
-   private Randomizer randomizer;
-
-   public Randomizer Random
-   {
-      get => this.randomizer ?? (this.Random = new Randomizer());
-      set
-      {
-         this.randomizer = value;
-         this.Notifier.Notify(value);
-      }
-   }
-
-   SeedNotifier IHasRandomizer.GetNotifier()
-   {
-      return this.Notifier;
-   }
-
-   public Name.Gender Gender;
-   public string FirstName;
-   public string LastName;
-   public string FullName;
-   public string UserName;
-   public string Avatar;
-   public string Email;
-   public DateTime DateOfBirth;
-   public CardAddress Address;
-   public string Phone;
-   public string Website;
-   public CardCompany Company;
 }

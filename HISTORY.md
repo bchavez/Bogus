@@ -1,3 +1,8 @@
+## v35.6.3
+Release Date: 2025-04-12
+* Issue 601: Fixes `Internet.Avatar()` URL generation. Moves from Cloudflare IPFS to IPFS.io.
+* .NET SDK 9 now required for builds. Various C# improvements and modernizations. Thanks @SimonCropp!
+
 ## v35.6.2
 Release Date: 2025-02-20
 * PR 584: Pack LICENSE file with NuGet package. Also, use ProjectIcon.

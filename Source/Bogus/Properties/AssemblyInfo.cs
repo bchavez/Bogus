@@ -6,10 +6,10 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("Bogus")]
 [assembly: AssemblyTitle("Bogus Fake Data Generator for .NET")]
 [assembly: AssemblyCompany("Brian Chavez")]
-[assembly: AssemblyCopyright("Brian Chavez © 2015")]
+[assembly: AssemblyCopyright("Brian Chavez © 2025")]
 [assembly: AssemblyVersion("0.0.0")]
 [assembly: AssemblyFileVersion("0.0.0")]
-[assembly: AssemblyInformationalVersion("0.0.0-localbuild built on 2015-01-01 00:00:00Z")]
+[assembly: AssemblyInformationalVersion("0.0.0-localbuild built on 2025-04-13 01:02:43Z")]
 [assembly: AssemblyTrademark("MIT License")]
 [assembly: AssemblyDescription("https://github.com/bchavez/Bogus")]
 [assembly: InternalsVisibleTo("Bogus.Tests")]
@@ -18,10 +18,10 @@ namespace System {
         internal const System.String AssemblyProduct = "Bogus";
         internal const System.String AssemblyTitle = "Bogus Fake Data Generator for .NET";
         internal const System.String AssemblyCompany = "Brian Chavez";
-        internal const System.String AssemblyCopyright = "Brian Chavez © 2015";
+        internal const System.String AssemblyCopyright = "Brian Chavez © 2025";
         internal const System.String AssemblyVersion = "0.0.0";
         internal const System.String AssemblyFileVersion = "0.0.0";
-        internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 2015-01-01 00:00:00Z";
+        internal const System.String AssemblyInformationalVersion = "0.0.0-localbuild built on 2025-04-13 01:02:43Z";
         internal const System.String AssemblyTrademark = "MIT License";
         internal const System.String AssemblyDescription = "https://github.com/bchavez/Bogus";
         internal const System.String InternalsVisibleTo = "Bogus.Tests";

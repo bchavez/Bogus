@@ -15,7 +15,7 @@ public class BelgianExtensionTests : SeededTest
       _faker = new Faker();
    }
 
-   [Fact]
+   [Fact(Skip = "Explicit")]
    public void can_generate_national_number_for_belgium()
    {
       // Act

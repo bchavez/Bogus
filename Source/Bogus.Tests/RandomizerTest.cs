@@ -561,4 +561,20 @@ public class RandomizerTest : SeededTest
       collectionAction.Should().Throw<ArgumentException>()
          .Where(ex => ex.Message.StartsWith("The collection is empty. There are no items to select."));
    }
+
+   [Fact]
+   public void can_clamp_string()
+   {
+      var x = r.ClampString("hello world", 14);
+      x.Length.Should().Be(14);
+
+      x = r.ClampString("hello world", 0, 5);
+      x.Should().Be("hello");
+
+      x = r.ClampString("hello world");
+      x.Should().Be("hello world");
+
+      x = r.ClampString("hello world", 11, 5);
+      x.Length.Should().Be(11);
+   }
 }

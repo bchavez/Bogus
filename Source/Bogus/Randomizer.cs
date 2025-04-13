@@ -29,22 +29,23 @@ public class Randomizer
    /// </summary>
    public Randomizer()
    {
-      this.localSeed = Seed;
+      LocalSeed = Seed;
    }
 
    /// <summary>
-   /// Constructor that uses <see cref="localSeed"/> parameter as a seed.
+   /// Constructor that uses <see cref="LocalSeed"/> parameter as a seed.
    /// Completely ignores the global static <see cref="Seed"/>.
    /// </summary>
+   /// <param name="localSeed"></param>
    public Randomizer(int localSeed)
    {
-      this.localSeed = new Random(localSeed);
+      LocalSeed = new Random(localSeed);
    }
 
    /// <summary>
    /// The pseudo-random number generator that is used for all random number generation in this instance.
    /// </summary>
-   protected Random localSeed;
+   protected Random LocalSeed;
 
    /// <summary>
    /// Get an int from 0 to max.
@@ -74,12 +75,17 @@ public class Randomizer
       return digits;
    }
 
+   public int Number()
+   {
+      return Number(0, 1);
+   }
+
    /// <summary>
    /// Get an int from min to max.
    /// </summary>
    /// <param name="min">Lower bound, inclusive</param>
    /// <param name="max">Upper bound, inclusive</param>
-   public int Number(int min = 0, int max = 1)
+   public int Number(int min, int max)
    {
       //lock any seed access, for thread safety.
       lock( Locker.Value )
@@ -87,11 +93,11 @@ public class Randomizer
          // Adjust the range as needed to make max inclusive. The Random.Next function uses exclusive upper bounds.
 
          // If max can be extended by 1, just do that.
-         if( max < int.MaxValue ) return localSeed.Next(min, max + 1);
+         if( max < int.MaxValue ) return LocalSeed.Next(min, max + 1);
 
          // If max is exactly int.MaxValue, then check if min can be used to push the range out by one the other way.
          // If so, then we can simply add one to the result to put it back in the correct range.
-         if( min > int.MinValue ) return 1 + localSeed.Next(min - 1, max);
+         if( min > int.MinValue ) return 1 + LocalSeed.Next(min - 1, max);
 
          // If we hit this line, then min is int.MinValue and max is int.MaxValue, which mean the caller wants a
          // number from a range spanning all possible values of int. The Random class only supports exclusive
@@ -99,11 +105,11 @@ public class Randomizer
          // single call is a value in the range (int.MinValue, int.MaxValue - 1). Instead, what we do is get two
          // samples, each of which has just under 31 bits of entropy, and use 16 bits from each to assemble a
          // single 16-bit number.
-         int sample1 = localSeed.Next();
-         int sample2 = localSeed.Next();
+         var sample1 = LocalSeed.Next();
+         var sample2 = LocalSeed.Next();
 
-         int topHalf = (sample1 >> 8) & 0xFFFF;
-         int bottomHalf = (sample2 >> 8) & 0xFFFF;
+         var topHalf = (sample1 >> 8) & 0xFFFF;
+         var bottomHalf = (sample2 >> 8) & 0xFFFF;
 
          return unchecked((topHalf << 16) | bottomHalf);
       }
@@ -120,7 +126,7 @@ public class Randomizer
       // Ensure that we have a valid range.
       if( min > max )
          throw new ArgumentException($"The min/max range is invalid. The minimum value '{min}' is greater than the maximum value '{max}'.", nameof(max));
-      if( ((min & 1) == 1) && (max - 1 < min) )
+      if( (min & 1) == 1 && max - 1 < min )
          throw new ArgumentException("The specified range does not contain any even numbers.", nameof(max));
 
       // Adjust the range to ensure that we always get the same number of even values as odd values.
@@ -128,7 +134,7 @@ public class Randomizer
       //   if the input is min = 1, max = 3, the new range should be min = 2, max = 3.
       //   if the input is min = 2, max = 3, the range should remain min = 2, max = 3.
       min = (min + 1) & ~1;
-      max = max | 1;
+      max |= 1;
 
       if( min > max )
          return min;
@@ -148,7 +154,7 @@ public class Randomizer
       // Ensure that we have a valid range.
       if( min > max )
          throw new ArgumentException($"The min/max range is invalid. The minimum value '{min}' is greater than the maximum value '{max}'.", nameof(max));
-      if( ((max & 1) == 0) && (min + 1 > max) )
+      if( (max & 1) == 0 && min + 1 > max )
          throw new ArgumentException("The specified range does not contain any odd numbers.", nameof(max));
 
       // Special case where the math below breaks.
@@ -159,7 +165,7 @@ public class Randomizer
       // For example,
       //   if the input is min = 2, max = 4, the new range should be min = 2, max = 3.
       //   if the input is min = 2, max = 3, the range should remain min = 2, max = 3.
-      min = min & ~1;
+      min &= ~1;
       max = (max - 1) | 1;
 
       if( min > max )
@@ -183,10 +189,10 @@ public class Randomizer
          if( min == 0.0d && max == 1.0d )
          {
             //use default implementation
-            return localSeed.NextDouble();
+            return LocalSeed.NextDouble();
          }
 
-         return localSeed.NextDouble() * (max - min) + min;
+         return LocalSeed.NextDouble() * (max - min) + min;
       }
    }
 
@@ -229,7 +235,7 @@ public class Randomizer
       var arr = new byte[count];
       lock( Locker.Value )
       {
-         localSeed.NextBytes(arr);
+         LocalSeed.NextBytes(arr);
       }
       return arr;
    }
@@ -251,7 +257,7 @@ public class Randomizer
    /// <param name="max">Max value, inclusive. Default int.MaxValue</param>
    public int Int(int min = int.MinValue, int max = int.MaxValue)
    {
-      return this.Number(min, max);
+      return Number(min, max);
    }
 
    /// <summary>
@@ -340,7 +346,7 @@ public class Randomizer
    /// <param name="maxChar">Max character value, inclusive. Default char.MaxValue</param>
    public string String(int? length = null, char minChar = char.MinValue, char maxChar = char.MaxValue)
    {
-      var l = length ?? this.Number(40, 80);
+      var l = length ?? Number(40, 80);
 
       return new string(Chars(minChar, maxChar, l));
    }
@@ -357,7 +363,7 @@ public class Randomizer
    /// <param name="maxChar">Max character value, inclusive. Default char.MaxValue</param>
    public string String(int minLength, int maxLength, char minChar = char.MinValue, char maxChar = char.MaxValue)
    {
-      var length = this.Number(minLength, maxLength);
+      var length = Number(minLength, maxLength);
       return String(length, minChar, maxChar);
    }
 
@@ -371,9 +377,9 @@ public class Randomizer
    {
       var target = new char[length];
 
-      for (int i = 0; i < length; i++)
+      for (var i = 0; i < length; i++)
       {
-         var idx = this.Number(0, chars.Length - 1);
+         var idx = Number(0, chars.Length - 1);
          target[i] = chars[idx];
       }
 
@@ -389,7 +395,7 @@ public class Randomizer
    /// <param name="chars">The pool of characters to draw from. The returned string may contain repeat characters from the pool.</param>
    public string String2(int minLength, int maxLength, string chars = "abcdefghijklmnopqrstuvwxyz")
    {
-      var length = this.Number(minLength, maxLength);
+      var length = Number(minLength, maxLength);
       return String2(length, chars);
    }
 
@@ -402,41 +408,37 @@ public class Randomizer
    /// <param name="excludeSurrogates">Excludes surrogate pairs from the returned string.</param>
    public string Utf16String(int minLength = 40, int maxLength = 80, bool excludeSurrogates = false)
    {
-      var targetLength = minLength == maxLength ? minLength : this.Number(minLength, maxLength);
+      var targetLength = minLength == maxLength ? minLength : Number(minLength, maxLength);
 
       var sb = new StringBuilder();
 
       while( sb.Length < targetLength)
       {
-         int spaceLeft = targetLength - sb.Length;
-         string block = null;
-         int alignment = 0;
+         var spaceLeft = targetLength - sb.Length;
+         string block;
+         int alignment;
 
-         if (!excludeSurrogates && spaceLeft >= 2 && this.Bool())
+         if (!excludeSurrogates && spaceLeft >= 2 && Bool())
          {
-            block = this.ArrayElement(SafeUnicodeRanges.SurrogatePairs);
+            block = ArrayElement(SafeUnicodeRanges.SurrogatePairs);
             alignment = 1;
          }
          else
          {
-            block = this.ArrayElement(SafeUnicodeRanges.Basic);
+            block = ArrayElement(SafeUnicodeRanges.Basic);
             alignment = 0;
          }
 
-         char rangeStart = block[alignment];
-         char rangeEnd = block[2 + alignment * 2];
+         var rangeStart = block[alignment];
+         var rangeEnd = block[2 + alignment * 2];
 
-         char pickedChar = (char)this.UShort(rangeStart, rangeEnd);
+         var pickedChar = (char)UShort(rangeStart, rangeEnd);
 
          if (alignment == 1)
          {
             sb.Append(block[0]);
-            sb.Append(pickedChar);
          }
-         else
-         {
-            sb.Append(pickedChar);
-         }
+         sb.Append(pickedChar);
       }
 
       return sb.ToString();
@@ -472,6 +474,7 @@ public class Randomizer
    /// <summary>
    /// Get a random array element.
    /// </summary>
+   /// <param name="array"></param>
    public T ArrayElement<T>(T[] array)
    {
       if (array.Length <= 0)
@@ -484,6 +487,9 @@ public class Randomizer
    /// <summary>
    /// Helper method to get a random element in a BSON array.
    /// </summary>
+   /// <param name="props"></param>
+   /// <param name="min"></param>
+   /// <param name="max"></param>
    public BValue ArrayElement(BArray props, int? min = null, int? max = null)
    {
       var r = Number(min: min ?? 0, max: max - 1 ?? props.Count - 1);
@@ -493,6 +499,7 @@ public class Randomizer
    /// <summary>
    /// Get a random array element.
    /// </summary>
+   /// <param name="array"></param>
    public string ArrayElement(Array array)
    {
       array ??= new[] {"a", "b", "c"};
@@ -511,8 +518,7 @@ public class Randomizer
    {
       if( count > array.Length )
          throw new ArgumentOutOfRangeException(nameof(count));
-      if( count is null )
-         count = Number(0, array.Length - 1);
+      count ??= Number(0, array.Length - 1);
 
       return Shuffle(array).Take(count.Value).ToArray();
    }
@@ -520,6 +526,7 @@ public class Randomizer
    /// <summary>
    /// Get a random list item.
    /// </summary>
+   /// <param name="list"></param>
    public T ListItem<T>(List<T> list)
    {
       return ListItem(list as IList<T>);
@@ -528,6 +535,7 @@ public class Randomizer
    /// <summary>
    /// Get a random list item.
    /// </summary>
+   /// <param name="list"></param>
    public T ListItem<T>(IList<T> list)
    {
       if (list.Count <= 0)
@@ -546,8 +554,7 @@ public class Randomizer
    {
       if( count > items.Count )
          throw new ArgumentOutOfRangeException(nameof(count));
-      if( count is null )
-         count = Number(0, items.Count - 1);
+      count ??= Number(0, items.Count - 1);
 
       return Shuffle(items).Take(count.Value).ToList();
    }
@@ -565,6 +572,7 @@ public class Randomizer
    /// <summary>
    /// Get a random collection item.
    /// </summary>
+   /// <param name="collection"></param>
    public T CollectionItem<T>(ICollection<T> collection)
    {
       if( collection.Count <= 0 )
@@ -599,9 +607,10 @@ public class Randomizer
    }
 
    /// <summary>
-   /// Replaces symbols with numbers and letters. # = number, ? = letter, * = number or letter.
+   /// Replaces symbols with numbers and letters. # = number; ? = letter; * = number or letter.
    /// IE: ###???* -> 283QED4. Letters are uppercase.
    /// </summary>
+   /// <param name="format"></param>
    public string Replace(string format)
    {
       var chars = format.Select(c =>
@@ -632,19 +641,21 @@ public class Randomizer
    /// If the string is over the maximum, the string is truncated at maximum characters; additionally, if the result string ends with
    /// whitespace, it is replaced with a random characters.
    /// </summary>
+   /// <param name="str"></param>
+   /// <param name="min"></param>
+   /// <param name="max"></param>
    public string ClampString(string str, int? min = null, int? max = null)
    {
       if( max != null && str.Length > max )
       {
          str = str.Substring(0, max.Value).Trim();
       }
-      if( min != null && min > str.Length )
-      {
-         var missingChars = min - str.Length;
-         var fillerChars = this.Replace("".PadRight(missingChars.Value, '?'));
-         return str + fillerChars;
-      }
-      return str;
+
+      if (min == null || min <= str.Length) return str;
+
+      var missingChars = min - str.Length;
+      var fillerChars = Replace("".PadRight(missingChars.Value, '?'));
+      return str + fillerChars;
    }
 
    /// <summary>
@@ -671,7 +682,7 @@ public class Randomizer
          throw new ArgumentException("There are no values after exclusion to choose from.");
       }
 
-      var val = this.ArrayElement(selection);
+      var val = ArrayElement(selection);
 
       System.Enum.TryParse(val, out T picked);
       return picked;
@@ -685,21 +696,10 @@ public class Randomizer
    /// <param name="exclude">Any enums that should be excluded before picking.</param>
    public T[] EnumValues<T>(int? count = null, params T[] exclude) where T : Enum
    {
-      T[] enums;
-      if( exclude.Length > 0)
-      {
-         enums = System.Enum.GetValues(typeof(T))
-            .OfType<T>()
-            .Except(exclude)
-            .ToArray();
-      }
-      else
-      {
-         enums = System.Enum.GetValues(typeof(T))
-            .OfType<T>()
-            .Except(exclude)
-            .ToArray();
-      }
+      T[] enums = System.Enum.GetValues(typeof(T))
+         .OfType<T>()
+         .Except(exclude)
+         .ToArray();
 
       if( count > enums.Length || count < 0 )
       {
@@ -707,12 +707,13 @@ public class Randomizer
          $"The {nameof(count)} parameter is {count} and the calculated set of enums has a length of {enums.Length}. It is impossible to pick {count} enums from a list of {enums.Length}.");
       }
 
-      return this.ArrayElements(enums, count);
+      return ArrayElements(enums, count);
    }
 
    /// <summary>
    /// Shuffles an IEnumerable source.
    /// </summary>
+   /// <param name="source"></param>
    public IEnumerable<T> Shuffle<T>(IEnumerable<T> source)
    {
       List<T> buffer = source.ToList();
@@ -722,7 +723,7 @@ public class Randomizer
          //lock any seed access, for thread safety.
          lock( Locker.Value )
          {
-            j = this.localSeed.Next(i, buffer.Count);
+            j = LocalSeed.Next(i, buffer.Count);
          }
          yield return buffer[j];
 
@@ -737,8 +738,8 @@ public class Randomizer
    /// </summary>
    public string Word()
    {
-      this.wordFunctions ??= new WordFunctions(this);
-      var randomWordMethod = ListItem(this.wordFunctions.Functions);
+      wordFunctions ??= new WordFunctions(this);
+      var randomWordMethod = ListItem(wordFunctions.Functions);
       return randomWordMethod();
    }
 
@@ -748,8 +749,7 @@ public class Randomizer
    /// <param name="count">Number of times to call Word()</param>
    public string Words(int? count = null)
    {
-      if( count == null )
-         count = Number(1, 3);
+      count ??= Number(1, 3);
 
       var words = WordsArray(count.Value);
 
@@ -770,6 +770,7 @@ public class Randomizer
    /// <summary>
    /// Get a specific number of words in an array (English).
    /// </summary>
+   /// <param name="count"></param>
    public string[] WordsArray(int count)
    {
       return Enumerable.Range(1, count)
@@ -782,7 +783,7 @@ public class Randomizer
    /// </summary>
    public Guid Guid()
    {
-      var guidBytes = this.Bytes(16);
+      var guidBytes = Bytes(16);
       return new Guid(guidBytes);
    }
 
@@ -791,7 +792,7 @@ public class Randomizer
    /// </summary>
    public Guid Uuid()
    {
-      var guidBytes = this.Bytes(16);
+      var guidBytes = Bytes(16);
       return new Guid(guidBytes);
    }
 
@@ -800,36 +801,39 @@ public class Randomizer
    /// </summary>
    public string RandomLocale()
    {
-      return this.ArrayElement(Database.GetAllLocales());
+      return ArrayElement(Database.GetAllLocales());
    }
 
 
-   private static char[] AlphaChars =
-      {
+   private static readonly char[] AlphaChars =
+      [
          '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
          'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
          'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
          'u', 'v', 'w', 'x', 'y', 'z'
-      };
+      ];
 
    /// <summary>
-   /// Returns a random set of alpha numeric characters 0-9, a-z.
+   /// Returns a random set of alphanumeric characters 0-9, a-z.
    /// </summary>
+   /// <param name="length"></param>
    public string AlphaNumeric(int length)
    {
       var sb = new StringBuilder();
       return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
    }
 
-   private static char[] HexChars =
-      {
+   private static readonly char[] HexChars =
+      [
          '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
          'a', 'b', 'c', 'd', 'e', 'f'
-      };
+      ];
 
    /// <summary>
    /// Generates a random hexadecimal string.
    /// </summary>
+   /// <param name="length"></param>
+   /// <param name="prefix"></param>
    public string Hexadecimal(int length = 1, string prefix = "0x")
    {
       var sb = new StringBuilder();
@@ -846,21 +850,20 @@ public class Randomizer
    {
       if( weights.Length != items.Length ) throw new ArgumentOutOfRangeException($"{nameof(items)}.Length and {nameof(weights)}.Length must be the same.");
 
-      var rand = this.Float();
-      float max;
-      float min = 0f;
+      var rand = Float();
+      var min = 0f;
 
       var item = default(T);
 
-      for( int i = 0; i < weights.Length; i++ )
+      for( var i = 0; i < weights.Length; i++ )
       {
-         max = min + weights[i];
+         var max = min + weights[i];
          item = items[i];
          if( rand >= min && rand <= max )
          {
             break;
          }
-         min = min + weights[i];
+         min += weights[i];
       }
 
       return item;
@@ -893,51 +896,51 @@ public class WordFunctions
    /// </summary>
    public WordFunctions(Randomizer r)
    {
-      this.Commerce = new Commerce {Random = r};
-      this.Company = new Company {Random = r};
-      this.Address = new Address {Random = r};
-      this.Finance = new Finance {Random = r};
-      this.Hacker = new Hacker {Random = r};
-      this.Name = new Name {Random = r};
+      Commerce = new Commerce {Random = r};
+      Company = new Company {Random = r};
+      Address = new Address {Random = r};
+      Finance = new Finance {Random = r};
+      Hacker = new Hacker {Random = r};
+      Name = new Name {Random = r};
 
       Init();
    }
 
    private void Init()
    {
-      this.Functions.Add(() => this.Commerce.Department());
-      this.Functions.Add(() => this.Commerce.ProductName());
-      this.Functions.Add(() => this.Commerce.ProductAdjective());
-      this.Functions.Add(() => this.Commerce.ProductMaterial());
-      this.Functions.Add(() => this.Commerce.ProductName());
-      this.Functions.Add(() => this.Commerce.Color());
+      Functions.Add(() => Commerce.Department());
+      Functions.Add(() => Commerce.ProductName());
+      Functions.Add(() => Commerce.ProductAdjective());
+      Functions.Add(() => Commerce.ProductMaterial());
+      Functions.Add(() => Commerce.ProductName());
+      Functions.Add(() => Commerce.Color());
 
-      this.Functions.Add(() => this.Company.CatchPhraseAdjective());
-      this.Functions.Add(() => this.Company.CatchPhraseDescriptor());
-      this.Functions.Add(() => this.Company.CatchPhraseNoun());
-      this.Functions.Add(() => this.Company.BsAdjective());
-      this.Functions.Add(() => this.Company.BsBuzz());
-      this.Functions.Add(() => this.Company.BsNoun());
+      Functions.Add(() => Company.CatchPhraseAdjective());
+      Functions.Add(() => Company.CatchPhraseDescriptor());
+      Functions.Add(() => Company.CatchPhraseNoun());
+      Functions.Add(() => Company.BsAdjective());
+      Functions.Add(() => Company.BsBuzz());
+      Functions.Add(() => Company.BsNoun());
 
-      this.Functions.Add(() => this.Address.StreetSuffix());
-      this.Functions.Add(() => this.Address.County());
-      this.Functions.Add(() => this.Address.Country());
-      this.Functions.Add(() => this.Address.State());
+      Functions.Add(() => Address.StreetSuffix());
+      Functions.Add(() => Address.County());
+      Functions.Add(() => Address.Country());
+      Functions.Add(() => Address.State());
 
-      this.Functions.Add(() => this.Address.StreetSuffix());
+      Functions.Add(() => Address.StreetSuffix());
 
-      this.Functions.Add(() => this.Finance.AccountName());
-      this.Functions.Add(() => this.Finance.TransactionType());
-      this.Functions.Add(() => this.Finance.Currency().Description);
+      Functions.Add(() => Finance.AccountName());
+      Functions.Add(() => Finance.TransactionType());
+      Functions.Add(() => Finance.Currency().Description);
 
-      this.Functions.Add(() => this.Hacker.Noun());
-      this.Functions.Add(() => this.Hacker.Verb());
-      this.Functions.Add(() => this.Hacker.Adjective());
-      this.Functions.Add(() => this.Hacker.IngVerb());
-      this.Functions.Add(() => this.Hacker.Abbreviation());
+      Functions.Add(() => Hacker.Noun());
+      Functions.Add(() => Hacker.Verb());
+      Functions.Add(() => Hacker.Adjective());
+      Functions.Add(() => Hacker.IngVerb());
+      Functions.Add(() => Hacker.Abbreviation());
 
-      this.Functions.Add(() => this.Name.JobDescriptor());
-      this.Functions.Add(() => this.Name.JobArea());
-      this.Functions.Add(() => this.Name.JobType());
+      Functions.Add(() => Name.JobDescriptor());
+      Functions.Add(() => Name.JobArea());
+      Functions.Add(() => Name.JobType());
    }
 }

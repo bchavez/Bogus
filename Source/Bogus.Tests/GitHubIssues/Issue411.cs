@@ -45,7 +45,7 @@ public class Issue411
    {
       public CustomRandomizer()
       {
-         localSeed = new CustomRandom();
+         LocalSeed = new CustomRandom();
       }
    }
 }

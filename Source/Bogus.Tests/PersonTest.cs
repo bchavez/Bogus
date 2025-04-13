@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using Bogus.DataSets;
 using Bogus.Extensions.Brazil;
 using Bogus.Extensions.Canada;
@@ -276,6 +277,152 @@ public class PersonTest : SeededTest
       Date.SystemClock = () => DateTime.Now;
    }
 
+   [Fact]
+   public void Constructor_WithSeed_ProducesConsistentResults()
+   {
+      // Arrange & Act
+      var person1 = new Person(seed: 42);
+      var person2 = new Person(seed: 42);
+
+      // Assert
+      person1.FirstName.Should().Be(person2.FirstName);
+      person1.LastName.Should().Be(person2.LastName);
+      person1.Email.Should().Be(person2.Email);
+      person1.Phone.Should().Be(person2.Phone);
+   }
+
+   [Fact]
+   public void Constructor_WithReferenceDate_UsesCorrectDate()
+   {
+      // Arrange
+      var referenceDate = new DateTime(2020, 1, 1);
+
+      // Act
+      var person = new Person(refDate: referenceDate);
+
+      // Assert - DateOfBirth should be calculated relative to the reference date
+      person.DateOfBirth.Should().BeBefore(referenceDate);
+      person.DateOfBirth.Should().BeAfter(referenceDate.AddYears(-70)); // Assuming max age is 70
+   }
+
+   [Fact]
+   public void Gender_InfluencesFirstName()
+   {
+      // Arrange - This test assumes different names for different genders
+      var maleNames = Enumerable.Range(1, 10)
+         .Select(_ => new Person() { Gender = DataSets.Name.Gender.Male })
+         .Select(p => p.FirstName)
+         .ToList();
+
+      var femaleNames = Enumerable.Range(1, 10)
+         .Select(_ => new Person() { Gender = DataSets.Name.Gender.Female })
+         .Select(p => p.FirstName)
+         .ToList();
+
+      // Assert
+      // This test is a bit fuzzy since we can't guarantee all random names will be different
+      // but with 10 samples, there should be some difference in the sets
+      maleNames.Should().NotBeEquivalentTo(femaleNames);
+   }
+
+   [Fact]
+   public void InternalConstructor_WithRandomizer_UsesProvidedRandomizer()
+   {
+      // Arrange
+      var randomizer = new Randomizer(42); // Fixed seed for deterministic results
+      var person = new Person(seed: 42);
+
+      // Act
+      var iperson = CreatePersonWithInternalConstructor(randomizer);
+
+      // Assert
+      iperson.FirstName.Should().Be(person.FirstName);
+      iperson.LastName.Should().Be(person.LastName);
+      iperson.Email.Should().Be(person.Email);
+   }
+
+   [Fact]
+   public void InternalConstructor_WithRefDate_AppliesReferenceDate()
+   {
+      // Arrange
+      var randomizer = new Randomizer(42);
+      var refDate = new DateTime(2010, 1, 1);
+
+      // Act
+      var person = CreatePersonWithInternalConstructor(randomizer, refDate);
+
+      // Assert
+      // DateOfBirth should be calculated relative to the reference date
+      person.DateOfBirth.Should().BeBefore(refDate);
+
+      // Using reflection to verify that the DsDate.LocalSystemClock is properly set
+      var dsDateField = typeof(Person).GetProperty("DsDate", BindingFlags.NonPublic | BindingFlags.Instance);
+      var dsDate = dsDateField.GetValue(person) as Date;
+
+      // We can verify the refDate was applied by calling GetTimeReference() which uses the LocalSystemClock
+      var currentTimeRef = dsDate.GetTimeReference();
+      currentTimeRef.Should().Be(refDate);
+   }
+
+   [Fact]
+   public void InternalConstructor_WithLocale_AppliesLocaleToAllDataSets()
+   {
+      // Arrange
+      var randomizer = new Randomizer(42);
+      var locale = "fr"; // Use French locale
+
+      // Act
+      var person = CreatePersonWithInternalConstructor(randomizer, null, locale);
+
+      // Assert - Check that datasets use the correct locale
+      var dsNameField = typeof(Person).GetProperty("DsName", BindingFlags.NonPublic | BindingFlags.Instance);
+      var dsName = dsNameField.GetValue(person) as Name;
+      dsName.Locale.Should().Be(locale);
+
+      var dsAddressField = typeof(Person).GetProperty("DsAddress", BindingFlags.NonPublic | BindingFlags.Instance);
+      var dsAddress = dsAddressField.GetValue(person) as Address;
+      dsAddress.Locale.Should().Be(locale);
+   }
+
+   [Fact]
+   public void InternalConstructor_SameRandomizer_ProducesConsistentResults()
+   {
+      // Arrange
+      var randomizer = new Randomizer(42);
+
+      // Act
+      var person1 = CreatePersonWithInternalConstructor(randomizer);
+      var person2 = CreatePersonWithInternalConstructor(randomizer);
+      var repeatedPerson = CreatePersonWithInternalConstructor(new Randomizer(42));
+
+      // Assert
+      // Since we're using the same randomizer instance (not just the same seed),
+      // the second person should have different data due to the consumed random values
+      person1.FirstName.Should().NotBe(person2.FirstName);
+
+      // Let's verify this by using a fresh randomizer with the same seed
+      // and confirming we get the same first person again
+      repeatedPerson.FirstName.Should().Be(person1.FirstName);
+   }
+
+   /// <summary>
+   /// Helper method to invoke the internal constructor using reflection
+   /// </summary>
+   private Person CreatePersonWithInternalConstructor(Randomizer randomizer, DateTime? refDate = null, string locale = "en")
+   {
+      // Get the internal constructor
+      var constructor = typeof(Person).GetConstructor(
+         BindingFlags.NonPublic | BindingFlags.Instance,
+         null,
+         new[] { typeof(Randomizer), typeof(DateTime?), typeof(string) },
+         null);
+
+      if (constructor == null)
+         throw new InvalidOperationException("Internal constructor not found");
+
+      // Invoke the constructor
+      return (Person)constructor.Invoke(new object[] { randomizer, refDate, locale });
+   }
 
    IEnumerable<T> Get<T>(int times, Func<Person, T> a)
    {

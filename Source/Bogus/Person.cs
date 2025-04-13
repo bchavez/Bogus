@@ -38,11 +38,11 @@ public class Person : IHasRandomizer, IHasContext
    }
 
    /// <summary>
-   /// .
+   /// Creates a new person object <seealso cref="Person.Person(string, int?, DateTime?)"/>.
    /// </summary>
-   /// <param name="randomizer"></param>
-   /// <param name="refDate"></param>
-   /// <param name="locale"></param>
+   /// <param name="randomizer">The randomizer to use.</param>
+   /// <param name="refDate">Reference date for data generation.</param>
+   /// <param name="locale">The locale to use.</param>
    internal Person(Randomizer randomizer, DateTime? refDate, string locale = "en")
    {
       InitializeDataSources(locale);

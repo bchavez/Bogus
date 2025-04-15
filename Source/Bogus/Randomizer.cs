@@ -17,30 +17,22 @@ public class Randomizer
    /// <summary>
    /// Set the random number generator manually with a seed to get reproducible results.
    /// </summary>
-   public static Random Seed = new();
+   public static Random Seed { get; set; } = new();
 
    /// <summary>
    /// The pseudo-random number generator that is used for all random number generation in this instance.
    /// </summary>
    protected Random LocalSeed;
 
+   /// <summary>
+   /// A container to protect the Seed field from access during multi-thread activity
+   /// </summary>
    internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
+   /// <summary>
+   /// container for a list of functions that generate random words
+   /// </summary>
    private WordFunctions wordFunctions;
-
-   private static readonly char[] AlphaChars =
-   [
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-      'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-      'u', 'v', 'w', 'x', 'y', 'z'
-   ];
-
-   private static readonly char[] HexChars =
-   [
-      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-      'a', 'b', 'c', 'd', 'e', 'f'
-   ];
 
    /// <summary>
    /// Constructor that uses the global static `<see cref="Seed"/>.
@@ -194,7 +186,6 @@ public class Randomizer
       return Number(min, max) | 1;
    }
 
-
    /// <summary>
    /// Get a random double, between 0.0 and 1.0.
    /// </summary>
@@ -252,7 +243,8 @@ public class Randomizer
    public byte[] Bytes(int count)
    {
       var arr = new byte[count];
-      lock( Locker.Value )
+      //lock any seed access, for thread safety.
+      lock ( Locker.Value )
       {
          LocalSeed.NextBytes(arr);
       }
@@ -826,11 +818,16 @@ public class Randomizer
    /// <param name="length">the number of characters to return</param>
    public string AlphaNumeric(int length)
    {
+      char[] alphaChars =
+      [
+         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+         'u', 'v', 'w', 'x', 'y', 'z'
+      ];
       var sb = new StringBuilder();
-      return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
+      return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(alphaChars)), b => b.ToString());
    }
-
-  
 
    /// <summary>
    /// Generates a random hexadecimal string.
@@ -839,8 +836,13 @@ public class Randomizer
    /// <param name="prefix">symbols to insert before the random string, default 0x</param>
    public string Hexadecimal(int length = 1, string prefix = "0x")
    {
+      char[] hexChars =
+      [
+         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+         'a', 'b', 'c', 'd', 'e', 'f'
+      ];
       var sb = new StringBuilder();
-      return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(HexChars)), b => $"{prefix}{b}");
+      return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(hexChars)), b => $"{prefix}{b}");
    }
 
    //items are weighted by the decimal probability in their value
@@ -910,6 +912,10 @@ public class WordFunctions
       Init();
    }
 
+   /// <summary>
+   /// Populates the <see cref="Functions"/> list
+   /// with methods from every other field.
+   /// </summary>
    private void Init()
    {
       Functions.Add(() => Commerce.Department());
@@ -930,7 +936,6 @@ public class WordFunctions
       Functions.Add(() => Address.County());
       Functions.Add(() => Address.Country());
       Functions.Add(() => Address.State());
-
       Functions.Add(() => Address.StreetSuffix());
 
       Functions.Add(() => Finance.AccountName());

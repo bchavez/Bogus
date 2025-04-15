@@ -92,7 +92,10 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
          this.System,
          this.Commerce,
          this.Database,
-         this.Random);
+         this.Random,
+         this.Music,
+         this.Vehicle,
+         this.ParsePerson);
    }
 
 
@@ -101,8 +104,21 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    /// <summary>
    /// A contextually relevant fields of a person.
    /// </summary>
+   [RegisterMustasheMethods]
    public Person Person => person ??= new Person(this.Random, this.localDateTimeRef, this.Locale);
 
+   /// <summary>
+   /// A contextually relevant fields of a person. This is a special case for the Parse method because we only want to populate when Get methods are called.
+   /// </summary>
+   private Person ParsePerson
+   {
+      get => this.person ??= new Person(this.randomizer ??= new Randomizer(), this.localDateTimeRef, this.Locale, true);
+      set
+      {
+         this.person = value;
+         this.Notifier.Notify(this.randomizer);
+      }
+   }
 
    private DateTime? localDateTimeRef;
 

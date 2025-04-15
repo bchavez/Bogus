@@ -19,7 +19,28 @@ public class Randomizer
    /// </summary>
    public static Random Seed = new();
 
+   /// <summary>
+   /// The pseudo-random number generator that is used for all random number generation in this instance.
+   /// </summary>
+   protected Random LocalSeed;
+
    internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+
+   private WordFunctions wordFunctions;
+
+   private static readonly char[] AlphaChars =
+   [
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+      'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+      'u', 'v', 'w', 'x', 'y', 'z'
+   ];
+
+   private static readonly char[] HexChars =
+   [
+      '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+      'a', 'b', 'c', 'd', 'e', 'f'
+   ];
 
    /// <summary>
    /// Constructor that uses the global static `<see cref="Seed"/>.
@@ -43,20 +64,6 @@ public class Randomizer
    }
 
    /// <summary>
-   /// The pseudo-random number generator that is used for all random number generation in this instance.
-   /// </summary>
-   protected Random LocalSeed;
-
-   /// <summary>
-   /// Get an int from 0 to max.
-   /// </summary>
-   /// <param name="max">Upper bound, inclusive.</param>
-   public int Number(int max)
-   {
-      return Number(0, max);
-   }
-
-   /// <summary>
    /// Get a random sequence of digits.
    /// </summary>
    /// <param name="count">How many</param>
@@ -75,9 +82,21 @@ public class Randomizer
       return digits;
    }
 
+   /// <summary>
+   /// get an int from 0 to 1
+   /// </summary>
    public int Number()
    {
       return Number(0, 1);
+   }
+
+   /// <summary>
+   /// Get an int from 0 to max.
+   /// </summary>
+   /// <param name="max">Upper bound, inclusive.</param>
+   public int Number(int max)
+   {
+      return Number(0, max);
    }
 
    /// <summary>
@@ -474,7 +493,7 @@ public class Randomizer
    /// <summary>
    /// Get a random array element.
    /// </summary>
-   /// <param name="array"></param>
+   /// <param name="array">The source array to pull an element from</param>
    public T ArrayElement<T>(T[] array)
    {
       if (array.Length <= 0)
@@ -487,9 +506,9 @@ public class Randomizer
    /// <summary>
    /// Helper method to get a random element in a BSON array.
    /// </summary>
-   /// <param name="props"></param>
-   /// <param name="min"></param>
-   /// <param name="max"></param>
+   /// <param name="props">The source array to pull an element from</param>
+   /// <param name="min">minimum value, inclusive, default = null</param>
+   /// <param name="max">maximum value, exclusive, default = null</param>
    public BValue ArrayElement(BArray props, int? min = null, int? max = null)
    {
       var r = Number(min: min ?? 0, max: max - 1 ?? props.Count - 1);
@@ -499,7 +518,7 @@ public class Randomizer
    /// <summary>
    /// Get a random array element.
    /// </summary>
-   /// <param name="array"></param>
+   /// <param name="array">The source array to pull an element from</param>
    public string ArrayElement(Array array)
    {
       array ??= new[] {"a", "b", "c"};
@@ -526,7 +545,7 @@ public class Randomizer
    /// <summary>
    /// Get a random list item.
    /// </summary>
-   /// <param name="list"></param>
+   /// <param name="list">The source list to pull an item from</param>
    public T ListItem<T>(List<T> list)
    {
       return ListItem(list as IList<T>);
@@ -535,7 +554,7 @@ public class Randomizer
    /// <summary>
    /// Get a random list item.
    /// </summary>
-   /// <param name="list"></param>
+   /// <param name="list">The source list to pull an item from</param>
    public T ListItem<T>(IList<T> list)
    {
       if (list.Count <= 0)
@@ -572,7 +591,7 @@ public class Randomizer
    /// <summary>
    /// Get a random collection item.
    /// </summary>
-   /// <param name="collection"></param>
+   /// <param name="collection">The source collection to pull an item from</param>
    public T CollectionItem<T>(ICollection<T> collection)
    {
       if( collection.Count <= 0 )
@@ -610,7 +629,7 @@ public class Randomizer
    /// Replaces symbols with numbers and letters. # = number; ? = letter; * = number or letter.
    /// IE: ###???* -> 283QED4. Letters are uppercase.
    /// </summary>
-   /// <param name="format"></param>
+   /// <param name="format">The string with symbols to replace</param>
    public string Replace(string format)
    {
       var chars = format.Select(c =>
@@ -641,9 +660,9 @@ public class Randomizer
    /// If the string is over the maximum, the string is truncated at maximum characters; additionally, if the result string ends with
    /// whitespace, it is replaced with a random characters.
    /// </summary>
-   /// <param name="str"></param>
-   /// <param name="min"></param>
-   /// <param name="max"></param>
+   /// <param name="str">The string to clamp</param>
+   /// <param name="min">minimum length of the returned string, default = null</param>
+   /// <param name="max">maximum length of the returned string, default = null</param>
    public string ClampString(string str, int? min = null, int? max = null)
    {
       if( max != null && str.Length > max )
@@ -713,7 +732,7 @@ public class Randomizer
    /// <summary>
    /// Shuffles an IEnumerable source.
    /// </summary>
-   /// <param name="source"></param>
+   /// <param name="source">The IEnumerable to be shuffled</param>
    public IEnumerable<T> Shuffle<T>(IEnumerable<T> source)
    {
       List<T> buffer = source.ToList();
@@ -730,8 +749,6 @@ public class Randomizer
          buffer[j] = buffer[i];
       }
    }
-
-   private WordFunctions wordFunctions;
 
    /// <summary>
    /// Returns a single word or phrase in English.
@@ -770,7 +787,7 @@ public class Randomizer
    /// <summary>
    /// Get a specific number of words in an array (English).
    /// </summary>
-   /// <param name="count"></param>
+   /// <param name="count">The number of words to be returned</param>
    public string[] WordsArray(int count)
    {
       return Enumerable.Range(1, count)
@@ -792,8 +809,7 @@ public class Randomizer
    /// </summary>
    public Guid Uuid()
    {
-      var guidBytes = Bytes(16);
-      return new Guid(guidBytes);
+      return Guid();
    }
 
    /// <summary>
@@ -804,36 +820,23 @@ public class Randomizer
       return ArrayElement(Database.GetAllLocales());
    }
 
-
-   private static readonly char[] AlphaChars =
-      [
-         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-         'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-         'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-         'u', 'v', 'w', 'x', 'y', 'z'
-      ];
-
    /// <summary>
    /// Returns a random set of alphanumeric characters 0-9, a-z.
    /// </summary>
-   /// <param name="length"></param>
+   /// <param name="length">the number of characters to return</param>
    public string AlphaNumeric(int length)
    {
       var sb = new StringBuilder();
       return Enumerable.Range(1, length).Aggregate(sb, (b, i) => b.Append(ArrayElement(AlphaChars)), b => b.ToString());
    }
 
-   private static readonly char[] HexChars =
-      [
-         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-         'a', 'b', 'c', 'd', 'e', 'f'
-      ];
+  
 
    /// <summary>
    /// Generates a random hexadecimal string.
    /// </summary>
-   /// <param name="length"></param>
-   /// <param name="prefix"></param>
+   /// <param name="length">the length of the string to return, default 1</param>
+   /// <param name="prefix">symbols to insert before the random string, default 0x</param>
    public string Hexadecimal(int length = 1, string prefix = "0x")
    {
       var sb = new StringBuilder();
@@ -894,6 +897,7 @@ public class WordFunctions
    /// <summary>
    /// Constructor for <see cref="WordFunctions"/>.
    /// </summary>
+   /// <param name="r">the locale used to provide values to the fields</param>
    public WordFunctions(Randomizer r)
    {
       Commerce = new Commerce {Random = r};

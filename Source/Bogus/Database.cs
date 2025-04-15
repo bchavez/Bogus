@@ -82,13 +82,7 @@ public static class Database
    /// </summary>
    public static BObject GetLocale(string locale)
    {
-      if( !Data.Value.TryGetValue(locale, out BObject l) )
-      {
-         l = DeserializeLocale(locale);
-         Data.Value.TryAdd(locale, l);
-      }
-
-      return l;
+      return Data.Value.GetOrAdd(locale, DeserializeLocale);
    }
 
    /// <summary>

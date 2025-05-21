@@ -28,7 +28,7 @@ public class Currency
    /// </summary>
    public string Symbol { get; set; }
 
-   public static Currency Default = new Currency { Description = "US Dollar", Code = "USD", Symbol = "$" };
+   public static Currency Default = new() { Description = "US Dollar", Code = "USD", Symbol = "$" };
 }
 
 /// <summary>
@@ -47,62 +47,62 @@ public class CardType
    /// <summary>
    /// List of all card types.
    /// </summary>
-   public static readonly List<CardType> All = new List<CardType>();
+   public static readonly List<CardType> All = [];
 
    /// <summary>
    /// Visa card number
    /// </summary>
-   public static readonly CardType Visa = new CardType("visa");
+   public static readonly CardType Visa = new("visa");
 
    /// <summary>
    /// Mastercard card number
    /// </summary>
-   public static readonly CardType Mastercard = new CardType("mastercard");
+   public static readonly CardType Mastercard = new("mastercard");
 
    /// <summary>
    /// Discover card number
    /// </summary>
-   public static readonly CardType Discover = new CardType("discover");
+   public static readonly CardType Discover = new("discover");
 
    /// <summary>
    /// American Express card number
    /// </summary>
-   public static readonly CardType AmericanExpress = new CardType("american_express");
+   public static readonly CardType AmericanExpress = new("american_express");
 
    /// <summary>
    /// Diners Club card number
    /// </summary>
-   public static readonly CardType DinersClub = new CardType("diners_club");
+   public static readonly CardType DinersClub = new("diners_club");
 
    /// <summary>
    /// JCB card number
    /// </summary>
-   public static readonly CardType Jcb = new CardType("jcb");
+   public static readonly CardType Jcb = new("jcb");
 
    /// <summary>
    /// Switch card number
    /// </summary>
-   public static readonly CardType Switch = new CardType("switch");
+   public static readonly CardType Switch = new("switch");
 
    /// <summary>
    /// Solo card number
    /// </summary>
-   public static readonly CardType Solo = new CardType("solo");
+   public static readonly CardType Solo = new("solo");
 
    /// <summary>
    /// Maestro card number
    /// </summary>
-   public static readonly CardType Maestro = new CardType("maestro");
+   public static readonly CardType Maestro = new("maestro");
 
    /// <summary>
    /// Laser card number
    /// </summary>
-   public static readonly CardType Laser = new CardType("laser");
+   public static readonly CardType Laser = new("laser");
 
    /// <summary>
    /// Instapayment card number
    /// </summary>
-   public static readonly CardType Instapayment = new CardType("instapayment");
+   public static readonly CardType Instapayment = new("instapayment");
 }
 
 
@@ -462,8 +462,7 @@ public class Finance : DataSet
       {
          var matches = Regex.Matches(iban, ".{1,4}");
          var array = matches.OfType<Match>()
-            .Select(m => m.Value)
-            .ToArray();
+            .Select(m => m.Value);
          return string.Join(" ", array);
       }
       return iban;

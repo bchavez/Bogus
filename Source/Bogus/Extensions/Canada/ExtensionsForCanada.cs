@@ -15,9 +15,9 @@ public static class ExtensionsForCanada
    public static string Sin(this Person p)
    {
       const string Key = nameof(ExtensionsForCanada) + "SIN";
-      if( p.context.ContainsKey(Key) )
+      if( p.context.TryGetValue(Key, out var value) )
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       //bit verbose, but works. :)
@@ -47,7 +47,7 @@ public static class ExtensionsForCanada
       if( last == 10 )
          last = 0;
 
-      var digits = numbers.Concat(new[] {last}).ToArray();
+      var digits = numbers.Concat(new[] {last});
 
       var comp = digits
          .Zip(Mask, (n, c) =>

@@ -22,6 +22,7 @@ using System.Diagnostics;
 using Z.ExtensionMethods;
 
 using static Nuke.Common.EnvironmentInfo;
+using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.IO.PathConstruction;
 using static Nuke.Common.IO.CompressionTasks;
@@ -96,7 +97,7 @@ partial class Build : NukeBuild
          .EnableNoRestore()
          );
 
-       CopyDirectoryRecursively(this.BogusProject.BinFolder(), this.BogusProject.CompileOutput());
+       this.BogusProject.BinFolder().Copy(this.BogusProject.CompileOutput());
 
     });
 
@@ -120,7 +121,7 @@ partial class Build : NukeBuild
    .DependsOn(Compile)
    .Executes(() => {
 
-      var zipPath = Folders.Package / this.BogusProject.ZipFile();
+      var zipPath = this.BogusProject.ZipFile();
       Folders.CompileOutput.ZipTo(zipPath);
    });
 

@@ -99,8 +99,7 @@ public class README_Generator
 
       foreach( var g in all )
       {
-         if( !datasets.ContainsKey(g.Key) ) return; //check if it's accessible
-         var methods = datasets[g.Key];
+         if( !datasets.TryGetValue(g.Key, out var methods) ) return; //check if it's accessible
 
          var distinctMethods = MoreEnumerable.DistinctBy(g, u => u.Method);
 
@@ -332,8 +331,8 @@ public class README_Generator
 
 public static class XmlExtensions
 {
-   private static Regex ParamPattern = new Regex(@"<(see|paramref) (name|cref)=""([TPF]{1}:)?(?<display>.+?)"" />");
-   private static Regex ConstPattern = new Regex(@"<c>(?<display>.+?)</c>");
+   private static Regex ParamPattern = new(@"<(see|paramref) (name|cref)=""([TPF]{1}:)?(?<display>.+?)"" />");
+   private static Regex ConstPattern = new(@"<c>(?<display>.+?)</c>");
    /// <summary>
    /// Extracts the display content of the specified <paramref name="node"/>, replacing
    /// paramref and c tags with a human-readable equivalent.

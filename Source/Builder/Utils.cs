@@ -99,19 +99,19 @@ partial class Build
 
 public static class ExtensionMethodsForProject
 {
-   public static string BinFolder(this Project p)
+   public static AbsolutePath BinFolder(this Project p)
    {
       var result = p.Directory / "bin";
       return result;
    }
-   public static string CompileOutput(this Project p)
+   public static AbsolutePath CompileOutput(this Project p)
    {
       var result = Build.Folders.CompileOutput / p.Name;
       return result;
    }
-   public static string ZipFile(this Project p)
+   public static AbsolutePath ZipFile(this Project p)
    {
-      var result = $"{p.Name}.zip";
+      var result = Build.Folders.Package / $"{p.Name}.zip";
       return result;
    }
 }

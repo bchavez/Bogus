@@ -35,7 +35,7 @@ namespace Benchmark
          var b = r.Int(1, 99);
          var c = r.Int(1, 9999);
 
-         var result = string.Format("{0:000}-{1:00}-{2:0000}", a, b, c);
+         var result = $"{a:000}-{b:00}-{c:0000}";
       }
 
       [Benchmark]
@@ -45,7 +45,7 @@ namespace Benchmark
 
          // right shift all bits except fir the first 10 bits = 2^10 = 1024.
          var a = (x >> (32 - 10)) % 898;
-         if (a == 0 || a == 666) a++;
+         if (a is 0 or 666) a++;
 
          // use the first 7 bits = 2^7 = 128
          var b = (x & 0x7F);

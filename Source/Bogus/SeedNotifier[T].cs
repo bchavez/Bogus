@@ -32,7 +32,7 @@ public interface IHasRandomizer
 /// </summary>
 public class SeedNotifier
 {
-   private List<IHasRandomizer> registry = new List<IHasRandomizer>();
+   private List<IHasRandomizer> registry = [];
 
    /// <summary>
    /// Causes <paramref name="item"/> to be remembered and tracked so that the

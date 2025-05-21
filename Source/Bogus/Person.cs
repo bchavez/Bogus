@@ -13,7 +13,7 @@ public class Person : IHasRandomizer, IHasContext
 {
    //context variable to store state from Bogus.Extensions so, they
    //keep returning the result on each person.
-   internal Dictionary<string, object> context = new Dictionary<string, object>();
+   internal Dictionary<string, object> context = new();
 
    Dictionary<string, object> IHasContext.Context => this.context;
 
@@ -128,7 +128,7 @@ public class Person : IHasRandomizer, IHasContext
          };
    }
 
-   protected SeedNotifier Notifier = new SeedNotifier();
+   protected SeedNotifier Notifier = new();
 
    private Randomizer randomizer;
 

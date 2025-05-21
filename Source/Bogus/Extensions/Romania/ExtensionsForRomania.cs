@@ -35,9 +35,9 @@ public static class ExtensionsForRomania
    {
       const string Key = nameof(ExtensionsForRomania) + "CNP";
 
-      if (p.context.ContainsKey(Key))
+      if (p.context.TryGetValue(Key, out var value))
       {
-         return p.context[Key] as string;
+         return value as string;
       }
 
       var randomizer = p.Random;

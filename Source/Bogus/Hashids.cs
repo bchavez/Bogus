@@ -26,8 +26,8 @@ public class Hashids : IHashids
 
    private Regex guardsRegex;
    private Regex sepsRegex;
-   private static Regex hexValidator = new Regex("^[0-9a-fA-F]+$", RegexOptions.Compiled);
-   private static Regex hexSplitter = new Regex(@"[\w\W]{1,12}", RegexOptions.Compiled);
+   private static Regex hexValidator = new("^[0-9a-fA-F]+$", RegexOptions.Compiled);
+   private static Regex hexSplitter = new(@"[\w\W]{1,12}", RegexOptions.Compiled);
 
    /// <summary>
    /// Instantiates a new Hashids with the default setup.
@@ -48,7 +48,7 @@ public class Hashids : IHashids
          throw new ArgumentNullException("alphabet");
 
       this.salt = salt;
-      this.alphabet = string.Join(string.Empty, alphabet.Distinct());
+      this.alphabet = string.Concat(alphabet.Distinct());
       this.seps = seps;
       this.minHashLength = minHashLength;
 
@@ -100,8 +100,8 @@ public class Hashids : IHashids
       if( !hexValidator.IsMatch(hex) )
          return string.Empty;
 
-      var numbers = new List<long>();
       var matches = hexSplitter.Matches(hex);
+      var numbers = new List<long>(matches.Count);
 
       foreach( Match match in matches )
       {
@@ -123,7 +123,7 @@ public class Hashids : IHashids
       var numbers = this.DecodeLong(hash);
 
       foreach( var number in numbers )
-         ret.Append(string.Format("{0:X}", number).Substring(1));
+         ret.Append($"{number:X}".Substring(1));
 
       return ret.ToString();
    }
@@ -205,10 +205,10 @@ public class Hashids : IHashids
    private void SetupSeps()
    {
       // seps should contain only characters present in alphabet; 
-      seps = new String(seps.Intersect(alphabet.ToArray()).ToArray());
+      seps = new String(seps.Intersect(alphabet).ToArray());
 
       // alphabet should not contain seps.
-      alphabet = new String(alphabet.Except(seps.ToArray()).ToArray());
+      alphabet = new String(alphabet.Except(seps).ToArray());
 
       seps = ConsistentShuffle(seps, salt);
 
@@ -362,7 +362,7 @@ public class Hashids : IHashids
       var hashBreakdown = guardsRegex.Replace(hash, " ");
       var hashArray = hashBreakdown.Split(new[] {' '}, StringSplitOptions.RemoveEmptyEntries);
 
-      if( hashArray.Length == 3 || hashArray.Length == 2 )
+      if( hashArray.Length is 3 or 2 )
          i = 1;
 
       hashBreakdown = hashArray[i];

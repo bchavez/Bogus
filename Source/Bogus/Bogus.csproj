@@ -13,9 +13,10 @@
     <AssemblyName>Bogus</AssemblyName>
     <PackageId>Bogus</PackageId>
     <PackageTags>faker;fake;bogus;poco;data;generator;database;seed;values;test-data;test;data;tdd;testing;.net;EF</PackageTags>
+    <PackageIcon>bogus.128.png</PackageIcon>
     <PackageIconUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/Docs/logo.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/bchavez/Bogus</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/bchavez/Bogus/master/LICENSE</PackageLicenseUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/bchavez/Bogus</RepositoryUrl>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -35,6 +36,10 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
     <DefineConstants>$(DefineConstants);STANDARD;STANDARD13</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE" Pack="true" PackagePath="" />
+    <None Include="../../Docs/logo.png" Pack="true" PackagePath="bogus.128.png" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="data\*.locale.bson" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
   </ItemGroup>

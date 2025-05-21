@@ -17,9 +17,9 @@ public class Randomizer
    /// <summary>
    /// Set the random number generator manually with a seed to get reproducible results.
    /// </summary>
-   public static Random Seed = new Random();
+   public static Random Seed = new();
 
-   internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+   internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
    /// <summary>
    /// Constructor that uses the global static `<see cref="Seed"/>.
@@ -63,8 +63,8 @@ public class Randomizer
    /// <param name="maxDigit">maximum digit, inclusive</param>
    public int[] Digits(int count, int minDigit = 0, int maxDigit = 9)
    {
-      if( maxDigit > 9 || maxDigit < 0 ) throw new ArgumentException("max digit can't be lager than 9 or smaller than 0", nameof(maxDigit));
-      if( minDigit > 9 || minDigit < 0 ) throw new ArgumentException("min digit can't be lager than 9 or smaller than 0", nameof(minDigit));
+      if( maxDigit is > 9 or < 0 ) throw new ArgumentException("max digit can't be lager than 9 or smaller than 0", nameof(maxDigit));
+      if( minDigit is > 9 or < 0 ) throw new ArgumentException("min digit can't be lager than 9 or smaller than 0", nameof(minDigit));
 
       var digits = new int[count];
       for( var i = 0; i < count; i++ )
@@ -271,7 +271,7 @@ public class Randomizer
    /// <param name="max">Max value, inclusive. Default ulong.MaxValue</param>
    public ulong ULong(ulong min = ulong.MinValue, ulong max = ulong.MaxValue)
    {
-      return Convert.ToUInt64(Double() * (max - min) + min);
+      return Convert.ToUInt64(Double() * (max - min)) + min;
    }
 
    /// <summary>
@@ -879,7 +879,7 @@ public class WordFunctions
    /// of <see cref="Func{TResult}"/> strings used as a selection list
    /// of word functions that generate English words or phrases.
    /// </summary>
-   public List<Func<string>> Functions { get; } = new List<Func<string>>();
+   public List<Func<string>> Functions { get; } = [];
 
    private Commerce Commerce { get; }
    private Company Company { get; }

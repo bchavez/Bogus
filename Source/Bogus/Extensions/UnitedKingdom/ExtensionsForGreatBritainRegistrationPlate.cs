@@ -10,14 +10,14 @@ namespace Bogus.Extensions.UnitedKingdom;
 /// </summary>
 public static class ExtensionsForGreatBritainRegistrationPlate
 {
-   private static readonly DateTime StartOfCurrentStyle = new DateTime(2001, 9, 1);
+   private static readonly DateTime StartOfCurrentStyle = new(2001, 9, 1);
 
    private static readonly DateTime EarliestRegistration = StartOfCurrentStyle;
-   private static readonly DateTime LatestRegistration = new DateTime(2051, 2, 28);
+   private static readonly DateTime LatestRegistration = new(2051, 2, 28);
 
    private static readonly char[] SequenceLetters = "ABCDEFGHJKLMNOPRSTUVWXYZ".ToCharArray();
    private static readonly char[] PrimaryLocations = "ABCDEFGHKLMNOPRSVWXY".ToCharArray();
-   private static readonly Dictionary<char,char[]> SecondaryLocations = new Dictionary<char, char[]>
+   private static readonly Dictionary<char,char[]> SecondaryLocations = new()
    {
       { 'A', "ABCDEFGJKMNOPRSTUVWXY".ToCharArray() },    // Anglia
       { 'B', "ABCDEFGHJKLMNOPRSTUVWX".ToCharArray() },   // Birmingham

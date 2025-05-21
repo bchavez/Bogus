@@ -18,7 +18,11 @@ init:
               Set-AppveyorBuildVariable -Name "IsPreRelease" -Value False
             }
 
-build_script: build.cmd ci
+build_script:
+- pwsh: |
+    Invoke-WebRequest "https://dot.net/v1/dotnet-install.ps1" -OutFile "./dotnet-install.ps1"
+    ./dotnet-install.ps1 -JSonFile global.json -Architecture x64 -InstallDir 'C:\Program Files\dotnet'
+- build.cmd ci
 
 test: off
 
@@ -42,7 +46,7 @@ deploy:
       prerelease: $(IsPreRelease)
       artifact: Zip, NuGet, Symbols
       auth_token:
-          secure: 2XX+rKvAK7FXcKIKYHE4vDjOmM4hrzNy8lvS84IwU605AekfBB9XtSr82shJwhHlYMD+01g7gM/P8e9ko83ovFpAr3C2KvoaJRB7RqyUOquKK8RkcXGc8rQyylcRRrA6
+          secure: 2XX+rKvAK7FXcKIKYHE4vJs71pmQzutcAwt6rJgl0406qfmG9KeZwZf/tc3HXTL/Yjo8w8vt4n/BIG7qwpzuMXN+54GzwY5/GlUrpCKnaC2EXneUG2QS4lN3QjhCBJab
       on:
           branch: master
           appveyor_repo_tag_name: /v\d+\.\d+\.\d+/ 
@@ -53,7 +57,7 @@ deploy:
       symbol_server:
       skip_symbols: false
       api_key:
-          secure: qrQj9+U7NioCkMEJubm65X/FgT6lA4tvms8C04/B3rOV4f7mCiCMqhJl5B9Gaeo5
+          secure: A847iwbc/jedX0ZfW79HmENaGIprGEDXDwcpECTsrOMlYmXDPiHPSSehYYdH24kz
       artifact: NuGet, Symbols
       on:
           branch: master

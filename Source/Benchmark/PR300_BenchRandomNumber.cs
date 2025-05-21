@@ -43,11 +43,11 @@ namespace Benchmark
       }
    }
 
-   public class NumberTests 
+   public class NumberTests
    {
-      internal static Lazy<object> Locker = new Lazy<object>(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
+      internal static Lazy<object> Locker = new(() => new object(), LazyThreadSafetyMode.ExecutionAndPublication);
 
-      private readonly Random localSeed = new System.Random();
+      private readonly Random localSeed = new();
 
       private static byte[] temp = new byte[4];
 

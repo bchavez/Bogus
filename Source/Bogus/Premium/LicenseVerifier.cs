@@ -95,7 +95,7 @@ public static class LicenseVerifier
       key = lines[1];
    }
 
-   public static List<string> ProbePaths { get; } = new List<string>
+   public static List<string> ProbePaths { get; } = new()
    {
 #if STANDARD
          AppContext.BaseDirectory,

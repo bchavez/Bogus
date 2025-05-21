@@ -13,7 +13,7 @@ public class Issue411
       var customRandomizer = new CustomRandomizer();
 
       for (int i = 0; i < 10; i++)
-      {          
+      {
          var index = i % CustomRandom.Data.Count;
          var knownValue = CustomRandom.Data[index];
 
@@ -23,7 +23,7 @@ public class Issue411
 
    private class CustomRandom : Random
    {
-      public static readonly List<int> Data = new List<int> { 4, 3, 9, 2001, 42, 7, 13 };
+      public static readonly List<int> Data = [4, 3, 9, 2001, 42, 7, 13];
       private int index = 0;
 
       public override int Next()

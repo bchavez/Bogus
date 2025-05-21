@@ -32,7 +32,7 @@ public static class ExtensionsForFakerT
    /// <param name="nullWeight">The probability of null occurring. Range [1.0f - 0.0f] (100% and 0%) respectively. For example, if 15% null is desired pass nullWeight = 0.15f.</param>
    public static T OrNull<T>(this T value, in Faker f, float nullWeight = 0.5f) where T : class
    {
-      if (nullWeight > 1 || nullWeight < 0) throw new ArgumentOutOfRangeException(nameof(nullWeight), $".{nameof(OrNull)}() {nameof(nullWeight)} of '{nullWeight}' must be between 1.0f and 0.0f.");
+      if (nullWeight is > 1 or < 0) throw new ArgumentOutOfRangeException(nameof(nullWeight), $".{nameof(OrNull)}() {nameof(nullWeight)} of '{nullWeight}' must be between 1.0f and 0.0f.");
       return f.Random.Float() > nullWeight ? value : null;
    }
 
@@ -45,7 +45,7 @@ public static class ExtensionsForFakerT
    /// <param name="nullWeight">The probability of null occurring. Range [1.0f - 0.0f] (100% and 0%) respectively. For example, if 15% null is desired pass nullWeight = 0.15f.</param>
    public static T? OrNull<T>(this T value, Faker f, float nullWeight = 0.5f) where T : struct
    {
-      if (nullWeight > 1 || nullWeight < 0) throw new ArgumentOutOfRangeException(nameof(nullWeight), $".{nameof(OrNull)}() {nameof(nullWeight)} of '{nullWeight}' must be between 1.0f and 0.0f.");
+      if (nullWeight is > 1 or < 0) throw new ArgumentOutOfRangeException(nameof(nullWeight), $".{nameof(OrNull)}() {nameof(nullWeight)} of '{nullWeight}' must be between 1.0f and 0.0f.");
       return f.Random.Float() > nullWeight ? new T?(value) : null;
    }
 
@@ -58,7 +58,7 @@ public static class ExtensionsForFakerT
    /// <param name="defaultValue">The default value to return.</param>
    public static T OrDefault<T>(this T value, Faker f, float defaultWeight = 0.5f, T defaultValue = default)
    {
-      if (defaultWeight > 1 || defaultWeight < 0) throw new ArgumentOutOfRangeException(nameof(defaultWeight), $".{nameof(OrDefault)}() {nameof(defaultWeight)} of '{defaultWeight}' must be between 1.0f and 0.0f. ");
+      if (defaultWeight is > 1 or < 0) throw new ArgumentOutOfRangeException(nameof(defaultWeight), $".{nameof(OrDefault)}() {nameof(defaultWeight)} of '{defaultWeight}' must be between 1.0f and 0.0f. ");
       return f.Random.Float() > defaultWeight ? value : defaultValue;
    }
 }

@@ -52,7 +52,7 @@ public class Issue309 : SeededTest
    {
       public int Id { get; set; }
       public string Name { get; set; }
-      public List<Hobby> Hobbies { get; } = new List<Hobby>();
+      public List<Hobby> Hobbies { get; } = [];
    }
 }
 

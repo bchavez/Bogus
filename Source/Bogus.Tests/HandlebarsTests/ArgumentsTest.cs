@@ -175,9 +175,9 @@ public class ArgumentsTest : SeededTest
    public void can_parse_person()
    {
       var faker = new Faker();
-      var firstname = faker.Parse("{{person.getfirstname}}");
-      var lastname = faker.Parse("{{person.getlastname}}");
-      var fullname = faker.Parse("{{person.getfullname}}");
+      var firstname = faker.Parse("{{person.firstname}}");
+      var lastname = faker.Parse("{{person.lastname}}");
+      var fullname = faker.Parse("{{person.fullname}}");
 
       Assert.Multiple(() =>
       {
@@ -198,7 +198,7 @@ public class ArgumentsTest : SeededTest
       var faker = new Faker<TestClass>();
       faker.RuleFor(o => o.Name, (f, o) =>
       {
-         return f.Parse("{{person.getfirstname}} {{person.getlastname}}");
+         return f.Parse("{{person.firstname}} {{person.lastname}}");
       });
 
       var fakes = faker.Generate(10);
@@ -211,26 +211,26 @@ public class ArgumentsTest : SeededTest
    {
       var faker = new Faker();
 
-      var firstname = faker.Parse("{{person.GetFirstName}}");
-      var lastname = faker.Parse("{{person.GetLastName}}");
-      var fullname = faker.Parse("{{person.GetFullName}}");
-      var gender = faker.Parse("{{person.GetGender}}");
-      var username = faker.Parse("{{person.GetUserName}}");
-      var avatar = faker.Parse("{{person.GetAvatar}}");
-      var email = faker.Parse("{{person.GetEmail}}");
-      var dateofbirth = faker.Parse("{{person.GetDateOfBirth}}");
-      var geolat = faker.Parse("{{person.GetAddressGeoLat}}");
-      var geolng = faker.Parse("{{person.GetAddressGeoLng}}");
-      var street = faker.Parse("{{person.GetAddressStreet}}");
-      var suit = faker.Parse("{{person.GetAddressSuite}}");
-      var city = faker.Parse("{{person.GetAddressCity}}");
-      var state = faker.Parse("{{person.GetAddressState}}");
-      var zipcode = faker.Parse("{{person.GetAddressZipCode}}");
-      var phone = faker.Parse("{{person.GetPhone}}");
-      var website = faker.Parse("{{person.GetWebsite}}");
-      var companyname = faker.Parse("{{person.GetCompanyName}}");
-      var companycatchphrase = faker.Parse("{{person.GetCompanyCatchPhrase}}");
-      var companybs = faker.Parse("{{person.GetCompanyBs}}");
+      var firstname = faker.Parse("{{person.FirstName}}");
+      var lastname = faker.Parse("{{person.LastName}}");
+      var fullname = faker.Parse("{{person.FullName}}");
+      var gender = faker.Parse("{{person.Gender}}");
+      var username = faker.Parse("{{person.UserName}}");
+      var avatar = faker.Parse("{{person.Avatar}}");
+      var email = faker.Parse("{{person.Email}}");
+      var dateofbirth = faker.Parse("{{person.DateOfBirth}}");
+      var geolat = faker.Parse("{{person.AddressGeoLat}}");
+      var geolng = faker.Parse("{{person.AddressGeoLng}}");
+      var street = faker.Parse("{{person.AddressStreet}}");
+      var suit = faker.Parse("{{person.AddressSuite}}");
+      var city = faker.Parse("{{person.AddressCity}}");
+      var state = faker.Parse("{{person.AddressState}}");
+      var zipcode = faker.Parse("{{person.AddressZipCode}}");
+      var phone = faker.Parse("{{person.Phone}}");
+      var website = faker.Parse("{{person.Website}}");
+      var companyname = faker.Parse("{{person.CompanyName}}");
+      var companycatchphrase = faker.Parse("{{person.CompanyCatchPhrase}}");
+      var companybs = faker.Parse("{{person.CompanyBs}}");
 
 
       firstname.Should().Be("Doris");

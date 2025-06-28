@@ -100,25 +100,18 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
 
 
    private Person person;
+   private Bogus.PersonParseWrapper.Person parseperson;
 
    /// <summary>
    /// A contextually relevant fields of a person.
    /// </summary>
-   [RegisterMustasheMethods]
    public Person Person => person ??= new Person(this.Random, this.localDateTimeRef, this.Locale);
 
    /// <summary>
-   /// A contextually relevant fields of a person. This is a special case for the Parse method because we only want to populate when Get methods are called.
+   /// A wrapper to allow for Person to be passed into Parse method.
    /// </summary>
-   private Person ParsePerson
-   {
-      get => this.person ??= new Person(this.randomizer ??= new Randomizer(), this.localDateTimeRef, this.Locale, true);
-      set
-      {
-         this.person = value;
-         this.Notifier.Notify(this.randomizer);
-      }
-   }
+   [RegisterMustasheMethods]
+   internal Bogus.PersonParseWrapper.Person ParsePerson => parseperson ??= new Bogus.PersonParseWrapper.Person(this.Random, this.localDateTimeRef, this.Locale);
 
    private DateTime? localDateTimeRef;
 
@@ -380,6 +373,7 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    internal void NewContext()
    {
       person = null;
+      parseperson = null;
       this.capturedGlobalIndex = Interlocked.Increment(ref GlobalUniqueIndex);
       Interlocked.Increment(ref IndexFaker);
    }

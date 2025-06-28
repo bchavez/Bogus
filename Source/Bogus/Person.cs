@@ -159,5 +159,4 @@ public class Person : IHasRandomizer, IHasContext
    public string Phone;
    public string Website;
    public CardCompany Company;
-
 }

@@ -31,11 +31,15 @@ public class Internet : DataSet
    /// <summary>
    /// Generates a legit Internet URL avatar from twitter accounts.
    /// </summary>
-   /// <returns>A string containing a URL avatar from twitter accounts.</returns>
-   public string Avatar()
+   /// <param name="ipfsGatewayRootUrl">A root IPFS Gateway URL. Default is 'https://ipfs.io'.
+   /// Other examples include passing 'https://gateway.pinata.cloud' or 'https://dweb.link', or any other public IPFS gateway found here:
+   /// https://ipfs.github.io/public-gateway-checker/. This parameter is used in case the default public IPFS gateway used
+   /// in Bogus (https://ipfs.io) goes down or an alternative IPFS public or private gateway is needed.</param>
+   /// <returns>A string containing a URL avatar from twitter accounts. This URL parameter should not contain any trailing '/'.</returns>
+   public string Avatar(string ipfsGatewayRootUrl = "https://ipfs.io")
    {
       var n = this.Random.Number(0, 1249);
-      return $"https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/{n}.jpg";
+      return $"{ipfsGatewayRootUrl}/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/{n}.jpg";
    }
 
    /// <summary>

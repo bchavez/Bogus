@@ -48,7 +48,7 @@ public class Hashids : IHashids
          throw new ArgumentNullException("alphabet");
 
       this.salt = salt;
-      this.alphabet = string.Join(string.Empty, alphabet.Distinct());
+      this.alphabet = string.Concat(alphabet.Distinct());
       this.seps = seps;
       this.minHashLength = minHashLength;
 
@@ -100,8 +100,8 @@ public class Hashids : IHashids
       if( !hexValidator.IsMatch(hex) )
          return string.Empty;
 
-      var numbers = new List<long>();
       var matches = hexSplitter.Matches(hex);
+      var numbers = new List<long>(matches.Count);
 
       foreach( Match match in matches )
       {

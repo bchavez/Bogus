@@ -3,16 +3,19 @@ using Bogus.DataSets;
 using Bogus.Extensions.Belgium;
 using FluentAssertions;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Bogus.Tests.ExtensionTests;
 
 public class BelgianExtensionTests : SeededTest
 {
    private readonly Faker _faker;
+   private readonly ITestOutputHelper console;
 
-   public BelgianExtensionTests()
+   public BelgianExtensionTests(ITestOutputHelper console)
    {
       _faker = new Faker();
+      this.console = console;
    }
 
    [Fact]
@@ -21,7 +24,7 @@ public class BelgianExtensionTests : SeededTest
       // Act
       var obtained = _faker.Person.NationalNumber(includeFormatSymbols: false);
 
-      obtained.Dump();
+      console.Dump(obtained);
 
       // Assert
       obtained.Should().NotBeNullOrWhiteSpace();
@@ -68,8 +71,9 @@ public class BelgianExtensionTests : SeededTest
          baseNumber += 2000000000L;
 
       var expectedCheckNumber = 97 - (int)(baseNumber % 97);
+      var expectedCheckNumberFormat = expectedCheckNumber.ToString("D2");
 
-      checkNumber.Should().Be(expectedCheckNumber.ToString());
+      checkNumber.Should().Be(expectedCheckNumberFormat);
    }
 
    private void ShouldBeLegalBelgianNationalNumber(string candidate)

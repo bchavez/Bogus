@@ -238,7 +238,7 @@ public class ArgumentsTest : SeededTest
       fullname.Should().Be("Doris Schultz");
       gender.Should().Be("Female");
       username.Should().Be("Doris.Schultz");
-      avatar.Should().Be("https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
+      avatar.Should().Be("https://ipfs.io/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
       email.Should().Be("Doris69@yahoo.com");
       //dateofbirth.Should().Be(""); Not sure the best way to test DOB.
       geolat.Should().Be("-38.4622");

@@ -59,15 +59,14 @@ public static class ExtensionsForAustraliaRegistrationPlate
    {
       ["ACT"] =
       [
-         new PlateFormatRule { StartYear = 1911, EndYear = 1998, Format = "NN-NNN" },
-         new PlateFormatRule { StartYear = 1968, EndYear = 1998, Format = "YLL-NNN" },
+         new PlateFormatRule { StartYear = 1911, EndYear = 1968, Format = "NN-NNN" },
+         new PlateFormatRule { StartYear = 1969, EndYear = 1998, Format = "YLL-NNN" },
          new PlateFormatRule { StartYear = 1999, EndYear = 9999, Format = "YLL-NNN" }
       ],
       ["NSW"] =
       [
          new PlateFormatRule { StartYear = 1910, EndYear = 1937, Format = "NNN-NNN" },
-         new PlateFormatRule { StartYear = 1924, EndYear = 1937, Format = "NNN-NNN" },
-         new PlateFormatRule { StartYear = 1937, EndYear = 1951, Format = "LL-NNN" },
+         new PlateFormatRule { StartYear = 1938, EndYear = 1951, Format = "LL-NNN" },
          new PlateFormatRule { StartYear = 1951, EndYear = 2004, Format = "LLL-NNN" },
          new PlateFormatRule { StartYear = 2005, EndYear = 9999, Format = "LL-NN-LL" }
       ],
@@ -90,14 +89,14 @@ public static class ExtensionsForAustraliaRegistrationPlate
       ["TAS"] =
       [
          new PlateFormatRule { StartYear = 1954, EndYear = 1970, Format = "LLL-NNN" },
-         new PlateFormatRule { StartYear = 1970, EndYear = 1971, Format = "LL-NNNN" },
-         new PlateFormatRule { StartYear = 1971, EndYear = 9999, Format = "M NN LL" }
+         new PlateFormatRule { StartYear = 1971, EndYear = 1971, Format = "LL-NNNN" },
+         new PlateFormatRule { StartYear = 1972, EndYear = 9999, Format = "M NN LL" }
       ],
       ["VIC"] =
       [
          new PlateFormatRule { StartYear = 1910, EndYear = 1939, Format = "NNN-NNN" },
-         new PlateFormatRule { StartYear = 1939, EndYear = 1953, Format = "LL-NNN" },
-         new PlateFormatRule { StartYear = 1953, EndYear = 2013, Format = "LLL-NNN" },
+         new PlateFormatRule { StartYear = 1940, EndYear = 1953, Format = "LL-NNN" },
+         new PlateFormatRule { StartYear = 1954, EndYear = 2013, Format = "LLL-NNN" },
          new PlateFormatRule { StartYear = 2014, EndYear = 9999, Format = "NLL-NLL" }
       ],
       ["WA"] =
@@ -156,7 +155,7 @@ public static class ExtensionsForAustraliaRegistrationPlate
          {
             case 'L': sb.Append(vehicle.Random.ArrayElement(Letters)); break;
             case 'N': sb.Append(vehicle.Random.ArrayElement(Digits)); break;
-            case '0': sb.Append(vehicle.Random.Digits(1, 0, 1)); break;
+            case '0': sb.Append(vehicle.Random.Number(1)); break;
             case 'M': sb.Append('M'); break;
             case 'S': sb.Append('S'); break;
             case 'Y': sb.Append('Y'); break;

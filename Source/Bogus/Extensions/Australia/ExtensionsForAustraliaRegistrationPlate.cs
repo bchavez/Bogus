@@ -11,13 +11,19 @@ namespace Bogus.Extensions.Australia;
 /// </summary>
 public static class ExtensionsForAustraliaRegistrationPlate
 {
+
+   /// <summary>
+   /// HashSet of supported Australian states.
+   /// </summary>
+   private static readonly HashSet<string> SupportedStates = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "NT", "ACT"];
+
    /// <summary>
    /// Australian Vehicle Registration Plates
    /// </summary>
    /// <param name="vehicle"></param>
    /// <param name="from">The start of the range of registration dates.</param>
    /// <param name="to">The end of the range of registration dates.</param>
-   /// <param name="state">The state for which the registration plate is to be generated.</param>
+   /// <param name="state">The state abbreviation for which the registration plate is to be generated.</param>
    /// <returns></returns>
    /// <remarks>
    /// This is based on the information in the Wikipedia article on
@@ -29,12 +35,18 @@ public static class ExtensionsForAustraliaRegistrationPlate
    /// </remarks>
    public static string AusCarRegistrationPlate(this Vehicle vehicle, DateTime from, DateTime to, string state)
    {
+      if (! SupportedStates.Contains(state)) 
+         throw new ArgumentException($"Unsupported Australian state: {state}. Supported states are: {string.Join(", ", SupportedStates)}", nameof(state));
       DateTime registrationDate = GenerateRegistrationDate(vehicle, from, to);
       return GenerateRegistrationPlate(vehicle, registrationDate, state);
    }
 
-   private static readonly HashSet<string> SupportedStates = ["NSW", "VIC", "QLD", "WA", "SA", "TAS", "NT", "ACT"];
-
+   /// <summary>
+   /// Represents a rule for formatting vehicle license plates based on a specified year range.
+   /// </summary>
+   /// <remarks>This class defines the format and logic for generating license plate numbers for vehicles
+   /// registered within a specific range of years. The <see cref="Generator"/> property can be used to provide custom
+   /// logic for generating the plate format.</remarks>
    private class PlateFormatRule
    {
       public int StartYear { get; set; }
@@ -68,7 +80,7 @@ public static class ExtensionsForAustraliaRegistrationPlate
       [
          new PlateFormatRule { StartYear = 1955, EndYear = 1977, Format = "NNN-LLL" },
          new PlateFormatRule { StartYear = 1978, EndYear = 2019, Format = "LLL-NNN" },
-         new PlateFormatRule { StartYear = 2020, EndYear = 9999, Format = "NNN-NLN" }
+         new PlateFormatRule { StartYear = 2020, EndYear = 9999, Format = "000-NLN" }
       ],
       ["SA"] =
       [
@@ -77,21 +89,32 @@ public static class ExtensionsForAustraliaRegistrationPlate
       ],
       ["TAS"] =
       [
-         new PlateFormatRule { StartYear = 1954, EndYear = 1970, Format = "LLL-NNL" },
-         new PlateFormatRule { StartYear = 1971, EndYear = 9999, Format = "MNN-AA" }
+         new PlateFormatRule { StartYear = 1954, EndYear = 1970, Format = "LLL-NNN" },
+         new PlateFormatRule { StartYear = 1970, EndYear = 1971, Format = "LL-NNNN" },
+         new PlateFormatRule { StartYear = 1971, EndYear = 9999, Format = "M NN LL" }
       ],
       ["VIC"] =
       [
+         new PlateFormatRule { StartYear = 1910, EndYear = 1939, Format = "NNN-NNN" },
+         new PlateFormatRule { StartYear = 1939, EndYear = 1953, Format = "LL-NNN" },
          new PlateFormatRule { StartYear = 1953, EndYear = 2013, Format = "LLL-NNN" },
-         new PlateFormatRule { StartYear = 2014, EndYear = 9999, Format = "NLL-NNL" }
+         new PlateFormatRule { StartYear = 2014, EndYear = 9999, Format = "NLL-NLL" }
       ],
       ["WA"] =
       [
-         new PlateFormatRule { StartYear = 1956, EndYear = 1978, Format = "NLLL-NNN" },
-         new PlateFormatRule { StartYear = 1979, EndYear = 9999, Format = "NLL-NNN" }
+         new PlateFormatRule { StartYear = 1956, EndYear = 1978, Format = "LLL-NNN" },
+         new PlateFormatRule { StartYear = 1979, EndYear = 9999, Format = "NLLL-NNN" }
       ]
    };
 
+
+   /// <summary>
+   /// This method generates a random registration date for a vehicle within a specified date range.
+   /// </summary>
+   /// <param name="vehicle"></param>
+   /// <param name="from"></param>
+   /// <param name="to"></param>
+   /// <returns></returns>
    private static DateTime GenerateRegistrationDate(Vehicle vehicle, DateTime from, DateTime to)
    {
       // Swap if needed
@@ -133,6 +156,7 @@ public static class ExtensionsForAustraliaRegistrationPlate
          {
             case 'L': sb.Append(vehicle.Random.ArrayElement(Letters)); break;
             case 'N': sb.Append(vehicle.Random.ArrayElement(Digits)); break;
+            case '0': sb.Append(vehicle.Random.Digits(1, 0, 1)); break;
             case 'M': sb.Append('M'); break;
             case 'S': sb.Append('S'); break;
             case 'Y': sb.Append('Y'); break;

@@ -33,9 +33,10 @@ public static class ExtensionsForAustraliaRegistrationPlate
    /// Different vehicle types also have different registration plate formats.
    /// Currently, this method only supports the "Car" or universal type of vehicle registration plates. 
    /// </remarks>
-   public static string AusCarRegistrationPlate(this Vehicle vehicle, DateTime from, DateTime to, string state)
+   public static string AusCarRegistrationPlate(this Vehicle vehicle, DateTime from, DateTime to, string state = null)
    {
-      if (! SupportedStates.Contains(state)) 
+      state ??= GenerateRandomState();
+      if (!SupportedStates.Contains(state))
          throw new ArgumentException($"Unsupported Australian state: {state}. Supported states are: {string.Join(", ", SupportedStates)}", nameof(state));
       DateTime registrationDate = GenerateRegistrationDate(vehicle, from, to);
       return GenerateRegistrationPlate(vehicle, registrationDate, state);
@@ -164,5 +165,11 @@ public static class ExtensionsForAustraliaRegistrationPlate
          }
       }
       return sb.ToString();
+   }
+
+   private static string GenerateRandomState()
+   {
+      var randomizer = new Randomizer();
+      return randomizer.ListItem(SupportedStates.ToList());
    }
 }

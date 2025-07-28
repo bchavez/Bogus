@@ -7,7 +7,6 @@ namespace Bogus.Tests.ExtensionTests;
 
 public class IranianExtensionTests : SeededTest
 {
-
    [Fact]
    public void can_create_valid_iranian_national_number()
    {

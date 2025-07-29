@@ -10,36 +10,46 @@ public class IranianExtensionTests : SeededTest
    [Fact]
    public void can_create_valid_iranian_national_number()
    {
+      //Arrange 
       var faker = new Faker("fa");
+
+      //Act
       var nationalNumber = faker.Person.IranianNationalNumber();
 
+      //Assert
       nationalNumber.Should().MatchRegex("^[0-9]{10}$");
-
       ValidateIranianNationalNumber(nationalNumber).Should().BeTrue();
    }
 
    [Fact]
    public void iranian_national_number_generated_twice_are_equal()
    {
+      //Arrange
       var faker = new Faker("fa");
       var person = faker.Person;
+
+      //Act
       var nationalNumber1 = person.IranianNationalNumber();
       var nationalNumber2 = person.IranianNationalNumber();
 
+      //Assert
       nationalNumber1.Should().Be(nationalNumber2);
    }
 
    [Fact]
    public void iranian_national_number_should_be_different_for_different_persons()
    {
+      //Arrange
       var faker1 = new Faker("fa");
       var faker2 = new Faker("fa");
       var person1 = faker1.Person;
       var person2 = faker2.Person;
 
+      //Act
       var nationalNumber1 = person1.IranianNationalNumber();
       var nationalNumber2 = person2.IranianNationalNumber();
 
+      //Assert
       nationalNumber1.Should().NotBe(nationalNumber2);
    }
 

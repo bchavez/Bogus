@@ -1,3 +1,8 @@
+## vNext
+Release Date: 202x-xx-xx
+* PR 614: Adds Extension Method to generate Iranian National Numbers. THanks @amirh-p!
+* PR 607: General code improvements. Thanks @SimonCropp!
+
 ## v35.6.3
 Release Date: 2025-04-12
 * Issue 601: Fixes `Internet.Avatar()` URL generation. Moves from Cloudflare IPFS to IPFS.io.

@@ -35,7 +35,7 @@ public static class ExtensionsForAustraliaRegistrationPlate
    /// </remarks>
    public static string AusCarRegistrationPlate(this Vehicle vehicle, DateTime from, DateTime to, string state = null)
    {
-      state ??= GenerateRandomState();
+      state ??= GenerateRandomState(vehicle);
       if (!SupportedStates.Contains(state))
          throw new ArgumentException($"Unsupported Australian state: {state}. Supported states are: {string.Join(", ", SupportedStates)}", nameof(state));
       DateTime registrationDate = GenerateRegistrationDate(vehicle, from, to);
@@ -167,9 +167,8 @@ public static class ExtensionsForAustraliaRegistrationPlate
       return sb.ToString();
    }
 
-   private static string GenerateRandomState()
+   private static string GenerateRandomState(Vehicle vehicle)
    {
-      var randomizer = new Randomizer();
-      return randomizer.ListItem(SupportedStates.ToList());
+      return vehicle.Random.ListItem(SupportedStates.ToList());
    }
 }

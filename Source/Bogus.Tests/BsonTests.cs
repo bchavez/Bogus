@@ -75,12 +75,12 @@ public class BsonTests : SeededTest, IDisposable
             ba.Add(name);
             return ba;
          });
-      
+
       //Get the locale we wish to mutate.
       var itLocale = Database.GetLocale("it");
 
       //get the locale's name category
-      var namesObject = itLocale["name"] as BObject;
+      var namesObject = (BObject)itLocale["name"];
 
       //In the name category, over-write the first_name category
       namesObject["first_name"] = firstNames;

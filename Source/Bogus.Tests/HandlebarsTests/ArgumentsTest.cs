@@ -14,6 +14,23 @@ public class ArgumentsTest : SeededTest
       this.console = console;
    }
 
+   [Fact]
+   public void can_instantiate_faker_with_locale_type()
+   {
+      var faker = new Faker(LocaleType.pt_BR);      
+   }
+
+   [Fact]
+   public void can_instantiate_faker_t_with_locale_type()
+   {
+      var faker = new Faker<Person>(LocaleType.fr);      
+   }
+
+   [Fact]
+   public void can_instantiate_dataset_with_locale_type()
+   {
+      var dataset = new DataSet(LocaleType.ko);
+   }
 
    [Fact]
    public void can_parse_random_number_request_without_arguments()

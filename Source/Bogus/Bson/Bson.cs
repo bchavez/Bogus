@@ -189,12 +189,12 @@ public class Bson
          case BValueType.Object:
             ms.WriteByte(0x03);
             EncodeCString(ms, name);
-            EncodeDocument(ms, v as BObject);
+            EncodeDocument(ms, (BObject)v);
             return;
          case BValueType.Array:
             ms.WriteByte(0x04);
             EncodeCString(ms, name);
-            EncodeArray(ms, v as BArray);
+            EncodeArray(ms, (BArray)v);
             return;
          case BValueType.Binary:
             ms.WriteByte(0x05);

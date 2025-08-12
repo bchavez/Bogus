@@ -22,7 +22,7 @@ public static class ExtensionsForPoland
       const string Key = nameof(ExtensionsForPoland) + nameof(Pesel);
       if (person.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       return new StringBuilder()

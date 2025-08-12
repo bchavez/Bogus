@@ -379,7 +379,7 @@ public class Finance : DataSet
       IBanFormat ibanFormat;
       if( countryCode is null )
       {
-         var formatEntry = this.Random.ArrayElement(arr) as BObject;
+         var formatEntry = (BObject)this.Random.ArrayElement(arr);
          ibanFormat = this.GetIbanFormat(formatEntry);
       }
       else
@@ -512,7 +512,7 @@ public class Finance : DataSet
 
    protected IBanFormat.BbanItem[] GetBbanItems(BObject obj)
    {
-      var arr = obj["bban"] as BArray;
+      var arr = (BArray)obj["bban"];
       return arr.OfType<BObject>()
          .Select(o => new IBanFormat.BbanItem
          {

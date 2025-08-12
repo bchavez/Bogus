@@ -15,7 +15,7 @@ public static class ExtensionsForIran
       const string Key = nameof(ExtensionsForIran) + nameof(IranianNationalNumber);
       if (p.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       Randomizer randomizer = p.Random;

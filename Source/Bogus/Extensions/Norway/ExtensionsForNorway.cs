@@ -15,7 +15,7 @@ public static class ExtensionsForNorway
       const string Key = nameof(ExtensionsForNorway) + "Fødselsnummer";
       if (p.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       /*

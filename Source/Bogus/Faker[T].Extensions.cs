@@ -17,7 +17,7 @@ public static class ExtensionsForFakerT
    /// <param name="max">Maximum number of T objects to create. Inclusive.</param>
    public static List<T> GenerateBetween<T>(this Faker<T> faker, int min, int max, string ruleSets = null) where T : class
    {
-      var internals = faker as IFakerTInternal;
+      var internals = (IFakerTInternal)faker;
       var r = internals.FakerHub.Random;
       var n = r.Number(min, max);
       return faker.Generate(n, ruleSets);

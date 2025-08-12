@@ -8,7 +8,7 @@ public static class ContextHelper
 {
    public static T GetOrSet<T>(string key, Faker f, Func<T> factory) where T : DataSet
    {
-      var context = (f as IHasContext).Context;
+      var context = ((IHasContext)f).Context;
 
       if( context.TryGetValue(key, out var t) )
       {
@@ -16,7 +16,7 @@ public static class ContextHelper
       }
 
       var dataset = factory();
-      var notifier = (f as IHasRandomizer).GetNotifier();
+      var notifier = ((IHasRandomizer)f).GetNotifier();
       notifier.Flow(dataset);
 
       context[key] = dataset;

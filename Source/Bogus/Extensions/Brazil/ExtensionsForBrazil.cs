@@ -22,7 +22,7 @@ public static class ExtensionsForBrazil
       const string Key = nameof(ExtensionsForBrazil) + "CPF";
       if( p.context.TryGetValue(Key, out var value) )
       {
-         finalDigits = value as int[];
+         finalDigits = (int[])value;
          return FormatCpf(finalDigits, includeFormatSymbols);
       }
 

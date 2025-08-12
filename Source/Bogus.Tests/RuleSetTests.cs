@@ -154,10 +154,7 @@ public class RuleSetTests : SeededTest
       results.Should().OnlyContain(c => c.Description == "overridden");
    }
 
-
-   public class EmptyObject
-   {
-   }
+   public class EmptyObject;
 
    [Fact]
    public void can_create_a_fake_object_with_no_props_or_rules()

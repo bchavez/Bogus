@@ -65,7 +65,7 @@ public static class ExtensionsForUnitedKingdom
    /// </summary>
    public static string CountryOfUnitedKingdom(this Address address)
    {
-      var countries = Database.Get(nameof(address), "uk_country", "en_GB") as BArray;
+      var countries = (BArray)Database.Get(nameof(address), "uk_country", "en_GB");
       return address.Random.ArrayElement(countries);
    }
 

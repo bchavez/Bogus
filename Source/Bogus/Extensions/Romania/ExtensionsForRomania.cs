@@ -37,7 +37,7 @@ public static class ExtensionsForRomania
 
       if (p.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       var randomizer = p.Random;

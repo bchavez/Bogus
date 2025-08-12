@@ -15,7 +15,7 @@ public static class ExtensionsForFinland
       const string Key = nameof(ExtensionsForFinland) + "Henkilötunnus";
       if( p.context.TryGetValue(Key, out var value) )
       {
-         return value as string;
+         return (string)value;
       }
 
       // DDMMYYCZZZQ

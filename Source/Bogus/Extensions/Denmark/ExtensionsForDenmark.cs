@@ -20,7 +20,7 @@ public static class ExtensionsForDenmark
       const string Key = nameof(ExtensionsForDenmark) + "CPR";
       if (p.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       /*

@@ -17,7 +17,7 @@ public static class ExtensionsForCanada
       const string Key = nameof(ExtensionsForCanada) + "SIN";
       if( p.context.TryGetValue(Key, out var value) )
       {
-         return value as string;
+         return (string)value;
       }
 
       //bit verbose, but works. :)

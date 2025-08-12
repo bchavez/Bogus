@@ -18,12 +18,10 @@ public class Issue70 : SeededTest
       //Works
       var baseAFaker = new Faker<BaseA>()
          .RuleFor(a => a.SomeProp, () => baseBFaker.Generate());
-      ;
 
       //Threw System.ArgumentException: 'An item with the same key has already been added.'
       var derivedAFaker = new Faker<DerivedA>()
          .RuleFor(da => da.SomeProp, () => derivedBFaker.Generate());
-
 
       DerivedA derivedA = derivedAFaker.Generate();
 

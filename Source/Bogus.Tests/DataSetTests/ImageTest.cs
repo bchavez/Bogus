@@ -66,10 +66,10 @@ public class ImageTest : SeededTest
    public void can_use_placeholder_url()
    {
       var url = image.PlaceholderUrl(200, 300, "foobar is today", "090", "ddd");
-      url.Should().Be("https://via.placeholder.com/200x300/090/ddd.png?text=foobar%20is%20today");
+      url.Should().Be("https://placehold.co/200x300/090/ddd.png?text=foobar%20is%20today");
 
       url = image.PlaceholderUrl(300, 200);
-      url.Should().Be("https://via.placeholder.com/300x200/cccccc/9c9c9c.png");
+      url.Should().Be("https://placehold.co/300x200/cccccc/9c9c9c.png");
    }
 
    [Fact]

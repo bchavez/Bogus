@@ -100,7 +100,7 @@ public partial class Images : DataSet
    }
 
    /// <summary>
-   /// Get an image from https://placeholder.com service.
+   /// Get an image from https://placehold.co service.
    /// </summary>
    /// <param name="width">Width of the image.</param>
    /// <param name="height">Height of the image.</param>
@@ -110,7 +110,7 @@ public partial class Images : DataSet
    /// <param name="textColor">HTML color code for the foreground (text) color.</param>
    public string PlaceholderUrl(int width, int height, string text = null, string backColor = "cccccc", string textColor = "9c9c9c", string format = "png")
    {
-      const string Url = "https://via.placeholder.com/";
+      const string Url = "https://placehold.co/";
 
       var sb = new StringBuilder(Url);
 

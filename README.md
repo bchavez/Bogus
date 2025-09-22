@@ -501,7 +501,8 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.Person.CodiceFiscale()` - Codice Fiscale
 	* `Bogus.DataSets.Finance.CodiceFiscale()` - Codice Fiscale
 * **`using Bogus.Extensions.Netherlands;`**
-  * `Bogus.Person.Bsn()` - Burgerservicenummer (BSN)
+  * `Bogus.Person.Bsn()` - Dutch Burgerservicenummer (BSN)
+  * `Bogus.Vehicle.NlRegistrationPlate()` - Dutch Vehicle Registration Plate (kentekenplaat)
 * **`using Bogus.Extensions.Norway;`**
 	* `Bogus.Person.Fodselsnummer()` - Norwegian national identity number
 * **`using Bogus.Extensions.Poland;`**

@@ -12,7 +12,7 @@ public class DutchExtensionTests : SeededTest
 
    public DutchExtensionTests(ITestOutputHelper console)
    {
-      faker = new Faker();
+      faker = new Faker("nl");
       this.console = console;
    }
    

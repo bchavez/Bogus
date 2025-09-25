@@ -29,13 +29,9 @@ public class Rule<T>
    public bool ProhibitInStrictMode { get; set; } = false;
 }
 
-public class PopulateAction<T> : Rule<Func<Faker, T, object>>
-{
-}
+public class PopulateAction<T> : Rule<Func<Faker, T, object>>;
 
-public class FinalizeAction<T> : Rule<Action<Faker, T>>
-{
-}
+public class FinalizeAction<T> : Rule<Action<Faker, T>>;
 
 public class MultiDictionary<Key, Key2, Value> : Dictionary<Key, Dictionary<Key2, Value>>
 {

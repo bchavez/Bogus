@@ -1,7 +1,8 @@
-## vNext
-Release Date: 202x-xx-xx
+## v35.6.4
+Release Date: 2025-09-25
 * PR 614: Adds Extension Method to generate Iranian National Numbers. THanks @amirh-p!
-* PR 607: General code improvements. Thanks @SimonCropp!
+* PR 607, 617, 618, 616, 615: General code improvements. Thanks @SimonCropp!
+* Issue 619 and PR 620: Replaced defunct Placeholder.com with placehold.co. Image.PlaceholderUrl should work again. Thanks mahmmoudkinawy!
 
 ## v35.6.3
 Release Date: 2025-04-12

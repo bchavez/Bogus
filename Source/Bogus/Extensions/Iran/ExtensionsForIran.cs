@@ -15,7 +15,7 @@ public static class ExtensionsForIran
       const string Key = nameof(ExtensionsForIran) + nameof(IranianNationalNumber);
       if (p.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       Randomizer randomizer = p.Random;
@@ -32,7 +32,7 @@ public static class ExtensionsForIran
       int s = sum % 11;
       list[9] = s < 2 ? s : 11 - s;
 
-      string result = string.Join(string.Empty, list);
+      string result = string.Concat(list);
       p.context[Key] = result;
 
       return result;

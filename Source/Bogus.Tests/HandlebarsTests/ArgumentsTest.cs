@@ -137,4 +137,38 @@ public class ArgumentsTest : SeededTest
       faker.Parse("{{date.timespan(00:00:25)}}")
          .Should().Be("00:00:15.0880571");
    }
+
+
+
+   [Fact]
+   public void can_parse_vehicle()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_vehicle_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      result.Should().Be("Maserati");
+   }
+
+   [Fact]
+   public void can_parse_music()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_music_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      result.Should().Be("Hip Hop");
+   }
 }

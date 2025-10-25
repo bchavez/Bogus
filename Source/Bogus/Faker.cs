@@ -92,17 +92,26 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
          this.System,
          this.Commerce,
          this.Database,
-         this.Random);
+         this.Random,
+         this.Music,
+         this.Vehicle,
+         this.ParsePerson);
    }
 
 
    private Person person;
+   private Bogus.PersonParseWrapper.Person parseperson;
 
    /// <summary>
    /// A contextually relevant fields of a person.
    /// </summary>
    public Person Person => person ??= new Person(this.Random, this.localDateTimeRef, this.Locale);
 
+   /// <summary>
+   /// A wrapper to allow for Person to be passed into Parse method.
+   /// </summary>
+   [RegisterMustasheMethods]
+   internal Bogus.PersonParseWrapper.Person ParsePerson => parseperson ??= new Bogus.PersonParseWrapper.Person(this.Random, this.localDateTimeRef, this.Locale);
 
    private DateTime? localDateTimeRef;
 
@@ -364,6 +373,7 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    internal void NewContext()
    {
       person = null;
+      parseperson = null;
       this.capturedGlobalIndex = Interlocked.Increment(ref GlobalUniqueIndex);
       Interlocked.Increment(ref IndexFaker);
    }

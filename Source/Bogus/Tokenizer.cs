@@ -23,7 +23,7 @@ public static class Tokenizer
 
    public static void RegisterMustashMethods(Type type)
    {
-      MustashMethods = type.GetProperties()
+      MustashMethods = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
          .Where(p => p.IsDefined(typeof(RegisterMustasheMethodsAttribute), true))
          .SelectMany(p =>
             {

@@ -92,7 +92,9 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
          this.System,
          this.Commerce,
          this.Database,
-         this.Random);
+         this.Random,
+         this.Music,
+         this.Vehicle);
    }
 
 

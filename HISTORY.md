@@ -1,6 +1,10 @@
+## v35.6.5
+Release Date: 2025-10-25
+* PR 622: Adds music and vehicle faker classes to parse method and unit tests. Thanks Perks-of-Being-a-Cauliflower!
+
 ## v35.6.4
 Release Date: 2025-09-25
-* PR 614: Adds Extension Method to generate Iranian National Numbers. THanks @amirh-p!
+* PR 614: Adds Extension Method to generate Iranian National Numbers. Thanks @amirh-p!
 * PR 607, 617, 618, 616, 615: General code improvements. Thanks @SimonCropp!
 * Issue 619 and PR 620: Replaced defunct Placeholder.com with placehold.co. Image.PlaceholderUrl should work again. Thanks mahmmoudkinawy!
 

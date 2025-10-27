@@ -17,41 +17,47 @@ public class System : DataSet
    /// <param name="locale">The locale that will be used to generate values.</param>
    public System(string locale = "en") : base(locale)
    {
-      mimes = this.GetArray("mimeTypes");
+      mimes = new Lazy<BArray>(
+         () => this.GetArray("mimeTypes"));
 
-      lookup = mimes.OfType<BObject>()
-         .ToDictionary(o => o["mime"].StringValue);
-
-      mimeKeys = mimes
-         .OfType<BObject>()
-         .Select(o => o["mime"].StringValue)
-         .Distinct()
-         .ToArray();
-
-      exts = mimes
-         .OfType<BObject>()
-         .SelectMany(bObject =>
+      lookup = new Lazy<Dictionary<string, BObject>>(
+         () => mimes.Value.OfType<BObject>()
+            .ToDictionary(o => o["mime"].StringValue));
+      
+      mimeKeys = new Lazy<string[]>(
+         () => mimes.Value
+            .OfType<BObject>()
+            .Select(o => o["mime"].StringValue)
+            .Distinct()
+            .ToArray());
+      
+      exts = new Lazy<string[]>(
+         () => mimes.Value
+            .OfType<BObject>()
+            .SelectMany(bObject =>
             {
-               if( bObject.ContainsKey("extensions") )
+               if (bObject.ContainsKey("extensions"))
                {
                   var extensions = (BArray)bObject["extensions"];
                   return extensions.OfType<BValue>().Select(s => s.StringValue);
                }
+               
                return Enumerable.Empty<string>();
             })
-         .ToArray();
-
-      types = mimeKeys.Select(k => k.Substring(0, k.IndexOf('/')))
-         .Distinct()
-         .ToArray();
+            .ToArray());
+      
+      types = new Lazy<string[]>(
+         () => mimeKeys.Value.Select(k => k.Substring(0, k.IndexOf('/')))
+            .Distinct()
+            .ToArray());
    }
 
    protected Lorem Lorem = null;
-   private readonly Dictionary<string, BObject> lookup;
-   private readonly BArray mimes;
-   private readonly string[] exts;
-   private readonly string[] types;
-   private readonly string[] mimeKeys;
+   private readonly Lazy<Dictionary<string, BObject>> lookup;
+   private readonly Lazy<BArray> mimes;
+   private readonly Lazy<string[]> exts;
+   private readonly Lazy<string[]> types;
+   private readonly Lazy<string[]> mimeKeys;
 
    private static readonly string[] commonFileTypes = 
       { "video", "audio", "image", "text", "application" };
@@ -145,7 +151,7 @@ public class System : DataSet
    /// </returns>
    public string MimeType()
    {
-      return this.Random.ArrayElement(this.mimeKeys);
+      return this.Random.ArrayElement(this.mimeKeys.Value);
    }
 
 
@@ -181,7 +187,7 @@ public class System : DataSet
    /// </returns>
    public string FileType()
    {
-      return this.Random.ArrayElement(this.types);
+      return this.Random.ArrayElement(this.types.Value);
    }
 
 
@@ -194,13 +200,13 @@ public class System : DataSet
    public string FileExt(string mimeType = null)
    {
       if( mimeType != null &&
-          lookup.TryGetValue(mimeType, out var mime) &&
+          lookup.Value.TryGetValue(mimeType, out var mime) &&
           mime.ContainsKey("extensions") )
       {
          return this.Random.ArrayElement((BArray)mime["extensions"]);
       }
 
-      return this.Random.ArrayElement(exts);
+      return this.Random.ArrayElement(exts.Value);
    }
 
    /// <summary>

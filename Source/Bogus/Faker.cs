@@ -42,7 +42,14 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
 
       this.Music = this.Notifier.Flow(new Music());
 
-      this.Hashids = new Hashids();
+      this.Hashids = new Hashids();   
+   }
+
+   /// <summary>
+   /// Create a Faker with a specific locale.
+   /// </summary>
+   public Faker(LocaleType localeType) : this(localeType.ToString())
+   {       
    }
 
    Dictionary<string, object> IHasContext.Context { get; } = new();

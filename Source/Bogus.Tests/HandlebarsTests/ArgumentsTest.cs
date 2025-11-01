@@ -233,27 +233,27 @@ public class ArgumentsTest : SeededTest
       var companycatchphrase = faker.Parse("{{person.Company.CatchPhrase}}");
       var companybs = faker.Parse("{{person.Company.Bs}}");
 
-
-      firstname.Should().Be("Doris");
-      lastname.Should().Be("Schultz");
-      fullname.Should().Be("Doris Schultz");
-      gender.Should().Be("Female");
-      username.Should().Be("Doris.Schultz");
-      avatar.Should().Be("https://ipfs.io/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
-      email.Should().Be("Doris69@yahoo.com");
-      //dateofbirth.Should().Be(""); Not sure the best way to test DOB.
-      geolat.Should().Be("-38.4622");
-      geolng.Should().Be("-0.6396");
-      street.Should().Be("31681 Little Flats");
-      suit.Should().Be("Suite 926");
-      city.Should().Be("Port Simone");
-      state.Should().Be("Rhode Island");
-      zipcode.Should().Be("42504-1131");
-      phone.Should().Be("1-607-290-8836 x5069");
-      website.Should().Be("javier.biz");
-      companyname.Should().Be("MacGyver and Sons");
-      companycatchphrase.Should().Be("Programmable multi-tasking implementation");
-      companybs.Should().Be("e-enable enterprise mindshare");
+      // Compare Parse to Class values. This will ensure that Parsing will return the same values as accessing the properties directly.
+      firstname.Should().Be(faker.Person.FirstName);
+      lastname.Should().Be(faker.Person.LastName);
+      fullname.Should().Be(faker.Person.FullName);
+      gender.Should().Be(faker.Person.Gender.ToString());
+      username.Should().Be(faker.Person.UserName);
+      avatar.Should().Be(faker.Person.Avatar);
+      email.Should().Be(faker.Person.Email);
+      dateofbirth.Should().Be(faker.Person.DateOfBirth.ToString());
+      geolat.Should().Be(faker.Person.Address.Geo.Lat.ToString());
+      geolng.Should().Be(faker.Person.Address.Geo.Lng.ToString());
+      street.Should().Be(faker.Person.Address.Street);
+      suit.Should().Be(faker.Person.Address.Suite);
+      city.Should().Be(faker.Person.Address.City);
+      state.Should().Be(faker.Person.Address.State);
+      zipcode.Should().Be(faker.Person.Address.ZipCode);
+      phone.Should().Be(faker.Person.Phone);
+      website.Should().Be(faker.Person.Website);
+      companyname.Should().Be(faker.Person.Company.Name);
+      companycatchphrase.Should().Be(faker.Person.Company.CatchPhrase);
+      companybs.Should().Be(faker.Person.Company.Bs);
    }
 
 }

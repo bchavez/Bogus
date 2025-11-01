@@ -21,23 +21,23 @@ public class Person : IHasRandomizer, IHasContext
    {
       public class CardGeo
       {
-         public double Lat;
-         public double Lng;
+         public double Lat { get; set; }
+         public double Lng { get; set; }
       }
 
-      public string Street;
-      public string Suite;
-      public string City;
-      public string State;
-      public string ZipCode;
-      public CardGeo Geo;
+      public string Street { get; set; }
+      public string Suite { get; set; }
+      public string City { get; set; }
+      public string State { get; set; }
+      public string ZipCode { get; set; }
+      public CardGeo Geo { get; set; }
    }
 
    public class CardCompany
    {
-      public string Name;
-      public string CatchPhrase;
-      public string Bs;
+      public string Name { get; set; }
+      public string CatchPhrase { get; set; }
+      public string Bs { get; set; }
    }
 
    protected internal Name DsName { get; set; }
@@ -146,17 +146,28 @@ public class Person : IHasRandomizer, IHasContext
    {
       return this.Notifier;
    }
-
-   public Name.Gender Gender;
-   public string FirstName;
-   public string LastName;
-   public string FullName;
-   public string UserName;
-   public string Avatar;
-   public string Email;
-   public DateTime DateOfBirth;
-   public CardAddress Address;
-   public string Phone;
-   public string Website;
-   public CardCompany Company;
+   [RegisterPersonProperty]
+   public Name.Gender Gender { get; set; }
+   [RegisterPersonProperty]
+   public string FirstName { get; set; }
+   [RegisterPersonProperty]
+   public string LastName { get; set; }
+   [RegisterPersonProperty]
+   public string FullName { get; set; }
+   [RegisterPersonProperty]
+   public string UserName { get; set; }
+   [RegisterPersonProperty]
+   public string Avatar { get; set; }
+   [RegisterPersonProperty]
+   public string Email { get; set; }
+   [RegisterPersonProperty]
+   public DateTime DateOfBirth { get; set; }
+   [RegisterPersonProperty]
+   public CardAddress Address { get; set; }
+   [RegisterPersonProperty]
+   public string Phone { get; set; }
+   [RegisterPersonProperty]
+   public string Website { get; set; }
+   [RegisterPersonProperty]
+   public CardCompany Company { get; set; }
 }

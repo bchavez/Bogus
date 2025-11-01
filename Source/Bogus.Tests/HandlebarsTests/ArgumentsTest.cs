@@ -171,4 +171,89 @@ public class ArgumentsTest : SeededTest
       var result = faker.Parse("{{music.genre}}");
       result.Should().Be("Hip Hop");
    }
+   [Fact]
+   public void can_parse_person()
+   {
+      var faker = new Faker();
+      var firstname = faker.Parse("{{person.firstname}}");
+      var lastname = faker.Parse("{{person.lastname}}");
+      var fullname = faker.Parse("{{person.fullname}}");
+
+      Assert.Multiple(() =>
+      {
+         Assert.NotNull(firstname);
+         Assert.NotNull(lastname);
+         Assert.NotNull(fullname);
+         Assert.True($"{firstname} {lastname}" == fullname);
+      });
+   }
+
+   private class TestClass
+   {
+      public string Name { get; set; }
+   }
+
+   [Fact]
+   public void can_parse_person_in_rulefor()
+   {
+      var faker = new Faker<TestClass>();
+      faker.RuleFor(o => o.Name, (f, o) =>
+      {
+         return f.Parse("{{person.firstname}} {{person.lastname}}");
+      });
+
+      var fakes = faker.Generate(10);
+
+      fakes.Should().OnlyHaveUniqueItems(o => o.Name);
+   }
+
+   [Fact]
+   public void can_parse_all_person_values()
+   {
+      var faker = new Faker();
+
+      var firstname = faker.Parse("{{person.FirstName}}");
+      var lastname = faker.Parse("{{person.LastName}}");
+      var fullname = faker.Parse("{{person.FullName}}");
+      var gender = faker.Parse("{{person.Gender}}");
+      var username = faker.Parse("{{person.UserName}}");
+      var avatar = faker.Parse("{{person.Avatar}}");
+      var email = faker.Parse("{{person.Email}}");
+      var dateofbirth = faker.Parse("{{person.DateOfBirth}}");
+      var geolat = faker.Parse("{{person.Address.Geo.Lat}}");
+      var geolng = faker.Parse("{{person.Address.Geo.Lng}}");
+      var street = faker.Parse("{{person.Address.Street}}");
+      var suit = faker.Parse("{{person.Address.Suite}}");
+      var city = faker.Parse("{{person.Address.City}}");
+      var state = faker.Parse("{{person.Address.State}}");
+      var zipcode = faker.Parse("{{person.Address.ZipCode}}");
+      var phone = faker.Parse("{{person.Phone}}");
+      var website = faker.Parse("{{person.Website}}");
+      var companyname = faker.Parse("{{person.Company.Name}}");
+      var companycatchphrase = faker.Parse("{{person.Company.CatchPhrase}}");
+      var companybs = faker.Parse("{{person.Company.Bs}}");
+
+      // Compare Parse to Class values. This will ensure that Parsing will return the same values as accessing the properties directly.
+      firstname.Should().Be(faker.Person.FirstName);
+      lastname.Should().Be(faker.Person.LastName);
+      fullname.Should().Be(faker.Person.FullName);
+      gender.Should().Be(faker.Person.Gender.ToString());
+      username.Should().Be(faker.Person.UserName);
+      avatar.Should().Be(faker.Person.Avatar);
+      email.Should().Be(faker.Person.Email);
+      dateofbirth.Should().Be(faker.Person.DateOfBirth.ToString());
+      geolat.Should().Be(faker.Person.Address.Geo.Lat.ToString());
+      geolng.Should().Be(faker.Person.Address.Geo.Lng.ToString());
+      street.Should().Be(faker.Person.Address.Street);
+      suit.Should().Be(faker.Person.Address.Suite);
+      city.Should().Be(faker.Person.Address.City);
+      state.Should().Be(faker.Person.Address.State);
+      zipcode.Should().Be(faker.Person.Address.ZipCode);
+      phone.Should().Be(faker.Person.Phone);
+      website.Should().Be(faker.Person.Website);
+      companyname.Should().Be(faker.Person.Company.Name);
+      companycatchphrase.Should().Be(faker.Person.Company.CatchPhrase);
+      companybs.Should().Be(faker.Person.Company.Bs);
+   }
+
 }

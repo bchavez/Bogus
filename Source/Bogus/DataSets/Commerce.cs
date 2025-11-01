@@ -171,6 +171,6 @@ public class Commerce : DataSet
 
       var checkDigit = (10 - weightedSum % 10) % 10;
 
-      return string.Join("", digits) + checkDigit;
+      return string.Concat(digits) + checkDigit;
    }
 }

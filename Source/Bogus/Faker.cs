@@ -93,6 +93,8 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
          this.Commerce,
          this.Database,
          this.Random,
+         this.Music,
+         this.Vehicle,
          new Func<Person>(() => this.Person));
    }
 

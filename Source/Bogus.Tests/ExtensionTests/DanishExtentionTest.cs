@@ -84,7 +84,7 @@ public class DanishExtensionTest : SeededTest
    [InlineData("250609", Name.Gender.Male)]
    [InlineData("250610", Name.Gender.Male)]
    public void can_generate_valid_danish_cpr_numbers(string birthDate, Name.Gender gender)
-   {;
+   {
       int day = int.Parse(birthDate.Substring(0, 2));
       int month = int.Parse(birthDate.Substring(2, 2));
       int year = int.Parse(birthDate.Substring(4, 2));

@@ -325,10 +325,6 @@ public static class Tokenizer
 }
 
 [AttributeUsage(AttributeTargets.Property)]
-internal class RegisterMustasheMethodsAttribute : Attribute
-{
-}
+internal class RegisterMustasheMethodsAttribute : Attribute;
 [AttributeUsage(AttributeTargets.Property)]
-internal class RegisterPersonPropertyAttribute : Attribute
-{
-}
+internal class RegisterPersonPropertyAttribute : Attribute;

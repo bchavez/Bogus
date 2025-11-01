@@ -34,7 +34,7 @@ public class System : DataSet
             {
                if( bObject.ContainsKey("extensions") )
                {
-                  var extensions = bObject["extensions"] as BArray;
+                  var extensions = (BArray)bObject["extensions"];
                   return extensions.OfType<BValue>().Select(s => s.StringValue);
                }
                return Enumerable.Empty<string>();
@@ -197,7 +197,7 @@ public class System : DataSet
           lookup.TryGetValue(mimeType, out var mime) &&
           mime.ContainsKey("extensions") )
       {
-         return this.Random.ArrayElement(mime["extensions"] as BArray);
+         return this.Random.ArrayElement((BArray)mime["extensions"]);
       }
 
       return this.Random.ArrayElement(exts);

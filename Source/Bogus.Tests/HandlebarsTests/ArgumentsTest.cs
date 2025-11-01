@@ -138,6 +138,39 @@ public class ArgumentsTest : SeededTest
          .Should().Be("00:00:15.0880571");
    }
 
+
+
+   [Fact]
+   public void can_parse_vehicle()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_vehicle_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{vehicle.manufacturer}}");
+      result.Should().Be("Maserati");
+   }
+
+   [Fact]
+   public void can_parse_music()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      Assert.NotNull(result);
+   }
+
+   [Fact]
+   public void parse_music_returns_expected_value()
+   {
+      var faker = new Faker();
+      var result = faker.Parse("{{music.genre}}");
+      result.Should().Be("Hip Hop");
+   }
    [Fact]
    public void can_parse_person()
    {
@@ -206,7 +239,7 @@ public class ArgumentsTest : SeededTest
       fullname.Should().Be("Doris Schultz");
       gender.Should().Be("Female");
       username.Should().Be("Doris.Schultz");
-      avatar.Should().Be("https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
+      avatar.Should().Be("https://ipfs.io/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1180.jpg");
       email.Should().Be("Doris69@yahoo.com");
       //dateofbirth.Should().Be(""); Not sure the best way to test DOB.
       geolat.Should().Be("-38.4622");

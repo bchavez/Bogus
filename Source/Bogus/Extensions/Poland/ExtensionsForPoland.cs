@@ -22,7 +22,7 @@ public static class ExtensionsForPoland
       const string Key = nameof(ExtensionsForPoland) + nameof(Pesel);
       if (person.context.TryGetValue(Key, out var value))
       {
-         return value as string;
+         return (string)value;
       }
 
       return new StringBuilder()
@@ -96,7 +96,7 @@ public static class ExtensionsForPoland
          sum += digits[8] * NipWeights[8];
       }
 
-      return string.Join("", digits)+(sum % 11);
+      return string.Concat(digits) + (sum % 11);
    }
 
    private static readonly int[] NipWeights = { 6, 5, 7, 2, 3, 4, 5, 6, 7 };
@@ -118,7 +118,7 @@ public static class ExtensionsForPoland
       if (checksum == 10)
          checksum = 0;
 
-      return string.Join("", digits)+checksum;
+      return string.Concat(digits) + checksum;
    }
 
    public enum RegonType

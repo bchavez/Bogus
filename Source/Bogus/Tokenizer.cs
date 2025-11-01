@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
@@ -10,15 +12,133 @@ public class MustashMethod
    public string Name { get; set; }
    public MethodInfo Method { get; set; }
    public object[] OptionalArgs { get; set; }
+   // precompiled getter for nested properties
+   public Func<object, object> Getter { get; set; }
 }
 
 public static class Tokenizer
 {
    public static ILookup<string, MustashMethod> MustashMethods;
+   public static ILookup<string, MustashMethod> PersonProperties;
 
    static Tokenizer()
    {
       RegisterMustashMethods(typeof(Faker));
+      RegisterPersonPropertiesAsMustashMethod(typeof(Person));
+      MustashMethods = MustashMethods.Concat(PersonProperties)
+         .SelectMany(g => g)
+         .ToLookup(mm => mm.Name);
+   }
+
+   /// <summary>
+   /// Method to determine if to traverse into the property or not.
+   /// </summary>
+   /// <param name="property"></param>
+   /// <returns></returns>
+   public static bool IsComplex(PropertyInfo property)
+   {
+      var t = property.PropertyType;
+      t = Nullable.GetUnderlyingType(t) ?? t; // unwrap Nullable<T>
+
+      // There isn't a efficient way to determine if a property cant be traversed into across all the supported .NET versions.
+#if NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3
+        var ti = t.GetTypeInfo();
+        bool isPrimitiveLike =
+            ti.IsPrimitive ||
+            ti.IsEnum ||
+            t == typeof(string) ||
+            t == typeof(DateTime) ||
+            t == typeof(DateTimeOffset);
+#else
+      bool isPrimitiveLike =
+          t.IsPrimitive ||
+          t.IsEnum ||
+          t == typeof(string) ||
+          t == typeof(DateTime) ||
+          t == typeof(DateTimeOffset);
+#endif
+
+      // drill into everything else
+      var test = isPrimitiveLike;
+      return !isPrimitiveLike;
+   }
+
+   /// <summary>
+   /// Recursively get all properties from a class, including nested properties.
+   /// </summary>
+   /// <param name="parentPropertyInfo"></param>
+   /// <param name="mi"></param>
+   /// <param name="nestedName"></param>
+   /// <returns></returns>
+   static IEnumerable<MustashMethod> GetClassProperties(Type parentPropertyInfo, PropertyInfo mi, string nestedName = null)
+   {
+      // if the property is complex, recurse into it
+      if (IsComplex(mi))
+      {
+         nestedName += mi.Name + ".";
+         return mi.PropertyType.GetProperties()
+            .SelectMany(nmi =>
+            {
+               return GetClassProperties(parentPropertyInfo, nmi, nestedName);
+            });
+      }
+      else
+      {
+         // if the property has a getter, create a MustashMethod for it
+         var category = DataSet.ResolveCategory(parentPropertyInfo);
+         var methodName = nestedName != null ? $"{nestedName}{mi.Name}" : mi.Name;
+         var mm = new MustashMethod
+         {
+            Name = $"{category}.{methodName}".ToUpperInvariant(),
+            Method = mi.GetGetMethod(),
+            Getter = BuildGetter($"{category}.{methodName}".ToUpperInvariant(), parentPropertyInfo),
+            OptionalArgs = []
+         };
+         return new[] { mm }.Where(x => x.Method != null);
+      }
+   }
+
+   /// <summary>
+   /// Allows for nested property getting via compiled expression trees.
+   /// </summary>
+   /// <param name="mustashName"></param>
+   /// <param name="rootType"></param>
+   /// <returns></returns>
+   private static Func<object, object> BuildGetter(string mustashName, Type rootType)
+   {
+      var parts = mustashName.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+      if (parts.Length <= 1) return null; // nothing to walk
+
+      var path = parts.Skip(1).ToArray(); // drop category
+
+      var param = Expression.Parameter(typeof(object), "root");
+      Expression current = Expression.Convert(param, rootType);
+
+      foreach (var segment in path)
+      {
+         var prop = current.Type.GetProperty(segment, BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+         if (prop == null) return null; // can't build
+         current = Expression.Property(current, prop);
+      }
+
+      var body = Expression.Convert(current, typeof(object));
+      var lambda = Expression.Lambda<Func<object, object>>(body, param);
+      return lambda.Compile();
+   }
+
+   /// <summary>
+   /// Finds the properties with the RegisterPersonPropertyAttribute to avoid getting properties that wont return a relevant value.
+   /// </summary>
+   /// <param name="type"></param>
+   public static void RegisterPersonPropertiesAsMustashMethod(Type type)
+   {
+      PersonProperties = type.GetProperties()
+         .Where(p => p.IsDefined(typeof(RegisterPersonPropertyAttribute), true))
+         .SelectMany(p =>
+         {
+            return GetClassProperties(type, p);
+         })
+         .ToLookup(mm => mm.Name);
    }
 
    public static void RegisterMustashMethods(Type type)
@@ -77,7 +197,18 @@ public static class Tokenizer
       var argumentList = providedArgumentList.Concat(optionalArgs).ToArray();
 
       //make the actual invocation.
-      var fakeVal = mm.Method.Invoke(dataSet, argumentList).ToString();
+      //check whether to invoke getter for registered properties or invoke method
+      object resultObj;
+      if (mm.Getter != null && (argumentList == null || argumentList.Length == 0))
+      {
+         // fast path: precompiled nested-property getter
+         resultObj = mm.Getter(dataSet);
+      }
+      else
+      {
+         resultObj = mm.Method.Invoke(dataSet, argumentList);
+      }
+      var fakeVal = resultObj?.ToString() ?? string.Empty;
 
       var sb = new StringBuilder();
       sb.Append(str, 0, start);
@@ -89,11 +220,24 @@ public static class Tokenizer
 
    private static object FindDataSetWithMethod(object[] dataSets, string methodName)
    {
-      var dataSetType = MustashMethods[methodName].First().Method.DeclaringType;
+      var method = MustashMethods[methodName].First().Method;
+      var dataSetType = method.DeclaringType;
 
-      var ds = dataSets.FirstOrDefault(o => o.GetType() == dataSetType);
+      // if the method is declared on a nested type, walk up to the top-level declaring type (e.g. Person)
+      while (dataSetType?.DeclaringType != null)
+      {
+         dataSetType = dataSetType.DeclaringType;
+      }
 
-      if( ds == null )
+      var ds = dataSets
+         .Select(o => o is Delegate del &&
+                      del.GetType().GetGenericTypeDefinition() == typeof(Func<>) &&
+                      del.GetType().GetGenericArguments()[0] == dataSetType
+               ? del.DynamicInvoke()
+               : o)
+         .FirstOrDefault(o => o?.GetType() == dataSetType);
+
+      if ( ds == null )
       {
          throw new ArgumentException($"Can't parse {methodName} because the dataset was not provided in the {nameof(dataSets)} parameter.", nameof(dataSets));
       }
@@ -182,5 +326,9 @@ public static class Tokenizer
 
 [AttributeUsage(AttributeTargets.Property)]
 internal class RegisterMustasheMethodsAttribute : Attribute
+{
+}
+[AttributeUsage(AttributeTargets.Property)]
+internal class RegisterPersonPropertyAttribute : Attribute
 {
 }

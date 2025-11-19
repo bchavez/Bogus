@@ -17,6 +17,10 @@
     <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="morelinq" Version="3.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="PolySharp" Version="1.15.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Rant" Version="3.0.530" />
     <PackageReference Include="TeamCity.VSTest.TestAdapter" Version="1.0.39" />
     <PackageReference Include="Verify.Xunit" Version="22.8.0" />

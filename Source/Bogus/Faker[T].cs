@@ -149,7 +149,11 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
       this.Locale = locale;
       FakerHub = new Faker(locale);
       TypeProperties = this.binder.GetMembers(typeof(T));
-      this.CreateActions[Default] = faker => Activator.CreateInstance<T>();
+      this.CreateActions[Default] = faker =>
+      {
+         var constructor = typeof(T).GetConstructors().First();
+         return (T)constructor.Invoke(new object[constructor.GetParameters().Length]);
+      };
    }
 
    /// <summary>

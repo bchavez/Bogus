@@ -29,6 +29,7 @@ Minimum Requirements: **.NET Standard 1.3** or **.NET Standard 2.0** or **.NET F
 * **Microsoft Office Developer**
     * [**Office 365 Development Training Content**](https://github.com/OfficeDev/TrainingContent) [[code]](https://github.com/OfficeDev/TrainingContent/blob/0b2579517f0271f9a64f613b2046ab2821a73956/Teams/03%20Authentication/LabFiles/Starter/officedev-talent-management/DataModel/PositionCandidateData.cs)
     * [**Microsoft Teams Sample Connector**](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp) [[code]](https://github.com/OfficeDev/microsoft-teams-sample-connector-csharp/blob/8805bb1acb136949905e4644c4e714dd7b70a61a/TeamsToDoAppConnector/Utils/TaskHelper.cs)
+* [**PowerToysRun-RandomGen/RandomGen for PowerToys Run**](https://github.com/ruslanlap/PowerToysRun-RandomGen) [[code]](https://github.com/ruslanlap/PowerToysRun-RandomGen/blob/master/README.md)
 
 ##### Featured In
 * [**Amazon AWS .NET Open Source Fund Recipient - Oct. 1st, 2024**](#sponsors)

@@ -123,18 +123,25 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    /// The current locale.
    /// </summary>
    public string Locale { get; set; }
-
+   
    /// <summary>
    /// Creates a Faker with default 'en' locale.
    /// </summary>
    public Faker() : this("en", null)
    {
    }
-
+   
    /// <summary>
    /// Creates a Faker with a locale
    /// </summary>
    public Faker(string locale) : this(locale, null)
+   {
+   }
+
+   /// <summary>
+   /// Creates a Faker with a locale
+   /// </summary>
+   public Faker(LocaleType localeType) : this(localeType.ToString(), null)
    {
    }
 
@@ -146,7 +153,7 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
    public Faker(string locale = "en", IBinder binder = null)
    {
       this.binder = binder ?? new Binder();
-      this.Locale = locale;
+      this.Locale = locale;      
       FakerHub = new Faker(locale);
       TypeProperties = this.binder.GetMembers(typeof(T));
       this.CreateActions[Default] = faker => Activator.CreateInstance<T>();

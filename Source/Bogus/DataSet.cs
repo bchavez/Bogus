@@ -31,6 +31,17 @@ public class DataSet : ILocaleAware, IHasRandomizer
    }
 
    /// <summary>
+   /// Initializes a new instance of the <see cref="DataSet"/> class.
+   /// </summary>
+   /// <param name="localeType">The locale wanting to be set.</param>
+   /// <exception cref="BogusException">
+   /// When the given <paramref name="localeType"/> isn't found.
+   /// </exception>
+   public DataSet(LocaleType localeType) : this(localeType.ToString())
+   {
+   }
+
+   /// <summary>
    /// Gets or sets the category name inside the locale.
    /// </summary>
    protected string Category { get; set; }
@@ -39,7 +50,7 @@ public class DataSet : ILocaleAware, IHasRandomizer
    /// Gets or sets the current locale of the data set.
    /// </summary>
    public string Locale { get; set; }
-
+   
    /// <summary>
    /// See <see cref="SeedNotifier"/>.
    /// </summary>

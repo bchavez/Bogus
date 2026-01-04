@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 17.0.31903.59
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bogus", "Bogus\Bogus.csproj", "{340A2FE9-5B52-4FD7-9D21-83CCF1621E09}"
 EndProject
@@ -15,9 +15,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Root", "Root", "{5CA98FAF-2
 		..\CONTRIBUTING.md = ..\CONTRIBUTING.md
 		Directory.Build.props = Directory.Build.props
 		..\.config\dotnet-tools.json = ..\.config\dotnet-tools.json
+		..\global.json = ..\global.json
 		..\HISTORY.md = ..\HISTORY.md
 		..\README.md = ..\README.md
-		..\global.json = ..\global.json
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Benchmark", "Benchmark\Benchmark.csproj", "{B8239D68-FBFA-4AAD-98E8-75405EA5B71C}"

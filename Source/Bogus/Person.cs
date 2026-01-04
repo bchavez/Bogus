@@ -30,6 +30,7 @@ public class Person : IHasRandomizer, IHasContext
       public string City { get; set; }
       public string State { get; set; }
       public string ZipCode { get; set; }
+      [Traverse]
       public CardGeo Geo { get; set; }
    }
 
@@ -163,11 +164,13 @@ public class Person : IHasRandomizer, IHasContext
    [RegisterPersonProperty]
    public DateTime DateOfBirth { get; set; }
    [RegisterPersonProperty]
+   [Traverse]
    public CardAddress Address { get; set; }
    [RegisterPersonProperty]
    public string Phone { get; set; }
    [RegisterPersonProperty]
    public string Website { get; set; }
    [RegisterPersonProperty]
+   [Traverse]
    public CardCompany Company { get; set; }
 }

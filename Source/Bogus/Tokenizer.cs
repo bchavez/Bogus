@@ -33,34 +33,11 @@ public static class Tokenizer
    /// <summary>
    /// Method to determine if to traverse into the property or not.
    /// </summary>
-   /// <param name="property"></param>
+   /// <param name="type"></param>
    /// <returns></returns>
-   public static bool IsComplex(PropertyInfo property)
+   public static bool Traverse(PropertyInfo info)
    {
-      var t = property.PropertyType;
-      t = Nullable.GetUnderlyingType(t) ?? t; // unwrap Nullable<T>
-
-      // There isn't a efficient way to determine if a property cant be traversed into across all the supported .NET versions.
-#if NETSTANDARD1_0 || NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3
-        var ti = t.GetTypeInfo();
-        bool isPrimitiveLike =
-            ti.IsPrimitive ||
-            ti.IsEnum ||
-            t == typeof(string) ||
-            t == typeof(DateTime) ||
-            t == typeof(DateTimeOffset);
-#else
-      bool isPrimitiveLike =
-          t.IsPrimitive ||
-          t.IsEnum ||
-          t == typeof(string) ||
-          t == typeof(DateTime) ||
-          t == typeof(DateTimeOffset);
-#endif
-
-      // drill into everything else
-      var test = isPrimitiveLike;
-      return !isPrimitiveLike;
+      return info.IsDefined(typeof(TraverseAttribute), true);
    }
 
    /// <summary>
@@ -73,7 +50,7 @@ public static class Tokenizer
    static IEnumerable<MustashMethod> GetClassProperties(Type parentPropertyInfo, PropertyInfo mi, string nestedName = null)
    {
       // if the property is complex, recurse into it
-      if (IsComplex(mi))
+      if (Traverse(mi))
       {
          nestedName += mi.Name + ".";
          return mi.PropertyType.GetProperties()
@@ -220,8 +197,7 @@ public static class Tokenizer
 
    private static object FindDataSetWithMethod(object[] dataSets, string methodName)
    {
-      var method = MustashMethods[methodName].First().Method;
-      var dataSetType = method.DeclaringType;
+      var dataSetType = MustashMethods[methodName].First().Method.DeclaringType;
 
       // if the method is declared on a nested type, walk up to the top-level declaring type (e.g. Person)
       while (dataSetType?.DeclaringType != null)
@@ -328,3 +304,5 @@ public static class Tokenizer
 internal class RegisterMustasheMethodsAttribute : Attribute;
 [AttributeUsage(AttributeTargets.Property)]
 internal class RegisterPersonPropertyAttribute : Attribute;
+[AttributeUsage(AttributeTargets.Property)]
+public sealed class TraverseAttribute : Attribute { }

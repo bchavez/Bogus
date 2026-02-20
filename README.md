@@ -511,6 +511,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
 	* `Bogus.DataSets.Company.Nipc()` - Número de Identificação de Pessoa Colectiva (NIPC)
 * **`using Bogus.Extensions.Romania;`**
 	* `Bogus.Person.Cnp()` - Romanian Personal Identification number (CNP)
+	* `Bogus.DataSets.Vehicle.RoRegistrationPlate()` - Romanian Vehicle Registration Plate
 * **`using Bogus.Extensions.Sweden;`**
 	* `Bogus.Person.Personnummer()` - Swedish national identity number
 	* `Bogus.Person.Samordningsnummer()` - Swedish coordination number

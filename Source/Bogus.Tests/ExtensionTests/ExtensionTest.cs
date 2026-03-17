@@ -115,6 +115,17 @@ namespace Bogus.Tests.ExtensionTests;
      }
 
      [Fact]
+     public void codice_fiscale_is_deterministic()
+     {
+          var codiceFiscale1 = new Faker("it").Person.CodiceFiscale();     
+
+          ResetGlobalSeed();
+          var codiceFiscale2 = new Faker("it").Person.CodiceFiscale();  
+  
+          codiceFiscale1.Should().Be(codiceFiscale2);
+     }
+
+     [Fact]
      public void double_names_are_correctly_squeezed()
      {
          var f = new Faker("it");

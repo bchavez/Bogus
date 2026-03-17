@@ -132,14 +132,44 @@ internal static class CodiceFiscaleGenerator
       //To guarantee code stability for a person, we generate
       //fake city-of-birth code through surname and birth date.
       //Using actual city code database would be too heavy.
-      sb.Append(lastName[0].ToString().ToUpper());
-      var birthDatePositiveHash = Math.Abs(birthday.GetHashCode());
-      sb.Append((birthDatePositiveHash % 1000).ToString("000"));
+      var cityHash = ComputeStableHash(lastName, firstName, birthday, male);
+      sb.Append((char)('A' + cityHash % 26));
+      sb.Append((cityHash / 26 % 1000).ToString("000"));
 
       var checksum = ComputeChecksumCodiceFiscale(sb.ToString(), validChecksum);
       sb.Append(checksum);
 
       return sb.ToString();
+   }
+
+   /// <summary>
+   /// Computes a deterministic, runtime-stable hash from all fiscal code inputs using FNV-1a.
+   /// Unlike <see cref="object.GetHashCode"/>, this produces the same value on every .NET runtime and version.
+   /// </summary>
+   /// <param name="lastName">Last name of the holder</param>
+   /// <param name="firstName">First name of the holder</param>
+   /// <param name="birthday">Birthday of the holder</param>
+   /// <param name="male">Indicates whether the holder is male</param>
+   /// <returns>The computed hash value</returns>
+   private static uint ComputeStableHash(string lastName, string firstName, DateTime birthday, bool male)
+   {
+      unchecked
+      {
+         // FNV-1a 32-bit: offset basis and prime from the spec
+         const uint offsetBasis = 2166136261u;
+         const uint prime = 16777619u;
+
+         var hash = offsetBasis;
+
+         foreach (var c in lastName.ToUpperInvariant())  { hash = (hash ^ c) * prime; }
+         foreach (var c in firstName.ToUpperInvariant()) { hash = (hash ^ c) * prime; }
+         hash = (hash ^ (uint)birthday.Year) * prime;
+         hash = (hash ^ (uint)birthday.Month) * prime;
+         hash = (hash ^ (uint)birthday.Day) * prime;
+         hash = (hash ^ (male ? 1u : 0u)) * prime;
+
+         return hash;
+      }
    }
 
    /// <summary>

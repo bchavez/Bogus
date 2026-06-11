@@ -530,7 +530,7 @@ In the examples above, all three alternative styles of using **Bogus** produce t
     * `Randomizer.GaussianDecimal()` - Generate a `decimal` based on a specific normal distribution.
     
 #### Amazing Community Extensions
-* [**AutoBogus**](https://github.com/nickdodd79/AutoBogus) ([`NuGet Package`](https://www.nuget.org/packages?q=AutoBogus)) by [@nickdodd79](https://github.com/nickdodd79/) - Extends **Bogus** by adding automatic `.RuleFor()` creation and population capabilities.
+* [**Soenneker.Utils.AutoBogus**](https://github.com/soenneker/soenneker.utils.autobogus) ([`NuGet Package`](https://www.nuget.org/packages/soenneker.utils.autobogus/)) by [@soenneker](https://github.com/soenneker) - Extends **Bogus** by adding automatic `.RuleFor()` creation and population capabilities.
 * [**NaughtyStrings.Bogus**](https://github.com/SimonCropp/NaughtyStrings) ([`NuGet Package`](https://www.nuget.org/packages/NaughtyStrings.Bogus/)) by [@SimonCropp](https://github.com/SimonCropp) - Extends **Bogus** with list of naughty strings which have a high probability of causing issues when used as user-input data. Examples:
     * `.SQLInjection()` - Strings which can cause a SQL injection if inputs are not sanitized.
     * `.ScriptInjection()` - Strings which attempt to invoke a benign script injection; shows vulnerability to XSS.

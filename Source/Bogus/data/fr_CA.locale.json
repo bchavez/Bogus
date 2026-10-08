@@ -51,32 +51,39 @@
       "SK",
       "YK"
     ],
-    "default_country": [
-      "Canada"
+    "city": [
+      "#{city_prefix} #{name.first_name}#{city_suffix}",
+      "#{city_prefix} #{name.first_name}",
+      "#{name.first_name}#{city_suffix}",
+      "#{name.last_name}#{city_suffix}"
+    ],
+    "street_name": [
+      "#{name.first_name} #{street_suffix}",
+      "#{name.last_name} #{street_suffix}"
     ]
   },
   "internet": {
     "free_email": [
       "gmail.com",
-      "yahoo.ca",
-      "hotmail.com"
+      "hotmail.com",
+      "yahoo.ca"
     ],
     "domain_suffix": [
-      "qc.ca",
+      "biz",
       "ca",
       "com",
-      "biz",
       "info",
       "name",
       "net",
-      "org"
+      "org",
+      "qc.ca"
     ]
   },
   "phone_number": {
     "formats": [
       "### ###-####",
-      "1 ### ###-####",
-      "### ###-####, poste ###"
+      "### ###-####, poste ###",
+      "1 ### ###-####"
     ]
   }
 }

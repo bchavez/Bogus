@@ -1,0 +1,24 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 104],
+    state: [Array String; 3],
+    state_abbr: [Array String; 3],
+    street_suffix: [Array String; 9]
+  },
+  company: {
+    suffix: [Array String; 2]
+  },
+  internet: {
+    domain_suffix: [Array String; 4]
+  },
+  name: {
+    last_name: [Array String; 97],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 7]
+  },
+  title: English (Hong Kong)
+}

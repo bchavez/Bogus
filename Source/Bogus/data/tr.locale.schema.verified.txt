@@ -1,17 +1,27 @@
 ﻿{
   address: {
     building_number: [Array String; 6],
-    city: [Array String; 81],
+    city: [Array String; 1],
+    city_name: [Array String; 81],
     country: [Array String; 236],
-    default_country: [Array String; 1],
     postcode: [Array String; 1],
     state: [Array String; 81],
     street_address: [Array String; 1],
     street_name: [Array String; 1],
-    street_root: [Array String; 41]
+    street_names: [Array String; 40]
   },
   cell_phone: {
     formats: [Array String; 4]
+  },
+  commerce: {
+    color: [Array String; 30],
+    department: [Array String; 22],
+    product_description: [Array String; 12],
+    product_name: {
+      adjective: [Array String; 20],
+      material: [Array String; 14],
+      product: [Array String; 24]
+    }
   },
   internet: {
     domain_suffix: [Array String; 10]
@@ -20,15 +30,14 @@
     words: [Array String; 216]
   },
   name: {
-    female_first_name: [Array String; 414],
-    first_name: [Array String; 731],
-    last_name: [Array String; 198],
-    male_first_name: [Array String; 752],
-    name: [Array String; 6],
+    female_first_name: [Array String; 392],
+    first_name: [Array String; 1794],
+    last_name: [Array String; 370],
+    male_first_name: [Array String; 723],
+    name: [Array String; 9],
     prefix: [Array String; 4]
   },
   phone_number: {
-    area_code: [Array String; 97],
     formats: [Array String; 2]
   },
   title: Turkish

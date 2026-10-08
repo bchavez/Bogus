@@ -1,0 +1,26 @@
+﻿{
+  address: {
+    building_number: [Array String; 4],
+    city: [Array String; 1],
+    city_name: [Array String; 51],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 14],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 10],
+    street_suffix: [Array String; 31]
+  },
+  internet: {
+    domain_suffix: [Array String; 4],
+    free_email: [Array String; 3]
+  },
+  name: {
+    female_first_name: [Array String; 78],
+    first_name: [Array String; 181],
+    last_name: [Array String; 148],
+    male_first_name: [Array String; 102],
+    name: [Array String; 1]
+  },
+  title: French (Senegal)
+}

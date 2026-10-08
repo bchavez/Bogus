@@ -1,17 +1,43 @@
 ﻿{
   address: {
+    building_number: [Array String; 4],
     city: [Array String; 1],
     city_name: [Array String; 173],
-    country_code: [Array String; 1],
-    default_country: [Array String; 1],
+    country: [Array String; 193],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
     postcode: [Array String; 9],
-    state: [Array String; 26]
+    secondary_address: [Array String; 2],
+    state: [Array String; 26],
+    state_abbr: [Array String; 26],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 5],
+    street_suffix: [Array String; 526]
+  },
+  cell_phone: {
+    formats: [Array String; 9]
   },
   internet: {
-    domain_suffix: [Array String; 6]
+    domain_suffix: [Array String; 4],
+    free_email: [Array String; 4]
+  },
+  lorem: {
+    words: [Array String; 182]
+  },
+  name: {
+    female_first_name: [Array String; 447],
+    first_name: [Array String; 898],
+    last_name: [Array String; 199],
+    male_first_name: [Array String; 447],
+    name: [Array String; 10],
+    prefix: [Array String; 5],
+    title: {
+      job: [Array String; 18]
+    }
   },
   phone_number: {
-    formats: [Array String; 15]
+    formats: [Array String; 14]
   },
   title: French (Switzerland)
 }

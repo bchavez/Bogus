@@ -1,0 +1,9 @@
+﻿{
+  name: {
+    female_first_name: [Array String; 84],
+    first_name: [Array String; 231],
+    last_name: [Array String; 98],
+    male_first_name: [Array String; 86]
+  },
+  title: Yoruba (Nigeria)
+}

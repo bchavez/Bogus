@@ -1,0 +1,77 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 5],
+    city_name: [Array String; 44],
+    city_prefix: [Array String; 7],
+    city_suffix: [Array String; 1],
+    country: [Array String; 156],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 7],
+    state_abbr: [Array String; 7],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 5]
+  },
+  app: {
+    author: [Array String; 2],
+    name: [Array String; 8],
+    version: [Array String; 5]
+  },
+  cell_phone: {
+    formats: [Array String; 3]
+  },
+  commerce: {
+    color: [Array String; 13],
+    department: [Array String; 18],
+    product_name: {
+      adjective: [Array String; 5],
+      material: [Array String; 11],
+      product: [Array String; 21]
+    }
+  },
+  date: {
+    month: {
+      wide: [Array String; 12]
+    },
+    weekday: {
+      wide: [Array String; 7]
+    }
+  },
+  finance: {
+    account_type: [Array String; 2],
+    transaction_type: [Array String; 4]
+  },
+  lorem: {
+    words: [Array String; 43]
+  },
+  music: {
+    genre: [Array String; 9]
+  },
+  name: {
+    female_first_name: [Array String; 18],
+    last_name: [Array String; 20],
+    male_first_name: [Array String; 18],
+    name: [Array String; 10],
+    prefix: [Array String; 3],
+    suffix: [Array String; 11],
+    title: {
+      descriptor: [Array String; 14],
+      level: [Array String; 14]
+    }
+  },
+  team: {
+    creature: [Array String; 35],
+    name: [Array String; 1]
+  },
+  title: Urdu,
+  vehicle: {
+    fuel: [Array String; 4],
+    manufacturer: [Array String; 8],
+    model: [Array String; 3],
+    type: [Array String; 2]
+  }
+}

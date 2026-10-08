@@ -2,47 +2,54 @@
   address: {
     building_number: [Array String; 2],
     city: [Array String; 1],
-    city_name: [Array String; 227],
-    default_country: [Array String; 1],
+    city_name: [Array String; 223],
+    country: [Array String; 249],
     postcode: [Array String; 1],
-    state: [Array String; 34],
+    state: [Array String; 37],
     street_address: [Array String; 1],
     street_name: [Array String; 2],
     street_prefix: [Array String; 8]
   },
+  commerce: {
+    color: [Array String; 41],
+    department: [Array String; 31],
+    product_description: [Array String; 31],
+    product_name: {
+      adjective: [Array String; 26],
+      material: [Array String; 18],
+      product: [Array String; 29]
+    }
+  },
   company: {
-    name: [Array String; 3],
-    prefix: [Array String; 5],
+    name: [Array String; 1],
     suffix: [Array String; 2]
   },
   date: {
     month: {
       abbr: [Array String; 12],
-      abbr_context: [Array String; 12],
-      wide: [Array String; 12],
-      wide_context: [Array String; 12]
+      wide: [Array String; 12]
     },
     weekday: {
       abbr: [Array String; 7],
-      abbr_context: [Array String; 7],
-      wide: [Array String; 7],
-      wide_context: [Array String; 7]
+      wide: [Array String; 7]
     }
   },
   internet: {
-    domain_suffix: [Array String; 20],
+    domain_suffix: [Array String; 23],
     free_email: [Array String; 4]
   },
   name: {
-    female_first_name: [Array String; 222],
-    female_last_name: [Array String; 69],
-    male_first_name: [Array String; 494],
-    male_last_name: [Array String; 106],
-    name: [Array String; 7],
+    female_first_name: [Array String; 259],
+    female_last_name: [Array String; 108],
+    first_name: [Array String; 752],
+    last_name: [Array String; 1],
+    male_first_name: [Array String; 489],
+    male_last_name: [Array String; 148],
+    name: [Array String; 3],
     suffix: [Array String; 20]
   },
   phone_number: {
     formats: [Array String; 38]
   },
-  title: Indonesia
+  title: Indonesian (Indonesia)
 }

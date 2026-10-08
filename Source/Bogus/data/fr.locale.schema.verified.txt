@@ -2,9 +2,11 @@
   address: {
     building_number: [Array String; 4],
     city: [Array String; 1],
-    city_name: [Array String; 100],
-    default_country: [Array String; 1],
-    postcode: [Array String; 1],
+    city_name: [Array String; 99],
+    country: [Array String; 193],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    postcode: [Array String; 108],
     secondary_address: [Array String; 2],
     state: [Array String; 22],
     street_address: [Array String; 1],
@@ -12,20 +14,23 @@
     street_prefix: [Array String; 9],
     street_suffix: [Array String; 66]
   },
+  commerce: {
+    color: [Array String; 186],
+    department: [Array String; 22],
+    product_description: [Array String; 14],
+    product_name: {
+      adjective: [Array String; 23],
+      material: [Array String; 12],
+      product: [Array String; 24]
+    }
+  },
   company: {
-    adjective: [Array String; 100],
-    bs_adjective: [Array String; 65],
-    bs_noun: [Array String; 44],
-    bs_verb: [Array String; 60],
-    descriptor: [Array String; 101],
     name: [Array String; 2],
-    noun: [Array String; 104],
-    suffix: [Array String; 8]
+    suffix: [Array String; 12]
   },
   date: {
     month: {
       abbr: [Array String; 12],
-      abbr_context: [Array String; 12],
       wide: [Array String; 12],
       wide_context: [Array String; 12]
     },
@@ -36,25 +41,40 @@
       wide_context: [Array String; 7]
     }
   },
+  finance: {
+    account_type: [Array String; 7],
+    currency: [Array String; 86],
+    transaction_type: [Array String; 4]
+  },
   internet: {
     domain_suffix: [Array String; 7],
     free_email: [Array String; 3]
   },
   lorem: {
-    words: [Array String; 249]
+    words: [Array String; 182]
+  },
+  music: {
+    genre: [Array String; 18]
   },
   name: {
-    female_first_name: [Array String; 451],
+    female_first_name: [Array String; 435],
+    first_name: [Array String; 931],
     last_name: [Array String; 150],
-    male_first_name: [Array String; 496],
-    name: [Array String; 3],
+    male_first_name: [Array String; 480],
+    name: [Array String; 10],
     prefix: [Array String; 5],
     title: {
-      job: [Array String; 18]
+      descriptor: [Array String; 11],
+      job: [Array String; 18],
+      level: [Array String; 37]
     }
   },
   phone_number: {
     formats: [Array String; 14]
   },
-  title: French
+  title: French,
+  vehicle: {
+    fuel: [Array String; 4],
+    type: [Array String; 11]
+  }
 }

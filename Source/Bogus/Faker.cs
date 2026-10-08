@@ -360,6 +360,55 @@ public class Faker : ILocaleAware, IHasRandomizer, IHasContext
    /// <value>The locale.</value>
    public string Locale { get; set; }
 
+   private readonly Dictionary<string, object> parameters = new(StringComparer.OrdinalIgnoreCase);
+
+   /// <summary>
+   /// Sets a named runtime parameter that can be read inside rules with
+   /// <see cref="GetParameter{T}(string)"/>. Overwrites any existing value.
+   /// Prefer <see cref="Faker{T}.WithParameter"/> when configuring a <see cref="Faker{T}"/>.
+   /// </summary>
+   internal void SetParameter(string name, object value)
+   {
+      if( string.IsNullOrWhiteSpace(name) ) throw new ArgumentException("Parameter name must not be null or whitespace.", nameof(name));
+      parameters[name] = value;
+   }
+
+   internal void CopyParametersTo(Faker other)
+   {
+      foreach( var kv in parameters ) other.parameters[kv.Key] = kv.Value;
+   }
+
+   /// <summary>
+   /// Gets a runtime parameter previously set with <see cref="Faker{T}.WithParameter"/>.
+   /// Throws <see cref="KeyNotFoundException"/> if the parameter doesn't exist.
+   /// </summary>
+   public object GetParameter(string name)
+   {
+      if( !parameters.TryGetValue(name, out var value) )
+         throw new KeyNotFoundException($"Faker parameter '{name}' was not found. Set it with Faker<T>.WithParameter().");
+      return value;
+   }
+
+   /// <summary>
+   /// Gets a runtime parameter as <typeparamref name="T"/>.
+   /// Throws <see cref="KeyNotFoundException"/> if the parameter doesn't exist.
+   /// </summary>
+   public T GetParameter<T>(string name) => (T)GetParameter(name);
+
+   /// <summary>
+   /// Tries to get a runtime parameter as <typeparamref name="T"/>. Returns false if it doesn't exist or isn't a <typeparamref name="T"/>.
+   /// </summary>
+   public bool TryGetParameter<T>(string name, out T value)
+   {
+      if( name != null && parameters.TryGetValue(name, out var o) && o is T t )
+      {
+         value = t;
+         return true;
+      }
+      value = default;
+      return false;
+   }
+
    /// <summary>
    /// Triggers a new generation context
    /// </summary>

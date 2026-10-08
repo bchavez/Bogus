@@ -1,0 +1,56 @@
+﻿{
+  address: {
+    city: [Array String; 2],
+    city_prefix: [Array String; 7],
+    city_suffix: [Array String; 16],
+    country: [Array String; 249],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    secondary_address: [Array String; 2],
+    street_address: [Array String; 1],
+    street_name: [Array String; 4],
+    street_prefix: [Array String; 19],
+    street_suffix: [Array String; 19]
+  },
+  commerce: {
+    color: [Array String; 25],
+    product_name: {
+      adjective: [Array String; 25],
+      material: [Array String; 15],
+      product: [Array String; 20]
+    }
+  },
+  database: {
+    column: [Array String; 10]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  hacker: {
+    adjective: [Array String; 25],
+    ingverb: [Array String; 25],
+    noun: [Array String; 30],
+    phrase: [Array String; 9],
+    verb: [Array String; 25]
+  },
+  name: {
+    female_first_name: [Array String; 89],
+    first_name: [Array String; 179],
+    gender: [Array String; 25],
+    last_name: [Array String; 100],
+    male_first_name: [Array String; 89],
+    name: [Array String; 8],
+    prefix: [Array String; 5]
+  },
+  title: Esperanto,
+  vehicle: {
+    fuel: [Array String; 4]
+  }
+}

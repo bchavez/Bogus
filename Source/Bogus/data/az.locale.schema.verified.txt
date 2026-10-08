@@ -4,13 +4,12 @@
     city: [Array String; 1],
     city_name: [Array String; 78],
     country: [Array String; 239],
-    default_country: [Array String; 1],
     postcode: [Array String; 1],
     secondary_address: [Array String; 1],
     street_address: [Array String; 1],
-    street_name: [Array String; 2],
-    street_suffix: [Array String; 6],
-    street_title: [Array String; 235]
+    street_name: [Array String; 1],
+    street_root: [Array String; 235],
+    street_suffix: [Array String; 6]
   },
   commerce: {
     color: [Array String; 18],
@@ -22,8 +21,7 @@
     }
   },
   company: {
-    name: [Array String; 8],
-    prefix: [Array String; 3],
+    name: [Array String; 3],
     suffix: [Array String; 2]
   },
   date: {
@@ -47,13 +45,13 @@
   name: {
     female_first_name: [Array String; 73],
     female_last_name: [Array String; 10],
+    last_name: [Array String; 20],
     male_first_name: [Array String; 35],
     male_last_name: [Array String; 10],
-    name: [Array String; 6]
+    name: [Array String; 3]
   },
   phone_number: {
     formats: [Array String; 1]
   },
-  separator:  və ,
   title: Azerbaijani
 }

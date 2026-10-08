@@ -2,35 +2,32 @@
   address: {
     building_number: [Array String; 7],
     city: [Array String; 1],
-    city_prefix: [Array String; 130],
-    city_suffix: [Array String; 19],
+    city_name: [Array String; 129],
     country: [Array String; 180],
-    default_country: [Array String; 1],
     postcode: [Array String; 1],
     secondary_address: [Array String; 3],
     state: [Array String; 31],
     state_abbr: [Array String; 32],
-    street: [Array String; 39],
-    street_address: [Array String; 2],
-    street_name: [Array String; 6],
-    street_suffix: [Array String; 70],
-    time_zone: [Array String; 142]
+    street_address: [Array String; 1],
+    street_name: [Array String; 3],
+    street_prefix: [Array String; 23],
+    street_root: [Array String; 39]
   },
   cell_phone: {
     formats: [Array String; 4]
   },
   commerce: {
-    color: [Array String; 31],
+    color: [Array String; 30],
     department: [Array String; 22],
     product_name: {
-      adjective: [Array String; 17],
+      adjective: [Array String; 16],
       material: [Array String; 11],
       product: [Array String; 23]
     }
   },
   company: {
-    adjective: [Array String; 85],
-    bs_adjective: [Array String; 65],
+    adjective: [Array String; 81],
+    bs_adjective: [Array String; 64],
     bs_noun: [Array String; 44],
     bs_verb: [Array String; 60],
     descriptor: [Array String; 81],
@@ -46,9 +43,12 @@
     words: [Array String; 268]
   },
   name: {
-    first_name: [Array String; 304],
+    female_first_name: [Array String; 161],
+    female_prefix: [Array String; 2],
     last_name: [Array String; 687],
-    name: [Array String; 5],
+    male_first_name: [Array String; 139],
+    male_prefix: [Array String; 1],
+    name: [Array String; 10],
     prefix: [Array String; 3],
     suffix: [Array String; 15],
     title: {
@@ -60,9 +60,8 @@
   phone_number: {
     formats: [Array String; 4]
   },
-  separator:  & ,
   team: {
-    creature: [Array String; 67],
+    creature: [Array String; 65],
     name: [Array String; 1]
   },
   title: Spanish (Mexico)

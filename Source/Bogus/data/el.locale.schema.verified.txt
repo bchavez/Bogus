@@ -1,32 +1,34 @@
 ﻿{
   address: {
-    county: [Array String; 78],
-    default_country: [Array String; 1]
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 77],
+    postcode: [Array String; 8],
+    secondary_address: [Array String; 8],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_names: [Array String; 192],
+    street_prefix: [Array String; 3]
   },
   app: {
     author: [Array String; 2],
     name: [Array String; 32],
     version: [Array String; 5]
   },
-  business: {
-    credit_card_expiry_dates: [Array String; 4],
-    credit_card_numbers: [Array String; 4],
-    credit_card_types: [Array String; 4]
-  },
   cell_phone: {
     formats: [Array String; 4]
   },
   commerce: {
     color: [Array String; 17],
-    department: [Array String; 22],
+    department: [Array String; 21],
     product_name: {
       adjective: [Array String; 10],
       material: [Array String; 5],
-      product: [Array String; 22]
+      product: [Array String; 21]
     }
   },
   company: {
-    adjective: [Array String; 62],
+    adjective: [Array String; 60],
     bs_adjective: [Array String; 52],
     bs_noun: [Array String; 36],
     bs_verb: [Array String; 28],
@@ -35,22 +37,9 @@
     noun: [Array String; 39],
     suffix: [Array String; 4]
   },
-  credit_card: {
-    american_express: [Array String; 2],
-    discover: [Array String; 6],
-    maestro: [Array String; 3],
-    mastercard: [Array String; 2],
-    visa: [Array String; 2]
-  },
   finance: {
     account_type: [Array String; 3],
-    currency: [
-      {
-        code: EUR,
-        name: Ευρώ,
-        symbol: €
-      }
-    ],
+    currency: [Array String; 1],
     transaction_type: [Array String; 4]
   },
   hacker: {
@@ -60,28 +49,29 @@
     verb: [Array String; 14]
   },
   internet: {
-    domain_suffix: [Array String; 5]
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 3]
   },
   lorem: {
-    words: [Array String; 249]
+    words: [Array String; 182]
   },
   name: {
-    first_name: [Array String; 36],
+    female_first_name: [Array String; 19],
     last_name: [Array String; 200],
-    name: [Array String; 6],
-    prefix: [Array String; 4],
+    male_first_name: [Array String; 36],
+    name: [Array String; 10],
+    prefix: [Array String; 3],
     title: {
       descriptor: [Array String; 6],
-      job: [Array String; 19],
+      job: [Array String; 17],
       level: [Array String; 30]
     }
   },
   phone_number: {
     formats: [Array String; 52]
   },
-  separator:  & ,
   team: {
-    creature: [Array String; 64],
+    creature: [Array String; 62],
     name: [Array String; 1]
   },
   title: Greek

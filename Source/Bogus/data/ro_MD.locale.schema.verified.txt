@@ -1,0 +1,44 @@
+﻿{
+  address: {
+    building_number: [Array String; 2],
+    city: [Array String; 2],
+    city_name: [Array String; 93],
+    city_prefix: [Array String; 2],
+    county: [Array String; 34],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 4],
+    street_root: [Array String; 298]
+  },
+  cell_phone: {
+    formats: [Array String; 90]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 5],
+    free_email: [Array String; 7]
+  },
+  name: {
+    female_first_name: [Array String; 245],
+    first_name: [Array String; 460],
+    last_name: [Array String; 299],
+    male_first_name: [Array String; 204],
+    name: [Array String; 2],
+    prefix: [Array String; 3]
+  },
+  phone_number: {
+    formats: [Array String; 10]
+  },
+  title: Romanian (Moldova)
+}

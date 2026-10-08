@@ -1,0 +1,32 @@
+﻿{
+  address: {
+    building_number: [Array String; 6],
+    city: [Array String; 1],
+    city_name: [Array String; 64],
+    country: [Array String; 125],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 4],
+    state: [Array String; 12],
+    state_abbr: [Array String; 12],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_names: [Array String; 97]
+  },
+  name: {
+    female_first_name: [Array String; 105],
+    first_name: [Array String; 206],
+    last_name: [Array String; 110],
+    male_first_name: [Array String; 100],
+    name: [Array String; 10],
+    prefix: [Array String; 9],
+    suffix: [Array String; 2],
+    title: {
+      descriptor: [Array String; 20],
+      job: [Array String; 50],
+      level: [Array String; 22]
+    }
+  },
+  title: Slovenian (Slovenia)
+}

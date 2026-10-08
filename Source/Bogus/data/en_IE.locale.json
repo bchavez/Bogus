@@ -29,17 +29,40 @@
       "Wexford",
       "Wicklow"
     ],
-    "default_country": [
-      "Ireland"
+    "postcode": [
+      "A## ****",
+      "D## ****",
+      "E## ****",
+      "F## ****",
+      "H## ****",
+      "K## ****",
+      "N## ****",
+      "P## ****",
+      "R## ****",
+      "T## ****",
+      "V## ****",
+      "W## ****",
+      "X## ****",
+      "Y## ****"
+    ],
+    "city": [
+      "#{city_prefix} #{name.first_name}#{city_suffix}",
+      "#{city_prefix} #{name.first_name}",
+      "#{name.first_name}#{city_suffix}",
+      "#{name.last_name}#{city_suffix}"
+    ],
+    "street_name": [
+      "#{name.first_name} #{street_suffix}",
+      "#{name.last_name} #{street_suffix}"
     ]
   },
   "internet": {
     "domain_suffix": [
-      "ie",
       "com",
-      "net",
+      "eu",
+      "ie",
       "info",
-      "eu"
+      "net"
     ]
   },
   "phone_number": {

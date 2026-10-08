@@ -1,48 +1,48 @@
 ﻿{
   address: {
-    building_number: [Array String; 3],
+    building_number: [Array String; 6],
     city: [Array String; 1],
-    city_name: [Array String; 908],
-    country: [Array String; 198],
-    default_country: [Array String; 1],
+    city_name: [Array String; 906],
+    country: [Array String; 194],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
     postcode: [Array String; 1],
-    secondary_address: [Array String; 2],
+    secondary_address: [Array String; 1],
     state: [Array String; 16],
     state_abbr: [Array String; 16],
     street_address: [Array String; 1],
     street_name: [Array String; 1],
-    street_prefix: [Array String; 2]
+    street_prefix: [Array String; 14]
   },
   cell_phone: {
     formats: [Array String; 12]
   },
+  commerce: {
+    color: [Array String; 148]
+  },
   company: {
-    adjetive: [Array String; 100],
-    bs_adjective: [Array String; 65],
-    bs_noun: [Array String; 44],
-    bs_verb: [Array String; 60],
-    descriptor: [Array String; 101],
     name: [Array String; 3],
-    noun: [Array String; 104],
-    suffix: [Array String; 4]
+    suffix: [Array String; 7]
   },
   internet: {
-    domain_suffix: [Array String; 5],
+    domain_suffix: [Array String; 19],
     free_email: [Array String; 3]
   },
   lorem: {
-    words: [Array String; 249]
+    words: [Array String; 182]
+  },
+  music: {
+    genre: [Array String; 18]
   },
   name: {
-    first_name: [Array String; 408],
+    female_first_name: [Array String; 163],
+    female_prefix: [Array String; 1],
+    gender: [Array String; 24],
     last_name: [Array String; 712],
-    name: [Array String; 6],
-    prefix: [Array String; 2],
-    title: {
-      descriptor: [Array String; 22],
-      job: [Array String; 25],
-      level: [Array String; 37]
-    }
+    male_first_name: [Array String; 230],
+    male_prefix: [Array String; 1],
+    name: [Array String; 10],
+    prefix: [Array String; 2]
   },
   phone_number: {
     formats: [Array String; 49]

@@ -185,31 +185,44 @@ public void With_Korean_Locale()
 
 | Locale Code  | Language                | | Locale Code  | Language                 |
 |:------------:|:-----------------------:|-|:------------:|:------------------------:|
-|`af_ZA`       |Afrikaans                 ||`fr_CH`       |French (Switzerland)      |
-|`ar`          |Arabic                    ||`ge`          |Georgian                  |
-|`az`          |Azerbaijani               ||`hr`          |Hrvatski                  |
-|`cz`          |Czech                     ||`id_ID`       |Indonesia                 |
-|`de`          |German                    ||`it`          |Italian                   |
-|`de_AT`       |German (Austria)          ||`ja`          |Japanese                  |
-|`de_CH`       |German (Switzerland)      ||`ko`          |Korean                    |
-|`el`          |Greek                     ||`lv`          |Latvian                   |
-|`en`          |English                   ||`nb_NO`       |Norwegian                 |
-|`en_AU`       |English (Australia)       ||`ne`          |Nepalese                  |
-|`en_AU_ocker` |English (Australia Ocker) ||`nl`          |Dutch                     |
-|`en_BORK`     |English (Bork)            ||`nl_BE`       |Dutch (Belgium)           |
-|`en_CA`       |English (Canada)          ||`pl`          |Polish                    |
-|`en_GB`       |English (Great Britain)   ||`pt_BR`       |Portuguese (Brazil)       |
-|`en_IE`       |English (Ireland)         ||`pt_PT`       |Portuguese (Portugal)     |
-|`en_IND`      |English (India)           ||`ro`          |Romanian                  |
-|`en_NG`       |Nigeria (English)         ||`ru`          |Russian                   |
-|`en_US`       |English (United States)   ||`sk`          |Slovakian                 |
-|`en_ZA`       |English (South Africa)    ||`sv`          |Swedish                   |
-|`es`          |Spanish                   ||`tr`          |Turkish                   |
-|`es_MX`       |Spanish (Mexico)          ||`uk`          |Ukrainian                 |
-|`fa`          |Farsi                     ||`vi`          |Vietnamese                |
-|`fi`          |Finnish                   ||`zh_CN`       |Chinese                   |
-|`fr`          |French                    ||`zh_TW`       |Chinese (Taiwan)          |
-|`fr_CA`       |French (Canada)           ||`zu_ZA`       |Zulu (South Africa)       |
+|`af_ZA`       |Afrikaans (South Africa)  ||`he`          |Hebrew                    |
+|`ar`          |Arabic                    ||`hr`          |Croatian                  |
+|`az`          |Azerbaijani               ||`hu`          |Hungarian                 |
+|`bn_BD`       |Bengali (Bangladesh)      ||`hy`          |Armenian                  |
+|`cy`          |Welsh                     ||`id_ID`       |Indonesian (Indonesia)    |
+|`cz`          |Czech (Czechia)           ||`it`          |Italian                   |
+|`da`          |Danish                    ||`ja`          |Japanese                  |
+|`de`          |German                    ||`ko`          |Korean                    |
+|`de_AT`       |German (Austria)          ||`ku_ckb`      |Kurdish (Sorani)          |
+|`de_CH`       |German (Switzerland)      ||`ku_kmr_latin`|Kurdish (Kurmanji, Latin) |
+|`dv`          |Maldivian                 ||`lv`          |Latvian                   |
+|`el`          |Greek                     ||`mk`          |Macedonian                |
+|`en`          |English                   ||`mn_MN_cyrl`  |Mongolian (Mongolia, Cyrillic)|
+|`en_AU`       |English (Australia)       ||`nb_NO`       |Norwegian (Norway)        |
+|`en_AU_ocker` |English (Australia Ocker) ||`ne`          |Nepali                    |
+|`en_BORK`     |English (Bork)            ||`nl`          |Dutch                     |
+|`en_CA`       |English (Canada)          ||`nl_BE`       |Dutch (Belgium)           |
+|`en_GB`       |English (Great Britain)   ||`pl`          |Polish                    |
+|`en_GH`       |English (Ghana)           ||`pt_BR`       |Portuguese (Brazil)       |
+|`en_HK`       |English (Hong Kong)       ||`pt_PT`       |Portuguese (Portugal)     |
+|`en_IE`       |English (Ireland)         ||`ro`          |Romanian                  |
+|`en_IND`      |English (India)           ||`ro_MD`       |Romanian (Moldova)        |
+|`en_NG`       |English (Nigeria)         ||`ru`          |Russian                   |
+|`en_NP`       |English (Nepal)           ||`sk`          |Slovak                    |
+|`en_US`       |English (United States)   ||`sl_SI`       |Slovenian (Slovenia)      |
+|`en_ZA`       |English (South Africa)    ||`sr_RS_latin` |Serbian (Serbia, Latin)   |
+|`eo`          |Esperanto                 ||`sv`          |Swedish                   |
+|`es`          |Spanish                   ||`ta_IN`       |Tamil (India)             |
+|`es_MX`       |Spanish (Mexico)          ||`th`          |Thai                      |
+|`fa`          |Farsi/Persian             ||`tr`          |Turkish                   |
+|`fi`          |Finnish                   ||`uk`          |Ukrainian                 |
+|`fr`          |French                    ||`ur`          |Urdu                      |
+|`fr_BE`       |French (Belgium)          ||`uz_UZ_latin` |Uzbek (Uzbekistan, Latin) |
+|`fr_CA`       |French (Canada)           ||`vi`          |Vietnamese                |
+|`fr_CH`       |French (Switzerland)      ||`yo_NG`       |Yoruba (Nigeria)          |
+|`fr_LU`       |French (Luxembourg)       ||`zh_CN`       |Chinese (China)           |
+|`fr_SN`       |French (Senegal)          ||`zh_TW`       |Chinese (Taiwan)          |
+|`ge`          |Georgian (Georgia)        ||`zu_ZA`       |Zulu (South Africa)       |
 
 
 ***Note:*** Some locales may not have a complete data set. For example, [`zh_CN`](https://github.com/faker-js/faker.js/tree/master/lib/locales/zh_CN) does not have a `lorem` data set, but [`ko`](https://github.com/faker-js/faker.js/tree/master/lib/locales/ko) has a `lorem` data set. **Bogus** will default to `en` if a *locale-specific* data set is not found. To further illustrate the previous example, the missing `zh_CN:lorem` data set will default to the `en:lorem` data set.
@@ -784,6 +797,20 @@ public void create_rules_for_an_object_the_easy_way()
 
 ***Note***: When using the bulk `.Rules(...)` action, `StrictMode` cannot be set to `true` since individual properties of type `T` cannot be independently checked to ensure each property has a rule.
 
+
+#### Passing Parameters to Rules
+
+Use `WithParameter(name, value)` to hand runtime values to a `Faker<T>`, then read them inside any rule with `GetParameter<T>(name)` (or `TryGetParameter<T>`):
+
+```csharp
+var faker = new Faker<Order>()
+   .WithParameter("tenant", "acme")
+   .RuleFor(o => o.Tenant, f => f.GetParameter<string>("tenant"));
+
+faker.WithParameter("tenant", "globex"); // overwrites the previous value
+```
+
+Parameter names are case-insensitive and a missing name throws `KeyNotFoundException`. `Clone()` copies parameters into the clone. Other `Faker<T>` instances created inside a rule do not inherit them.
 
 ### Using `Enumerable.Range()` and LINQ 
 The `Enumerable.Range()` and LINQ are a great supplement when creating data with **Bogus**. Here's how to generate a simple list of email addresses:

@@ -4,35 +4,25 @@
     city: [Array String; 1],
     city_name: [Array String; 602],
     country: [Array String; 195],
-    default_country: [Array String; 1],
-    postcode: [Array String; 3],
+    postcode: [Array String; 2],
     secondary_address: [Array String; 2],
-    street: [Array String; 8311],
+    state: [Array String; 14],
     street_address: [Array String; 1],
     street_name: [Array String; 1],
-    time_zone: [Array String; 143]
+    street_names: [Array String; 7526]
   },
   company: {
-    adjective: [Array String; 100],
-    bs_noun: [Array String; 109],
-    bs_verb: [Array String; 60],
-    descriptor: [Array String; 101],
-    name: [Array String; 3],
-    noun: [Array String; 104],
+    name: [Array String; 2],
     suffix: [Array String; 3]
   },
   date: {
     month: {
       abbr: [Array String; 12],
-      abbr_context: [Array String; 12],
-      wide: [Array String; 12],
-      wide_context: [Array String; 12]
+      wide: [Array String; 12]
     },
     weekday: {
       abbr: [Array String; 7],
-      abbr_context: [Array String; 7],
-      wide: [Array String; 7],
-      wide_context: [Array String; 7]
+      wide: [Array String; 7]
     }
   },
   internet: {
@@ -40,24 +30,21 @@
     free_email: [Array String; 5]
   },
   lorem: {
-    words: [Array String; 249]
+    words: [Array String; 182]
   },
   name: {
-    female_first_name: [Array String; 786],
-    female_last_name: [Array String; 999],
-    male_first_name: [Array String; 796],
-    male_last_name: [Array String; 999],
+    female_first_name: [Array String; 783],
+    female_last_name: [Array String; 980],
+    first_name: [Array String; 1578],
+    last_name: [Array String; 11],
+    male_first_name: [Array String; 793],
+    male_last_name: [Array String; 988],
     name: [Array String; 10],
     prefix: [Array String; 4],
-    suffix: [Array String; 1],
-    title: {
-      descriptor: [Array String; 22],
-      job: [Array String; 25],
-      level: [Array String; 37]
-    }
+    suffix: [Array String; 1]
   },
   phone_number: {
     formats: [Array String; 6]
   },
-  title: Czech
+  title: Czech (Czechia)
 }

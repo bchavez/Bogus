@@ -1,0 +1,40 @@
+﻿{
+  address: {
+    building_number: [Array String; 4],
+    city: [Array String; 1],
+    city_name: [Array String; 10],
+    country: [Array String; 94],
+    postcode: [Array String; 1],
+    state: [Array String; 77],
+    street_name: [Array String; 1],
+    street_names: [Array String; 521]
+  },
+  commerce: {
+    color: [Array String; 18]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 4]
+  },
+  name: {
+    female_first_name: [Array String; 681],
+    first_name: [Array String; 1159],
+    last_name: [Array String; 111],
+    male_first_name: [Array String; 472],
+    name: [Array String; 100],
+    prefix: [Array String; 4]
+  },
+  phone_number: {
+    formats: [Array String; 5]
+  },
+  title: Thai
+}

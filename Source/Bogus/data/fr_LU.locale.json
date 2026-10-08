@@ -1,0 +1,64 @@
+{
+  "title": "French (Luxembourg)",
+  "address": {
+    "postcode": [
+      "####"
+    ],
+    "state": [
+      "Capellen",
+      "Clervaux",
+      "Diekirch",
+      "Echternach",
+      "Esch-sur-Alzette",
+      "Grevenmacher",
+      "Luxembourg",
+      "Mersch",
+      "Redange",
+      "Remich",
+      "Vianden",
+      "Wiltz"
+    ],
+    "city_name": [
+      "Diekirch",
+      "Differdange",
+      "Dudelange",
+      "Echternach",
+      "Esch-sur-Alzette",
+      "Ettelbruck",
+      "Grevenmacher",
+      "Luxembourg",
+      "Remich",
+      "Rumelange",
+      "Vianden",
+      "Wiltz"
+    ],
+    "city": [
+      "#{city_name}"
+    ]
+  },
+  "internet": {
+    "domain_suffix": [
+      "lu"
+    ]
+  },
+  "phone_number": {
+    "formats": [
+      "######",
+      "########",
+      "+352 ######",
+      "+352 ########"
+    ]
+  },
+  "cell_phone": {
+    "formats": [
+      "621 ### ###",
+      "661 ### ###",
+      "671 ### ###",
+      "691 ### ###",
+      "+352 621 ### ###",
+      "+352 661 ### ###",
+      "+352 671 ### ###",
+      "+352 691 ### ###"
+    ]
+  }
+}

@@ -4,14 +4,13 @@
     city: [Array String; 1],
     city_name: [Array String; 76],
     country: [Array String; 176],
-    default_country: [Array String; 1],
     postcode: [Array String; 2],
     secondary_address: [Array String; 2],
     state: [Array String; 28],
-    street_address: [Array String; 2],
+    street_address: [Array String; 1],
     street_name: [Array String; 1],
-    street_suffix: [Array String; 6],
-    street_title: [Array String; 347]
+    street_root: [Array String; 345],
+    street_suffix: [Array String; 6]
   },
   cell_phone: {
     formats: [Array String; 3]
@@ -26,8 +25,7 @@
     }
   },
   company: {
-    name: [Array String; 5],
-    prefix: [Array String; 6],
+    name: [Array String; 2],
     suffix: [Array String; 4]
   },
   date: {
@@ -49,15 +47,15 @@
     free_email: [Array String; 8]
   },
   lorem: {
-    supplemental: [Array String; 840],
-    words: [Array String; 184]
+    words: [Array String; 1006]
   },
   name: {
     female_first_name: [Array String; 105],
-    female_last_name: [Array String; 209],
+    female_last_name: [Array String; 195],
+    last_name: [Array String; 12],
     male_first_name: [Array String; 91],
-    male_last_name: [Array String; 209],
-    name: [Array String; 11],
+    male_last_name: [Array String; 194],
+    name: [Array String; 9],
     prefix: [Array String; 3],
     suffix: [Array String; 2],
     title: {
@@ -69,6 +67,5 @@
   phone_number: {
     formats: [Array String; 3]
   },
-  separator:  un ,
   title: Latvian
 }

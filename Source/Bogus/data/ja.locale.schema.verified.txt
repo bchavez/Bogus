@@ -3,25 +3,66 @@
     city: [Array String; 4],
     city_prefix: [Array String; 7],
     city_suffix: [Array String; 4],
+    country: [Array String; 151],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
     postcode: [Array String; 1],
+    secondary_address: [Array String; 1],
     state: [Array String; 47],
     state_abbr: [Array String; 47],
-    street_name: [Array String; 2]
+    street_address: [Array String; 1],
+    street_name: [Array String; 1]
   },
   cell_phone: {
     formats: [Array String; 3]
   },
+  commerce: {
+    color: [Array String; 25]
+  },
+  company: {
+    suffix: [Array String; 5]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  finance: {
+    account_type: [Array String; 8],
+    currency: [Array String; 154],
+    transaction_type: [Array String; 4]
+  },
+  internet: {
+    domain_suffix: [Array String; 11],
+    free_email: [Array String; 9]
+  },
   lorem: {
-    supplemental: [Array String; 506],
-    words: [Array String; 509]
+    words: [Array String; 932]
   },
   name: {
-    first_name: [Array String; 21],
-    last_name: [Array String; 20],
-    name: [Array String; 1]
+    female_first_name: [Array String; 144],
+    first_name: [Array String; 279],
+    last_name: [Array String; 500],
+    male_first_name: [Array String; 134],
+    name: [Array String; 1],
+    suffix: [Array String; 7],
+    title: {
+      descriptor: [Array String; 17],
+      job: [Array String; 20],
+      level: [Array String; 24]
+    }
   },
   phone_number: {
     formats: [Array String; 4]
   },
-  title: Japanese
+  title: Japanese,
+  vehicle: {
+    fuel: [Array String; 4],
+    type: [Array String; 9]
+  }
 }

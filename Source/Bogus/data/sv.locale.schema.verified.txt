@@ -5,15 +5,15 @@
     city_prefix: [Array String; 25],
     city_suffix: [Array String; 19],
     common_street_suffix: [Array String; 2],
-    country: [Array String; 205],
-    default_country: [Array String; 1],
+    country: [Array String; 202],
+    county: [Array String; 290],
     postcode: [Array String; 1],
     secondary_address: [Array String; 2],
     state: [Array String; 23],
     street_address: [Array String; 1],
     street_name: [Array String; 4],
     street_prefix: [Array String; 6],
-    street_root: [Array String; 28],
+    street_root: [Array String; 27],
     street_suffix: [Array String; 5]
   },
   cell_phone: {
@@ -53,17 +53,17 @@
     name: [Array String; 8],
     prefix: [Array String; 3],
     title: {
-      descriptor: [Array String; 22],
-      job: [Array String; 25],
-      level: [Array String; 37]
+      descriptor: [Array String; 11],
+      job: [Array String; 17],
+      level: [Array String; 19]
     }
   },
   phone_number: {
-    formats: [Array String; 2]
+    formats: [Array String; 26]
   },
   team: {
     name: [Array String; 1],
-    suffix: [Array String; 13]
+    suffix: [Array String; 12]
   },
   title: Swedish
 }

@@ -1,0 +1,17 @@
+﻿{
+  commerce: {
+    color: [Array String; 20]
+  },
+  name: {
+    female_first_name: [Array String; 44],
+    first_name: [Array String; 108],
+    last_name: [Array String; 58],
+    male_first_name: [Array String; 49],
+    name: [Array String; 6],
+    prefix: [Array String; 5],
+    title: {
+      job: [Array String; 10]
+    }
+  },
+  title: Kurdish (Kurmanji, Latin)
+}

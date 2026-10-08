@@ -1,9 +1,10 @@
 ﻿{
   address: {
-    default_country: [Array String; 1],
+    city: [Array String; 4],
     postcode: [Array String; 18],
     state: [Array String; 13],
-    state_abbr: [Array String; 13]
+    state_abbr: [Array String; 13],
+    street_name: [Array String; 2]
   },
   internet: {
     domain_suffix: [Array String; 8],

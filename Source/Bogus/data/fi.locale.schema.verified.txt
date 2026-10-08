@@ -1,10 +1,26 @@
 ﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 20],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 9],
+    state: [Array String; 19],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_suffix: [Array String; 11]
+  },
+  cell_phone: {
+    formats: [Array String; 3]
+  },
   name: {
     female_first_name: [Array String; 50],
-    first_name: [Array String; 100],
     last_name: [Array String; 50],
     male_first_name: [Array String; 50],
-    name: [Array String; 4]
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 13]
   },
   title: Finnish
 }

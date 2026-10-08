@@ -1,30 +1,45 @@
 ﻿{
   address: {
     city: [Array String; 1],
-    city_name: [Array String; 28],
+    city_name: [Array String; 35],
     city_suffix: [Array String; 3],
-    postcode: [Array String; 1],
+    postcode: [Array String; 2],
+    secondary_address: [Array String; 2],
     state: [Array String; 17],
     state_abbr: [Array String; 17],
     street_name: [Array String; 1],
-    street_root: [Array String; 28],
-    street_suffix: [Array String; 3]
+    street_root: [Array String; 104],
+    street_suffix: [Array String; 12]
+  },
+  commerce: {
+    color: [Array String; 25]
   },
   company: {
-    name: [Array String; 2],
-    prefix: [Array String; 2],
-    suffix: [Array String; 6]
+    name: [Array String; 1],
+    suffix: [Array String; 2]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
   },
   internet: {
     domain_suffix: [Array String; 8],
     free_email: [Array String; 4]
   },
   lorem: {
-    words: [Array String; 128]
+    words: [Array String; 95]
   },
   name: {
-    first_name: [Array String; 21],
-    last_name: [Array String; 20],
+    female_first_name: [Array String; 239],
+    first_name: [Array String; 540],
+    last_name: [Array String; 112],
+    male_first_name: [Array String; 240],
     name: [Array String; 1]
   },
   phone_number: {

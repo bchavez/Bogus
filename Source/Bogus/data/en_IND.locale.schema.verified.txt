@@ -1,9 +1,11 @@
 ﻿{
   address: {
-    default_country: [Array String; 4],
+    city: [Array String; 1],
+    city_name: [Array String; 1198],
     postcode: [Array String; 1],
     state: [Array String; 36],
-    state_abbr: [Array String; 36]
+    state_abbr: [Array String; 36],
+    street_name: [Array String; 2]
   },
   company: {
     suffix: [Array String; 7]
@@ -13,8 +15,9 @@
     free_email: [Array String; 3]
   },
   name: {
-    first_name: [Array String; 762],
-    last_name: [Array String; 89]
+    female_first_name: [Array String; 288],
+    last_name: [Array String; 92],
+    male_first_name: [Array String; 454]
   },
   phone_number: {
     formats: [Array String; 12]

@@ -1,15 +1,25 @@
 ﻿{
   address: {
+    building_number: [Array String; 3],
+    city: [Array String; 3],
+    city_prefix: [Array String; 17],
+    city_suffix: [Array String; 31],
     county: [Array String; 70],
-    default_country: [Array String; 4],
-    postcode: [Array String; 2],
-    uk_country: [Array String; 4]
+    postcode: [Array String; 250],
+    state: [Array String; 4],
+    state_abbr: [Array String; 4],
+    street_name: [Array String; 3],
+    street_names: [Array String; 401],
+    street_suffix: [Array String; 55]
   },
   cell_phone: {
     formats: [Array String; 6]
   },
   internet: {
-    domain_suffix: [Array String; 5]
+    domain_suffix: [Array String; 19]
+  },
+  name: {
+    name: [Array String; 8]
   },
   phone_number: {
     formats: [Array String; 15]

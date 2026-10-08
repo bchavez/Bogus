@@ -1,0 +1,16 @@
+﻿{
+  lorem: {
+    words: [Array String; 49]
+  },
+  name: {
+    female_first_name: [Array String; 425],
+    female_prefix: [Array String; 2],
+    first_name: [Array String; 1200],
+    last_name: [Array String; 499],
+    male_first_name: [Array String; 499],
+    male_prefix: [Array String; 1],
+    name: [Array String; 35],
+    prefix: [Array String; 3]
+  },
+  title: Kurdish (Sorani)
+}

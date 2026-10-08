@@ -1,0 +1,31 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 350],
+    postcode: [Array String; 2],
+    state: [Array String; 16],
+    street_address: [Array String; 1],
+    street_name: [Array String; 2],
+    street_prefix: [Array String; 1],
+    street_suffix: [Array String; 8]
+  },
+  company: {
+    name: [Array String; 2],
+    suffix: [Array String; 2]
+  },
+  internet: {
+    domain_suffix: [Array String; 9]
+  },
+  name: {
+    female_first_name: [Array String; 131],
+    first_name: [Array String; 261],
+    last_name: [Array String; 120],
+    male_first_name: [Array String; 129],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 26]
+  },
+  title: English (Ghana)
+}

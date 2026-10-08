@@ -1,17 +1,17 @@
 ﻿{
   address: {
     building_number: [Array String; 1],
-    city: [Array String; 300],
+    city: [Array String; 1],
+    city_name: [Array String; 300],
     county: [Array String; 42],
-    default_country: [Array String; 1],
     postcode: [Array String; 1],
     secondary_address: [Array String; 2],
     state: [Array String; 42],
     state_abbr: [Array String; 42],
     street_address: [Array String; 1],
     street_name: [Array String; 1],
-    street_suffix: [Array String; 3],
-    streets: [Array String; 100]
+    street_root: [Array String; 100],
+    street_suffix: [Array String; 3]
   },
   cell_phone: {
     formats: [Array String; 59]
@@ -19,15 +19,11 @@
   date: {
     month: {
       abbr: [Array String; 12],
-      abbr_context: [Array String; 12],
-      wide: [Array String; 12],
-      wide_context: [Array String; 12]
+      wide: [Array String; 12]
     },
     weekday: {
       abbr: [Array String; 7],
-      abbr_context: [Array String; 7],
-      wide: [Array String; 7],
-      wide_context: [Array String; 7]
+      wide: [Array String; 7]
     }
   },
   internet: {
@@ -37,8 +33,8 @@
   name: {
     female_first_name: [Array String; 387],
     last_name: [Array String; 300],
-    male_first_name: [Array String; 288],
-    name: [Array String; 32],
+    male_first_name: [Array String; 287],
+    name: [Array String; 10],
     prefix: [Array String; 3],
     suffix: [Array String; 2]
   },

@@ -1,0 +1,40 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 27],
+    country: [Array String; 246],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 30],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_names: [Array String; 492]
+  },
+  cell_phone: {
+    formats: [Array String; 3]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 5]
+  },
+  name: {
+    female_first_name: [Array String; 200],
+    last_name: [Array String; 999],
+    male_first_name: [Array String; 200],
+    name: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 5]
+  },
+  title: Serbian (Serbia, Latin)
+}

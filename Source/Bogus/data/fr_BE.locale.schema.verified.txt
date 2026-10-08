@@ -1,0 +1,39 @@
+﻿{
+  address: {
+    building_number: [Array String; 10],
+    city: [Array String; 2],
+    city_prefix: [Array String; 262],
+    city_suffix: [Array String; 4],
+    postcode: [Array String; 1],
+    state: [Array String; 10],
+    state_abbr: [Array String; 9],
+    street_address: [Array String; 1],
+    street_name: [Array String; 3],
+    street_prefix: [Array String; 19],
+    street_suffix: [Array String; 210]
+  },
+  cell_phone: {
+    formats: [Array String; 28]
+  },
+  internet: {
+    domain_suffix: [Array String; 8],
+    free_email: [Array String; 4]
+  },
+  name: {
+    female_first_name: [Array String; 1293],
+    first_name: [Array String; 2592],
+    gender: [Array String; 8],
+    last_name: [Array String; 615],
+    male_first_name: [Array String; 1254],
+    name: [Array String; 10],
+    prefix: [Array String; 5],
+    suffix: [Array String; 6],
+    title: {
+      job: [Array String; 18]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 89]
+  },
+  title: French (Belgium)
+}

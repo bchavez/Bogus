@@ -1,6 +1,5 @@
 {
   "title": "Azerbaijani",
-  "separator": " və ",
   "address": {
     "country": [
       "Akrotiri və Dekeliya",
@@ -254,14 +253,7 @@
       "sahəsi",
       "sh."
     ],
-    "secondary_address": [
-      "m. ###"
-    ],
-    "postcode": [
-      "AZ####"
-    ],
-    "state": [],
-    "street_title": [
+    "street_root": [
       "Abbas Fətullayev",
       "Abbas Mirzə Şərifzadə",
       "Abbas Səhhət",
@@ -498,6 +490,12 @@
       "Zavod",
       "Zərgərpalan"
     ],
+    "secondary_address": [
+      "m. ###"
+    ],
+    "postcode": [
+      "AZ####"
+    ],
     "city_name": [
       "Ağcabədi",
       "Ağdam",
@@ -579,30 +577,37 @@
       "Zərdab"
     ],
     "city": [
-      "#{Address.city_name}"
+      "#{city_name}"
     ],
     "street_name": [
-      "#{street_suffix} #{Address.street_title}",
-      "#{Address.street_title} #{street_suffix}"
+      "#{street_root} #{street_suffix}"
     ],
     "street_address": [
       "#{street_name}, #{building_number}"
+    ]
+  },
+  "company": {
+    "suffix": [
+      "Qrup",
+      "Holdinqlər"
     ],
-    "default_country": [
-      "Azərbaycan"
+    "name": [
+      "#{suffix} #{name.female_first_name}",
+      "#{suffix} #{name.male_first_name}",
+      "#{suffix} #{name.male_last_name}"
     ]
   },
   "internet": {
     "free_email": [
       "box.az",
-      "mail.az",
       "gmail.com",
-      "yahoo.com",
-      "hotmail.com"
+      "hotmail.com",
+      "mail.az",
+      "yahoo.com"
     ],
     "domain_suffix": [
-      "com",
       "az",
+      "com",
       "com.az",
       "info",
       "net",
@@ -611,150 +616,167 @@
   },
   "name": {
     "male_first_name": [
-      "Anar",
-      "Amid",
-      "Afəl",
       "Abbas",
       "Abdulla",
       "Adil",
+      "Afəl",
       "Akif",
+      "Amid",
+      "Anar",
       "Aqil",
       "Bəhram",
+      "Bəhruz",
+      "Bəxtiyar",
+      "Elnur",
+      "Emil",
+      "Emin",
+      "Faiq",
+      "Kamran",
+      "Nadir",
+      "Nahid",
+      "Natiq",
+      "Nihad",
       "Nurlan",
       "Rafiq",
-      "Tərlan",
-      "Zaur",
-      "Emin",
-      "Emil",
-      "Kamran",
-      "Elnur",
-      "Natiq",
       "Rəşad",
       "Rəşid",
       "Tahir",
-      "Əhməd",
+      "Tunar",
+      "Tərlan",
       "Zahir",
+      "Zaur",
       "İlham",
       "İlqar",
-      "Nahid",
-      "Nihad",
-      "Faiq",
       "İxtiyar",
-      "Şəhriyar",
       "Şaiq",
-      "Bəxtiyar",
-      "Bəhruz",
-      "Tunar",
-      "Nadir"
-    ],
-    "male_last_name": [
-      "Əhmədov",
-      "Ələkbərov",
-      "Əliyev",
-      "Vəliyev",
-      "Soltanov",
-      "Quliyev",
-      "Məmmədov",
-      "Xəlilov",
-      "Nəzərov",
-      "Rəhimov"
+      "Şəhriyar",
+      "Əhməd"
     ],
     "female_first_name": [
-      "Anna",
       "Adeliya",
       "Afaq",
-      "Afət",
       "Afərim",
+      "Afət",
       "Aidə",
-      "Aygün",
-      "Aynur",
       "Alsu",
+      "Anna",
       "Ayan",
-      "Aytən",
-      "Aygül",
       "Aydan",
+      "Aygül",
+      "Aygün",
       "Aylin",
+      "Aynur",
+      "Aytən",
       "Bahar",
       "Banu",
-      "Bəyaz",
       "Billurə",
+      "Bəyaz",
       "Cansu",
       "Ceyla",
       "Damla",
-      "Dəniz",
       "Diana",
       "Dilarə",
+      "Dəniz",
       "Ella",
-      "Elza",
-      "Elyanora",
       "Ellada",
-      "Elvira",
       "Elnarə",
+      "Elvira",
+      "Elyanora",
+      "Elza",
       "Esmira",
       "Estella",
       "Fatimə",
-      "Fəxriyyə",
-      "Fərəh",
-      "Fərqanə",
       "Fidan",
       "Firuzə",
+      "Fərqanə",
+      "Fərəh",
+      "Fəxriyyə",
       "Gövhər",
-      "Günay",
       "Gülay",
+      "Gülsüm",
       "Gülçin",
       "Gülər",
-      "Gülsüm",
+      "Günay",
       "Humay",
-      "Hüriyə",
       "Hülya",
+      "Hüriyə",
       "Jalə",
       "Jasmin",
       "Kübra",
-      "Ləman",
-      "Lamiyə",
       "Lalə",
-      "Liliya",
+      "Lamiyə",
       "Laura",
       "Leyla",
+      "Liliya",
+      "Ləman",
       "Maya",
       "Mehriban",
       "Mələk",
+      "Nigar",
       "Nuray",
       "Nurgün",
       "Nərgiz",
-      "Nigar",
       "Ofelya",
       "Pəri",
       "Röya",
-      "Səbinə",
       "Selcan",
+      "Səbinə",
       "Tansu",
       "Tuba",
-      "Ülviyyə",
       "Ulduz",
-      "Ülkər"
+      "Ülkər",
+      "Ülviyyə"
+    ],
+    "male_last_name": [
+      "Məmmədov",
+      "Nəzərov",
+      "Quliyev",
+      "Rəhimov",
+      "Soltanov",
+      "Vəliyev",
+      "Xəlilov",
+      "Əhmədov",
+      "Əliyev",
+      "Ələkbərov"
     ],
     "female_last_name": [
-      "Qasımova",
-      "Əfəndiyeva",
-      "Soltanova",
       "Abdullayeva",
+      "Qasımova",
       "Rəşidova",
-      "Ələkbərova",
-      "Əliyeva",
-      "Tahirova",
       "Seyidova",
-      "Vəsiyeva"
+      "Soltanova",
+      "Tahirova",
+      "Vəsiyeva",
+      "Əfəndiyeva",
+      "Əliyeva",
+      "Ələkbərova"
     ],
-    "prefix": [],
-    "suffix": [],
+    "last_name": [
+      "Abdullayeva",
+      "Qasımova",
+      "Rəşidova",
+      "Seyidova",
+      "Soltanova",
+      "Tahirova",
+      "Vəsiyeva",
+      "Əfəndiyeva",
+      "Əliyeva",
+      "Ələkbərova",
+      "Məmmədov",
+      "Nəzərov",
+      "Quliyev",
+      "Rəhimov",
+      "Soltanov",
+      "Vəliyev",
+      "Xəlilov",
+      "Əhmədov",
+      "Əliyev",
+      "Ələkbərov"
+    ],
     "name": [
-      "#{male_first_name}",
-      "#{male_last_name} #{male_first_name}",
-      "#{male_first_name} #{male_last_name}",
-      "#{female_first_name}",
-      "#{female_first_name} #{female_last_name}",
-      "#{female_last_name} #{female_first_name}"
+      "#{first_name}",
+      "#{last_name} #{first_name}",
+      "#{first_name} #{last_name}"
     ]
   },
   "phone_number": {
@@ -767,12 +789,12 @@
       "ala",
       "açıq bənövşəyi",
       "ağ",
-      "mavi",
       "boz",
       "bənövşəyi",
       "göy rəng",
       "gümüşü",
       "kardinal",
+      "mavi",
       "narıncı",
       "qara",
       "qırmızı",
@@ -784,175 +806,154 @@
       "çəhrayı"
     ],
     "department": [
-      "Kitablar",
+      "Avtomobil",
+      "Ayyaqqabı",
+      "Elektronika",
+      "Ev",
       "Filmlər",
+      "Geyim",
+      "Kitablar",
+      "Kompyuterlər",
+      "Oyuncaqlar",
+      "Səhiyyə",
+      "bəzək",
+      "gözəllik",
       "musiqi",
       "oyunlar",
-      "Elektronika",
-      "Kompyuterlər",
-      "Ev",
-      "садинструмент",
-      "Səhiyyə",
-      "gözəllik",
-      "Oyuncaqlar",
-      "uşaq üçün",
-      "Geyim",
-      "Ayyaqqabı",
-      "bəzək",
-      "İdman",
       "turizm",
-      "Avtomobil"
+      "uşaq üçün",
+      "İdman",
+      "садинструмент"
     ],
     "product_name": {
       "adjective": [
         "Balaca",
         "Ergonomik",
-        "Kobud",
-        "İntellektual",
-        "Möhtəşəm",
-        "İnanılmaz",
         "Fantastik",
-        "Əlverişli",
+        "Kobud",
+        "Möhtəşəm",
+        "Mükəmməl",
         "Parlaq",
-        "Mükəmməl"
+        "İnanılmaz",
+        "İntellektual",
+        "Əlverişli"
       ],
       "material": [
-        "Polad",
         "Ağac",
         "Beton",
-        "Plastik",
         "Pambıq",
+        "Plastik",
+        "Polad",
         "Qranit",
         "Rezin"
       ],
       "product": [
-        "Stul",
         "Avtomobil",
-        "Kompyuter",
         "Beret",
+        "Kompyuter",
         "Kulon",
+        "Kəmər",
         "Stol",
-        "Sviter",
-        "Kəmər"
+        "Stul",
+        "Sviter"
       ]
     }
-  },
-  "company": {
-    "prefix": [
-      "ASC",
-      "MMC",
-      "QSC"
-    ],
-    "suffix": [
-      "Qrup",
-      "Holdinqlər"
-    ],
-    "name": [
-      "#{prefix} #{Name.female_first_name}",
-      "#{prefix} #{Name.male_first_name}",
-      "#{prefix} #{Name.male_last_name}",
-      "#{prefix} #{suffix}#{suffix}",
-      "#{prefix} #{suffix}#{suffix}#{suffix}",
-      "#{prefix} #{Address.city_name}#{suffix}",
-      "#{prefix} #{Address.city_name}#{suffix}#{suffix}",
-      "#{prefix} #{Address.city_name}#{suffix}#{suffix}#{suffix}"
-    ]
   },
   "date": {
     "month": {
       "wide": [
-        "yanvar",
-        "fevral",
-        "mart",
         "aprel",
-        "may",
-        "iyun",
-        "iyul",
         "avqust",
-        "sentyabr",
-        "oktyabr",
+        "dekabr",
+        "fevral",
+        "iyul",
+        "iyun",
+        "mart",
+        "may",
         "noyabr",
-        "dekabr"
+        "oktyabr",
+        "sentyabr",
+        "yanvar"
       ],
       "wide_context": [
-        "января",
-        "февраля",
-        "марта",
-        "апреля",
-        "мая",
-        "июня",
-        "июля",
         "августа",
-        "сентября",
-        "октября",
+        "апреля",
+        "декабря",
+        "июля",
+        "июня",
+        "марта",
+        "мая",
         "ноября",
-        "декабря"
+        "октября",
+        "сентября",
+        "февраля",
+        "января"
       ],
       "abbr": [
-        "янв.",
-        "февр.",
-        "март",
-        "апр.",
-        "май",
-        "июнь",
-        "июль",
         "авг.",
-        "сент.",
-        "окт.",
+        "апр.",
+        "дек.",
+        "июль",
+        "июнь",
+        "май",
+        "март",
         "нояб.",
-        "дек."
+        "окт.",
+        "сент.",
+        "февр.",
+        "янв."
       ],
       "abbr_context": [
-        "янв.",
-        "февр.",
-        "марта",
-        "апр.",
-        "мая",
-        "июня",
-        "июля",
         "авг.",
-        "сент.",
-        "окт.",
+        "апр.",
+        "дек.",
+        "июля",
+        "июня",
+        "марта",
+        "мая",
         "нояб.",
-        "дек."
+        "окт.",
+        "сент.",
+        "февр.",
+        "янв."
       ]
     },
     "weekday": {
       "wide": [
         "Bazar",
         "Bazar ertəsi",
-        "Çərşənbə axşamı",
-        "Çərşənbə",
-        "Cümə axşamı",
         "Cümə",
+        "Cümə axşamı",
+        "Çərşənbə",
+        "Çərşənbə axşamı",
         "Şənbə"
       ],
       "wide_context": [
         "воскресенье",
-        "понедельник",
         "вторник",
-        "среда",
-        "четверг",
+        "понедельник",
         "пятница",
-        "суббота"
+        "среда",
+        "суббота",
+        "четверг"
       ],
       "abbr": [
-        "Ba",
         "BE",
-        "ÇA",
-        "Çə",
+        "Ba",
         "CA",
         "Cü",
+        "ÇA",
+        "Çə",
         "Şə"
       ],
       "abbr_context": [
         "вс",
-        "пн",
         "вт",
-        "ср",
-        "чт",
+        "пн",
         "пт",
-        "сб"
+        "сб",
+        "ср",
+        "чт"
       ]
     }
   }

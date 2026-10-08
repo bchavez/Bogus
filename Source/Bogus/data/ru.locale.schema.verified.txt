@@ -2,16 +2,15 @@
   address: {
     building_number: [Array String; 1],
     city: [Array String; 1],
-    city_name: [Array String; 47],
+    city_name: [Array String; 649],
     country: [Array String; 210],
-    default_country: [Array String; 1],
     postcode: [Array String; 1],
     secondary_address: [Array String; 1],
-    state: [Array String; 86],
+    state: [Array String; 84],
     street_address: [Array String; 1],
     street_name: [Array String; 2],
-    street_suffix: [Array String; 6],
-    street_title: [Array String; 100]
+    street_root: [Array String; 297],
+    street_suffix: [Array String; 8]
   },
   commerce: {
     color: [Array String; 31],
@@ -23,9 +22,8 @@
     }
   },
   company: {
-    name: [Array String; 8],
-    prefix: [Array String; 8],
-    suffix: [Array String; 5]
+    name: [Array String; 3],
+    suffix: [Array String; 12]
   },
   date: {
     month: {
@@ -45,25 +43,24 @@
     abbreviation: [Array String; 30],
     adjective: [Array String; 17],
     ingverb: [Array String; 19],
-    noun: [Array String; 27],
+    noun: [Array String; 26],
     phrase: [Array String; 8],
     verb: [Array String; 22]
   },
   internet: {
-    domain_suffix: [Array String; 6],
+    domain_suffix: [Array String; 22],
     free_email: [Array String; 6]
   },
   lorem: {
     words: [Array String; 189]
   },
   name: {
-    female_first_name: [Array String; 56],
+    female_first_name: [Array String; 80],
     female_last_name: [Array String; 250],
-    female_middle_name: [Array String; 51],
-    male_first_name: [Array String; 52],
+    last_name: [Array String; 500],
+    male_first_name: [Array String; 321],
     male_last_name: [Array String; 250],
-    male_middle_name: [Array String; 52],
-    name: [Array String; 8],
+    name: [Array String; 2],
     title: {
       descriptor: [Array String; 10],
       job: [Array String; 16],
@@ -73,6 +70,5 @@
   phone_number: {
     formats: [Array String; 1]
   },
-  separator:  и ,
   title: Russian
 }

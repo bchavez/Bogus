@@ -1,0 +1,53 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 80],
+    country: [Array String; 244],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 80],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_names: [Array String; 675]
+  },
+  cell_phone: {
+    formats: [Array String; 2]
+  },
+  company: {
+    name: [Array String; 3],
+    suffix: [Array String; 4]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 11],
+    free_email: [Array String; 4]
+  },
+  name: {
+    female_first_name: [Array String; 232],
+    female_last_name: [Array String; 458],
+    last_name: [Array String; 37],
+    male_first_name: [Array String; 283],
+    male_last_name: [Array String; 456],
+    name: [Array String; 9],
+    prefix: [Array String; 5],
+    title: {
+      descriptor: [Array String; 9],
+      job: [Array String; 15],
+      level: [Array String; 8]
+    }
+  },
+  phone_number: {
+    formats: [Array String; 9]
+  },
+  title: Macedonian
+}

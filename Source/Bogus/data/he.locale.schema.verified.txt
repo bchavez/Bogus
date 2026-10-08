@@ -1,0 +1,70 @@
+﻿{
+  address: {
+    building_number: [Array String; 7],
+    city: [Array String; 1],
+    city_name: [Array String; 1267],
+    country: [Array String; 199],
+    county: [Array String; 1],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    postcode: [Array String; 2],
+    secondary_address: [Array String; 4],
+    state: [Array String; 7],
+    state_abbr: [Array String; 50],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_prefix: [Array String; 5],
+    street_root: [Array String; 1949]
+  },
+  cell_phone: {
+    formats: [Array String; 16]
+  },
+  commerce: {
+    color: [Array String; 35],
+    department: [Array String; 22],
+    product_description: [Array String; 12],
+    product_name: {
+      adjective: [Array String; 15],
+      material: [Array String; 11],
+      product: [Array String; 24]
+    }
+  },
+  company: {
+    adjective: [Array String; 96],
+    bs_adjective: [Array String; 63],
+    bs_noun: [Array String; 41],
+    bs_verb: [Array String; 57],
+    descriptor: [Array String; 100],
+    name: [Array String; 3],
+    noun: [Array String; 102],
+    suffix: [Array String; 5]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  lorem: {
+    words: [Array String; 130]
+  },
+  music: {
+    genre: [Array String; 20]
+  },
+  name: {
+    female_first_name: [Array String; 218],
+    first_name: [Array String; 541],
+    last_name: [Array String; 738],
+    male_first_name: [Array String; 205],
+    name: [Array String; 10],
+    prefix: [Array String; 5]
+  },
+  phone_number: {
+    formats: [Array String; 12]
+  },
+  title: Hebrew
+}

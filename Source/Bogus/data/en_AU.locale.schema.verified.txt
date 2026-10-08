@@ -1,10 +1,11 @@
 ﻿{
   address: {
     building_number: [Array String; 3],
-    default_country: [Array String; 1],
+    city: [Array String; 4],
     postcode: [Array String; 1],
     state: [Array String; 8],
     state_abbr: [Array String; 8],
+    street_name: [Array String; 2],
     street_suffix: [Array String; 37]
   },
   company: {
@@ -14,11 +15,12 @@
     domain_suffix: [Array String; 6]
   },
   name: {
-    first_name: [Array String; 200],
-    last_name: [Array String; 286]
+    female_first_name: [Array String; 100],
+    last_name: [Array String; 286],
+    male_first_name: [Array String; 100]
   },
   phone_number: {
-    formats: [Array String; 4]
+    formats: [Array String; 11]
   },
   title: English (Australia)
 }

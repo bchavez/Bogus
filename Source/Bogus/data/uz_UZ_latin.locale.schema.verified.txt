@@ -1,0 +1,48 @@
+﻿{
+  address: {
+    building_number: [Array String; 3],
+    city: [Array String; 1],
+    city_name: [Array String; 60],
+    country: [Array String; 129],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    postcode: [Array String; 1],
+    secondary_address: [Array String; 2],
+    state: [Array String; 13],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_root: [Array String; 531],
+    street_suffix: [Array String; 6]
+  },
+  commerce: {
+    color: [Array String; 25],
+    department: [Array String; 25],
+    product_description: [Array String; 21],
+    product_name: {
+      adjective: [Array String; 29],
+      material: [Array String; 10],
+      product: [Array String; 52]
+    }
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  lorem: {
+    words: [Array String; 999]
+  },
+  name: {
+    female_first_name: [Array String; 133],
+    female_last_name: [Array String; 207],
+    last_name: [Array String; 2],
+    male_first_name: [Array String; 227],
+    male_last_name: [Array String; 207]
+  },
+  title: Uzbek (Uzbekistan, Latin)
+}

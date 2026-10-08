@@ -106,6 +106,8 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
          }
       }
 
+      this.FakerHub.CopyParametersTo(clone.FakerHub);
+
       if( localSeed.HasValue )
       {
          clone.UseSeed(localSeed.Value);
@@ -117,6 +119,17 @@ public class Faker<T> : IFakerTInternal, ILocaleAware, IRuleSet<T> where T : cla
       }
 
       return clone;
+   }
+
+   /// <summary>
+   /// Sets a named runtime parameter, readable inside rules via
+   /// <see cref="Faker.GetParameter{T}(string)"/>. Setting an existing name overwrites it.
+   /// Parameters are not inherited by other <see cref="Faker{T}"/> instances created inside rules.
+   /// </summary>
+   public Faker<T> WithParameter(string name, object value)
+   {
+      this.FakerHub.SetParameter(name, value);
+      return this;
    }
 
    /// <summary>

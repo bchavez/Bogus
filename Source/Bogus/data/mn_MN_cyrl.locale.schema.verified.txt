@@ -1,0 +1,16 @@
+﻿{
+  commerce: {
+    color: [Array String; 40]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  title: Mongolian (Mongolia, Cyrillic)
+}

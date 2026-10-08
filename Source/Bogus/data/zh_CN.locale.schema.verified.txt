@@ -2,23 +2,78 @@
   address: {
     building_number: [Array String; 5],
     city: [Array String; 1],
-    city_prefix: [Array String; 21],
-    city_suffix: [Array String; 19],
-    default_country: [Array String; 1],
+    city_name: [Array String; 37],
+    city_prefix: [Array String; 20],
+    city_suffix: [Array String; 18],
+    country: [Array String; 208],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
     postcode: [Array String; 1],
-    state: [Array String; 34],
-    state_abbr: [Array String; 34],
+    secondary_address: [Array String; 2],
+    state: [Array String; 31],
+    state_abbr: [Array String; 31],
     street_address: [Array String; 1],
     street_name: [Array String; 1],
+    street_names: [Array String; 133],
     street_suffix: [Array String; 8]
   },
+  commerce: {
+    color: [Array String; 26],
+    department: [Array String; 22],
+    product_description: [Array String; 10],
+    product_name: {
+      adjective: [Array String; 24],
+      material: [Array String; 12],
+      product: [Array String; 24]
+    }
+  },
+  company: {
+    suffix: [Array String; 7]
+  },
+  database: {
+    column: [Array String; 14]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  finance: {
+    account_type: [Array String; 8],
+    currency: [Array String; 155],
+    transaction_type: [Array String; 4]
+  },
+  hacker: {
+    adjective: [Array String; 17],
+    noun: [Array String; 24],
+    phrase: [Array String; 8],
+    verb: [Array String; 18]
+  },
+  internet: {
+    free_email: [Array String; 16]
+  },
+  music: {
+    genre: [Array String; 18]
+  },
   name: {
-    first_name: [Array String; 134],
-    last_name: [Array String; 100],
+    female_first_name: [Array String; 85],
+    first_name: [Array String; 278],
+    last_name: [Array String; 162],
+    male_first_name: [Array String; 78],
     name: [Array String; 1]
   },
   phone_number: {
     formats: [Array String; 3]
   },
-  title: Chinese
+  title: Chinese (China),
+  vehicle: {
+    fuel: [Array String; 4],
+    manufacturer: [Array String; 46],
+    type: [Array String; 7]
+  }
 }

@@ -1,0 +1,20 @@
+﻿{
+  address: {
+    city: [Array String; 1],
+    city_name: [Array String; 480],
+    country: [Array String; 249],
+    county: [Array String; 64],
+    state: [Array String; 8]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  title: Bengali (Bangladesh)
+}

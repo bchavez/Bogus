@@ -1,0 +1,45 @@
+﻿{
+  address: {
+    building_number: [Array String; 6],
+    city: [Array String; 2],
+    city_prefix: [Array String; 5],
+    city_suffix: [Array String; 3],
+    country: [Array String; 229],
+    direction: [Array String; 8],
+    direction_abbr: [Array String; 8],
+    secondary_address: [Array String; 2],
+    state: [Array String; 19],
+    street_address: [Array String; 1],
+    street_name: [Array String; 1],
+    street_suffix: [Array String; 2]
+  },
+  commerce: {
+    color: [Array String; 12]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  internet: {
+    domain_suffix: [Array String; 7]
+  },
+  lorem: {
+    words: [Array String; 189]
+  },
+  name: {
+    female_first_name: [Array String; 46],
+    last_name: [Array String; 47],
+    male_first_name: [Array String; 45],
+    name: [Array String; 10]
+  },
+  phone_number: {
+    formats: [Array String; 2]
+  },
+  title: Armenian
+}

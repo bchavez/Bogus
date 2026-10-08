@@ -1,7 +1,10 @@
 ﻿{
   address: {
-    default_country: [Array String; 1],
-    postcode: [Array String; 2]
+    city: [Array String; 1],
+    city_name: [Array String; 14],
+    postcode: [Array String; 2],
+    state: [Array String; 9],
+    street_name: [Array String; 2]
   },
   cell_phone: {
     formats: [Array String; 6]
@@ -11,6 +14,12 @@
   },
   internet: {
     domain_suffix: [Array String; 5]
+  },
+  name: {
+    female_first_name: [Array String; 48],
+    first_name: [Array String; 98],
+    last_name: [Array String; 96],
+    male_first_name: [Array String; 49]
   },
   phone_number: {
     formats: [Array String; 9]

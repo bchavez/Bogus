@@ -1,0 +1,18 @@
+﻿{
+  address: {
+    city: [Array String; 1],
+    city_name: [Array String; 12],
+    postcode: [Array String; 1],
+    state: [Array String; 12]
+  },
+  cell_phone: {
+    formats: [Array String; 8]
+  },
+  internet: {
+    domain_suffix: [Array String; 1]
+  },
+  phone_number: {
+    formats: [Array String; 4]
+  },
+  title: French (Luxembourg)
+}

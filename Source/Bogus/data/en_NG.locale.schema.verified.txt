@@ -1,26 +1,25 @@
 ﻿{
   address: {
     city: [Array String; 1],
-    city_prefix: [Array String; 525],
-    default_country: [Array String; 4],
+    city_name: [Array String; 517],
     postcode: [Array String; 2],
-    state: [Array String; 37]
+    state: [Array String; 37],
+    street_name: [Array String; 2]
   },
   company: {
     suffix: [Array String; 3]
   },
   internet: {
-    domain_suffix: [Array String; 5]
+    domain_suffix: [Array String; 4]
   },
   name: {
     female_first_name: [Array String; 31],
-    first_name: [Array String; 99],
-    last_name: [Array String; 166],
-    male_first_name: [Array String; 68],
+    last_name: [Array String; 156],
+    male_first_name: [Array String; 67],
     name: [Array String; 2]
   },
   phone_number: {
     formats: [Array String; 5]
   },
-  title: Nigeria (English)
+  title: English (Nigeria)
 }

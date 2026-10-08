@@ -1,13 +1,12 @@
 ﻿{
   address: {
-    default_country: [Array String; 3]
+    city: [Array String; 4],
+    county: [Array String; 36],
+    street_name: [Array String; 3],
+    street_names: [Array String; 382]
   },
   internet: {
     domain_suffix: [Array String; 7]
-  },
-  phone_number: {
-    area_code: [Array String; 283],
-    exchange_code: [Array String; 283]
   },
   title: English (United States)
 }

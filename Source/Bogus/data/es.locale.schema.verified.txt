@@ -2,24 +2,22 @@
   address: {
     building_number: [Array String; 5],
     city: [Array String; 1],
-    city_prefix: [Array String; 129],
+    city_name: [Array String; 130],
     country: [Array String; 180],
-    default_country: [Array String; 1],
+    county: [Array String; 50],
     postcode: [Array String; 1],
-    province: [Array String; 50],
-    secondary_address: [Array String; 2],
+    secondary_address: [Array String; 22],
     state: [Array String; 17],
     state_abbr: [Array String; 17],
-    street_address: [Array String; 2],
+    street_address: [Array String; 1],
     street_name: [Array String; 2],
-    street_suffix: [Array String; 70],
-    time_zone: [Array String; 143]
+    street_suffix: [Array String; 70]
   },
   cell_phone: {
     formats: [Array String; 4]
   },
   commerce: {
-    color: [Array String; 9],
+    color: [Array String; 37],
     department: [Array String; 19],
     product_name: {
       adjective: [Array String; 15],
@@ -28,22 +26,35 @@
     }
   },
   company: {
-    adjective: [Array String; 85],
+    adjective: [Array String; 81],
     descriptor: [Array String; 81],
     name: [Array String; 4],
     noun: [Array String; 93],
     suffix: [Array String; 4]
   },
+  date: {
+    month: {
+      abbr: [Array String; 12],
+      abbr_context: [Array String; 12],
+      wide: [Array String; 12]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      abbr_context: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
   internet: {
-    domain_suffix: [Array String; 5],
+    domain_suffix: [Array String; 7],
     free_email: [Array String; 3]
   },
   name: {
-    female_first_name: [Array String; 11],
-    first_name: [Array String; 212],
-    last_name: [Array String; 624],
-    male_first_name: [Array String; 16],
-    name: [Array String; 5],
+    female_first_name: [Array String; 120],
+    female_prefix: [Array String; 2],
+    last_name: [Array String; 625],
+    male_first_name: [Array String; 107],
+    male_prefix: [Array String; 1],
+    name: [Array String; 10],
     prefix: [Array String; 3],
     suffix: [Array String; 11],
     title: {

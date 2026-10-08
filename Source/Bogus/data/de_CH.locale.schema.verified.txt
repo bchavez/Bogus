@@ -1,24 +1,30 @@
 ﻿{
   address: {
-    country_code: [Array String; 10],
-    default_country: [Array String; 1],
-    postcode: [Array String; 9]
+    city: [Array String; 1],
+    city_name: [Array String; 100],
+    postcode: [Array String; 9],
+    state: [Array String; 26],
+    state_abbr: [Array String; 26],
+    street_name: [Array String; 1],
+    street_names: [Array String; 31]
   },
   company: {
     name: [Array String; 3],
     suffix: [Array String; 8]
   },
   internet: {
-    domain_suffix: [Array String; 9]
+    domain_suffix: [Array String; 7]
   },
   name: {
-    first_name: [Array String; 336],
+    female_first_name: [Array String; 137],
+    first_name: [Array String; 316],
     last_name: [Array String; 209],
-    name: [Array String; 6],
-    prefix: [Array String; 3]
+    male_first_name: [Array String; 178],
+    name: [Array String; 1],
+    prefix: [Array String; 4]
   },
   phone_number: {
-    formats: [Array String; 9]
+    formats: [Array String; 8]
   },
   title: German (Switzerland)
 }

@@ -1,0 +1,49 @@
+﻿{
+  address: {
+    city: [Array String; 6],
+    city_name: [Array String; 19],
+    city_prefix: [Array String; 5],
+    city_suffix: [Array String; 5],
+    postcode: [Array String; 1],
+    street_name: [Array String; 3],
+    street_suffix: [Array String; 3]
+  },
+  cell_phone: {
+    formats: [Array String; 6]
+  },
+  commerce: {
+    color: [Array String; 15]
+  },
+  company: {
+    adjective: [Array String; 24],
+    name: [Array String; 5],
+    noun: [Array String; 58],
+    suffix: [Array String; 6]
+  },
+  date: {
+    month: {
+      abbr: [Array String; 24],
+      wide: [Array String; 24]
+    },
+    weekday: {
+      abbr: [Array String; 7],
+      wide: [Array String; 7]
+    }
+  },
+  lorem: {
+    words: [Array String; 41]
+  },
+  name: {
+    female_first_name: [Array String; 49],
+    female_last_name: [Array String; 243],
+    last_name: [Array String; 5],
+    male_first_name: [Array String; 14],
+    male_last_name: [Array String; 107],
+    name: [Array String; 1],
+    prefix: [Array String; 4]
+  },
+  phone_number: {
+    formats: [Array String; 42]
+  },
+  title: Maldivian
+}

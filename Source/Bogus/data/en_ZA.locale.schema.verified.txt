@@ -1,10 +1,10 @@
 ﻿{
   address: {
     city: [Array String; 1],
-    city_prefix: [Array String; 14],
-    default_country: [Array String; 4],
+    city_name: [Array String; 14],
     postcode: [Array String; 2],
-    state: [Array String; 9]
+    state: [Array String; 9],
+    street_name: [Array String; 2]
   },
   cell_phone: {
     formats: [Array String; 18]
@@ -16,15 +16,13 @@
     domain_suffix: [Array String; 5]
   },
   name: {
-    female_first_name: [Array String; 291],
-    first_name: [Array String; 550],
-    last_name: [Array String; 241],
-    male_first_name: [Array String; 251],
+    female_first_name: [Array String; 288],
+    first_name: [Array String; 546],
+    last_name: [Array String; 237],
+    male_first_name: [Array String; 247],
     name: [Array String; 2]
   },
   phone_number: {
-    area_code: [Array String; 38],
-    exchange_code: [Array String; 283],
     formats: [Array String; 12]
   },
   title: English (South Africa)

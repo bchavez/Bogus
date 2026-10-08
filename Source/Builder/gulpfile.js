@@ -18,71 +18,22 @@ const BSON = require("bson");
 
 var es = require("event-stream");
 
-var localeFolders = gulp.src(
-   [
-      "../fakerjs/lib/locales/*",
-      "!../fakerjs/lib/locales/ar", // 2018.09.23 - Exclude this locale, has problems upstream.
-                                    // https://github.com/Marak/faker.js/pull/505/files#r219737439
-   ]);
+const fakerImport = require("./fakerImport");
 
 var dataFolder = "../Bogus/data";
 var dataExtendFolder = "../Bogus/data_extend";
 
-function importLocalesJsonTask(){
-   return localeFolders
-      .pipe($.plumber())
-      .pipe($.map(function (file) {
-         var localeCode = file.relative;
-         var localeIndex = file.path + "/index.js";
-         var locale = require(localeIndex);
+function importLocalesJsonTask(cb) {
+   // faker.js (TypeScript layout) -> Bogus legacy locale JSON, see fakerImport.js
+   var imported = fakerImport.importAll();
 
-         // Transform Step: Currencies
-         transformCurrency(locale);
+   var files = fakerImport.writeLocales(imported, dataFolder, dataExtendFolder);
+   files.forEach(log2);
 
-         // Transform Step: Mime Types
-         transformMimeTypes(locale);
-
-         // Transform Step: Postcode By State
-         transformPostCodeByState(locale);
-
-         removeAvatarUri(locale);
-
-         ensureAllArraysAreStrings(locale);
-
-         specializeLocale(locale, localeCode);
-
-         var destName = localeCode + ".locale.json";
-         log2(destName);
-         var bogusLocale = {};
-
-         var extendPath = path.resolve(dataExtendFolder, destName);
-         if (fs.existsSync(extendPath)) {
-            var extendData = JSON.parse(fs.readFileSync(extendPath, 'utf8'));
-
-            // By default, _.merge replaces items in arrays. IE:
-            // _.merge([1,2,3,4], [9,9]) = [9,9,3,4], in our case
-            // data extend locale files should replace the full contents
-            // of the array, not replace items.
-            // https://lodash.com/docs/4.17.10#mergeWith
-            var replacer = (objValue, srcValue) => {
-               if( _.isArray(objValue) ) {
-                  return objValue = srcValue;
-               }
-            };
-            bogusLocale = l.mergeWith(locale, extendData, replacer);
-         } else {
-            bogusLocale = locale;
-         }
-
-         var vinyl = new Vinyl({
-            path: './' + destName,
-            contents: Buffer.from(JSON.stringify(bogusLocale, null, 2))
-         });
-         return vinyl;
-      }))
-      .pipe(print())
-      .pipe(lec({ eolc: "CRLF" }))
-      .pipe(gulp.dest(dataFolder));
+   _.each(imported, (entry, code) => {
+      entry.warnings.forEach(w => logger.warn(color.yellow(`[${code}] ${w}`)));
+   });
+   cb();
 }
 
 function importLocalesTask(){
@@ -104,65 +55,6 @@ function importLocalesTask(){
       .pipe(print())
       .pipe(gulp.dest(dataFolder));
 }
-
-function removeAvatarUri(obj){
-   if(obj.internet && obj.internet.avatar_uri)
-   {
-      log("Removing internet.avatar_uri");
-      delete obj.internet.avatar_uri;
-   }
-}
-
-function transformPostCodeByState(obj) {
-   if (obj.address && obj.address.postcode_by_state)
-      delete obj.address.postcode_by_state;
-}
-
-function ensureAllArraysAreStrings(obj) {
-   var nodes = jp.nodes(obj, "$..*[*]");
-   for (var i = 0; i < nodes.length; i++) {
-      var item = nodes[i].value;
-      var path = nodes[i].path;
-      if (l.isNumber(item)) {
-         var pathExpr = jp.stringify(path);
-         log(`Replacing number found: ${item} at ${pathExpr} with string.`);
-         jp.value(obj, pathExpr, item.toString());
-      }
-   }
-}
-
-function transformCurrency(obj) {
-   var currencies = l.get(obj, "finance.currency");
-   if (!currencies) return;
-   log("Normalizing finance.currency...");
-   var arr = l.keys(currencies).map(function (key) {
-      var name = key;
-      var code = currencies[key]["code"];
-      var symbol = currencies[key]["symbol"];
-      return { name: name, code: code, symbol: symbol }
-   });
-
-   obj["finance"]["currency"] = arr;
-}
-function transformMimeTypes(obj) {
-   var mimes = l.get(obj, "system.mimeTypes");
-   if (!mimes) return;
-   log("Normalizing system.mimeTypes...");
-   var arr = l.keys(mimes).map(function (key) {
-      var mime = key;
-      var source = mimes[key]["source"];
-      var compressible = mimes[key]["compressible"];
-      var extensions = mimes[key]["extensions"];
-      return { mime: mime, source: source, compressible: compressible, extensions: extensions }
-   });
-
-   obj["system"]["mimeTypes"] = arr;
-}
-
-function specializeLocale(locale, localeCode) {
-   
-}
-
 
 //Helper Methods
 function log(msg) {

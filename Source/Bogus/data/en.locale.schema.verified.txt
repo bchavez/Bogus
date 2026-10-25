@@ -1973,7 +1973,7 @@
           },
           {
             count: 1,
-            type: c
+            type: n
           },
           {
             count: 16,

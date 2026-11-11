@@ -8,21 +8,21 @@ namespace Bogus.Extensions.Russia;
 /// </summary>
 public static class ExtensionsForRussia
 {
-   private static readonly int[] InnIndividualFirstWeights = {7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
-   private static readonly int[] InnIndividualSecondWeights = {3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
-   private static readonly int[] InnLegalWeights = {2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinIndividualFirstWeights = {7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinIndividualSecondWeights = {3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinLegalWeights = {2, 4, 10, 3, 5, 9, 4, 6, 8};
 
    /// <summary>
-   /// Страховой номер индивидуального лицевого счёта (СНИЛС)
+   /// Insurance Number of Individual Ledger Account (INILA / СНИЛС)
    /// </summary>
    /// <param name="includeFormatSymbols">Includes formatting symbols.</param>
-   public static string Snils(this Person p, bool includeFormatSymbols = true)
+   public static string Inila(this Person p, bool includeFormatSymbols = true)
    {
       // https://ru.wikipedia.org/wiki/Страховой_номер_индивидуального_лицевого_счёта
-      const string Key = nameof(ExtensionsForRussia) + nameof(Snils);
+      const string Key = nameof(ExtensionsForRussia) + nameof(Inila);
       if( p.context.TryGetValue(Key, out var value) )
       {
-         return FormatSnils((int[])value, includeFormatSymbols);
+         return FormatInila((int[])value, includeFormatSymbols);
       }
 
       var digits = p.Random.Digits(9);
@@ -38,10 +38,10 @@ public static class ExtensionsForRussia
       var finalDigits = digits.Concat(new[] {check / 10, check % 10}).ToArray();
       p.context[Key] = finalDigits;
 
-      return FormatSnils(finalDigits, includeFormatSymbols);
+      return FormatInila(finalDigits, includeFormatSymbols);
    }
 
-   private static string FormatSnils(int[] digits, bool includeFormatSymbols)
+   private static string FormatInila(int[] digits, bool includeFormatSymbols)
    {
       if( includeFormatSymbols )
       {
@@ -52,12 +52,12 @@ public static class ExtensionsForRussia
    }
 
    /// <summary>
-   /// Индивидуальный номер налогоплательщика (ИНН) физического лица
+   /// Taxpayer Identification Number (TIN / ИНН) for an individual
    /// </summary>
-   public static string Inn(this Person p)
+   public static string Tin(this Person p)
    {
       // https://ru.wikipedia.org/wiki/Идентификационный_номер_налогоплательщика
-      const string Key = nameof(ExtensionsForRussia) + nameof(Inn);
+      const string Key = nameof(ExtensionsForRussia) + nameof(Tin);
       if( p.context.TryGetValue(Key, out var value) )
       {
          return (string)value;
@@ -66,26 +66,26 @@ public static class ExtensionsForRussia
       var digits = p.Random.Digits(10);
       digits[0] = p.Random.Number(1, 9);
 
-      var firstCheck = WeightedMod(digits, InnIndividualFirstWeights);
+      var firstCheck = WeightedMod(digits, TinIndividualFirstWeights);
       var withFirstCheck = digits.Concat(new[] {firstCheck}).ToArray();
-      var secondCheck = WeightedMod(withFirstCheck, InnIndividualSecondWeights);
+      var secondCheck = WeightedMod(withFirstCheck, TinIndividualSecondWeights);
 
-      var inn = string.Concat(digits) + firstCheck + secondCheck;
-      p.context[Key] = inn;
+      var tin = string.Concat(digits) + firstCheck + secondCheck;
+      p.context[Key] = tin;
 
-      return inn;
+      return tin;
    }
 
    /// <summary>
-   /// Индивидуальный номер налогоплательщика (ИНН) юридического лица
+   /// Taxpayer Identification Number (TIN / ИНН) for a legal entity
    /// </summary>
-   public static string Inn(this Company c)
+   public static string Tin(this Company c)
    {
       // https://ru.wikipedia.org/wiki/Идентификационный_номер_налогоплательщика
       var digits = c.Random.Digits(9);
       digits[0] = c.Random.Number(1, 9);
 
-      var check = WeightedMod(digits, InnLegalWeights);
+      var check = WeightedMod(digits, TinLegalWeights);
 
       return string.Concat(digits) + check;
    }

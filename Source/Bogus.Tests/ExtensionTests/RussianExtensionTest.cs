@@ -7,74 +7,74 @@ namespace Bogus.Tests.ExtensionTests;
 
 public class RussianExtensionTest : SeededTest
 {
-   private static readonly int[] InnIndividualFirstWeights = {7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
-   private static readonly int[] InnIndividualSecondWeights = {3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
-   private static readonly int[] InnLegalWeights = {2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinIndividualFirstWeights = {7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinIndividualSecondWeights = {3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8};
+   private static readonly int[] TinLegalWeights = {2, 4, 10, 3, 5, 9, 4, 6, 8};
 
    [Fact]
-   public void can_generate_snils()
+   public void can_generate_inila()
    {
       var faker = new Faker("ru");
-      var snils = faker.Person.Snils();
+      var inila = faker.Person.Inila();
 
-      snils.Should().MatchRegex(@"^\d{3}-\d{3}-\d{3} \d{2}$");
-      ShouldHaveValidSnilsChecksum(snils.Replace("-", "").Replace(" ", ""));
+      inila.Should().MatchRegex(@"^\d{3}-\d{3}-\d{3} \d{2}$");
+      ShouldHaveValidInilaChecksum(inila.Replace("-", "").Replace(" ", ""));
    }
 
    [Fact]
-   public void can_generate_snils_without_formatting()
+   public void can_generate_inila_without_formatting()
    {
       var faker = new Faker("ru");
-      var snils = faker.Person.Snils(includeFormatSymbols: false);
+      var inila = faker.Person.Inila(includeFormatSymbols: false);
 
-      snils.Should().HaveLength(11);
-      snils.Should().MatchRegex(@"^\d{11}$");
-      ShouldHaveValidSnilsChecksum(snils);
+      inila.Should().HaveLength(11);
+      inila.Should().MatchRegex(@"^\d{11}$");
+      ShouldHaveValidInilaChecksum(inila);
    }
 
    [Fact]
-   public void snils_is_cached_on_person()
-   {
-      var faker = new Faker("ru");
-      var person = faker.Person;
-
-      person.Snils().Should().Be(person.Snils());
-   }
-
-   [Fact]
-   public void can_generate_individual_inn()
-   {
-      var faker = new Faker("ru");
-      var inn = faker.Person.Inn();
-
-      inn.Should().HaveLength(12);
-      inn.Should().MatchRegex(@"^\d{12}$");
-      inn[0].Should().NotBe('0');
-      ShouldHaveValidIndividualInnChecksum(inn);
-   }
-
-   [Fact]
-   public void individual_inn_is_cached_on_person()
+   public void inila_is_cached_on_person()
    {
       var faker = new Faker("ru");
       var person = faker.Person;
 
-      person.Inn().Should().Be(person.Inn());
+      person.Inila().Should().Be(person.Inila());
    }
 
    [Fact]
-   public void can_generate_legal_inn()
+   public void can_generate_individual_tin()
    {
       var faker = new Faker("ru");
-      var inn = faker.Company.Inn();
+      var tin = faker.Person.Tin();
 
-      inn.Should().HaveLength(10);
-      inn.Should().MatchRegex(@"^\d{10}$");
-      inn[0].Should().NotBe('0');
-      ShouldHaveValidLegalInnChecksum(inn);
+      tin.Should().HaveLength(12);
+      tin.Should().MatchRegex(@"^\d{12}$");
+      tin[0].Should().NotBe('0');
+      ShouldHaveValidIndividualTinChecksum(tin);
    }
 
-   private static void ShouldHaveValidSnilsChecksum(string digits)
+   [Fact]
+   public void individual_tin_is_cached_on_person()
+   {
+      var faker = new Faker("ru");
+      var person = faker.Person;
+
+      person.Tin().Should().Be(person.Tin());
+   }
+
+   [Fact]
+   public void can_generate_legal_tin()
+   {
+      var faker = new Faker("ru");
+      var tin = faker.Company.Tin();
+
+      tin.Should().HaveLength(10);
+      tin.Should().MatchRegex(@"^\d{10}$");
+      tin[0].Should().NotBe('0');
+      ShouldHaveValidLegalTinChecksum(tin);
+   }
+
+   private static void ShouldHaveValidInilaChecksum(string digits)
    {
       var sum = 0;
       for( var i = 0; i < 9; i++ )
@@ -87,19 +87,19 @@ public class RussianExtensionTest : SeededTest
       check.Should().Be(int.Parse(digits.Substring(9, 2)));
    }
 
-   private static void ShouldHaveValidIndividualInnChecksum(string inn)
+   private static void ShouldHaveValidIndividualTinChecksum(string tin)
    {
-      var digits = inn.Select(c => (int)char.GetNumericValue(c)).ToArray();
+      var digits = tin.Select(c => (int)char.GetNumericValue(c)).ToArray();
 
-      WeightedMod(digits, InnIndividualFirstWeights).Should().Be(digits[10]);
-      WeightedMod(digits, InnIndividualSecondWeights).Should().Be(digits[11]);
+      WeightedMod(digits, TinIndividualFirstWeights).Should().Be(digits[10]);
+      WeightedMod(digits, TinIndividualSecondWeights).Should().Be(digits[11]);
    }
 
-   private static void ShouldHaveValidLegalInnChecksum(string inn)
+   private static void ShouldHaveValidLegalTinChecksum(string tin)
    {
-      var digits = inn.Select(c => (int)char.GetNumericValue(c)).ToArray();
+      var digits = tin.Select(c => (int)char.GetNumericValue(c)).ToArray();
 
-      WeightedMod(digits, InnLegalWeights).Should().Be(digits[9]);
+      WeightedMod(digits, TinLegalWeights).Should().Be(digits[9]);
    }
 
    private static int WeightedMod(int[] digits, int[] weights)

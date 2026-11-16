@@ -138,7 +138,7 @@ public class Internet : DataSet
    /// <returns>A random domain word.</returns>
    public string DomainWord()
    {
-      var domain = Name.FirstName().ToLower();
+      var domain = Name.FirstName().ToLowerInvariant();
 
       return Regex.Replace(domain, @"([\\ ~#&*{}/:<>?|\""'])", string.Empty);
    }
@@ -379,7 +379,7 @@ public class Internet : DataSet
    {
       var words = Random.WordsArray(1, 3)
          .Select(Utils.Slugify)
-         .Select(s => s.ToLower());
+         .Select(s => s.ToLowerInvariant());
 
       var path = $"/{Utils.Slashify(words)}";
 

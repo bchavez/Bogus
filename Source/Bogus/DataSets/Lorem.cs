@@ -62,7 +62,7 @@ public class Lorem : DataSet
       }
 
       var sentence = string.Join(" ", Words(wc));
-      return sentence.Substring(0, 1).ToUpper() + sentence.Substring(1) + ".";
+      return sentence.Substring(0, 1).ToUpperInvariant() + sentence.Substring(1) + ".";
    }
 
    /// <summary>

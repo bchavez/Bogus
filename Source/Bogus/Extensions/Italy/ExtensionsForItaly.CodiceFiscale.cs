@@ -132,7 +132,7 @@ internal static class CodiceFiscaleGenerator
       //To guarantee code stability for a person, we generate
       //fake city-of-birth code through surname and birth date.
       //Using actual city code database would be too heavy.
-      sb.Append(lastName[0].ToString().ToUpper());
+      sb.Append(lastName[0].ToString().ToUpperInvariant());
       var birthDatePositiveHash = Math.Abs(birthday.GetHashCode());
       sb.Append((birthDatePositiveHash % 1000).ToString("000"));
 

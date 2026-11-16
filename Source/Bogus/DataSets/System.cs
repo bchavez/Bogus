@@ -88,7 +88,7 @@ public class System : DataSet
       filename = filename.Replace("-", "_");
       filename = filename.Replace(@"\", "_");
       filename = filename.Replace("/", "_");
-      filename = filename.ToLower().Trim();
+      filename = filename.ToLowerInvariant().Trim();
       return filename;
    }
 
@@ -132,7 +132,7 @@ public class System : DataSet
       filename = filename.Replace("-", "_");
       filename = filename.Replace(@"\", "_");
       filename = filename.Replace("/", "_");
-      filename = filename.ToLower().Trim();
+      filename = filename.ToLowerInvariant().Trim();
       return filename;
    }
 

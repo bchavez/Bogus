@@ -106,11 +106,13 @@ public class Binder : IBinder
    //Issue #389 - Use Declaring Base Type PropertyInfo instead of a DerivedA's 
    //PropertyInfo because DerivedA's PropertyInfo could say property is not
    //write-able.
+   //Issue #502 - Ignore indexer properties since multiple indexers share the same
+   //name and GetProperty(name, flags) would throw AmbiguousMatchException.
    protected virtual MemberInfo UseBaseTypeDeclaredPropertyInfo(Type t, MemberInfo m)
    {
-      if( m is PropertyInfo {CanWrite: false} && m.DeclaringType is not null && m.DeclaringType != t )
+      if( m is PropertyInfo {CanWrite: false} pi && m.DeclaringType is not null && m.DeclaringType != t && pi.GetIndexParameters().Length == 0 )
       {
-         var newPropInfo = m.DeclaringType.GetProperty(m.Name, this.BindingFlags);
+         var newPropInfo = m.DeclaringType.GetProperty(m.Name, this.BindingFlags | BindingFlags.DeclaredOnly);
          if( newPropInfo is not null )
             return newPropInfo;
       }
